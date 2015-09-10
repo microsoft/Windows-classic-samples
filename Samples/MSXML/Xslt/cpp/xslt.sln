@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xslt", "xslt.vcxproj", "{29CC8C20-6484-41B4-840E-72FFCDB03E19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29CC8C20-6484-41B4-840E-72FFCDB03E19}.Debug|Win32.ActiveCfg = Debug|Win32
+		{29CC8C20-6484-41B4-840E-72FFCDB03E19}.Debug|Win32.Build.0 = Debug|Win32
+		{29CC8C20-6484-41B4-840E-72FFCDB03E19}.Release|Win32.ActiveCfg = Release|Win32
+		{29CC8C20-6484-41B4-840E-72FFCDB03E19}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

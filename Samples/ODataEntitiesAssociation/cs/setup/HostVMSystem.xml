@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Store for VMSystem. It contains a list of physical machines. Each physical machine can have multiple virtual machines. There are Systems in the store. Each virtual machine
+is associated with one system. Each system can have multiple virtual machines-->
+<VMSystem>
+    <PhysicalMachines>
+        <PhysicalMachine>
+            <Name>testBox1</Name>
+            <VMs>
+                <Vm>
+                    <VmId>d7c001c7-8e45-457b-8668-2d387354074c</VmId>
+                    <OperatingSystem>Fabrikam 8.0</OperatingSystem>
+                    <SystemId>05b3d116-87f9-4391-bfd3-9430f55284ac</SystemId>
+                </Vm>
+                <Vm>
+                    <VmId>9d293568-209e-4852-86bb-473215c457c6</VmId>
+                    <OperatingSystem>Fabrikam 7.0</OperatingSystem>
+                    <SystemId>05b3d116-87f9-4391-bfd3-9430f55284ac</SystemId>
+                </Vm>
+                <Vm>
+                    <VmId>ed33e400-1a40-4569-92db-905115b620d9</VmId>
+                    <OperatingSystem>Contoso 1.0</OperatingSystem>
+                </Vm>
+            </VMs>
+        </PhysicalMachine>
+        <PhysicalMachine>
+            <Name>testBox2</Name>
+            <VMs>
+                <Vm>
+                    <VmId>3574ad4e-a432-42c8-8c16-184e693658ea</VmId>
+                    <OperatingSystem>win8</OperatingSystem>
+                </Vm>
+            </VMs>
+        </PhysicalMachine>
+    </PhysicalMachines>
+    <Systems>
+        <System>
+            <Name>Redmond</Name>
+            <Id>05b3d116-87f9-4391-bfd3-9430f55284ac</Id>
+        </System>
+        <System>
+            <Name>Fareast</Name>
+            <Id>1d8b9c43-881d-4b66-9107-aa1e464e04c2</Id>
+        </System>
+    </Systems>
+</VMSystem>

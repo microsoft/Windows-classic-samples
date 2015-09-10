@@ -1,0 +1,35 @@
+HKLM
+{
+    NoRemove Software
+    {
+        NoRemove Microsoft
+        {
+            NoRemove Spelling
+            {
+                NoRemove Spellers
+                {
+                    ForceRemove samplespell
+                    {
+                        val CLSID = s '{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}'
+                    }
+                }
+            }
+        }
+    }
+}
+
+HKCR
+{
+    NoRemove CLSID
+    {
+        ForceRemove {9AEC2879-1A82-4FEA-AA4F-60B98D3AC293} = s 'Sample Spell Checking Provider'
+        {
+            val AppId = s '{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Both'
+            }
+            Version = s '1.0'
+        }
+    }
+}

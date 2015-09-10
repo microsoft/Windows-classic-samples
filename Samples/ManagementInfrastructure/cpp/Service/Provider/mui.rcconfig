@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+    <resources>
+        <win32Resources fileType="Application">
+            <localizedResources>
+                <resourceType typeNameId="#6"/>
+            </localizedResources>
+        </win32Resources>
+    </resources>
+</localization>

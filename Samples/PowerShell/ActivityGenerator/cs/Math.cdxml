@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  <Class ClassName="ROOT\test\TestClass_MethodProvider_Calc">
+    <Version>1.2.3.4</Version>
+    <DefaultNoun>Math</DefaultNoun>
+    <StaticCmdlets>
+      <Cmdlet>
+        <CmdletMetadata Verb="Add" ConfirmImpact="Medium"></CmdletMetadata>
+        <Method MethodName="Add">
+          <ReturnValue>
+            <Type PSType="int64"></Type>
+            <CmdletOutputMetadata>
+              <ErrorCode></ErrorCode>
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="Left">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="0" />
+            </Parameter>
+            <Parameter ParameterName="Right">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="1" />
+            </Parameter>
+            <Parameter ParameterName="sum">
+              <Type PSType="int64" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <Cmdlet>
+        <CmdletMetadata Verb="Subtract" ConfirmImpact="Medium"></CmdletMetadata>
+        <Method MethodName="Subtract">
+          <ReturnValue>
+            <Type PSType="int64"></Type>
+            <CmdletOutputMetadata>
+              <ErrorCode></ErrorCode>
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="Left">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="0" />
+            </Parameter>
+            <Parameter ParameterName="Right">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="1" />
+            </Parameter>
+            <Parameter ParameterName="difference">
+              <Type PSType="int64" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <Cmdlet>
+        <CmdletMetadata Verb="Divide" ConfirmImpact="Medium"></CmdletMetadata>
+        <Method MethodName="Divide">
+          <ReturnValue>
+            <Type PSType="int64"></Type>
+            <CmdletOutputMetadata>
+              <ErrorCode></ErrorCode>
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="Numerator">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="0" />
+            </Parameter>
+            <Parameter ParameterName="Denominator">
+              <Type PSType="int64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="1" />
+            </Parameter>
+            <Parameter ParameterName="quotient">
+              <Type PSType="int64" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <Cmdlet>
+        <CmdletMetadata Verb="Multiply" ConfirmImpact="Medium"/>
+        <Method MethodName="Multiply">
+          <ReturnValue>
+            <Type PSType="uint64"></Type>
+            <CmdletOutputMetadata>
+              <ErrorCode></ErrorCode>
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="Left">
+              <Type PSType="uint64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="0" />
+            </Parameter>
+            <Parameter ParameterName="Right">
+              <Type PSType="uint64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="1" />
+            </Parameter>
+            <Parameter ParameterName="product">
+              <Type PSType="uint64" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <Cmdlet>
+        <CmdletMetadata Verb="PrimeFactors" ConfirmImpact="Medium"/>
+        <Method MethodName="PrimeFactors">
+          <ReturnValue>
+            <Type PSType="uint64"></Type>
+            <CmdletOutputMetadata>
+              <ErrorCode></ErrorCode>
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="number">
+              <Type PSType="uint64" />
+              <CmdletParameterMetadata IsMandatory="true" Position="0" />
+            </Parameter>
+
+            <Parameter ParameterName="factors">
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#root\test\TestClass_MethodProvider_Calc" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+
+    </StaticCmdlets>
+  </Class>
+</PowerShellMetadata>

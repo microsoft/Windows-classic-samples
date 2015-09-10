@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  <copyright file="CustomQuickStatus.home" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<Tasks version="2.0" xmlns="http://schemas.microsoft.com/WindowsServerSolutions/2010/01/Dashboard">
+  <GetQuickStatusTasks>
+    <Task name="Synchronous Quick Status" description="Demo to show query status synchronously." id="FE8FB8CD-C7AA-4798-839C-A3D82985C0F5"
+          assembly="SyncQuickStatus" class="WSSHomepageQuickStatus.SyncQuickStatus" />
+    <Task name="Asynchronous Quick Status" description="Demo to query quick status asynchronously." id="C19CEF15-FCF7-4361-925F-9904D5FDD238"
+          assembly="CancellableAsyncQuickStatus" class="WSSHomepageQuickStatus.CancellableAsyncQuickStatus" />
+  </GetQuickStatusTasks>
+</Tasks>

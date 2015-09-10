@@ -1,0 +1,14 @@
+<Files>
+    <File file_name="a.txt" file_length="12">
+&NON_XML_CONTENT
+aaaaaaaaaaaa
+    </File>
+    <File file_name="b.txt" file_length="20">
+&NON_XML_CONTENT
+bbbbbbbbbbbbbbbbbbbb
+    </File>
+    <File file_name="c.txt" file_length="15">
+&NON_XML_CONTENT
+ccccccccccccccc
+    </File>
+</Files>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  <copyright file="MockEmailServiceConfiguration.xml" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<Configuration>
+  <DefaultOperationDuration>2</DefaultOperationDuration>
+  <Operations>
+    <!--Credential operations-->
+    <Operation Name="VerifyAdminAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <!--Connection operations-->
+    <Operation Name="Logon">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="LogOff">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <!--Account Management operations-->
+    <Operation Name="AddAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="RemoveAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="UpdateAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="EnableAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="DisableAccount">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="GetAccountById">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="GetAccountByPrimaryEmail">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="GetAllAccounts">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="GetDomains">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+    <Operation Name="ResetPassword">
+      <DurationInSeconds>1</DurationInSeconds>
+    </Operation>
+  </Operations>
+
+  <DistributionGroups>
+    <Group Id="DG1" Name="DistributionGroup 1"></Group>
+    <Group Id="DG2" Name="DistributionGroup 2"></Group>
+    <Group Id="DG3" Name="DistributionGroup 3"></Group>
+    <Group Id="DG4" Name="DistributionGroup 4"></Group>
+    <Group Id="DG5" Name="DistributionGroup 5"></Group>
+    <Group Id="DG6" Name="DistributionGroup 6"></Group>
+    <Group Id="DG7" Name="DistributionGroup 7"></Group>
+    <Group Id="DG8" Name="DistributionGroup 8"></Group>
+    <Group Id="DG9" Name="DistributionGroup 9"></Group>
+    <Group Id="DG10" Name="DistributionGroup 10"></Group>
+  </DistributionGroups>
+
+</Configuration>

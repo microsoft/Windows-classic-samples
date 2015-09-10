@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnhancedSession", "EnhancedSession.csproj", "{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Debug|x86.ActiveCfg = Debug|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Release|Any CPU.ActiveCfg = Release|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4ED7B3E5-FAED-42E8-95DF-1C33540D0B73}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

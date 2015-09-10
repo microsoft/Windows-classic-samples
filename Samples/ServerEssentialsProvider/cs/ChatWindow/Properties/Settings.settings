@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<!--
+  <copyright file="Settings.settings" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>

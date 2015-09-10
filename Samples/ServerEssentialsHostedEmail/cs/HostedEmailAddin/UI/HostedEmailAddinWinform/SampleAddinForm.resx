@@ -1,0 +1,1055 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  <copyright file="SampleAddinForm.resx" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelServerIntegratedTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanelIntegration.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelServerIsIntegratedDescription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServerIsIntegratedDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelServerIsIntegratedDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="labelServerIsIntegratedDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 30</value>
+  </data>
+  <data name="labelServerIsIntegratedDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelServerIsIntegratedDescription.Text" xml:space="preserve">
+    <value>Server is integrated with Contoso Services</value>
+  </data>
+  <data name="&gt;&gt;labelServerIsIntegratedDescription.Name" xml:space="preserve">
+    <value>labelServerIsIntegratedDescription</value>
+  </data>
+  <data name="&gt;&gt;labelServerIsIntegratedDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServerIsIntegratedDescription.Parent" xml:space="preserve">
+    <value>tableLayoutPanelIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelServerIsIntegratedDescription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelSigninAccountDescription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSigninAccountDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSigninAccountDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 66</value>
+  </data>
+  <data name="labelSigninAccountDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 30</value>
+  </data>
+  <data name="labelSigninAccountDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelSigninAccountDescription.Text" xml:space="preserve">
+    <value>Sign-in account used by the integration:</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccountDescription.Name" xml:space="preserve">
+    <value>labelSigninAccountDescription</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccountDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccountDescription.Parent" xml:space="preserve">
+    <value>tableLayoutPanelIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccountDescription.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelSigninAccount.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSigninAccount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSigninAccount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 96</value>
+  </data>
+  <data name="labelSigninAccount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 15</value>
+  </data>
+  <data name="labelSigninAccount.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelSigninAccount.Text" xml:space="preserve">
+    <value>rongyu@contoso.com</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccount.Name" xml:space="preserve">
+    <value>labelSigninAccount</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccount.Parent" xml:space="preserve">
+    <value>tableLayoutPanelIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelSigninAccount.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 63</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 111</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelIntegration.Name" xml:space="preserve">
+    <value>tableLayoutPanelIntegration</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelIntegration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelIntegration.Parent" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelIntegration.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanelIntegration.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelServerIsIntegratedDescription" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelServerIntegratedTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelSigninAccountDescription" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelSigninAccount" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="labelServerIntegratedTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelServerIntegratedTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelServerIntegratedTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelServerIntegratedTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="labelServerIntegratedTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelServerIntegratedTitle.Text" xml:space="preserve">
+    <value>Server Integration</value>
+  </data>
+  <data name="&gt;&gt;labelServerIntegratedTitle.Name" xml:space="preserve">
+    <value>labelServerIntegratedTitle</value>
+  </data>
+  <data name="&gt;&gt;labelServerIntegratedTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServerIntegratedTitle.Parent" xml:space="preserve">
+    <value>tableLayoutPanelIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelServerIntegratedTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanelTop.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelTop.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanelTop.ColumnCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelTotalMailboxes.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelTotalMailboxes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelTotalMailboxes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="labelTotalMailboxes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 15</value>
+  </data>
+  <data name="labelTotalMailboxes.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelTotalMailboxes.Text" xml:space="preserve">
+    <value>Total mailboxes:</value>
+  </data>
+  <data name="&gt;&gt;labelTotalMailboxes.Name" xml:space="preserve">
+    <value>labelTotalMailboxes</value>
+  </data>
+  <data name="&gt;&gt;labelTotalMailboxes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTotalMailboxes.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelTotalMailboxes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelEmailDomains.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelEmailDomains.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelEmailDomains.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 51</value>
+  </data>
+  <data name="labelEmailDomains.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 15</value>
+  </data>
+  <data name="labelEmailDomains.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="labelEmailDomains.Text" xml:space="preserve">
+    <value>Email domains:</value>
+  </data>
+  <data name="&gt;&gt;labelEmailDomains.Name" xml:space="preserve">
+    <value>labelEmailDomains</value>
+  </data>
+  <data name="&gt;&gt;labelEmailDomains.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelEmailDomains.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelEmailDomains.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelSubscription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSubscription.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelSubscription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSubscription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelSubscription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 21</value>
+  </data>
+  <data name="labelSubscription.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="labelSubscription.Text" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
+  <data name="&gt;&gt;labelSubscription.Name" xml:space="preserve">
+    <value>labelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelSubscription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSubscription.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelSubscription.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelMailNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMailNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 36</value>
+  </data>
+  <data name="labelMailNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 15</value>
+  </data>
+  <data name="labelMailNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="labelMailNumber.Text" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="labelMailNumber.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelMailNumber.Name" xml:space="preserve">
+    <value>labelMailNumber</value>
+  </data>
+  <data name="&gt;&gt;labelMailNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMailNumber.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelMailNumber.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelFirstEmailDomain.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelFirstEmailDomain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 66</value>
+  </data>
+  <data name="labelFirstEmailDomain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 15</value>
+  </data>
+  <data name="labelFirstEmailDomain.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelFirstEmailDomain.Text" xml:space="preserve">
+    <value>Haydenmanagement.com</value>
+  </data>
+  <data name="labelFirstEmailDomain.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelFirstEmailDomain.Name" xml:space="preserve">
+    <value>labelFirstEmailDomain</value>
+  </data>
+  <data name="&gt;&gt;labelFirstEmailDomain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelFirstEmailDomain.Parent" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;labelFirstEmailDomain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 270</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 81</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscription.Name" xml:space="preserve">
+    <value>tableLayoutPanelSubscription</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscription.Parent" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelSubscription.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelSubscription.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelTotalMailboxes" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelEmailDomains" Row="3" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelSubscription" Row="0" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="labelMailNumber" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelFirstEmailDomain" Row="4" RowSpan="1" Column="1" ColumnSpan="2" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,AutoSize,0,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelServerNotIntegrationTitle.Text" xml:space="preserve">
+    <value>Server Integration</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegrationTitle.Name" xml:space="preserve">
+    <value>labelServerNotIntegrationTitle</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegrationTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegrationTitle.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNotIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegrationTitle.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 30</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="labelServerNotIntegratedDescription.Text" xml:space="preserve">
+    <value>Server is not integrated with Contoso Services</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegratedDescription.Name" xml:space="preserve">
+    <value>labelServerNotIntegratedDescription</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegratedDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegratedDescription.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNotIntegration</value>
+  </data>
+  <data name="&gt;&gt;labelServerNotIntegratedDescription.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dashboardLinkLabelClickToIntegrate.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dashboardLinkLabelClickToIntegrate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 66</value>
+  </data>
+  <data name="dashboardLinkLabelClickToIntegrate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 30</value>
+  </data>
+  <data name="dashboardLinkLabelClickToIntegrate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="dashboardLinkLabelClickToIntegrate.Text" xml:space="preserve">
+    <value>Click to integrate with Contoso Services</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelClickToIntegrate.Name" xml:space="preserve">
+    <value>dashboardLinkLabelClickToIntegrate</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelClickToIntegrate.Type" xml:space="preserve">
+    <value>Microsoft.WindowsServerSolutions.Controls.DashboardLinkLabel, AdminCommon, Version=6.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelClickToIntegrate.Parent" xml:space="preserve">
+    <value>tableLayoutPanelNotIntegration</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelClickToIntegrate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>394, 63</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 96</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelNotIntegration.Name" xml:space="preserve">
+    <value>tableLayoutPanelNotIntegration</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelNotIntegration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelNotIntegration.Parent" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelNotIntegration.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanelNotIntegration.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelServerNotIntegrationTitle" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="labelServerNotIntegratedDescription" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dashboardLinkLabelClickToIntegrate" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="labelUserTab.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelUserTab.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelUserTab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 15</value>
+  </data>
+  <data name="labelUserTab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 15</value>
+  </data>
+  <data name="labelUserTab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelUserTab.Text" xml:space="preserve">
+    <value>To manage email account for server users, click the Users tab.</value>
+  </data>
+  <data name="&gt;&gt;labelUserTab.Name" xml:space="preserve">
+    <value>labelUserTab</value>
+  </data>
+  <data name="&gt;&gt;labelUserTab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUserTab.Parent" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;labelUserTab.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelServiceProvider.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServiceProvider.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelServiceProvider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelServiceProvider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 21</value>
+  </data>
+  <data name="labelServiceProvider.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelServiceProvider.Text" xml:space="preserve">
+    <value>Service Provider</value>
+  </data>
+  <data name="&gt;&gt;labelServiceProvider.Name" xml:space="preserve">
+    <value>labelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelServiceProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServiceProvider.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelServiceProvider.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="labelServiceName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelServiceName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 36</value>
+  </data>
+  <data name="labelServiceName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="labelServiceName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelServiceName.Text" xml:space="preserve">
+    <value>The Email online services hosted by Contoso Ltd.</value>
+  </data>
+  <data name="&gt;&gt;labelServiceName.Name" xml:space="preserve">
+    <value>labelServiceName</value>
+  </data>
+  <data name="&gt;&gt;labelServiceName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelServiceName.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelServiceName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelCompany.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCompany.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 66</value>
+  </data>
+  <data name="labelCompany.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 15</value>
+  </data>
+  <data name="labelCompany.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelCompany.Text" xml:space="preserve">
+    <value>Company:</value>
+  </data>
+  <data name="&gt;&gt;labelCompany.Name" xml:space="preserve">
+    <value>labelCompany</value>
+  </data>
+  <data name="&gt;&gt;labelCompany.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCompany.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelCompany.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelCompanyName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCompanyName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 81</value>
+  </data>
+  <data name="labelCompanyName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 15</value>
+  </data>
+  <data name="labelCompanyName.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelCompanyName.Text" xml:space="preserve">
+    <value>Contoso Computer</value>
+  </data>
+  <data name="&gt;&gt;labelCompanyName.Name" xml:space="preserve">
+    <value>labelCompanyName</value>
+  </data>
+  <data name="&gt;&gt;labelCompanyName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCompanyName.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelCompanyName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelSupport.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSupport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 126</value>
+  </data>
+  <data name="labelSupport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 15</value>
+  </data>
+  <data name="labelSupport.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelSupport.Text" xml:space="preserve">
+    <value>Support:</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Name" xml:space="preserve">
+    <value>labelSupport</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelSupport.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelPhoneNumber.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPhoneNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 141</value>
+  </data>
+  <data name="labelPhoneNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 15</value>
+  </data>
+  <data name="labelPhoneNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="labelPhoneNumber.Text" xml:space="preserve">
+    <value>400-888-8888</value>
+  </data>
+  <data name="&gt;&gt;labelPhoneNumber.Name" xml:space="preserve">
+    <value>labelPhoneNumber</value>
+  </data>
+  <data name="&gt;&gt;labelPhoneNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPhoneNumber.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;labelPhoneNumber.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="dashboardLinkLabelContosoURL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dashboardLinkLabelContosoURL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 96</value>
+  </data>
+  <data name="dashboardLinkLabelContosoURL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 30</value>
+  </data>
+  <data name="dashboardLinkLabelContosoURL.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="dashboardLinkLabelContosoURL.Text" xml:space="preserve">
+    <value>http://www.contoso.com</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoURL.Name" xml:space="preserve">
+    <value>dashboardLinkLabelContosoURL</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoURL.Type" xml:space="preserve">
+    <value>Microsoft.WindowsServerSolutions.Controls.DashboardLinkLabel, AdminCommon, Version=6.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoURL.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoURL.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="dashboardLinkLabelContosoEmail.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dashboardLinkLabelContosoEmail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 156</value>
+  </data>
+  <data name="dashboardLinkLabelContosoEmail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 15</value>
+  </data>
+  <data name="dashboardLinkLabelContosoEmail.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="dashboardLinkLabelContosoEmail.Text" xml:space="preserve">
+    <value>support@contoso.com</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoEmail.Name" xml:space="preserve">
+    <value>dashboardLinkLabelContosoEmail</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoEmail.Type" xml:space="preserve">
+    <value>Microsoft.WindowsServerSolutions.Controls.DashboardLinkLabel, AdminCommon, Version=6.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoEmail.Parent" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;dashboardLinkLabelContosoEmail.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 63</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.RowCount" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 171</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelServiceProvider.Name" xml:space="preserve">
+    <value>tableLayoutPanelServiceProvider</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelServiceProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelServiceProvider.Parent" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelServiceProvider.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tableLayoutPanelServiceProvider.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="labelServiceProvider" Row="0" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelServiceName" Row="2" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelCompany" Row="3" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelCompanyName" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="labelSupport" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="labelPhoneNumber" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="dashboardLinkLabelContosoURL" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="dashboardLinkLabelContosoEmail" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,20,Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,Absolute,15,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanelTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanelTop.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="tableLayoutPanelTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanelTop.RowCount" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="tableLayoutPanelTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 364</value>
+  </data>
+  <data name="tableLayoutPanelTop.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelTop.Name" xml:space="preserve">
+    <value>tableLayoutPanelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelTop.Parent" xml:space="preserve">
+    <value>panelTop</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanelTop.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanelTop.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanelSubscription" Row="5" RowSpan="1" Column="0" ColumnSpan="5" /&gt;&lt;Control Name="tableLayoutPanelIntegration" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanelNotIntegration" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="labelUserTab" Row="1" RowSpan="1" Column="0" ColumnSpan="4" /&gt;&lt;Control Name="tableLayoutPanelServiceProvider" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33.33333,Absolute,60,Percent,33.33334,Percent,33.33334,Absolute,34" /&gt;&lt;Rows Styles="Absolute,15,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,10" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 21</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 13</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Server is not integrated with Contoso Services</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 21</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Server Integration</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelTop.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelTop.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelTop.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelTop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 0</value>
+  </data>
+  <data name="panelTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>592, 377</value>
+  </data>
+  <data name="panelTop.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panelTop.Name" xml:space="preserve">
+    <value>panelTop</value>
+  </data>
+  <data name="&gt;&gt;panelTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelTop.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelTop.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 0, 6, 6</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>604, 383</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SampleAddinForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

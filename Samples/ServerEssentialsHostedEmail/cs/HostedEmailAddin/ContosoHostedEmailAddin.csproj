@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  <copyright file="ContosoHostedEmailAddin.csproj" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BFB25D6-367F-4220-A7D7-4941F21A94F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Contoso.HostedEmail</RootNamespace>
+    <AssemblyName>ContosoHostedEmailAddin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdminCommon">
+      <HintPath>..\Library\AdminCommon.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.windowsserversolutions.administration.objectmodel">
+      <HintPath>..\Library\Microsoft.windowsserversolutions.administration.objectmodel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProviderFramework">
+      <HintPath>..\Library\ProviderFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ProviderFrameworkExtended">
+      <HintPath>..\Library\ProviderFrameworkExtended.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wssg.HostedEmailBase">
+      <HintPath>..\Library\Wssg.HostedEmailBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Wssg.HostedEmailObjectModel">
+      <HintPath>..\Library\Wssg.HostedEmailObjectModel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adaptor\ContosoHostedEmailAdaptor.cs" />
+    <Compile Include="Adaptor\CredentialManager.cs" />
+    <Compile Include="DistributionGroup\DGSelectCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DistributionGroup\DGSelectCtrl.designer.cs">
+      <DependentUpon>DGSelectCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistributionGroup\DistributionGroupAdorner.cs" />
+    <Compile Include="DistributionGroup\DistributionGroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DistributionGroup\DistributionGroupControl.designer.cs">
+      <DependentUpon>DistributionGroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AdvancedPage.cs" />
+    <Compile Include="UI\UIConstants.cs" />
+    <Compile Include="UI\GlobalTasks.cs" />
+    <Compile Include="UI\HostedEmailAddinWinform\SampleAddinForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\HostedEmailAddinWinform\SampleAddinForm.Designer.cs">
+      <DependentUpon>SampleAddinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\HostedEmailAddinWinform\UserPropertyAdvancedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\HostedEmailAddinWinform\UserPropertyAdvancedForm.Designer.cs">
+      <DependentUpon>UserPropertyAdvancedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SubTabPage.cs" />
+    <Compile Include="UI\TopLevelTab.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DistributionGroup\DGSelectCtrl.resx">
+      <DependentUpon>DGSelectCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistributionGroup\DistributionGroupControl.resx">
+      <DependentUpon>DistributionGroupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\HostedEmailAddinWinform\SampleAddinForm.resx">
+      <DependentUpon>SampleAddinForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\HostedEmailAddinWinform\UserPropertyAdvancedForm.resx">
+      <DependentUpon>UserPropertyAdvancedForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddinFiles\ContosoDistributionGroupAddin.addin">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AddinFiles\ContosoHostedEmail.addin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AddinFiles\ContosoTopLevelDashboard.addin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AddinFiles\ContosoUserPropertyAdvanced.addin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="UI\Wssg.HostedEmailConfigureWizard.Reset.vbs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema\HosteEmailAddinSchema.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContosoMockEmailService\ContosoMockEmailService.csproj">
+      <Project>{24553B09-5B6E-4AED-952A-461092136BC0}</Project>
+      <Name>ContosoMockEmailService</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

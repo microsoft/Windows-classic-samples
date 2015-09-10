@@ -1,0 +1,10 @@
+#include <winver.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                   VFT_APP
+#define VER_FILESUBTYPE                VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR        "Sample spell check client"
+#define VER_INTERNALNAME_STR           "SampleSpellClient"
+#define VER_ORIGINALFILENAME_STR       "SampleSpellClient.exe"
+
+#include "common.ver"

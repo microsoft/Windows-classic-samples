@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <!-- when serializing classes derived from System.ArgumentException use serialization depth = 1 -->
+  <Type>
+    <Name>System.ArgumentException</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <NoteProperty>
+            <Name>SerializationDepth</Name>
+            <Value>1</Value>
+          </NoteProperty>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+
+  <!-- when deserializing classes derived from System.ArgumentException please cast to 
+         this type: Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter -->
+  <Type>
+    <Name>Deserialized.System.ArgumentException</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <NoteProperty>
+            <Name>TargetTypeForDeserialization</Name>
+            <Value>Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter</Value>
+          </NoteProperty>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+
+  <!-- when casting to (1) Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter type
+         please call into ConvertFrom method of (2) Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter 
+         type converter -->
+  <Type>
+    <Name>
+      Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter<!-- (1) -->
+    </Name>
+    <TypeConverter>
+      <TypeName>
+        Microsoft.Samples.PowerShell.Serialization.DeserializingTypeConverter<!-- (2) -->
+      </TypeName>
+    </TypeConverter>
+  </Type>
+
+</Types>

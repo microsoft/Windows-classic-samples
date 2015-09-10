@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://example.org/derivedTypes"
+           xmlns:tns="http://example.org/derivedTypes"
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PayloadBaseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PayloadBase" type="tns:PayloadBaseType" />
+
+  <xs:complexType name="Payload1Type">
+    <xs:complexContent >
+      <xs:extension base="tns:PayloadBaseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
+          <xs:element minOccurs="0" name="StringValue"  type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Payload1" type="tns:Payload1Type" />
+</xs:schema>

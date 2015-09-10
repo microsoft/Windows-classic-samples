@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+
+##
+##  <copyright file="ChatProvider.sln" company="Microsoft">
+##    Copyright (C) Microsoft. All rights reserved.
+##  </copyright>
+##
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatProvider", "ChatProvider\ChatProvider\ChatProvider.csproj", "{41A9F89A-20F8-43EB-8C63-7417824177C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatProvider.ObjectModel", "ChatProvider\ChatProvider.ObjectModel\ChatProvider.ObjectModel.csproj", "{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatWindow", "ChatWindow\ChatWindow.csproj", "{C4C912AA-8BEC-4C16-94F1-72298006B94F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{41A9F89A-20F8-43EB-8C63-7417824177C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{49AB9A51-7231-4C50-9D28-49A3BE9EC89D}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|Any CPU.Build.0 = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|x86.ActiveCfg = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Debug|x86.Build.0 = Debug|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Release|Any CPU.ActiveCfg = Release|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Release|x86.ActiveCfg = Release|x86
+		{C4C912AA-8BEC-4C16-94F1-72298006B94F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

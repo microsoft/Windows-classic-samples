@@ -1,0 +1,204 @@
+<html>
+	<head>
+		<script LANGUAGE="VBScript">
+			Option Explicit 
+			
+			Dim TheForm
+			Dim LightDevice
+			Dim DimmerService
+			
+			Dim DeviceStatus
+			Dim DeviceLevel
+			
+			Dim inArgs(0)
+			Dim outArgs(0)
+			Dim dimLevelArg(1)
+
+			' ********************************************************************
+			' InitializePresentation:
+			' This subroutine gets called when the webpage loads
+			' ********************************************************************			
+			Sub InitializePresentation
+				Dim PresentationURL
+				Dim LightDesc
+								
+				PresentationURL = window.location.search
+				Set TheForm = document.forms("ModeSelectionForm")
+
+				' Create UPnP Description Document object and fetch the description document from the webpage URL.
+				Set LightDesc = CreateObject("UPnP.DescriptionDocument.1")
+				
+				' PresentationURL initially contains the URL opened in the web browser
+				' To get a description document URL, we need to remove "[DeviceUDN]/DimmerPresentation.htm?"
+				' from the PresentationURL. Following string operation does the same.
+				LightDesc.Load(Trim(Mid(PresentationURL,2,Instr(PresentationURL,"+")-2))& vbCrLf)
+
+				' Get the Root Device and dimmer service from the description document
+				Set LightDevice = LightDesc.RootDevice
+				Set DimmerService = LightDevice.Services("urn:microsoft-com:serviceId:DimmerService1.0")
+
+				' Update device information on the webpage
+				FriendlyName.innerText 		= LightDevice.FriendlyName
+				UniqueDeviceName.innerText 	= LightDevice.UniqueDeviceName
+				DeviceType.innerText 		= LightDevice.Type
+				Description.innerText 		= LightDevice.Description
+				ManufacturerName.innerText 	= LightDevice.ManufacturerName
+				ManufacturerURL.innerText 	= LightDevice.ManufacturerURL
+				ModelName.innerText 		= LightDevice.ModelName
+				ModelNumber.innerText 		= LightDevice.ModelNumber
+				ModelURL.innerText 		= LightDevice.ModelURL
+				SerialNumber.innerText 		= LightDevice.SerialNumber
+				UPC.innerText 			= LightDevice.UPC
+
+				' Subscribe to the Event handler callback to keep track of variables' values
+				DimmerService.AddCallback GetRef("eventHandler")
+			End Sub
+			
+		
+			' ********************************************************************
+			' btnPowerOn_OnClick:
+			' This subroutine invokes PowerOn action on the device
+			' ********************************************************************				
+			Sub btnPowerOn_OnClick
+				DimmerService.InvokeAction "PowerOn", inArgs, outArgs
+			End Sub
+			
+			' ********************************************************************
+			' btnPowerOff_OnClick:
+			' This subroutine invokes PowerOff action on the device
+			' ********************************************************************				
+			Sub btnPowerOff_OnClick
+				DimmerService.InvokeAction "PowerOff", inArgs, outArgs
+			End Sub
+
+			' ********************************************************************
+			' btnSetLevel_OnClick:
+			' This subroutine invokes SetDimLevel action on the device
+			' ********************************************************************							
+			Sub btnSetLevel_OnClick
+				Dim targetLevel				
+				targetLevel = CLng(TheForm.txtDeviceType.Value)	
+				
+				If(targetLevel < 0 OR targetLevel > 100 ) Then
+					MsgBox "Please enter a value between 0 - 100"
+					Exit Sub
+				End If
+				
+				dimLevelArg(0) = targetLevel
+				DimmerService.InvokeAction "SetDimLevel", dimLevelArg, outArgs
+			End Sub
+			
+			' ********************************************************************
+			' eventHandler:
+			' This callback subroutine gets called whenever a state variable of the device is changed.
+			' ********************************************************************							
+			Sub eventHandler(callbackType, svcObj, varName, value)
+				If (callbackType = "VARIABLE_UPDATE") Then
+					select case varName
+						Case "Power" 
+							Window.status = "Current status of the Dimmer Device: " & value
+							If value = "true" Then
+								DeviceStatus = true
+							Else
+								DeviceStatus = false
+							End If
+						Case "dimLevel" 
+							Window.status = "Current dim level of the Dimmer Device: " & value
+							DeviceLevel = value
+					end select
+				End If
+			End Sub
+
+
+		</script>
+	</head>
+
+	<body ONLOAD="InitializePresentation">
+		<h2>UPnP Dimmer Light Device 1.0</h2>
+		<hr>
+		<form id="ModeSelectionForm">
+			
+			</p>
+			</p>
+			</p>
+		
+		<TABLE TABLE BORDER=3>
+
+			<TR BGCOLOR=#AACCFF>
+				<TH>Variable</TH>
+				<TH>Value</TH>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Device Name</TD>
+				<TD><P ID=FriendlyName></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>UDN</TD>
+				<TD><P ID=UniqueDeviceName></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Type</TD>
+				<TD><P ID=DeviceType></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Description</TD>
+				<TD><P ID=Description></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Manufacturer Name</TD>
+				<TD><P ID=ManufacturerName></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Manufacturer URL</TD>
+				<TD><P ID=ManufacturerURL></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Model Name</TD>
+				<TD><P ID=ModelName></P></TD>
+			</TR>
+
+			<TR>
+				<TD BGCOLOR=#CCCCCC>Model Number</TD>
+				<TD><P ID=ModelNumber></P></TD>
+			</TR>
+			
+			<TR>
+				<TD BGCOLOR=#CCCCCC>ModelURL</TD>
+				<TD><P ID=ModelURL></P></TD>
+			</TR>
+			
+			<TR>
+				<TD BGCOLOR=#CCCCCC>SerialNumber</TD>
+				<TD><P ID=SerialNumber></P></TD>
+			</TR>
+			
+			<TR>
+				<TD BGCOLOR=#CCCCCC>UPC</TD>
+				<TD><P ID=UPC></P></TD>
+			</TR>
+			  
+		</TABLE>
+			
+			</p>
+			</hr>
+			</p>
+			<h3>Use buttons below to change the state of the device.</h3>
+			
+			<input type="button" value="Power On" name="btnPowerOn"/>
+			<input type="button" value="Power Off" name="btnPowerOff"/>
+			</p>
+			<p>Please enter an integer between 0 - 100: </p>
+			<input type="text" value="0" size="30" name="txtDeviceType" >
+			<input type="button" value="Set Level" name="btnSetLevel"/>
+			</p>
+		
+		</form>
+	</body>
+</html>

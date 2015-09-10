@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+
+-->
+
+<!--
+
+Documentation of the .cdxml format is available at the following location:
+http://go.microsoft.com/fwlink/?LinkId=252460
+
+-->
+
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  
+  <!-- ClassVersion attribute below corresponds to the ClassVersion qualifier of the MSFT_WindowsProcess class (as defined in the .MOF file) -->
+  <Class ClassName="Root/StandardCimV2/Sample/MSFT_WindowsProcess" ClassVersion="1.0.0">
+    
+    <!-- This is the version of the cmdlets defined in this module.
+         This version describes signature and semantics of the cmdlets.
+         This version is equivalent to ModuleVersion entry in a module manifest psd1 file.
+    -->
+    <Version>1.0</Version>
+    
+    <DefaultNoun>WindowsProcess</DefaultNoun>
+    
+    <!-- This section defines cmdlets that get instances of MSFT_WindowsProcess and cmdlets that invoke instance methods on those instances. -->
+    <InstanceCmdlets>
+      
+      <!-- This section defines what cmdlet parameters should exist to select instances of MSFT_WindowsProcess. 
+           Cmdlet parameters from this section will be available by default in all cmdlets under InstanceCmdlets element.
+           
+           These cmdlet parameters will be used by all cmdlets defined in InstanceCmdlets section, 
+           unless those cmdlets override the default with their own GetCmdletParameters element. 
+        
+           Each parameter set has at least 1 mandatory parameter, because we don't want the user 
+           to accidentally run Stop-WindowsProcess or Set-WindowsProcessPriority without any parameters
+           which would result in stopping all the processes or setting the priority for all the processes. 
+      -->
+      <GetCmdletParameters>
+        
+        <!-- This section declares that cmdlet parameters should allow filtering of MSFT_WindowsProcess by 
+             1) "Name" property - using regular query (which for strings means wildcards support) and using default cmdlet parameter metadata
+             2) "WorkingSetProperty" - using a minimum value query and overriding the default name of the cmdlet parameter.
+        --> 
+        <QueryableProperties>
+          <Property PropertyName="Name">
+            <Type PSType="string"/>
+            <RegularQuery>
+              <CmdletParameterMetadata CmdletParameterSets="ByName" Position="1" IsMandatory="true" />
+            </RegularQuery>
+          </Property>
+
+          <Property PropertyName="WorkingSetSize">
+            <Type PSType="uint64"/>
+            <MinValueQuery>
+              <CmdletParameterMetadata PSName="MinWorkingSet" CmdletParameterSets="ByName" />
+            </MinValueQuery>
+          </Property>
+
+          <Property PropertyName="Handle">
+            <Type PSType="int"/>
+            <RegularQuery>
+              <CmdletParameterMetadata PSName="ProcessId" CmdletParameterSets="ById" IsMandatory="true" />
+            </RegularQuery>
+          </Property>
+        </QueryableProperties>
+        
+        <!-- This section defines a cmdlet parameter that allows returning a process associated with the given service.
+             This cmdlet parameter is put into a separate parameter set from query parameters above -->
+        <QueryableAssociations>
+          <Association Association="MSFT_WindowsServiceProcess" ResultRole="Process" SourceRole="Service">
+            <AssociatedInstance>
+              <Type
+                PSType="Microsoft.Management.Infrastructure.CimInstance"
+                ETSType="Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsService" />
+              <CmdletParameterMetadata CmdletParameterSets="ByAssociatedService" PSName="AssociatedService" IsMandatory="true" ValueFromPipeline="true" />
+            </AssociatedInstance>
+          </Association>
+        </QueryableAssociations>
+        
+      </GetCmdletParameters>
+
+      <GetCmdlet>
+        <CmdletMetadata Verb="Get" />
+        
+        <!-- We override GetCmdletParameters for Get-WindowsProcess cmdlet to allow invocation of Get-WindowsProcess without any parameters 
+             (Name parameter is no longer mandatory;  everything else is the same as in the default GetCmdletParameters element defined above).
+        -->
+        <GetCmdletParameters>
+          <QueryableProperties>
+            <Property PropertyName="Name">
+              <Type PSType="string"/>
+              <RegularQuery>
+                <CmdletParameterMetadata CmdletParameterSets="ByName" Position="1" />
+              </RegularQuery>
+            </Property>
+            
+            <Property PropertyName="WorkingSetSize">
+              <Type PSType="uint64"/>
+              <MinValueQuery>
+                <CmdletParameterMetadata PSName="MinWorkingSet" CmdletParameterSets="ByName" />
+              </MinValueQuery>
+            </Property>
+            
+            <Property PropertyName="Handle">
+              <Type PSType="int"/>
+              <RegularQuery>
+                <CmdletParameterMetadata PSName="ProcessId" CmdletParameterSets="ById" IsMandatory="true" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+          <QueryableAssociations>
+            <Association Association="MSFT_WindowsServiceProcess" ResultRole="Process" SourceRole="Service">
+              <AssociatedInstance>
+                <Type
+                  PSType="Microsoft.Management.Infrastructure.CimInstance"
+                  ETSType="Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsService" />
+                <CmdletParameterMetadata CmdletParameterSets="ByAssociatedService" PSName="AssociatedService" IsMandatory="true" ValueFromPipeline="true" />
+              </AssociatedInstance>
+            </Association>
+          </QueryableAssociations>
+
+        </GetCmdletParameters>
+      </GetCmdlet>
+
+      <!-- This section defines Set-WindowsProcessPriority cmdlet that wraps the extrinsic SetPriority method -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Set" ConfirmImpact="Low" />
+        <Method MethodName="SetPriority">
+          <Parameters>
+            <Parameter ParameterName="Priority">
+              <Type PSType="WindowsProcess.Priority" />
+              <CmdletParameterMetadata PSName="NewPriority" IsMandatory="true" Position="1" />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      
+      <!-- This section defines Stop-WindowsProcess that wraps the inrinsic DeleteInstance method. -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Stop" ConfirmImpact="Medium" />
+        <Method MethodName="cim:DeleteInstance" />
+      </Cmdlet>
+      
+    </InstanceCmdlets>
+
+    <StaticCmdlets>
+
+      <!-- This section defines Start-WindowsProcess cmdlet that wraps the intrinsic CreateInstance method -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Start" />
+        <Method MethodName="cim:CreateInstance">
+          <Parameters>
+            <Parameter ParameterName="CommandLine">
+              <Type PSType="string" />
+              <CmdletParameterMetadata IsMandatory="true" Position="1" />
+            </Parameter>
+          </Parameters>
+        </Method>
+        
+      </Cmdlet>
+      
+    </StaticCmdlets>
+    
+    <CmdletAdapterPrivateData>
+      <!-- For simplicity, the sample CIM provider for MSFT_WindowsProcess class doesn't implement extended semantics (i.e. it doesn't call MI_Context_ShouldProcess).
+           This means that WhatIf and Confirm parameters of Stop-WindowsProcess cmdlet need to be supported on the client side.
+           This usually results in worse user experience, than implementing extended semantics in a CIM provider.
+      -->
+      <Data Name="ClientSideShouldProcess" />
+    </CmdletAdapterPrivateData>
+    
+  </Class>
+
+  <Enums>
+    
+    <!-- This section defines a .NET enum that correspond to a ValueMap qualifier from .MOF files -->
+    <Enum EnumName="WindowsProcess.State" UnderlyingType="uint16">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="Other" Value="1" />
+      <Value Name="Ready" Value="2" />
+      <Value Name="Running" Value="3" />
+      <Value Name="Blocked" Value="4" />
+      <Value Name="SuspendedBlocked" Value="5" />
+      <Value Name="SuspendedReady" Value="6" />
+      <Value Name="Terminated" Value="7" />
+      <Value Name="Stopped" Value="8" />
+      <Value Name="Growing" Value="9" />
+      <Value Name="ReadyButRelinquishedProcessor" Value="10" />
+      <Value Name="Hung" Value="11" />
+    </Enum>
+    
+    <!-- This section defines a .NET enum that correspond to values allowed by Win32 SetPriorityClass function -->
+    <Enum EnumName="WindowsProcess.Priority" UnderlyingType="uint32">
+      <Value Name="AboveNormal" Value="32768" />
+      <Value Name="BelowNormal" Value="16384" />
+      <Value Name="High" Value="128" />
+      <Value Name="Idle" Value="64" />
+      <Value Name="Normal" Value="32" />
+      <Value Name="Realtime" Value="256" />
+    </Enum>
+    
+  </Enums>
+  
+</PowerShellMetadata>

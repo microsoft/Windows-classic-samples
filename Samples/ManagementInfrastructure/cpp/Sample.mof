@@ -1,0 +1,83 @@
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+
+#pragma include ("cim_schema_2.26.0.mof")
+#pragma include ("MSFT_Qualifiers.mof")
+
+// MSFT_WindowsProcess class derives from CIM_Process class,
+// which defines the schema for the processes running on windows OS.
+[ClassVersion("1.0.0")]
+class MSFT_WindowsProcess : CIM_Process
+{
+	string CommandLine;
+
+	[Description("This instance method demonstrates modifying the "
+		"priority of a given process."
+		"The method returns an integer value of 0 if the "
+		"operation was successfully completed,"
+		"and any other number to indicate an win32 error code.")]
+	uint32 SetPriority([In] uint32 Priority);
+
+	[static,
+	Description("This static method demonstrates creating a process "
+		"by supplying commandline to start a new process."
+		"It will output the reference to the newly created process."
+		"The method returns an integer value of 0 if the process "
+		"was successfully created, and any other number to "
+		"indicate an win32 error code.")]
+	uint32 Create([In] string CommandLine, [Out] CIM_Process ref Process);
+};
+
+
+// MSFT_WindowsService class derives from CIM_Service class,
+// which defines the schema for the services present on windows OS.
+[ClassVersion("1.0.0")]
+class MSFT_WindowsService : CIM_Service
+{
+	// To implement methods defined in parent class,
+	// it is mandatory to copy those methods definition
+	// from parent class and redefine in child class
+   	uint32 StartService();
+	uint32 StopService();
+};
+
+[Description("This class demonstrates designing a WMI class "
+ " having a static method to use the feature of steam output parameter, "
+ "which allows provider to send output array element one by one back to "
+ "client instead of sending the whole array back at one time."),
+ ClassVersion("1.0.0")]
+class MSFT_WindowsServiceManager
+{
+	// GetWindowsServices method reads list of MSFT_WindowsService instances with specific status,
+	// value of 0 for stopped services, 1 for running services, and other values for all services.
+	[static] uint32 GetWindowsServices([in, ValueMap { "0", "1", ".."}, Values { "Running", "Stopped", "All"}] uint32 status, [out, stream, EmbeddedInstance("MSFT_WindowsService")] string services[]);
+};
+
+// MSFT_WindowsServiceProcess class derives from CIM_ServiceProcess class,
+// which associates present services instance with running process instance on windows OS.
+[ClassVersion("1.0.0")]
+class MSFT_WindowsServiceProcess : CIM_ServiceProcess
+{
+};
+
+
+// MSFT_WindowsServiceStopped class derives from CIM_InstModification class,
+// which presents the notification of a stopped service on windows OS.
+[ClassVersion("1.0.0")]
+class MSFT_WindowsServiceStopped : CIM_InstModification
+{
+};
+
+
+// MSFT_WindowsServiceStarted class derives from CIM_InstModification class,
+// which presents the notification of a started service on windows OS.
+[ClassVersion("1.0.0")]
+class MSFT_WindowsServiceStarted : CIM_InstModification
+{
+};

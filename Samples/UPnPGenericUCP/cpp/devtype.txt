@@ -1,0 +1,5 @@
+upnp:rootdevice All Root Devices
+urn:schemas-upnp-org:device:InternetGatewayDevice:1 Internet Gateway Devices
+urn:schemas-upnp-org:device:lighting:1 Lighting Devices
+urn:schemas-upnp-org:device:reminder:1 Reminder Devices
+urn:microsoft-com:device:DimmerDevice:1 UPnP SDK Sample Dimmer Devices

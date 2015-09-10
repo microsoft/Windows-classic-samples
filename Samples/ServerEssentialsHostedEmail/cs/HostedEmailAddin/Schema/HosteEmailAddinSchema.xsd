@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  <copyright file="HosteEmailAddinSchema.xsd" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!--Guid class-->
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+      <xs:pattern value="\{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--Enumeration of Hoste Email Built-in UI-->
+  <xs:simpleType name="HostedEmailBuiltinUIEnum">
+    <xs:annotation>
+      <xs:documentation>Enumeration of Hosted Email Built-in UI</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HEAddUser" />
+      <xs:enumeration value="HERemoveUser" />
+      <xs:enumeration value="HEUserProperty" />
+      <xs:enumeration value="HEEnableUser" />
+      <xs:enumeration value="HEDisableUser" />
+      <xs:enumeration value="HEResetPassword" />
+      <xs:enumeration value="HEUserTab" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="HostedEmailPasswordPolicyLevelEnum">
+    <xs:annotation>
+      <xs:documentation>Enumeration of Password Policy level on SBS8</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Weak" />
+      <xs:enumeration value="Medium" />
+      <xs:enumeration value="MediumStrong" />
+      <xs:enumeration value="Strong" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="addin">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Service" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="ShortName" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+              <xs:element name="FullName" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+              <xs:element name="ServiceSignupURL" type="xs:anyURI" minOccurs="0" maxOccurs="1" nillable="false"/>
+              <xs:element name="ServiceUserPortal" type="xs:anyURI" minOccurs="0" maxOccurs="1" nillable="false"/>
+              <xs:element name="RetrievePasswordURL" type="xs:anyURI" minOccurs="0" maxOccurs="1" nillable="false"/>
+              <xs:element name="ServicesDescription" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+              <xs:element name="LogoImage" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+              <xs:element name="Provider" minOccurs="1" maxOccurs="1" nillable="false">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="Website" type="xs:anyURI" minOccurs="1" maxOccurs="1" nillable="false"/>
+                    <xs:element name="Address" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SupportContact" minOccurs="0" maxOccurs="1" nillable="false">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="Phone" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                    <xs:element name="Email" type="xs:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PasswordSync" minOccurs="0" maxOccurs="1" nillable="false">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PasswordPolicyOnServer" minOccurs="1" maxOccurs="1" nillable="true">
+                <xs:complexType>
+                  <xs:attribute name="level" type="HostedEmailPasswordPolicyLevelEnum" use="required" />
+                  <xs:attribute name="minLength" type="xs:positiveInteger" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HideBuiltinUI" minOccurs="0" maxOccurs="1" nillable="false">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="UIAddin" type="HostedEmailBuiltinUIEnum" maxOccurs="unbounded" nillable="false"/>
+            </xs:sequence>
+          </xs:complexType>
+          <!--Duplicate check -->
+          <xs:unique name="DuplicateCheckForUIAddin">
+            <xs:selector xpath="UIAddin"/>
+            <xs:field xpath="."/>
+          </xs:unique>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="name" type="xs:string"/>
+      <xs:attribute name="id" type="guid" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
+      <xs:attribute name="basedir" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

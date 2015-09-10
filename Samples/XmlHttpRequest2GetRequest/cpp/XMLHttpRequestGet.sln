@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XMLHttpRequestGet", "XMLHttpRequestGet.vcxproj", "{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Debug|Win32.ActiveCfg = Debug|Win32
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Debug|Win32.Build.0 = Debug|Win32
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Debug|Win32.Deploy.0 = Debug|Win32
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Release|Win32.ActiveCfg = Release|Win32
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Release|Win32.Build.0 = Release|Win32
+		{938B1A6D-41B3-485F-A2BB-BE39DCD5AB50}.Release|Win32.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

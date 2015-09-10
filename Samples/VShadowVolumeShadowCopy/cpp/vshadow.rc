@@ -1,0 +1,15 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#undef  VER_PRODUCTNAME_STR
+#define VER_PRODUCTNAME_STR         "VShadow"
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "VShadow, Volume Shadow Copy Service (VSS) Sample Requestor"
+#define VER_INTERNALNAME_STR        "vshadow.exe"
+#define VER_ORIGINALFILENAME_STR    VER_INTERNALNAME_STR
+
+#include "common.ver"
+
+
+

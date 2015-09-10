@@ -1,0 +1,9 @@
+LIBRARY	"DX11VideoRenderer"
+EXPORTS
+    CreateDX11VideoRenderer
+    CreateDX11VideoRendererActivate
+    DllCanUnloadNow                 PRIVATE
+    DllGetClassObject               PRIVATE
+    DllMain                         PRIVATE
+    DllRegisterServer               PRIVATE
+    DllUnregisterServer             PRIVATE

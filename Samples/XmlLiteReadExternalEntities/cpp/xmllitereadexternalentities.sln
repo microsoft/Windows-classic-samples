@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xmllitereadexternalentities", "xmllitereadexternalentities.vcxproj", "{7FE218D8-1430-49EF-99C1-473C4A0261A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FE218D8-1430-49EF-99C1-473C4A0261A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7FE218D8-1430-49EF-99C1-473C4A0261A8}.Debug|Win32.Build.0 = Debug|Win32
+		{7FE218D8-1430-49EF-99C1-473C4A0261A8}.Release|Win32.ActiveCfg = Release|Win32
+		{7FE218D8-1430-49EF-99C1-473C4A0261A8}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

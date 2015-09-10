@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+    xmlns:tns="http://www.example.org" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.example.org" 
+    xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
+    <wsdl:types>
+        <xs:schema targetNamespace="http://www.example.org" elementFormDefault="qualified">
+            <xsd:element name="BlockServiceType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="BlockServiceResponseType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="UnBlockServiceType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="UnBlockServiceResponseType">
+                <xsd:complexType/>
+            </xsd:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="BlockServiceMessage">
+        <wsdl:part name="parameters" element="tns:BlockServiceType"/>
+    </wsdl:message>
+    <wsdl:message name="BlockServiceResponseMessage">
+        <wsdl:part name="parameters" element="tns:BlockServiceResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="UnBlockServiceMessage">
+        <wsdl:part name="parameters" element="tns:UnBlockServiceType"/>
+    </wsdl:message>
+    <wsdl:message name="UnBlockServiceResponseMessage">
+        <wsdl:part name="parameters" element="tns:UnBlockServiceResponseType"/>
+    </wsdl:message>
+    <wsdl:portType name="IBlockUnBlockService">
+        <wsdl:operation name="Block">
+            <wsdl:input message="tns:BlockServiceMessage" wsaw:Action="http://www.example.org/Block"/>
+            <wsdl:output message="tns:BlockServiceResponseMessage" wsaw:Action="http://www.example.org/BlockResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="UnBlock">
+            <wsdl:input message="tns:UnBlockServiceMessage" wsaw:Action="http://www.example.org/UnBlock"/>
+            <wsdl:output message="tns:UnBlockServiceResponseMessage" wsaw:Action="http://www.example.org/UnBlockResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BlockServiceBinding" type="tns:IBlockUnBlockService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Block">
+            <soap:operation soapAction="http://www.example.org/Block"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="UnBlock">
+            <soap:operation soapAction="http://www.example.org/UnBlock"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BlockUnBlockService">
+        <wsdl:port name="BlockingService" binding="tns:BlockServiceBinding">
+            <soap:address location="No Target Adress"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

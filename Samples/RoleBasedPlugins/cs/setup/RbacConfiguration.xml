@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RbacConfiguration>
+  <Groups>
+    <!--Group consists of the following: 
+      Name:  Name of the group
+      UserName (Optional): Windows Identity user name
+      Password (Optional): Password of the Windows user name
+      DomainName (Optional): Domain for the user. For local machine account either do not include them or give the machine name. Do not give empty string
+      MapIncomingUser (Optional): Boolean value indicating whether to execute cmdlet in the context of network client.
+
+      User credentials and MapIncomingUser=true are exclusive.
+    -->
+    <Group Name="NonAdminGroup" MapIncomingUser="true">
+      <Cmdlets>
+        <Cmdlet>Get-Service</Cmdlet>
+        <Cmdlet>Set-Service</Cmdlet>
+        <Cmdlet>Get-Process</Cmdlet>
+        <Cmdlet>Get-Item</Cmdlet>
+        <Cmdlet>New-Item</Cmdlet>
+        <Cmdlet>Get-Command</Cmdlet>
+        <Cmdlet>ConvertTo-Xml</Cmdlet>
+        <Cmdlet>ConvertTo-Json</Cmdlet>
+        <Cmdlet>ConvertFrom-Json</Cmdlet>
+      </Cmdlets>
+    </Group>
+    <Group Name="AdminGroup" MapIncomingUser="true">
+      <Cmdlets>
+        <Cmdlet>Get-Service</Cmdlet>
+        <Cmdlet>Get-Process</Cmdlet>
+        <Cmdlet>Get-Item</Cmdlet>
+        <Cmdlet>New-Item</Cmdlet>
+        <Cmdlet>Get-Command</Cmdlet>
+        <Cmdlet>ConvertTo-Xml</Cmdlet>
+        <Cmdlet>ConvertTo-Json</Cmdlet>
+        <Cmdlet>ConvertFrom-Json</Cmdlet>
+      </Cmdlets>
+      <Modules>
+        <Module>C:\Windows\System32\WindowsPowerShell\v1.0\Modules\ServerManager\ServerManager.psd1</Module>
+      </Modules>
+    </Group>
+  </Groups>
+  <Users>
+    <!-- User consists of the following : 
+      Name: Name of the user. If a user is from a cer
+      AuthenticationType: Authentication type used.
+      DomainName (Optional): Domain for the user
+    -->
+    <User Name="localNonAdmin" AuthenticationType="Basic" GroupName="NonAdminGroup" />
+    <User Name="localAdmin" AuthenticationType="Basic" GroupName="AdminGroup" />
+  </Users>
+</RbacConfiguration>

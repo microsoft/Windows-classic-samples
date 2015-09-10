@@ -1,0 +1,4 @@
+LIBRARY          UiaCleanShutdownControl.dll
+
+EXPORTS
+	CreateCleanShutdownControl

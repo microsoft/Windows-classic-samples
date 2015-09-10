@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Factory="System.Data.Services.DataServiceHostFactory, System.Data.Services, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Service="Microsoft.Management.Odata.DataService, Microsoft.Management.OData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>

@@ -1,0 +1,157 @@
+﻿<!--
+  <copyright file="MyCustomWPFControl.xaml" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<UserControl x:Class="WSSTopLevelTabWPFSample.MyCustomWPFControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <UserControl.Background>
+        <RadialGradientBrush GradientOrigin="0.75,0.25">
+            <GradientStop Color="White" Offset="0.0" />
+            <GradientStop Color="Gray" Offset="0.7" />
+            <GradientStop Color="Black"  Offset="1.0" />
+        </RadialGradientBrush>
+    </UserControl.Background>
+    <Grid>
+        <Border BorderThickness="1" Margin="5" Background="Transparent">
+            <DockPanel LastChildFill="True">
+                <TextBlock TextAlignment="Center"
+                           FontSize="20"
+                           Foreground="White"
+                           DockPanel.Dock="Top">
+                    This is WPF custom control
+                </TextBlock>
+                <Border Margin="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <FlowDocumentReader Opacity="1" Grid.Column="0" Background="White" Margin="10">
+                            <FlowDocument Background="White">
+                                <Section FontSize="14pt">
+                                    <Paragraph TextAlignment="Left">
+                                        <Bold>Introduction to Windows Presentation Foundation</Bold>
+                                    </Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph Background="LightYellow">
+                                        http://msdn.microsoft.com/en-us/library/aa970268.aspx
+                                    </Paragraph>
+                                </Section>
+                                <Section>
+                                    <BlockUIContainer>
+                                        <Button Click="Button_Click_2">Click Me!</Button>
+                                    </BlockUIContainer>
+                                </Section>
+                                <Section>
+                                    <Paragraph>Windows Presentation Foundation (WPF) is a next-generation presentation system for building Windows client applications with visually stunning user experiences. With WPF, you can create a wide range of both standalone and browser-hosted applications</Paragraph>
+                                    <Paragraph>The core of WPF is a resolution-independent and vector-based rendering engine that is built to take advantage of modern graphics hardware. WPF extends the core with a comprehensive set of application-development features that include Extensible Application Markup Language (XAML), controls, data binding, layout, 2-D and 3-D graphics, animation, styles, templates, documents, media, text, and typography. WPF is included in the Microsoft .NET Framework, so you can build applications that incorporate other elements of the .NET Framework class library.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF exists as a subset of .NET Framework types that are for the most part located in the System.Windows namespace. If you have previously built applications with .NET Framework using managed technologies like ASP.NET and Windows Forms, the fundamental WPF programming experience should be familiar; you instantiate classes, set properties, call methods, and handle events, all using your favorite .NET Framework programming language, such as C# or Visual Basic.</Paragraph>
+                                    <Paragraph>To support some of the more powerful WPF capabilities and to simplify the programming experience, WPF includes additional programming constructs that enhance properties and events: dependency properties and routed events. For more information on dependency properties, see Dependency Properties Overview. For more information on routed events, see Routed Events Overview.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF offers additional programming enhancements for Windows client application development. One obvious enhancement is the ability to develop an application using both markup and code-behind, an experience that ASP.NET developers should be familiar with. You generally use Extensible Application Markup Language (XAML) markup to implement the appearance of an application while using managed programming languages (code-behind) to implement its behavior.</Paragraph>
+                                    <Paragraph>XAML is an XML-based markup language that is used to implement an application's appearance declaratively. It is typically used to create windows, dialog boxes, pages, and user controls, and to fill them with controls, shapes, and graphics.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>Windows Presentation Foundation (WPF) is a next-generation presentation system for building Windows client applications with visually stunning user experiences. With WPF, you can create a wide range of both standalone and browser-hosted applications</Paragraph>
+                                    <Paragraph>The core of WPF is a resolution-independent and vector-based rendering engine that is built to take advantage of modern graphics hardware. WPF extends the core with a comprehensive set of application-development features that include Extensible Application Markup Language (XAML), controls, data binding, layout, 2-D and 3-D graphics, animation, styles, templates, documents, media, text, and typography. WPF is included in the Microsoft .NET Framework, so you can build applications that incorporate other elements of the .NET Framework class library.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF exists as a subset of .NET Framework types that are for the most part located in the System.Windows namespace. If you have previously built applications with .NET Framework using managed technologies like ASP.NET and Windows Forms, the fundamental WPF programming experience should be familiar; you instantiate classes, set properties, call methods, and handle events, all using your favorite .NET Framework programming language, such as C# or Visual Basic.</Paragraph>
+                                    <Paragraph>To support some of the more powerful WPF capabilities and to simplify the programming experience, WPF includes additional programming constructs that enhance properties and events: dependency properties and routed events. For more information on dependency properties, see Dependency Properties Overview. For more information on routed events, see Routed Events Overview.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF offers additional programming enhancements for Windows client application development. One obvious enhancement is the ability to develop an application using both markup and code-behind, an experience that ASP.NET developers should be familiar with. You generally use Extensible Application Markup Language (XAML) markup to implement the appearance of an application while using managed programming languages (code-behind) to implement its behavior.</Paragraph>
+                                    <Paragraph>XAML is an XML-based markup language that is used to implement an application's appearance declaratively. It is typically used to create windows, dialog boxes, pages, and user controls, and to fill them with controls, shapes, and graphics.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>Windows Presentation Foundation (WPF) is a next-generation presentation system for building Windows client applications with visually stunning user experiences. With WPF, you can create a wide range of both standalone and browser-hosted applications</Paragraph>
+                                    <Paragraph>The core of WPF is a resolution-independent and vector-based rendering engine that is built to take advantage of modern graphics hardware. WPF extends the core with a comprehensive set of application-development features that include Extensible Application Markup Language (XAML), controls, data binding, layout, 2-D and 3-D graphics, animation, styles, templates, documents, media, text, and typography. WPF is included in the Microsoft .NET Framework, so you can build applications that incorporate other elements of the .NET Framework class library.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF exists as a subset of .NET Framework types that are for the most part located in the System.Windows namespace. If you have previously built applications with .NET Framework using managed technologies like ASP.NET and Windows Forms, the fundamental WPF programming experience should be familiar; you instantiate classes, set properties, call methods, and handle events, all using your favorite .NET Framework programming language, such as C# or Visual Basic.</Paragraph>
+                                    <Paragraph>To support some of the more powerful WPF capabilities and to simplify the programming experience, WPF includes additional programming constructs that enhance properties and events: dependency properties and routed events. For more information on dependency properties, see Dependency Properties Overview. For more information on routed events, see Routed Events Overview.</Paragraph>
+                                </Section>
+                                <Section>
+                                    <Paragraph>WPF offers additional programming enhancements for Windows client application development. One obvious enhancement is the ability to develop an application using both markup and code-behind, an experience that ASP.NET developers should be familiar with. You generally use Extensible Application Markup Language (XAML) markup to implement the appearance of an application while using managed programming languages (code-behind) to implement its behavior.</Paragraph>
+                                    <Paragraph>XAML is an XML-based markup language that is used to implement an application's appearance declaratively. It is typically used to create windows, dialog boxes, pages, and user controls, and to fill them with controls, shapes, and graphics.</Paragraph>
+                                </Section>
+                            </FlowDocument>
+                        </FlowDocumentReader>
+                        <DockPanel Grid.Column="1" LastChildFill="True">
+                            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="White">
+                                        Blur intensity:
+                                    </TextBlock>
+                                    <Slider Margin="20,0,0,0" Width="200" Name="slider1" Minimum="1" Maximum="7" Opacity="0.7"/>
+                                </StackPanel>
+                                <Border Name="rotatingBorder" Margin="0,100,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Opacity="0.7">
+                                    <StackPanel Margin="10">
+                                        <TextBox Width="250" Name="textBox1" FontSize="20" FontWeight="Bold">
+                                            Enter text here
+                                        </TextBox>
+                                        <Button Margin="0,10,0,0" Height="50">Sample WPF Button</Button>
+                                    </StackPanel>
+                                    <Border.RenderTransform>
+                                        <RotateTransform Angle="0">
+                                        </RotateTransform>
+                                    </Border.RenderTransform>
+                                    <Border.BitmapEffect>
+                                        <BlurBitmapEffect Radius="{Binding ElementName=slider1, Path=Value}"></BlurBitmapEffect>
+                                    </Border.BitmapEffect>
+                                    <Border.Triggers>
+                                        <EventTrigger RoutedEvent="Border.Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="rotatingBorder"
+                                                                        Storyboard.TargetProperty="(Border.RenderTransform).(RotateTransform.Angle)"
+                                                                        From="0"
+                                                                        To="360"
+                                                                        Duration="0:0:17"
+                                                                        RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Border.Triggers>
+                                </Border>
+                            </StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Button Width="100" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Margin="20" Click="Button_Click">
+                                    <Button.RenderTransform>
+                                        <SkewTransform AngleX="25"></SkewTransform>
+                                    </Button.RenderTransform>
+                                    WPF Button
+                                </Button>
+                                <Button Width="100" Height="35" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="20" RenderTransformOrigin="0.5,0.5" Click="Button_Click_1">
+                                    <Button.BitmapEffect>
+                                        <OuterGlowBitmapEffect GlowSize="10"></OuterGlowBitmapEffect>
+                                    </Button.BitmapEffect>
+                                    <Button.RenderTransform>
+                                        <RotateTransform Angle="-15"></RotateTransform>
+                                    </Button.RenderTransform>
+                                    WPF Button
+                                </Button>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </Border>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

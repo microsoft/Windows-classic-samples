@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 12
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindPackagesByUserSecurityIdSample", "FindPackagesByUserSecurityIdSample.vcxproj", "{5DF7C69B-4783-DC86-7ECA-F87D8102DB86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DF7C69B-4783-DC86-7ECA-F87D8102DB86}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5DF7C69B-4783-DC86-7ECA-F87D8102DB86}.Debug|Win32.Build.0 = Debug|Win32
+		{5DF7C69B-4783-DC86-7ECA-F87D8102DB86}.Release|Win32.ActiveCfg = Release|Win32
+		{5DF7C69B-4783-DC86-7ECA-F87D8102DB86}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

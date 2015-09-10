@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+
+-->
+<Configuration>
+  <ViewDefinitions>
+    <!-- This section (first view matching MSFT_WindowsProcess type name) defines default way for displaying MSFT_WindowsProcess instances -->
+    <View>
+      <Name>DefaultView</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsProcess</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <!-- note: PowerShell users expect table column labels to match unlocalized names of properties that are displayed in the column -->
+            <label>Name</label>
+            <!-- note: by not defining width for some columns, we allow the table to scale to the current width of the PowerShell display -->
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>ProcessId</label>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>ExecutionState</label>
+            <Width>14</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>UserModeTime</label>
+            <Width>18</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>KernelModeTime</label>
+            <Width>18</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>WorkingSetSize</label>
+            <Width>14</Width>
+            <Alignment>Right</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ProcessId</PropertyName>
+                <Alignment>Right</Alignment>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExecutionState</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserModeTime</PropertyName>
+                <!-- FormatString element specifies how to format the column item 
+                     (the "g" format for System.TimeSpan values is documented at http://msdn.microsoft.com/en-us/library/ee372286.aspx) -->
+                <FormatString>g</FormatString>
+                <Alignment>Right</Alignment>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>KernelModeTime</PropertyName>
+                <!-- FormatString element specifies how to format the column item 
+                     (the "g" format for System.TimeSpan values is documented at http://msdn.microsoft.com/en-us/library/ee372286.aspx) -->
+                <FormatString>g</FormatString>
+                <Alignment>Right</Alignment>
+              </TableColumnItem>
+              <TableColumnItem>
+                <!-- This section demonstrates using a script block to display the property value in a more user-friendly name .
+                     note: if the value evaluated by the script block is useful outside of formatting & output, then consider defining a script property via types.ps1xml file instead -->
+                <ScriptBlock>
+                  "{0:n1}MB" -f ([float]$_.WorkingSetSize / 1MB)
+                </ScriptBlock>
+                <Alignment>Right</Alignment>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

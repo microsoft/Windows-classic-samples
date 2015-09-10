@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>System.Drawing.Point</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <!-- when serializing System.Drawing.Point (or derived classes) use serialization depth = 1 
+                         (i.e. do not serialize at depth 0 - as a string) -->
+          <NoteProperty>
+            <Name>SerializationDepth</Name>
+            <Value>1</Value>
+          </NoteProperty>
+
+          <!-- serialize only a subset of all public properties 
+                         (i.e. don't serialize IsEmpty property of System.Drawing.Point) -->
+          <NoteProperty>
+            <Name>SerializationMethod</Name>
+            <Value>SpecificProperties</Value>
+          </NoteProperty>
+          <PropertySet>
+            <Name>PropertySerializationSet</Name>
+            <ReferencedProperties>
+              <Name>X</Name>
+              <Name>Y</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+</Types>

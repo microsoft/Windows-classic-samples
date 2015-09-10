@@ -1,0 +1,8 @@
+﻿<!--
+  <copyright file="ContosoDistributionGroupAddin.addin" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+
+<addin name="Contoso Service Distribution Group Addin" basedir="C:\Program Files\Windows Server\Bin\"
+      type="Contoso.HostedEmail.DistributionGroup.DistributionGroupAdorner, ContosoHostedEmailAddin" />

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<root>
+  <child myAttribute="this is a somewhat longer attribute value">
+    This is a somewhat longer value for an element.
+  </child>
+</root>

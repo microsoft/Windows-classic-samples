@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Dictionary\SampleIMESimplifiedQuanPin.txt" />
+    <None Include="image\DoubleSingleByteOff.ico" />
+    <None Include="image\DoubleSingleByteOn.ico" />
+    <None Include="image\ImeModeOff.ico" />
+    <None Include="image\ImeModeOn.ico" />
+    <None Include="image\PunctuationOff.ico" />
+    <None Include="image\PunctuationOn.ico" />
+    <None Include="image\SampleIme.ico" />
+    <None Include="SampleIME.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseDictionaryEngine.h" />
+    <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="ButtonWindow.h" />
+    <ClInclude Include="CandidateListUIPresenter.h" />
+    <ClInclude Include="CandidateWindow.h" />
+    <ClInclude Include="Compartment.h" />
+    <ClInclude Include="CompositionProcessorEngine.h" />
+    <ClInclude Include="define.h" />
+    <ClInclude Include="EnumTfCandidates.h" />
+    <ClInclude Include="KeyStateCategory.h" />
+    <ClInclude Include="SampleIMEBaseStructure.h" />
+    <ClInclude Include="SearchCandidateProvider.h" />
+    <ClInclude Include="DictionaryParser.h" />
+    <ClInclude Include="DictionarySearch.h" />
+    <ClInclude Include="DisplayAttributeInfo.h" />
+    <ClInclude Include="EditSession.h" />
+    <ClInclude Include="EnumDisplayAttributeInfo.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="FileMapping.h" />
+    <ClInclude Include="GetTextExtentEditSession.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="KeyHandlerEditSession.h" />
+    <ClInclude Include="LanguageBar.h" />
+    <ClInclude Include="Private.h" />
+    <ClInclude Include="RegKey.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SampleIME.h" />
+    <ClInclude Include="ScrollBarWindow.h" />
+    <ClInclude Include="ShadowWindow.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TableDictionaryEngine.h" />
+    <ClInclude Include="TfInputProcessorProfile.h" />
+    <ClInclude Include="TfTextLayoutSink.h" />
+    <ClInclude Include="TipCandidateList.h" />
+    <ClInclude Include="TipCandidateString.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ActiveLanguageProfileNotifySink.cpp" />
+    <ClCompile Include="BaseDictionaryEngine.cpp" />
+    <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="ButtonWindow.cpp" />
+    <ClCompile Include="CandidateListUIPresenter.cpp" />
+    <ClCompile Include="CandidateWindow.cpp" />
+    <ClCompile Include="Compartment.cpp" />
+    <ClCompile Include="Composition.cpp" />
+    <ClCompile Include="CompositionProcessorEngine.cpp" />
+    <ClCompile Include="EnumTfCandidates.cpp" />
+    <ClCompile Include="KeyStateCategory.cpp" />
+    <ClCompile Include="SampleIMEBaseStructure.cpp" />
+    <ClCompile Include="SearchCandidateProvider.cpp" />
+    <ClCompile Include="DictionaryParser.cpp" />
+    <ClCompile Include="DictionarySearch.cpp" />
+    <ClCompile Include="DisplayAttribute.cpp" />
+    <ClCompile Include="DisplayAttributeInfo.cpp" />
+    <ClCompile Include="DisplayAttributeProvider.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="EditSession.cpp" />
+    <ClCompile Include="EndComposition.cpp" />
+    <ClCompile Include="EnumDisplayAttributeInfo.cpp" />
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="FileMapping.cpp" />
+    <ClCompile Include="FunctionProviderSink.cpp" />
+    <ClCompile Include="GetTextExtentEditSession.cpp" />
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="KeyEventSink.cpp" />
+    <ClCompile Include="KeyHandler.cpp" />
+    <ClCompile Include="KeyHandlerEditSession.cpp" />
+    <ClCompile Include="LanguageBar.cpp" />
+    <ClCompile Include="Register.cpp" />
+    <ClCompile Include="RegKey.cpp" />
+    <ClCompile Include="ScrollBarWindow.cpp" />
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="ShadowWindow.cpp" />
+    <ClCompile Include="StartComposition.cpp" />
+    <ClCompile Include="TableDictionaryEngine.cpp" />
+    <ClCompile Include="SampleIME.cpp" />
+    <ClCompile Include="TextEditSink.cpp" />
+    <ClCompile Include="TfInputProcessorProfile.cpp" />
+    <ClCompile Include="TfTextLayoutSink.cpp" />
+    <ClCompile Include="ThreadFocusSink.cpp" />
+    <ClCompile Include="ThreadMgrEventSink.cpp" />
+    <ClCompile Include="TipCandidateList.cpp" />
+    <ClCompile Include="TipCandidateString.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SampleIME.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0C8FE010-5146-44D8-AF99-82702C15FEA5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SampleIME</RootNamespace>
+    <ProjectName>SampleIME</ProjectName>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SampleIME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\um;$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Lib\win8\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>SampleIME.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SampleIME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\um;$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Lib\win8\um\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>SampleIME.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SampleIME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\um;$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>false</BrowseInformation>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Lib\win8\um\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>SampleIME.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SampleIME_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\um;$(MSBuildProgramFiles32)\Windows Kits\8.0\Include\shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>false</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(MSBuildProgramFiles32)\Windows Kits\8.0\Lib\win8\um\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>SampleIME.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

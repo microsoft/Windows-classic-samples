@@ -1,0 +1,32 @@
+﻿<!--
+  <copyright file="MainWindow.xaml" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<Window x:Class="ChatWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ChatObjectModel="clr-namespace:ChatObjectModel;assembly=ChatObjectModel"    
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Margin="81.183,8,0,0" x:Name="UserName"
+         VerticalAlignment="Top" Text="&lt;enter user name&gt;" TextWrapping="Wrap"
+         Width="167"/>
+        <Label HorizontalAlignment="Left" Margin="8,6,0,0" VerticalAlignment="Top" 
+         Content="User name:"/>
+        <Button d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,8,8,0"
+         x:Name="ConnectButton" VerticalAlignment="Top" Content="Connect" 
+         Click="ConnectButton_Click"/>
+        <ListBox IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Right" 
+         Margin="0,47,8,8" x:Name="CurrentUsers" Width="154"/>
+        <TextBox Margin="8,47,166,33.96" Text="" TextWrapping="Wrap" x:Name="ChatText"/>
+        <TextBox d:LayoutOverrides="Height" Margin="8,0,202.507,8" 
+         VerticalAlignment="Bottom" Text="&lt;enter chat text&gt;" TextWrapping="Wrap" 
+         x:Name="ChatEntry" IsEnabled="False"/>
+        <Button d:LayoutOverrides="Width, Height" HorizontalAlignment="Right" 
+         Margin="0,0,166,8" VerticalAlignment="Bottom" Content="Send" x:Name="Send"
+         Click="Send_Click" IsDefault="True" IsEnabled="False"/>
+    </Grid>
+</Window>

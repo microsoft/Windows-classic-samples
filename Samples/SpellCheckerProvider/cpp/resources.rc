@@ -1,0 +1,26 @@
+#include <winver.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                   VFT_DLL
+#define VER_FILESUBTYPE                VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR        "Sample spell check provider"
+#define VER_INTERNALNAME_STR           "SampleSpellChecker\0"
+#define VER_ORIGINALFILENAME_STR       "SampleSpellChecker.dll"
+
+#include "common.ver"
+#include "resource.h"
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_IGNOREREPEATED_HEADING          L""
+    IDS_IGNOREREPEATED_DESCRIPTION      L"Do not consider repeated consecutive words as misspelled."
+    IDS_IGNOREREPEATED_LABEL            L"Ignore repeated words"
+
+    IDS_OKLETTER_HEADING                L""
+    IDS_OKLETTER_DESCRIPTION            L"Letter required to be present for a word to be considered correctly spelled."
+    IDS_OKLETTER_LABEL_A                L"Letter a"
+    IDS_OKLETTER_LABEL_B                L"Letter b"
+    IDS_OKLETTER_LABEL_F                L"Letter f"
+END
+
+IDR_SPELLCHECKPROVIDERFACTORY           REGISTRY    "SampleSpellChecker.rgs"

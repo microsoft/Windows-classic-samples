@@ -1,0 +1,55 @@
+﻿<?xml version="1.0"?>
+<definitions name="StockQuote"
+
+targetNamespace="http://example.com/stockquote/definitions"
+          xmlns:tns="http://example.com/stockquote/definitions"
+          xmlns:xsd1="http://example.com/stockquote/schemas"
+          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+          xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <!-- ************************************************************ -->
+  <!-- The following imports the XSD file which contains the types
+       referenced in the message parts, below.
+   -->
+  <!-- ************************************************************ -->
+  <import namespace="http://example.com/stockquote/schemas"
+          location="http://example.com/stockquote/stockquote.xsd"/>
+
+  <!-- ************************************************************ -->
+  <!-- The following messages section describes how the types are
+       assembled into messages.  These messages are referenced in
+       the operations listed in the portType section, below.
+   -->
+  <!-- ************************************************************ -->
+  <message name="GetLastTradePriceInput">
+    <part name="body" element="xsd1:TradePriceRequest"/>
+  </message>
+
+  <message name="GetLastTradePriceOutput">
+    <part name="body" element="xsd1:TradePrice"/>
+  </message>
+
+  <!-- ************************************************************ -->
+  <!-- The portTyupe section organizes messages into operations.
+       The StockQuote type is advertised by a service on a device;
+       the device itself does not advertise this type.
+   -->
+  <!-- ************************************************************ -->
+  <portType name="StockQuotePortType">
+    <operation name="GetLastTradePrice">
+      <input message="tns:GetLastTradePriceInput"/>
+      <output message="tns:GetLastTradePriceOutput"/>
+    </operation>
+  </portType>
+
+  <!-- ************************************************************ -->
+  <!-- This empty portType is used in WS-Discovery messages to
+       indicate that the device supports the StockQuote service.
+       This type does not describe any operations, and is not
+       advertised by the service on the device which hosts the
+       StockQuote portType.
+   -->
+  <!-- ************************************************************ -->
+
+  <portType name="StockQuoteDeviceType" />
+</definitions>

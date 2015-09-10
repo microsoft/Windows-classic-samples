@@ -1,0 +1,59 @@
+﻿<!--
+  <copyright file="Content.launchpad" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<!--
+DESCRIPTION:
+
+The Launchpad is a small application installed only on the client that supports the execution of simple commands. 
+This includes navigating to web sites or starting applications. There are several built in commands to support 
+Windows Server Solutions Products and it can be customized on client computers with an XML with the extension 
+".launchpad"
+INSTALLATION:
+
+This file can have any name, but needs to have the exetension .launchpad. This file should be copied to the folder:
+
+		%ProgramFiles%\Windows Server\Bin\LaunchPad on a client computer that is joined to the server. 
+ 
+XML:
+
+Top level LaunchPad element contains Task and Category elements
+
+Category Element Attributes:
+  Provides a button on the Launchpad that can contain any number of other categories and tasks. The following 
+      attributes are used with a Category element:
+  id – Provides a unique identifier for the category. It is recommended that you either use a GUID or a namespace-like 
+      string of the form <CompanyName>.<AppName>.<FeatureName>.
+  name – Provides a caption for the category button. You can assign a hotkey for the button by using the underscore 
+      ('_') character as a prefix to the letter that you want to use as the hotkey.
+
+Task Element Attributes:
+  Provides a button on the Launchpad that is used to access Web pages or applications. The following attributes 
+      are used with a Task element:
+  id – Provides a unique identifier for the task. It is recommended that you either use a GUID or a namespace-like 
+        string of the form <CompanyName>.<AppName>.<FeatureName>.
+  name – Provides a caption for the task button. You can assign a hotkey for the button by using the underscore 
+        ('_') character as a prefix to the letter that you want to use as the hotkey.
+  src – Indicates how to run a task. The value of this attribute can be either a URL or a command to run an application. 
+        Environment variables are expanded when using the src attribute.
+  args - Provides optional arguments to the command that is specified in the src attribute. A list of arguments is 
+        specified as a single string.
+  image – Specifies the name of the image resource that is displayed for the task or category. This attribute only 
+      applies if you are using data that is embedded in a resource-only DLL file.
+  iconPath – Specifies the path of the icon or image file.
+  applyTo - Specifies the groups, as defined in the local users and groups control panel, for which this task is displayed. 
+      The groups are a comma separated within the quotes (ie applyTo="GroupName1,GroupName2,GroupName3")
+-->
+
+<LaunchPad xmlns="http://schemas.microsoft.com/WindowsServerSolutions/2010/01/Launchpad">
+  <!-- Application Sample: Open Registry Editor (in this case only logins within the administartor group would 
+        see this link)  -->
+   <Task id="MyCompany.Tasks.Regedit" name="Edit the registry" src="%SystemRoot%\regedit.exe"/>
+
+  <!-- Tasks under a Category and sub category -->
+   <Category id="MyCompany.Categories.Sample" name="Tasks under category">
+      <Task id="MyCompany.Tasks.Notepad" name="Notepad" src="%SystemRoot%\notepad.exe"/>
+      <Task id="MyCompany.Tasks.Bing" name="SearchText" src="http://www.bing.com/"/>
+   </Category>
+</LaunchPad>

@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Spelling\Spellers\samplespell]
+"CLSID"="{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}]
+@="Sample Spell Checking Provider"
+"AppId"="{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}\InprocServer32]
+@="c:\\Program Files\\SampleSpellingProvider\\SampleSpellingProvider.dll"
+"ThreadingModel"="Both"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{9AEC2879-1A82-4FEA-AA4F-60B98D3AC293}\Version]
+@="1.0"
+

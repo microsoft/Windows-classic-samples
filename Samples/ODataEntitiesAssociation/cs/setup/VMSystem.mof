@@ -1,0 +1,51 @@
+// schema file for showing relation between host machine and hosted VMs
+
+// Physical machine 
+class VMSystem_PhysicalMachine
+{
+    [Required, Key] string Name;
+
+    // Navigation property to virtual machines
+    // Array indicates that this is reference collection 
+    [AssociationClass("VMSystem_HostVMRelationship"), ToEnd("HostedVMs")] VMSystem_VirtualMachine ref VMs[];
+};
+
+// Virtual machine 
+class VMSystem_VirtualMachine
+{
+    [Required, Key] string MachineName;
+    [Required, Key, EmbeddedInstance("EDM_GUID")] string Id;
+
+    string OS;
+
+    // Navigation property pointing to physical machine on which virtual machines are created
+    [AssociationClass("VMSystem_HostVMRelationship"), ToEnd("PhysicalMachine")] VMSystem_PhysicalMachine ref PhysicalMachine;
+
+    // Navigation property pointing to System to which Virtual machine belongs
+    [AssociationClass("VMSystem_SystemVMRelationship"), ToEnd("System")] VMSystem_System ref System;
+};
+
+// System: A logical collection of virtual machines
+class VMSystem_System
+{
+    [Required, Key] string Name;
+    [Required, Key, EmbeddedInstance("EDM_GUID")] string Id;
+
+    // Navigation property pointing to Virtual machine in the system
+    [AssociationClass("VMSystem_SystemVMRelationship"), ToEnd("VMs")] VMSystem_VirtualMachine ref VMs[];
+};
+
+// Association between Physical machine and Virtual machine
+// Cardnality is not specified in the association class. It is specified in navigation property
+[association] class VMSystem_HostVMRelationship
+{
+    VMSystem_PhysicalMachine ref PhysicalMachine;
+    VMSystem_VirtualMachine ref HostedVMs;
+};
+
+// Association between System and Virtual machine
+[association] class VMSystem_SystemVMRelationship
+{
+    VMSystem_System ref System;
+    VMSystem_VirtualMachine ref VMs;
+};

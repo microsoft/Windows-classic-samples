@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  <copyright file="ContosoHostedEmail.addin" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<addin id="3983E9AC-B6D1-4A2A-881C-4B1CEFCA5266" 
+       name="Contoso Hosted Email Addin"
+       basedir="%ProgramFiles%\windows server\bin"
+       type="Contoso.HostedEmail.Adaptor.ContosoHostedEmailAdaptor, ContosoHostedEmailAddin.dll">
+  <Service>
+    <ShortName>Contoso</ShortName>
+    <FullName>Email online service hosted by Contoso Ltd.</FullName>
+    <Provider>
+      <Website>http://contoso.com</Website>
+      <Address>One Microsoft Way, Redmond, WA 98052</Address>
+      <Name>Contoso Hosted Email</Name>
+    </Provider>
+    <ServiceSignupURL>http://signup.contoso.com</ServiceSignupURL>
+    <ServiceUserPortal>http://protal.contoso.com</ServiceUserPortal>
+    <ServicesDescription>Service description of Contoso Hosted Email</ServicesDescription>
+    <SupportContact>
+      <Phone>400-888-9999</Phone>
+      <Email>support@vip.contoso.com</Email>
+    </SupportContact>
+  </Service>
+  <PasswordSync>
+    <PasswordPolicyOnServer level="Strong" minLength ="8"/>
+  </PasswordSync>
+  
+  <!--Following section is optional-->
+  <!--
+  <HideBuiltinUI>
+    <UIAddin>HEAddUser</UIAddin>
+    <UIAddin>HERemoveUser</UIAddin>
+    <UIAddin>HEUserProperty</UIAddin>
+    <UIAddin>HEEnableUser</UIAddin>
+    <UIAddin>HEDisableUser</UIAddin>
+    <UIAddin>HEResetPassword</UIAddin>
+    <UIAddin>HEUserTab</UIAddin>
+  </HideBuiltinUI>
+  -->
+</addin>

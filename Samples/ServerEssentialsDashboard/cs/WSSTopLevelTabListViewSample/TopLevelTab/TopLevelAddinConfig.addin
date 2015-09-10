@@ -1,0 +1,41 @@
+﻿<!--
+  <copyright file="TopLevelAddinConfig.addin" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+
+<!-- Rename this xml file from "TopLevelAddinConfig" and copy to %ProgramFiles%\Windows Server\Bin\Addins\Primary folder-->
+
+<!--
+ATTRIBUTES:
+
+  name attribute: Corresponds to a friendly name for the add-in. This is for internal use and 
+    will not be displayed to the user. It is mainly used in logging.
+  
+  type attribute: Comma separated string where the first entry is the namespace path to the class that is derived 
+    from the abstract ControlRendererPage class and the second entry is the name of the dll containing this class.
+    
+  basedir attribute: the path to the directory containing the user's addin binaries (dll)
+    Copy binaries there.
+
+PROCEDURE: 
+
+Addin file: A name will be needed for this file, so the file should be renamed from the default "AddinConfig.addin" 
+  to new unique name such as "MyNewDashboardAddin.addin". The only requirement is that this name be unique with the folder.
+  This file will be put into the "%ProgramFiles%\Windows Server\Bin\Addins\Primary" folder. If this folder does not exist, 
+  create the folder.
+  
+  
+Binary file: the location of the main binary is specified by the basedir attribute in the Addin file. If the binary is 
+  named MyNewWSSDashboardAddin.dll in the folder C:\Program Files\MyWSSAddins, and the name of the class is 
+  MyNewControlRendererPage derirved from the ControlRendererPage class, and the namespace is MyDashboardAddinNamespace, 
+  then the addin element would be as follows:
+  
+        <addin name="Test Add-in" basedir="%ProgramFiles%\MyWSSAddins" 
+                type="MyDashboardAddinNamespace.MyNewControlRendererPage, MyNewWSSDashboardAddin" /> 
+                
+  Put the binaries in the folder specified by the Addin file, in this case: %ProgramFiles%\MyWSSAddins.
+-->
+
+<addin name="Test Top Level Tab Add-in with ListView" basedir="FULL_PATH_TO_YOUR_PAGE_PROVIDER_BINARY_DLL"
+      type="TopLevelTab.TopLevelTabPageProvider, WSSTopLevelListViewSample" />

@@ -1,0 +1,10 @@
+﻿<!--
+  <copyright file="Sample.home" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+
+<Links xmlns="http://schemas.microsoft.com/WindowsServerSolutions/2010/01/Dashboard">
+	<Link Title="Calc" Description="Launches Calc" ShellExecPath="%windir%\system32\calc.exe" />
+	<Link Title="My website" Description="Go to my website" ShellExecPath="http://www.microsoft.com" />
+</Links>

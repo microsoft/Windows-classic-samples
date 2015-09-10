@@ -1,0 +1,84 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+// DimmerDevice.idl : Control-specific component and library description
+
+
+import "ocidl.idl";
+
+//################################
+//component and type library descriptions
+//################################
+[
+   uuid(3c5082c4-0c06-4127-beb3-05e294faf2e7),
+   version(1.0),
+   helpstring("UPNP SDK Sample Dimmer Service Type Library")
+]
+library SDKDimmerServiceLib
+{
+   importlib("stdole32.tlb");
+   typedef [v1_enum] enum DIMMINGSERVICE_SCPD_DISPIDS
+   {
+      DISPID_POWER = 1,
+      DISPID_DIMLEVEL,
+      DISPID_POWERON,
+      DISPID_POWEROFF,
+      DISPID_GETPOWERVALUE,
+      DISPID_SETDIMLEVEL,
+      DISPID_GETDIMLEVEL,
+      DISPID_GETCONFIGDETAILS
+   } DIMMINGSERVICE_SCPD_DISPIDS;
+
+   [
+      uuid(c121c884-7805-403a-afee-e0721cda48d2),
+      object,
+      dual,
+      pointer_default(unique)
+   ]
+   interface IUPnPService_DimmingService_SCPD : IDispatch
+   {
+      [propget, id(DISPID_POWER), helpstring("Property Power")] 
+      HRESULT Power([out, retval] VARIANT_BOOL *pPower);
+
+      [propget, id(DISPID_DIMLEVEL), helpstring("Property dimLevel")]
+      HRESULT dimLevel(
+         [out, retval] long *pdimLevel);
+
+      [ id(DISPID_POWERON), helpstring("Method PowerOn")]
+      HRESULT PowerOn();
+
+      [ id(DISPID_POWEROFF), helpstring("Method PowerOff")]
+      HRESULT PowerOff();
+
+      [ id(DISPID_GETPOWERVALUE), helpstring("Method GetPowerValue")]
+      HRESULT GetPowerValue(
+         [in, out] VARIANT_BOOL *ppowerVall);
+
+      [ id(DISPID_SETDIMLEVEL), helpstring("Method SetDimLevel")]
+      HRESULT SetDimLevel(
+         [in] long dLevel);
+
+      [ id(DISPID_GETDIMLEVEL), helpstring("Method GetDimLevel")]
+      HRESULT GetDimLevel(
+         [in, out] long *pdLevel);
+
+      [ id(DISPID_GETCONFIGDETAILS), helpstring("Method GetConfigDetails")]
+      HRESULT GetConfigDetails(
+         [in, out] VARIANT_BOOL *ppowerVal,
+         [in, out] long *pdLevel);
+   };
+
+   //component
+   [	
+      uuid(d31b8f49-367e-41b7-8fc4-50e23d36625d),
+      helpstring("UPNP Sample Dimmer Device")
+   ]
+   coclass UPNPSampleDimmerDevice
+   {
+      interface  IUnknown;
+   };
+};

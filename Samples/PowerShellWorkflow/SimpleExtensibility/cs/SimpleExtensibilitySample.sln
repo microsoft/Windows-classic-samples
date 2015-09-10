@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExtensibilitySample", "SimpleExtensibilitySample.csproj", "{A0FC7029-AF87-4161-9735-9D4E550C7877}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|Any CPU
+		Release|x86 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0FC7029-AF87-4161-9735-9D4E550C7877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0FC7029-AF87-4161-9735-9D4E550C7877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0FC7029-AF87-4161-9735-9D4E550C7877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0FC7029-AF87-4161-9735-9D4E550C7877}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

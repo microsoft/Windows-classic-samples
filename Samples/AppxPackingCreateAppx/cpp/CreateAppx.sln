@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CreateAppx", "CreateAppx.vcxproj", "{EA7812FB-A528-41CC-96D8-AE3BA89ACA4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA7812FB-A528-41CC-96D8-AE3BA89ACA4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EA7812FB-A528-41CC-96D8-AE3BA89ACA4C}.Debug|Win32.Build.0 = Debug|Win32
+		{EA7812FB-A528-41CC-96D8-AE3BA89ACA4C}.Release|Win32.ActiveCfg = Release|Win32
+		{EA7812FB-A528-41CC-96D8-AE3BA89ACA4C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

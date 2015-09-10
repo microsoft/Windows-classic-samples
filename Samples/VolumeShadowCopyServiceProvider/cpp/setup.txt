@@ -1,0 +1,58 @@
+========================================================================
+    VssSampleProvider Setup and Uninstall Instructions
+========================================================================
+
+(1) Install the virtual storage driver as follows:
+
+    a.  Navigate to the Program Files (x86)\Windows Kits\8.0\bin\x86 directory 
+in the Windows SDK. This directory contains virtualstoragevss.sys and 
+vstorcontrol.exe.
+
+    b.  Type "vstorcontrol.exe install" at the command prompt.
+
+(2) Install the VSS sample provider as follows:
+
+    a.  Copy the following files from the Program Files (x86)\Windows Kits\8.0\bin
+\x86 directory into the VssSampleProvider directory in the downloaded sample.
+
+        •   VssSampleProvider.dll
+        •   VstorInterface.dll
+        •   install-sampleprovider.cmd
+        •   uninstall-sampleprovider.cmd
+        •   register_app.vbs
+    b.  In the VssSampleProvider directory, type "install-sampleprovider.cmd" at 
+the command prompt.
+
+
+(3) Create one or more virtual LUNs as follows:
+
+    a.  At the command prompt, type "vstorcontrol.exe create fixeddisk -
+newimage C:\disk1.image -size 20M -storid "VSS Sample HW Provider"". This 
+creates a virtual LUN whose storage identifier is "VSS Sample HW Provider". 
+To create additional virtual LUNs, repeat this step.
+
+
+    Note:
+          The VSS sample provider will recognize a LUN only if "VSS Sample HW 
+Provider" is a part of the storage identifier. For more information about the 
+storage identifier, see LUN-Resync with DiskShadow and Virtual Storage on 
+MSDN [http://blogs.msdn.com/b/himanshu_kale/archive/2009/06/02/lun-resync-with
+-diskshadow-virtual-storage.aspx]
+
+
+    b.  Use diskpart.exe or diskmgmt.msc to format the virtual disk and assign a 
+drive letter to it.
+
+
+(4) Run the sample provider by typing the following at the command prompt: "
+Run vshadow.exe -p -nw <DriveLetter>"
+
+    where <DriveLetter> is the drive letter of the virtual LUN.
+
+(5) To uninstall the VSS sample provider, do the following:
+
+    a.  In the VssSampleProvider directory, type "uninstall-sampleprovider.cmd" 
+at the command prompt.
+
+    b.  Uninstall the virtual storage driver by typing "vstorcontrol.exe uninstall
+" at the command prompt.

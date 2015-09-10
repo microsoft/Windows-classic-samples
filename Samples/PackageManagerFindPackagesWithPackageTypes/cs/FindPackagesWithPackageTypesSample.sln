@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 12
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindPackagesWithPackageTypesSample", "FindPackagesWithPackageTypesSample.csproj", "{82683839-7977-4813-B69C-E9E7F72B0207}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82683839-7977-4813-B69C-E9E7F72B0207}.Debug|x86.ActiveCfg = Debug|x86
+		{82683839-7977-4813-B69C-E9E7F72B0207}.Debug|x86.Build.0 = Debug|x86
+		{82683839-7977-4813-B69C-E9E7F72B0207}.Release|x86.ActiveCfg = Release|x86
+		{82683839-7977-4813-B69C-E9E7F72B0207}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

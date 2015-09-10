@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20617.1 PREVIEW
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageQoS", "StorageQoS.csproj", "{0B42135B-8A72-4910-8CCB-AA063DA917CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|x64.ActiveCfg = Debug|x64
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|x64.Build.0 = Debug|x64
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|x86.ActiveCfg = Debug|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Debug|x86.Build.0 = Debug|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|Any CPU.ActiveCfg = Release|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|x64.ActiveCfg = Release|x64
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|x64.Build.0 = Release|x64
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|x86.ActiveCfg = Release|x86
+		{0B42135B-8A72-4910-8CCB-AA063DA917CA}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

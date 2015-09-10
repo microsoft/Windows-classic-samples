@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+
+-->
+
+<!--
+
+Documentation of the .cdxml format is available at the following location:
+http://go.microsoft.com/fwlink/?LinkId=252460
+
+-->
+
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+
+  <!-- ClassVersion attribute below corresponds to the ClassVersion qualifier of the MSFT_WindowsService class (as defined in the .MOF file) -->
+  <Class ClassName="Root/StandardCimV2/Sample/MSFT_WindowsService" ClassVersion="1.0.0">
+
+    <!-- This is the version of the cmdlets defined in this module.
+         This version describes signature and semantics of the cmdlets.
+         This version is equivalent to ModuleVersion entry in a module manifest psd1 file.
+    -->
+    <Version>1.0</Version>
+
+    <DefaultNoun>WindowsService</DefaultNoun>
+
+    <!-- This section defines cmdlets that get instances of MSFT_WindowsService and cmdlets that invoke instance methods on those instances. -->
+    <InstanceCmdlets>
+
+      <!-- This section defines what cmdlet parameters should exist to select instances of MSFT_WindowsService. 
+           Cmdlet parameters from this section will be available by default in all cmdlets under InstanceCmdlets element.
+           
+           These cmdlet parameters will be used by all cmdlets defined in InstanceCmdlets section, 
+           unless those cmdlets override the default with their own GetCmdletParameters element. 
+        
+           Each parameter set has at least 1 mandatory parameter, because we don't want the user 
+           to accidentally run Stop-WindowsService without any parameters and stop all the services. 
+      -->
+      <GetCmdletParameters>
+
+        <!-- This section declares that cmdlet parameters should allow filtering of MSFT_WindowsService -->
+        <QueryableProperties>
+          <Property PropertyName="Name">
+            <Type PSType="string"/>
+            <RegularQuery>
+              <CmdletParameterMetadata CmdletParameterSets="ByName" Position="1" IsMandatory="true" />
+            </RegularQuery>
+          </Property>
+        </QueryableProperties>
+
+        <!-- This section defines a cmdlet parameter that allows returning a process associated with the given service.
+             This cmdlet parameter is put into a separate parameter set from query parameters above -->
+        <QueryableAssociations>
+          <Association Association="MSFT_WindowsServiceProcess" ResultRole="Service" SourceRole="Process">
+            <AssociatedInstance>
+              <Type
+                PSType="Microsoft.Management.Infrastructure.CimInstance"
+                ETSType="Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsProcess" />
+              <CmdletParameterMetadata CmdletParameterSets="ByAssociatedProcess" PSName="AssociatedProcess" IsMandatory="true" ValueFromPipeline="true" />
+            </AssociatedInstance>
+          </Association>
+        </QueryableAssociations>
+
+      </GetCmdletParameters>
+
+      <GetCmdlet>
+        <CmdletMetadata Verb="Get" />
+        
+        <!-- We override GetCmdletParameters for Get-WindowsService cmdlet to allow invocation of Get-WindowsService without any parameters 
+             (Name parameter is no longer mandatory;  everything else is the same as in the default GetCmdletParameters element defined above).
+        -->
+        <GetCmdletParameters>
+          <QueryableProperties>
+            <Property PropertyName="Name">
+              <Type PSType="string"/>
+              <RegularQuery>
+                <CmdletParameterMetadata CmdletParameterSets="ByName" Position="1" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+          <QueryableAssociations>
+            <Association Association="MSFT_WindowsServiceProcess" ResultRole="Service" SourceRole="Process">
+              <AssociatedInstance>
+                <Type
+                  PSType="Microsoft.Management.Infrastructure.CimInstance"
+                  ETSType="Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsProcess" />
+                <CmdletParameterMetadata CmdletParameterSets="ByAssociatedProcess" PSName="AssociatedProcess" IsMandatory="true" ValueFromPipeline="true" />
+              </AssociatedInstance>
+            </Association>
+          </QueryableAssociations>
+
+        </GetCmdletParameters>
+      </GetCmdlet>
+
+      <!-- This section defines Stop-WindowsService and Start-WindowsService cmdlets that wraps the extrinsic, instance StartService and StopService methods.
+           These methods call MI_Context_ShouldProcess and therefore we can expose -Confirm and -WhatIf parameters by declaring ConfirmImpact value -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Stop" ConfirmImpact="Medium" />
+        <Method MethodName="StopService" />
+      </Cmdlet>
+      <Cmdlet>
+        <CmdletMetadata Verb="Start" ConfirmImpact="Medium" />
+        <Method MethodName="StartService" />
+        
+        <!-- Start-WindowsService cmdlet overrides GetCmdletParameters to remove AssociatedProcess parameter,
+             which does not apply to this cmdlet (stopped service doesn't have any associated process) -->
+        <GetCmdletParameters>
+          <QueryableProperties>
+            <Property PropertyName="Name">
+              <Type PSType="string"/>
+              <RegularQuery>
+                <CmdletParameterMetadata CmdletParameterSets="ByName" Position="1" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+
+    </InstanceCmdlets>
+
+  </Class>
+
+</PowerShellMetadata>

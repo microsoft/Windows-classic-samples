@@ -1,0 +1,13 @@
+
+
+#include <windows.h>
+
+#include <ntverp.h>
+
+#define    VER_FILETYPE    VFT_DLL
+#define    VER_FILESUBTYPE    VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "Bluetooth Connection Sample Application"
+#define VER_INTERNALNAME_STR            "BthCxn.exe"
+#define VER_ORIGINALFILENAME_STR        "BthCxn.exe"
+
+#include "common.ver"

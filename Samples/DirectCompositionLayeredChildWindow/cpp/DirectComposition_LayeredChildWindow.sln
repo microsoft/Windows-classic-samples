@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectComposition_LayeredChildWindow", "DirectComposition_LayeredChildWindow.vcxproj", "{AF8505A8-38D8-B694-D0EB-0BEBA395C798}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF8505A8-38D8-B694-D0EB-0BEBA395C798}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AF8505A8-38D8-B694-D0EB-0BEBA395C798}.Debug|Win32.Build.0 = Debug|Win32
+		{AF8505A8-38D8-B694-D0EB-0BEBA395C798}.Release|Win32.ActiveCfg = Release|Win32
+		{AF8505A8-38D8-B694-D0EB-0BEBA395C798}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

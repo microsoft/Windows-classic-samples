@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetCostSample", "NetCostSample.vcxproj", "{C5BE0963-6F0E-4998-A726-D626509B7AA8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5BE0963-6F0E-4998-A726-D626509B7AA8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C5BE0963-6F0E-4998-A726-D626509B7AA8}.Debug|Win32.Build.0 = Debug|Win32
+		{C5BE0963-6F0E-4998-A726-D626509B7AA8}.Release|Win32.ActiveCfg = Release|Win32
+		{C5BE0963-6F0E-4998-A726-D626509B7AA8}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

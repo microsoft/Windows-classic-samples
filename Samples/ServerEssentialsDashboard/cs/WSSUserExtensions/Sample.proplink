@@ -1,0 +1,4 @@
+<Links>
+<Link Title="Calc" Description="Launches Calc" Image="" ShellExecPath="%windir%\system32\calc.exe" />
+<Link Title="Sample Application" Description="Launches RegEdit" Image="%programfiles%\windows server\bin\addins\users\Sample.png" ShellExecPath="%windir%\regedit.exe" />
+</Links>

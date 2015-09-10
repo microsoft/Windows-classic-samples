@@ -1,0 +1,1 @@
+Please navigate to ..\..\Process\NativeClient to find the sample source code of MI Native(C) API.

@@ -1,0 +1,10 @@
+#include "windows.h"
+
+#define CONTROL_FONTFACE 100
+
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "UiaCleanShutdownHost.exe.manifest"
+
+STRINGTABLE
+BEGIN
+    CONTROL_FONTFACE "Calibri"
+END

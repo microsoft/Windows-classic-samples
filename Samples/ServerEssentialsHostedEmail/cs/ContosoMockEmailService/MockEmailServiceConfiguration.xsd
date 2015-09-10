@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  <copyright file="MockEmailServiceConfiguration.xsd" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ErrorCodeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ServiceNotReachable" />
+      <xs:enumeration value="InsufficientPermission" />
+      <xs:enumeration value="AuthenticationFailure" />
+      <xs:enumeration value="AccountAlreadyExists" />
+      <xs:enumeration value="AccountNotExists" />
+      <xs:enumeration value="InvalidEmailAddress" />
+      <xs:enumeration value="Custom" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="OperationEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="VerifyAdminAccount" />
+      <xs:enumeration value="Logon" />
+      <xs:enumeration value="LogOff" />
+      <xs:enumeration value="AddAccount" />
+      <xs:enumeration value="RemoveAccount" />
+      <xs:enumeration value="UpdateAccount" />
+      <xs:enumeration value="EnableAccount" />
+      <xs:enumeration value="DisableAccount" />
+      <xs:enumeration value="GetAccountById" />
+      <xs:enumeration value="GetAccountByPrimaryEmail" />
+      <xs:enumeration value="GetAllAccounts" />
+      <xs:enumeration value="ResetPassword" />
+      <xs:enumeration value="GetDomains" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ErrorRecord">
+    <xs:all>
+      <xs:element name="ErrorTitle" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ErrorMessage" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HelpLink" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+      <xs:element name="HelpLinkText" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name ="Operations">
+    <xs:sequence>
+      <xs:element name="Operation" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="DurationInSeconds" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+            <xs:element name ="Exception" minOccurs="0" maxOccurs="1">
+              <xs:complexType>
+                <xs:all>
+                  <xs:element name="ErrorCode" type="ErrorCodeEnum" minOccurs="1" maxOccurs="1"/>
+                  <xs:element name="ErrorRecord" type="ErrorRecord" minOccurs="0" maxOccurs="1"/>
+                </xs:all>
+              </xs:complexType>
+            </xs:element>
+          </xs:all>
+          <xs:attribute name="Name" type="OperationEnum" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DistributionGroup">
+    <xs:attribute name="Id" type="xs:string" use="required"/>
+    <xs:attribute name="Name" type="xs:string"  use="required"/>
+  </xs:complexType>
+
+  <xs:element name="Configuration">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="DefaultOperationDuration" type="xs:positiveInteger" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="Operations" type="Operations" minOccurs="0" maxOccurs="1" />
+        <xs:element name="DistributionGroups" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Group" type="DistributionGroup" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+    <xs:unique name="DupOperationCheck">
+      <xs:selector xpath="Operation" />
+      <xs:field xpath="@Name" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

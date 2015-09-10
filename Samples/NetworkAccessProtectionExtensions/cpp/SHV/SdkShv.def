@@ -1,0 +1,10 @@
+; SdkShv.def : Declares the module parameters.
+ 
+LIBRARY      "SdkShv.DLL"
+ 
+EXPORTS
+ DllCanUnloadNow         PRIVATE
+ DllGetClassObject       PRIVATE
+ DllRegisterServer       PRIVATE
+ DllUnregisterServer     PRIVATE
+

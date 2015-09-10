@@ -1,0 +1,39 @@
+﻿<Activity mc:Ignorable="sads sap" x:Class="ActivityControllerExtensibilitySample.Workflow1" sap:VirtualizedContainerService.HintSize="440,440" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mpa="clr-namespace:Microsoft.PowerShell.Activities;assembly=Microsoft.PowerShell.Activities"
+ xmlns:mpma="clr-namespace:Microsoft.PowerShell.Management.Activities;assembly=Microsoft.PowerShell.Management.Activities"
+ xmlns:ns2="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:ns3="clr-namespace:Microsoft.PowerShell.Core.Activities;assembly=Microsoft.PowerShell.Core.Activities"
+ xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:s1="clr-namespace:System;assembly=System"
+ xmlns:s2="clr-namespace:System;assembly=System.Xml"
+ xmlns:s3="clr-namespace:System;assembly=System.Core"
+ xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System"
+ xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel"
+ xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System.Core"
+ xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:st="clr-namespace:System.Text;assembly=mscorlib"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Sequence sad:XamlDebuggerXmlReader.FileName="D:\ActivityControllerExtensibilitySample\ActivityControllerExtensibilitySample\SampleWorkflow.xaml" sap:VirtualizedContainerService.HintSize="222,146">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg3:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg3:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ns3:GetCommand DisplayName="Get-Command" sap:VirtualizedContainerService.HintSize="200,22">
+      <ns3:GetCommand.Module>
+        <ns2:InArgument x:TypeArguments="s:String[]">
+          <mpa:PowerShellValue x:TypeArguments="s:String[]" Expression="'PSDiagnostics'"/>
+        </ns2:InArgument>
+      </ns3:GetCommand.Module>
+    </ns3:GetCommand>
+  </Sequence>
+</Activity>

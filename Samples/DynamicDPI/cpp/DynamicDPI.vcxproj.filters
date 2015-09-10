@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="SampleDynamicDpiWindow.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="DeviceResources.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearEaseInOutAnimation.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleDesktopWindow.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleElementBase.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleElementTextBlock.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleEngine.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleMultiDpiImage.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleElementAnimation.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SlimRWLock.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleHoverElement.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRichEditControl.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+    <ClCompile Include="FontFileStream.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="FontLoader.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleCustomColorFontButton.cpp">
+      <Filter>Sample UI elements</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="SampleDynamicDpiWindow.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="DeviceResources.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearEaseInOutAnimation.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleDesktopWindow.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleElementBase.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleElementTextBlock.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleEngine.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleMultiDpiImage.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleElementAnimation.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SlimRWLock.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleHoverElement.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRichEditControl.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="FontFileStream.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="FontLoader.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleCustomColorFontButton.h">
+      <Filter>Sample UI elements</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="png100.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="png150.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="png200.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="png125.png">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{27ef4b73-6e0d-4278-bd98-8e02cf8f071e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sample UI elements">
+      <UniqueIdentifier>{b2951034-4625-4ec8-8b2c-b76104629e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{6c5ca1fe-9d61-4715-9c9d-adddc64757d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DynamicDPI.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ColorToolbarIcons.ttf">
+      <Filter>Resources</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="DPImanifest.xml">
+      <Filter>Resources</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

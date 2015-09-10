@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopProcessSample03", "StopProcessSample03.csproj", "{2A93BBE6-AFEF-4C72-8CED-800097E42F9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A93BBE6-AFEF-4C72-8CED-800097E42F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A93BBE6-AFEF-4C72-8CED-800097E42F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A93BBE6-AFEF-4C72-8CED-800097E42F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A93BBE6-AFEF-4C72-8CED-800097E42F9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

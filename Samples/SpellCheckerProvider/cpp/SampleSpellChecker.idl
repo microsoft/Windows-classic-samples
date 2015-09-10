@@ -1,0 +1,74 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+// My3rdPartySpeller.idl : IDL source for SampleSpellCheckProvider
+
+// This file will be processed by the MIDL tool to
+// produce the type library (SampleSpellCheckProvider.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "spellcheckprovider.idl";
+
+[
+    uuid(00B573B4-E925-4413-9F57-FAC7FE382719),
+    version(1.0),
+]
+library SampleSpellCheckProviderLib
+{
+    importlib("stdole2.tlb");
+
+    [
+        uuid(CC2C6BA2-7FA9-4DF3-BBF6-A7F9AE330AC8)
+    ]
+    coclass SampleSpellCheckProvider
+    {
+        [default] interface ISpellCheckProvider;
+    };
+
+    [
+        uuid(9AEC2879-1A82-4FEA-AA4F-60B98D3AC293)
+    ]
+    coclass SampleSpellCheckProviderFactory
+    {
+        [default] interface ISpellCheckProviderFactory;
+    };
+
+    [
+        uuid(D38C3661-42C6-402B-BAEE-31DDAFC2E3ED)
+    ]
+    coclass EnumString
+    {
+        [default] interface IEnumString;
+    };
+
+    [
+        uuid(BD50D32A-D0AB-4C2B-AD7C-7EEC5D59B531)
+    ]
+    coclass OptionDescription
+    {
+        [default] interface IOptionDescription;
+    };
+
+    [
+        uuid(7E197CA5-BD87-45AC-93AA-41DCCF8188D0)
+    ]
+    coclass EnumSpellingError
+    {
+        [default] interface IEnumSpellingError;
+    };
+
+    [
+        uuid(90586670-1727-4F88-A2B9-9545E7E63526)
+    ]
+    coclass SpellingError
+    {
+        [default] interface ISpellingError;
+    };
+};
+

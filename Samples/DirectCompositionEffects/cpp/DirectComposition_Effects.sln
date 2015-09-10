@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectComposition_Effects", "DirectComposition_Effects.vcxproj", "{96A886BA-A020-29ED-93C2-3028B08CF096}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96A886BA-A020-29ED-93C2-3028B08CF096}.Debug|Win32.ActiveCfg = Debug|Win32
+		{96A886BA-A020-29ED-93C2-3028B08CF096}.Debug|Win32.Build.0 = Debug|Win32
+		{96A886BA-A020-29ED-93C2-3028B08CF096}.Release|Win32.ActiveCfg = Release|Win32
+		{96A886BA-A020-29ED-93C2-3028B08CF096}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

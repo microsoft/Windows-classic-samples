@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+
+-->
+<Types>
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsProcess</Name>
+    <Members>
+      
+      <!-- This section defines ExecutionState script property which overrides the ExecutionState property defined by CIM_Process.
+           The property defined below casts an integer from CIM_Process.ExecutionState into a more useful .NET enum defined in WindowsProcess.cdxml file -->
+      <ScriptProperty>
+        <Name>ExecutionState</Name>
+        <GetScriptBlock>
+          [Microsoft.PowerShell.Cmdletization.GeneratedTypes.WindowsProcess.State][System.UInt16]$this.PSBase.CimInstanceProperties['ExecutionState'].Value
+        </GetScriptBlock>
+      </ScriptProperty>
+      
+      <!-- This section defines UserModeTime script property which overrides the UserModeTime property defined by CIM_Process.
+           The property defined below casts an integer from CIM_Process.UserModeTime into a more useful System.TimeSpan.
+           The next ScriptProperty element does the same thing for KernelModeTime property. -->
+      <ScriptProperty>
+        <Name>UserModeTime</Name>
+        <GetScriptBlock>
+          [System.TimeSpan]::FromMilliseconds([System.UInt64]$this.PSBase.CimInstanceProperties['UserModeTime'].Value)
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>KernelModeTime</Name>
+        <GetScriptBlock>
+          [System.TimeSpan]::FromMilliseconds([System.UInt64]$this.PSBase.CimInstanceProperties['KernelModeTime'].Value)
+        </GetScriptBlock>
+      </ScriptProperty>
+     
+      <!-- This section defines ProcessId script property which wraps the Handle property defined by CIM_Process.
+           The property is defined to 
+           1) cast the property value from string to an integer (since we know that on a Windows system the Handle property is always an integer)
+           2) use ProcessId name (name that is more commonly used by Windows admins + ProcessId is the name of the cmdlet parameter in Get-WindowsProcess cmdlet) 
+           
+           If cast was not needed / renaming the property was the only requirement, then an AliasProperty would be used instead of ScriptProperty.
+           -->
+      <ScriptProperty>
+        <Name>ProcessId</Name>
+        <GetScriptBlock>
+          [System.Int32][System.String]$this.PSBase.CimInstanceProperties['Handle'].Value
+        </GetScriptBlock>
+      </ScriptProperty>
+      
+    </Members>
+  </Type>
+</Types>

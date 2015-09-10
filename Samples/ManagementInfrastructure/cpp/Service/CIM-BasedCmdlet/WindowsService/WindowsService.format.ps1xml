@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved
+
+-->
+<Configuration>
+  <ViewDefinitions>
+    <!-- This section (first view matching MSFT_WindowsService type name) defines default way for displaying MSFT_WindowsService instances -->
+    <View>
+      <Name>DefaultView</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Management.Infrastructure.CimInstance#Root/StandardCimV2/Sample/MSFT_WindowsService</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <!-- note: PowerShell users expect table column labels to match unlocalized names of properties that are displayed in the column -->
+            <label>Name</label>
+            <!-- note: by not defining width for some columns, we allow the table to scale to the current width of the PowerShell display -->
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <label>Started</label>
+            <Width>7</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Started</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "addpolicyrange", "addpolicyrange.vcxproj", "{7C04C03A-A5DB-45D6-A9B9-340440267BCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C04C03A-A5DB-45D6-A9B9-340440267BCC}.Debug|x64.ActiveCfg = Debug|x64
+		{7C04C03A-A5DB-45D6-A9B9-340440267BCC}.Debug|x64.Build.0 = Debug|x64
+		{7C04C03A-A5DB-45D6-A9B9-340440267BCC}.Release|x64.ActiveCfg = Release|x64
+		{7C04C03A-A5DB-45D6-A9B9-340440267BCC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

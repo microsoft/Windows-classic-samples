@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>System.Drawing.Point</Name>
+    <Members>
+      <!-- when serializing System.Drawing.Point (or derived classes) use serialization depth = 1 -->
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <NoteProperty>
+            <Name>SerializationDepth</Name>
+            <Value>1</Value>
+          </NoteProperty>
+        </Members>
+      </MemberSet>
+
+      <!-- add an extra script property that allows serialization of information that is not available in public properties
+                 (in this case the information is gathered by a series of calls to public methods) -->
+      <!-- make the extra script property hidden 
+                 (the user won't see the property via Format-* cmdlets, unless he/she uses the -Force flag) -->
+      <ScriptProperty IsHidden='true'>
+        <Name>BinaryFormatterOutput</Name>
+        <GetScriptBlock>
+          $memoryStream = new-object system.io.memorystream
+          $binaryFormatter = new-object system.runtime.serialization.formatters.binary.binaryformatter
+          $binaryFormatter.Serialize($memoryStream, $this)
+          $memoryStream.GetBuffer()
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>
+

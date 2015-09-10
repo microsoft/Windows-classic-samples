@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  <copyright file="WindowsUpdates.home" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<!--
+Copy WindowsUpdateHomePageTask.dll to %programfiles%\Windows Server\Bin\Addins\Home
+
+In order to see this task, may have to click on "Customize this list" once the "Common Task" has 
+been selected, and select the checkbox for the new task to appear in the list.
+-->
+<Tasks xmlns="http://schemas.microsoft.com/WindowsServerSolutions/2010/01/Dashboard">
+  <CommonTasks>
+    <Task name="WindowsUpdates" description = "WindowsUpdatesToolTIp" id="F850A02A-12EC-4DCD-A6A0-6DAA4103AFF4" image="update" type="exe" exelocation="%windir%\system32\wuapp.exe" replaceid="8991302D-676A-4A7C-B244-D1E08AE0EFEA"/>
+  </CommonTasks>
+</Tasks>

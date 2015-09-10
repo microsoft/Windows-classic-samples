@@ -1,0 +1,122 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDIS_SAMPLEIME          ICON                    "image\\SampleIme.ico"
+IDI_IME_MODE_ON         ICON                    "image\\ImeModeOn.ico"
+IDI_IME_MODE_OFF        ICON                    "image\\ImeModeOff.ico"
+IDI_DOUBLE_SINGLE_BYTE_ON ICON                    "image\\DoubleSingleByteOn.ico"
+IDI_DOUBLE_SINGLE_BYTE_OFF ICON                    "image\\DoubleSingleByteOff.ico"
+IDI_PUNCTUATION_ON      ICON                    "image\\PunctuationOn.ico"
+IDI_PUNCTUATION_OFF     ICON                    "image\\PunctuationOff.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+IDR_VERSION2 VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "MSFT"
+            VALUE "FileDescription", "The Sample code of Windows 8 IME"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "SampleIM.dll"
+            VALUE "LegalCopyright", "Copyright (C)"
+            VALUE "OriginalFilename", "SampleIM.dll"
+            VALUE "ProductName", "SampleIME"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDIS_SAMPLEIME          "Chinese Simplified QuanPin (version 6.0)"
+    IDS_DEFAULT_FONT        "Microsoft YaHei UI"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_IME_MODE            "Chinese/English input (Shift)"
+    IDS_DOUBLE_SINGLE_BYTE  "Double/Single byte (Shift+Space)"
+    IDS_PUNCTUATION         "Chinese/English punctuation (Ctrl+.)"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

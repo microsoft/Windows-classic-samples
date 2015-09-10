@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="Microsoft.SDKSamples.HelloWorldPackage"
+            ProcessorArchitecture="neutral"
+            Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+            Version="1.0.0.0"
+            ResourceId="en-us" 
+  />
+
+  <Properties>
+    <DisplayName>HelloWorld</DisplayName>
+    <Description>Sample package containing a "Hello World!" application</Description>
+    <Logo>AppTile.png</Logo>
+    <PublisherDisplayName>Microsoft</PublisherDisplayName>
+  </Properties>
+
+  <Resources>
+    <Resource Language="en-us"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="HelloWorld" StartPage="Default.html">
+      <VisualElements DisplayName="Hello World Sample App"
+                      Logo="AppTile.png"
+                      SmallLogo="AppTile.png"
+                      Description="Hello world package!"
+                      BackgroundColor="#AA00AA"
+                      ForegroundText="light"
+      >
+        <DefaultTile WideLogo="AppTile.png" />
+        <SplashScreen Image="AppTile.png" />
+      </VisualElements>
+    </Application>
+
+  </Applications>
+  
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+</Package>

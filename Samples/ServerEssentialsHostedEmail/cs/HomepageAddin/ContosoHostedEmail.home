@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  <copyright file="ContosoHostedEmail.home" company="Microsoft">
+    Copyright (C) Microsoft. All rights reserved.
+  </copyright>
+-->
+<Tasks version="2.0">
+  <MailServiceTasks>
+    <Task
+       name="HE_Sample_Service_GS_Task_Name"
+       description="HE_Sample_Service_GS_Task_Description"
+       id="3983E9AC-B6D1-4A2A-881C-4B1CEFCA5266">
+      <Action
+        name="HE_Sample_Service_GS_Action_Learn_More"
+        image="LearnMore"
+        type="url"
+        exelocation="http://www.contoso.com"/>
+      <Action
+        name="HE_Sample_Service_GS_Action_Name"
+        image="Logo"
+        type="exe"
+        exelocation="%ProgramFiles%\Windows Server\bin\Wssg.HostedEmailConfigureWizard.vbs"/>
+    </Task>
+  </MailServiceTasks>
+</Tasks>
