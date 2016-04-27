@@ -632,6 +632,14 @@ HRESULT STDMETHODCALLTYPE TextAreaTextRange::ExpandToEnclosingUnit(_In_ TextUnit
     }
     else if (unit == TextUnit_Line || unit == TextUnit_Paragraph)
     {
+        // As stated above, this sample does not support line-by-line navigation. It does support paragraph-by-paragraph
+        // navigation, and in that case, check if the starting position of the current range is already at the end of a
+        // paragraph. If it is, move to the next paragraph.
+        if ((unit == TextUnit_Paragraph) && (_range.begin.character == _control->GetLineLength(_range.begin.line)))
+        {
+            _range.begin.line++;
+        }
+
         _range.begin.character = 0;
         _range.end.line = _range.begin.line;
         _range.end.character = _control->GetLineLength(_range.end.line);
@@ -1018,7 +1026,11 @@ HRESULT STDMETHODCALLTYPE TextAreaTextRange::GetText(_In_ int maxLength, _Out_ B
                 current.character = _range.end.character;
             }
         }
+
+        // Always allow space for the final string terminator.
+        builderSize++;
     }
+
     textBuilder = new WCHAR[builderSize];
     if (textBuilder != NULL)
     {
