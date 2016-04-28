@@ -157,7 +157,7 @@ AnnotatedTextControl::AnnotatedTextControl(_In_reads_(lineCount) TextLine *lines
     isActive = false;
 }
 
-LRESULT CALLBACK AnnotatedTextControl::WndProc(_In_ HWND hwnd, _In_ UINT message, _In_ WPARAM wParam, _In_ LPARAM lParam)
+LRESULT CALLBACK AnnotatedTextControl::WndProc(_In_ HWND hwndAnnotatedTextControl, _In_ UINT message, _In_ WPARAM wParam, _In_ LPARAM lParam)
 {
     LRESULT lResult = 0;
     switch (message)
@@ -165,17 +165,17 @@ LRESULT CALLBACK AnnotatedTextControl::WndProc(_In_ HWND hwnd, _In_ UINT message
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            BeginPaint(hwnd, &ps);
+            BeginPaint(hwndAnnotatedTextControl, &ps);
             OnPaint(ps.hdc);
-            EndPaint(hwnd, &ps);
+            EndPaint(hwndAnnotatedTextControl, &ps);
             break;
         }
     case WM_GETOBJECT:
         {
-            IRawElementProviderSimple * provider = new FrameProvider(hwnd, this);
+            IRawElementProviderSimple * provider = new FrameProvider(hwndAnnotatedTextControl, this);
             if (provider != NULL)
             {
-                lResult = UiaReturnRawElementProvider(hwnd, wParam, lParam, provider);
+                lResult = UiaReturnRawElementProvider(hwndAnnotatedTextControl, wParam, lParam, provider);
                 provider->Release();
             }
             break;
@@ -212,7 +212,7 @@ LRESULT CALLBACK AnnotatedTextControl::WndProc(_In_ HWND hwnd, _In_ UINT message
         }
 
     default:
-        lResult = DefWindowProc(hwnd, message, wParam, lParam);
+        lResult = DefWindowProc(hwndAnnotatedTextControl, message, wParam, lParam);
         break;
     }
             
@@ -767,7 +767,7 @@ EndPoint AnnotatedTextControl::SearchForClosestEndPoint(_In_ float x, _In_ float
         for (int i = 0; i < 20; i++)
         {
             int direction = 0;
-            Region *region = GetLineCharactersPosition(inLine, searchPoint, 1, &graphics);
+            region = GetLineCharactersPosition(inLine, searchPoint, 1, &graphics);
             if (region != NULL)
             {
                 RectF character;

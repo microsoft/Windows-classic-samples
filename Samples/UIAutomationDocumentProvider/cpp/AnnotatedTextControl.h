@@ -5,7 +5,10 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved
 
+#pragma warning(disable:4458)
 #include <gdiplus.h>
+#pragma warning(default:4458)
+
 using namespace Gdiplus;
 
 enum TextStyle
