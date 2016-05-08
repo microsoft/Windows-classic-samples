@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LargeMessageQueue", "LargeMessageQueue\LargeMessageQueue.csproj", "{1CB3515C-6CB1-40FC-A084-7F98AF868B13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLargeMessageQueue", "TestLargeMessageQueue\TestLargeMessageQueue.csproj", "{45C4677A-350D-4244-90BE-D161A8F3F667}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CB3515C-6CB1-40FC-A084-7F98AF868B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB3515C-6CB1-40FC-A084-7F98AF868B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB3515C-6CB1-40FC-A084-7F98AF868B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB3515C-6CB1-40FC-A084-7F98AF868B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45C4677A-350D-4244-90BE-D161A8F3F667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45C4677A-350D-4244-90BE-D161A8F3F667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45C4677A-350D-4244-90BE-D161A8F3F667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45C4677A-350D-4244-90BE-D161A8F3F667}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

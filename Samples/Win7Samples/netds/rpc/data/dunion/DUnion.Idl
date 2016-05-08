@@ -1,0 +1,33 @@
+[ uuid (87E5BFA0-CA46-1067-B31B-00DD010662DA),
+  version(1.0),
+  pointer_default(unique)
+]
+interface dunion
+{
+
+typedef [switch_type(short)] union {
+    [case(0)] short          sVal;
+    [case(1)] float          fVal;
+    [case(2)] unsigned char  chVal;
+    [default] ;
+} DISCRIM_UNION_PARAM_TYPE;
+
+typedef DISCRIM_UNION_PARAM_TYPE DISCRIM_UNION_FIELD_TYPE;
+
+typedef struct {
+    short                                          sDiscrim; 
+    [switch_is(sDiscrim)] DISCRIM_UNION_FIELD_TYPE u;
+} DISCRIM_UNION_STRUCT_TYPE;
+
+
+void UnionParamProc([in] handle_t h1,
+    [in, switch_is(sDiscrim)] DISCRIM_UNION_PARAM_TYPE *UnionParam,
+    [in]                      short                    sDiscrim
+    );
+
+void UnionStructProc([in] handle_t h1,
+    [in] DISCRIM_UNION_STRUCT_TYPE *UnionStruct);
+
+void Shutdown([in] handle_t h1);
+
+}

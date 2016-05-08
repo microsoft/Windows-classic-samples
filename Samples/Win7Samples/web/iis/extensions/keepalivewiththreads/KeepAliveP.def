@@ -1,0 +1,6 @@
+LIBRARY	     "KEEPALIVEP"
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+	TerminateExtension

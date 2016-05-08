@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>BITS Upload Sample</TITLE>
+</HEAD>
+
+<BODY style="font-family: Tahoma">
+
+<H1>BITS Upload Sample</CENTER></H1>
+
+<H2>Summary</H2> 
+
+<p> 
+This sample demonstrates a simple application that uses BITS to upload
+files to a IIS server using the HTTP protocol. BITS allows for
+file transfers that consume only 'idle' bandwith and that are automatically
+restarted after interruptions such as network outages, machine reboots
+or user logoff.
+
+<p>
+The UI for the Upload Sample captures text entered by the user, and
+packs it as an XML file. This XML file is in turn uploaded to the IIS server.
+
+<p>
+If the check box <b>Process a reply from the server after the completion of the upload job</b>
+is checked, and the file is uploaded to a virtual directory that has BITS Extensions
+notification enabled, then the app will receive a reply from the server, and will
+display its content in the <b>Job Status</b> area.
+
+<H2>Key Concepts</H2>
+<UL>
+  <LI>Basic connection with BITS job manager and submission of BITS jobs
+  <li>Registration of a job callback for special handling of errors and job states
+  <li>Submission of Upload and Upload-Reply jobs
+  <LI>Configuration of the IIS virtual directory for Upload and Upload with notifications
+</UL>
+
+<H2>Build/Configuration instructions</H2>
+
+<OL>
+  <li>Run "nmake" in the directory where the sources are.
+  <LI>Change the current directory to the binary output directory in the SDK.
+  <LI>Run the configuration script, by executing "cscript configure.js &lt;physicalpath_root_for_virtualdirectories&gt;". 
+	  Execute only "cscript configure.js" to obtain usage information.
+  <LI>Execute uploadsample.exe.
+</OL>
+
+<H2>Basic Usage</H2>
+
+<H3>Upload</H3>
+
+<oL>
+  <LI>Select <b>http://localhost/UploadSample</b> in the <b>Upload file to the following virtual directory</b> combo-box
+	   (or type the URL for a virtual directory with BITS Extensions enabled).
+  <LI>Type some words in the <b>Pack the following text in an XML file</b> edit box.
+  <LI>Click the <b>Upload file</b> button.
+  <LI>Check if a file with a name in the format "uplxxxx.xml" was uploaded to the <b>UploadSample</b> virtual directory.
+</oL>
+
+<H3>Upload-Reply</H3>
+
+<oL>
+  <LI>Select <b>http://localhost/UploadSampleWithNotifications</b> in the <b>Upload file to the following virtual directory</b> combo-box
+	   (or type the URL for a virtual directory with BITS Extensions enabled, and Notification settings adjusted 
+	   to execute the ASP script newupload.asp).
+  <LI>Type some words in the <b>Pack the following text in an XML file</b> edit box
+  <LI>Click the <b>Upload file</b> button
+  <LI>Check if a file with a name in the format "uplxxxx.xml" was uploaded to the <b>UploadSample</b> virtual directory
+  <LI>Check in the <b>Job Status</b> area if a reply was received from the server
+</oL>
+
+
+<h2>System configuration</h2>
+
+<ul>
+  <li>To be able to compile this sample, your system needs the Windows Server 2003 version of the Platform SDK (Core SDK).
+  <li>In order to execute uploadsample.exe, your system needs BITS 1.5 client installed in the client machine, and 
+	  BITS 1.5 server in the server machine. 
+	  BITS 1.5 (server and client) is included with Windows Server 2003. No action is needed to enable the client part of the BITS software. 
+	  For the server part, you might need to enable BITS Extensions in your IIS 6.0 server. To enable BITS Extensions 
+	  in a Windows Server 2003 system, use the following steps:
+	  <ol>
+		  <li>Go to <b>Add or Remove Programs</b>
+		  <li>Select <b>Add/Remove Windows Components</b>
+		  <li>Select the <b>Application Server</b> check box, and <li>click <b>Details</b>
+		  <li>Select the <b>Internet Information Server</b> check box, and <li>click <b>Details</b>
+		  <li>Check the <b>Background Intelligent Transfer Service (BITS) Server Extensions</b> check box, and click <b>OK</b>
+		  <li>Click <b>OK</b> twice to close the previous dialogs
+		  <li>Click <b>Next</b> to proceed with the Windows Components Wizard
+		  <li>Click <b>Finish</b> when it is done
+	  </ol>
+  <li>For Windows 2000 and Windows XP versions of BITS 1.5, there is a redistributable package available at the Platform SDK 
+	  download web site. 
+</ul>
+
+<h2>Questions</h2>
+
+For development and deployment questions on BITS 1.5, please post a message to the newsgroup 
+microsoft.public.windows.backgroundtransfer, or contact Microsoft Support. <br>
+Known issues are commonly published as Knowledge Base (KB) articles. Please go to
+http://www.microsoft.com/support and search using the term "Background Intelligent Transfer Service".
+ 
+
+
+</BODY>
+
+</HTML>

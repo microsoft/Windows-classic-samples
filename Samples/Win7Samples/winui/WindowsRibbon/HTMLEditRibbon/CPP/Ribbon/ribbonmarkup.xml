@@ -1,0 +1,409 @@
+<!--
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (c) Microsoft Corporation. All rights reserved.
+-->
+
+<Application xmlns="http://schemas.microsoft.com/windows/2009/Ribbon">
+
+  <Application.Commands>
+    <!-- Tabs -->
+    <Command Name="TabHome" Symbol="IDC_TAB_HOME">
+      <Command.LabelTitle>
+        <String Id="2000">Home</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="TabInsert" Symbol="IDC_TAB_INSERT">
+      <Command.LabelTitle>
+        <String Id="2001">Insert</String>
+      </Command.LabelTitle>
+    </Command>
+
+    <!-- Groups -->
+    <Command Name="GroupClipboard" Symbol="IDC_GROUP_CLIPBOARD">
+      <Command.LabelTitle>
+        <String Id ="2002">Clipboard</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4000" Source="res/Paste.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="GroupView" Symbol="IDC_GROUP_VIEW"/>
+    <Command Name="GroupInsert" Symbol="IDC_GROUP_INSERT">
+      <Command.LabelTitle>
+        <String Id="2003">View</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="GroupFont" Symbol="IDC_GROUP_FONT">
+      <Command.LabelTitle>
+        <String Id="2004">Font</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="GroupParagraph" Symbol="IDC_GROUP_PARAGRAPH">
+      <Command.LabelTitle>
+        <String Id="2005">Paragraph</String>
+      </Command.LabelTitle>
+    </Command>
+
+    <!-- App Menu, MRU list, Help button and Quick Access Toolbar -->
+    <Command Name="FileMenu" Symbol="IDC_FILEMENU"/>
+    <Command Name="MRUList" Symbol="IDC_MRULIST"/>
+    <Command Name="Help" Symbol="IDC_RIBBONHELP" Id="57664" />
+    <Command Name="QAT" Symbol="IDC_QAT"/>
+
+    <!-- Clipboard commands -->
+    <Command Name="Paste" Symbol="IDC_PASTE" Id="57637">
+      <Command.LabelTitle>
+        <String Id="2032">Paste</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4001" Source="res/Paste.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="Cut" Symbol="IDC_CUT" Id="57635">
+      <Command.LabelTitle>
+        <String Id="2006">Cut</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4002" Source="res/Cut.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="Copy" Symbol="IDC_COPY" Id="57634">
+      <Command.LabelTitle>
+        <String Id="2007">Copy</String>
+      </Command.LabelTitle>
+      <Command.TooltipTitle>
+        <String Id ="2008">Copy</String>
+      </Command.TooltipTitle>
+      <Command.SmallImages>
+        <Image Id="4003" Source="res/Copy.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="SelectAll" Symbol="IDC_SELECTALL" Id="57642">
+      <Command.LabelTitle>
+        <String Id="2009">Select All</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4004" Source="res/SelectAllS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+
+    <!-- View commands -->
+    <Command Name="ViewSource" Symbol="IDC_VIEWSOURCE" Id="32803">
+      <Command.LabelTitle>
+        <String Id="2010">View Source</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4005" Source="res/ViewSourceS.bmp" />
+      </Command.SmallImages>
+      <Command.LargeImages>
+        <Image Id="4006" Source="res/PrintPreviewL.bmp" />
+      </Command.LargeImages>
+    </Command>
+
+    <!-- Font commands -->
+    <Command Name="Font" Symbol="IDC_FONT">
+      <Command.LabelTitle>
+        <String Id="2011">My Font</String>
+      </Command.LabelTitle>
+    </Command>
+
+    <!-- Paragraph commands -->
+    <Command Name="LeftJustify" Symbol="IDC_LEFTJUSTIFY" Id="32828">
+      <Command.LabelTitle>
+        <String Id="2012">Left Justify</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4007" Source="res/LeftJustifyS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="CenterJustify" Symbol="IDC_CENTERJUSTIFY" Id="32805">
+      <Command.LabelTitle>
+        <String Id="2013">Center Justify</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4008" Source="res/CenterJustifyS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="RightJustify" Symbol="IDC_RIGHTJUSTIFY" Id="32829">
+      <Command.LabelTitle>
+        <String Id="2014">Right Justify</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4009" Source="res/RightJustifyS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="Outdent" Symbol="IDC_OUTDENT" Id="32832">
+      <Command.LabelTitle>
+        <String Id="2015">Outdent</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4010" Source="res/OutdentS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="Indent" Symbol="IDC_INDENT" Id="32833">
+      <Command.LabelTitle>
+        <String Id="2016">Indent</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4011" Source="res/IndentS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="Numbered" Symbol="IDC_NUMBERED" Id="32834">
+      <Command.LabelTitle>
+        <String Id="2017">Numbered List</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4012" Source="res/NumberedS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="Bulleted" Symbol="IDC_BULLETED" Id="32831">
+      <Command.LabelTitle>
+        <String Id="2018">Bulleted List</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4013" Source="res/BulletsS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+
+    <!-- Insert commands -->
+    <Command Name="InsertPicture" Symbol="IDC_INSERTPICTURE" Id="32791">
+      <Command.LabelTitle>
+        <String Id="2019">Insert Picture</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4014" Source="res/InsertPictureL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="Hyperlink" Symbol="IDC_HYPERLINK" Id="32804">
+      <Command.LabelTitle>
+        <String Id="2020">Create Hyperlink</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4015" Source="res/HyperlinkL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+
+    <!-- AppMenu commands -->
+    <Command Name="New" Symbol="IDC_NEW" Id="57600">
+      <Command.LabelTitle>
+        <String Id="2021">New</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4016" Source="res/NewL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="OpenFileMore" Symbol="IDC_OPENFILEMORE" Id="20500" />
+    <Command Name="OpenFile" Symbol="IDC_OPENFILE" Id="57601">
+      <Command.LabelTitle>
+        <String Id="2022">Open File</String>
+      </Command.LabelTitle>
+      <Command.LabelDescription>
+        <String Id="2023">Open a file from the local system or network share.</String>
+      </Command.LabelDescription>
+      <Command.LargeImages>
+        <Image Id="4017" Source="res/OpenFileL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="OpenURL" Symbol="IDC_OPENURL" Id="32774">
+      <Command.LabelTitle>
+        <String Id="2024">Open URL</String>
+      </Command.LabelTitle>
+      <Command.LabelDescription>
+        <String Id="2025">Open a file from an Internet URL.</String>
+      </Command.LabelDescription>
+      <Command.LargeImages>
+        <Image Id="4018" Source="res/OpenFileL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+
+    <Command Name="Save" Symbol="IDC_SAVE" Id="57603">
+      <Command.LabelTitle>
+        <String Id="2026">Save</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4019" Source="res/SaveL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="SaveAs" Symbol="IDC_SAVEAS" Id="57604">
+      <Command.LabelTitle>
+        <String Id ="2027">Save As</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="4020" Source="res/SaveAsL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    
+    <Command Name="PrintMore" Symbol="IDC_PRINTMORE" Id="20501" />
+    <Command Name="Print" Symbol="IDC_PRINT" Id="57607">
+      <Command.LabelTitle>
+        <String Id="2033">Print</String>
+      </Command.LabelTitle>
+      <Command.LabelDescription>
+        <String Id="2028">Send the document to the currently selected default printer.</String>
+      </Command.LabelDescription>
+      <Command.LargeImages>
+        <Image Id="4021" Source="res/PrintL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="PrintSetup" Symbol="IDC_PRINTSETUP" Id="57606">
+      <Command.LabelTitle>
+        <String Id="2029">Print Setup</String>
+      </Command.LabelTitle>
+      <Command.LabelDescription>
+        <String Id="2030">Change the page layout or other printer settings.</String>
+      </Command.LabelDescription>
+      <Command.LargeImages>
+        <Image Id="4022" Source="res/PrintL.bmp"/>
+      </Command.LargeImages>
+    </Command>
+
+    <!-- QAT commands -->
+    <Command Name="Undo" Symbol="IDC_UNDO" Id="57643">
+      <Command.LabelTitle>
+        <String Id="2031">Undo</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="4023" Source="res/UndoS.bmp"/>
+      </Command.SmallImages>
+    </Command>
+
+  </Application.Commands>
+
+  <Application.Views>
+
+    <Ribbon>
+
+      <!-- Application Menu -->
+      <Ribbon.ApplicationMenu >
+        <ApplicationMenu CommandName="FileMenu" >
+          <ApplicationMenu.RecentItems>
+            <!-- MFC's internal mechanisms support at most 16 MRU items, but you can implement your own MRU list to work around the limit-->
+            <RecentItems CommandName="MRUList" MaxCount="16" EnablePinning="false"/>
+          </ApplicationMenu.RecentItems>
+          <MenuGroup Class="MajorItems" >
+            <Button CommandName="New"  />
+            
+            <!-- Open File SplitButton -->
+            <SplitButton CommandName="OpenFileMore" >
+              <SplitButton.ButtonItem>
+                <Button CommandName="OpenFile" />
+              </SplitButton.ButtonItem>
+              <SplitButton.MenuGroups>
+                <MenuGroup Class="MajorItems">
+                  <Button CommandName="OpenFile" />
+                  <Button CommandName="OpenURL" />
+                </MenuGroup>
+              </SplitButton.MenuGroups>
+            </SplitButton>
+
+            <Button CommandName="Save"  />
+            <Button CommandName="SaveAs"  />
+          </MenuGroup>
+          
+          <MenuGroup Class="MajorItems" >
+            <!-- Printing SplitButton -->
+            <SplitButton CommandName="PrintMore">
+              <SplitButton.ButtonItem>
+                <Button CommandName="Print" />
+              </SplitButton.ButtonItem>
+              <SplitButton.MenuGroups>
+                <MenuGroup Class="MajorItems">
+                  <Button CommandName="Print" />
+                  <Button CommandName="PrintSetup" />
+                </MenuGroup>
+              </SplitButton.MenuGroups>
+            </SplitButton>
+          </MenuGroup>
+
+        </ApplicationMenu>
+      </Ribbon.ApplicationMenu >
+
+      <!-- Help button -->
+      <Ribbon.HelpButton>
+        <HelpButton CommandName="Help" />
+      </Ribbon.HelpButton>
+
+      <!-- QAT (Quick Access Toolbar) -->
+      <Ribbon.QuickAccessToolbar>
+        <QuickAccessToolbar CommandName="QAT">
+          <QuickAccessToolbar.ApplicationDefaults>
+            <Button CommandName="Undo" ApplicationDefaults.IsChecked="true"/>
+            <ToggleButton CommandName="ViewSource" ApplicationDefaults.IsChecked="false"/>
+          </QuickAccessToolbar.ApplicationDefaults>
+        </QuickAccessToolbar>
+      </Ribbon.QuickAccessToolbar>
+
+      <Ribbon.Tabs>
+
+        <Tab CommandName="TabHome">
+          <Tab.ScalingPolicy>
+            <ScalingPolicy>
+              <ScalingPolicy.IdealSizes>
+                <Scale Group="GroupClipboard" Size="Medium"/>
+                <Scale Group="GroupView" Size="Large"/>
+                <Scale Group="GroupFont" Size="Large"/>
+                <Scale Group="GroupParagraph" Size="Large"/>
+              </ScalingPolicy.IdealSizes>
+              <Scale Group="GroupClipboard" Size="Small"/>
+              <Scale Group="GroupClipboard" Size="Popup"/>
+              <Scale Group="GroupParagraph" Size="Medium"/>
+            </ScalingPolicy>
+          </Tab.ScalingPolicy>
+
+          <Group CommandName="GroupClipboard" SizeDefinition="FourButtons">
+            <Button CommandName="Paste"/>
+            <Button CommandName="Cut"/>
+            <Button CommandName="Copy"/>
+            <Button CommandName="SelectAll"/>
+          </Group>
+
+          <Group CommandName="GroupFont"  ApplicationModes="1">
+            <FontControl CommandName="Font" FontType="FontWithColor" />
+          </Group>
+
+          <Group CommandName="GroupParagraph"  ApplicationModes="1" SizeDefinition="ButtonGroups">
+            <ControlGroup>
+              <ControlGroup>
+                <ToggleButton CommandName="Numbered" />
+                <ToggleButton CommandName="Bulleted" />
+              </ControlGroup>
+            </ControlGroup>
+            <ControlGroup>
+              <ControlGroup>
+                <ToggleButton CommandName="LeftJustify" />
+                <ToggleButton CommandName="CenterJustify" />
+                <ToggleButton CommandName="RightJustify" />
+              </ControlGroup>
+              <ControlGroup/>
+              <ControlGroup>
+                <Button CommandName="Outdent" />
+                <Button CommandName="Indent" />
+              </ControlGroup>
+            </ControlGroup>
+          </Group>
+
+          <Group CommandName="GroupView" SizeDefinition="OneButton" >
+            <ToggleButton CommandName="ViewSource"/>
+          </Group>
+
+        </Tab>
+
+        <Tab CommandName="TabInsert" ApplicationModes="1">
+          <Group CommandName="GroupInsert" SizeDefinition="TwoButtons">
+            <Button CommandName="InsertPicture"/>
+            <Button CommandName="Hyperlink"/>
+          </Group>
+        </Tab>
+      </Ribbon.Tabs>
+
+    </Ribbon>
+
+  </Application.Views>
+
+</Application>
+

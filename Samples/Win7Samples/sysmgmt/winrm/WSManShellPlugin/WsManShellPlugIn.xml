@@ -1,0 +1,30 @@
+<PlugInConfiguration xmlns="http://schemas.microsoft.com/wbem/wsman/1/config/PluginConfiguration"
+                     Name="MyPlugIn"
+                     Filename="%systemroot%\system32\myplugin.dll"
+                     SDKVersion="1"
+                     XmlRenderingType="text"
+                     Architecture="64"
+                     Enabled="true">
+
+  <InitializationParameters>
+    <Param Name="myParam1" Value="myValue1" />
+    <Param Name="myParam2" Value="myValue2" />
+  </InitializationParameters>
+
+  <Resources>
+    <Resource ResourceUri="http://schemas.MyCompany.com/MyUri1" SupportsOptions="true" ExactMatch="false">
+      <Capability Type="Get" SupportsFragment="true" />
+      <Capability Type="Put" SupportsFragment="true" />
+      <Capability Type="Create" />
+      <Capability Type="Delete" />
+      <Capability Type="Invoke" />
+      <Capability Type="Enumerate" SupportsFiltering="true" />
+    </Resource>
+
+    <Resource ResourceUri="http://schemas.MyCompany.com/MyUri2" SupportsOptions="false" ExactMatch="true">
+      <Security Uri="http://schemas.MyCompany.com/MyUri2" Sddl="O:NSG:BAD:P(A;;GA;;;BA)" />
+      <Security Uri="http://schemas.MyCompany.com/MyUri2/MoreSpecific" Sddl="O:NSG:BAD:P(A;;GR;;;BA)" ExactMatch="true"/>
+      <Capability Type="Shell" />
+    </Resource>
+  </Resources>
+</PlugInConfiguration>

@@ -1,0 +1,26 @@
+﻿<%-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+ THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ PARTICULAR PURPOSE.
+
+ Copyright (c) Microsoft Corporation. All rights reserved--%>
+ 
+<%@ Master Language="C#" AutoEventWireup="true" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="StyleSheet.css" rel="Stylesheet" type="text/css" /> 
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ContentPlaceHolder id="content" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

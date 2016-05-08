@@ -1,0 +1,29 @@
+#include "resource.h"
+#include <windows.h>
+
+IDD_DIALOG1 DIALOGEX 0, 0, 295, 324
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "NameSpaceTreeControl Test Application"
+FONT 9, "Segoe UI", 0, 0, 0x0
+BEGIN
+    LTEXT           "",IDC_BROWSER,7,6,140,218,NOT WS_VISIBLE
+    GROUPBOX        "Settings",IDC_SETTINGS,151,6,136,86
+    CONTROL         "Expandos",IDC_EXPANDOS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,16,100,8
+    CONTROL         "Lines",IDC_LINES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,26,100,8
+    CONTROL         "Full row select",IDC_FULLROWSELECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,36,100,8
+    CONTROL         "Display horizontal scroll bar",IDC_HORIZONTALSCROLL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,46,100,8
+    CONTROL         "Add padding between root nodes",IDC_PADDING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,56,120,8
+    CONTROL         "Filter items",IDC_FILTERPINNED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,66,100,8
+    CONTROL         "Auto expand single nodes",IDC_AUTOEXPAND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,156,76,100,8
+    GROUPBOX        "Item Information",-1,7,229,281,69
+    LTEXT           "Parse:",-1,12,239,24,8
+    LTEXT           "",IDC_NAME,40,239,196,8
+    LTEXT           "Path:",-1,12,249,24,8
+    LTEXT           "",IDC_PATH,40,249,193,8
+    LTEXT           "SFGAO:",-1,12,259,24,8
+    LTEXT           "",IDC_ATTRIBUTES,40,259,193,32
+    CONTROL         "",IDC_IMAGE,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_REALSIZEIMAGE,238,235,32,30,WS_EX_TRANSPARENT
+    DEFPUSHBUTTON   "Open",IDC_EXPLORE,7,302,50,14
+    PUSHBUTTON      "Cancel",IDC_CANCEL,238,302,50,14
+END
+

@@ -1,0 +1,6 @@
+LIBRARY	     "WORKERTHREAD"
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+	TerminateExtension

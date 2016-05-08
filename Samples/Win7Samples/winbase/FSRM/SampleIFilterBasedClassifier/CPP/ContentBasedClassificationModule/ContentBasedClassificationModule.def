@@ -1,0 +1,9 @@
+; ContentBasedClassificationModule.def : Declares the module parameters.
+
+LIBRARY      "ContentBasedClassificationModule.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

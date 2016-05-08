@@ -1,0 +1,10 @@
+; Copyright (c)  Microsoft Corporation
+LIBRARY         METHPROV
+;DESCRIPTION     'Sample WMI Method Provider (c)1998 Microsoft Corp.'
+
+
+EXPORTS
+                DllGetClassObject          PRIVATE
+                DllCanUnloadNow            PRIVATE
+                DllRegisterServer          PRIVATE
+                DllUnregisterServer        PRIVATE

@@ -1,0 +1,22 @@
+<?wpl version="1.0"?><smil>
+	<head>
+		<meta name="Generator" content="GuzTools -- 0.0.0.1"/>
+		<meta name="ItemCount" content="6"/>
+		<properties>hQAAABwAAAAxU1BTpmpjKD2V0hG11gDAT9kY0AAAAAAtAAAAMVNQU5IERGSLTNER
+i3AIADaxGgMRAAAACQAAAAATAAAAMgAAAAAAAAAcAAAAMVNQU+CFn/L5T2gQq5EI
+ACsns9kAAAAAHAAAADFTUFOQBERki0zREYtwCAA2sRoDAAAAAAAAAAA=
+</properties><title>New Playlist.WPL</title></head>
+	<body>
+		<seq>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/05%20Press%20Forward.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/06%20Grind.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/07%20Torture.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/08%20So%20Deadly.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/03%20Swampwater.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/04%20Pressure.wma"/>
+		</seq>
+	</body>
+	<properties>aQAAABwAAAAxU1BTpmpjKD2V0hG11gDAT9kY0AAAAAAtAAAAMVNQU5IERGSLTNER
+i3AIADaxGgMRAAAACQAAAAATAAAAGQAAAAAAAAAcAAAAMVNQU+CFn/L5T2gQq5EI
+ACsns9kAAAAAAAAAAA==
+</properties></smil>

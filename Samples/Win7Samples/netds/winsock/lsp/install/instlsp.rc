@@ -1,0 +1,14 @@
+
+#include <windows.h>
+#include <ntverp.h>
+
+#define MANIFEST_RESOURCE_ID        1
+MANIFEST_RESOURCE_ID    RT_MANIFEST "instlsp.exe.manifest"
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Sample LSP Installer"
+#define VER_INTERNALNAME_STR        "instlsp.exe"
+#define VER_ORIGINALFILENAME_STR    "instlsp.exe"
+
+#include "common.ver"

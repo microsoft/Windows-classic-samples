@@ -1,0 +1,140 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML xmlns:t = "urn:schemas-microsoft-com:time" >
+<HEAD>
+<TITLE>Creating Dynamic PopUp Elements with IE 5.5</TITLE>
+</HEAD>
+
+<STYLE TYPE="text/css">
+
+BODY{ 
+background:white;
+font-family:verdana;
+font-size:80%;
+}
+.bar{
+background:#336699;
+width:100%;
+height:30px;
+border-top:1px solid #99CCFF;
+border-bottom:1px solid #000000;
+}
+.desbar{
+background:#FFFFFF;
+width:100%;
+padding: 10px;
+border-top:1px solid #CCCCCC;
+border-bottom:1px solid #000000;
+color:black; 
+font-size:8pt;
+height:105;
+}
+.title{
+font-size:15pt;
+color:white;
+padding-left:10px;
+}
+PRE { margin:0}
+
+a:link
+{
+text-decoration:none;
+color:white
+}
+a:visited
+{
+text-decoration:none;
+color:white
+}
+a:active
+{
+text-decoration:none;
+color:white
+}
+a:hover
+{
+text-decoration:none;
+color:yellow
+}
+
+.time {	BEHAVIOR: url(#DEFAULT#TIME2)}
+t\:* {	BEHAVIOR: url(#DEFAULT#TIME2)}
+
+h1 {font-size:13pt; margin:0; margin-bottom:5px; }
+h2 {font-size:10pt; margin:0; margin-bottom:5px; }
+.cbutton {position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black;}
+
+</STYLE>
+
+<SCRIPT LANGUAGE="JScript">
+<!--	
+
+function goPop(oHeight) {
+
+var oPopupBody = oPopup.document.body;
+
+var lefter = event.offsetY+10;
+var topper = event.offsetX+10;
+
+    oPopupBody.innerHTML = styleDiv.innerHTML;
+    oPopup.show(topper, lefter, 207, oHeight, document.body);
+	document.body.onmouseup = closePopup;
+	
+}
+
+function goContext(oHeight) {
+
+
+var oPopupBody = oPopup.document.body;
+
+var lefter = event.offsetY+10;
+var topper = event.offsetX+10;
+
+    oPopupBody.innerHTML = oContext.innerHTML;
+    oPopup.show(topper, lefter, 207, oHeight, document.body);
+	document.body.onmouseup = closePopup;
+	
+}
+
+function closePopup(){
+oPopup.hide();
+}
+
+function fillPopup(titler, texter, linker){
+	oTitle.innerText=titler;
+	oText.innerText=texter;
+	oLinkStore.innerText=linker;
+}
+
+
+
+var oPopup = window.createPopup()
+//-->
+</SCRIPT>
+
+</HEAD>
+
+<BODY ID="obody" STYLE="font-family:verdana; font-size:70%" oncontextmenu="goContext('92'); return false" > 
+<H2>This is the IFRAME homepage.</H2> Right-click on this page to show a custom pop-up menu.<BR><BR> <I><B>Note:</B> Once you navigate 
+to another page, you cannot use the context menu in the IFRAME, but you can click outside of the IFRAME to get to the custom menu.</I>
+
+<DIV ID="oContext" STYLE="display:none">
+<DIV STYLE="position:relative; top:0; left:0; border:2px solid black;  border-top:2px solid #cccccc; border-left:2px solid #cccccc; background:#666666; height:110px; width:207px;">
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.location.href='iframe4popup.htm';">
+<IMG src="../Graphics Files/home.gif" align="absmiddle ">&nbsp;&nbsp;Home</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.location.href='http://search.microsoft.com';">
+<IMG src="../Graphics Files/search.gif" align="absmiddle ">&nbsp;&nbsp;Search</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.location.href='http://www.microsoft.com/ie';">
+<IMG src="../Graphics Files/ielogo.gif" align="absmiddle ">&nbsp;&nbsp;Internet Explorer</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.location.href='http://www.microsoft.com/info/cpyright.htm';">
+&#169; Microsoft Corporation</DIV>
+
+
+</DIV>
+
+<P><HR><font color="black" face="ms sans serif" size="1">&copy;<a href="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" target="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</a></font>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

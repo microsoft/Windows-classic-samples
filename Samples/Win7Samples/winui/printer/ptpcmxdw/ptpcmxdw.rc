@@ -1,0 +1,103 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// JPGIMAGE
+//
+
+IDR_JPGIMAGE1           JPGIMAGE                "image1.jpg"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_SUMMARY         "\n\nptpcmxdw.exe is a simple application that helps demonstrate how to \n    1. Use PrintTicket/PrintCapabilities APIs.\n    2. Send PrintTicket to a printer driver capable of accepting PrintTickets.\n    3. Send a .jpg image and a FixedPage xaml content to a print driver that supports XPS resource and markup passthrough escapes.\n\n"
+    IDS_APP_PREREQ          "Prerequisites\n    1. Microsoft's ""Microsoft XPS Document Writer"" printer driver must be installed. This printer driver is PrintTicket aware and supports MXDW passthrough escapes.\n    2. Microsoft PrintTicket and PrintCapabilities support.  This requires that the prntvpt.dll is installed and registered on the system.\n    3. Microsoft MSXML 6.0 must be installed and registered.\nNote: All the above are installed by default on most versions Windows Vista.  If these components are not installed, please contact your system manufacturer.  On previous version of Windows (XP SP2 and later), these components may be installed individually through the Microsoft XPS Essentials Pack and MSXML 6.0 downloadable installers or by installing the .NET Framework 3.0\n\n"
+    IDS_APP_SYNTAX          "SYNTAX:\n ptpcmxdw [/s | /m | /i]\n    /s : Create a simple one page job by sending user's PrintTicket using MXDW passthrough escapes.\n    /m : Create a multi page job, with a different PrintTicket for each page.\n    /i : Send a jpg image using MXDW passthrough escapes.\n"
+    IDS_APP_MXDWPRINTER_NOTINSTALLED 
+                            "The ""Microsoft XPS Document Writer"" printer is not installed.\n"
+    IDS_APP_MXDC_ESCAPE_NOTSUPPORTED 
+                            "The driver does not suppot MXDC Escape.\n"
+    IDS_APP_CREATEDC_FAILED "CreateDC failed.\n"
+    IDS_APP_XPS_CAPABLE_PRINTER_NOTINSTALLED 
+                            "XPS capable printer not installed.\n"
+    IDS_APP_EXTESCAPE_FAILED "ExtEscape Failed.\n"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_JOB_COMPLETED   "Job Completed.\n"
+    IDS_APP_JOB_NOT_COMPLETED "The Print Job could not be completed.\n"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

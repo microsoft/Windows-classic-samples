@@ -1,0 +1,49 @@
+<HTML>
+
+<HEAD>
+    <SCRIPT LANGUAGE="VBScript" RUNAT="Server">
+    <!--
+        option explicit
+    -->
+    </SCRIPT>
+
+<TITLE>Indexing Service Sample Navigation Page</TITLE>
+        <LINK REL=STYLESHEET HREF="is2admin.css" TYPE="text/css">
+    <META NAME="DESCRIPTION" CONTENT="Redirects to another page.">
+    <META NAME="AUTHOR"      CONTENT="Indexing Service Team">
+    <META NAME="KEYWORDS"    CONTENT="redirect">
+    <META NAME="SUBJECT"     CONTENT="Redirect utility">
+    <META NAME="MS.CATEGORY" CONTENT="Internet">
+    <META NAME="MS.LOCALE"   CONTENT="EN-US">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Windows-1252">
+</HEAD>
+
+<BODY BACKGROUND="is2side.gif" BGPROPERTIES=FIXED BGCOLOR=#000000 TEXT=#FFFFFF LINK=#FFFFFF VLINK=#FFFFFF>
+
+<TABLE width=100>
+  <TR>
+    <TD height=60 align=center>
+           <a href="/iisadmin/isadmin/state.ida" target="main" style="color:#FFFFFF;"><p>Index Statistics</a>              
+         </TD>
+  </TR>
+  <TR>
+    <TD height=60 align=center>
+          <a href="/iisadmin/isadmin/unfilt.idq" target="main" style="color:#FFFFFF;"><p>Unfiltered Documents</a>
+         </TD>
+  </TR>
+  <TR>
+    <TD height=60 align=center>
+      <a href="/iisadmin/isadmin/scan.idq" target="main" style="color:#FFFFFF;"><p>Virtual Root Data</a>
+    </TD>
+  </TR>
+  <TR>
+    <TD height=60 align=center>
+                <FORM ACTION="/iisadmin/isadmin/merge.ida" METHOD="GET">
+                        <INPUT TYPE="SUBMIT" VALUE="Merge Index">
+                </FORM>
+        </TD>
+  </TR>
+</TABLE>
+
+</body>
+</HTML>

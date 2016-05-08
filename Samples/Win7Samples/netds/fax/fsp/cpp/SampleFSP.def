@@ -1,0 +1,11 @@
+EXPORTS
+    FaxDevVirtualDeviceCreation
+    FaxDevInitialize
+    FaxDevStartJob
+    FaxDevEndJob
+    FaxDevSend
+    FaxDevReceive
+    FaxDevReportStatus
+    FaxDevAbortOperation
+    DllRegisterServer            PRIVATE
+    DllUnregisterServer            PRIVATE

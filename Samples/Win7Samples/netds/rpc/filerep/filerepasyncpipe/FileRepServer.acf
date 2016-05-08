@@ -1,0 +1,20 @@
+/*
+    Copyright Microsoft Corp. 1992 - 2001
+
+    File Replication Sample
+
+    FILE: FileRepServer.acf
+
+    PURPOSE:  Informs the midl compiler that the server interface uses
+  strict context handles and explicit binding handles.
+
+*/
+
+[
+    explicit_handle
+]
+
+interface FileRepServer
+{
+    [async] RemoteReadAsyncPipe();
+}

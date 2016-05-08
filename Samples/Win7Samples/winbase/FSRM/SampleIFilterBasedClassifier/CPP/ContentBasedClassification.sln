@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContentBasedClassificationModule", "ContentBasedClassificationModule\ContentBasedClassificationModule.vcproj", "{E9844AD6-498D-430D-92B3-991BD23ED8F7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FsrmTextReader", "FsrmTextReader\FsrmTextReader.vcproj", "{CEC25B30-7046-4139-B3D1-CB169F03F25D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Debug|Win32.ActiveCfg = Debug|x64
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Debug|Win32.Build.0 = Debug|x64
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Debug|x64.ActiveCfg = Debug|x64
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Debug|x64.Build.0 = Debug|x64
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Release|Win32.ActiveCfg = Release|Win32
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Release|Win32.Build.0 = Release|Win32
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Release|x64.ActiveCfg = Release|x64
+		{E9844AD6-498D-430D-92B3-991BD23ED8F7}.Release|x64.Build.0 = Release|x64
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Debug|Win32.ActiveCfg = Debug|x64
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Debug|Win32.Build.0 = Debug|x64
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Debug|x64.ActiveCfg = Debug|x64
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Release|Win32.ActiveCfg = Release|Win32
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Release|Win32.Build.0 = Release|Win32
+		{CEC25B30-7046-4139-B3D1-CB169F03F25D}.Release|x64.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

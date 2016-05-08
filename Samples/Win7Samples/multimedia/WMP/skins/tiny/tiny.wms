@@ -1,0 +1,21 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<THEME>
+    <VIEW
+        clippingColor = "#CCCC00"
+        backgroundImage = "background.bmp"
+        titleBar = "false">
+		
+        <BUTTONGROUP
+            mappingImage = "map.bmp"
+            hoverImage = "hover.bmp"> 
+                
+        <PLAYELEMENT
+            mappingColor = "#00FF00" />
+                          
+        <STOPELEMENT
+            mappingColor = "#FF0000" />
+                
+        </BUTTONGROUP>
+		
+    </VIEW>
+</THEME>

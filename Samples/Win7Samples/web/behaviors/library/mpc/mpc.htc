@@ -1,0 +1,848 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:		mpc.htc
+//
+//  Description:	This behavior allows web authors to a tabbed dialog
+//			style control for grouping information on a page.
+//
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="selectedIndex"/>  
+<PROPERTY NAME="CumulativeTabWidth"/> 
+<PROPERTY NAME="ContainerHeight"/> 
+  
+<EVENT    NAME="onchange"   ID="change" />
+<EVENT    NAME="onfocus"   ID="focus" />
+
+<METHOD   NAME="FireFocus"/>
+
+<ATTACH   EVENT="ondocumentready" HANDLER="DoInit"        />
+
+
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+var StyleInfo;
+var StyleRules = new Array();
+var iIndex = null;
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions, set variables, and attaches events to
+//                  initialize behavior
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+function DoInit()
+{
+	//if container....
+	if(tagName=="container")
+	{
+		style.position = "absolute";
+		CumulativeTabWidth = -1;
+		if(selectedIndex==null) selectedIndex = 1;
+		SetDefaults();
+		ContainerHeight = style.posHeight;
+	}
+	
+	//*************************************************************************
+	//*************************************************************************
+	//if page.....
+	if(tagName=="page")
+	{	
+		var iIndex = null;
+		for(c=0; c<parentElement.children.length; c++)
+		{
+			if(element == parentElement.children(c)) iIndex = c + 1;
+		}
+		
+		
+		//create and insert the HTML that is the content area for the tab
+		MakeContent();
+	
+		//determine the width of this tab, using a simple algorithm (fairly reliable,
+		//since the font family and size are restricted
+		var iWidth = 6*parseInt(TABTEXT.length);
+		
+		//create and insert the HTML that is the tab
+		MakeTab(parentElement.CumulativeTabWidth+1, iWidth+6, TABTEXT, TABTITLE, iIndex);
+	
+		//reset CumulativeTabWidth
+		parentElement.CumulativeTabWidth = parentElement.CumulativeTabWidth + iWidth + 18;
+		
+		//create a stylesheet for the tab
+		CreatePageStyleSheet();
+		
+		//determine which tab in the collection this one is.  If last, do some configuring
+		var Tabs = window.document.all("Tab");
+		if(parentElement.children.length == 1)
+		{
+			SelectTab();
+			SelectContent();
+			SetTabTop();
+			ConfirmContainerWidth();
+			SetContainerHeight();
+		}
+		else
+		{
+			if(Tabs.length == parentElement.children.length)
+			{
+				SelectTab();
+				SelectContent();
+				SetTabTop();
+				ConfirmContainerWidth();
+				SetContainerHeight();
+			}	
+		}
+		
+	}
+ attachEvent("onpropertychange", DoPropChange); 
+}
+
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MakeContent
+//
+//  Description:    Makes Content Area that holds content
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+function MakeContent()
+{
+	
+	var sHTML = '<DIV onclick="window.event.cancelBubble = true" CLASS=DormantContent_' + uniqueID + '>' + innerHTML + '</DIV>';
+	innerHTML =  "";
+	insertAdjacentHTML('BeforeEnd', sHTML);
+	
+}
+//+----------------------------------------------------------------------------
+//
+//  Function:       MakeTab
+//
+//  Description:    Makes Tabs
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function MakeTab(iLeft, iWidth, sLabel, sTitle, iIndex)
+{
+	var sTopDisplay = null;
+	var sBottomDisplay = null;
+	if(parentElement.style.tdTabOrientation.toUpperCase()=="TOP")
+	{
+		sTopDisplay = "inline";
+		sBottomDisplay = "none";
+	}
+	if(parentElement.style.tdTabOrientation.toUpperCase()=="BOTTOM")
+	{
+		sTopDisplay = "none";
+		sBottomDisplay = "inline";
+	}
+
+	var sHTML = "";
+	sHTML = sHTML + '<TABLE ID=Tab onclick="parentElement.parentElement.selectedIndex = this.index" CLASS=DormantTab_' + uniqueID + ' index=' + iIndex + ' CELLPADDING=0 CELLSPACING=0 STYLE="left:' + iLeft + '">';
+	sHTML = sHTML + '<TR STYLE="display:' + sTopDisplay + '">';
+	sHTML = sHTML + '<TD STYLE="width:1px; height:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=LightShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '</TR>';
+	sHTML = sHTML + '<TR STYLE="display:' + sTopDisplay + '">';
+	sHTML = sHTML + '<TD CLASS=Transparent_' + uniqueID + ' STYLE="height:1px"></TD>';
+	sHTML = sHTML + '<TD CLASS=LightShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Tab_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=DarkShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '</TR>';
+	sHTML = sHTML + '<TR>';
+	sHTML = sHTML + '<TD CLASS=LightShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Tab_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Tab_' + uniqueID + ' TITLE="' + sTitle + '" STYLE="font:9pt MS Sans Serif; width:' + iWidth + '; height:20px; padding-left:4px; padding-right:4px">' + sLabel + '</TD>';
+	sHTML = sHTML + '<TD CLASS=MediumShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=DarkShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '</TR>';
+	sHTML = sHTML + '<TR STYLE="display:' + sBottomDisplay + '">';
+	sHTML = sHTML + '<TD CLASS=Transparent_' + uniqueID + ' STYLE="height:1px"></TD>';
+	sHTML = sHTML + '<TD CLASS=LightShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Tab_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=DarkShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '</TR>';
+	sHTML = sHTML + '<TR STYLE="display:' + sBottomDisplay + '">';
+	sHTML = sHTML + '<TD STYLE="width:1px; height:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD CLASS=DarkShadow_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '<TD STYLE="width:1px" CLASS=Transparent_' + uniqueID + '></TD>';
+	sHTML = sHTML + '</TR>';
+	sHTML = sHTML + '</TABLE>';
+	
+	insertAdjacentHTML('BeforeEnd', sHTML);
+}
+
+
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CreatePageStyleSheet
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function CreatePageStyleSheet()
+{
+    //  Create Page StyleSheet page
+    element.document.body.MPCPageStyleSheet = element.document.createStyleSheet();
+    StyleInfo = element.document.body.MPCPageStyleSheet;
+    
+    //get values of container background color and foreground color
+    var sForeColor = parentElement.style.color;
+    var sBackColor = parentElement.style.background;
+    
+    //determine value of iTop for placement of tabs
+    var iTop = null;
+    if(parentElement.style.tdTabOrientation.toUpperCase() == "TOP") iTop = -22;
+    if(parentElement.style.tdTabOrientation.toUpperCase() == "BOTTOM") iTop = parentElement.style.posHeight - 2;
+    
+
+    StyleInfo.addRule(   '.Transparent_' + uniqueID, 'width:1px; height:1px; font-size:0px');
+    StyleRules['Transparent'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.LightShadow_' + uniqueID, 'background:white; font-size:0px');
+    StyleRules['LightShadow'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.MediumShadow_' + uniqueID, 'background:gray; font-size:0px');
+    StyleRules['MediumShadow'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.DarkShadow_' + uniqueID, 'background:black; font-size:0px');
+    StyleRules['DarkShadow'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.Tab_' + uniqueID, 'background:' + sBackColor + '; color:' + sForeColor);
+    StyleRules['Tab'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.DormantTab_' + uniqueID, 'position:absolute; z-index:2; cursor:default');
+    StyleRules['DormantTab'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.ActiveTab_' + uniqueID, 'position:absolute; z-index:4; cursor:default');
+    StyleRules['ActiveTab'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.DormantContent_' + uniqueID, 'position:absolute; visibility:hidden; top:0; left:0; background:silver');
+    StyleRules['DormantContent'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.ActiveContent_' + uniqueID, 'position:absolute; height:100%; width:100%; border-left:solid 1 white; border-top:solid 1 white; border-bottom:solid 1 black; border-right:solid 1 black; background:' + sBackColor + '; z-index:3');
+    StyleRules['ActiveContent'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    
+}
+
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+	if(tagName=="container")
+	{
+		
+		CustomDefault('td--tab-orientation', 'tdTabOrientation', 'top');
+		NormalDefault('width',   'auto');
+		NormalDefault('height',   'auto');   
+		NormalDefault('background',   'buttonface');
+		NormalDefault('color',   'buttontext');
+		
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+	
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+    
+    
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sDefault)
+{
+    if (style[sCSSName] == "" || style[sCSSName] == null)   
+    {
+        style[sCSSName] = sDefault;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SelectTab
+//
+//  Description:    Selects the selected tab
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SelectTab()
+{
+	var oContainer = null;
+	if(tagName=="container") oContainer = element;
+	if(tagName=="page") oContainer = parentElement;
+	
+	//handle the possibility that selectedIndex is a string.  Change it to an integer.
+	if(isNaN(parseInt(oContainer.selectedIndex)))
+	{
+		
+		for(i=0; i<oContainer.children.length; i++)
+		{
+			if(oContainer.children(i).TABTEXT==oContainer.selectedIndex) oContainer.selectedIndex = i + 1;
+		}
+		if(isNaN(parseInt(oContainer.selectedIndex))) oContainer.selectedIndex = 1;
+	}
+	
+	if(oContainer.selectedIndex > oContainer.children.length)
+	{
+		var TempClass = oContainer.children(0).children(1).className;
+		TempClass = "ActiveTab" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+		oContainer.children(0).children(1).className = TempClass;
+		return;
+	}
+	
+	var TempClass = oContainer.children(oContainer.selectedIndex-1).children(1).className;
+	TempClass = "ActiveTab" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+	oContainer.children(oContainer.selectedIndex-1).children(1).className = TempClass;
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DeselectTab
+//
+//  Description:    Deselects the selected tab
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DeselectTab()
+{
+	var oContainer = null;
+	if(tagName=="container") oContainer = element;
+	if(tagName=="page") oContainer = parentElement;
+	
+	for(i=0; i<oContainer.children.length; i++)
+	{
+			var TempClass = oContainer.children(i).children(1).className;
+			TempClass = "DormantTab" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+			oContainer.children(i).children(1).className = TempClass;
+	}
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SelectContent
+//
+//  Description:    Selects the selected content page
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SelectContent()
+{
+	var oContainer = null;
+	if(tagName=="container") oContainer = element;
+	if(tagName=="page") oContainer = parentElement;
+	
+	if(oContainer.selectedIndex > oContainer.children.length)
+	{
+		var TempClass = oContainer.children(0).children(0).className;
+		TempClass = "ActiveContent" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+		oContainer.children(0).children(0).className = TempClass;
+		return;
+	}
+	
+	var TempClass = oContainer.children(oContainer.selectedIndex-1).children(0).className;
+	TempClass = "ActiveContent" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+	oContainer.children(oContainer.selectedIndex-1).children(0).className = TempClass;
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DeselectContent
+//
+//  Description:    Deselects the selected tab
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DeselectContent()
+{
+	var oContainer = null;
+	if(tagName=="container") oContainer = element;
+	if(tagName=="page") oContainer = parentElement;
+	
+	for(i=0; i<oContainer.children.length; i++)
+	{
+			var TempClass = oContainer.children(i).children(0).className;
+			TempClass = "DormantContent" + TempClass.substring(TempClass.indexOf("_"), TempClass.length);
+			oContainer.children(i).children(0).className = TempClass;
+	}
+}
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetTabTop
+//
+//  Description:    Sets the top position of the tabs, based on container.tdTabOrientation
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetTabTop()
+{
+	var sOrient = null;
+	var iTop = null;
+	var iHeight = null;
+	
+	if(tagName=="container") sOrient = style.tdTabOrientation.toUpperCase();
+	if(tagName=="page") sOrient = parentElement.style.tdTabOrientation.toUpperCase();
+	
+	var Tabs = window.document.all("Tab");
+	if(sOrient == "TOP") iTop = -21;
+	if(sOrient == "BOTTOM" && tagName=="container") iTop = style.posHeight - 1;
+	if(sOrient == "BOTTOM" && tagName=="page")
+	{
+		if(isNaN(parentElement.ContainerHeight)) parentElement.ContainerHeight = 0;
+		iTop = parentElement.style.posHeight - 1;
+		
+		for(i=0; i<parentElement.children.length; i++)
+		{
+			if(parentElement.children(i).children(0).offsetHeight>parentElement.ContainerHeight)
+			{
+				parentElement.ContainerHeight = parentElement.children(i).children(0).offsetHeight;
+				parentElement.style.height = parentElement.ContainerHeight;
+			}
+		}
+		iTop = parentElement.ContainerHeight-1;
+	}
+	
+	
+	//if there are no tabs
+	if(Tabs==null) return;
+	
+	//if there is only one tab
+	if(Tabs.length==null)
+	{
+		Tabs.style.top = iTop;
+		return;
+	}
+	
+	//if there are more than 1 tab
+	for(i=0; i<Tabs.length; i++)
+	{
+		Tabs(i).style.top = iTop;
+	}
+	
+}
+
+
+function SetContainerHeight()
+{
+	if(isNaN(parentElement.style.posHeight)) parentElement.style.height = 0;
+	parentElement.ContainerHeight = 0;
+	for(i=0; i<parentElement.children.length; i++)
+	{
+		if(parentElement.children(i).children(0).offsetHeight > parentElement.ContainerHeight)
+		{
+			parentElement.ContainerHeight = parentElement.children(i).children(0).offsetHeight;
+			parentElement.style.height = parentElement.ContainerHeight;
+		}
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetTabFormat
+//
+//  Description:    Formats the tab for display at top or bottom orientation
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetTabFormat()
+{
+	var sOrient = null;
+	
+	if(tagName=="container")
+	{
+		sOrient = style.tdTabOrientation.toUpperCase();
+	}
+	if(tagName=="page")
+	{
+		sOrient = parentElement.style.tdTabOrientation.toUpperCase();
+	}
+	
+	
+	
+	var Tabs = window.document.all("Tab");
+	
+	//if there are no tabs
+	if(Tabs==null) return;
+	
+	//if there is only one tab
+	if(Tabs.length==null)
+	{
+		if(sOrient=="TOP")
+		{
+			Tabs.rows(0).style.display = "inline";
+			Tabs.rows(1).style.display = "inline";
+			Tabs.rows(3).style.display = "none";
+			Tabs.rows(4).style.display = "none";
+		}
+		if(sOrient=="BOTTOM")
+		{
+			Tabs.rows(0).style.display = "none";
+			Tabs.rows(1).style.display = "none";
+			Tabs.rows(3).style.display = "inline";
+			Tabs.rows(4).style.display = "inline";
+		}
+		return;
+	}
+	
+	//if there are more than 1 tab
+	for(i=0; i<Tabs.length; i++)
+	{
+		if(sOrient=="TOP")
+		{
+			Tabs(i).rows(0).style.display = "block";
+			Tabs(i).rows(1).style.display = "block";
+			Tabs(i).rows(3).style.display = "none";
+			Tabs(i).rows(4).style.display = "none";
+		}
+		if(sOrient=="BOTTOM")
+		{
+			Tabs(i).rows(0).style.display = "none";
+			Tabs(i).rows(4).style.display = "block";
+			Tabs(i).rows(1).style.display = "none";
+			Tabs(i).rows(3).style.display = "block";
+		}
+		
+	}
+	
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       PositionTabs
+//
+//  Description:    Positions all tabs.  Called after resetting the label in a tab 
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function PositionTabs()
+{
+	var iIndex = parseInt(children(1).index);
+	iCurrentLeft = children(1).style.posLeft + children(1).offsetWidth;
+	for(i=iIndex; i<parentElement.children.length; i++)
+	{
+		var CurrentTab = parentElement.children(i).children(1);
+		CurrentTab.style.left = iCurrentLeft;
+		iCurrentLeft = CurrentTab.style.posLeft + CurrentTab.offsetWidth;
+	}
+	
+	parentElement.CumulativeTabWidth = 0;
+	for(i=0; i<parentElement.children.length; i++)
+	{
+		parentElement.CumulativeTabWidth = parentElement.CumulativeTabWidth + parentElement.children(i).children(1).offsetWidth;
+	}
+}
+
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+    
+    detachEvent("onpropertychange", DoPropChange);
+    if (propertyName.substring(0,5) == "style")
+    {
+		
+        switch (propertyName)
+        {
+            case "style.tdTabOrientation"        :
+				SetTabTop();
+				SetTabFormat();
+				break;
+			case "style.backgroundColor"		:
+				SetBackgroundColor();
+				break;
+			case "style.color"		:
+				SetColor();
+				break;
+			case "style.width"		:
+				ConfirmContainerWidth();
+				break;
+			case "style.height"		:
+				if(ContainerHeight>style.posHeight) style.height = ContainerHeight;
+				SetTabTop();
+				break;
+			default                         :
+                break;
+		}
+    }
+    else
+    {
+        switch(propertyName)
+        {
+            case "selectedIndex"                 :
+				DeselectTab();
+				SelectTab();
+				DeselectContent();
+				SelectContent();
+				change.fire();
+				children(selectedIndex-1).FireFocus();
+				break;   
+			case "TABTITLE"                 :
+				children(1).rows(2).cells(2).title = TABTITLE;
+				break;   
+			case "TABTEXT"                 :
+				children(1).rows(2).cells(2).innerText = TABTEXT;
+				children(1).rows(2).cells(2).style.width = parseInt((TABTEXT.length*6)+8);
+				PositionTabs();
+				ConfirmContainerWidth();
+				break;   
+				
+				     
+            default                         :
+                break;
+        }
+    }
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ConfirmContainerWidth
+//
+//  Description:    Sets container width to Cumulative width of tabs + 10 if
+//                  container is not wide enough to accommodate tab widths
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ConfirmContainerWidth()
+{
+	if(tagName=="container")
+	{
+		if(style.posWidth<CumulativeTabWidth+10)
+		{
+			style.width = CumulativeTabWidth + 10;
+		}
+	}
+	if(tagName=="page")
+	{
+		//skip if the container is automatically determining width
+		if(parentElement.style.width == 'auto') return;
+		if(parentElement.style.posWidth<parentElement.CumulativeTabWidth+10)
+		{
+			parentElement.style.width = parentElement.CumulativeTabWidth + 10;
+		}
+	}
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetBackgroundColor
+//
+//  Description:    Sets the background color for the control
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetBackgroundColor()
+{
+	if(tagName!="container") return;
+	var Tabs = element.children;
+	//alert(Tabs.length);
+	
+	if(Tabs==null) return;
+	if(Tabs.length==null)
+	{
+		Tabs.children(0).style.background = style.background;
+		Tabs.children(1).rows(2).cells(1).style.background = style.background;
+		Tabs.children(1).rows(2).cells(2).style.background = style.background;
+		return;
+	}
+	for(i=0; i<Tabs.length; i++)
+	{
+		Tabs(i).children(0).style.background = style.background;
+		Tabs(i).children(1).rows(2).cells(1).style.background = style.background;
+		Tabs(i).children(1).rows(2).cells(2).style.background = style.background;
+	}
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetColor
+//
+//  Description:    Sets the foreground color for the control
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetColor()
+{
+	if(tagName!="container") return;
+	var Tabs = element.children;
+	//alert(Tabs.length);
+	
+	if(Tabs==null) return;
+	if(Tabs.length==null)
+	{
+		Tabs.children(0).style.color = style.color;
+		Tabs.children(1).rows(2).cells(1).style.color = style.color;
+		Tabs.children(1).rows(2).cells(2).style.color = style.color;
+		return;
+	}
+	for(i=0; i<Tabs.length; i++)
+	{
+		Tabs(i).children(0).style.color = style.color;
+		Tabs(i).children(1).rows(2).cells(1).style.color = style.color;
+		Tabs(i).children(1).rows(2).cells(2).style.color = style.color;
+	}
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FireFocus
+//
+//  Description:    Fires the onfocus event
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+function FireFocus()
+{
+	focus.fire();
+}
+
+</SCRIPT>

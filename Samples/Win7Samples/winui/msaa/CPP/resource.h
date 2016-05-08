@@ -1,0 +1,15 @@
+#define IDM_EXIT                        105
+#define IDI_ACCSERVER                   108
+#define IDR_MAINFRAME                   128
+#define IDD_MAINDLG                     129
+#define IDD_DIALOG1                     130
+#define IDD_PROPS                       130
+#define IDC_CUSTOMLISTBOX               1001
+#define IDC_ADD                         1003
+#define IDC_REMOVE                      1004
+#define IDC_EDIT1                       1005
+#define IDC_OFFLINE                     1006
+#define IDC_ONLINE                      1007
+#define IDC_NAME                        1008
+#define IDC_STATUS                      1009
+#define IDC_STATIC                      -1

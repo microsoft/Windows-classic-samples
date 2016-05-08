@@ -1,0 +1,18 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows Media Technologies
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       ContextSamplePropPage.def
+;
+;  Contents:
+;
+;--------------------------------------------------------------------------
+
+LIBRARY      "ContextSamplePropPage.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE

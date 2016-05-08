@@ -1,0 +1,29 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'DeviceModelPluginSample'
+		'DeviceModelPluginSample.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+	WcsSampleDMPlugin.Plugin.1 = s 'Wcs Sample Device Model Plugin'
+	{
+		CLSID = s '{48D2ACFF-1716-4262-9163-CC8ADB245D58}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {48D2ACFF-1716-4262-9163-CC8ADB245D58} = s 'Wcs Sample Device Model Plugin'
+		{
+			ProgID = s 'WcsSampleDMPlugin.Plugin.1'
+			VersionIndependentProgID = s 'WcsSampleDMPlugin.Plugin'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{6EEE65CE-1F38-4a04-9A66-075A67C99E9F}'
+		}
+	}		
+}

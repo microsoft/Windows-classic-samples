@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SdkCommon", "SdkCommon\SdkCommon.vcproj", "{875A6120-8F4D-4EBB-8396-491A4C170B76}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClientSdkMethod", "ClientSdkMethod\ClientSdkMethod.vcproj", "{F19DE5ED-9761-4A1E-A546-48C40EE8E60E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServerSdkMethod", "ServerSdkMethod\ServerSdkMethod.vcproj", "{3EB60EAF-0475-4426-B15C-12ACABB0187D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SdkSupplicant", "SdkSupplicant\SdkSupplicant.vcproj", "{A87E3A92-0CBE-4E03-93D1-2E98EF276E56}"
+	ProjectSection(ProjectDependencies) = postProject
+		{875A6120-8F4D-4EBB-8396-491A4C170B76} = {875A6120-8F4D-4EBB-8396-491A4C170B76}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{875A6120-8F4D-4EBB-8396-491A4C170B76}.Debug|Win32.ActiveCfg = Debug|Win32
+		{875A6120-8F4D-4EBB-8396-491A4C170B76}.Debug|Win32.Build.0 = Debug|Win32
+		{875A6120-8F4D-4EBB-8396-491A4C170B76}.Release|Win32.ActiveCfg = Release|Win32
+		{875A6120-8F4D-4EBB-8396-491A4C170B76}.Release|Win32.Build.0 = Release|Win32
+		{F19DE5ED-9761-4A1E-A546-48C40EE8E60E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F19DE5ED-9761-4A1E-A546-48C40EE8E60E}.Debug|Win32.Build.0 = Debug|Win32
+		{F19DE5ED-9761-4A1E-A546-48C40EE8E60E}.Release|Win32.ActiveCfg = Release|Win32
+		{F19DE5ED-9761-4A1E-A546-48C40EE8E60E}.Release|Win32.Build.0 = Release|Win32
+		{3EB60EAF-0475-4426-B15C-12ACABB0187D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3EB60EAF-0475-4426-B15C-12ACABB0187D}.Debug|Win32.Build.0 = Debug|Win32
+		{3EB60EAF-0475-4426-B15C-12ACABB0187D}.Release|Win32.ActiveCfg = Release|Win32
+		{3EB60EAF-0475-4426-B15C-12ACABB0187D}.Release|Win32.Build.0 = Release|Win32
+		{A87E3A92-0CBE-4E03-93D1-2E98EF276E56}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A87E3A92-0CBE-4E03-93D1-2E98EF276E56}.Debug|Win32.Build.0 = Debug|Win32
+		{A87E3A92-0CBE-4E03-93D1-2E98EF276E56}.Release|Win32.ActiveCfg = Release|Win32
+		{A87E3A92-0CBE-4E03-93D1-2E98EF276E56}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

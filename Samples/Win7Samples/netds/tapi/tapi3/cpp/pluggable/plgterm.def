@@ -1,0 +1,9 @@
+; PlgTerminalTest.def : Declares the module parameters.
+
+LIBRARY      "PlgTerm.DLL"
+
+EXPORTS
+	DllCanUnloadNow PRIVATE
+	DllGetClassObject PRIVATE
+	DllRegisterServer PRIVATE
+	DllUnregisterServer PRIVATE

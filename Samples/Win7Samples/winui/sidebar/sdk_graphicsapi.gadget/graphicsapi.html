@@ -1,0 +1,36 @@
+﻿<!--
+ *************************************************************************
+ *
+ * File: graphicsapi.html
+ *
+ * Description: 
+ * Root of the "Graphics API" Desktop Gadget sample. 
+ * Demonstrates gadget flyout functionality.
+ * 
+ * This file is part of the Microsoft Windows SDK Code Samples.
+ * 
+ * Copyright (C) Microsoft Corporation.  All rights reserved.
+ * 
+ * This source code is intended only as a supplement to Microsoft
+ * Development Tools and/or on-line documentation.  See these other
+ * materials for detailed information regarding Microsoft code samples.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ ************************************************************************
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link href="css/graphicsapi.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" src="js/graphicsapi.js" type="text/javascript"></script>
+</head>
+<body onload="loadMain();" onkeydown="keyNavigate();" onmouseover="showNavBar();" onmouseout="hideNavBar();">
+    <g:background id="background">
+        <div id="navbar" onfocusin="showNavBar();" onfocusout="hideNavBar();"></div>
+    </g:background>
+</body>
+</html>

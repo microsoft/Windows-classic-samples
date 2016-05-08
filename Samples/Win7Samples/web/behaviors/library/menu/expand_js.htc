@@ -1,0 +1,602 @@
+<HTC URN="ex">
+
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 2001 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         expand_js.htc
+//
+//  Description:  The expand behavior allows web authors to easily create
+//                expanding/collapsing menus and outlines. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="imgExpand"   />
+<PROPERTY NAME="imgClose"    />
+<PROPERTY NAME="state"       />
+<PROPERTY NAME="masterState" />
+<PROPERTY NAME="href"        />
+<PROPERTY NAME="target"      />
+<PROPERTY NAME="title"       />
+	
+<METHOD   NAME="expandAll"  />
+<METHOD   NAME="closeAll"   />
+<METHOD   NAME="expandNode" />
+<METHOD   NAME="closeNode"  />
+
+<EVENT    NAME="onExpandAll"      ID="expandall"  />
+<EVENT    NAME="onCloseAll"       ID="closeall"   />
+<EVENT    NAME="onExpandNode"     ID="expandnode" />
+<EVENT    NAME="onCloseNode"      ID="closenode"  />
+<EVENT    NAME="onError"          ID="error"      />
+	
+<ATTACH   EVENT="ondocumentready" HANDLER="DoInit"     />
+<ATTACH   EVENT="onclick"         HANDLER="CheckNode"  />
+<ATTACH   EVENT="ondrag"          HANDLER="DoSelect" />
+
+	
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+
+var bImage = true;   // Tracks whether the node has an image associated with it
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Nodes are formatted by setting defaults, adding images,
+//                  and adding the indentation.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+    SetDefaults();
+    
+    //  If imgExpand and imgClose are both null, don't include images
+	if (imgExpand == null && imgClose == null)
+	{
+	    bImage = false;
+	}
+    else
+    {
+        //  Set defaults for images.
+        if (imgExpand == null || imgExpand == "default")
+        {
+            imgExpand = "plus.gif";
+        }
+        if (imgClose == null || imgClose == "default") 
+        {
+            imgClose = "minus.gif";
+        }
+        
+        //  Insert image into the element
+        var sImgTag = "<IMG SRC='" + imgExpand + "' "
+            + "imgExpand='" + imgExpand + "' "
+            + "imgClose='" + imgClose + "'>&nbsp;";
+    }
+    
+    //  If there are children, call FormatChildren() to format each
+    if (children[0] != null)
+    {
+        FormatChildren(true);
+        if (bImage) insertAdjacentHTML("AfterBegin", sImgTag);
+    }
+
+    // Attach onpropertychange
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults(sImgTag)
+{
+    //  Custom CSS Property Defaults
+	CustomDefault('mv--indent',   'mvIndent',    '17px');
+
+    //  CSS Property Defaults
+    NormalDefault('cursor',  'auto',  'default');
+
+    //  Attribute | Property Defaults
+    if (target == null)         target = "_self";
+	if (href == null)           href = "";
+	
+	state = "closed";
+    masterState = "closed";
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatChildren
+//
+//  Description:    Sets the formatting for each level of child nodes
+//
+//  Arguments:      bInit - true (if setting at design time) or false (if
+//                      setting at run time).
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FormatChildren(bInit)
+{
+    //  Check if an image is the first child, so it doesn't get formatted
+    var iStart = 0;
+    if (!bInit && bImage) iStart = 1;
+
+    //  Iterate through children adding indenting as necessary and hiding them
+    for (i=iStart; i<children.length; i++) 
+    {
+        if (bInit) children[i].style.display = "none";
+        children[i].style.marginLeft = style.mvIndent;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    //
+    //  Handle CSS property changes by calling necessary functions, setting
+    //  variables, and/or setting styles
+    //
+    if (propertyName.substring(0,5) == "style")
+    {
+        switch (propertyName)
+        {
+            case "style.mvIndent"             :
+                FormatChildren();
+                break;
+                
+            case "style.cursor"               :
+                break;
+        }
+    }
+    else
+    {
+        //
+        //  Detach the onpropertychange event to prevent it from firing while
+        //  the changes are handled
+        //
+        detachEvent("onpropertychange", DoPropChange);
+        
+        switch(propertyName)
+        {
+            case "imgExpand"                  :
+                if (bImage && state == "closed")
+                {
+                    children[0].src = imgExpand;
+                }
+                break;
+
+            case "imgClose"                   :
+                if (bImage && state == "expand")
+                {
+                    children[0].src = imgClose;
+                }
+                break;
+                
+            case "href"                       :
+                break;
+                
+            case "target"                     :
+                break;
+                
+            case "title"                      :
+                break;
+                
+            case "state"                      :
+                break;
+                
+            case "masterState"                :
+                break;
+
+            default                           :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+        
+        //  Re-attach the onpropertychange event
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       expandAll
+//
+//  Description:    Expand node and all children nodes
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function expandAll() 
+{
+    //  Get the collection of expand nodes in this element
+    var oNodeTags = element.all.urns("ex");
+    
+    //  Expand all nodes in this element
+	for (i=0; i<oNodeTags.length; i++) 
+	{
+	    oNodeTags(i).expandNode(false);
+	}
+	
+	//  Expand this node
+    expandNode();
+    
+    masterState = "expand";
+	expandall.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       closeAll
+//
+//  Description:    Close node and all children nodes
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function closeAll() 
+{
+    //  Close this node
+    closeNode();
+
+    //  Get the collection of expand nodes in this element
+    var oNodeTags = element.all.urns("ex");
+
+    //  Expand all nodes in this element
+	for (i=0; i<oNodeTags.length; i++)
+	{
+	    oNodeTags(i).closeNode(false);
+	}
+	
+    msterState = "closed";
+	closeall.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       expandNode
+//
+//  Description:    Expands a node
+//
+//  Arguments:      bHref - true (function was called explicitly) or false
+//                      (function was called as a result of an ExpandAll or
+//                      CloseAll).
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function expandNode(bHref)
+{
+    //  Call DoNode to expand this node
+    DoNode(imgClose, "block");
+    
+    //  If this node has an HREF, do it
+    if (bHref && href != "" && href != null) DoHref();
+    
+    state = "expand";
+    expandnode.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       closeNode
+//
+//  Description:    Closes a node
+//
+//  Arguments:      bHref - true (function was called explicitly) or false
+//                      (function was called as a result of an ExpandAll or
+//                      CloseAll).
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function closeNode(bHref)
+{
+    //  Call DoNode to close this node
+    DoNode(imgExpand, "none");
+    
+    //  If this node has an HREF, do it
+    if (bHref && href != null) DoHref();
+    
+    state = "closed";
+    closenode.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CheckNode
+//
+//  Description:    Determine if a click occurred on a node or the image of a
+//                  node.  If so, based on the current state of that node,
+//                  expand or close it.
+//
+//  Arguments:      none
+//
+//  Returns:        true if the source of the click was not a node or an
+//                      image of a node.
+//
+//-----------------------------------------------------------------------------
+
+function CheckNode()
+{
+    //  Did the click occur on the node or the node's image (if there is one)
+    if (window.event.srcElement == element ||
+        (bImage && window.event.srcElement == children[0]))
+    {
+        setCapture();
+    
+        //  If the node is closed, open it
+        if (state == "closed") expandNode(true);
+        
+        //  Else close the node
+        else closeNode(true);
+    }
+    else return true;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoNode
+//
+//  Description:    Shows or hides a node and changes it's image source
+//                  appropriately.
+//
+//  Arguments:      sImage - the source of the image to display for the node
+//                  sDisplay -  "block" or "none" to show or hide node
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoNode(sImage, sDisplay)
+{
+    //  Apply the display formatting and image src as noted in the arguments
+    if (children[0] != null)
+    {
+        if (bImage)
+        {
+            children[0].src = sImage;
+        }
+	    for (i=(bImage?1:0); i<children.length; i++)
+	    {
+	        children[i].style.display = sDisplay;
+	    }
+    }
+
+	releaseCapture();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoHref
+//
+//  Description:    Open the HREF into the TARGET.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoHref()
+{
+    switch(target)
+    {
+        case "_self"        :   window.document.location.href = href;
+                                break;
+        
+        case "_top"         :   window.top.location.href = href;
+                                break;
+        
+        case "_parent"      :   window.parent.location.href = href;
+                                break;
+        
+        case "_blank"       :   window.open(href, target);
+                                break;
+        
+        default             :   FindTarget();
+                                break;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FindTarget
+//
+//  Description:    Take the TARGET property and determine whether it is
+//                  a separate frame or window, or an element.  Open the
+//                  HREF into that TARGET.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FindTarget()
+{
+    if (target == "")
+    {
+        window.open(href, "_blank");
+        return true;
+    }
+
+    //  Is there a frames collection and is this one of them?
+    if (window.top.frames.length > 1)
+    {
+        for (i=0; i<window.top.frames.length; i++)
+        {
+            if (window.top.frames(i).name == target)
+            {
+                window.top.frames(i).src = href;
+                return true;
+            }
+        }
+    }
+
+    for (i=0; i<window.document.frames.length; i++)
+    {
+        if (window.document.frames(i).name == target)
+        {
+            window.document.frames(i).document.location.href = href;
+            return true;
+        }
+    }
+    
+    window.open(href, target);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSelect
+//
+//  Description:    Do not allow the contents of a node to be drag-selected.
+//
+//  Arguments:      none
+//
+//  Returns:        false (returnValue)
+//
+//-----------------------------------------------------------------------------
+
+function DoSelect()
+{
+	window.event.cancelBubble = true;
+	window.event.returnValue = false;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+    
+
+</SCRIPT>
+
+</HTC>

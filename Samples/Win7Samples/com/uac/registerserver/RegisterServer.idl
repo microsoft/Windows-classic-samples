@@ -1,0 +1,42 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "unknwn.idl";
+
+[
+	object, 
+	uuid(D6117008-CCE3-4614-8ACD-769FA5E8B265),
+	helpstring("Interface to register a DLL COM Server")
+
+]
+interface IDllRegister : IUnknown{	
+	[helpstring("method RegisterDll")] HRESULT RegisterDll([in] BSTR lpFileName);
+	[helpstring("method UnregisterDll")] HRESULT UnRegisterDll([in] BSTR lpFileName);
+}
+
+[
+	object,
+	uuid(7585D4FA-07BD-4b4e-9AAB-0749C334558B),
+	helpstring("Interface to register an EXE COM Server")
+]
+interface IExeRegister : IUnknown{
+	[helpstring("method RegisterExe")] HRESULT RegisterExe([in] BSTR lpFileName, HWND hwndWindow);
+	[helpstring("method UnregisterExe")] HRESULT UnregisterExe([in] BSTR lpFileName, HWND hwndWindow);
+}
+
+
+[
+	uuid(64009241-4306-4971-B6E9-184CA1208F06),
+	helpstring("Component Class")
+]
+coclass RegistrationClass{
+	[default] interface IDllRegister;
+	interface IExeRegister;
+}

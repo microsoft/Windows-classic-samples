@@ -1,0 +1,40 @@
+import "wtypes.idl";
+[
+    uuid(fe7f2eda-5da1-4041-928c-d2534d3fa128),
+    pointer_default(unique),
+    version(1.0)
+]
+
+interface FileRepServer {
+
+// Declare the string data type. This should work for UNICODE.
+#ifdef _UNICODE
+    typedef wchar_t CHAR_TYPE;
+    typedef wchar_t * STR;
+#else
+    typedef unsigned char CHAR_TYPE;
+    typedef unsigned char * STR;
+#endif
+
+
+    typedef pipe CHAR CHAR_PIPE_TYPE;
+
+    // The size of the buffer returned with the RemoteOpen call.
+    // It allows us to send back some data with the server reply for free:
+    // since the TCP MTU size is at least 1500 bytes, we can make
+    // use of the remaining bytes.
+    const unsigned short PUSH_BUFSIZE = 10*1024;
+
+    // The size of the buffer returned with RemoteRead.  It is larger
+    // due to being optimized for data transfer.
+    const unsigned short PULL_BUFSIZE = 10*1024;
+
+	const unsigned short MAX_FILE_SIZE = 128;
+    /*
+      Opens a file with name that is sent on the in-direction of the pipe
+      and sends back its contents via the out pipe.
+    */
+    void RemoteReadAsyncPipe([in] handle_t hFileRepServer,
+			     [in] wchar_t RemoteFileName[MAX_FILE_SIZE],
+                             [out] CHAR_PIPE_TYPE *PipeData);
+}

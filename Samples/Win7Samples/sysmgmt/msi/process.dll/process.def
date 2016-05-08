@@ -1,0 +1,14 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows
+;
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       process.def
+;
+;--------------------------------------------------------------------------
+
+
+EXPORTS
+ProcessUserAccounts		@5
+UninstallUserAccounts	@6

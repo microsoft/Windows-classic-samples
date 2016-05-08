@@ -1,0 +1,21 @@
+#include "resource.h"
+#include "windows.h"
+
+IDD_MAINDLG DIALOGEX 0, 0, 189, 111
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IFileIsInUse Sample"
+MENU IDM_FILE
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "",IDC_INFO,7,7,175,97
+END
+
+IDM_FILE MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "&Open File...",               IDM_FILE_OPENFILE
+        MENUITEM "&Close File",                 IDM_FILE_CLOSEFILE, GRAYED
+        MENUITEM "E&xit",                       IDM_FILE_EXIT
+    END
+END

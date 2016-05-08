@@ -1,0 +1,18 @@
+/*----------------------------------------------------------------------------
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) 1993 - 2000.  Microsoft Corporation.  All rights reserved.
+----------------------------------------------------------------------------*/
+
+#include <windows.h>
+
+#define VER_FILETYPE    VFT_DLL
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Sample Security Provider DLL"
+#define VER_INTERNALNAME_STR        "sampssp.DLL"
+#define VER_ORIGINALFILENAME_STR    "sampssp.DLL"
+
+

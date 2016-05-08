@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdsiDump", "AdsiDump.vcproj", "{715DF152-48F1-4434-A88B-892C0A46DCDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{715DF152-48F1-4434-A88B-892C0A46DCDB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{715DF152-48F1-4434-A88B-892C0A46DCDB}.Debug|Win32.Build.0 = Debug|Win32
+		{715DF152-48F1-4434-A88B-892C0A46DCDB}.Release|Win32.ActiveCfg = Release|Win32
+		{715DF152-48F1-4434-A88B-892C0A46DCDB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

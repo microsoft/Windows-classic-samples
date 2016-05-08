@@ -1,0 +1,51 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>Popup Parent</TITLE>
+</HEAD>
+<BODY ID=dwn STYLE="behavior:url(#default#download)" BGCOLOR=lightyellow>
+
+<SCRIPT TYPE="text/jscript" LANGUAGE="JScript">
+
+function onDone(src) {
+
+  oPopup.document.write(src); 
+
+}
+
+function clickPopup() {
+
+  var srcElem = oPopup.document.parentWindow.event.srcElement;
+			
+  if (srcElem.tagName == "IMG") {
+    curweather.src = srcElem.src;
+    oPopup.hide();
+  }
+
+}
+		
+function displayPopup () {
+
+  var popupBody = oPopup.document.body;
+  oPopup.show(0, 0, 400, 8);
+  var textInBody = popupBody.createTextRange();
+  var realWidth = textInBody.boundingWidth + popupBody.offsetWidth - popupBody.clientWidth;
+  var realHeight = popupBody.scrollHeight;
+  oPopup.hide();
+  oPopup.show(0,1, realWidth, realHeight, popbutton);
+  oPopup.document.body.onclick = clickPopup;
+
+}
+
+var oPopup = window.createPopup();
+dwn.startDownload("popupHTML.htm",onDone);
+	
+</SCRIPT>
+
+My Favorite Weather is:<SPAN ><IMG ID=curweather STYLE="position: relative; top: 4px" border=2 src="01.gif">
+<BUTTON ID=popbutton hideFocus onclick="displayPopup();" STYLE="height:64px; width:12px">></BUTTON></SPAN>
+<P><HR><font color="black" face="ms sans serif" size="1">&copy;<a href="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" target="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</a></font>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>
+

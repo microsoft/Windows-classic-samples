@@ -1,0 +1,49 @@
+//+--------------------------------------------------------------------------
+//
+// Microsoft Windows
+// Copyright (C) Microsoft Corporation, 1996 - 1999
+//
+// File:        certpsam.idl
+//
+// Contents:    IDL source for certpsam
+//
+//---------------------------------------------------------------------------
+
+
+import "wtypes.idl";
+import "certpol.idl";
+import "certmod.idl";
+
+
+//+--------------------------------------------------------------------------
+// certpol Type library
+//+--------------------------------------------------------------------------
+
+[
+    uuid(98a77720-c2c8-11d2-b313-00c04f79dc72),
+    version(1.0),
+    helpstring("CertPolicySample 1.0 Type Library")
+]
+
+library CERTPOLICYSAMPLELib
+{
+    importlib("stdole2.tlb");
+
+    [
+	uuid(98f87410-c2c8-11d2-b313-00c04f79dc72),
+	helpstring("CertPolicySample Class")
+    ]
+    coclass CCertPolicySample
+    {
+	[default] interface ICertPolicy2;
+    };
+
+    [
+	uuid(98567a30-c2c8-11d2-b313-00c04f79dc72),
+	helpstring("CertManagePolicyModuleSample Class")
+    ]
+    coclass CCertManagePolicyModuleSample
+    {
+	[default] interface ICertManageModule;
+    };
+};

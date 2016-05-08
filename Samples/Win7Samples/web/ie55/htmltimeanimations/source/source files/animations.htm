@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>HTML+TIME Animations</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=iso-8859-1">
+<META NAME="AUTHOR" CONTENT="InetSDK">
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="ROBOTS" CONTENT="noindex">
+
+<!-- SAMPLE_STYLE_START -->
+<STYLE TYPE="text/css">
+A:link		{ color: #000066; }
+A:visited 	{ color: #666666; }
+A:active 	{ color: #0000FF; }
+A:hover 	{ color: #0000FF; }
+BODY{	
+	margin-left: 0pt;
+	margin-top: 0pt;
+	font-size: 80%;    		
+	font-family: Verdana, Arial, Helvetica, MS Sans Serif;
+	}
+BLOCKQUOTE.body{
+	margin-left: 10pt;
+	margin-right: 10pt;
+	margin-top: 10pt;
+	margin-bottom: 10pt;
+	}	
+H3{
+	font-size: 128%;
+    	margin-top: 1em;
+    	margin-bottom: 0em;
+	}
+H5{
+	font-size: 110%;
+    	margin-top: .8 em;
+    	margin-bottom: 0em;
+	}		
+</STYLE>
+<!-- SAMPLE_STYLE_END -->
+
+</HEAD>
+
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<BODY TOPMARGIN=0 LEFTMARGIN=0 BGPROPERTIES="FIXED" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#808080" ALINK="#000000">
+<BLOCKQUOTE CLASS="body">
+
+<H3>Creating animations with HTML+TIME</H3>
+<HR>
+<DIV>&nbsp;&nbsp;<A HREF="#" onclick="self.close()">Close This Sample</A></DIV><P>
+<DIV STYLE="position:relative; top:0; left:0; width:500; height:350; background: #CCCCCC; border: 1px solid black; padding:5px"><BR>
+<IFRAME SRC="animation1.htm" STYLE="position:absolute; top:10; left:10; width:155; height:130; border:1px solid black" SCROLLING="no" FRAMEBORDER="no"></IFRAME><BR><BR>
+<IFRAME SRC="animation2.htm" STYLE="position:absolute; top:155; left:10; width:155; height:130; border:1px solid black" SCROLLING="no" FRAMEBORDER="no"></IFRAME>
+<DIV STYLE="position:absolute; top:10; left:180; ">
+<H5 STYLE="font-size:13pt">t:ANIMATE, t:SET, oh:MY!</H5>
+
+<P>These animations use hidden HTML elements. Over time, the 
+<A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/display.asp">display</A> property is set to 
+<SPAN STYLE="font-family:courier;">block</SPAN> using the 
+<A HREF="http://msdn.microsoft.com/workshop/author/behaviors/reference/time2/elements/set.asp">t:SET</A> element. As each element 
+is displayed, different attributes of the elements are animated using the 
+<A HREF="http://msdn.microsoft.com/workshop/author/behaviors/reference/time2/elements/animate.asp">t:ANIMATE</A> element. Changing the <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/left.asp">left</A> 
+and <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/top_0.asp">top</A> CSS attributes animate the positions. On the top 
+animation, the background cycles through multiple colors using the 
+<A HREF="http://msdn.microsoft.com/workshop/author/behaviors/reference/time2/elements/animateColor.asp">t:ANIMATECOLOR</A> element.</P>
+
+<P>Various effects can be created when you animate filters that are applied to elements. For example, to create a fading effect, apply the <A HREF="http://msdn.microsoft.com/workshop/author/filter/reference/filters/alpha.asp">alpha filter</A> and animate the filter's <A HREF="http://msdn.microsoft.com/workshop/author/filter/reference/properties/opacity.asp">opacity</A> property.</P>
+</DIV>
+
+<!-- START_PAGE_FOOTER -->
+<DIV STYLE="position:absolute; top:365; left:10;"><A HREF="http://www.microsoft.com/misc/cpyright.htm" TARGET=_top>
+&#169;Microsoft Corporation. All rights reserved. Terms of use</A>.</DIV>
+<!-- END_PAGE_FOOTER -->
+</BLOCKQUOTE>
+
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

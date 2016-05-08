@@ -1,0 +1,430 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Microsoft"
+            VALUE "FileDescription", "Topology Editor"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "LegalCopyright", "(c) Microsoft.  All rights reserved."
+            VALUE "InternalName", "topoedit.exe"
+            VALUE "OriginalFilename", "topoedit.exe"
+            VALUE "ProductName", "Media Foundation Topology Editor"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TRV                 ICON                    "trv.ico"
+IDI_SMALL               ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_TRV ACCELERATORS 
+BEGIN
+    "N",            ID_TOPOLOGY_NEWTOPOLOGY, VIRTKEY, CONTROL
+    "N",            ID_TOPOLOGY_NEWTOPOLOGY, VIRTKEY, SHIFT
+    "S",            ID_ADD_SOURCE,          VIRTKEY, SHIFT
+    "T",            ID_ADD_TRANSFORM,       VIRTKEY, SHIFT
+    "A",            ID_ADD_SAR,             VIRTKEY, SHIFT
+    "V",            ID_ADD_EVR,             VIRTKEY, SHIFT
+    "R",            ID_LOAD_TOPOLOGY,       VIRTKEY, SHIFT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "L",            ID_FILE_LOAD,           VIRTKEY, CONTROL
+    VK_DELETE,      ID_EDIT_DELETE,         VIRTKEY 
+    VK_F1,          ID_HELP_HELP,           VIRTKEY 
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 22, 17, 230, 44
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    ICON            IDI_TRV,IDC_MYICON,14,9,20,20
+    LTEXT           "MF Topology Editor v1.0",IDS_VERSION,49,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2005 Microsoft Corporation",IDC_STATIC,47,20,136,8
+    DEFPUSHBUTTON   "OK",IDOK,195,6,30,11,WS_GROUP
+END
+
+IDD_TRANSFORM DIALOGEX 0, 0, 294, 225
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Transform"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Add",IDOK,93,204,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,145,204,50,14
+    CONTROL         "",IDC_TRANSFORMTREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_DISABLEDRAGDROP | WS_BORDER | WS_TABSTOP,1,4,286,197
+END
+
+IDD_ADDPROPERTY DIALOGEX 0, 0, 249, 80
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Attribute"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Add",IDOK,137,62,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,192,62,50,14
+    COMBOBOX        IDC_PROPERTYCATEGORY,7,7,235,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_PROPERTYNAME,7,25,235,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PROPERTYVALUE,7,43,235,14,ES_AUTOHSCROLL
+END
+
+IDD_CHOOSER DIALOGEX 0, 0, 249, 65
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Make a Selection"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,137,44,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,192,44,50,14
+    COMBOBOX        IDC_CHOOSER,7,7,235,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_INPUTGUID DIALOGEX 0, 0, 205, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Input Custom GUID"
+FONT 8, "MS Shell Dlg", 420, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,40,40,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,98,40,50,14
+    LTEXT           "GUID:",IDC_STATIC,7,15,19,10
+    EDITTEXT        IDC_INPUTGUID,27,15,171,10,NOT WS_BORDER | NOT WS_TABSTOP
+    LTEXT           "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}",IDC_STATIC,27,27,171,10
+END
+
+IDD_INPUTURL DIALOGEX 0, 0, 205, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Input URL"
+FONT 8, "MS Shell Dlg", 420, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,40,40,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,98,40,50,14
+    LTEXT           "URL:",IDC_STATIC,7,15,19,10
+    EDITTEXT        IDC_INPUTURL,27,15,171,10,NOT WS_BORDER
+END
+
+IDD_INPUTCAPSOURCE DIALOGEX 0, 0, 229, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Capture Device"
+FONT 8, "MS Shell Dlg", 420, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,60,40,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,118,40,50,14
+    LTEXT           "Capture Source:",IDC_STATIC,7,15,54,10
+    COMBOBOX        IDC_COMBOSOURCES,65,12,148,67,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_MAINTOOL            BITMAP                  "maintool.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TRANSFORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 287
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 218
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_TRV MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New...",                     ID_TOPOLOGY_NEWTOPOLOGY
+        MENUITEM "&Render File...",             ID_FILE_RENDER
+        MENUITEM "Render &Transcode...",        ID_FILE_TRANSCODE
+        MENUITEM SEPARATOR
+        MENUITEM "&Open...",                    ID_FILE_LOAD
+        MENUITEM "&Save...",                    ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Topology"
+    BEGIN
+        MENUITEM "Add &Source...",              ID_ADD_SOURCE
+        MENUITEM "Add S&AR",                    ID_ADD_SAR
+        MENUITEM "Add E&VR",                    ID_ADD_EVR
+        MENUITEM "Add &Transform...",           ID_ADD_TRANSFORM
+        MENUITEM "Add T&ee",                    ID_ADD_TEE
+        MENUITEM "Add Custom &MFT...",          ID_TOPOLOGY_ADDCUSTOMMFT
+        MENUITEM "Add Custom S&ink...",         ID_TOPOLOGY_ADDCUSTOMSINK
+        MENUITEM "Add Video Cap&ture Source...", ID_TOPOLOGY_ADD_VIDEO_CAPTURE_SOURCE
+        MENUITEM "Add Audio Cap&ture Source...", ID_TOPOLOGY_ADD_AUDIO_CAPTURE_SOURCE
+        MENUITEM SEPARATOR
+        MENUITEM "&Resolve Topology",           ID_LOAD_TOPOLOGY
+        MENUITEM SEPARATOR
+        MENUITEM "&Delete\tDelete",             ID_EDIT_DELETE
+    END
+    POPUP "&Controls"
+    BEGIN
+        MENUITEM "&Play",                       ID_PLAY_PLAY
+        MENUITEM "Pau&se",                      ID_PLAY_PAUSE
+        MENUITEM "&Stop",                       ID_PLAY_STOP
+    END
+    POPUP "Too&ls"
+    BEGIN
+        MENUITEM "&Spy Selected Node",          ID_TOOLS_SPY
+        MENUITEM "Custom &Topoloader...",       ID_TOOLS_CUSTOMTOPOLOADER
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help...",                    ID_HELP_HELP
+        MENUITEM "&About ...",                  ID_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "trv"
+    IDC_TRV                 "TRV"
+    IDS_VERSION             "1.0"
+
+    IDS_MF_ERROR            "Media Foundation Error"  
+    IDS_E_OUTOFMEMORY       "The system is out of memory."
+    IDS_MF_E_UNSUPPORTED_BYTESTREAM_TYPE "The source file format is not supported."
+    IDS_MF_E_INVALID_FORMAT "The file format is invalid.";
+    IDS_MF_E_UNEXPECTED     "BUG: An unexpected error occurred in the media library."
+    IDS_E_FAIL              "The operation failed to complete."
+    IDS_E_POINTER           "BUG: Invalid pointer passed to COM object."
+    IDS_E_INVALIDARG        "Invalid input.  This may be due to a corrupt file."
+    IDS_E_NOTIMPL           "BUG: The called method is not implemented."
+    IDS_E_NOINTERFACE       "BUG: The object does not implement the specified interface."
+    IDS_REGDB_E_CLASSNOTREG "BUG: The given COM class is not registered."
+    IDS_E_UNKNOWN           "Unknown error.  HRESULT is %1!x!"
+
+    IDS_TOPO_STATUS_RESOLVED        "Topology Status: [Resolved]"
+    IDS_TOPO_STATUS_NOT_RESOLVED    "Topology Status: [Not Resolved]"
+    IDS_RATE                "Rate"
+    IDS_RATE_1_0            "Rate (1.0):"
+    IDS_TOOLBAR             "Toolbar"
+    IDS_APP_VERSION         "MF Topology Editor %1!s!-%2!d!/%3!d!/%4!d!"
+    IDS_FONT_SIZE_12        "12"
+    IDS_FONT_SIZE_14        "14"
+    IDS_FONT_FACE_ARIAL     "Arial"
+    IDS_ADD                 "Add"
+    IDS_SAVE                "Save"
+
+    IDS_LICENSE_URL_UNTRUSTED           "License URL for this content is untrusted.  Continue?"
+    IDS_LICENSE_URL_TAMPERED            "License URL for this content has been tampered!  Continue (probably dangerous)?"
+    IDS_LICENSE_ACQUIRED                "License acquired for protected content."
+    IDS_LICENSE_ACQUIRED_FAILED         "Failed to acquire license for protected content."
+
+    IDS_ERROR       "Error"
+    IDS_UINT32      "UINT32"
+    IDS_UINT64      "UINT64"
+    IDS_DOUBLE      "Double"
+    IDS_GUID        "GUID"
+    IDS_STRING      "String"
+    IDS_BYTE_ARRAY  "Byte Array"
+    IDS_IUNKNOWN    "IUnknown pointer"
+    IDS_NO_TYPE     "No Type"
+
+    IDS_VIDEO_PLAYBACK  "Video Playback"
+    IDS_WDW_NAME        "TopoEdit"
+    IDS_WDW_TOPOVIEW    "TopoViewer"
+    IDS_DOCK            "Dock"
+    IDS_SPLITTER        "Splitter"
+    IDS_SLIDER          "Slider"
+    IDS_PROP_VIEW       "Property View"
+
+    IDS_E_LICENSE_URL_BROWSER      "Failed to launch a browser window for license acquisition."
+    IDS_E_SAVE_PROP                 "Failed to save properties.  Reason: %x"
+    IDS_E_APP_INIT                  "Error initializing application."
+    IDS_E_MEDIA_EVENT               "Error handling media event"
+    IDS_E_PLAYBACK_START            "Error starting playback."
+    IDS_E_PLAY_MEDIA                "Error playing media from new location."
+    IDS_E_PLAY_RATE                 "Error setting new rate."
+    IDS_E_UNTRUSTED_COMPONENTS      "There are untrusted or revoked components on the system.  Cannot play back protected topology."
+    IDS_E_MANUAL_LICENSE            "Error manually acquiring a license for protected content playback."
+    IDS_E_PROT_CONTENT_PLAYBACK     "Error individualizing TED for protected content playback."
+    IDS_E_TOPO_RESOLUTION           "Topology resolution failed. "
+    IDS_E_TOPO_MERGE                "Error merging full topology"
+    IDS_E_TOPO_PLAY                 "Error playing topology."
+    IDS_E_TOPO_RETRIEVE             "Error retrieving full topology"
+    IDS_E_TOPO_RESOLUTION_PINS      "Topology resolution failed.\nDisconnected pins may not be left disconnected.  Reconnect any disconnected pins, or recreate the node, to fix this problem."
+    IDS_E_TOPO_RESOLUTION_NO_SOURCE "Topology resolution failed.\nThere is no connected source node in the topology.  Media Foundation topologies require a source node."
+    IDS_E_TOPO_RESOLUTION_INIT      "Topology resolution failed (error initializing media session)."
+    IDS_E_FILE_SAVE                 "Failed to save file."
+    IDS_E_FILE_LOAD_XML             "Error loading XML file."
+    IDS_E_SOURCE_CREATE             "Failed to create source node."
+    IDS_E_AUDIO_RENDERER_CREATE     "Failed to create audio renderer."
+    IDS_E_VIDEO_RENDERER_CREATE     "Failed to create video renderer."
+    IDS_E_TRANSFORM_CREATE          "Failed to create transform node."
+    IDS_E_TEE_CREATE                "Failed to create tee node."
+    IDS_E_SINK_CREATE               "Failed to create custom sink."
+    IDS_E_VIDEO_CAP_SOURCE_CREATE   "Failed to create a video capture source."
+    IDS_E_AUDIO_CAP_SOURCE_CREATE   "Failed to create an audio capture source."
+    IDS_E_NODE_SPY                  "Could not spy on node"
+    IDS_E_TOPOLOADER_CREATE         "Could not create custom topoloader."
+    IDS_E_URL_OPEN                  "Error launching help webpage; please navigate manually to http://go.microsoft.com/fwlink/?LinkId=92748"
+    IDS_E_MEDIA_RENDER              "Error rendering media file"
+    IDS_E_GUID                      "Invalid GUID.  Error code %1!x!."
+    IDS_E_TRANSCODE_PROFILES        "The transcode profiles file is invalid."
+    IDS_E_TRANSCODE_PROFILE         "No encoder supports the selected transcode profile."
+
+    IDS_MFT_CUSTOM      "Custom MFT"
+    IDS_TOPO_NOT_SAVED  "Current topology is not saved; continue?"
+    IDS_TOPO_NEW        "New Topology"
+
+    IDS_FILE_XML        "XML Files\0*.XML##"
+    IDS_FILE_SAVE       "Save File"
+    IDS_FILE_LOAD       "Load File"
+    IDS_FILE_MEDIA      "Media Files\0*.*##"
+    IDS_FILE_SELECT     "Select Media Source"
+
+    IDS_CATEGORY_AUDIO_DECODERS "Audio Decoders"
+    IDS_CATEGORY_AUDIO_EFFECTS  "Audio Effects"
+    IDS_CATEGORY_AUDIO_ENCODERS "Audio Encoder"
+    IDS_CATEGORY_DEMUX          "Demultiplexers"
+    IDS_CATEGORY_MUX            "Multiplexers"
+    IDS_CATEGORY_OTHER          "Other"
+    IDS_CATEGORY_VIDEO_DECODERS "Video Decoder"
+    IDS_CATEGORY_VIDEO_EFFECTS  "Video Effects"
+    IDS_CATEGORY_VIDEO_ENCODERS "Video Encoders"
+
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_INPUTGUID, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 198
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 45
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

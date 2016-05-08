@@ -1,0 +1,29 @@
+//////////////////////////////////////////////////////////////////////
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES 
+// OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+//
+//////////////////////////////////////////////////////////////////////
+import "FunctionDiscoveryProvider.idl";
+
+[
+    uuid(eadbcc49-f598-44c6-aa0f-648dd99abbdb),
+    helpstring("Simple Thermostat Proxy Type Library"),
+    version(1.0)
+]
+library SimpleThermostatProxyLib
+{
+    importlib("stdole32.tlb");
+
+    [
+        uuid(eadbcc49-f598-44c6-aa0f-648dd99abbdc),
+        helpstring("Simple Thermostat Proxy Class")
+    ]
+    coclass SimpleThermostatProxy
+    {
+        interface IFunctionDiscoveryServiceProvider;
+    };
+};

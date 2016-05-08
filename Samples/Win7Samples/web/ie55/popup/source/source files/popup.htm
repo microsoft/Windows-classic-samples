@@ -1,0 +1,98 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>Creating Dynamic Pop-up Elements with IE 5.5</TITLE>
+</HEAD>
+<LINK ID="oCSS" REL=STYLESHEET HREF="popup.css" TYPE="text/css">
+
+<SCRIPT LANGUAGE="JScript">
+var oPopup = window.createPopup()
+
+function goPop(oHeight)
+{
+  var oPopupBody = oPopup.document.body;
+  var lefter = event.offsetY+10;
+  var topper = event.offsetX+10;
+
+  oPopupBody.innerHTML = styleDiv.innerHTML;
+  oPopup.show(topper, lefter, 200, oHeight, document.body);
+  document.body.onmouseup = closePopup;
+}
+
+function goContext(oHeight)
+{
+  var oPopupBody = oPopup.document.body;
+  var lefter = event.offsetY+10;
+  var topper = event.offsetX+10;
+
+  oPopupBody.innerHTML = oContext.innerHTML;
+  oPopup.show(topper, lefter, 207, oHeight, document.body);
+  document.body.onmouseup = closePopup;
+}
+
+function closePopup()
+{
+  oPopup.hide();
+}
+
+function fillPopup(titler, texter, linker)
+{
+  oTitle.innerText=titler;
+  oText.innerText=texter;
+  oLinkStore.innerText=linker;
+}
+</SCRIPT>
+
+</HEAD>
+
+<BODY STYLE="font-family:verdana; font-size:70%" oncontextmenu="goContext('87'); return false" > 
+<DIV CLASS="bar title">Creating Dynamic Pop-up Elements</DIV>
+
+<DIV STYLE="width:600">
+  <DIV CLASS="desbar">
+  
+    <P>The new pop-up feature in Microsoft&reg; Internet Explorer 5.5 provides an easy way to create context menus, dialog boxes, pop-up tips, and glossary entries. These all can be built with DHTML.</P>
+    <P>Right-click anywhere within the main document to display a customized context menu that uses a pop-up window. Choosing an option in the context menu sends you to the related page in the IFRAME below.</P>
+    <IFRAME  SRC="iframe4popup.htm" ID="oIframe" STYLE="position:relative; top:10; left:10;  width:95%; height:150;"></IFRAME>
+    <BR><BR><BR>Click on the bold elements in the paragraph below to see glossary entries created using a pop-up window.<BR> <BR> 
+    <DIV STYLE="padding:10px; border:1px solid #cccccc">
+      Creating Dynamic Pop-up Elements with <SPAN TITLE="Click here to view definition" onclick=" fillPopup('Internet Explorer','Application developed to browse the World Wide Web','http://www.microsoft.com/windows/ie'); goPop('100');" STYLE="cursor:hand"><B>IE 5.5</B></SPAN> is easy now that the developers at <SPAN TITLE="Click here to view definition" onclick=" fillPopup('Microsoft Corp.','A great place to work','http://www.microsoft.com'); goPop('100');" STYLE="cursor:hand"><B>Microsoft</B></SPAN> have implemented it into the latest version of their Web browser. To learn how to use <SPAN TITLE="Click here to view definition" onclick=" fillPopup('pop-up','A type of overlapped window typically used for dialog boxes, message boxes, and other temporary windows.','http://msdn.microsoft.com/workshop/author/dhtml/reference/objects/popup.asp'); goPop('118');" STYLE="cursor:hand"><B>pop-up</B></SPAN> and other <SPAN TITLE="Click here to view definition" onclick=" fillPopup('DHTML','Dynamic Hyper-Text Markup Language','http://msdn.microsoft.com/workshop'); goPop('100');" STYLE="cursor:hand"><B>DHTML</B></SPAN> features, see the <SPAN TITLE="Click here to view definition" onclick=" fillPopup('MSDN','Microsoft Developers Network','http://msdn.microsoft.com'); goPop('100');" STYLE="cursor:hand"><B>MSDN Web Workshop</B></SPAN>.<BR><BR>
+    </DIV>
+    <BR>
+
+<!-- This is the formatting that the pop-up will use -->
+<DIV ID="styleDiv" STYLE="display:none">
+<DIV STYLE="position:absolute; top:0; left:0; background:#ffffff; border:1px solid #6699cc; width:200; height:100px; font-family:verdana; font-size:9pt; border:1px solid black;   z-index:3 ;">
+
+<DIV ID="oTitle" STYLE="position:relative; width:100%; background:#ffffff; height:20px; font-weight:bold; padding:5px; font-size:10pt; ; filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#00ffffff', startColorstr='#FF99CCFF', gradientType='1'); ">Title of tip</DIV>
+
+<DIV ID="oText" STYLE="padding:5px"></DIV>
+<DIV ID="oLink" STYLE="cursor:hand; font-weight:bold; color:#6699CC; padding:5px" onclick="parent.oIframe.location.href =oLinkStore.innerText">Go there...</DIV>
+<DIV ID="oLinkStore" STYLE="display:none" ></DIV>
+</DIV>
+</DIV>
+
+<DIV ID="oContext" STYLE="display:none">
+<DIV STYLE="position:relative; top:0; left:0; border:2px solid black;  border-top:2px solid #cccccc; border-left:2px solid #cccccc; background:#666666; height:110px; width:207px;">
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.oIframe.location.href='iframe4popup.htm';">
+<IMG SRC="../Graphics Files/home.gif" ALIGN="absmiddle">&nbsp;&nbsp;Home</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.oIframe.location.href='http://search.microsoft.com';">
+<IMG SRC="../Graphics Files/search.gif" ALIGN="absmiddle">&nbsp;&nbsp;Search</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.oIframe.location.href='http://www.microsoft.com/windows/ie';">
+<IMG SRC="../Graphics Files/ielogo.gif" ALIGN="absmiddle">&nbsp;&nbsp;Intenet Explorer</DIV>
+
+<DIV STYLE="position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black; font-family:verdana; font-weight:bold; padding:2px; padding-left:10px; font-size:8pt; cursor:hand" onmouseover="this.style.background='#ffffff'" onmouseout="this.style.background='#cccccc'" onclick="parent.oIframe.location.href='http://www.microsoft.com/info/cpyright.htm';">
+&#169; Microsoft Corporation</DIV>
+</DIV>
+</DIV>
+</DIV>
+</DIV>
+<DIV CLASS="bar" STYLE="position:absolute; top:467px; padding:5px; padding-left:10">
+<A HREF="http://www.microsoft.com/misc/cpyright.htm" TARGET=_TOP>
+&#169;Microsoft Corporation. All rights reserved. Terms of use</A>.
+</DIV>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

@@ -1,0 +1,23 @@
+HKCR
+{
+	PrivLib32.Column.1 = s 'Column Class'
+	{
+		CLSID = s '{B3AD7BC6-57D7-11D1-8AE1-00C04FB90A5E}'
+	}
+	PrivLib32.Column = s 'Column Class'
+	{
+		CLSID = s '{B3AD7BC6-57D7-11D1-8AE1-00C04FB90A5E}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B3AD7BC6-57D7-11D1-8AE1-00C04FB90A5E} = s 'Column Class'
+		{
+			ProgID = s 'PrivLib32.Column.1'
+			VersionIndependentProgID = s 'PrivLib32.Column'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

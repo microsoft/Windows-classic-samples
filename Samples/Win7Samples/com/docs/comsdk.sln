@@ -1,0 +1,10 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

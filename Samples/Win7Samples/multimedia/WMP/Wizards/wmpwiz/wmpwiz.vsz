@@ -1,0 +1,6 @@
+VSWIZARD 7.0
+Wizard=VsWizard.<VsWizardEngine version goes here>
+
+Param="WIZARD_NAME = Windows Media Player Plug-in Wizard"
+Param="ABSOLUTE_PATH = <path to wmpwiz directory goes here>"
+Param="FALLBACK_LCID = 1033"

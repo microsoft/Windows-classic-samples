@@ -1,0 +1,15 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ContextMenu_Title   "Sample Item"
+    IDS_ContextMenu_Tooltip "This is the sample context menu item"
+END
+

@@ -1,0 +1,57 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include "resource.h"
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_TASKSAPPPROPPAGE  REGISTRY                "WindowsSideShowTasks.rgs"
+IDR_TASKS             REGISTRY                "Tasks.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TASKSPROPPAGE DIALOGEX 0, 0, 271, 105
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | DS_CENTER
+FONT 8, "Segoe UI", 0, 0, 0x1
+BEGIN
+    CONTROL         "Work",IDC_WORKTASKS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,10,80,10
+    CONTROL         "Family",IDC_FAMILYTASKS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,90,10,80,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+IDI_TASKICON    ICON "Tasks.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME                    "WindowsSideShowTasks"
+    IDS_TITLE                       "Tasks Property Page Title"
+    IDS_HELPFILE                    "Tasks Property Page Help File Name"
+    IDS_DOCSTRING                   "Tasks Property Page Help String"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FRIENDLYNAME    "Tasks Sample"
+END

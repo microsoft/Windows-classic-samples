@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GamesExplorerBaseTypes" targetNamespace="urn:schemas-microsoft-com:GamesExplorerBaseTypes.v1" elementFormDefault="qualified" xmlns="urn:schemas-microsoft-com:GamesExplorerBaseTypes.v1" xmlns:mstns="urn:schemas-microsoft-com:GamesExplorerBaseTypes.v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="fourPartVersion">
+        <xs:annotation>
+            <xs:documentation>
+                Values of this type (version) will look like xx.xx.xx.xx (example: 1.0.2.3)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^(0*[0-9]{0,4}|0*[1-5][0-9]{4}|0*6[0-4][0-9]{3}|0*654[0-9]{2}|0*655[0-2][0-9]|0*6553[0-5])\.(0*[0-9]{0,4}|0*[1-5][0-9]{4}|0*6[0-4][0-9]{3}|0*654[0-9]{2}|0*655[0-2][0-9]|0*6553[0-5])\.(0*[0-9]{0,4}|0*[1-5][0-9]{4}|0*6[0-4][0-9]{3}|0*654[0-9]{2}|0*655[0-2][0-9]|0*6553[0-5])\.(0*[0-9]{0,4}|0*[1-5][0-9]{4}|0*6[0-4][0-9]{3}|0*654[0-9]{2}|0*655[0-2][0-9]|0*6553[0-5])" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="guid">
+        <xs:annotation>
+            <xs:documentation>Values of this type will look like: "01234567-89AB-CDEF-0123-456789ABCDEF".  Usage is case-insensitve.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\{[0-9A-Fa-f]{8}\-?[0-9A-Fa-f]{4}\-?[0-9A-Fa-f]{4}\-?[0-9A-Fa-f]{4}\-?[0-9A-Fa-f]{12}\}" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:attributeGroup name="filePathAttributeGroup">
+        <xs:annotation>
+            <xs:documentation>
+            The baseKnownFolder attribute is a Windows Shell Well Known Folder name. If left blank, the application's install directory is used.
+            The path is a relative path based off either the application directory, or the Known Folder.
+            Example:  path="bin\myapplication.exe" would refer to Program Files\applicationInstallFolder\bin\myapplication.exe
+            Example 2: baseKnownFolder="800d0572-e92d-46dd-a7a5-58bbc6d2e175" path="Game\Save Files" would refer to the "Game\Save Files" 
+	    in the users's Documents folder in Windows Vista or Windows Server 2008.  (Note... That GUID is just an example and is most likely not the Documents guid.)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="baseKnownFolderID" type="guid" use="optional" />
+        <xs:attribute name="path" type="boundedString" use="required" />
+    </xs:attributeGroup>
+    <xs:simpleType name="boundedString">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="preserve" />
+            <xs:maxLength value="32768" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

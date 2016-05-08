@@ -1,0 +1,24 @@
+[ uuid (B75AF600-9CF4-11CD-A076-08002B2BD711),
+  version(1.0),
+  pointer_default(unique)
+]
+interface type_pickle
+{
+
+const short ARR_SIZE =  4;
+const short BUFSIZE = 1024;
+
+typedef struct _OBJECT1 {
+    long            al[ARR_SIZE];
+    unsigned short  s;
+    } OBJECT1;
+
+/* This is the top level type to be serialized. See the ACF file */
+
+typedef struct _OBJECT2 {
+    unsigned short      sData;
+    OBJECT1 *           pObject1;
+    } OBJECT2;
+
+}
+

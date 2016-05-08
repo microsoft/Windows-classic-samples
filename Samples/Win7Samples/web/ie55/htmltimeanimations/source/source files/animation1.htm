@@ -1,0 +1,119 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML xmlns:t ="urn:schemas-microsoft-com:time">
+<?IMPORT namespace="t" implementation="#default#time2">   
+
+<HEAD>
+<TITLE>What's New Animated Banner</TITLE>
+<XML:namespace prefix="t"/>
+
+<STYLE TYPE="text/css">
+.time {	BEHAVIOR: url(#DEFAULT#TIME2)}
+t\:* {	BEHAVIOR: url(#DEFAULT#TIME2)}
+BODY {	margin:0; font-family:verdana}
+.viewbox { position:absolute; width:155; height: 130; top:0; left:0; background:#000000; border:1px solid #000000; overflow:hidden; text-align:center; padding:10; background-image: url(../Graphics Files/bgclockgray.gif); z-index:0}
+.colorbox { position:absolute; width:155; height: 130; top:0; left:0; background:green; overflow:hidden; text-align:center; padding:10; z-index:1; filter: alpha(opacity=20);}
+.topbox { position:absolute; width:155; height: 130; top:0; left:0; overflow:hidden; text-align:center; padding-top:35; z-index:5;}
+.letter { font-size:20; font-weight:bold; color:white; display:none }
+.posab {position:absolute;}
+</STYLE>
+
+<BODY>
+<!-- Layout -->
+<DIV class="viewbox">
+<DIV ID="bar1" STYLE="background:white; position:absolute; top:10; left:160; filter: alpha(opacity=20); height:45px; width:155px; z-index:1"></DIV>
+<DIV ID="bar2" STYLE="background:white; position:absolute; top:25; left:-155; filter: alpha(opacity=30); height:65px; width:155px; z-index:1"></DIV>
+<DIV ID="bar3" STYLE="background:white; position:absolute; top:75; left:160; filter: alpha(opacity=40); height:35px; width:155px; z-index:1"></DIV>
+<DIV ID="bar4" STYLE="background:white; position:absolute; top:-130; left:30; filter: alpha(opacity=10); height:130px; width:45px; z-index:1"></DIV>
+<DIV ID="bar5" STYLE="background:white; position:absolute; top:130; left:80; filter: alpha(opacity=10); height:130px; width:65px; z-index:1"></DIV>
+
+</DIV>
+<DIV ID="colorbox" class="colorbox"></DIV>
+<DIV ID="topbox" class="topbox">
+<IMG ID="n5" SRC="../Graphics Files/H.gif" STYLE="filter: alpha(opacity=100); display:none; z-index:3">
+<IMG ID="n4" SRC="../Graphics Files/T.gif" STYLE="filter: alpha(opacity=100); display:none; z-index:3">
+<IMG ID="n3" SRC="../Graphics Files/M.gif" STYLE="filter: alpha(opacity=100); display:none; z-index:3">
+<IMG ID="n2" SRC="../Graphics Files/L.gif" STYLE="filter: alpha(opacity=100); display:none; z-index:3">
+<IMG ID="n1" SRC="../Graphics Files/plus.gif" STYLE="filter: alpha(opacity=100); display:none; z-index:3">
+
+
+<DIV ID="htmltime" class="letter" STYLE="position:absolute; top:25; left:14; filter: alpha(opacity=0);  z-index:3; font-size:32pt; ">TIME</DIV>
+
+<DIV ID="htmltime4" class="letter" STYLE="  z-index:2; color:black; position:absolute; top:24; left:-1; width:155px; filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=2, MakeShadow=true, ShadowOpacity=.80) z-index:2; font-size:32pt; ">TIME</DIV>
+
+<DIV ID="htmltime3" class="letter" STYLE="z-index:2; color:black; position:absolute; top:24; left:0; width:155px; filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=2, MakeShadow=true, ShadowOpacity=.80)">
+<DIV STYLE="font-size:10pt">Spice up your Web pages with</DIV>
+HTML+TIME </DIV>
+
+<DIV ID="htmltime2" class="letter" STYLE="position:absolute; top:26; left:8; filter: alpha(opacity=0);  z-index:3; ">
+<DIV STYLE="font-size:10pt">Spice up your Web pages with</DIV>
+HTML+TIME </DIV>
+
+</DIV>
+
+<!-- Animation -->
+
+<t:par  begin=".5"  repeatcount="indefinite">
+
+<!-- H -->
+<t:set  targetElement="n5" attributeName="display" to="block" begin="0" />
+<t:animate  targetElement="n5" attributeName="width" from="100" to="50" begin="0" dur=".5" />
+<t:animate  targetElement="n5" attributeName="filters.item(0).opacity" from="100" to="00" begin=".4" dur=".1" />
+<t:set  targetElement="n5" attributeName="filters.item(0).opacity" to="00" begin=".5" />
+<t:set  targetElement="n5" attributeName="display" to="none" begin=".5" />
+<!-- T -->
+<t:set  targetElement="n4" attributeName="display" to="block" begin=".5" />
+<t:animate  targetElement="n4" attributeName="width" from="100" to="50" begin=".5" dur=".5" />
+<t:animate  targetElement="n4" attributeName="filters.item(0).opacity" from="100" to="00" begin=".9" dur=".1" />
+<t:set  targetElement="n4" attributeName="filters.item(0).opacity" to="00" begin="1" />
+<t:set  targetElement="n4" attributeName="display" to="none" begin="1" />
+<!-- M -->
+<t:set  targetElement="n3" attributeName="display" to="block" begin="1" />
+<t:animate  targetElement="n3" attributeName="width" from="100" to="50" begin="1" dur=".5" />
+<t:animate  targetElement="n3" attributeName="filters.item(0).opacity" from="100" to="00" begin="1.4" dur=".1" />
+<t:set  targetElement="n3" attributeName="filters.item(0).opacity" to="00" begin="1.5" />
+<t:set  targetElement="n3" attributeName="display" to="none" begin="1.5" />
+<!-- L -->
+<t:set  targetElement="n2" attributeName="display" to="block" begin="1.5" />
+<t:animate  targetElement="n2" attributeName="width" from="100" to="50" begin="1.5" dur=".5" />
+<t:animate  targetElement="n2" attributeName="filters.item(0).opacity" from="100" to="00" begin="1.9" dur=".1" />
+<t:set  targetElement="n2" attributeName="filters.item(0).opacity" to="00" begin="2" />
+<t:set  targetElement="n2" attributeName="display" to="none" begin="2" />
+<!-- + -->
+<t:set  targetElement="n1" attributeName="display" to="block" begin="2" />
+<t:animate  targetElement="n1" attributeName="width" from="100" to="50" begin="2" dur="1" />
+<t:animate  targetElement="n1" attributeName="filters.item(0).opacity" from="100" to="00" begin="2.5" dur=".5" />
+<t:set  targetElement="n1" attributeName="filters.item(0).opacity" to="00" begin="3" />
+<t:set  targetElement="n1" attributeName="display" to="none" begin="3" />
+<!-- TIME -->
+<t:set  targetElement="htmltime" attributeName="display" to="block" begin="3" />
+<t:animate  targetElement="htmltime" attributeName="filters.item(0).opacity" from="00" to="100" begin="3" dur="1" />
+<t:set  targetElement="htmltime" attributeName="filters.item(0).opacity" to="100" begin="4" />
+<t:set  targetElement="htmltime" attributeName="display" to="none" begin="4.75" />
+
+
+<t:set  targetElement="htmltime2" attributeName="display" to="block" begin="5" />
+<t:animate  targetElement="htmltime2" attributeName="filters.item(0).opacity" from="00" to="100" begin="5" dur="1" />
+<t:set  targetElement="htmltime2" attributeName="filters.item(0).opacity" to="100" begin="5" />
+
+<t:set  targetElement="htmltime3" attributeName="display" to="block" begin="5" />
+<t:animate  targetElement="htmltime3" attributeName="filters.item(0).ShadowOpacity" from="00" to="100" begin="5" dur="1" />
+<t:set  targetElement="htmltime3" attributeName="filters.item(0).shadowOpacity" to="100" begin="5" />
+</t:par>
+<!-- Bar 1 -->
+<t:par  begin="0" repeatcount="indefinite">
+<t:animate  targetElement="bar1" attributeName="left" from="160" to="-200" begin="2" dur="8" />
+<t:animate  targetElement="bar2" attributeName="left" from="-200" to="160" begin="4" dur="8" />
+<t:animate  targetElement="bar3" attributeName="left" from="160" to="-200" begin="6" dur="8" />
+<t:animate  targetElement="bar4" attributeName="top" from="-130" to="200" begin="0" dur="6" />
+<t:animate  targetElement="bar5" attributeName="top" from="130" to="-200" begin="4" dur="8" />
+</t:par>
+</t:par>
+<!--colorbackground-->
+<t:par  begin="0" repeatcount="indefinite" >
+<t:animatecolor  targetElement="colorbox" attributeName="backgroundColor" values="blue;green;red;yellow" begin="0" dur="10" autoreverse="true"/>
+
+</t:par>
+
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

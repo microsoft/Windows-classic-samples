@@ -1,0 +1,1858 @@
+<!--
+Copyright (c) 2000-2001 Microsoft Corp. All rights reserved.
+Version 1.0.1.719
+-->
+
+<public:component tagname="Toolbar" literalcontent="true">
+<public:method name="createLabelAt" internalname="f_PublicCreateLabelAt" />
+<public:method name="createButtonAt" internalname="f_PublicCreateButtonAt" />
+<public:method name="createCheckButtonAt" internalname="f_PublicCreateCheckButtonAt" />
+<public:method name="createSeparatorAt" internalname="f_PublicCreateSeparatorAt" />
+<public:method name="createGripperAt" internalname="f_PublicCreateGripperAt" />
+<public:method name="createTextBoxAt" internalname="f_PublicCreateTextBoxAt" />
+<public:method name="createDropDownListAt" internalname="f_PublicCreateDropDownListAt" />
+<public:method name="createCheckGroupAt" internalname="f_PublicCreateCheckGroupAt" />
+<public:method name="getItem" internalname="f_PublicGetItem" />
+<public:property name="numItems" get="f_PublicGetCount" />
+<public:property name="defaultStyle" id="prDefaultStyle" get="get_defaultStyle" put="set_defaultStyle" />
+<public:property name="hoverStyle" id="prHoverStyle" get="get_hoverStyle" put="set_hoverStyle" />
+<public:property name="selectedStyle" id="prSelectedStyle" get="get_selectedStyle" put="set_selectedStyle" />
+<public:property name="movement" id="prMovement" get="get_movement" put="set_movement" />
+<public:property name="orientation" id="prOrientation" get="get_orientation" put="set_orientation" />
+<public:property name="turnVerticalContent" id="prTurnVerticalContent" get="get_turnVerticalContent" put="set_turnVerticalContent" />
+<public:event name="onbuttonclick" id="evButtonClick" />
+<public:event name="oncheckchange" id="evCheckChange" />
+<public:defaults
+tabStop="true"
+contentEditable="false"
+canHaveHTML="true"
+viewInheritStyle="true"
+viewMasterTab="false"
+viewLinkContent="false"
+style="display:none;overflow:visible;cursor:default;padding:1px;background-color:buttonface;border-top:solid 1px buttonhighlight;border-top:solid 1px buttonhighlight;border-left:solid 1px buttonhighlight;border-right:solid 1px buttonshadow;border-bottom:solid 1px buttonshadow"
+/>
+<public:attach event="oncontentready" onevent="f_CreateToolbar()" />
+<public:attach event="onpropertychange" onevent="f_OnPropertyChange()" />
+<public:attach event="ondocumentready" onevent="f_OnDocReady()" />
+<script language="JScript">
+var _oTable;
+var _oInteractNode;
+var _OnStopCount = 0;
+var _Ready = false;
+var _bDragging = false;
+var _bDocked = false;
+var _szDockedLocation = "";
+var _nLastClientX;
+var _nLastClientY;
+var _nLastScreenX;
+var _nLastScreenY;
+var _tbDefaultStyle = "";
+var _tbHoverStyle = "";
+var _tbSelectedStyle = "";
+var _Orientation = "horizontal";
+var _TurnVerticalContent = false;
+var _Movement = "";
+var _KeyboardClick = false;
+var _PreDockOrientation = "";
+var _IsSubmitting = false;
+var _BuiltInDefaultStyle = "color:buttontext;padding:2px;border:solid 1px buttonface";
+var _BuiltInHoverStyle = "border-top-color:buttonhighlight;border-left-color:buttonhighlight;border-bottom-color:buttonshadow;border-right-color:buttonshadow";
+var _BuiltInSelectedStyle = "border-top-color:buttonshadow;border-left-color:buttonshadow;border-bottom-color:buttonhighlight;border-right-color:buttonhighlight;padding-top:3px;padding-left:3px;padding-bottom:1px;padding-right:1px";
+var _szSeparatorHorizStyle = "border-left-width:1px;border-left-style:solid;border-left-color:buttonshadow;border-right-width:1px;border-right-style:solid;border-right-color:buttonhighlight;margin-left:2px;margin-right:2px;width:2px;overflow:hidden;";
+var _szSeparatorVertStyle = "border-top-width:1px;border-top-style:solid;border-top-color:buttonshadow;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:buttonhighlight;margin-top:2px;margin-bottom:2px;margin-left:3px;margin-right:3px;height:2px;overflow:hidden;";
+var _szGripperHorizStyle = "cursor:move;margin-left:2px;margin-right:2px;border-top:buttonhighlight;border-bottom:buttonshadow;border-right:buttonshadow;border-left:buttonhighlight;border-style:solid;border-width:1px;width:3px;overflow:hidden;";
+var _szGripperVertStyle = "cursor:move;margin-top:2px;margin-bottom:2px;margin-left:3px;margin-right:3px;border-top:buttonhighlight;border-bottom:buttonshadow;border-right:buttonshadow;border-left:buttonhighlight;border-style:solid;border-width:1px;height:3px;overflow:hidden;";
+function f_GetParent()
+{
+if (_oTable.children[0] == null)
+{
+return;
+}
+if (orientation == "vertical")
+{
+return _oTable.children[0];
+}
+else
+{
+if (_oTable.children[0].children.length > 0)
+return _oTable.children[0].children[0];
+}
+}
+function get_orientation()
+{
+return _Orientation;
+}
+function set_orientation(value)
+{
+var szOrig = _Orientation;
+if (typeof value == "string")
+{
+var lVal = value.toLowerCase();
+switch (lVal)
+{
+case "horizontal":
+case "vertical":
+_Orientation = lVal;
+break;
+}
+}
+if (_Ready && (szOrig != _Orientation))
+{
+if (_Orientation == "horizontal")
+f_RearrangeHorizontal();
+else
+f_RearrangeVertical();
+prOrientation.fireChange();
+}
+}
+function f_RearrangeHorizontal()
+{
+var root = _oTable.children[0];
+if (root.children.length == 0)
+{
+root.appendChild(element.document.createElement("TR"));
+return;
+}
+var topRow = root.children[0];
+if (topRow.children.length > 0)
+{
+var item = topRow.children[0];
+f_AdjustContents(item);
+f_AdjustSeps(item);
+}
+while (root.children.length > 1)
+{
+var item = topRow.appendChild(root.children[1].children[0]);
+f_AdjustContents(item);
+f_AdjustSeps(item);
+root.children[1].removeNode(true);
+}
+f_ApplyStylesToChildren();
+}
+function f_RearrangeVertical()
+{
+var root = _oTable.children[0];
+if (root.children.length == 0)
+return;
+var oldRow = root.children[0];
+if (oldRow.children.length == 0)
+{
+oldRow.removeNode(true);
+return;
+}
+if (oldRow.children.length > 0)
+{
+var item = oldRow.children[0];
+f_AdjustContents(item);
+f_AdjustSeps(item);
+}
+while (oldRow.children.length > 1)
+{
+var row = element.document.createElement("TR");
+if (item._type == "emptygroup")
+row.style.display = "none";
+root.appendChild(row);
+var item = row.appendChild(oldRow.children[1]);
+f_AdjustContents(item);
+f_AdjustSeps(item);
+}
+f_ApplyStylesToChildren();
+}
+function f_AdjustSeps(item)
+{
+if ((item._type != "separator") && (item._type != "gripper"))
+return;
+var builtIn;
+if ((element.style.writingMode != null) && (element.style.writingMode == "tb-rl"))
+{
+if (item._type == "separator")
+builtIn = (orientation == "vertical") ? _szSeparatorHorizStyle : _szSeparatorVertStyle;
+else
+builtIn = (orientation == "vertical") ? _szGripperHorizStyle : _szGripperVertStyle;
+}
+else
+{
+if (item._type == "separator")
+builtIn = (orientation == "vertical") ? _szSeparatorVertStyle : _szSeparatorHorizStyle;
+else
+builtIn = (orientation == "vertical") ? _szGripperVertStyle : _szGripperHorizStyle;
+}
+item.children[0].style.cssText = builtIn + ";" + item.children[0]._origStyle;
+}
+function get_turnVerticalContent()
+{
+return _TurnVerticalContent;
+}
+function set_turnVerticalContent(value)
+{
+var bOrig = _TurnVerticalContent;
+if (typeof value == "boolean")
+{
+_TurnVerticalContent = value;
+}
+else if (typeof value == "string")
+{
+var lVal = value.toLowerCase();
+_TurnVerticalContent = (lVal != "false") && (lVal != "no") && (lVal != "0");
+}
+if (_Ready && (bOrig != _TurnVerticalContent))
+{
+if (_Orientation == "vertical")
+f_RearrangeVerticalContent();
+prTurnVerticalContent.fireChange();
+}
+}
+function f_RearrangeVerticalContent()
+{
+var root = _oTable.children[0];
+if (root.children.length == 0)
+return;
+for (var row = 0; row < root.children.length; row++)
+{
+f_AdjustContents(root.children[row].children[0]);
+}
+f_ApplyStylesToChildren();
+}
+function get_defaultStyle()
+{
+return _tbDefaultStyle;
+}
+function set_defaultStyle(value)
+{
+var orig = _tbDefaultStyle;
+if (typeof value == "string")
+{
+_tbDefaultStyle = value;
+if (_Ready)
+f_ApplyStylesToChildren();
+}
+if (_Ready && (orig != _tbDefaultStyle))
+{
+prDefaultStyle.fireChange();
+}
+}
+function get_hoverStyle()
+{
+return _tbHoverStyle;
+}
+function set_hoverStyle(value)
+{
+var orig = _tbHoverStyle;
+if (typeof value == "string")
+{
+_tbHoverStyle = value;
+if (_Ready)
+f_ApplyStylesToChildren();
+}
+if (_Ready && (orig != _tbHoverStyle))
+{
+prHoverStyle.fireChange();
+}
+}
+function get_selectedStyle()
+{
+return _tbSelectedStyle;
+}
+function set_selectedStyle(value)
+{
+var orig = _tbSelectedStyle;
+if (typeof value == "string")
+{
+_tbSelectedStyle = value;
+if (_Ready)
+f_ApplyStylesToChildren();
+}
+if (_Ready && (orig != _tbSelectedStyle))
+{
+prSelectedStyle.fireChange();
+}
+}
+function get_movement()
+{
+return _Movement;
+}
+function set_movement(value)
+{
+var szOrig = _Movement;
+if (typeof value == "string")
+{
+var lVal = value.toLowerCase();
+switch (lVal)
+{
+case "move":
+case "move-dock":
+case "":
+_Movement = lVal;
+break;
+case "none":
+_Movement = "";
+break;
+}
+}
+if (_Ready && (szOrig != _Movement))
+{
+if (f_IsMoveable())
+{
+defaults.style.position = "absolute";
+defaults.style.zIndex = "1";
+defaults.style.overflow = "hidden";
+}
+else
+{
+defaults.style.position = "static";
+defaults.style.zIndex = "";
+defaults.style.overflow = "visible";
+}
+prMovement.fireChange();
+}
+}
+function f_IsMoveable()
+{
+switch (_Movement)
+{
+case "move":
+case "move-dock":
+return true;
+}
+return false;
+}
+function f_IsDockable()
+{
+return (_Movement == "move-dock");
+}
+function f_PublicCreateLabelAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarLabel />");
+}
+function f_PublicCreateButtonAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarButton />");
+}
+function f_PublicCreateCheckButtonAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarCheckButton />");
+}
+function f_PublicCreateSeparatorAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarSeparator />");
+}
+function f_PublicCreateGripperAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarGripper />");
+}
+function f_PublicCreateDropDownListAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarDropDownList />");
+}
+function f_PublicCreateTextBoxAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarTextBox />");
+}
+function f_PublicCreateCheckGroupAt(index)
+{
+return f_AddItemAt(index, "<ie:ToolbarCheckGroup />");
+}
+function f_AddItemAt(index, html)
+{
+var numItems = f_NumItems();
+var realIndex = f_PublicToRealIndex(index);
+if ((realIndex < 0) || (realIndex > numItems))
+{
+realIndex = numItems;
+index = f_PublicGetCount();
+}
+f_AddItemAtRealIndex(realIndex, html);
+return f_PublicGetItem(index);
+}
+function f_AddItemToGroupAt(index, group, publicGroup)
+{
+var parent = f_GetParent();
+if (parent == null)
+return null;
+var numInGroup = publicGroup.getCount();
+if ((index < 0) || (index > numInGroup))
+index = numInGroup;
+var realIndex = 0;
+var cell;
+var foundGroup = false;
+for (realIndex = 0; realIndex < parent.children.length; realIndex++)
+{
+cell = parent.children[realIndex];
+if ((orientation == "vertical") && (cell.children.length > 0))
+cell = cell.children[0];
+if (((cell._type == "checkbutton") || (cell._type == "emptygroup")) &&
+(cell._group != null))
+{
+if (group == cell._group)
+{
+foundGroup = true;
+break;
+}
+}
+}
+if (!foundGroup)
+return null;
+var selectItem = false;
+if (cell._type == "emptygroup")
+{
+if (orientation == "vertical")
+cell = cell.parentElement;
+cell.removeNode(true);
+selectItem = group.bForceSel;
+}
+var newIndex = realIndex + index;
+var newItem = f_AddItemAtRealIndex(newIndex, "<ie:ToolbarCheckButton />");
+newItem._group = group;
+newItem.id = newItem.uniqueID;
+var publicNewItem = publicGroup.getItem(index);;
+if (selectItem && (publicNewItem != null))
+publicNewItem.setAttribute("selected", "true");
+return publicNewItem;
+}
+function f_AddItemAtRealIndex(index, html)
+{
+var parent = f_GetParent();
+if (parent == null)
+return null;
+var aNodes = f_CreateNodesFromHtml(html);
+if ((aNodes == null) || (aNodes.length < 1))
+return null;
+var cell = aNodes[0];
+var retCell = cell;
+if (orientation == "vertical")
+{
+var trRow = element.document.createElement("TR");
+if (cell._type == "emptygroup")
+trRow.style.display = "none";
+trRow.appendChild(cell);
+cell = trRow;
+}
+if (index == f_NumItems())
+{
+parent.appendChild(cell);
+}
+else
+{
+parent.children[index].insertAdjacentElement("beforeBegin", cell);
+}
+f_ApplyStylesToChildren();
+return retCell;
+}
+function f_PublicToRealIndex(index)
+{
+var parent = f_GetParent();
+if ((parent == null) || (parent.children.length == 0))
+return -1;
+var curIndex = -1;
+var realIndex;
+var cell;
+var group = null;
+for (realIndex = 0; realIndex < parent.children.length; realIndex++)
+{
+cell = parent.children[realIndex];
+if ((orientation == "vertical") && (cell.children.length > 0))
+cell = cell.children[0];
+if (((cell._type == "checkbutton") || (cell._type == "emptygroup")) &&
+(cell._group != null))
+{
+if (group != cell._group)
+{
+curIndex++;
+group = cell._group;
+}
+}
+else
+{
+group = null;
+curIndex++;
+}
+if (curIndex == index)
+return realIndex;
+}
+return -1;
+}
+function f_PublicGetCount()
+{
+var parent = f_GetParent();
+if ((parent == null) || (parent.children.length == 0))
+return 0;
+var numItems = 0;
+var realIndex;
+var cell;
+var group = null;
+for (realIndex = 0; realIndex < parent.children.length; realIndex++)
+{
+cell = parent.children[realIndex];
+if ((orientation == "vertical") && (cell.children.length > 0))
+cell = cell.children[0];
+if (((cell._type == "checkbutton") || (cell._type == "emptygroup")) &&
+(cell._group != null))
+{
+if (group != cell._group)
+{
+numItems++;
+group = cell._group;
+}
+}
+else
+{
+group = null;
+numItems++;
+}
+}
+return (numItems < 0) ? 0 : numItems;
+}
+function f_PublicGetItem(index)
+{
+if ((index < 0) || (index > f_NumItems()))
+return null;
+var realIndex = f_PublicToRealIndex(index);
+var item = f_GetItem(realIndex);
+if (item == null)
+return null;
+if (((item._type == "checkbutton") || (item._type == "emptygroup")) && (item._group != null))
+return f_PublicMakeGroupContract(item);
+else
+return f_PublicMakeContract(item);
+}
+function f_PublicMakeContract(item)
+{
+var obj = new Object();
+obj.getType = function() { return item._type; };
+if ((item._type == "dropdownlist") || (item._type == "textbox"))
+{
+obj.click = function() { item.children[0].click(); };
+obj.focus = function() { item.children[0].focus(); };
+obj.blur = function() { item.children[0].blur(); };
+}
+else
+{
+obj.click = function() { item.click(); };
+obj.focus = function() { item.focus(); };
+obj.blur = function() { item.blur(); };
+}
+obj.remove = function() { f_PublicRemoveItem(item); };
+obj.getAttribute = function(name) { return f_PublicGetAttribute(item, name); };
+obj.setAttribute = function(name, value) { f_PublicSetAttribute(item, name, value); };
+if (item._type == "dropdownlist")
+obj.getOptions = function() { return item.children[0].options; };
+return obj;
+}
+function f_PublicMakeGroupContract(item)
+{
+var obj = new Object();
+obj.getType = function() { return "checkgroup"; };
+obj.getItem = function(subIndex) { return f_PublicGetGroupItem(subIndex, item._group); };
+obj.getSelected = function() { var selItem = _oTable.document.all[item._group.oSelected]; if (selItem != null) return f_PublicMakeContract(selItem); else return null; };
+obj.getAttribute = function(name) { return f_PublicGetGroupAttribute(item._group, name); };
+obj.setAttribute = function(name, value) { f_PublicSetGroupAttribute(item._group, name, value); };
+obj.remove = function() { f_PublicRemoveGroup(item._group); };
+obj.getCount = function() { return f_PublicGetGroupCount(item._group); };
+obj.createCheckButtonAt = function(subIndex) { return f_AddItemToGroupAt(subIndex, item._group, obj); };
+return obj;
+}
+function f_PublicGetGroupCount(group)
+{
+var parent = f_GetParent();
+if (parent == null)
+return 0;
+var realIndex = 0;
+var count = 0;
+var cell;
+var foundGroup = false;
+for (realIndex = 0; realIndex < parent.children.length; realIndex++)
+{
+cell = parent.children[realIndex];
+if ((orientation == "vertical") && (cell.children.length > 0))
+cell = cell.children[0];
+if (((cell._type == "checkbutton") || (cell._type == "emptygroup")) &&
+(cell._group != null))
+{
+if (group == cell._group)
+{
+if (cell._type == "emptygroup")
+return 0;
+count++;
+foundGroup = true;
+}
+else if (foundGroup)
+{
+break;
+}
+}
+else if (foundGroup)
+{
+break;
+}
+}
+return count;
+}
+function f_PublicRemoveGroup(group)
+{
+var numItems = f_PublicGetGroupCount(group);
+if (numItems == 0)
+{
+var cell = f_GetGroupItem(0, group);
+if (orientation == "vertical")
+cell = cell.parentElement;
+cell.removeNode(true);
+}
+else
+{
+for (var count = 0; count < numItems; count++)
+{
+var cell = f_GetGroupItem(0, group);
+if (orientation == "vertical")
+cell = cell.parentElement;
+cell.removeNode(true);
+}
+}
+}
+function f_PublicGetGroupItem(index, group)
+{
+var item = f_GetGroupItem(index, group);
+if ((item == null) || (item._type == "emptygroup"))
+return null;
+return f_PublicMakeContract(item);
+}
+function f_GetGroupItem(index, group)
+{
+var parent = f_GetParent();
+if (parent == null)
+return null;
+var realIndex = 0;
+var vIndex = -1;
+var cell;
+var foundGroup = false;
+for (realIndex = 0; realIndex < parent.children.length; realIndex++)
+{
+cell = parent.children[realIndex];
+if ((orientation == "vertical") && (cell.children.length > 0))
+cell = cell.children[0];
+if (((cell._type == "checkbutton") || (cell._type == "emptygroup")) &&
+(cell._group != null))
+{
+if (group == cell._group)
+{
+foundGroup = true;
+vIndex++;
+}
+else if (foundGroup)
+{
+return null;
+}
+if (vIndex == index)
+{
+return cell;
+break;
+}
+}
+else if (foundGroup)
+{
+return null;
+}
+}
+return null;
+}
+function f_PublicRemoveItem(item)
+{
+var empty = null;
+var group = item._group;
+if ((item._type == "checkbutton") && (group != null) &&
+(f_PublicGetGroupCount(group) == 1))
+{
+empty = f_CreateEmptyGroup(group);
+}
+if (orientation == "vertical")
+{
+item = item.parentElement;
+if (empty != null)
+{
+var row = element.document.createElement("TR");
+row.style.display = "none";
+row.appendChild(empty);
+empty = row;
+}
+}
+if ((group != null) && (group.oSelected == item.uniqueID))
+group.oSelected = null;
+if (empty != null)
+item.insertAdjacentElement("beforeBegin", empty);
+item.removeNode(true);
+if ((group != null) && group.bForceSel && (group.oSelected == null) && (empty == null))
+{
+item = f_PublicGetGroupItem(0, group);
+if (item != null)
+item.setAttribute("selected", "true");
+}
+}
+function f_PublicGetGroupAttribute(group, name)
+{
+switch (name.toLowerCase())
+{
+case "forceselection":
+return (group.bForceSel) ? "true" : "false";
+case "defaultstyle":
+return group.szDefaultStyle;
+case "hoverstyle":
+return group.szHoverStyle;
+case "selectedstyle":
+return group.szSelectedStyle;
+}
+}
+function f_PublicSetGroupAttribute(group, name, value)
+{
+switch (name.toLowerCase())
+{
+case "forceselection":
+group.bForceSel = (value.toLowerCase() == "true");
+if (group.bForceSel && (group.oSelected == null))
+{
+var cell = f_PublicGetGroupItem(0, group);
+if (cell != null)
+cell.setAttribute("selected", "true");
+}
+break;
+case "defaultstyle":
+group.szDefaultStyle = value;
+f_ApplyStylesToChildren();
+break;
+case "hoverstyle":
+group.szHoverStyle = value;
+f_ApplyStylesToChildren();
+break;
+case "selectedstyle":
+group.szSelectedStyle = value;
+f_ApplyStylesToChildren();
+break;
+}
+}
+function f_PublicGetAttribute(item, name)
+{
+var lname = name.toLowerCase();
+if ((item._type == "dropdownlist") || (item._type == "textbox"))
+{
+if ((lname != "defaultstyle") && (lname != "style") && (item.children.length > 0))
+item = item.children[0];
+}
+if ((lname == "style") && (item.children.length == 1))
+return item.children[0].style.cssText;
+return item.getAttribute(name);
+}
+function f_PublicSetAttribute(item, name, value)
+{
+var cachedImage;
+var lname = name.toLowerCase();
+if ((item._type == "dropdownlist") || (item._type == "textbox"))
+{
+if ((lname != "defaultstyle") && (lname != "style") && (item.children.length > 0))
+item = item.children[0];
+}
+if ((lname != "style") && (lname != "selected") && (lname != "outerhtml") &&
+(lname != "innertext") && (lname != "innerhtml"))
+item.setAttribute(name, value, 0);
+if (!_Ready)
+return;
+switch (lname)
+{
+case "defaultstyle":
+case "hoverstyle":
+case "selectedstyle":
+f_ApplyStylesToChildren();
+break;
+case "text":
+case "innertext":
+if ((item._type == "label") || (item._type == "button") || (item._type == "checkbutton"))
+{
+f_DoLabelText(item, value);
+}
+break;
+case "innerhtml":
+if ((item._type == "label") || (item._type == "button") || (item._type == "checkbutton"))
+{
+f_DoLabelHTML(item, value);
+}
+break;
+case "imageurl":
+if ((item._type == "label") || (item._type == "button") || (item._type == "checkbutton"))
+{
+cachedImage = new Image();
+cachedImage.src = value;
+f_DoLabelImageUrl(item, value);
+}
+break;
+case "style":
+if (item.children.length == 1)
+{
+if ((item._type == "separator") || (item._type == "gripper"))
+{
+item.children[0]._origStyle += ";" + value;
+}
+item.children[0].style.cssText += ";" + value;
+}
+break;
+case "selected":
+if (item._type == "checkbutton")
+{
+if (f_IsSelected(item) != (value.toLowerCase() == "true"))
+{
+_KeyboardClick = true;
+item.click();
+}
+}
+break;
+}
+}
+function f_DoLabelText(item, text)
+{
+f_RemoveTextNodes(item);
+var span = element.document.createElement("SPAN");
+span.innerText = text;
+item.children[0].appendChild(span);
+f_AdjustContents(item);
+}
+function f_DoLabelHTML(item, html)
+{
+f_RemoveTextNodes(item);
+var span = element.document.createElement("SPAN");
+span.innerHTML = html;
+item.children[0].appendChild(span);
+f_AdjustContents(item);
+}
+function f_RemoveTextNodes(item)
+{
+var content = item.children[0];
+if (content.hasChildNodes())
+{
+var index = (content.getAttribute("_imageAdded")) ? 1 : 0;
+while (index < content.childNodes.length)
+content.childNodes[index].removeNode(true);
+}
+}
+function f_DoLabelImageUrl(item, imageUrl)
+{
+var content = item.children[0];
+var imageAdded = content.getAttribute("_imageAdded");
+if (imageAdded && (imageUrl == null))
+{
+content.children[0].removeNode(true);
+content.removeAttribute("_imageAdded", 0);
+if (content.childNodes.length == 0)
+content.innerHTML = "&nbsp;";
+}
+else if (imageUrl == null)
+{
+return;
+}
+else
+{
+if (imageAdded)
+{
+content.children[0].removeNode(true);
+}
+var cacheImage = new Image();
+cacheImage.src = imageUrl;
+var img = element.document.createElement("IMG");
+img.src = cacheImage.src;
+if (content.hasChildNodes())
+content.insertBefore(img, content.childNodes[0]);
+else
+content.insertBefore(img);
+content.setAttribute("_imageAdded", "true", 0);
+}
+f_AdjustContents(item);
+}
+function f_GetItem(nIndex)
+{
+var oParent = f_GetParent();
+if (oParent != null)
+{
+if ((nIndex < 0) || (nIndex >= oParent.children.length))
+return null;
+var oCell = oParent.children[nIndex];
+if (orientation == "vertical")
+{
+if (oCell.children.length > 0)
+return oCell.children[0];
+}
+else
+{
+return oCell;
+}
+}
+return null;
+}
+function f_NumItems()
+{
+var oParent = f_GetParent();
+if (oParent != null)
+{
+return oParent.children.length;
+}
+return 0;
+}
+function f_OnPropertyChange()
+{
+switch (event.propertyName)
+{
+case "innerHTML":
+f_CreateToolbar();
+break;
+case "_submitting":
+_IsSubmitting = (element.getAttribute("_submitting") != null);
+_OnStopCount = 0;
+break;
+case "style.direction":
+_oTable.style.direction = element.style.direction;
+break;
+case "dir":
+_oTable.dir = element.dir;
+break;
+}
+}
+function f_CreateToolbar()
+{
+element.document.releaseCapture();
+f_AddStopEvent();
+if (f_IsMoveable())
+{
+defaults.style.position = "absolute";
+defaults.style.zIndex = "1";
+defaults.style.overflow = "hidden";
+}
+var oTable = element.document.createElement("TABLE");
+var oTBody = element.document.createElement("TBODY");
+_oTable = oTable;
+oTable.style.fontSize = currentStyle.fontSize;
+oTable.style.fontFamily = currentStyle.fontFamily;
+oTable.style.fontWeight = currentStyle.fontWeight;
+oTable.style.color = currentStyle.color;
+oTable.cellSpacing = 0;
+oTable.cellPadding = 0;
+if (element.currentStyle.direction != element.style.direction)
+oTable.style.direction = element.currentStyle.direction;
+else
+oTable.style.direction = element.style.direction;
+oTable.dir = element.dir;
+if (orientation != "vertical")
+{
+var oRow = element.document.createElement("TR");
+oTBody.appendChild(oRow);
+}
+oTable.appendChild(oTBody);
+var aNodes = f_CreateNodesFromHtml(element.innerHTML);
+for (var nIndex = 0; nIndex < aNodes.length; nIndex++)
+{
+f_AppendToolbarItem(aNodes[nIndex]);
+}
+f_ApplyStylesToChildren();
+oTable.attachEvent("onclick", f_OnClick);
+oTable.attachEvent("ondblclick", f_OnClick);
+oTable.attachEvent("onmousedown", f_OnMouseDown);
+oTable.attachEvent("onmouseup", f_OnMouseUp);
+oTable.attachEvent("onmouseover", f_OnMouseOver);
+oTable.attachEvent("onmouseout", f_OnMouseOut);
+oTable.attachEvent("onmousemove", f_Drag);
+oTable.attachEvent("oncontextmenu", f_CancelInteractEvents);
+oTable.attachEvent("onselectstart", f_CancelInteractEvents);
+var oBody = element.document.createElement("BODY");
+var oHtml = element.document.createElement("HTML");
+oBody.appendChild(oTable);
+oHtml.appendChild(oBody);
+defaults.viewLink = oHtml.document;
+_Ready = true;
+defaults.style.display = "block";
+}
+function f_CreateNodesFromHtml(htmlText)
+{
+var oSpan = element.document.createElement("span");
+oSpan.innerHTML = htmlText;
+return f_CreateNodes(oSpan.childNodes);
+}
+function f_CreateNodes(aNodes)
+{
+var tbNodes = new Array();
+var nNumNodes = (aNodes == null) ? 0 : aNodes.length;
+for (var nIndex = 0; nIndex < nNumNodes; nIndex++)
+{
+var node = aNodes[nIndex];
+if (node != null)
+tbNodes = tbNodes.concat(f_CreateToolbarItems(node));
+}
+return tbNodes;
+}
+function f_CreateToolbarItems(oNode)
+{
+var aNodes;
+var szTagName = (oNode.tagName == null) ? "" : oNode.tagName.toLowerCase();
+switch (szTagName)
+{
+case "toolbarbutton":
+aNodes = new Array(f_CreateButton(oNode));
+break;
+case "toolbarcheckbutton":
+aNodes = new Array(f_CreateCheckbutton(oNode));
+break;
+case "toolbarseparator":
+aNodes = new Array(f_CreateSeparator(oNode));
+break;
+case "toolbarcheckgroup":
+aNodes = f_CreateCheckGroup(oNode);
+break;
+case "toolbardropdownlist":
+aNodes = new Array(f_CreateDropDownList(oNode));
+break;
+case "toolbartextbox":
+aNodes = new Array(f_CreateTextBox(oNode));
+break;
+case "toolbarlabel":
+aNodes = new Array(f_CreateLabel(oNode));
+break;
+case "toolbargripper":
+aNodes = new Array(f_CreateGripper(oNode));
+break;
+default:
+aNodes = new Array();
+break;
+}
+for (var nIndex = 0; nIndex < aNodes.length; nIndex++)
+f_AdjustContents(aNodes[nIndex]);
+return aNodes;
+}
+function f_Interactable(oCell)
+{
+switch (oCell._type)
+{
+case "checkbutton":
+case "button":
+return true;
+default:
+return false;
+}
+}
+function f_IsSelected(oCell)
+{
+if (oCell._type != "checkbutton")
+return false;
+var szSelected = oCell.getAttribute("selected");
+return ((szSelected != null) && (String(szSelected).toLowerCase() == "true"));
+}
+function f_SetSelected(oCell, bSelected)
+{
+if (oCell._type != "checkbutton")
+return;
+oCell.setAttribute("selected", bSelected ? "true" : "false", 0);
+}
+function f_CheckButton(oSelected)
+{
+if ((oSelected == null) || (oSelected._type != "checkbutton"))
+return;
+if (oSelected._group != null)
+{
+var oPrevID = oSelected._group.oSelected;
+if (oPrevID != null)
+{
+var oPrevSel = oSelected.document.all[oPrevID];
+if (oPrevSel != null)
+{
+if (oPrevSel.uniqueID == oSelected.uniqueID)
+return;
+f_SetSelected(oPrevSel, false);
+f_ApplyNeutralStyle(oPrevSel);
+oSelected._group.oSelected = null;
+f_FireCheckChange(oPrevSel);
+}
+}
+}
+f_SetSelected(oSelected, true);
+f_ApplyNeutralStyle(oSelected);
+if (oSelected._group != null)
+oSelected._group.oSelected = oSelected.uniqueID;
+f_FireCheckChange(oSelected);
+}
+function f_AppendToolbarItem(oCell)
+{
+var oParent = f_GetParent();
+if ((oCell == null) || (oParent == null))
+return;
+if (orientation == "vertical")
+{
+var trRow = element.document.createElement("TR");
+if (oCell._type == "emptygroup")
+trRow.style.display = "none";
+trRow.appendChild(oCell);
+oParent.appendChild(trRow);
+}
+else
+{
+oParent.appendChild(oCell);
+}
+}
+function f_AdjustContents(oCell)
+{
+if (oCell._turnContent == null)
+oCell._turnContent = false;
+var bTurnContent = false;
+if (turnVerticalContent)
+{
+switch (oCell._type)
+{
+case "label":
+case "button":
+case "checkbutton":
+bTurnContent = (orientation == "vertical");
+break;
+default:
+return;
+}
+if (bTurnContent)
+{
+oCell._turnContent = true;
+oCell.style.writingMode = "tb-rl";
+}
+}
+if (oCell._turnContent && !bTurnContent)
+{
+oCell._turnContent = false;
+oCell.style.writingMode = "lr-tb";
+}
+if (oCell._type == "emptygroup")
+return;
+var oContent = oCell.children[0];
+var len = oContent.children.length;
+for (nIndex = 0; nIndex < len; nIndex++)
+{
+var oObj = oContent.children[nIndex];
+if (oObj.tagName == "IMG")
+{
+oObj.align = (bTurnContent) ? "middle" : "absmiddle";
+}
+}
+}
+function f_CreateGripper(oNode)
+{
+var oCell = element.document.createElement("td");
+var oDiv = element.document.createElement("div");
+oCell.appendChild(oDiv);
+var szStyle = "";
+if ((element.style.writingMode != null) && (element.style.writingMode == "tb-rl"))
+szStyle = (orientation == "vertical") ? _szGripperHorizStyle : _szGripperVertStyle;
+else
+szStyle = (orientation == "vertical") ? _szGripperVertStyle : _szGripperHorizStyle;
+oDiv._origStyle = oNode.style.cssText;
+oDiv.style.cssText = szStyle + ";" + oDiv._origStyle;
+oCell.mergeAttributes(oNode);
+oCell.id = oNode.getAttribute("id");
+oCell._type = "gripper";
+return oCell;
+}
+function f_CreateSeparator(oNode)
+{
+var oCell = element.document.createElement("TD");
+var oDiv = element.document.createElement("DIV");
+oCell.appendChild(oDiv);
+var szStyle;
+if ((element.style.writingMode != null) && (element.style.writingMode == "tb-rl"))
+szStyle = (orientation == "vertical") ? _szSeparatorHorizStyle : _szSeparatorVertStyle;
+else
+szStyle = (orientation == "vertical") ? _szSeparatorVertStyle : _szSeparatorHorizStyle;
+oDiv._origStyle = oNode.style.cssText;
+oDiv.style.cssText = szStyle + ";" + oDiv._origStyle;
+oCell.mergeAttributes(oNode);
+oCell.id = oNode.getAttribute("id");
+oCell._type = "separator";
+return oCell;
+}
+function f_CreateButton(oNode)
+{
+var oCell = f_CreateLabel(oNode);
+if (oCell.tabIndex == 0)
+oCell.tabIndex = 1;
+oCell._type = "button";
+oCell.attachEvent("onkeyup", f_OnKeyUp);
+return oCell;
+}
+function f_CreateCheckbutton(oNode)
+{
+var oCell = f_CreateButton(oNode);
+oCell._type = "checkbutton";
+if (oCell.getAttribute("selected") == null)
+oCell.setAttribute("selected", "false", 0);
+return oCell;
+}
+function f_CreateCheckGroup(oNode)
+{
+var aTempNodes = f_CreateNodesFromHtml(oNode.innerHTML);
+var aNodes = new Array();
+var oGroup = new Object();
+var forceSel = oNode.getAttribute("forceselection");
+oGroup.bForceSel = (forceSel != null) && (String(forceSel).toLowerCase() == "true");
+oGroup.oSelected = null;
+oGroup.szDefaultStyle = oNode.getAttribute("defaultstyle");
+oGroup.szHoverStyle = oNode.getAttribute("hoverstyle");
+oGroup.szSelectedStyle = oNode.getAttribute("selectedstyle");
+var nFirstCheckBtn = -1;
+var bDisabled = oNode.disabled;
+for (var nIndex = 0; nIndex < aTempNodes.length; nIndex++)
+{
+var oCell = aTempNodes[nIndex];
+if (oCell._type == "checkbutton")
+{
+if (nFirstCheckBtn == -1)
+nFirstCheckBtn = nIndex;
+aNodes = aNodes.concat(new Array(oCell));
+if ((oCell.id == null) || (oCell.id == ""))
+{
+oCell.id = oCell.uniqueID;
+}
+oCell._group = oGroup;
+if (f_IsSelected(oCell))
+{
+if (oGroup.oSelected == null)
+{
+oGroup.oSelected = oCell.uniqueID;
+}
+else
+{
+f_SetSelected(oCell, false);
+}
+}
+}
+oCell.disabled = (bDisabled || oCell.isDisabled);
+}
+if (oGroup.bForceSel && (oGroup.oSelected == null) && (nFirstCheckBtn != -1))
+{
+var oCell = aNodes[nFirstCheckBtn];
+oGroup.oSelected = oCell.uniqueID;
+f_SetSelected(oCell, true);
+}
+if (aNodes.length == 0)
+aNodes = new Array(f_CreateEmptyGroup(oGroup));
+return aNodes;
+}
+function f_CreateEmptyGroup(group)
+{
+var empty = element.document.createElement("TD");
+empty._type = "emptygroup";
+empty._group = group;
+empty.style.display = "none";
+return empty;
+}
+function f_CreateLabel(oNode)
+{
+var oCell = element.document.createElement("TD");
+var oContent = element.document.createElement("SPAN");
+oCell.appendChild(oContent);
+var szText = oNode.getAttribute("text");
+var szImageUrl = oNode.getAttribute("imageUrl");
+if (szText == null)
+{
+while (oNode.childNodes.length > 0)
+oContent.appendChild(oNode.childNodes[0].removeNode(true));
+}
+else
+{
+var oText = element.document.createElement("SPAN");
+oText.innerText = szText;
+oContent.appendChild(oText);
+}
+if (szImageUrl != null)
+{
+var cacheImage = new Image();
+cacheImage.src = szImageUrl;
+var oImg = element.document.createElement("IMG");
+oImg.src = cacheImage.src;
+if (oContent.hasChildNodes())
+oContent.insertBefore(oImg, oContent.childNodes[0]);
+else
+oContent.insertBefore(oImg);
+oContent.setAttribute("_imageAdded", "true", 0);
+}
+if (oContent.childNodes.length == 0)
+oContent.innerHTML = "&nbsp;";
+oCell.mergeAttributes(oNode);
+oCell.id = oNode.getAttribute("id");
+oCell.noWrap = "true";
+oCell._type = "label";
+oContent.style.cssText = oNode.style.cssText;
+return oCell;
+}
+function f_CreateTextBox(oNode)
+{
+var oCell = element.document.createElement("td");
+var szType = oNode.getAttribute("type");
+var szValue = oNode.getAttribute("value");
+var szSize = oNode.getAttribute("size");
+var szMaxLength = oNode.getAttribute("maxlength");
+var szReadOnly = oNode.getAttribute("readonly");
+if ((szType == null) || (szType.toLowerCase() != "password"))
+szType = "text";
+var szTabIndex = "1";
+if (oNode.tabIndex != 0)
+szTabIndex = oNode.getAttribute("tabindex");
+oCell.innerHTML = "<input type=\"" + szType + "\">";
+var textbox = oCell.children[0];
+textbox.mergeAttributes(oNode);
+if ((szSize != null) && (szSize != ""))
+textbox.size = szSize;
+if ((szMaxLength != null) && (szMaxLength != ""))
+textbox.maxLength = szMaxLength;
+if ((szTabIndex != null) && (szTabIndex != ""))
+textbox.tabIndex = szTabIndex;
+if ((szValue != null) && (szValue != ""))
+textbox.value = szValue;
+if ((szReadOnly != null) && (szReadOnly != ""))
+textbox.readOnly = szReadOnly;
+var changeScript = oNode.getAttribute("onchange");
+if (changeScript != null)
+textbox.onchange = function() { eval(changeScript) };
+oCell.id = oNode.getAttribute("id");
+oCell._type = "textbox";
+oCell.noWrap = "true";
+var szDefaultStyle = oNode.getAttribute("defaultStyle");
+var fontStr = f_CreateFontString(oNode);
+szDefaultStyle = (szDefaultStyle == null) ? fontStr : fontStr + szDefaultStyle;
+if (szDefaultStyle != null)
+{
+oCell.setAttribute("defaultStyle", szDefaultStyle, 0);
+oCell.children[0].removeAttribute("defaultStyle", 0);
+}
+return oCell;
+}
+function f_CreateFontString(oNode)
+{
+var fontStr = "";
+if (oNode.style.fontFamily)
+fontStr += "font-family:" + oNode.style.fontFamily + ";";
+if (oNode.style.fontSize)
+fontStr += "font-size:" + oNode.style.fontSize + ";";
+if (oNode.style.fontStyle)
+fontStr += "font-style:" + oNode.style.fontStyle + ";";
+if (oNode.style.fontVariant)
+fontStr += "font-variant:" + oNode.style.fontVariant + ";";
+if (oNode.style.fontWeight)
+fontStr += "font-weight:" + oNode.style.fontWeight + ";";
+return fontStr;
+}
+function f_InheritCellFont(oCell)
+{
+oCell.children[0].style.fontFamily = oCell.style.fontFamily;
+oCell.children[0].style.fontSize = oCell.style.fontSize;
+oCell.children[0].style.fontStyle = oCell.style.fontStyle;
+oCell.children[0].style.fontVariant = oCell.style.fontVariant;
+oCell.children[0].style.fontWeight = oCell.style.fontWeight;
+}
+function f_CreateDropDownList(oNode)
+{
+var oCell = element.document.createElement("td");
+var szTabIndex = "1";
+if (oNode.tabIndex != 0)
+szTabIndex = oNode.getAttribute("tabindex");
+var szHtml = "<select"
+if ((szTabIndex != null) && (szTabIndex != ""))
+szHtml += " tabindex=\"" + szTabIndex + "\"";
+szHtml += ">";
+szHtml += oNode.innerHTML;
+szHtml += "</select>";
+oCell.innerHTML = szHtml;
+oCell.children[0].mergeAttributes(oNode);
+oCell.children[0].disabled = oNode.isDisabled || element.isDisabled;
+oCell.id = oNode.getAttribute("id");
+oCell._type = "dropdownlist";
+oCell.noWrap = "true";
+var changeScript = oNode.getAttribute("onchange");
+if (changeScript != null)
+oCell.children[0].onchange = function() { eval(changeScript) };
+var szDefaultStyle = oNode.getAttribute("defaultStyle");
+var fontStr = f_CreateFontString(oNode);
+szDefaultStyle = (szDefaultStyle == null) ? fontStr : fontStr + szDefaultStyle;
+if (szDefaultStyle != null)
+{
+oCell.setAttribute("defaultStyle", szDefaultStyle, 0);
+oCell.children[0].removeAttribute("defaultStyle", 0);
+}
+return oCell;
+}
+function f_ApplyStylesToChildren()
+{
+var globalDefault = _BuiltInDefaultStyle + ";" + _tbDefaultStyle + ";";
+var globalHover = _BuiltInHoverStyle + ";" + _tbHoverStyle + ";";
+var globalSelected = _BuiltInSelectedStyle + ";" + _tbSelectedStyle + ";";
+var numItems = f_NumItems();
+var index;
+for (index = 0; index < numItems; index++)
+{
+var item = f_GetItem(index);
+var isButton = (item._type == "button");
+var isCheckButton = (item._type == "checkbutton");
+var hasGroup = (isCheckButton && (item._group != null));
+var localDefault = item.getAttribute("defaultStyle");
+var groupStyle = ";";
+if (item._turnContent)
+localDefault += ";writing-mode:tb-rl;";
+if (isButton || isCheckButton)
+{
+item._defaultStyle = globalDefault;
+if (hasGroup && (item._group.szDefaultStyle != null))
+item._defaultStyle += item._group.szDefaultStyle + ";";
+item._defaultStyle += localDefault + ";";
+item._hoverStyle = item._defaultStyle + globalHover;
+if (hasGroup && (item._group.szHoverStyle != null))
+item._hoverStyle += item._group.szHoverStyle + ";";
+item._hoverStyle += item.getAttribute("hoverStyle") + ";";
+item._selectedStyle = item._defaultStyle + globalSelected;
+if (hasGroup && (item._group.szSelectedStyle != null))
+item._selectedStyle += item._group.szSelectedStyle + ";";
+item._selectedStyle += item.getAttribute("selectedStyle") + ";";
+f_ApplyNeutralStyle(item);
+}
+else if (item._type != "emptygroup")
+{
+item.style.cssText = globalDefault + localDefault;
+if ((item._type == "dropdownlist") || (item._type == "textbox"))
+f_InheritCellFont(item);
+}
+}
+}
+function f_ApplyNeutralStyle(oCell)
+{
+switch (oCell._type)
+{
+case "checkbutton":
+oCell.style.cssText = (f_IsSelected(oCell)) ? oCell._selectedStyle : oCell._defaultStyle;
+break;
+case "button":
+oCell.style.cssText = oCell._defaultStyle;
+break;
+}
+}
+function f_ApplyPressedStyle(oCell)
+{
+switch (oCell._type)
+{
+case "checkbutton":
+oCell.style.cssText = oCell._selectedStyle;
+break;
+case "button":
+oCell.style.cssText = oCell._selectedStyle;
+break;
+}
+}
+function f_ApplyHoverStyle(oCell)
+{
+switch (oCell._type)
+{
+case "checkbutton":
+oCell.style.cssText = (f_IsSelected(oCell)) ? oCell._selectedStyle : oCell._hoverStyle;
+break;
+case "button":
+oCell.style.cssText = oCell._hoverStyle;
+break;
+}
+}
+function f_OnMouseOver()
+{
+if (_IsSubmitting || !_Ready)
+return;
+if (_bDragging)
+return;
+var oCell = f_FindSurroundingCell(event.srcElement);
+if ((oCell != null) && !oCell.contains(event.fromElement))
+{
+if (!f_Interactable(oCell) || oCell.isDisabled)
+return;
+if (_oInteractNode != null)
+{
+if (_oInteractNode == oCell)
+f_ApplyPressedStyle(oCell);
+}
+else
+{
+f_ApplyHoverStyle(oCell);
+}
+}
+}
+function f_OnMouseOut()
+{
+if (_IsSubmitting || !_Ready)
+return;
+if (_bDragging)
+return;
+var oCell = f_FindSurroundingCell(event.srcElement);
+if ((oCell != null) && !oCell.contains(event.toElement))
+{
+if (!f_Interactable(oCell) || oCell.isDisabled)
+return;
+if (_oInteractNode != null)
+{
+if (_oInteractNode == oCell)
+f_ApplyHoverStyle(oCell);
+}
+else
+{
+f_ApplyNeutralStyle(oCell);
+}
+}
+}
+function f_OnMouseDown()
+{
+if (_IsSubmitting || !_Ready)
+return;
+if (event.button != 1)
+return;
+var oCell = f_FindSurroundingCell(event.srcElement);
+if ((oCell != null) && (f_Interactable(oCell)))
+{
+f_SetCapture();
+if (oCell.isDisabled)
+return;
+f_ApplyPressedStyle(oCell);
+_oInteractNode = oCell;
+}
+else if (f_IsMoveable())
+{
+if ((oCell == null) ||
+(oCell._type == "gripper"))
+{
+f_SetCapture();
+f_StartDrag();
+}
+}
+}
+function f_OnMouseUp()
+{
+if (_IsSubmitting || !_Ready)
+return;
+if (event.button != 1)
+return;
+f_ReleaseCapture();
+if (_oInteractNode != null)
+{
+f_ApplyNeutralStyle(_oInteractNode);
+_oInteractNode = null;
+}
+f_StopDrag();
+f_OnMouseOver();
+}
+function f_OnKeyUp()
+{
+if (_IsSubmitting || !_Ready)
+return;
+if ((event.srcElement.accessKey != null) && event.altKey &&
+(event.srcElement.accessKey.toUpperCase().charCodeAt() == event.keyCode))
+{
+event.srcElement.click();
+}
+else
+{
+switch (event.keyCode)
+{
+case 13:
+case 32:
+var oCell = f_FindSurroundingCell(event.srcElement);
+if (oCell != null)
+{
+_KeyboardClick = true;
+oCell.click();
+}
+break;
+}
+}
+}
+function f_StartDrag()
+{
+_nLastScreenX = event.screenX;
+_nLastScreenY = event.screenY;
+_nLastClientX = event.clientX;
+_nLastClientY = event.clientY;
+_bDragging = true;
+}
+function f_StopDrag()
+{
+_bDragging = false;
+}
+function f_Least (a, b, c, d)
+{
+return ((a < b) && (a < c) && (a < d));
+}
+function f_Drag()
+{
+if (!_bDragging || (event.button != 1))
+{
+return;
+}
+var nNewLeft = offsetLeft + event.screenX - _nLastScreenX;
+var nNewTop = offsetTop + event.screenY - _nLastScreenY;
+_nLastScreenX = event.screenX;
+_nLastScreenY = event.screenY;
+var oBody = f_FindSurroundingBody();
+if (oBody == null)
+return;
+var nDeltaLeft = (offsetLeft + event.clientX) - oBody.scrollLeft;
+var nDeltaTop = (offsetTop + event.clientY) - oBody.scrollTop;
+var nDeltaRight = (oBody.scrollLeft + oBody.clientWidth) - (offsetLeft + event.clientX);
+var nDeltaBottom = (oBody.scrollTop + oBody.clientHeight) - (offsetTop + event.clientY);
+var nMaxDelta = 10;
+if (f_IsDockable() &&
+((nDeltaLeft <= nMaxDelta) || (nDeltaTop <= nMaxDelta) || (nDeltaBottom <= nMaxDelta) || (nDeltaRight <= nMaxDelta)))
+{
+if ((!_bDocked && (nDeltaTop <= nMaxDelta)) ||
+(_bDocked && (_szDockedLocation != "top") && f_Least(nDeltaTop, nDeltaBottom, nDeltaLeft, nDeltaRight)))
+{
+if (!_bDocked)
+_PreDockOrientation = orientation;
+f_ReleaseCapture();
+_oTable.releaseCapture();
+orientation = "horizontal";
+f_SetCapture();
+style.removeExpression("height");
+style.height = "";
+style.setExpression("left", "scrollLeft-scrollLeft+document.body.scrollLeft", "JavaScript");
+style.setExpression("top", "scrollTop-scrollTop+document.body.scrollTop", "JavaScript");
+style.setExpression("width", "document.body.clientWidth");
+_bDocked = true;
+_szDockedLocation = "top";
+}
+else if ((!_bDocked && (nDeltaLeft <= nMaxDelta)) ||
+(_bDocked && (_szDockedLocation != "left") && f_Least(nDeltaLeft, nDeltaTop, nDeltaBottom, nDeltaRight)))
+{
+if (!_bDocked)
+_PreDockOrientation = orientation;
+f_ReleaseCapture();
+orientation = "vertical";
+f_SetCapture();
+style.removeExpression("width");
+style.width = "";
+style.height = oBody.clientHeight;
+style.setExpression("left", "scrollLeft-scrollLeft+document.body.scrollLeft", "JavaScript");
+style.setExpression("top", "scrollTop-scrollTop+document.body.scrollTop", "JavaScript");
+style.setExpression("height", "document.body.clientHeight");
+_bDocked = true;
+_szDockedLocation = "left";
+}
+else if ((!_bDocked && (nDeltaBottom <= nMaxDelta)) ||
+(_bDocked && (_szDockedLocation != "bottom") && f_Least(nDeltaBottom, nDeltaTop, nDeltaLeft, nDeltaRight)))
+{
+if (!_bDocked)
+_PreDockOrientation = orientation;
+f_ReleaseCapture();
+orientation = "horizontal";
+f_SetCapture();
+style.removeExpression("height");
+style.height = "";
+style.setExpression("left", "scrollLeft-scrollLeft+document.body.scrollLeft", "JavaScript");
+style.setExpression("top", "scrollTop-scrollTop+document.body.scrollTop+document.body.clientHeight-offsetHeight", "JavaScript");
+style.setExpression("width", "document.body.clientWidth");
+_bDocked = true;
+_szDockedLocation = "bottom";
+}
+else if ((!_bDocked && (nDeltaRight <= nMaxDelta)) ||
+(_bDocked && (_szDockedLocation != "right") && f_Least(nDeltaRight, nDeltaTop, nDeltaBottom, nDeltaLeft)))
+{
+if (!_bDocked)
+_PreDockOrientation = orientation;
+f_ReleaseCapture();
+orientation = "vertical";
+f_SetCapture();
+style.removeExpression("width");
+style.width = "";
+style.height = oBody.clientHeight;
+style.setExpression("left", "scrollLeft-scrollLeft+document.body.scrollLeft+document.body.clientWidth-offsetWidth", "JavaScript");
+style.setExpression("top", "scrollTop-scrollTop+document.body.scrollTop", "JavaScript");
+style.setExpression("height", "document.body.clientHeight");
+_bDocked = true;
+_szDockedLocation = "right";
+}
+}
+else if (_bDocked)
+{
+f_ReleaseCapture();
+orientation = _PreDockOrientation;
+_PreDockOrientation = "";
+f_SetCapture();
+style.removeExpression("left");
+style.removeExpression("top");
+style.removeExpression("width");
+style.removeExpression("height");
+style.width = "";
+style.height = "";
+style.left = offsetLeft + (event.clientX - _nLastClientX);
+style.top = offsetTop + (event.clientY - _nLastClientY);
+_bDocked = false;
+}
+else if (!_bDocked)
+{
+style.left = nNewLeft;
+style.top = nNewTop;
+}
+}
+function f_SelectItem(oCell)
+{
+if (!f_Interactable(oCell))
+return;
+if (oCell._type == "checkbutton")
+{
+if (!f_IsSelected(oCell))
+{
+f_CheckButton(oCell);
+}
+else if ((oCell._group == null) || (!oCell._group.bForceSel))
+{
+f_SetSelected(oCell, false);
+if (oCell._group != null)
+{
+oCell._group.oSelected = null;
+}
+f_FireCheckChange(oCell);
+}
+if (_KeyboardClick)
+f_ApplyNeutralStyle(oCell);
+else
+f_ApplyHoverStyle(oCell);
+}
+f_FireButtonClick(oCell);
+}
+function f_OnClick()
+{
+if (_IsSubmitting || !_Ready)
+return;
+var oCell = f_FindSurroundingCell(event.srcElement);
+if ((oCell != null) && (!oCell.isDisabled))
+f_SelectItem(oCell);
+_KeyboardClick = false;
+}
+function f_FindSurroundingCell(oNode)
+{
+while (oNode != null)
+{
+if (oNode._type != null)
+return oNode;
+oNode = oNode.offsetParent;
+}
+return null;
+}
+function f_FindSurroundingBody()
+{
+var oParent = element.offsetParent;
+while (oParent.tagName != "BODY")
+{
+oParent = oParent.offsetParent;
+if (oParent == null)
+return;
+}
+return oParent;
+}
+function f_CancelInteractEvents()
+{
+var oCell = f_FindSurroundingCell(event.srcElement);
+if (oCell == null)
+{
+event.returnValue = false;
+}
+else
+{
+switch (oCell._type)
+{
+case "button":
+case "checkbutton":
+case "separator":
+case "gripper":
+case "label":
+event.returnValue = false;
+break;
+}
+}
+}
+function f_FireCheckChange(oCell)
+{
+evCheckChange.fire(f_CreateEventObject(oCell));
+}
+function f_FireButtonClick(oCell)
+{
+evButtonClick.fire(f_CreateEventObject(oCell));
+}
+function f_CreateEventObject(oCell)
+{
+var oEvent= createEventObject();
+if (oCell != null)
+{
+oEvent.srcNode = f_PublicMakeContract(oCell);
+var nIndex = f_GetIndexFromCell(oCell);
+if (nIndex >= 0)
+oEvent.flatIndex = nIndex;
+}
+return oEvent;
+}
+function f_GetIndexFromCell(oCell)
+{
+var oParent = f_GetParent();
+var nIndex;
+if (orientation == "vertical")
+{
+oCell = oCell.parentElement;
+}
+for (nIndex = 0; nIndex < oParent.children.length; nIndex++)
+{
+if (oCell.uniqueID == oParent.children[nIndex].uniqueID)
+{
+return nIndex;
+}
+}
+return -1;
+}
+function f_SetCapture()
+{
+f_ReleaseCapture();
+_oTable.setCapture();
+}
+function f_ReleaseCapture()
+{
+_oTable.releaseCapture();
+}
+function f_OnStop()
+{
+if (!_IsSubmitting || (_OnStopCount > 0))
+{
+_IsSubmitting = false;
+element.removeAttribute("_submitting");
+}
+_OnStopCount++;
+}
+function f_CleanupEvents()
+{
+var eventArray = window.__toolbarAttachedEvents;
+if ((eventArray != null) && (eventArray[0]))
+{
+var newArray = new Array(false);
+for (var i = 1; i < eventArray.length; i++)
+{
+if (element.document.all[eventArray[i][0]] == null)
+{
+element.document.detachEvent("onstop", eventArray[i][1]);
+}
+else
+{
+newArray = newArray.concat(new Array(eventArray[i]));
+}
+}
+window.__toolbarAttachedEvents = newArray;
+}
+}
+function f_AddStopEvent()
+{
+var eventArray = window.__toolbarAttachedEvents;
+if (eventArray == null)
+{
+eventArray = new Array(false);
+}
+element.document.attachEvent("onstop", f_OnStop);
+eventArray[0] = true;
+entry = new Array(element.uniqueID, f_OnStop);
+window.__toolbarAttachedEvents = eventArray.concat(new Array(entry));
+}
+function f_OnDocReady()
+{
+f_CleanupEvents();
+}
+</script>
+</public:component>

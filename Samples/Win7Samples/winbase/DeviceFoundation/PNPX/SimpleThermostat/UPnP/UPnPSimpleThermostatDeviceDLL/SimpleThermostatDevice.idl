@@ -1,0 +1,50 @@
+//////////////////////////////////////////////////////////////////////
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES 
+// OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+//
+//////////////////////////////////////////////////////////////////////
+import "upnphost.idl";
+
+[
+    uuid(ac7014a6-5163-4c9b-8fdc-15dd356e45ba),
+    helpstring("Simple Thermostat Device Type Library"),
+    version(1.0)
+]
+library SimpleThermostatDeviceLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        object,
+        uuid(8c5ee4b9-d9c0-4520-9c0d-de067e6c6125),
+        helpstring("ISimpleThermostat_UPnPService Interface")
+    ]
+    interface ISimpleThermostat_UPnPService: IUnknown
+    {
+        //
+        // These first two functions are required by UPnP. Each state variable
+        // defined in your Service XML file must have a get_ function to
+        // access it. The other three functions are the real SimpleThermostat
+        // ones.
+        //
+        [propget] HRESULT currentTemp( [out, retval] long* plTemp );
+        [propget] HRESULT desiredTemp( [out, retval] long* plTemp );
+        HRESULT GetCurrentTemp( [in, out] long* plTempOut );
+        HRESULT GetDesiredTemp( [in, out] long* plTempOut );
+        HRESULT SetDesiredTemp( [in] long lTemp );
+    };
+
+    [
+        uuid(ad13c187-bbc2-4378-a439-fe6a8539bf06)
+    ]
+    coclass SimpleThermostatDevice
+    {
+        [default] interface IUnknown;
+    };
+};
+

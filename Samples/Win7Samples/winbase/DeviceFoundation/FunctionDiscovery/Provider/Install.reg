@@ -1,0 +1,60 @@
+Windows Registry Editor Version 5.00
+
+; TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
+;
+; This registry file serves as a sample of the registry keys that are
+; required to register the COM object that represent the Function Discovery
+; provider, its host EXE and registration with PNP-X.
+;
+; To use the sample this file can be used with RegEdit.exe to import these
+; values into the registry.  In production code, the product's MSI 
+; or INF will create these registry keys.
+;
+; IMPORTANT: Every COM object must have its own CLSID and APPID, DO NOT use
+; the values provided in this sample.
+;
+; TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
+
+
+; Register the CLSID for the provider
+[HKEY_CLASSES_ROOT\CLSID\{8C19066A-643A-4586-92B2-A785B90D766F}]
+@="Function Discovery Provider Sample"
+"AppID"="{71F70024-0C44-4a05-A918-651F41EF8548}"
+
+[HKEY_CLASSES_ROOT\CLSID\{8C19066A-643A-4586-92B2-A785B90D766F}\InprocServer32]
+@="C:\\Program Files\\Microsoft SDKs\\Windows\\v6.0\\Samples\\FunctionDiscoveryProvider\\Debug\\FDProviderSample.dll"
+"ThreadingModel" = "Free"
+
+[HKEY_CLASSES_ROOT\CLSID\{8C19066A-643A-4586-92B2-A785B90D766F}\LocalServer32]
+@="C:\\Program Files\\Microsoft SDKs\\Windows\\v6.0\\Samples\\FunctionDiscoveryProvider\\Debug\\FDProviderHostSample.exe"
+
+; Create the APPID for the provider
+[HKEY_CLASSES_ROOT\AppID\{71F70024-0C44-4a05-A918-651F41EF8548}]
+@="Function Discovery Provider Sample"
+"RunAs"="nt authority\\localservice"
+"AccessPermission"=hex:01,00,04,80,84,00,00,00,94,00,00,00,00,00,00,00,14,00,\
+  00,00,02,00,70,00,05,00,00,00,00,00,14,00,03,00,00,00,01,01,00,00,00,00,00,\
+  05,12,00,00,00,00,00,14,00,03,00,00,00,01,01,00,00,00,00,00,05,13,00,00,00,\
+  00,00,18,00,03,00,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,\
+  00,14,00,03,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,03,00,\
+  00,00,01,01,00,00,00,00,00,05,14,00,00,00,01,02,00,00,00,00,00,05,20,00,00,\
+  00,20,02,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00
+"LaunchPermission"=hex:01,00,04,80,84,00,00,00,94,00,00,00,00,00,00,00,14,00,\
+  00,00,02,00,70,00,05,00,00,00,00,00,14,00,0b,00,00,00,01,01,00,00,00,00,00,\
+  05,12,00,00,00,00,00,14,00,0b,00,00,00,01,01,00,00,00,00,00,05,13,00,00,00,\
+  00,00,18,00,0b,00,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,\
+  00,14,00,0b,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,0b,00,\
+  00,00,01,01,00,00,00,00,00,05,14,00,00,00,01,02,00,00,00,00,00,05,20,00,00,\
+  00,20,02,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00
+
+; Create an host process APPID
+[HKEY_CLASSES_ROOT\AppID\FDProviderHostSample.exe]
+"AppID"="{71F70024-0C44-4a05-A918-651F41EF8548}"
+
+; Register the CLSID as a Function Discovery provider
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Function Discovery\Categories\Provider\Sample.FDProvider]
+"00000000"="<provider type='{8C19066A-643A-4586-92B2-A785B90D766F}' />"
+
+; Add the provider to the list of Network device providers
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Function Discovery\Categories\Layered\Microsoft.Networking.Devices\SampleFDProvider]
+"00000000"="<categoryMetadata name='SampleFDProvider'><queryDefinition><category identity='Provider\\Sample.FDProvider'/></queryDefinition></categoryMetadata>"

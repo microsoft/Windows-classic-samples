@@ -1,0 +1,208 @@
+
+BODY {
+		margin:0;
+		background:white;
+		font-family:verdana;
+		font-size:80%; }
+
+H3 {	
+		font-size:11pt;
+		margin-bottom: 4px;
+		padding-bottom: 4px;
+		border-bottom:1px solid #cccccc;
+		font-weight:bold}
+		
+PRE { 
+		margin:0 }
+		
+BUTTON { 
+		background:#666666; 
+		border:1px solid black; 
+		border-top:1px solid #cccccc; 
+		border-left:1px solid #cccccc; 
+		cursor:hand; color:white; 
+		font-weight:bold; 
+		font-family:verdana; 
+		width:110px }
+		
+a:link {
+		text-decoration:none;
+		color:white }
+		
+a:visited {
+		text-decoration:none;
+		color:white }
+
+a:active {
+		text-decoration:none;
+		color:white }
+		
+a:hover {
+		text-decoration:none;
+		color:yellow }
+		
+.bar {
+		background:#336699;
+		width:100%;
+		border-top:1px solid #99CCFF;
+		border-bottom:1px solid #000000; }
+		
+
+.desbar {
+		background:#FFFFFF; 
+		width:100%;
+		padding: 10px;
+		border-top:1px solid #CCCCCC;
+		border-bottom:1px solid #000000;
+		color:black; 
+		font-size:9pt;
+		height:55; }
+		
+.title {
+		font-size:15pt;
+		color:white;
+		padding-left:10px; }
+	
+.lpanelcont {
+		position:absolute; 
+		top:0; 
+		left:0; 
+		width:350px; 
+		height:317; 
+		overflow:hidden; 
+		z-index:2 }
+		
+.rightPanel {
+		position:absolute; 
+		top:37; 
+		left:420; }
+		
+.buttonholder {
+		border-bottom:1px solid #336699;
+		padding:7px; 
+		text-align:center}
+
+.outerblue {
+		border-top:1px solid #336699;
+		padding:5px; 
+		padding-top:0px;
+		height:276px; 
+		overflow:hidden }
+		
+.innerwhite {
+		background:white; 
+		height:100%; 
+		width:100%; 
+		padding:5px; 
+		border:1px solid black; }
+
+.descHints {
+		padding:5px; 
+		background:#e4e4e4; 
+		font-size:8pt;
+		width:100%;
+		height:133px; }
+
+.descHilite {
+		color:red }
+
+.controlTitle {
+		border-bottom:1px solid #cccccc; 
+		font-weight:bold; 
+		padding:5px; 
+		cursor:hand; 
+		background:white; 
+		text-align:center}
+
+.copyBar {
+		margin-top:5px; 
+		text-align:left; 
+		border-top:1px solid #cccccc; 
+		font-weight:bold; 
+		font-family:verdana; 
+		font-size:9pt; 
+		padding:5px; 
+		cursor:hand; 
+		background:#cccccc; }
+
+.codeHilite {
+		color:red; 
+		font-size:9pt; 
+		font-family:verdana; }
+
+.controlpanel
+	{
+	position:absolute;
+	top:20;
+	left:0;
+	width:400px;
+	height:330px;
+	background-color:#6699CC;
+	z-index:1;
+	border:1px solid #99CCFF;
+	border-right:1px solid #000000;
+	border-bottom:1px solid #000000;
+	padding:2px;
+	padding-top:5px;
+	text-align:left;
+	}
+	
+.cpcontent
+	{
+	position:absolute;
+	width:100%;
+	height:320px;
+	background-color:white;
+	z-index:1;
+	border:2px solid #336699;
+	border-bottom:2px solid #99CCFF;
+	font-family:verdana;
+	font-size:10pt;
+	font-weight:normal;
+	padding:0px;
+	text-align:left;
+	overflow:hidden;
+	scrollbar-base-color:#cccccc;
+	display:none;
+	}
+	
+.tab {
+	position:absolute;
+	width:90;
+	height:25px;
+	top:3px;
+	left:2;
+	z-index:1;
+	cursor:hand;
+	font-family:verdana;
+	font-size:8pt;
+	font-weight:normal;
+	color:white;
+	text-align:center;
+	padding-top:2px;
+	background-image: url(UI_graytab.gif);
+	background-repeat:no-repeat;
+	}
+
+.btover { 
+		background:#666666; 
+		border:1px solid black; 
+		border-top:1px solid #cccccc; 
+		border-left:1px solid #cccccc; 
+		cursor:hand; color:white; 
+		font-weight:bold; 
+		font-family:verdana; 
+		width:110px }
+		
+.cDescText {
+		width:100%; height:133px;
+		padding-top:10px;
+		}
+TD {font-size:70%}
+BODY { font-family:tahoma; font-size:80%;}
+.attrib {color:red; font-size:8pt; font-family:verdana;}
+.staticAttrib {color:blue; font-size:8pt; font-family:verdana;}
+.basic {border: 4px solid black; width:250;height:250; filter:progid:DXImageTransform.Microsoft.Gradient(); color:white;font-size:28; font-family:trebuceht; font-weight:bold; text-align:center}
+.specialI {font-size:15pt; font-family:arial; color:#000000; font-weight:bold;}
+
+

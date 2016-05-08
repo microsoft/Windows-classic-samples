@@ -1,0 +1,1149 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>Filters and Transitions Interactive Demo</TITLE>
+<STYLE TYPE="text/css">
+IMG {border:2px solid black}
+BODY{ 
+margin:0;
+background:white;
+font-family:verdana;
+font-size:80%;
+}
+.bar{
+background:#336699;
+width:100%;
+height:30px;
+border-top:1px solid #99CCFF;
+border-bottom:1px solid #000000;
+}
+.desbar{
+background:#FFFFFF;
+width:100%;
+padding: 10px;
+border-top:1px solid #CCCCCC;
+border-bottom:1px solid #000000;
+color:black; 
+font-size:8pt;
+}
+.title{
+font-size:15pt;
+color:white;
+padding-left:10px;
+}
+.close{
+font-size:8pt;
+color:white;
+padding-left:10px;
+}
+PRE { margin:0}
+
+a:link
+{
+text-decoration:none;
+color:white
+}
+a:visited
+{
+text-decoration:none;
+color:white
+}
+a:active
+{
+text-decoration:none;
+color:white
+}
+a:hover
+{
+text-decoration:none;
+color:yellow
+}
+SELECT { font-size:9pt; border:2px; }
+</style>
+
+<SCRIPT LANGUAGE="javascript">
+var browserCapable = true;	// Prevents errors on downlevel browsers
+var startImage = "fruit.gif";     // /workshop/graphics/
+var endImage = "mouse.gif";
+var featuresHeader = "<B>Features:</B><BR>"
+var sSinQut ="'";
+var sRandomBarsOrientationText="";
+
+function copy2Clipboard()
+{
+  // Copy displayed code to user's clipboard.
+  var textRange = document.body.createTextRange();
+  textRange.moveToElementText(oCodeSpan);
+  textRange.execCommand("Copy");
+}
+
+function highlightText(whatToHighlight) {
+  var oRng = document.body.createTextRange();
+  oRng.moveToElementText(oCodePre);
+  oRng.execCommand("RemoveFormat");
+  var oHL = document.body.createTextRange();
+  oHL.moveToElementText(oCodePre);
+  oHL.findText(whatToHighlight);
+  oHL.execCommand("Bold");
+}
+
+function switchContent(obj) {
+    oContentHolder.innerHTML=obj.innerHTML;
+    oImg.src=startImage;
+    if (obj==filterSection){
+        changeFilter();
+        updateFilterCode();
+    }
+    else {
+	    imgObjText.innerHTML = "<BR><b>First Page</b><BR><BR>Using the <B>apply</B> method prepares this SPAN element for content changes.";
+        changeTrans();
+        updateTransCode();
+    }
+}
+
+function getControlObject(controlName) {
+    var obj=null;    
+
+   for (x=0; x < document.all(controlName).length; x++) {
+       objTemp = document.all(controlName,x);
+       if (objTemp.parentElement.isSource==null) {
+           obj=objTemp;
+       }
+    }
+    return(obj);
+}
+
+function disableControlObject(controlName) {
+
+   for (x=0; x < document.all(controlName).length; x++) {
+      document.all(controlName,x).disabled=true;
+    }
+}
+
+function enableControlObject(controlName) {
+
+   for (x=0; x < document.all(controlName).length; x++) {
+      document.all(controlName,x).disabled=false;
+    }
+}
+
+function changeFilter() {
+    var selectObject = getControlObject("oSelect");
+    var selectedValue = selectObject.options[selectObject.selectedIndex].value;
+    var transitionAsFilter = selectObject.options[selectObject.selectedIndex].TRANS;
+
+    imgObjText.innerHTML = "<BR>The image, dark red text, and sky blue background make up the content of the filtered SPAN.";
+    imgObj.style.backgroundColor='skyblue';
+    imgObj.style.color='darkred';
+    if (selectedValue != "empty") {
+        if (selectedValue.indexOf('AlphaImageLoader')!=-1) {
+            oControlsSpan.innerHTML = oAlphaImageLoaderControls.innerHTML;
+        alphaImageLoaderFilterChange();
+        }
+        else if (selectedValue.indexOf('Blur')!=-1) {
+            imgObj.style.backgroundColor='';        
+            imgObjText.innerHTML = "<BR>The image, dark red text, and sky blue background make up the content of the filtered SPAN.";
+            oControlsSpan.innerHTML = oBlurControls.innerHTML;
+            blurFilterChange();
+        }
+        else if (selectedValue.indexOf('Alpha')!=-1) {
+            oControlsSpan.innerHTML = oAlphaControls.innerHTML;
+        alphaFilterChange();
+        }
+        else if (selectedValue.indexOf('Emboss')!=-1) {
+            oControlsSpan.innerHTML = "";
+            embossFilterChange();
+        }
+        else if (selectedValue.indexOf('Engrave')!=-1) {
+            oControlsSpan.innerHTML = "";
+            engraveFilterChange();
+        }
+        else if (selectedValue.indexOf('Pixelate')!=-1) {
+            oControlsSpan.innerHTML = oPixelateFilterControls.innerHTML;
+            pixelateFilterChange();
+        }
+        else if (selectedValue.indexOf('DropShadow')!=-1) {
+            imgObj.style.backgroundColor='';        
+            imgObjText.innerHTML = "<BR>The image, dark red text, and sky blue background make up the content of the filtered SPAN.";
+            oControlsSpan.innerHTML = oDropShadowControls.innerHTML;
+            dropShadowFilterChange();
+        }
+        else if (selectedValue.indexOf('Chroma')!=-1) {
+            oControlsSpan.innerHTML = oChromaControls.innerHTML;
+            chromaFilterChange();
+        }
+        else if (selectedValue.indexOf('BasicImage')!=-1) {
+            oControlsSpan.innerHTML = oBasicImageControls.innerHTML;
+            basicImageFilterChange();
+        }
+        else {
+            imgObj.style.filter=selectedValue;
+            oControlsSpan.innerHTML = '';
+        }
+        if (oControlsSpan.innerHTML!='') {
+            oControlsSpan.innerHTML = featuresHeader + oControlsSpan.innerHTML;
+        }
+        if (transitionAsFilter == "TRUE") {
+            oControlsSpan.innerHTML = oControlsSpan.innerHTML + oGlobalControls.innerHTML;
+            progressChange();
+        }
+    }
+    else {
+            imgObj.style.filter='';
+            oControlsSpan.innerHTML = featuresHeader + 'No filter is currently selected.';
+    }
+    updateFilterCode();       
+}
+
+function updateFilterCode() {
+    oCodePre.innerText=imgObj.outerHTML;
+}
+
+function alphaFilterChange(){
+    var cmd;
+    var controlObject = getControlObject("styleList");
+    var style = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("opacityList");
+    var opacity = controlObject.options[controlObject.selectedIndex].value;
+
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Alpha( " ;
+    cmd  = cmd + "style=" + style + ",opacity=" + opacity ;
+
+    if (style!=0){
+        controlObject = getControlObject("finishOpacityList");
+        enableControlObject("finishOpacityList");
+        var finishOpacity = controlObject.options[controlObject.selectedIndex].value;
+        
+        cmd  = cmd + ",finishOpacity=" + finishOpacity ;
+
+        if (style==1){
+            controlObject = getControlObject("startXList");
+            enableControlObject("startXList");
+            var startX = controlObject.options[controlObject.selectedIndex].value;
+            controlObject = getControlObject("finishXList");
+            enableControlObject("finishXList");
+            var finishX = controlObject.options[controlObject.selectedIndex].value;
+
+            controlObject = getControlObject("startYList");
+            enableControlObject("startYList");
+            var startY = controlObject.options[controlObject.selectedIndex].value;
+            controlObject = getControlObject("finishYList");
+            enableControlObject("finishYList");
+            var finishY = controlObject.options[controlObject.selectedIndex].value;
+
+            cmd  = cmd + ",startX=" + startX + ",finishX=" + finishX ;
+            cmd  = cmd + ",startY=" + startY + ",finishY=" + finishY;
+        }
+        else{
+            disableControlObject("startXList");
+            disableControlObject("finishXList");
+            disableControlObject("startYList");
+            disableControlObject("finishYList");
+        }
+        
+    } 
+    else{
+        disableControlObject("finishOpacityList");
+        disableControlObject("startXList");
+        disableControlObject("finishXList");
+        disableControlObject("startYList");
+        disableControlObject("finishYList");
+    }
+   
+    cmd  = cmd + ")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+function alphaImageLoaderFilterChange(){
+    var cmd; 
+    var controlObject = getControlObject("srcList");
+    var src = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("sizingMethodList");
+    var sizingmethod = controlObject.options[controlObject.selectedIndex].value;
+
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.AlphaImageLoader( " ;
+    cmd  = cmd + "src="  + src + ", sizingmethod=" + sizingmethod + ")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+function basicImageFilterChange(){
+    var cmd;
+    var controlObject = getControlObject("rotationList");
+    var rotation = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("mirrorSwitch");
+    controlObject.checked==true ? mirror = 1 : mirror = 0
+    controlObject = getControlObject("invertSwitch");
+    controlObject.checked==true ? invert = 1 : invert = 0
+    controlObject = getControlObject("xraySwitch");
+    controlObject.checked==true ? xray = 1 : xray = 0
+    controlObject = getControlObject("grayscaleSwitch");
+    controlObject.checked==true ? grayscale = 1 : grayscale = 0
+    controlObject = getControlObject("basicImageOpacityList");
+    var opacity = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.BasicImage( Rotation="+ rotation +",Mirror=" + mirror + ",Invert=" + invert + ",XRay=" + xray + ",Grayscale=" + grayscale + ",Opacity=" + opacity;
+    cmd = cmd + ")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function blurFilterChange(){
+    var controlObject = getControlObject("pixelRadiusList");
+    var pixelRadius = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("shadowOpacityList");
+    var shadowOpacity = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("makeShadowSwitch");
+    var makeShadow = controlObject.checked;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Blur( PixelRadius="+ pixelRadius +"," + "MakeShadow=" + makeShadow + ",ShadowOpacity=" + shadowOpacity +")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function embossFilterChange(){
+//    var controlObject = getControlObject("biasList");
+//    var bias = controlObject.options[controlObject.selectedIndex].value;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Emboss()'"; // Bias=" + bias + "
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function engraveFilterChange(){
+//    var controlObject = getControlObject("biasList");
+//    var bias = controlObject.options[controlObject.selectedIndex].value;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Engrave( )'"; // Bias=" + bias + "
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function pixelateFilterChange(){
+    var controlObject = getControlObject("maxSquareFList");
+    var maxSquare = controlObject.options[controlObject.selectedIndex].value;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Pixelate( maxsquare="+ maxSquare  +")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function dropShadowFilterChange(){
+    var controlObject = getControlObject("shadowColorList");
+    var shadowColor = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("offsetXList");
+    var offX = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("offsetYList");
+    var offY = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("positiveSwitch");
+    var positive = controlObject.checked;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.dropShadow( Color=" + shadowColor + ",offX=" + offX + ",offY=" + offY + ",positive=" + positive + ")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function chromaFilterChange(){
+    var controlObject = getControlObject("chromaColorList");
+    var chromaColor = controlObject.options[controlObject.selectedIndex].value;
+    var cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Chroma( Color="+ chromaColor +")'";
+    eval(cmd);
+    updateFilterCode();
+    highlightText(cmd);
+}
+
+function transStart(arg) {
+    var obj = getControlObject("oSelect");
+    var selectedValue=obj.options[obj.selectedIndex].value;
+    if (selectedValue != "empty") {
+        imgObj.filters[0].apply();
+        if (arg.src.indexOf(startImage)!=-1) {
+            arg.src = endImage;
+            imgObj.style.backgroundColor = "gold";
+			imgObjText.innerHTML = "<BR><B>Second Page</B><BR><BR>Using the <B>play</B> method reveals the changes in the SPAN element content.";
+        }
+        else {
+            arg.src = startImage;
+            imgObj.style.backgroundColor = "skyblue";
+			imgObjText.innerHTML = "<BR><b>First Page</b><BR><BR>Using the <B>apply</B> method prepares this SPAN element for content changes.";
+        }
+        imgObj.filters[0].play();
+    }
+}
+
+function changeTrans() {
+    var obj = getControlObject("oSelect");
+    var selectedValue = obj.options[obj.selectedIndex].value;
+    sRandomBarsOrientation="";
+
+    if (selectedValue != "empty") {
+        if (selectedValue.indexOf('Barn')!=-1) {
+            oControlsSpan.innerHTML = oBarnControls.innerHTML;
+            barnTransChange();
+        }
+        else if (selectedValue.indexOf('Blinds')!=-1) {
+            oControlsSpan.innerHTML = oBlindsControls.innerHTML;
+            blindsTransChange();
+        }
+        else if (selectedValue.indexOf('Checkerboard')!=-1) {
+            oControlsSpan.innerHTML = oCheckerboardControls.innerHTML;
+            checkerboardTransChange();
+        }
+        else if (selectedValue.indexOf('Fade')!=-1) {
+            oControlsSpan.innerHTML = oFadeControls.innerHTML;
+            fadeTransChange();
+        }
+        else if (selectedValue.indexOf('Iris')!=-1) {
+            oControlsSpan.innerHTML = oIrisControls.innerHTML;
+            irisTransChange();
+        }
+        else if (selectedValue.indexOf('Pixelate')!=-1) {
+            oControlsSpan.innerHTML = oPixelateTransControls.innerHTML;
+            pixelateTransChange();
+        }
+        else if (selectedValue.indexOf('RadialWipe')!=-1) {
+            oControlsSpan.innerHTML = oRadialWipeControls.innerHTML;
+            radialWipeTransChange();
+        }
+        else if (selectedValue.indexOf('RandomBars')!=-1) {
+            oControlsSpan.innerHTML = oRandomBarsControls.innerHTML;
+            randomBarsTransChange();
+        }
+        else if (selectedValue.indexOf('Slide')!=-1) {
+            oControlsSpan.innerHTML = oSlideControls.innerHTML;
+            slideTransChange();
+        }
+        else if (selectedValue.indexOf('Spiral')!=-1) {
+            oControlsSpan.innerHTML = oSpiralControls.innerHTML;
+            spiralTransChange();
+        }
+        else if (selectedValue.indexOf('Stretch')!=-1) {
+            oControlsSpan.innerHTML = oStretchControls.innerHTML;
+            stretchTransChange();
+        }
+        else if (selectedValue.indexOf('Strips')!=-1) {
+            oControlsSpan.innerHTML = oStripsControls.innerHTML;
+            stripsTransChange();
+        }
+        else if (selectedValue.indexOf('Wheel')!=-1) {
+            oControlsSpan.innerHTML = oWheelControls.innerHTML;
+            wheelTransChange();
+        }
+        else if (selectedValue.indexOf('GradientWipe')!=-1) {
+            oControlsSpan.innerHTML = oWipeControls.innerHTML;
+            wipeTransChange();
+        }
+        else if (selectedValue.indexOf('Zigzag')!=-1) {
+            oControlsSpan.innerHTML = oZigzagControls.innerHTML;
+            zigzagTransChange();
+        }
+        else {
+            imgObj.style.filter=selectedValue;
+            oControlsSpan.innerHTML = featuresHeader + 'The transition does not support additional features.';
+        }
+    }
+    else {
+            imgObj.style.filter=null;
+            oControlsSpan.innerHTML =  featuresHeader + 'No transition is currently selected.';
+    }
+    updateTransCode();
+}
+
+function updateTransCode() {
+    var obj = getControlObject("oSelect");
+    var selectedValue=obj.options[obj.selectedIndex].value;
+    var imgContents = imgObj.outerHTML;
+    if (selectedValue != "empty") {
+        oCodePre.innerText=completeTransCode(imgContents);
+    }
+    else {
+        oCodePre.innerText=imgContents;
+    }
+    highlightText(imgContents);
+}
+
+function completeTransCode(imgText) {
+    scriptBlock = '';
+    scriptBlock = scriptBlock + 'var startImage ="' + startImage + '";\n';
+    scriptBlock = scriptBlock + 'var endImage="' + endImage + '";\n';
+    scriptBlock = scriptBlock + 'function doTrans() {\n';
+    scriptBlock = scriptBlock + '        ' + sRandomBarsOrientationText + '\n';
+    scriptBlock = scriptBlock + '        imgObj.filters[0].apply();\n';
+    scriptBlock = scriptBlock + '        if (oImg.src.indexOf(startImage)!=-1) {\n';
+    scriptBlock = scriptBlock + '            oImg.src = endImage;\n';
+    scriptBlock = scriptBlock + '            imgObj.style.backgroundColor = "gold";\n';
+    scriptBlock = scriptBlock + '            imgObjText.innerHTML = ';
+    scriptBlock = scriptBlock + '            "<BR><B>Second Page</B><BR><BR>Using the <B>play</B> method reveals the changes in the SPAN element content."';
+
+    scriptBlock = scriptBlock + '        }\n';
+    scriptBlock = scriptBlock + '        else {\n';
+    scriptBlock = scriptBlock + '            oImg.src = startImage;\n';
+    scriptBlock = scriptBlock + '            imgObj.style.backgroundColor = "skyblue";\n';
+    scriptBlock = scriptBlock + '            imgObjText.innerHTML = ';
+    scriptBlock = scriptBlock + '            "<BR><b>First Page</b><BR><BR>Using the <B>apply</B> method prepares this SPAN element for content changes."';
+    scriptBlock = scriptBlock + '        }\n';
+    scriptBlock = scriptBlock + '        imgObj.filters[0].play();\n';
+    scriptBlock = scriptBlock + '}\n'
+    buttonBlock = '\<BR\>\<BR\>\n<BUTTON onclick="doTrans()">Play Transition</BUTTON>\n'
+    fullBlock = '\<HEAD\>\n\<SCRIPT\>\n' + scriptBlock + '\<\/SCRIPT\>\n\<\/HEAD\>\n\<BODY\>\n' + imgText + buttonBlock + '\<\/BODY\>';
+    return(fullBlock);  
+}
+
+function barnTransChange(){
+    var controlObject = getControlObject("barnMotionList");
+    var motion = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("barnVerticalList");
+    var orientation = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Barn( motion="+ motion+",orientation="+ orientation+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function blindsTransChange(){
+    var controlObject = getControlObject("blindsBandsList");
+    var bands = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("blindsDirectionList");
+    var direction = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Blinds( Bands="+ bands+",direction="+ direction+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function checkerboardTransChange(){
+    var controlObject = getControlObject("checkerboardDirectionList");
+    var direction = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("squaresXList");
+    var squaresX = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("squaresYList");
+    var squaresY = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Checkerboard( Direction="+ direction+",SquaresX="+ squaresX+",SquaresY="+ squaresY+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function fadeTransChange(){
+    var controlObject = getControlObject("fadeOverlapList");
+    var overlap = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Fade(Overlap=" + overlap +")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function irisTransChange(){
+    var controlObject = getControlObject("irisStyleList");
+    var irisstyle = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("irisMotionList");
+    var motion = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Iris(irisstyle="+ irisstyle+",motion=" + motion +")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function pixelateTransChange(){
+    var controlObject = getControlObject("randomBarsVerticalList");
+    var orientation =  controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.RandomBars()'";
+    eval(cmd);
+    cmd = "imgObj.filters[0].orientation='" + orientation + "';"; 
+    eval(cmd);
+    sRandomBarsOrientationText = cmd;
+   updateTransCode();
+}
+
+function randomBarsTransChange(){
+    var controlObject = getControlObject("randomBarsVerticalList");
+    var orientation =  controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.RandomBars()'";
+    eval(cmd);
+    cmd = "imgObj.filters[0].orientation='" + orientation + "';"; 
+    eval(cmd);
+    sRandomBarsOrientationText = cmd;
+   updateTransCode();
+}
+
+function radialWipeTransChange(){
+    controlObject = getControlObject("radialWipeStyleList");
+    wipestyle = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.RadialWipe(wipestyle="+ wipestyle+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function slideTransChange(){
+    controlObject = getControlObject("slideStyleList");
+    slidestyle = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("slideBandsList");
+    bands = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Slide(slidestyle="+ slidestyle+",Bands=" + bands +")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function spiralTransChange(){
+    controlObject = getControlObject("spiralGridSizeXList");
+    gridSizeX = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("spiralGridSizeYList");
+    gridSizeY = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Spiral(GridSizeX="+ gridSizeX+",GridSizeY=" + gridSizeY +")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function stretchTransChange(){
+    controlObject = getControlObject("stretchStyleList");
+    stretchstyle = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Stretch(stretchstyle="+ stretchstyle+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function stripsTransChange(){
+    controlObject = getControlObject("movementList");
+    motion = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Strips(motion="+ motion+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function wheelTransChange(){
+    controlObject = getControlObject("spokesList");
+    spokes = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Wheel(spokes="+ spokes+")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function wipeTransChange(){
+    controlObject = getControlObject("wipeReverseSwitch");
+    motion = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("gradientSizeList");
+    gradientSize = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("wipeStyleList");
+    wipestyle = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.GradientWipe(GradientSize="+ gradientSize+",wipestyle=" + wipestyle +",motion=" + motion +")'";
+    eval(cmd);
+    updateTransCode();
+}
+
+function zigzagTransChange(){
+    controlObject = getControlObject("zigzagGridSizeXList");
+    gridSizeX = controlObject.options[controlObject.selectedIndex].value;
+    controlObject = getControlObject("zigzagGridSizeYList");
+    gridSizeY = controlObject.options[controlObject.selectedIndex].value;
+    cmd = "imgObj.style.filter='progid:DXImageTransform.Microsoft.Zigzag(GridSizeX="+ gridSizeX+",GridSizeY=" + gridSizeY +")'";
+    eval(cmd);
+    updateTransCode();
+}
+</SCRIPT>
+
+<LINK REL="stylesheet" TYPE="text/css" HREF="IASample.css" />
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF" onload="switchContent(filterSection);">
+
+<!-- Title and Description -->
+<DIV class="title bar" style="position:relative; top:0; left:0; z-index:10">Filters and Transitions Master Sample</DIV>
+<DIV class="desbar" id="oDesc"style="padding:5px; font:8pt verdana; HEIGHT: 75; LEFT: 0;  TOP:0px; WIDTH: 100%; z-index: 3; ">
+Use the controls on the left side of the window to apply and modify various filters and transitions. First, select the type of effect: filters or transitions. Next, select a filter or transition from the drop-down list. If the selected effect supports specific features, you can use the controls on the lower left side of the window to further modify the effect. The code used to generate the effect is shown below the controls section.
+</DIV>
+<DIV class="desbar" style="height:0">
+
+<!-- Rendered content -->
+<SPAN ID="oLiveSpan" style="POSITION: absolute; TOP: 115px;  LEFT:330px; WIDTH: 300px; " >
+<SPAN ID="imgObj" style="width:305; height:150; font:bold 9pt verdana ; line-height:1.3; padding-left:13px; padding-right:10px"><IMG ID="oImg"  align="left" style="margin:8px;"><DIV id="imgObjText"></DIV></SPAN>
+</SPAN>
+
+<!-- Control Panel -->
+<SPAN ID="oControlPanel" style="LEFT: 0px; POSITION: relative; TOP: -10; WIDTH: 300; HEIGHT: 250; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 15px; z-index: 5; ">
+<BR>
+<P>Effect Type: <INPUT TYPE=radio NAME="DemoChoice" VALUE="Filters" onclick="switchContent(filterSection); imgObj.style.color='darkred'; imgObj.style.fontWeight='bold';" CHECKED>&nbsp;Filters&nbsp;
+<INPUT TYPE=radio NAME="DemoChoice" VALUE="Transitions" onclick="switchContent(transitionSection); imgObj.style.color='black'; imgObj.style.fontWeight='normal';">&nbsp;Transitions
+</P>
+<SPAN ID="oContentHolder">
+</SPAN>
+<SPAN ID="oControlsSpan">
+</SPAN>
+</SPAN>
+</DIV>
+
+<!-- Copy Code Bar -->
+<SPAN BGCOLOR="#DDDDDD" class="bar" style="POSITION: relative; z-index:10; HEIGHT: 35px; LEFT: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px;  TEXT-ALIGN: center; TOP: 0px; WIDTH: 100%;">
+  <BUTTON STYLE="margin-top:3; margin-bottom:3;" onclick="copy2Clipboard();">
+    Copy Code to Clipboard
+  </BUTTON>
+</SPAN>
+
+<!-- Code -->
+<SPAN id=oCodeSpan style="position:relative; FONT-FAMILY: courier new; font-size: 9pt; line-height:1.5;  LEFT: 0px; TOP: 0px; WIDTH: 100%; padding-top: 22px; padding-right: 5px; padding-bottom: 22px; padding-left: 5px; overflow: scroll; z-index: 4; height:30%;">
+<SPAN ID="oCodePre" style=" HEIGHT: 100%; WIDTH: 95%">
+</SPAN>
+</SPAN>
+
+<!-- Copyright bar -->
+<DIV class="bar" style="position:relative; top:0; padding-left:5px; padding-top:5px"><A href="http://www.microsoft.com/misc/cpyright.htm" target=_top>
+&#169;Microsoft Corporation. All rights reserved. Terms of use</A>.</DIV>
+
+
+<!-- Hidden Controls -->
+
+<!--Filter-->
+<SPAN id=filterSection style="DISPLAY: none" isSource="TRUE">
+Select a filter:&nbsp;
+<SELECT id=oSelect onchange=changeFilter()> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Alpha SELECTED>Alpha</OPTION>
+  <OPTION value=progid:DXImageTransform.Microsoft.AlphaImageLoader>AlphaImageLoader</OPTION>
+  <OPTION value=progid:DXImageTransform.Microsoft.BasicImage >BasicImage</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Blur>Blur</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Chroma>Chroma</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.DropShadow>DropShadow</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Emboss >Emboss</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Engrave>Engrave</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Pixelate>Pixelate</OPTION>
+  </SELECT><hr></SPAN>
+  
+<!--Transition  --> 
+<SPAN id=transitionSection style="DISPLAY: none" isSource="TRUE">
+Select a transition:
+<SELECT id=oSelect onchange=changeTrans();> 
+<OPTION value=progid:DXImageTransform.Microsoft.Barn() SELECTED>Barn</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Blinds()>Blinds</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Checkerboard()>Checkerboard</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Fade()>Fade</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Inset()>Inset</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Iris()>Iris</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Pixelate()>Pixelate</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.RadialWipe()>RadialWipe</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.RandomBars()>Random Bars</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Slide()>Slide</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Spiral()>Spiral</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Stretch()>Stretch</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.CrStrips()>Strips</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Wheel()>Wheel</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.GradientWipe()>GradientWipe</OPTION> 
+  <OPTION value=progid:DXImageTransform.Microsoft.Zigzag()>Zigzag</OPTION>
+  </SELECT> 
+  
+&nbsp;<BUTTON onclick=transStart(oImg) width="25">Play</BUTTON><hr></SPAN>
+
+<!--Alpha  -->
+<SPAN id=oAlphaControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Style: 
+<SELECT onchange=alphaFilterChange() name=styleList> 
+<OPTION value=0>0 - Uniform Opacity</OPTION> 
+<OPTION value=1 SELECTED>1 - Linear Opacity Change</OPTION> 
+<OPTION value=2>2 - Radial Opacity Change</OPTION> 
+<OPTION value=3>3 - Rectangular Opacity Change</OPTION>
+</SELECT>  <BR/><BR/>
+Opacity: 
+<SELECT onchange=alphaFilterChange() name=opacityList> 
+<OPTION value=0>0</OPTION> 
+<OPTION value=25 SELECTED>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100>100</OPTION>
+</SELECT>
+&nbsp;&nbsp; FinishOpacity: 
+<SELECT onchange=alphaFilterChange() name=finishOpacityList> 
+<OPTION value=0>0</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100 SELECTED>100</OPTION>
+</SELECT> <BR/><BR/> 
+StartX: 
+<SELECT onchange=alphaFilterChange() name=startXList> 
+<OPTION value=0 SELECTED>0</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100>100</OPTION>
+</SELECT> 
+&nbsp;&nbsp; FinishX: 
+<SELECT onchange=alphaFilterChange() name=finishXList> 
+<OPTION value=0>0</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100 SELECTED>100</OPTION>
+</SELECT> 
+<BR/><BR/> 
+StartY: 
+<SELECT onchange=alphaFilterChange() name=startYList> 
+<OPTION value=0>0</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100 SELECTED>100</OPTION>
+</SELECT> 
+&nbsp;&nbsp; FinishY: 
+<SELECT onchange=alphaFilterChange() name=finishYList> 
+<OPTION value=0 SELECTED>0</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION> 
+<OPTION value=75>75</OPTION> 
+<OPTION value=100>100</OPTION>
+</SELECT>  
+</SPAN>
+
+<!--AlphaImageLoader -->
+<SPAN id=oAlphaImageLoaderControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Src (source image): 
+<SELECT onchange=alphaImageLoaderFilterChange() name=srcList> 
+<OPTION value='notebook.GIF'  SELECTED>Spiral Bound</OPTION> 
+<OPTION value='MOUSE2.GIF'>Mouse</OPTION> 
+</SELECT>  
+<BR/><BR/>SizingMethod: 
+<SELECT onchange=alphaImageLoaderFilterChange() name=sizingMethodList> 
+<OPTION value='crop' SELECTED>Crop - Crop at boundaries</OPTION> 
+<OPTION value='image'>Image - Normal image size</OPTION>
+<OPTION value='scale'>Scale - Scale to window</OPTION> 
+</SELECT><BR/><BR/><BR/><BR/>
+</SPAN>
+
+<!--Emboss -->
+<SPAN id=oEmbossControls style="DISPLAY: none" isSource="TRUE">
+Bias: 
+<SELECT onchange=embossFilterChange() name=biasList> 
+<OPTION value=-0.9>-0.9</OPTION> 
+<OPTION value=-0.5>-0.5</OPTION> 
+<OPTION value=-0.2>-0.2</OPTION> 
+<OPTION value=0.00 SELECTED>0.00</OPTION> 
+<OPTION value=0.2>0.2</OPTION> 
+<OPTION value=0.5>0.5</OPTION> 
+<OPTION value=0.9>0.9</OPTION> 
+</SELECT><BR/><BR/><BR/><BR/>
+
+</SPAN>
+
+<!--Engrave -->
+<SPAN id=oEngraveControls style="DISPLAY: none" isSource="TRUE">
+Bias: 
+<SELECT onchange=engraveFilterChange() name=biasList> 
+<OPTION value=-0.9>-0.9</OPTION> 
+<OPTION value=-0.5>-0.5</OPTION> 
+<OPTION value=-0.2>-0.2</OPTION> 
+<OPTION value=0.00 SELECTED>0.00</OPTION> 
+<OPTION value=0.2>0.2</OPTION> 
+<OPTION value=0.5>0.5</OPTION> 
+<OPTION value=0.9>0.9</OPTION> 
+</SELECT><BR/><BR/><BR/><BR/>
+</SPAN>
+
+<!--Blur  -->
+<SPAN id=oBlurControls style="DISPLAY: none" isSource="TRUE"><BR/>
+PixelRadius: 
+<SELECT onchange=blurFilterChange() name=pixelRadiusList> 
+<OPTION value=0>0</OPTION> 
+<OPTION value=5 SELECTED>5</OPTION> 
+<OPTION value=10>10</OPTION> 
+<OPTION value=20>20</OPTION>
+</SELECT> <BR/><BR/>
+<INPUT onclick=blurFilterChange() type=checkbox name=makeShadowSwitch>
+ MakeShadow</INPUT>
+<BR><BR>ShadowOpacity: 
+<SELECT onchange=blurFilterChange() name=shadowOpacityList> 
+<OPTION value=0.00>0.00</OPTION> <OPTION value=0.25>0.25</OPTION>
+<OPTION value=0.50>0.50</OPTION> <OPTION value=0.75>0.75</OPTION> 
+<OPTION value=1.00 SELECTED>1.00</OPTION>
+</SELECT> <BR/><BR/>
+</SPAN>
+
+<!-- Pixelate -->
+<SPAN id=oPixelateFilterControls style="DISPLAY: none" isSource="TRUE"><BR/>
+MaxSquare:
+<SELECT onchange=pixelateFilterChange() name=maxSquareFList> 
+<OPTION value=2>2</OPTION> 
+<OPTION value=5>5</OPTION> 
+<OPTION value=10 SELECTED>10</OPTION> 
+<OPTION value=25>25</OPTION> 
+<OPTION value=50>50</OPTION>
+</SELECT> 
+<BR/><BR/><BR/><BR/>
+</SPAN>
+
+<!-- DropShadow -->
+<SPAN id=oDropShadowControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Color: 
+<SELECT onchange=dropShadowFilterChange() name=shadowColorList> 
+<OPTION value=DDDDDD>Light Gray (DDDDDD)</OPTION> 
+<OPTION value=999999 SELECTED>Dark Gray (999999)</OPTION> 
+<OPTION value=000000>Black (000000)</OPTION> 
+<OPTION value=FFFF00>Yellow (FFFF00)</OPTION> 
+<OPTION value=0000FF>Blue (0000FF)</OPTION>
+</SELECT>
+<BR><BR>
+OffX: <SELECT onchange=dropShadowFilterChange() name=OffsetXList> 
+<OPTION value=-5>-5</OPTION>
+<OPTION value=-3>-3</OPTION>
+<OPTION value=-1>-1</OPTION>
+<OPTION value=1>1</OPTION>
+<OPTION value=3>3</OPTION>
+<OPTION value=5 SELECTED>5</OPTION>
+</SELECT>
+OffY: <SELECT onchange=dropShadowFilterChange() name=OffsetYList> 
+<OPTION value=-5>-5</OPTION>
+<OPTION value=-3>-3</OPTION>
+<OPTION value=-1>-1</OPTION>
+<OPTION value=1>1</OPTION>
+<OPTION value=3>3</OPTION>
+<OPTION value=5 SELECTED>5</OPTION>
+</SELECT><BR><BR>
+<INPUT onclick=dropShadowFilterChange() type=checkbox CHECKED name=positiveSwitch>Positive</INPUT> 
+</SPAN>
+
+<!--Chroma-->
+<SPAN id=oChromaControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Color: 
+<SELECT onchange=chromaFilterChange() name=chromaColorList> 
+<OPTION value='#FFFFFF' SELECTED>White (FFFFFF)</OPTION>
+<OPTION value='#87CEEB'>Sky blue (87CEEB)</OPTION>
+<OPTION value='#8B0000'>Dark red(8B0000)</OPTION>
+<OPTION value='#000000'>Black (000000)</OPTION> 
+</SELECT><BR/><BR/><BR/><BR/>
+</SPAN>
+
+<!--BasicImage -->
+<SPAN id=oBasicImageControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Rotation: 
+<SELECT onchange=basicImageFilterChange() name=rotationList> 
+<OPTION value=0 SELECTED>0 - 0 degrees</OPTION> 
+<OPTION value=1>1 - 90 degrees</OPTION> 
+<OPTION value=2>2 - 180 degrees</OPTION> 
+<OPTION value=3>3 - 270 degrees</OPTION>
+</SELECT><BR/><BR/>
+Opacity: <SELECT onchange=basicImageFilterChange() name=basicImageOpacityList> 
+<OPTION value=0.00>0.00</OPTION> 
+<OPTION value=0.25>0.25</OPTION> 
+<OPTION value=0.50>0.50</OPTION> 
+<OPTION value=0.75>0.75</OPTION> 
+<OPTION value=1.00 SELECTED>1.00</OPTION>
+</SELECT><BR><BR/>
+<INPUT onclick=basicImageFilterChange() type=checkbox name=mirrorSwitch>Mirror</INPUT> 
+<INPUT onclick=basicImageFilterChange() type=checkbox name=invertSwitch>Invert</INPUT><BR><BR/>
+<INPUT onclick=basicImageFilterChange() type=checkbox name=xraySwitch>X-Ray</INPUT> 
+<INPUT onclick=basicImageFilterChange() type=checkbox name=grayscaleSwitch>Grayscale</INPUT>
+</SPAN>
+
+<!--Barn -->
+<SPAN id=oBarnControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Motion: 
+<SELECT onchange=barnTransChange() name=barnMotionList> 
+<OPTION value=out SELECTED>Out - From inside outward</OPTION> 
+<OPTION value=in>In - From outside inward</OPTION> 
+</SELECT> <BR/><BR/>
+Orientation: 
+<SELECT onchange=barnTransChange() name=barnVerticalList> 
+<OPTION value=horizontal>Horizontal</OPTION> 
+<OPTION value=vertical SELECTED>Vertical</OPTION> 
+</SELECT> 
+</SPAN>
+
+<!--Blinds -->
+<SPAN id=oBlindsControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Bands: <SELECT onchange=blindsTransChange() name=blindsBandsList> 
+<OPTION value=2>2</OPTION>
+<OPTION value=4>4</OPTION> 
+<OPTION value=6>6</OPTION> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=10 SELECTED>10</OPTION>
+</SELECT> 
+Direction: 
+<SELECT onchange=blindsTransChange() name=blindsDirectionList> 
+<OPTION value=up SELECTED>Up</OPTION> 
+<OPTION value=down>Down</OPTION> 
+<OPTION value=left>Left</OPTION> 
+<OPTION value=right>Right</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Checkerboard  -->
+<SPAN id=oCheckerboardControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Direction: <SELECT onchange=checkerboardTransChange() name=checkerboardDirectionList> 
+<OPTION value=up>Up</OPTION> 
+<OPTION value=down>Down</OPTION> 
+<OPTION value=left>Left</OPTION> 
+<OPTION value=right SELECTED>Right</OPTION>
+</SELECT><BR><BR>
+SquaresX: <SELECT onchange=checkerboardTransChange() name=squaresXList> 
+<OPTION value=2 SELECTED>2</OPTION> 
+<OPTION value=4>4</OPTION> 
+<OPTION value=6>6</OPTION> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=10>10</OPTION> 
+<OPTION value=12>12</OPTION>
+<OPTION value=50>50</OPTION> 
+</SELECT> 
+SquaresY: <SELECT onchange=checkerboardTransChange() name=squaresYList> 
+<OPTION value=2 SELECTED>2</OPTION> 
+<OPTION value=4>4</OPTION> 
+<OPTION value=6>6</OPTION> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=10>10</OPTION> 
+<OPTION value=12>12</OPTION>
+<OPTION value=50>50</OPTION> 
+</SELECT> </SPAN>
+
+<!--Fade -->
+<SPAN id=oFadeControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Overlap: <SELECT onchange=fadeTransChange() name=fadeOverlapList> 
+<OPTION value=0.00>0.00</OPTION> 
+<OPTION value=0.25>0.25</OPTION> 
+<OPTION value=0.50>0.50</OPTION> 
+<OPTION value=0.75>0.75</OPTION> 
+<OPTION value=1.00 SELECTED>1.00</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Iris  -->
+<SPAN id=oIrisControls 
+style="DISPLAY: none" isSource="TRUE"><BR/>
+IrisStyle: <SELECT onchange=irisTransChange() name=irisStyleList> 
+<OPTION value=DIAMOND>Diamond</OPTION> 
+<OPTION value=CIRCLE>Circle</OPTION> 
+<OPTION value=CROSS>Cross</OPTION> 
+<OPTION value=PLUS SELECTED>Plus</OPTION> 
+<OPTION value=SQUARE>Square</OPTION> 
+<OPTION value=STAR>Star</OPTION>
+</SELECT> <BR><BR>
+Motion: <SELECT onchange=irisTransChange() name=irisMotionList> 
+<OPTION value=out SELECTED>Out - From inside outward</OPTION> 
+<OPTION value=in>In - From outside inward</OPTION> 
+</SELECT> 
+</SPAN>
+
+<!--Pixelate Trans -->
+<SPAN id=oPixelateTransControls style="DISPLAY: none" isSource="TRUE"><BR/>
+MaxSquare: <SELECT onchange=pixelateTransChange() name=maxSquareTransList> 
+<OPTION value=2>2</OPTION>
+<OPTION value=5>5</OPTION>
+<OPTION value=10>10</OPTION>
+<OPTION value=25>25</OPTION> 
+<OPTION value=50 SELECTED>50</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--RadialWipe  -->
+<SPAN id=oRadialWipeControls 
+style="DISPLAY: none" isSource="TRUE"><BR/>
+WipeStyle: <SELECT onchange=radialWipeTransChange() name=radialWipeStyleList> 
+<OPTION value=CLOCK SELECTED>Clock</OPTION> 
+<OPTION value=WEDGE>Wedge</OPTION> 
+<OPTION value=RADIAL>Radial</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--RandomBars -->
+<SPAN id=oRandomBarsControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Orientation: <SELECT onchange=randomBarsTransChange() name=randomBarsVerticalList> 
+<OPTION value=horizontal SELECTED>Horizontal</OPTION> 
+<OPTION value=vertical>Vertical</OPTION> 
+</SELECT> 
+</SPAN>
+
+<!--Slide -->
+<SPAN id=oSlideControls style="DISPLAY: none" isSource="TRUE"><BR/>
+SlideStyle: <SELECT onchange=slideTransChange() name=slideStyleList> 
+<OPTION value=HIDE SELECTED>Hide</OPTION> 
+<OPTION value=PUSH>Push</OPTION> 
+<OPTION  value=SWAP>Swap</OPTION>
+</SELECT> <BR/><BR/>
+Bands: <SELECT onchange=slideTransChange() name=slideBandsList> 
+<OPTION value=1 SELECTED>1</OPTION> 
+<OPTION value=3>3</OPTION> 
+<OPTION value=5>5</OPTION> 
+<OPTION value=10>10</OPTION> 
+<OPTION value=25>25</OPTION>
+<OPTION value=50>50</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Spiral  -->
+<SPAN id=oSpiralControls style="DISPLAY: none" isSource="TRUE"><BR/>
+GridSizeX: <SELECT onchange=spiralTransChange() name=spiralGridSizeXList> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=16 SELECTED>16</OPTION> 
+<OPTION value=32>32</OPTION> 
+<OPTION value=64>64</OPTION>
+</SELECT> 
+GridSizeY: <SELECT onchange=spiralTransChange() name=spiralGridSizeYList> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=16 SELECTED>16</OPTION> 
+<OPTION value=32>32</OPTION> 
+<OPTION value=64>64</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Stretch  -->
+<SPAN id=oStretchControls style="DISPLAY: none" isSource="TRUE"><BR/>
+StretchStyle: <SELECT onchange=stretchTransChange() name=stretchStyleList> 
+<OPTION value=HIDE>Hide</OPTION> 
+<OPTION value=PUSH>Push</OPTION> 
+<OPTION value=SPIN SELECTED>Spin</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Strips -->
+<SPAN id=oStripsControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Motion: <SELECT onchange=stripsTransChange() name=movementList> 
+<OPTION value=leftup>Left-up</OPTION> 
+<OPTION value=leftdown SELECTED>Left-down</OPTION> 
+<OPTION value=rightup>Right-up</OPTION> 
+<OPTION value=rightdown>Right-down</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Wheel  -->
+<SPAN id=oWheelControls style="DISPLAY: none" isSource="TRUE"><BR/>
+Spokes: 
+<SELECT onchange=wheelTransChange() name=spokesList> 
+<OPTION value=2>2</OPTION> 
+<OPTION value=4 SELECTED>4</OPTION> 
+<OPTION value=6>6</OPTION> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=10>10</OPTION>
+</SELECT> 
+</SPAN>
+
+<!--Wipe -->
+<SPAN id=oWipeControls style="DISPLAY: none" isSource="TRUE"><BR/>
+GradientSize: <SELECT onchange=wipeTransChange() name=gradientSizeList> 
+<OPTION value=0.00>0.00</OPTION> 
+<OPTION value=0.25 SELECTED>0.25</OPTION> 
+<OPTION value=0.50>0.50</OPTION> 
+<OPTION value=0.75>0.75</OPTION> 
+<OPTION value=1.00>1.00</OPTION>
+</SELECT><BR><BR>
+WipeStyle: <SELECT onchange=wipeTransChange() name=wipeStyleList> 
+<OPTION value=0 SELECTED>0 - Left-to-right motion</OPTION> 
+<OPTION value=1>1 - Top-to-bottom motion</OPTION>
+</SELECT><BR><BR>
+Motion: <SELECT onchange=wipeTransChange() name=wipeReverseSwitch> 
+<OPTION  value=forward SELECTED>Forward</OPTION> 
+<OPTION  value=reverse>Reverse</OPTION>
+</SELECT>
+</SPAN>
+
+<!--ZigZag  -->
+<SPAN id=oZigzagControls style="DISPLAY: none" isSource="TRUE"><BR/>
+GridSizeX: 
+<SELECT onchange=zigzagTransChange() name=zigzagGridSizeXList> 
+<OPTION value=8>8</OPTION> 
+<OPTION value=16 SELECTED>16</OPTION> 
+<OPTION value=32>32</OPTION> 
+<OPTION value=64>64</OPTION>
+<OPTION value=100>100</OPTION> 
+</SELECT> 
+GridSizeY: <SELECT onchange=zigzagTransChange() name=zigzagGridSizeYList>
+<OPTION value=8>8</OPTION> 
+<OPTION value=16 SELECTED>16</OPTION> 
+<OPTION value=32>32</OPTION> 
+<OPTION value=64>64</OPTION>
+<OPTION value=100>100</OPTION> 
+</SELECT> 
+</SPAN>
+<BR/><BR/><BR/><BR/>
+
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

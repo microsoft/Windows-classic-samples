@@ -1,0 +1,3860 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Microsoft Corporation Technical Documentation License Agreement (Standard)
+
+READ THIS! THIS IS A LEGAL AGREEMENT BETWEEN MICROSOFT CORPORATION 
+("MICROSOFT") AND THE RECIPIENT OF THESE MATERIALS, WHETHER AN INDIVIDUAL OR AN 
+ENTITY ("YOU"). IF YOU HAVE ACCESSED THIS AGREEMENT IN THE PROCESS OF 
+DOWNLOADING MATERIALS ("MATERIALS") FROM A MICROSOFT WEB SITE, BY CLICKING "I 
+ACCEPT", DOWNLOADING, USING OR PROVIDING FEEDBACK ON THE MATERIALS, YOU AGREE 
+TO THESE TERMS. IF THIS AGREEMENT IS ATTACHED TO MATERIALS, BY ACCESSING, USING 
+OR PROVIDING FEEDBACK ON THE ATTACHED MATERIALS, YOU AGREE TO THESE TERMS.
+
+1. For good and valuable consideration, the receipt and sufficiency of which 
+are acknowledged, You and Microsoft agree as follows:
+
+(a) If You are an authorized representative of the corporation or other entity 
+designated below ("Company"), and such Company has executed a Microsoft 
+Corporation Non-Disclosure Agreement that is not limited to a specific subject 
+matter or event ("Microsoft NDA"), You represent that You have authority to act 
+on behalf of Company and agree that the Confidential Information, as defined in 
+the Microsoft NDA, is subject to the terms and conditions of the Microsoft NDA 
+and that Company will treat the Confidential Information accordingly; 
+
+(b) If You are an individual, and have executed a Microsoft NDA, You agree that 
+the Confidential Information, as defined in the Microsoft NDA, is subject to 
+the terms and conditions of the Microsoft NDA and that You will treat the 
+Confidential Information accordingly; or
+
+(c)If a Microsoft NDA has not been executed, You (if You are an individual), or 
+Company (if You are an authorized representative of Company), as applicable, 
+agrees: (a) to refrain from disclosing or distributing the Confidential 
+Information to any third party for five (5) years from the date of disclosure 
+of the Confidential Information by Microsoft to Company/You; (b) to refrain 
+from reproducing or summarizing the Confidential Information; and (c) to take 
+reasonable security precautions, at least as great as the precautions it takes 
+to protect its own confidential information, but no less than reasonable care, 
+to keep confidential the Confidential Information. You/Company, however, may 
+disclose Confidential Information in accordance with a judicial or other 
+governmental order, provided You/Company either (i) gives Microsoft reasonable 
+notice prior to such disclosure and to allow Microsoft a reasonable opportunity 
+to seek a protective order or equivalent, or (ii) obtains written assurance 
+from the applicable judicial or governmental entity that it will afford the 
+Confidential Information the highest level of protection afforded under 
+applicable law or regulation. Confidential Information shall not include any 
+information, however designated, that: (i) is or subsequently becomes publicly 
+available without Your/Company's breach of any obligation owed to Microsoft; 
+(ii) became known to You/Company prior to Microsoft's disclosure of such 
+information to You/Company pursuant to the terms of this Agreement; (iii) 
+became known to You/Company from a source other than Microsoft other than by 
+the breach of an obligation of confidentiality owed to Microsoft; or (iv) is 
+independently developed by You/Company. For purposes of this paragraph, 
+"Confidential Information" means nonpublic information that Microsoft 
+designates as being confidential or which, under the circumstances surrounding 
+disclosure ought to be treated as confidential by Recipient. "Confidential 
+Information" includes, without limitation, information in tangible or 
+intangible form relating to and/or including released or unreleased Microsoft 
+software or hardware products, the marketing or promotion of any Microsoft 
+product, Microsoft's business policies or practices, and information received 
+from others that Microsoft is obligated to treat as confidential.
+
+2. You may review these Materials only (a) as a reference to assist You in 
+planning and designing Your product, service or technology ("Product") to 
+interface with a Microsoft Product as described in these Materials; and (b) to 
+provide feedback on these Materials to Microsoft. All other rights are retained 
+by Microsoft; this agreement does not give You rights under any Microsoft 
+patents. You may not (i) duplicate any part of these Materials, (ii) remove 
+this agreement or any notices from these Materials, or (iii) give any part of 
+these Materials, or assign or otherwise provide Your rights under this 
+agreement, to anyone else. 
+
+3. These Materials may contain preliminary information or inaccuracies, and may 
+not correctly represent any associated Microsoft Product as commercially 
+released. All Materials are provided entirely "AS IS." To the extent permitted 
+by law, MICROSOFT MAKES NO WARRANTY OF ANY KIND, DISCLAIMS ALL EXPRESS, IMPLIED 
+AND STATUTORY WARRANTIES, AND ASSUMES NO LIABILITY TO YOU FOR ANY DAMAGES OF 
+ANY TYPE IN CONNECTION WITH THESE MATERIALS OR ANY INTELLECTUAL PROPERTY IN 
+THEM.
+
+4. If You are an entity and (a) merge into another entity or (b) a controlling 
+ownership interest in You changes, Your right to use these Materials 
+automatically terminates and You must destroy them. 
+
+5. You have no obligation to give Microsoft any suggestions, comments or other 
+feedback ("Feedback") relating to these Materials. However, any Feedback you 
+voluntarily provide may be used in Microsoft Products and related 
+specifications or other documentation (collectively, "Microsoft Offerings") 
+which in turn may be relied upon by other third parties to develop their own 
+Products. Accordingly, if You do give Microsoft Feedback on any version of 
+these Materials or the Microsoft Offerings to which they apply, You agree: (a) 
+Microsoft may freely use, reproduce, license, distribute, and otherwise 
+commercialize Your Feedback in any Microsoft Offering; (b) You also grant third 
+parties, without charge, only those patent rights necessary to enable other 
+Products to use or interface with any specific parts of a Microsoft Product 
+that incorporate Your Feedback; and (c) You will not give Microsoft any 
+Feedback (i) that You have reason to believe is subject to any patent, 
+copyright or other intellectual property claim or right of any third party; or 
+(ii) subject to license terms which seek to require any Microsoft Offering 
+incorporating or derived from such Feedback, or other Microsoft intellectual 
+property, to be licensed to or otherwise shared with any third party. 
+
+6. Microsoft has no obligation to maintain confidentiality of any Microsoft 
+Offering, but otherwise the confidentiality of Your Feedback, including Your 
+identity as the source of such Feedback, is governed by Your NDA. 
+
+7. This agreement is governed by the laws of the State of Washington. Any 
+dispute involving it must be brought in the federal or state superior courts 
+located in King County, Washington, and You waive any defenses allowing the 
+dispute to be litigated elsewhere. If there is litigation, the losing party 
+must pay the other party's reasonable attorneys' fees, costs and other 
+expenses. If any part of this agreement is unenforceable, it will be considered 
+modified to the extent necessary to make it enforceable, and the remainder 
+shall continue in effect. This agreement is the entire agreement between You 
+and Microsoft concerning these Materials; it may be changed only by a written 
+document signed by both You and Microsoft.
+-->
+<cdm:ColorDeviceModel
+	xmlns:cdm="http://schemas.microsoft.com/windows/2005/02/color/ColorDeviceModel"
+	xmlns:wcs="http://schemas.microsoft.com/windows/2005/02/color/WcsCommonProfileTypes"
+	xmlns:xs='http://www.w3.org/2001/XMLSchema-instance'>
+
+	<cdm:ProfileName>
+		<wcs:Text xml:lang="en-US">CMYKPrinter.cdmp</wcs:Text>
+	</cdm:ProfileName>
+	<cdm:Description>
+		<wcs:Text xml:lang="en-US">CMYKPrinter device model test profile</wcs:Text>
+	</cdm:Description>
+	<cdm:Author>
+		<wcs:Text xml:lang="en-US">Jane Doe</wcs:Text>
+	</cdm:Author>
+
+	<cdm:MeasurementConditions>
+		<cdm:ColorSpace>CIEXYZ</cdm:ColorSpace>
+		<cdm:WhitePoint X=" 83.947" Y=" 85.829" Z=" 81.473" />
+		<cdm:Geometry>0/45</cdm:Geometry>
+		<cdm:ApertureSize>10</cdm:ApertureSize>
+	</cdm:MeasurementConditions>
+	<cdm:SelfLuminous>false</cdm:SelfLuminous>
+	<cdm:MaxColorant>100</cdm:MaxColorant>
+	<cdm:MinColorant>0</cdm:MinColorant>	
+
+	<cdm:CMYKPrinterDevice>
+		<cdm:MeasurementData TimeStamp="2005-02-09T22:00:00">
+			<cdm:ColorCube>
+				<cdm:Sample Tag="C1">
+					<cdm:CMYK C="100" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="18.409" Y="25.544" Z="55.451" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D1">
+					<cdm:CMYK C="0" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="37.487" Y="19.849" Z="22.173" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E1">
+					<cdm:CMYK C="0" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="69.576" Y="78.063" Z="11.203" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F1">
+					<cdm:CMYK C="100" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="6.229" Y="4.277" Z="17.194" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G1">
+					<cdm:CMYK C="100" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="8.199" Y="19.029" Z="8.107" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H1">
+					<cdm:CMYK C="0" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="32.132" Y="17.538" Z="2.798" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I1">
+					<cdm:CMYK C="100" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="5.991" Y="6.201" Z="5.221" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J1">
+					<cdm:CMYK C="70" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="13.887" Y="11.826" Z="30.314" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K1">
+					<cdm:CMYK C="70" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="17.356" Y="29.467" Z="16.101" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L1">
+					<cdm:CMYK C="0" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="40.915" Y="28.007" Z="9.215" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M1">
+					<cdm:CMYK C="40" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="28.706" Y="26.886" Z="45.482" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N1">
+					<cdm:CMYK C="0" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="52.991" Y="44.641" Z="22.686" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O1">
+					<cdm:CMYK C="40" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="21.372" Y="23.030" Z="18.480" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P1">
+					<cdm:CMYK C="40" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="32.476" Y="44.179" Z="28.326" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q1">
+					<cdm:CMYK C="20" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="49.806" Y="48.074" Z="60.844" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R1">
+					<cdm:CMYK C="20" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="53.659" Y="62.485" Z="48.548" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S1">
+					<cdm:CMYK C="0" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="64.630" Y="59.936" Z="42.959" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T1">
+					<cdm:CMYK C="100" M="0" Y="0" K="100" />
+					<cdm:CIEXYZ X="1.623" Y="1.826" Z="2.299" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U1">
+					<cdm:CMYK C="0" M="100" Y="0" K="100" />
+					<cdm:CIEXYZ X="2.373" Y="1.860" Z="1.485" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V1">
+					<cdm:CMYK C="0" M="0" Y="100" K="100" />
+					<cdm:CIEXYZ X="2.803" Y="3.069" Z="1.256" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W1">
+					<cdm:CMYK C="100" M="100" Y="0" K="100" />
+					<cdm:CIEXYZ X="1.723" Y="1.579" Z="1.789" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X1">
+					<cdm:CMYK C="100" M="0" Y="100" K="100" />
+					<cdm:CIEXYZ X="1.620" Y="2.014" Z="1.391" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B2">
+					<cdm:CMYK C="0" M="100" Y="100" K="100" />
+					<cdm:CIEXYZ X="2.304" Y="2.018" Z="1.132" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C2">
+					<cdm:CMYK C="100" M="100" Y="100" K="100" />
+					<cdm:CIEXYZ X="1.836" Y="1.855" Z="1.441" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D2">
+					<cdm:CMYK C="0" M="0" Y="0" K="100" />
+					<cdm:CIEXYZ X="4.139" Y="4.230" Z="3.553" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E2">
+					<cdm:CMYK C="0" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="83.947" Y="85.829" Z="81.473" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F2">
+					<cdm:CMYK C="90" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="20.538" Y="27.797" Z="57.018" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G2">
+					<cdm:CMYK C="80" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="23.698" Y="31.082" Z="59.804" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H2">
+					<cdm:CMYK C="70" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="29.415" Y="36.951" Z="63.193" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I2">
+					<cdm:CMYK C="60" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="33.218" Y="40.703" Z="65.451" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J2">
+					<cdm:CMYK C="50" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="39.306" Y="46.602" Z="68.321" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K2">
+					<cdm:CMYK C="40" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="43.864" Y="50.832" Z="70.408" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L2">
+					<cdm:CMYK C="30" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="51.030" Y="57.467" Z="72.737" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M2">
+					<cdm:CMYK C="25" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="55.806" Y="61.799" Z="74.788" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N2">
+					<cdm:CMYK C="20" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="60.165" Y="65.757" Z="75.931" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O2">
+					<cdm:CMYK C="15" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="63.096" Y="68.318" Z="76.798" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P2">
+					<cdm:CMYK C="10" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="66.859" Y="71.613" Z="77.813" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q2">
+					<cdm:CMYK C="7" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="73.919" Y="77.633" Z="79.434" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R2">
+					<cdm:CMYK C="3" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="81.262" Y="83.696" Z="81.010" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S2">
+					<cdm:CMYK C="0" M="90" Y="0" K="0" />
+					<cdm:CIEXYZ X="39.681" Y="22.110" Z="25.169" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T2">
+					<cdm:CMYK C="0" M="80" Y="0" K="0" />
+					<cdm:CIEXYZ X="43.627" Y="26.567" Z="30.961" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U2">
+					<cdm:CMYK C="0" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="48.609" Y="32.719" Z="37.820" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V2">
+					<cdm:CMYK C="0" M="60" Y="0" K="0" />
+					<cdm:CIEXYZ X="52.633" Y="37.900" Z="43.317" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W2">
+					<cdm:CMYK C="0" M="50" Y="0" K="0" />
+					<cdm:CIEXYZ X="56.396" Y="43.161" Z="48.255" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X2">
+					<cdm:CMYK C="0" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="60.631" Y="49.180" Z="53.732" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A3">
+					<cdm:CMYK C="0" M="30" Y="0" K="0" />
+					<cdm:CIEXYZ X="66.537" Y="57.900" Z="60.956" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B3">
+					<cdm:CMYK C="0" M="25" Y="0" K="0" />
+					<cdm:CIEXYZ X="68.873" Y="61.425" Z="63.980" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C3">
+					<cdm:CMYK C="0" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="70.079" Y="63.310" Z="65.493" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D3">
+					<cdm:CMYK C="0" M="15" Y="0" K="0" />
+					<cdm:CIEXYZ X="73.514" Y="68.799" Z="69.534" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E3">
+					<cdm:CMYK C="0" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="76.265" Y="73.188" Z="72.958" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F3">
+					<cdm:CMYK C="0" M="7" Y="0" K="0" />
+					<cdm:CIEXYZ X="78.980" Y="77.624" Z="75.839" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G3">
+					<cdm:CMYK C="0" M="3" Y="0" K="0" />
+					<cdm:CIEXYZ X="82.016" Y="82.779" Z="79.269" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H3">
+					<cdm:CMYK C="0" M="0" Y="90" K="0" />
+					<cdm:CIEXYZ X="70.061" Y="78.536" Z="13.359" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I3">
+					<cdm:CMYK C="0" M="0" Y="80" K="0" />
+					<cdm:CIEXYZ X="70.658" Y="79.071" Z="16.539" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J3">
+					<cdm:CMYK C="0" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="71.553" Y="79.697" Z="21.453" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K3">
+					<cdm:CMYK C="0" M="0" Y="60" K="0" />
+					<cdm:CIEXYZ X="72.598" Y="80.502" Z="25.482" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L3">
+					<cdm:CMYK C="0" M="0" Y="50" K="0" />
+					<cdm:CIEXYZ X="73.455" Y="80.990" Z="30.162" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M3">
+					<cdm:CMYK C="0" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="74.317" Y="81.447" Z="34.741" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N3">
+					<cdm:CMYK C="0" M="0" Y="30" K="0" />
+					<cdm:CIEXYZ X="75.997" Y="82.332" Z="42.903" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O3">
+					<cdm:CMYK C="0" M="0" Y="25" K="0" />
+					<cdm:CIEXYZ X="77.172" Y="82.911" Z="48.549" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P3">
+					<cdm:CMYK C="0" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="78.185" Y="83.416" Z="53.465" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q3">
+					<cdm:CMYK C="0" M="0" Y="15" K="0" />
+					<cdm:CIEXYZ X="79.073" Y="83.704" Z="58.527" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R3">
+					<cdm:CMYK C="0" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="80.526" Y="84.373" Z="65.477" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S3">
+					<cdm:CMYK C="0" M="0" Y="7" K="0" />
+					<cdm:CIEXYZ X="81.189" Y="84.434" Z="70.138" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T3">
+					<cdm:CMYK C="0" M="0" Y="3" K="0" />
+					<cdm:CIEXYZ X="82.669" Y="84.964" Z="77.719" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U3">
+					<cdm:CMYK C="0" M="0" Y="0" K="90" />
+					<cdm:CIEXYZ X="6.465" Y="6.583" Z="5.551" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V3">
+					<cdm:CMYK C="0" M="0" Y="0" K="80" />
+					<cdm:CIEXYZ X="10.281" Y="10.463" Z="8.936" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W3">
+					<cdm:CMYK C="0" M="0" Y="0" K="70" />
+					<cdm:CIEXYZ X="13.844" Y="14.096" Z="12.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X3">
+					<cdm:CMYK C="0" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="18.912" Y="19.264" Z="16.973" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A4">
+					<cdm:CMYK C="0" M="0" Y="0" K="50" />
+					<cdm:CIEXYZ X="21.558" Y="21.969" Z="19.470" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B4">
+					<cdm:CMYK C="0" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="32.577" Y="33.233" Z="29.964" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C4">
+					<cdm:CMYK C="0" M="0" Y="0" K="30" />
+					<cdm:CIEXYZ X="42.879" Y="43.742" Z="40.174" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D4">
+					<cdm:CMYK C="0" M="0" Y="0" K="25" />
+					<cdm:CIEXYZ X="45.578" Y="46.524" Z="42.642" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E4">
+					<cdm:CMYK C="0" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="49.641" Y="50.673" Z="46.807" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F4">
+					<cdm:CMYK C="0" M="0" Y="0" K="15" />
+					<cdm:CIEXYZ X="57.862" Y="59.091" Z="54.922" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G4">
+					<cdm:CMYK C="0" M="0" Y="0" K="10" />
+					<cdm:CIEXYZ X="68.654" Y="70.133" Z="65.932" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H4">
+					<cdm:CMYK C="0" M="0" Y="0" K="7" />
+					<cdm:CIEXYZ X="71.951" Y="73.525" Z="69.185" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I4">
+					<cdm:CMYK C="0" M="0" Y="0" K="3" />
+					<cdm:CIEXYZ X="81.234" Y="83.065" Z="78.641" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J4">
+					<cdm:CMYK C="40" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="15.344" Y="9.097" Z="20.116" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K4">
+					<cdm:CMYK C="40" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="12.957" Y="8.263" Z="8.709" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L4">
+					<cdm:CMYK C="0" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="34.582" Y="18.914" Z="9.955" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M4">
+					<cdm:CMYK C="40" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="11.335" Y="7.477" Z="2.470" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N4">
+					<cdm:CMYK C="0" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="48.086" Y="40.185" Z="7.102" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O4">
+					<cdm:CMYK C="40" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="18.315" Y="20.775" Z="6.675" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P4">
+					<cdm:CMYK C="70" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="9.762" Y="10.417" Z="8.634" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q4">
+					<cdm:CMYK C="40" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="25.393" Y="38.042" Z="9.884" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R4">
+					<cdm:CMYK C="100" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="5.451" Y="10.328" Z="5.253" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S4">
+					<cdm:CMYK C="100" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="11.632" Y="21.871" Z="23.410" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T4">
+					<cdm:CMYK C="100" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="8.110" Y="12.340" Z="16.651" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U4">
+					<cdm:CMYK C="100" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="11.861" Y="13.516" Z="37.116" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V4">
+					<cdm:CMYK C="100" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="4.457" Y="3.799" Z="7.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W4">
+					<cdm:CMYK C="70" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="8.450" Y="5.840" Z="12.835" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X4">
+					<cdm:CMYK C="20" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="28.245" Y="21.116" Z="23.023" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A5">
+					<cdm:CMYK C="20" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="27.317" Y="21.080" Z="15.501" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B5">
+					<cdm:CMYK C="20" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="20.515" Y="12.479" Z="6.319" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C5">
+					<cdm:CMYK C="20" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="25.817" Y="20.132" Z="9.731" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D5">
+					<cdm:CMYK C="20" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="24.090" Y="18.771" Z="5.149" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E5">
+					<cdm:CMYK C="20" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="36.435" Y="39.504" Z="15.406" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F5">
+					<cdm:CMYK C="70" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="12.898" Y="20.063" Z="7.563" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G5">
+					<cdm:CMYK C="70" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="14.591" Y="21.581" Z="13.649" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H5">
+					<cdm:CMYK C="100" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="8.373" Y="15.407" Z="12.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I5">
+					<cdm:CMYK C="70" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="19.438" Y="24.467" Z="32.843" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J5">
+					<cdm:CMYK C="100" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="7.676" Y="8.357" Z="19.091" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K5">
+					<cdm:CMYK C="70" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="12.467" Y="11.681" Z="20.938" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L5">
+					<cdm:CMYK C="70" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="7.178" Y="5.386" Z="4.772" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M5">
+					<cdm:CMYK C="40" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="17.018" Y="14.773" Z="14.252" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N5">
+					<cdm:CMYK C="20" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="37.698" Y="34.460" Z="32.922" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O5">
+					<cdm:CMYK C="70" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="8.010" Y="6.619" Z="3.968" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P5">
+					<cdm:CMYK C="20" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="33.798" Y="31.898" Z="20.762" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q5">
+					<cdm:CMYK C="70" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="8.317" Y="9.242" Z="4.210" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R5">
+					<cdm:CMYK C="40" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="19.347" Y="21.548" Z="12.247" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S5">
+					<cdm:CMYK C="20" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="39.159" Y="41.381" Z="25.160" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T5">
+					<cdm:CMYK C="20" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="43.302" Y="44.125" Z="39.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U5">
+					<cdm:CMYK C="100" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="5.629" Y="8.169" Z="5.627" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V5">
+					<cdm:CMYK C="70" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="11.959" Y="16.024" Z="11.793" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W5">
+					<cdm:CMYK C="40" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="24.656" Y="29.694" Z="22.373" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X5">
+					<cdm:CMYK C="100" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="5.250" Y="7.204" Z="8.033" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A6">
+					<cdm:CMYK C="40" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="23.932" Y="24.461" Z="29.163" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B6">
+					<cdm:CMYK C="100" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="5.581" Y="5.604" Z="7.066" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C6">
+					<cdm:CMYK C="40" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="28.662" Y="32.762" Z="35.160" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D6">
+					<cdm:CMYK C="70" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="13.281" Y="16.878" Z="17.474" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E6">
+					<cdm:CMYK C="100" M="85" Y="85" K="100" />
+					<cdm:CIEXYZ X="1.957" Y="2.004" Z="1.607" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F6">
+					<cdm:CMYK C="100" M="85" Y="85" K="80" />
+					<cdm:CIEXYZ X="3.025" Y="3.236" Z="2.838" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G6">
+					<cdm:CMYK C="100" M="85" Y="85" K="60" />
+					<cdm:CIEXYZ X="3.828" Y="4.146" Z="3.888" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H6">
+					<cdm:CMYK C="80" M="65" Y="65" K="100" />
+					<cdm:CIEXYZ X="1.935" Y="2.007" Z="1.615" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I6">
+					<cdm:CMYK C="80" M="65" Y="65" K="80" />
+					<cdm:CIEXYZ X="2.887" Y="3.149" Z="2.805" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J6">
+					<cdm:CMYK C="80" M="65" Y="65" K="60" />
+					<cdm:CIEXYZ X="3.848" Y="4.295" Z="3.926" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K6">
+					<cdm:CMYK C="80" M="65" Y="65" K="40" />
+					<cdm:CIEXYZ X="4.723" Y="5.481" Z="4.982" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L6">
+					<cdm:CMYK C="60" M="45" Y="45" K="100" />
+					<cdm:CIEXYZ X="1.727" Y="1.801" Z="1.429" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M6">
+					<cdm:CMYK C="60" M="45" Y="45" K="80" />
+					<cdm:CIEXYZ X="2.739" Y="3.041" Z="2.688" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N6">
+					<cdm:CMYK C="60" M="45" Y="45" K="60" />
+					<cdm:CIEXYZ X="4.266" Y="4.844" Z="4.488" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O6">
+					<cdm:CMYK C="60" M="45" Y="45" K="40" />
+					<cdm:CIEXYZ X="6.534" Y="7.532" Z="7.207" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P6">
+					<cdm:CMYK C="60" M="45" Y="45" K="20" />
+					<cdm:CIEXYZ X="9.027" Y="10.515" Z="10.195" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q6">
+					<cdm:CMYK C="40" M="27" Y="27" K="100" />
+					<cdm:CIEXYZ X="2.284" Y="2.414" Z="2.057" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R6">
+					<cdm:CMYK C="40" M="27" Y="27" K="80" />
+					<cdm:CIEXYZ X="4.239" Y="4.660" Z="4.217" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S6">
+					<cdm:CMYK C="40" M="27" Y="27" K="60" />
+					<cdm:CIEXYZ X="6.381" Y="7.134" Z="6.545" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T6">
+					<cdm:CMYK C="40" M="27" Y="27" K="40" />
+					<cdm:CIEXYZ X="10.146" Y="11.432" Z="10.783" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U6">
+					<cdm:CMYK C="40" M="27" Y="27" K="20" />
+					<cdm:CIEXYZ X="14.544" Y="16.461" Z="15.508" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V6">
+					<cdm:CMYK C="40" M="27" Y="27" K="10" />
+					<cdm:CIEXYZ X="19.912" Y="22.569" Z="21.626" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W6">
+					<cdm:CMYK C="20" M="12" Y="12" K="100" />
+					<cdm:CIEXYZ X="3.362" Y="3.479" Z="3.000" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X6">
+					<cdm:CMYK C="20" M="12" Y="12" K="80" />
+					<cdm:CIEXYZ X="6.677" Y="6.950" Z="6.205" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A7">
+					<cdm:CMYK C="20" M="12" Y="12" K="60" />
+					<cdm:CIEXYZ X="10.945" Y="11.464" Z="10.401" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B7">
+					<cdm:CMYK C="20" M="12" Y="12" K="40" />
+					<cdm:CIEXYZ X="19.949" Y="20.899" Z="19.403" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C7">
+					<cdm:CMYK C="20" M="12" Y="12" K="20" />
+					<cdm:CIEXYZ X="29.594" Y="30.989" Z="29.187" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D7">
+					<cdm:CMYK C="20" M="12" Y="12" K="10" />
+					<cdm:CIEXYZ X="41.755" Y="43.845" Z="41.908" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E7">
+					<cdm:CMYK C="10" M="6" Y="6" K="100" />
+					<cdm:CIEXYZ X="3.721" Y="3.864" Z="3.366" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F7">
+					<cdm:CMYK C="10" M="6" Y="6" K="80" />
+					<cdm:CIEXYZ X="8.288" Y="8.620" Z="7.738" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G7">
+					<cdm:CMYK C="10" M="6" Y="6" K="60" />
+					<cdm:CIEXYZ X="14.991" Y="15.609" Z="14.355" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H7">
+					<cdm:CMYK C="10" M="6" Y="6" K="40" />
+					<cdm:CIEXYZ X="25.706" Y="26.804" Z="25.370" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I7">
+					<cdm:CMYK C="10" M="6" Y="6" K="20" />
+					<cdm:CIEXYZ X="38.361" Y="40.113" Z="38.684" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J7">
+					<cdm:CMYK C="10" M="6" Y="6" K="10" />
+					<cdm:CIEXYZ X="51.746" Y="54.157" Z="53.573" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K7">
+					<cdm:CMYK C="100" M="85" Y="85" K="0" />
+					<cdm:CIEXYZ X="5.577" Y="6.582" Z="6.349" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L7">
+					<cdm:CMYK C="80" M="65" Y="65" K="0" />
+					<cdm:CIEXYZ X="7.690" Y="9.685" Z="9.018" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M7">
+					<cdm:CMYK C="60" M="45" Y="45" K="0" />
+					<cdm:CIEXYZ X="14.694" Y="17.150" Z="16.566" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N7">
+					<cdm:CMYK C="40" M="27" Y="27" K="0" />
+					<cdm:CIEXYZ X="26.381" Y="29.779" Z="28.484" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O7">
+					<cdm:CMYK C="20" M="12" Y="12" K="0" />
+					<cdm:CIEXYZ X="50.109" Y="52.492" Z="51.098" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P7">
+					<cdm:CMYK C="10" M="6" Y="6" K="0" />
+					<cdm:CIEXYZ X="62.075" Y="65.267" Z="65.912" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q7">
+					<cdm:CMYK C="5" M="3" Y="3" K="0" />
+					<cdm:CIEXYZ X="75.571" Y="77.587" Z="75.360" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R7">
+					<cdm:CMYK C="100" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="10.476" Y="14.839" Z="29.651" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S7">
+					<cdm:CMYK C="0" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="20.200" Y="11.093" Z="13.104" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T7">
+					<cdm:CMYK C="0" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="34.482" Y="38.694" Z="6.758" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U7">
+					<cdm:CMYK C="100" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="4.188" Y="2.971" Z="10.398" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V7">
+					<cdm:CMYK C="100" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="5.146" Y="11.563" Z="5.207" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W7">
+					<cdm:CMYK C="0" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="17.291" Y="10.040" Z="2.049" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X7">
+					<cdm:CMYK C="40" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="16.299" Y="15.630" Z="25.012" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A8">
+					<cdm:CMYK C="40" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="18.573" Y="24.613" Z="16.326" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B8">
+					<cdm:CMYK C="0" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="28.697" Y="25.102" Z="13.797" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C8">
+					<cdm:CMYK C="100" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="3.634" Y="2.728" Z="7.729" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D8">
+					<cdm:CMYK C="100" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="4.336" Y="8.743" Z="3.941" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E8">
+					<cdm:CMYK C="0" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="11.830" Y="7.224" Z="1.774" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F8">
+					<cdm:CMYK C="40" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="11.919" Y="11.493" Z="17.199" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G8">
+					<cdm:CMYK C="40" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="13.336" Y="17.249" Z="11.557" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H8">
+					<cdm:CMYK C="0" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="19.672" Y="17.352" Z="9.825" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I8">
+					<cdm:CMYK C="100" M="0" Y="0" K="70" />
+					<cdm:CIEXYZ X="3.884" Y="5.108" Z="8.314" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J8">
+					<cdm:CMYK C="0" M="100" Y="0" K="70" />
+					<cdm:CIEXYZ X="6.226" Y="3.942" Z="4.194" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K8">
+					<cdm:CMYK C="0" M="0" Y="100" K="70" />
+					<cdm:CIEXYZ X="9.732" Y="10.795" Z="2.480" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L8">
+					<cdm:CMYK C="100" M="100" Y="0" K="70" />
+					<cdm:CIEXYZ X="2.606" Y="2.176" Z="4.650" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M8">
+					<cdm:CMYK C="100" M="0" Y="100" K="70" />
+					<cdm:CIEXYZ X="2.920" Y="4.883" Z="2.767" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N8">
+					<cdm:CMYK C="0" M="100" Y="100" K="70" />
+					<cdm:CIEXYZ X="6.287" Y="4.400" Z="1.662" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O8">
+					<cdm:CMYK C="40" M="40" Y="0" K="70" />
+					<cdm:CIEXYZ X="5.951" Y="5.758" Z="8.347" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P8">
+					<cdm:CMYK C="40" M="0" Y="40" K="70" />
+					<cdm:CIEXYZ X="6.760" Y="8.630" Z="5.906" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q8">
+					<cdm:CMYK C="0" M="40" Y="40" K="70" />
+					<cdm:CIEXYZ X="9.660" Y="8.641" Z="4.912" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R8">
+					<cdm:CMYK C="0" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="84.164" Y="86.067" Z="81.541" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S8">
+					<cdm:CMYK C="0" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="76.161" Y="72.802" Z="72.795" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T8">
+					<cdm:CMYK C="0" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="70.410" Y="63.629" Z="65.969" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U8">
+					<cdm:CMYK C="0" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="61.587" Y="50.548" Z="54.786" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V8">
+					<cdm:CMYK C="0" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="50.161" Y="34.650" Z="39.934" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W8">
+					<cdm:CMYK C="0" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="37.488" Y="19.939" Z="22.071" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X8">
+					<cdm:CMYK C="10" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="66.426" Y="71.252" Z="77.961" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A9">
+					<cdm:CMYK C="10" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="62.009" Y="62.320" Z="70.412" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B9">
+					<cdm:CMYK C="10" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="56.757" Y="53.839" Z="63.046" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C9">
+					<cdm:CMYK C="10" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="49.096" Y="42.482" Z="52.900" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D9">
+					<cdm:CMYK C="10" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="38.184" Y="27.578" Z="37.647" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E9">
+					<cdm:CMYK C="10" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="28.061" Y="15.736" Z="22.360" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F9">
+					<cdm:CMYK C="20" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="62.021" Y="67.378" Z="76.213" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G9">
+					<cdm:CMYK C="20" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="55.785" Y="57.011" Z="68.363" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H9">
+					<cdm:CMYK C="20" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="50.533" Y="48.882" Z="61.195" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I9">
+					<cdm:CMYK C="20" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="43.665" Y="38.500" Z="51.261" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J9">
+					<cdm:CMYK C="20" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="32.638" Y="23.669" Z="35.783" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K9">
+					<cdm:CMYK C="20" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="23.784" Y="13.337" Z="21.077" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L9">
+					<cdm:CMYK C="40" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="43.867" Y="50.883" Z="70.439" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M9">
+					<cdm:CMYK C="40" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="39.197" Y="42.815" Z="62.129" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N9">
+					<cdm:CMYK C="40" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="35.470" Y="36.602" Z="55.799" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O9">
+					<cdm:CMYK C="40" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="29.654" Y="27.947" Z="46.152" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P9">
+					<cdm:CMYK C="40" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="22.366" Y="17.537" Z="33.367" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q9">
+					<cdm:CMYK C="40" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="15.533" Y="9.294" Z="20.073" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R9">
+					<cdm:CMYK C="70" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="30.344" Y="37.799" Z="63.730" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S9">
+					<cdm:CMYK C="70" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="26.844" Y="31.689" Z="56.329" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T9">
+					<cdm:CMYK C="70" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="22.709" Y="25.593" Z="49.599" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U9">
+					<cdm:CMYK C="70" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="18.837" Y="19.299" Z="41.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V9">
+					<cdm:CMYK C="70" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="14.193" Y="12.096" Z="30.706" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W9">
+					<cdm:CMYK C="70" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="9.809" Y="6.306" Z="18.988" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X9">
+					<cdm:CMYK C="100" M="0" Y="0" K="0" />
+					<cdm:CIEXYZ X="17.535" Y="24.536" Z="54.295" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A10">
+					<cdm:CMYK C="100" M="10" Y="0" K="0" />
+					<cdm:CIEXYZ X="16.849" Y="22.028" Z="49.859" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B10">
+					<cdm:CMYK C="100" M="20" Y="0" K="0" />
+					<cdm:CIEXYZ X="14.685" Y="18.323" Z="44.515" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C10">
+					<cdm:CMYK C="100" M="40" Y="0" K="0" />
+					<cdm:CIEXYZ X="12.629" Y="14.297" Z="37.763" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D10">
+					<cdm:CMYK C="100" M="70" Y="0" K="0" />
+					<cdm:CIEXYZ X="10.024" Y="9.575" Z="29.399" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E10">
+					<cdm:CMYK C="100" M="100" Y="0" K="0" />
+					<cdm:CIEXYZ X="6.646" Y="4.737" Z="18.078" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F10">
+					<cdm:CMYK C="0" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="81.033" Y="84.821" Z="66.357" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G10">
+					<cdm:CMYK C="0" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="74.145" Y="72.636" Z="60.532" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H10">
+					<cdm:CMYK C="0" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="68.319" Y="63.157" Z="54.752" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I10">
+					<cdm:CMYK C="0" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="59.323" Y="49.427" Z="45.236" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J10">
+					<cdm:CMYK C="0" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="47.934" Y="33.222" Z="32.207" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K10">
+					<cdm:CMYK C="0" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="36.417" Y="19.543" Z="18.180" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L10">
+					<cdm:CMYK C="10" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="65.106" Y="71.275" Z="63.572" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M10">
+					<cdm:CMYK C="10" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="58.917" Y="60.499" Z="57.010" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N10">
+					<cdm:CMYK C="10" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="53.840" Y="52.184" Z="51.501" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O10">
+					<cdm:CMYK C="10" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="46.159" Y="40.599" Z="42.698" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P10">
+					<cdm:CMYK C="10" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="35.851" Y="26.146" Z="30.256" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q10">
+					<cdm:CMYK C="10" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="26.651" Y="15.015" Z="17.871" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R10">
+					<cdm:CMYK C="20" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="58.352" Y="65.387" Z="62.424" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S10">
+					<cdm:CMYK C="20" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="52.413" Y="55.236" Z="55.370" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T10">
+					<cdm:CMYK C="20" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="47.013" Y="46.639" Z="49.640" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U10">
+					<cdm:CMYK C="20" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="40.413" Y="36.484" Z="41.172" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V10">
+					<cdm:CMYK C="20" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="30.753" Y="22.886" Z="29.353" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W10">
+					<cdm:CMYK C="20" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="22.744" Y="13.151" Z="18.086" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X10">
+					<cdm:CMYK C="40" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="40.112" Y="48.891" Z="55.873" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A11">
+					<cdm:CMYK C="40" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="36.566" Y="41.890" Z="50.948" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B11">
+					<cdm:CMYK C="40" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="33.194" Y="36.013" Z="45.857" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C11">
+					<cdm:CMYK C="40" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="28.372" Y="27.875" Z="38.558" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D11">
+					<cdm:CMYK C="40" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="21.236" Y="17.315" Z="28.309" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E11">
+					<cdm:CMYK C="40" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="15.415" Y="9.772" Z="18.383" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F11">
+					<cdm:CMYK C="70" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="28.997" Y="37.956" Z="51.858" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G11">
+					<cdm:CMYK C="70" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="25.148" Y="31.423" Z="46.266" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H11">
+					<cdm:CMYK C="70" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="22.122" Y="26.293" Z="41.407" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I11">
+					<cdm:CMYK C="70" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="18.345" Y="19.776" Z="34.449" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J11">
+					<cdm:CMYK C="70" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="13.882" Y="12.639" Z="26.395" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K11">
+					<cdm:CMYK C="70" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="9.942" Y="6.786" Z="16.568" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L11">
+					<cdm:CMYK C="100" M="0" Y="10" K="0" />
+					<cdm:CIEXYZ X="16.640" Y="24.798" Z="44.643" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M11">
+					<cdm:CMYK C="100" M="10" Y="10" K="0" />
+					<cdm:CIEXYZ X="14.915" Y="21.053" Z="39.981" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N11">
+					<cdm:CMYK C="100" M="20" Y="10" K="0" />
+					<cdm:CIEXYZ X="13.419" Y="18.049" Z="36.700" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O11">
+					<cdm:CMYK C="100" M="40" Y="10" K="0" />
+					<cdm:CIEXYZ X="11.874" Y="14.588" Z="31.974" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P11">
+					<cdm:CMYK C="100" M="70" Y="10" K="0" />
+					<cdm:CIEXYZ X="9.138" Y="9.424" Z="24.409" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q11">
+					<cdm:CMYK C="100" M="100" Y="10" K="0" />
+					<cdm:CIEXYZ X="6.012" Y="4.526" Z="14.636" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R11">
+					<cdm:CMYK C="0" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="78.711" Y="83.781" Z="54.900" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S11">
+					<cdm:CMYK C="0" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="71.171" Y="70.695" Z="48.737" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T11">
+					<cdm:CMYK C="0" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="65.110" Y="60.712" Z="43.565" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U11">
+					<cdm:CMYK C="0" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="57.010" Y="47.776" Z="36.315" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V11">
+					<cdm:CMYK C="0" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="45.872" Y="31.568" Z="25.472" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W11">
+					<cdm:CMYK C="0" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="36.422" Y="20.013" Z="15.628" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X11">
+					<cdm:CMYK C="10" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="60.801" Y="68.779" Z="51.100" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A12">
+					<cdm:CMYK C="10" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="55.919" Y="59.040" Z="45.781" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B12">
+					<cdm:CMYK C="10" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="51.064" Y="50.798" Z="41.769" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C12">
+					<cdm:CMYK C="10" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="44.111" Y="39.560" Z="34.766" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D12">
+					<cdm:CMYK C="10" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="34.130" Y="25.112" Z="24.351" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E12">
+					<cdm:CMYK C="10" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="26.282" Y="15.086" Z="15.502" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F12">
+					<cdm:CMYK C="20" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="56.057" Y="64.380" Z="50.627" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G12">
+					<cdm:CMYK C="20" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="49.959" Y="53.976" Z="44.866" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H12">
+					<cdm:CMYK C="20" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="45.118" Y="45.884" Z="39.935" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I12">
+					<cdm:CMYK C="20" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="39.086" Y="36.041" Z="33.917" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J12">
+					<cdm:CMYK C="20" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="30.322" Y="23.104" Z="24.213" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K12">
+					<cdm:CMYK C="20" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="22.680" Y="13.339" Z="15.047" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L12">
+					<cdm:CMYK C="40" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="38.249" Y="47.975" Z="45.749" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M12">
+					<cdm:CMYK C="40" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="33.953" Y="39.957" Z="40.341" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N12">
+					<cdm:CMYK C="40" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="30.379" Y="33.961" Z="36.532" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O12">
+					<cdm:CMYK C="40" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="26.037" Y="26.459" Z="30.679" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P12">
+					<cdm:CMYK C="40" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="19.798" Y="16.714" Z="22.619" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q12">
+					<cdm:CMYK C="40" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="14.079" Y="8.974" Z="13.946" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R12">
+					<cdm:CMYK C="70" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="24.536" Y="34.435" Z="40.434" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S12">
+					<cdm:CMYK C="70" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="21.488" Y="28.614" Z="35.990" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T12">
+					<cdm:CMYK C="70" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="18.874" Y="23.937" Z="32.137" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U12">
+					<cdm:CMYK C="70" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="15.624" Y="18.055" Z="26.895" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V12">
+					<cdm:CMYK C="70" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="12.335" Y="11.866" Z="21.144" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W12">
+					<cdm:CMYK C="70" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="8.367" Y="5.945" Z="12.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X12">
+					<cdm:CMYK C="100" M="0" Y="20" K="0" />
+					<cdm:CIEXYZ X="14.161" Y="23.233" Z="35.036" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A13">
+					<cdm:CMYK C="100" M="10" Y="20" K="0" />
+					<cdm:CIEXYZ X="13.268" Y="20.462" Z="32.162" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B13">
+					<cdm:CMYK C="100" M="20" Y="20" K="0" />
+					<cdm:CIEXYZ X="11.929" Y="17.426" Z="29.376" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C13">
+					<cdm:CMYK C="100" M="40" Y="20" K="0" />
+					<cdm:CIEXYZ X="10.437" Y="13.710" Z="25.545" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D13">
+					<cdm:CMYK C="100" M="70" Y="20" K="0" />
+					<cdm:CIEXYZ X="8.091" Y="8.760" Z="19.715" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E13">
+					<cdm:CMYK C="100" M="100" Y="20" K="0" />
+					<cdm:CIEXYZ X="5.363" Y="4.164" Z="11.875" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F13">
+					<cdm:CMYK C="0" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="75.354" Y="82.370" Z="36.459" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G13">
+					<cdm:CMYK C="0" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="67.530" Y="68.324" Z="32.490" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H13">
+					<cdm:CMYK C="0" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="61.582" Y="58.264" Z="29.054" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I13">
+					<cdm:CMYK C="0" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="53.716" Y="45.525" Z="23.884" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J13">
+					<cdm:CMYK C="0" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="43.667" Y="30.449" Z="16.713" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K13">
+					<cdm:CMYK C="0" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="34.955" Y="19.348" Z="10.440" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L13">
+					<cdm:CMYK C="10" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="57.629" Y="67.099" Z="34.258" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M13">
+					<cdm:CMYK C="10" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="51.191" Y="55.329" Z="30.264" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N13">
+					<cdm:CMYK C="10" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="46.482" Y="47.150" Z="26.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O13">
+					<cdm:CMYK C="10" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="39.975" Y="36.526" Z="22.288" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P13">
+					<cdm:CMYK C="10" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="31.476" Y="23.571" Z="15.604" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q13">
+					<cdm:CMYK C="10" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="24.566" Y="14.369" Z="10.123" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R13">
+					<cdm:CMYK C="20" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="49.976" Y="60.278" Z="33.142" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S13">
+					<cdm:CMYK C="20" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="44.284" Y="49.748" Z="28.918" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T13">
+					<cdm:CMYK C="20" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="39.630" Y="41.781" Z="25.781" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U13">
+					<cdm:CMYK C="20" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="33.408" Y="31.741" Z="20.718" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V13">
+					<cdm:CMYK C="20" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="26.414" Y="20.514" Z="15.316" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W13">
+					<cdm:CMYK C="20" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="20.644" Y="12.496" Z="9.841" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X13">
+					<cdm:CMYK C="40" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="31.735" Y="43.364" Z="29.052" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A14">
+					<cdm:CMYK C="40" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="29.834" Y="37.628" Z="26.404" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B14">
+					<cdm:CMYK C="40" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="26.717" Y="31.791" Z="23.545" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C14">
+					<cdm:CMYK C="40" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="23.141" Y="24.694" Z="20.026" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D14">
+					<cdm:CMYK C="40" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="18.153" Y="15.837" Z="15.074" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E14">
+					<cdm:CMYK C="40" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="13.573" Y="8.934" Z="9.497" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F14">
+					<cdm:CMYK C="70" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="21.149" Y="32.660" Z="26.421" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G14">
+					<cdm:CMYK C="70" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="18.573" Y="27.047" Z="23.607" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H14">
+					<cdm:CMYK C="70" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="17.308" Y="23.486" Z="21.811" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I14">
+					<cdm:CMYK C="70" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="14.518" Y="17.919" Z="18.181" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J14">
+					<cdm:CMYK C="70" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="11.534" Y="11.749" Z="14.240" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K14">
+					<cdm:CMYK C="70" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="8.308" Y="6.235" Z="8.861" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L14">
+					<cdm:CMYK C="100" M="0" Y="40" K="0" />
+					<cdm:CIEXYZ X="12.478" Y="22.740" Z="24.029" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M14">
+					<cdm:CMYK C="100" M="10" Y="40" K="0" />
+					<cdm:CIEXYZ X="10.979" Y="19.073" Z="21.233" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N14">
+					<cdm:CMYK C="100" M="20" Y="40" K="0" />
+					<cdm:CIEXYZ X="10.001" Y="16.317" Z="19.653" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O14">
+					<cdm:CMYK C="100" M="40" Y="40" K="0" />
+					<cdm:CIEXYZ X="8.649" Y="12.895" Z="16.655" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P14">
+					<cdm:CMYK C="100" M="70" Y="40" K="0" />
+					<cdm:CIEXYZ X="6.663" Y="8.165" Z="12.866" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q14">
+					<cdm:CMYK C="100" M="100" Y="40" K="0" />
+					<cdm:CIEXYZ X="4.601" Y="3.936" Z="7.547" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R14">
+					<cdm:CMYK C="0" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="72.320" Y="80.421" Z="22.680" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S14">
+					<cdm:CMYK C="0" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="63.677" Y="64.700" Z="19.621" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T14">
+					<cdm:CMYK C="0" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="57.842" Y="54.580" Z="17.225" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U14">
+					<cdm:CMYK C="0" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="50.436" Y="42.474" Z="13.957" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V14">
+					<cdm:CMYK C="0" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="41.821" Y="29.001" Z="10.289" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W14">
+					<cdm:CMYK C="0" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="33.970" Y="18.852" Z="6.348" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X14">
+					<cdm:CMYK C="10" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="51.536" Y="62.574" Z="21.095" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A15">
+					<cdm:CMYK C="10" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="47.602" Y="53.171" Z="18.598" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B15">
+					<cdm:CMYK C="10" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="43.083" Y="44.836" Z="16.420" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C15">
+					<cdm:CMYK C="10" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="37.474" Y="34.813" Z="13.947" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D15">
+					<cdm:CMYK C="10" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="30.538" Y="23.282" Z="10.400" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E15">
+					<cdm:CMYK C="10" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="24.420" Y="14.527" Z="6.593" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F15">
+					<cdm:CMYK C="20" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="46.451" Y="57.862" Z="20.892" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G15">
+					<cdm:CMYK C="20" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="41.635" Y="48.159" Z="18.378" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H15">
+					<cdm:CMYK C="20" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="37.756" Y="40.787" Z="16.561" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I15">
+					<cdm:CMYK C="20" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="32.532" Y="31.434" Z="13.403" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J15">
+					<cdm:CMYK C="20" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="26.501" Y="21.040" Z="10.212" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K15">
+					<cdm:CMYK C="20" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="20.543" Y="12.509" Z="6.027" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L15">
+					<cdm:CMYK C="40" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="29.539" Y="41.732" Z="18.308" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M15">
+					<cdm:CMYK C="40" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="26.247" Y="34.566" Z="16.181" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N15">
+					<cdm:CMYK C="40" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="23.854" Y="29.455" Z="14.771" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O15">
+					<cdm:CMYK C="40" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="20.763" Y="23.006" Z="12.797" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P15">
+					<cdm:CMYK C="40" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="16.415" Y="14.902" Z="9.529" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q15">
+					<cdm:CMYK C="40" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="12.269" Y="8.188" Z="5.563" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R15">
+					<cdm:CMYK C="70" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="17.873" Y="29.876" Z="16.683" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S15">
+					<cdm:CMYK C="70" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="15.981" Y="24.948" Z="15.263" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T15">
+					<cdm:CMYK C="70" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="14.271" Y="21.131" Z="13.571" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U15">
+					<cdm:CMYK C="70" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="12.409" Y="16.388" Z="11.874" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V15">
+					<cdm:CMYK C="70" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="9.757" Y="10.518" Z="8.968" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W15">
+					<cdm:CMYK C="70" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="7.526" Y="5.780" Z="5.528" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X15">
+					<cdm:CMYK C="100" M="0" Y="70" K="0" />
+					<cdm:CIEXYZ X="10.363" Y="21.108" Z="15.629" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A16">
+					<cdm:CMYK C="100" M="10" Y="70" K="0" />
+					<cdm:CIEXYZ X="9.871" Y="18.679" Z="14.377" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B16">
+					<cdm:CMYK C="100" M="20" Y="70" K="0" />
+					<cdm:CIEXYZ X="8.898" Y="16.079" Z="13.259" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C16">
+					<cdm:CMYK C="100" M="40" Y="70" K="0" />
+					<cdm:CIEXYZ X="7.519" Y="12.401" Z="11.099" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D16">
+					<cdm:CMYK C="100" M="70" Y="70" K="0" />
+					<cdm:CIEXYZ X="5.896" Y="7.946" Z="8.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E16">
+					<cdm:CMYK C="100" M="100" Y="70" K="0" />
+					<cdm:CIEXYZ X="6.234" Y="6.172" Z="7.898" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F16">
+					<cdm:CMYK C="0" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="70.225" Y="78.707" Z="11.871" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G16">
+					<cdm:CMYK C="0" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="61.354" Y="62.696" Z="10.321" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H16">
+					<cdm:CMYK C="0" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="55.806" Y="52.765" Z="9.167" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I16">
+					<cdm:CMYK C="0" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="49.063" Y="41.426" Z="7.747" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J16">
+					<cdm:CMYK C="0" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="40.672" Y="28.428" Z="5.637" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K16">
+					<cdm:CMYK C="0" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="32.861" Y="18.270" Z="3.177" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L16">
+					<cdm:CMYK C="10" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="49.090" Y="60.323" Z="11.171" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M16">
+					<cdm:CMYK C="10" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="43.294" Y="48.698" Z="9.848" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N16">
+					<cdm:CMYK C="10" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="39.480" Y="41.327" Z="9.040" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O16">
+					<cdm:CMYK C="10" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="34.474" Y="32.200" Z="7.683" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P16">
+					<cdm:CMYK C="10" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="28.163" Y="21.427" Z="5.395" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q16">
+					<cdm:CMYK C="10" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="22.569" Y="13.336" Z="3.119" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R16">
+					<cdm:CMYK C="20" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="41.226" Y="53.220" Z="10.969" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S16">
+					<cdm:CMYK C="20" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="36.242" Y="42.891" Z="9.646" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T16">
+					<cdm:CMYK C="20" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="32.837" Y="36.082" Z="8.743" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U16">
+					<cdm:CMYK C="20" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="28.967" Y="28.337" Z="7.529" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V16">
+					<cdm:CMYK C="20" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="23.585" Y="18.766" Z="5.511" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W16">
+					<cdm:CMYK C="20" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="18.930" Y="11.563" Z="3.199" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A17">
+					<cdm:CMYK C="40" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="25.857" Y="38.473" Z="10.441" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B17">
+					<cdm:CMYK C="40" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="23.269" Y="32.243" Z="9.457" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C17">
+					<cdm:CMYK C="40" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="21.603" Y="27.863" Z="8.394" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D17">
+					<cdm:CMYK C="40" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="18.899" Y="21.560" Z="7.162" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E17">
+					<cdm:CMYK C="40" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="15.235" Y="14.045" Z="5.172" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F17">
+					<cdm:CMYK C="40" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="12.189" Y="8.242" Z="3.049" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G17">
+					<cdm:CMYK C="70" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="16.013" Y="28.193" Z="9.644" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H17">
+					<cdm:CMYK C="70" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="14.633" Y="23.838" Z="8.770" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I17">
+					<cdm:CMYK C="70" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="13.421" Y="20.528" Z="7.961" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J17">
+					<cdm:CMYK C="70" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="11.326" Y="15.661" Z="6.406" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K17">
+					<cdm:CMYK C="70" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="9.013" Y="10.086" Z="4.726" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L17">
+					<cdm:CMYK C="70" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="8.415" Y="7.058" Z="4.334" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M17">
+					<cdm:CMYK C="100" M="0" Y="100" K="0" />
+					<cdm:CIEXYZ X="8.654" Y="19.396" Z="8.733" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N17">
+					<cdm:CMYK C="100" M="10" Y="100" K="0" />
+					<cdm:CIEXYZ X="7.761" Y="16.387" Z="7.743" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O17">
+					<cdm:CMYK C="100" M="20" Y="100" K="0" />
+					<cdm:CIEXYZ X="6.992" Y="14.023" Z="7.061" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P17">
+					<cdm:CMYK C="100" M="40" Y="100" K="0" />
+					<cdm:CIEXYZ X="5.714" Y="10.712" Z="5.639" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q17">
+					<cdm:CMYK C="100" M="70" Y="100" K="0" />
+					<cdm:CIEXYZ X="6.126" Y="8.701" Z="6.076" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R17">
+					<cdm:CMYK C="100" M="100" Y="100" K="0" />
+					<cdm:CIEXYZ X="6.205" Y="6.508" Z="6.026" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S17">
+					<cdm:CMYK C="0" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="52.559" Y="53.667" Z="49.764" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T17">
+					<cdm:CMYK C="0" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="46.617" Y="45.457" Z="43.864" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U17">
+					<cdm:CMYK C="0" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="41.939" Y="38.925" Z="39.012" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V17">
+					<cdm:CMYK C="0" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="35.349" Y="30.085" Z="31.854" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C18">
+					<cdm:CMYK C="0" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="28.314" Y="20.134" Z="23.501" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D18">
+					<cdm:CMYK C="0" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="21.218" Y="11.909" Z="14.325" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E18">
+					<cdm:CMYK C="10" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="42.927" Y="45.263" Z="45.595" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F18">
+					<cdm:CMYK C="10" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="38.854" Y="39.203" Z="41.505" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G18">
+					<cdm:CMYK C="10" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="35.214" Y="33.929" Z="37.551" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H18">
+					<cdm:CMYK C="10" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="29.739" Y="26.212" Z="31.343" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I18">
+					<cdm:CMYK C="10" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="22.677" Y="16.728" Z="22.594" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J18">
+					<cdm:CMYK C="10" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="16.419" Y="9.556" Z="13.701" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K18">
+					<cdm:CMYK C="20" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="39.477" Y="42.350" Z="45.112" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L18">
+					<cdm:CMYK C="20" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="34.832" Y="35.781" Z="40.118" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M18">
+					<cdm:CMYK C="20" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="31.710" Y="31.041" Z="36.810" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N18">
+					<cdm:CMYK C="20" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="27.198" Y="24.381" Z="30.974" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O18">
+					<cdm:CMYK C="20" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="20.339" Y="15.325" Z="22.427" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P18">
+					<cdm:CMYK C="20" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="14.796" Y="8.827" Z="13.702" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q18">
+					<cdm:CMYK C="40" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="28.724" Y="32.815" Z="41.333" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R18">
+					<cdm:CMYK C="40" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="24.907" Y="27.296" Z="36.539" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S18">
+					<cdm:CMYK C="40" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="22.279" Y="23.316" Z="33.162" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T18">
+					<cdm:CMYK C="40" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="18.284" Y="17.571" Z="27.750" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U18">
+					<cdm:CMYK C="40" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="13.364" Y="10.775" Z="20.192" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V18">
+					<cdm:CMYK C="40" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="9.744" Y="6.174" Z="12.915" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W18">
+					<cdm:CMYK C="70" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="17.815" Y="22.333" Z="34.383" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X18">
+					<cdm:CMYK C="70" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="15.101" Y="18.137" Z="30.340" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B19">
+					<cdm:CMYK C="70" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="14.371" Y="16.494" Z="28.837" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C19">
+					<cdm:CMYK C="70" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="12.046" Y="12.606" Z="24.568" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D19">
+					<cdm:CMYK C="70" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="9.357" Y="8.288" Z="19.214" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E19">
+					<cdm:CMYK C="70" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="6.904" Y="4.770" Z="12.714" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F19">
+					<cdm:CMYK C="100" M="0" Y="0" K="20" />
+					<cdm:CIEXYZ X="11.373" Y="15.811" Z="30.636" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G19">
+					<cdm:CMYK C="100" M="10" Y="0" K="20" />
+					<cdm:CIEXYZ X="10.105" Y="13.432" Z="27.922" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H19">
+					<cdm:CMYK C="100" M="20" Y="0" K="20" />
+					<cdm:CIEXYZ X="9.226" Y="11.685" Z="25.744" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I19">
+					<cdm:CMYK C="100" M="40" Y="0" K="20" />
+					<cdm:CIEXYZ X="8.139" Y="9.411" Z="22.795" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J19">
+					<cdm:CMYK C="100" M="70" Y="0" K="20" />
+					<cdm:CIEXYZ X="6.525" Y="6.356" Z="17.810" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K19">
+					<cdm:CMYK C="100" M="100" Y="0" K="20" />
+					<cdm:CIEXYZ X="4.718" Y="3.520" Z="11.444" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L19">
+					<cdm:CMYK C="0" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="49.850" Y="51.800" Z="42.026" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M19">
+					<cdm:CMYK C="0" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="45.514" Y="45.044" Z="38.051" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N19">
+					<cdm:CMYK C="0" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="41.809" Y="39.394" Z="34.621" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O19">
+					<cdm:CMYK C="0" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="36.129" Y="31.214" Z="28.917" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P19">
+					<cdm:CMYK C="0" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="28.564" Y="20.837" Z="20.982" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q19">
+					<cdm:CMYK C="0" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="20.833" Y="11.928" Z="12.193" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R19">
+					<cdm:CMYK C="10" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="41.882" Y="45.099" Z="40.350" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S19">
+					<cdm:CMYK C="10" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="36.786" Y="37.831" Z="35.358" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T19">
+					<cdm:CMYK C="10" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="33.449" Y="32.736" Z="32.031" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U19">
+					<cdm:CMYK C="10" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="28.034" Y="25.180" Z="26.195" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V19">
+					<cdm:CMYK C="10" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="21.120" Y="15.991" Z="18.929" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W19">
+					<cdm:CMYK C="10" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="15.487" Y="9.312" Z="11.658" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X19">
+					<cdm:CMYK C="20" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="34.999" Y="38.700" Z="35.970" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A20">
+					<cdm:CMYK C="20" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="33.032" Y="34.714" Z="33.725" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B20">
+					<cdm:CMYK C="20" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="29.783" Y="29.883" Z="30.467" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C20">
+					<cdm:CMYK C="20" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="24.955" Y="22.805" Z="25.187" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D20">
+					<cdm:CMYK C="20" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="19.117" Y="14.668" Z="18.445" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E20">
+					<cdm:CMYK C="20" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="14.378" Y="8.731" Z="11.906" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F20">
+					<cdm:CMYK C="40" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="26.077" Y="30.772" Z="33.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G20">
+					<cdm:CMYK C="40" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="23.076" Y="26.114" Z="30.260" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H20">
+					<cdm:CMYK C="40" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="20.461" Y="22.078" Z="27.287" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I20">
+					<cdm:CMYK C="40" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="17.458" Y="17.278" Z="23.382" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J20">
+					<cdm:CMYK C="40" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="13.142" Y="10.956" Z="17.442" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K20">
+					<cdm:CMYK C="40" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="9.773" Y="6.415" Z="11.230" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L20">
+					<cdm:CMYK C="70" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="16.768" Y="21.938" Z="29.528" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M20">
+					<cdm:CMYK C="70" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="14.994" Y="18.727" Z="27.042" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N20">
+					<cdm:CMYK C="70" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="13.478" Y="16.069" Z="24.652" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O20">
+					<cdm:CMYK C="70" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="11.492" Y="12.550" Z="21.262" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P20">
+					<cdm:CMYK C="70" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="9.041" Y="8.380" Z="16.628" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q20">
+					<cdm:CMYK C="70" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="6.464" Y="4.599" Z="10.444" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R20">
+					<cdm:CMYK C="100" M="0" Y="10" K="20" />
+					<cdm:CIEXYZ X="10.287" Y="15.213" Z="25.999" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S20">
+					<cdm:CMYK C="100" M="10" Y="10" K="20" />
+					<cdm:CIEXYZ X="9.050" Y="12.858" Z="23.477" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T20">
+					<cdm:CMYK C="100" M="20" Y="10" K="20" />
+					<cdm:CIEXYZ X="8.339" Y="11.237" Z="21.798" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U20">
+					<cdm:CMYK C="100" M="40" Y="10" K="20" />
+					<cdm:CIEXYZ X="7.320" Y="8.985" Z="18.999" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V20">
+					<cdm:CMYK C="100" M="70" Y="10" K="20" />
+					<cdm:CIEXYZ X="5.806" Y="5.976" Z="14.957" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W20">
+					<cdm:CMYK C="100" M="100" Y="10" K="20" />
+					<cdm:CIEXYZ X="4.094" Y="3.163" Z="9.322" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X20">
+					<cdm:CMYK C="0" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="45.287" Y="47.858" Z="32.817" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A21">
+					<cdm:CMYK C="0" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="41.654" Y="41.920" Z="30.242" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B21">
+					<cdm:CMYK C="0" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="37.655" Y="35.962" Z="26.755" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C21">
+					<cdm:CMYK C="0" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="33.302" Y="28.929" Z="22.650" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D21">
+					<cdm:CMYK C="0" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="26.336" Y="19.148" Z="16.322" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E21">
+					<cdm:CMYK C="0" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="20.419" Y="11.866" Z="10.439" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F21">
+					<cdm:CMYK C="10" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="37.638" Y="41.396" Z="31.423" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G21">
+					<cdm:CMYK C="10" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="34.077" Y="35.788" Z="28.437" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H21">
+					<cdm:CMYK C="10" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="31.177" Y="31.147" Z="25.895" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I21">
+					<cdm:CMYK C="10" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="26.888" Y="24.498" Z="21.830" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J21">
+					<cdm:CMYK C="10" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="20.629" Y="15.756" Z="15.615" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K21">
+					<cdm:CMYK C="10" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="15.589" Y="9.282" Z="9.744" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L21">
+					<cdm:CMYK C="20" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="33.887" Y="38.230" Z="30.572" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M21">
+					<cdm:CMYK C="20" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="30.602" Y="32.829" Z="27.547" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N21">
+					<cdm:CMYK C="20" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="28.267" Y="28.797" Z="25.434" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O21">
+					<cdm:CMYK C="20" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="24.138" Y="22.505" Z="21.325" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P21">
+					<cdm:CMYK C="20" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="18.539" Y="14.383" Z="15.506" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q21">
+					<cdm:CMYK C="20" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="14.005" Y="8.552" Z="9.878" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R21">
+					<cdm:CMYK C="40" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="23.601" Y="29.063" Z="27.503" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S21">
+					<cdm:CMYK C="40" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="21.182" Y="24.794" Z="24.948" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T21">
+					<cdm:CMYK C="40" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="18.703" Y="20.840" Z="22.201" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U21">
+					<cdm:CMYK C="40" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="15.698" Y="16.021" Z="18.712" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V21">
+					<cdm:CMYK C="40" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="12.121" Y="10.425" Z="14.287" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W21">
+					<cdm:CMYK C="40" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="8.945" Y="5.905" Z="9.215" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X21">
+					<cdm:CMYK C="70" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="14.902" Y="20.596" Z="23.235" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A22">
+					<cdm:CMYK C="70" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="13.300" Y="17.515" Z="21.141" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B22">
+					<cdm:CMYK C="70" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="12.261" Y="15.377" Z="19.746" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C22">
+					<cdm:CMYK C="70" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="10.663" Y="12.136" Z="17.205" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D22">
+					<cdm:CMYK C="70" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="8.762" Y="8.366" Z="13.962" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E22">
+					<cdm:CMYK C="70" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="6.173" Y="4.510" Z="9.008" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F22">
+					<cdm:CMYK C="100" M="0" Y="20" K="20" />
+					<cdm:CIEXYZ X="9.717" Y="15.227" Z="21.598" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G22">
+					<cdm:CMYK C="100" M="10" Y="20" K="20" />
+					<cdm:CIEXYZ X="8.694" Y="13.038" Z="19.855" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H22">
+					<cdm:CMYK C="100" M="20" Y="20" K="20" />
+					<cdm:CIEXYZ X="7.994" Y="11.383" Z="18.526" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I22">
+					<cdm:CMYK C="100" M="40" Y="20" K="20" />
+					<cdm:CIEXYZ X="7.016" Y="9.110" Z="16.344" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J22">
+					<cdm:CMYK C="100" M="70" Y="20" K="20" />
+					<cdm:CIEXYZ X="5.445" Y="5.953" Z="12.626" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K22">
+					<cdm:CMYK C="100" M="100" Y="20" K="20" />
+					<cdm:CIEXYZ X="4.303" Y="3.501" Z="8.585" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L22">
+					<cdm:CMYK C="0" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="42.062" Y="45.733" Z="21.778" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M22">
+					<cdm:CMYK C="0" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="37.778" Y="38.764" Z="19.185" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N22">
+					<cdm:CMYK C="0" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="35.160" Y="34.090" Z="17.774" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O22">
+					<cdm:CMYK C="0" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="30.714" Y="27.013" Z="14.853" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P22">
+					<cdm:CMYK C="0" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="24.805" Y="18.326" Z="10.803" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q22">
+					<cdm:CMYK C="0" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="19.267" Y="11.239" Z="6.726" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R22">
+					<cdm:CMYK C="10" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="33.325" Y="38.205" Z="20.607" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S22">
+					<cdm:CMYK C="10" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="30.057" Y="32.559" Z="18.529" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T22">
+					<cdm:CMYK C="10" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="26.785" Y="27.426" Z="16.183" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U22">
+					<cdm:CMYK C="10" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="22.835" Y="21.212" Z="13.431" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V22">
+					<cdm:CMYK C="10" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="18.505" Y="14.442" Z="10.214" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W22">
+					<cdm:CMYK C="10" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="14.558" Y="8.992" Z="6.630" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X22">
+					<cdm:CMYK C="20" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="27.774" Y="33.029" Z="18.618" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A23">
+					<cdm:CMYK C="20" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="26.283" Y="29.417" Z="17.124" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B23">
+					<cdm:CMYK C="20" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="24.258" Y="25.694" Z="15.805" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C23">
+					<cdm:CMYK C="20" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="20.953" Y="20.126" Z="13.281" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D23">
+					<cdm:CMYK C="20" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="17.010" Y="13.686" Z="10.211" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E23">
+					<cdm:CMYK C="20" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="13.366" Y="8.444" Z="6.685" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F23">
+					<cdm:CMYK C="40" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="20.403" Y="26.546" Z="17.914" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G23">
+					<cdm:CMYK C="40" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="18.478" Y="22.855" Z="16.233" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H23">
+					<cdm:CMYK C="40" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="16.888" Y="19.857" Z="14.856" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I23">
+					<cdm:CMYK C="40" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="14.768" Y="15.784" Z="13.033" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J23">
+					<cdm:CMYK C="40" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="11.676" Y="10.488" Z="9.893" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K23">
+					<cdm:CMYK C="40" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="8.720" Y="5.976" Z="6.236" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L23">
+					<cdm:CMYK C="70" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="13.296" Y="19.748" Z="16.004" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M23">
+					<cdm:CMYK C="70" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="12.099" Y="17.057" Z="14.676" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N23">
+					<cdm:CMYK C="70" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="11.326" Y="15.158" Z="14.031" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O23">
+					<cdm:CMYK C="70" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="9.833" Y="12.000" Z="12.091" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P23">
+					<cdm:CMYK C="70" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="7.757" Y="7.991" Z="9.561" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q23">
+					<cdm:CMYK C="70" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="5.696" Y="4.377" Z="5.993" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R23">
+					<cdm:CMYK C="100" M="0" Y="40" K="20" />
+					<cdm:CIEXYZ X="8.130" Y="14.267" Z="14.854" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S23">
+					<cdm:CMYK C="100" M="10" Y="40" K="20" />
+					<cdm:CIEXYZ X="7.202" Y="12.148" Z="13.385" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T23">
+					<cdm:CMYK C="100" M="20" Y="40" K="20" />
+					<cdm:CIEXYZ X="6.621" Y="10.564" Z="12.403" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U23">
+					<cdm:CMYK C="100" M="40" Y="40" K="20" />
+					<cdm:CIEXYZ X="5.766" Y="8.418" Z="10.809" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V23">
+					<cdm:CMYK C="100" M="70" Y="40" K="20" />
+					<cdm:CIEXYZ X="4.575" Y="5.573" Z="8.504" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W23">
+					<cdm:CMYK C="100" M="100" Y="40" K="20" />
+					<cdm:CIEXYZ X="4.767" Y="4.464" Z="7.582" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X23">
+					<cdm:CMYK C="0" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="37.596" Y="41.583" Z="13.372" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A24">
+					<cdm:CMYK C="0" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="34.547" Y="36.022" Z="11.478" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B24">
+					<cdm:CMYK C="0" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="31.547" Y="30.951" Z="10.259" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C24">
+					<cdm:CMYK C="0" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="28.162" Y="24.981" Z="8.830" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D24">
+					<cdm:CMYK C="0" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="23.358" Y="17.326" Z="6.735" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E24">
+					<cdm:CMYK C="0" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="18.947" Y="11.299" Z="4.446" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F24">
+					<cdm:CMYK C="10" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="30.265" Y="35.629" Z="12.574" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G24">
+					<cdm:CMYK C="10" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="27.846" Y="30.886" Z="11.738" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H24">
+					<cdm:CMYK C="10" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="25.355" Y="26.520" Z="10.321" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I24">
+					<cdm:CMYK C="10" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="22.318" Y="21.145" Z="8.900" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J24">
+					<cdm:CMYK C="10" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="18.121" Y="14.348" Z="6.614" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K24">
+					<cdm:CMYK C="10" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="14.390" Y="8.940" Z="4.160" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L24">
+					<cdm:CMYK C="20" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="27.015" Y="32.943" Z="12.138" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M24">
+					<cdm:CMYK C="20" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="24.463" Y="28.047" Z="10.973" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N24">
+					<cdm:CMYK C="20" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="22.547" Y="24.359" Z="10.223" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O24">
+					<cdm:CMYK C="20" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="19.403" Y="19.045" Z="8.644" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P24">
+					<cdm:CMYK C="20" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="16.238" Y="13.341" Z="6.855" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q24">
+					<cdm:CMYK C="20" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="12.593" Y="8.027" Z="4.147" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R24">
+					<cdm:CMYK C="40" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="18.352" Y="25.195" Z="11.778" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S24">
+					<cdm:CMYK C="40" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="16.044" Y="20.866" Z="10.358" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T24">
+					<cdm:CMYK C="40" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="14.672" Y="18.020" Z="9.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U24">
+					<cdm:CMYK C="40" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="12.501" Y="14.038" Z="8.118" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V24">
+					<cdm:CMYK C="40" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="10.383" Y="9.698" Z="6.411" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W24">
+					<cdm:CMYK C="40" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="8.207" Y="5.855" Z="4.087" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X24">
+					<cdm:CMYK C="70" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="11.254" Y="17.978" Z="10.583" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A25">
+					<cdm:CMYK C="70" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="10.557" Y="15.973" Z="9.669" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B25">
+					<cdm:CMYK C="70" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="9.739" Y="14.034" Z="8.965" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C25">
+					<cdm:CMYK C="70" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="8.562" Y="11.118" Z="7.870" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D25">
+					<cdm:CMYK C="70" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="6.924" Y="7.513" Z="5.892" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E25">
+					<cdm:CMYK C="70" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="6.737" Y="5.793" Z="5.496" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F25">
+					<cdm:CMYK C="100" M="0" Y="70" K="20" />
+					<cdm:CIEXYZ X="7.053" Y="13.611" Z="9.702" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G25">
+					<cdm:CMYK C="100" M="10" Y="70" K="20" />
+					<cdm:CIEXYZ X="6.347" Y="11.665" Z="8.739" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H25">
+					<cdm:CMYK C="100" M="20" Y="70" K="20" />
+					<cdm:CIEXYZ X="5.759" Y="10.092" Z="8.074" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I25">
+					<cdm:CMYK C="100" M="40" Y="70" K="20" />
+					<cdm:CIEXYZ X="5.021" Y="8.020" Z="6.920" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J25">
+					<cdm:CMYK C="100" M="70" Y="70" K="20" />
+					<cdm:CIEXYZ X="5.318" Y="6.745" Z="6.930" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K25">
+					<cdm:CMYK C="100" M="100" Y="70" K="20" />
+					<cdm:CIEXYZ X="5.652" Y="5.715" Z="6.603" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L25">
+					<cdm:CMYK C="0" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="35.217" Y="39.506" Z="6.924" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M25">
+					<cdm:CMYK C="0" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="31.976" Y="33.423" Z="6.252" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N25">
+					<cdm:CMYK C="0" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="29.811" Y="29.236" Z="5.870" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O25">
+					<cdm:CMYK C="0" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="26.289" Y="23.291" Z="4.787" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P25">
+					<cdm:CMYK C="0" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="22.252" Y="16.472" Z="3.720" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q25">
+					<cdm:CMYK C="0" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="17.908" Y="10.474" Z="2.153" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R25">
+					<cdm:CMYK C="10" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="27.356" Y="33.067" Z="7.011" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S25">
+					<cdm:CMYK C="10" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="24.424" Y="27.506" Z="6.199" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T25">
+					<cdm:CMYK C="10" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="22.392" Y="23.653" Z="5.691" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U25">
+					<cdm:CMYK C="10" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="20.059" Y="19.094" Z="4.993" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V25">
+					<cdm:CMYK C="10" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="16.364" Y="12.881" Z="3.549" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W25">
+					<cdm:CMYK C="10" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="13.515" Y="8.415" Z="2.345" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X25">
+					<cdm:CMYK C="20" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="22.818" Y="28.756" Z="6.905" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A26">
+					<cdm:CMYK C="20" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="22.163" Y="25.919" Z="6.484" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B26">
+					<cdm:CMYK C="20" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="20.389" Y="22.402" Z="5.804" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C26">
+					<cdm:CMYK C="20" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="18.331" Y="18.031" Z="5.018" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D26">
+					<cdm:CMYK C="20" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="15.187" Y="12.348" Z="3.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E26">
+					<cdm:CMYK C="20" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="12.204" Y="7.760" Z="2.302" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F26">
+					<cdm:CMYK C="40" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="16.128" Y="23.031" Z="6.655" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G26">
+					<cdm:CMYK C="40" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="14.496" Y="19.474" Z="5.876" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H26">
+					<cdm:CMYK C="40" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="13.523" Y="17.055" Z="5.425" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I26">
+					<cdm:CMYK C="40" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="11.902" Y="13.516" Z="4.603" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J26">
+					<cdm:CMYK C="40" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="9.671" Y="9.031" Z="3.342" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K26">
+					<cdm:CMYK C="40" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="9.255" Y="6.796" Z="3.034" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L26">
+					<cdm:CMYK C="70" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="9.964" Y="16.927" Z="5.973" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M26">
+					<cdm:CMYK C="70" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="9.090" Y="14.545" Z="5.417" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N26">
+					<cdm:CMYK C="70" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="8.415" Y="12.712" Z="5.025" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O26">
+					<cdm:CMYK C="70" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="7.444" Y="10.140" Z="4.260" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P26">
+					<cdm:CMYK C="70" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="7.167" Y="8.068" Z="4.325" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q26">
+					<cdm:CMYK C="70" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="7.253" Y="6.507" Z="4.800" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R26">
+					<cdm:CMYK C="100" M="0" Y="100" K="20" />
+					<cdm:CIEXYZ X="5.818" Y="12.398" Z="5.631" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S26">
+					<cdm:CMYK C="100" M="10" Y="100" K="20" />
+					<cdm:CIEXYZ X="5.049" Y="10.347" Z="4.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T26">
+					<cdm:CMYK C="100" M="20" Y="100" K="20" />
+					<cdm:CIEXYZ X="4.683" Y="9.113" Z="4.499" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U26">
+					<cdm:CMYK C="100" M="40" Y="100" K="20" />
+					<cdm:CIEXYZ X="5.152" Y="8.481" Z="5.123" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V26">
+					<cdm:CMYK C="100" M="70" Y="100" K="20" />
+					<cdm:CIEXYZ X="5.616" Y="7.338" Z="5.760" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W26">
+					<cdm:CMYK C="100" M="100" Y="100" K="20" />
+					<cdm:CIEXYZ X="6.056" Y="6.303" Z="5.996" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X26">
+					<cdm:CMYK C="0" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="33.861" Y="34.544" Z="31.352" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A27">
+					<cdm:CMYK C="0" M="20" Y="0" K="40" />
+					<cdm:CIEXYZ X="29.086" Y="27.359" Z="26.721" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B27">
+					<cdm:CMYK C="0" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="24.486" Y="21.108" Z="21.955" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C27">
+					<cdm:CMYK C="0" M="70" Y="0" K="40" />
+					<cdm:CIEXYZ X="19.191" Y="13.972" Z="16.178" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D27">
+					<cdm:CMYK C="0" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="14.474" Y="8.561" Z="10.152" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E27">
+					<cdm:CMYK C="20" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="26.384" Y="28.229" Z="28.956" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F27">
+					<cdm:CMYK C="20" M="20" Y="0" K="40" />
+					<cdm:CIEXYZ X="22.100" Y="21.736" Z="24.630" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G27">
+					<cdm:CMYK C="20" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="18.346" Y="16.557" Z="20.642" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H27">
+					<cdm:CMYK C="20" M="70" Y="0" K="40" />
+					<cdm:CIEXYZ X="14.194" Y="10.885" Z="15.474" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I27">
+					<cdm:CMYK C="20" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="10.564" Y="6.563" Z="9.883" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J27">
+					<cdm:CMYK C="40" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="19.501" Y="22.255" Z="26.879" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K27">
+					<cdm:CMYK C="40" M="20" Y="0" K="40" />
+					<cdm:CIEXYZ X="15.643" Y="16.364" Z="22.272" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L27">
+					<cdm:CMYK C="40" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="12.854" Y="12.375" Z="18.823" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M27">
+					<cdm:CMYK C="40" M="70" Y="0" K="40" />
+					<cdm:CIEXYZ X="9.963" Y="8.176" Z="14.443" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N27">
+					<cdm:CMYK C="40" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="7.486" Y="4.948" Z="9.449" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O27">
+					<cdm:CMYK C="70" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="13.427" Y="16.607" Z="24.177" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P27">
+					<cdm:CMYK C="70" M="20" Y="0" K="40" />
+					<cdm:CIEXYZ X="10.573" Y="12.070" Z="20.129" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q27">
+					<cdm:CMYK C="70" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="9.243" Y="9.708" Z="17.781" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R27">
+					<cdm:CMYK C="70" M="70" Y="0" K="40" />
+					<cdm:CIEXYZ X="7.036" Y="6.287" Z="13.624" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S27">
+					<cdm:CMYK C="70" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="5.193" Y="3.691" Z="8.926" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T27">
+					<cdm:CMYK C="100" M="0" Y="0" K="40" />
+					<cdm:CIEXYZ X="7.971" Y="11.043" Z="20.370" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U27">
+					<cdm:CMYK C="100" M="20" Y="0" K="40" />
+					<cdm:CIEXYZ X="6.668" Y="8.352" Z="17.297" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V27">
+					<cdm:CMYK C="100" M="40" Y="0" K="40" />
+					<cdm:CIEXYZ X="5.823" Y="6.695" Z="15.262" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W27">
+					<cdm:CMYK C="100" M="70" Y="0" K="40" />
+					<cdm:CIEXYZ X="4.782" Y="4.663" Z="12.270" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X27">
+					<cdm:CMYK C="100" M="100" Y="0" K="40" />
+					<cdm:CIEXYZ X="3.608" Y="2.704" Z="7.930" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A28">
+					<cdm:CMYK C="0" M="0" Y="20" K="40" />
+					<cdm:CIEXYZ X="31.336" Y="32.955" Z="23.148" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B28">
+					<cdm:CMYK C="0" M="20" Y="20" K="40" />
+					<cdm:CIEXYZ X="26.233" Y="25.168" Z="18.992" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C28">
+					<cdm:CMYK C="0" M="40" Y="20" K="40" />
+					<cdm:CIEXYZ X="22.479" Y="19.658" Z="15.585" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D28">
+					<cdm:CMYK C="0" M="70" Y="20" K="40" />
+					<cdm:CIEXYZ X="18.313" Y="13.661" Z="11.845" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E28">
+					<cdm:CMYK C="0" M="100" Y="20" K="40" />
+					<cdm:CIEXYZ X="14.102" Y="8.542" Z="7.628" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F28">
+					<cdm:CMYK C="20" M="0" Y="20" K="40" />
+					<cdm:CIEXYZ X="24.036" Y="26.869" Z="21.509" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G28">
+					<cdm:CMYK C="20" M="20" Y="20" K="40" />
+					<cdm:CIEXYZ X="19.702" Y="20.096" Z="17.695" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H28">
+					<cdm:CMYK C="20" M="40" Y="20" K="40" />
+					<cdm:CIEXYZ X="16.952" Y="15.806" Z="15.059" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I28">
+					<cdm:CMYK C="20" M="70" Y="20" K="40" />
+					<cdm:CIEXYZ X="13.490" Y="10.787" Z="11.459" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J28">
+					<cdm:CMYK C="20" M="100" Y="20" K="40" />
+					<cdm:CIEXYZ X="10.085" Y="6.449" Z="7.303" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K28">
+					<cdm:CMYK C="40" M="0" Y="20" K="40" />
+					<cdm:CIEXYZ X="16.915" Y="20.554" Z="19.322" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L28">
+					<cdm:CMYK C="40" M="20" Y="20" K="40" />
+					<cdm:CIEXYZ X="13.486" Y="14.975" Z="15.940" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M28">
+					<cdm:CMYK C="40" M="40" Y="20" K="40" />
+					<cdm:CIEXYZ X="11.625" Y="11.870" Z="13.773" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N28">
+					<cdm:CMYK C="40" M="70" Y="20" K="40" />
+					<cdm:CIEXYZ X="9.613" Y="8.415" Z="11.138" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O28">
+					<cdm:CMYK C="40" M="100" Y="20" K="40" />
+					<cdm:CIEXYZ X="7.157" Y="5.056" Z="7.230" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P28">
+					<cdm:CMYK C="70" M="0" Y="20" K="40" />
+					<cdm:CIEXYZ X="11.369" Y="15.375" Z="17.604" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q28">
+					<cdm:CMYK C="70" M="20" Y="20" K="40" />
+					<cdm:CIEXYZ X="9.323" Y="11.525" Z="14.934" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R28">
+					<cdm:CMYK C="70" M="40" Y="20" K="40" />
+					<cdm:CIEXYZ X="8.244" Y="9.316" Z="13.059" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S28">
+					<cdm:CMYK C="70" M="70" Y="20" K="40" />
+					<cdm:CIEXYZ X="6.488" Y="6.278" Z="10.349" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T28">
+					<cdm:CMYK C="70" M="100" Y="20" K="40" />
+					<cdm:CIEXYZ X="4.825" Y="3.669" Z="6.604" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U28">
+					<cdm:CMYK C="100" M="0" Y="20" K="40" />
+					<cdm:CIEXYZ X="6.977" Y="10.684" Z="15.223" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V28">
+					<cdm:CMYK C="100" M="20" Y="20" K="40" />
+					<cdm:CIEXYZ X="5.906" Y="8.213" Z="13.097" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W28">
+					<cdm:CMYK C="100" M="40" Y="20" K="40" />
+					<cdm:CIEXYZ X="5.262" Y="6.672" Z="11.502" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X28">
+					<cdm:CMYK C="100" M="70" Y="20" K="40" />
+					<cdm:CIEXYZ X="4.362" Y="4.678" Z="9.160" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A29">
+					<cdm:CMYK C="100" M="100" Y="20" K="40" />
+					<cdm:CIEXYZ X="4.363" Y="3.824" Z="7.862" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B29">
+					<cdm:CMYK C="0" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="28.534" Y="30.873" Z="15.242" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C29">
+					<cdm:CMYK C="0" M="20" Y="40" K="40" />
+					<cdm:CIEXYZ X="24.257" Y="23.739" Z="12.772" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D29">
+					<cdm:CMYK C="0" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="21.167" Y="18.785" Z="10.657" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E29">
+					<cdm:CMYK C="0" M="70" Y="40" K="40" />
+					<cdm:CIEXYZ X="17.194" Y="12.916" Z="7.968" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F29">
+					<cdm:CMYK C="0" M="100" Y="40" K="40" />
+					<cdm:CIEXYZ X="13.459" Y="8.145" Z="5.163" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G29">
+					<cdm:CMYK C="20" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="21.064" Y="24.621" Z="14.229" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H29">
+					<cdm:CMYK C="20" M="20" Y="40" K="40" />
+					<cdm:CIEXYZ X="17.454" Y="18.406" Z="11.695" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I29">
+					<cdm:CMYK C="20" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="15.139" Y="14.603" Z="10.097" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J29">
+					<cdm:CMYK C="20" M="70" Y="40" K="40" />
+					<cdm:CIEXYZ X="12.253" Y="10.045" Z="7.764" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K29">
+					<cdm:CMYK C="20" M="100" Y="40" K="40" />
+					<cdm:CIEXYZ X="9.510" Y="6.218" Z="5.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L29">
+					<cdm:CMYK C="40" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="14.662" Y="18.879" Z="13.073" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M29">
+					<cdm:CMYK C="40" M="20" Y="40" K="40" />
+					<cdm:CIEXYZ X="12.037" Y="14.031" Z="10.944" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N29">
+					<cdm:CMYK C="40" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="10.442" Y="11.134" Z="9.582" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O29">
+					<cdm:CMYK C="40" M="70" Y="40" K="40" />
+					<cdm:CIEXYZ X="8.654" Y="7.886" Z="7.651" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P29">
+					<cdm:CMYK C="40" M="100" Y="40" K="40" />
+					<cdm:CIEXYZ X="6.678" Y="4.785" Z="4.881" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q29">
+					<cdm:CMYK C="70" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="9.685" Y="14.141" Z="12.031" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R29">
+					<cdm:CMYK C="70" M="20" Y="40" K="40" />
+					<cdm:CIEXYZ X="8.242" Y="10.811" Z="10.385" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S29">
+					<cdm:CMYK C="70" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="7.104" Y="8.624" Z="8.965" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T29">
+					<cdm:CMYK C="70" M="70" Y="40" K="40" />
+					<cdm:CIEXYZ X="5.781" Y="5.919" Z="7.119" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U29">
+					<cdm:CMYK C="70" M="100" Y="40" K="40" />
+					<cdm:CIEXYZ X="5.377" Y="4.509" Z="6.058" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V29">
+					<cdm:CMYK C="100" M="0" Y="40" K="40" />
+					<cdm:CIEXYZ X="6.303" Y="10.468" Z="11.151" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W29">
+					<cdm:CMYK C="100" M="20" Y="40" K="40" />
+					<cdm:CIEXYZ X="5.032" Y="7.699" Z="9.044" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X29">
+					<cdm:CMYK C="100" M="40" Y="40" K="40" />
+					<cdm:CIEXYZ X="4.505" Y="6.242" Z="8.008" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A30">
+					<cdm:CMYK C="100" M="70" Y="40" K="40" />
+					<cdm:CIEXYZ X="4.460" Y="5.148" Z="7.388" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B30">
+					<cdm:CMYK C="100" M="100" Y="40" K="40" />
+					<cdm:CIEXYZ X="4.453" Y="4.262" Z="6.753" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C30">
+					<cdm:CMYK C="0" M="0" Y="70" K="40" />
+					<cdm:CIEXYZ X="26.043" Y="28.773" Z="9.328" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D30">
+					<cdm:CMYK C="0" M="20" Y="70" K="40" />
+					<cdm:CIEXYZ X="21.655" Y="21.439" Z="7.471" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E30">
+					<cdm:CMYK C="0" M="40" Y="70" K="40" />
+					<cdm:CIEXYZ X="19.151" Y="17.142" Z="6.320" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F30">
+					<cdm:CMYK C="0" M="70" Y="70" K="40" />
+					<cdm:CIEXYZ X="16.171" Y="12.247" Z="5.039" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G30">
+					<cdm:CMYK C="0" M="100" Y="70" K="40" />
+					<cdm:CIEXYZ X="12.934" Y="7.896" Z="3.278" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H30">
+					<cdm:CMYK C="20" M="0" Y="70" K="40" />
+					<cdm:CIEXYZ X="18.869" Y="22.812" Z="8.785" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I30">
+					<cdm:CMYK C="20" M="20" Y="70" K="40" />
+					<cdm:CIEXYZ X="15.989" Y="17.367" Z="7.561" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J30">
+					<cdm:CMYK C="20" M="40" Y="70" K="40" />
+					<cdm:CIEXYZ X="13.945" Y="13.762" Z="6.357" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K30">
+					<cdm:CMYK C="20" M="70" Y="70" K="40" />
+					<cdm:CIEXYZ X="11.441" Y="9.509" Z="4.950" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L30">
+					<cdm:CMYK C="20" M="100" Y="70" K="40" />
+					<cdm:CIEXYZ X="8.983" Y="5.861" Z="3.028" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M30">
+					<cdm:CMYK C="40" M="0" Y="70" K="40" />
+					<cdm:CIEXYZ X="12.869" Y="17.441" Z="8.205" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N30">
+					<cdm:CMYK C="40" M="20" Y="70" K="40" />
+					<cdm:CIEXYZ X="10.900" Y="13.246" Z="7.159" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O30">
+					<cdm:CMYK C="40" M="40" Y="70" K="40" />
+					<cdm:CIEXYZ X="9.493" Y="10.498" Z="6.171" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P30">
+					<cdm:CMYK C="40" M="70" Y="70" K="40" />
+					<cdm:CIEXYZ X="7.867" Y="7.314" Z="4.733" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q30">
+					<cdm:CMYK C="40" M="100" Y="70" K="40" />
+					<cdm:CIEXYZ X="7.458" Y="5.688" Z="4.187" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R30">
+					<cdm:CMYK C="70" M="0" Y="70" K="40" />
+					<cdm:CIEXYZ X="8.357" Y="13.068" Z="7.726" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S30">
+					<cdm:CMYK C="70" M="20" Y="70" K="40" />
+					<cdm:CIEXYZ X="7.093" Y="10.060" Z="6.647" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T30">
+					<cdm:CMYK C="70" M="40" Y="70" K="40" />
+					<cdm:CIEXYZ X="6.091" Y="7.898" Z="5.689" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U30">
+					<cdm:CMYK C="70" M="70" Y="70" K="40" />
+					<cdm:CIEXYZ X="5.822" Y="6.375" Z="5.369" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V30">
+					<cdm:CMYK C="70" M="100" Y="70" K="40" />
+					<cdm:CIEXYZ X="5.852" Y="5.260" Z="5.065" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W30">
+					<cdm:CMYK C="100" M="0" Y="70" K="40" />
+					<cdm:CIEXYZ X="4.897" Y="9.297" Z="6.859" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X30">
+					<cdm:CMYK C="100" M="20" Y="70" K="40" />
+					<cdm:CIEXYZ X="4.252" Y="7.138" Z="5.840" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A31">
+					<cdm:CMYK C="100" M="40" Y="70" K="40" />
+					<cdm:CIEXYZ X="4.868" Y="7.056" Z="6.234" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B31">
+					<cdm:CMYK C="100" M="70" Y="70" K="40" />
+					<cdm:CIEXYZ X="4.974" Y="6.053" Z="6.175" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C31">
+					<cdm:CMYK C="100" M="100" Y="70" K="40" />
+					<cdm:CIEXYZ X="5.766" Y="5.882" Z="6.561" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D31">
+					<cdm:CMYK C="0" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="23.615" Y="26.420" Z="5.172" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E31">
+					<cdm:CMYK C="0" M="20" Y="100" K="40" />
+					<cdm:CIEXYZ X="20.353" Y="20.309" Z="4.431" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F31">
+					<cdm:CMYK C="0" M="40" Y="100" K="40" />
+					<cdm:CIEXYZ X="17.956" Y="16.113" Z="3.601" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G31">
+					<cdm:CMYK C="0" M="70" Y="100" K="40" />
+					<cdm:CIEXYZ X="15.213" Y="11.466" Z="2.857" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H31">
+					<cdm:CMYK C="0" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="12.337" Y="7.480" Z="1.775" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I31">
+					<cdm:CMYK C="20" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="17.174" Y="21.203" Z="5.168" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J31">
+					<cdm:CMYK C="20" M="20" Y="100" K="40" />
+					<cdm:CIEXYZ X="14.488" Y="15.955" Z="4.367" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K31">
+					<cdm:CMYK C="20" M="40" Y="100" K="40" />
+					<cdm:CIEXYZ X="12.781" Y="12.751" Z="3.641" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L31">
+					<cdm:CMYK C="20" M="70" Y="100" K="40" />
+					<cdm:CIEXYZ X="10.561" Y="8.757" Z="2.720" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M31">
+					<cdm:CMYK C="20" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="9.706" Y="6.804" Z="2.729" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N31">
+					<cdm:CMYK C="40" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="11.616" Y="16.216" Z="5.039" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O31">
+					<cdm:CMYK C="40" M="20" Y="100" K="40" />
+					<cdm:CIEXYZ X="9.839" Y="12.290" Z="4.110" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P31">
+					<cdm:CMYK C="40" M="40" Y="100" K="40" />
+					<cdm:CIEXYZ X="8.583" Y="9.773" Z="3.494" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q31">
+					<cdm:CMYK C="40" M="70" Y="100" K="40" />
+					<cdm:CIEXYZ X="8.157" Y="7.732" Z="3.305" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R31">
+					<cdm:CMYK C="40" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="8.036" Y="6.408" Z="3.617" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S31">
+					<cdm:CMYK C="70" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="7.380" Y="12.198" Z="4.627" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T31">
+					<cdm:CMYK C="70" M="20" Y="100" K="40" />
+					<cdm:CIEXYZ X="6.065" Y="9.100" Z="3.822" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U31">
+					<cdm:CMYK C="70" M="40" Y="100" K="40" />
+					<cdm:CIEXYZ X="6.074" Y="7.990" Z="3.966" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V31">
+					<cdm:CMYK C="70" M="70" Y="100" K="40" />
+					<cdm:CIEXYZ X="6.114" Y="6.817" Z="4.360" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W31">
+					<cdm:CMYK C="70" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="6.490" Y="6.033" Z="4.706" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X31">
+					<cdm:CMYK C="100" M="0" Y="100" K="40" />
+					<cdm:CIEXYZ X="4.240" Y="8.628" Z="4.026" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A32">
+					<cdm:CMYK C="100" M="20" Y="100" K="40" />
+					<cdm:CIEXYZ X="5.204" Y="8.470" Z="4.838" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B32">
+					<cdm:CMYK C="100" M="40" Y="100" K="40" />
+					<cdm:CIEXYZ X="5.292" Y="7.772" Z="5.191" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C32">
+					<cdm:CMYK C="100" M="70" Y="100" K="40" />
+					<cdm:CIEXYZ X="5.760" Y="7.092" Z="5.771" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D32">
+					<cdm:CMYK C="100" M="100" Y="100" K="40" />
+					<cdm:CIEXYZ X="6.072" Y="6.452" Z="5.794" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E32">
+					<cdm:CMYK C="0" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="20.523" Y="20.936" Z="18.829" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F32">
+					<cdm:CMYK C="0" M="20" Y="0" K="60" />
+					<cdm:CIEXYZ X="17.501" Y="16.462" Z="15.943" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G32">
+					<cdm:CMYK C="0" M="40" Y="0" K="60" />
+					<cdm:CIEXYZ X="15.119" Y="13.015" Z="13.522" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H32">
+					<cdm:CMYK C="0" M="70" Y="0" K="60" />
+					<cdm:CIEXYZ X="11.856" Y="8.771" Z="9.923" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I32">
+					<cdm:CMYK C="0" M="100" Y="0" K="60" />
+					<cdm:CIEXYZ X="8.951" Y="5.596" Z="6.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J32">
+					<cdm:CMYK C="20" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="16.385" Y="17.556" Z="17.948" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K32">
+					<cdm:CMYK C="20" M="20" Y="0" K="60" />
+					<cdm:CIEXYZ X="13.275" Y="13.076" Z="14.928" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L32">
+					<cdm:CMYK C="20" M="40" Y="0" K="60" />
+					<cdm:CIEXYZ X="11.423" Y="10.317" Z="12.702" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M32">
+					<cdm:CMYK C="20" M="70" Y="0" K="60" />
+					<cdm:CIEXYZ X="9.110" Y="7.172" Z="9.718" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N32">
+					<cdm:CMYK C="20" M="100" Y="0" K="60" />
+					<cdm:CIEXYZ X="7.112" Y="4.828" Z="6.432" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O32">
+					<cdm:CMYK C="40" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="12.096" Y="13.791" Z="16.488" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P32">
+					<cdm:CMYK C="40" M="20" Y="0" K="60" />
+					<cdm:CIEXYZ X="9.938" Y="10.444" Z="13.951" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q32">
+					<cdm:CMYK C="40" M="40" Y="0" K="60" />
+					<cdm:CIEXYZ X="8.478" Y="8.250" Z="11.950" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R32">
+					<cdm:CMYK C="40" M="70" Y="0" K="60" />
+					<cdm:CIEXYZ X="6.770" Y="5.747" Z="9.287" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S32">
+					<cdm:CMYK C="40" M="100" Y="0" K="60" />
+					<cdm:CIEXYZ X="5.233" Y="3.803" Z="6.086" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T32">
+					<cdm:CMYK C="70" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="8.019" Y="9.911" Z="14.067" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U32">
+					<cdm:CMYK C="70" M="20" Y="0" K="60" />
+					<cdm:CIEXYZ X="6.404" Y="7.248" Z="11.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V32">
+					<cdm:CMYK C="70" M="40" Y="0" K="60" />
+					<cdm:CIEXYZ X="5.748" Y="6.000" Z="10.324" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W32">
+					<cdm:CMYK C="70" M="70" Y="0" K="60" />
+					<cdm:CIEXYZ X="4.827" Y="4.426" Z="8.447" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X32">
+					<cdm:CMYK C="70" M="100" Y="0" K="60" />
+					<cdm:CIEXYZ X="3.716" Y="2.805" Z="5.561" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A33">
+					<cdm:CMYK C="100" M="0" Y="0" K="60" />
+					<cdm:CIEXYZ X="5.430" Y="7.154" Z="11.625" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B33">
+					<cdm:CMYK C="100" M="20" Y="0" K="60" />
+					<cdm:CIEXYZ X="4.791" Y="5.780" Z="10.388" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C33">
+					<cdm:CMYK C="100" M="40" Y="0" K="60" />
+					<cdm:CIEXYZ X="4.482" Y="5.002" Z="9.665" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D33">
+					<cdm:CMYK C="100" M="70" Y="0" K="60" />
+					<cdm:CIEXYZ X="3.755" Y="3.673" Z="7.922" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E33">
+					<cdm:CMYK C="100" M="100" Y="0" K="60" />
+					<cdm:CIEXYZ X="3.561" Y="3.033" Z="6.544" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F33">
+					<cdm:CMYK C="0" M="0" Y="20" K="60" />
+					<cdm:CIEXYZ X="19.132" Y="20.106" Z="13.974" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G33">
+					<cdm:CMYK C="0" M="20" Y="20" K="60" />
+					<cdm:CIEXYZ X="16.187" Y="15.556" Z="11.601" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H33">
+					<cdm:CMYK C="0" M="40" Y="20" K="60" />
+					<cdm:CIEXYZ X="14.079" Y="12.331" Z="9.749" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I33">
+					<cdm:CMYK C="0" M="70" Y="20" K="60" />
+					<cdm:CIEXYZ X="11.737" Y="8.976" Z="7.675" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J33">
+					<cdm:CMYK C="0" M="100" Y="20" K="60" />
+					<cdm:CIEXYZ X="9.009" Y="5.796" Z="5.023" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K33">
+					<cdm:CMYK C="20" M="0" Y="20" K="60" />
+					<cdm:CIEXYZ X="14.919" Y="16.683" Z="13.122" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L33">
+					<cdm:CMYK C="20" M="20" Y="20" K="60" />
+					<cdm:CIEXYZ X="12.403" Y="12.672" Z="10.996" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M33">
+					<cdm:CMYK C="20" M="40" Y="20" K="60" />
+					<cdm:CIEXYZ X="10.700" Y="10.029" Z="9.319" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N33">
+					<cdm:CMYK C="20" M="70" Y="20" K="60" />
+					<cdm:CIEXYZ X="8.790" Y="7.165" Z="7.400" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O33">
+					<cdm:CMYK C="20" M="100" Y="20" K="60" />
+					<cdm:CIEXYZ X="6.918" Y="4.810" Z="4.981" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P33">
+					<cdm:CMYK C="40" M="0" Y="20" K="60" />
+					<cdm:CIEXYZ X="11.009" Y="13.280" Z="12.303" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q33">
+					<cdm:CMYK C="40" M="20" Y="20" K="60" />
+					<cdm:CIEXYZ X="8.900" Y="9.848" Z="10.151" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R33">
+					<cdm:CMYK C="40" M="40" Y="20" K="60" />
+					<cdm:CIEXYZ X="7.667" Y="7.810" Z="8.786" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S33">
+					<cdm:CMYK C="40" M="70" Y="20" K="60" />
+					<cdm:CIEXYZ X="6.342" Y="5.642" Z="7.039" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T33">
+					<cdm:CMYK C="40" M="100" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.898" Y="3.592" Z="4.676" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U33">
+					<cdm:CMYK C="70" M="0" Y="20" K="60" />
+					<cdm:CIEXYZ X="6.918" Y="9.268" Z="10.306" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V33">
+					<cdm:CMYK C="70" M="20" Y="20" K="60" />
+					<cdm:CIEXYZ X="5.980" Y="7.282" Z="9.055" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W33">
+					<cdm:CMYK C="70" M="40" Y="20" K="60" />
+					<cdm:CIEXYZ X="5.517" Y="6.158" Z="8.114" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A34">
+					<cdm:CMYK C="70" M="70" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.357" Y="4.221" Z="6.172" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B34">
+					<cdm:CMYK C="70" M="100" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.097" Y="3.435" Z="5.316" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C34">
+					<cdm:CMYK C="100" M="0" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.955" Y="7.120" Z="9.204" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D34">
+					<cdm:CMYK C="100" M="20" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.545" Y="5.935" Z="8.478" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E34">
+					<cdm:CMYK C="100" M="40" Y="20" K="60" />
+					<cdm:CIEXYZ X="3.851" Y="4.697" Z="7.369" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F34">
+					<cdm:CMYK C="100" M="70" Y="20" K="60" />
+					<cdm:CIEXYZ X="3.858" Y="4.084" Z="6.842" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G34">
+					<cdm:CMYK C="100" M="100" Y="20" K="60" />
+					<cdm:CIEXYZ X="4.168" Y="3.875" Z="6.400" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H34">
+					<cdm:CMYK C="0" M="0" Y="40" K="60" />
+					<cdm:CIEXYZ X="17.833" Y="19.254" Z="9.647" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I34">
+					<cdm:CMYK C="0" M="20" Y="40" K="60" />
+					<cdm:CIEXYZ X="15.383" Y="15.090" Z="8.062" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J34">
+					<cdm:CMYK C="0" M="40" Y="40" K="60" />
+					<cdm:CIEXYZ X="13.453" Y="12.098" Z="6.910" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K34">
+					<cdm:CMYK C="0" M="70" Y="40" K="60" />
+					<cdm:CIEXYZ X="11.143" Y="8.663" Z="5.468" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L34">
+					<cdm:CMYK C="0" M="100" Y="40" K="60" />
+					<cdm:CIEXYZ X="8.623" Y="5.616" Z="3.603" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M34">
+					<cdm:CMYK C="20" M="0" Y="40" K="60" />
+					<cdm:CIEXYZ X="13.573" Y="15.787" Z="9.118" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N34">
+					<cdm:CMYK C="20" M="20" Y="40" K="60" />
+					<cdm:CIEXYZ X="11.502" Y="12.087" Z="7.748" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O34">
+					<cdm:CMYK C="20" M="40" Y="40" K="60" />
+					<cdm:CIEXYZ X="9.987" Y="9.670" Z="6.714" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P34">
+					<cdm:CMYK C="20" M="70" Y="40" K="60" />
+					<cdm:CIEXYZ X="8.417" Y="7.132" Z="5.517" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q34">
+					<cdm:CMYK C="20" M="100" Y="40" K="60" />
+					<cdm:CIEXYZ X="6.731" Y="4.786" Z="3.837" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R34">
+					<cdm:CMYK C="40" M="0" Y="40" K="60" />
+					<cdm:CIEXYZ X="9.300" Y="11.832" Z="8.209" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S34">
+					<cdm:CMYK C="40" M="20" Y="40" K="60" />
+					<cdm:CIEXYZ X="7.927" Y="9.139" Z="7.113" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T34">
+					<cdm:CMYK C="40" M="40" Y="40" K="60" />
+					<cdm:CIEXYZ X="6.980" Y="7.436" Z="6.264" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U34">
+					<cdm:CMYK C="40" M="70" Y="40" K="60" />
+					<cdm:CIEXYZ X="5.662" Y="5.266" Z="4.993" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V34">
+					<cdm:CMYK C="40" M="100" Y="40" K="60" />
+					<cdm:CIEXYZ X="5.229" Y="4.064" Z="4.064" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C35">
+					<cdm:CMYK C="70" M="0" Y="40" K="60" />
+					<cdm:CIEXYZ X="6.493" Y="9.109" Z="7.548" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D35">
+					<cdm:CMYK C="70" M="20" Y="40" K="60" />
+					<cdm:CIEXYZ X="5.673" Y="7.288" Z="6.652" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E35">
+					<cdm:CMYK C="70" M="40" Y="40" K="60" />
+					<cdm:CIEXYZ X="5.214" Y="6.118" Z="6.071" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F35">
+					<cdm:CMYK C="70" M="70" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.593" Y="4.704" Z="5.233" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G35">
+					<cdm:CMYK C="70" M="100" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.563" Y="4.053" Z="4.854" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H35">
+					<cdm:CMYK C="100" M="0" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.514" Y="6.940" Z="7.100" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I35">
+					<cdm:CMYK C="100" M="20" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.002" Y="5.633" Z="6.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J35">
+					<cdm:CMYK C="100" M="40" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.026" Y="5.124" Z="6.037" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K35">
+					<cdm:CMYK C="100" M="70" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.177" Y="4.645" Z="5.872" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L35">
+					<cdm:CMYK C="100" M="100" Y="40" K="60" />
+					<cdm:CIEXYZ X="4.603" Y="4.529" Z="5.710" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M35">
+					<cdm:CMYK C="0" M="0" Y="70" K="60" />
+					<cdm:CIEXYZ X="16.453" Y="18.137" Z="6.214" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N35">
+					<cdm:CMYK C="0" M="20" Y="70" K="60" />
+					<cdm:CIEXYZ X="14.098" Y="13.999" Z="5.353" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O35">
+					<cdm:CMYK C="0" M="40" Y="70" K="60" />
+					<cdm:CIEXYZ X="12.374" Y="11.257" Z="4.675" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P35">
+					<cdm:CMYK C="0" M="70" Y="70" K="60" />
+					<cdm:CIEXYZ X="10.379" Y="8.184" Z="3.831" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q35">
+					<cdm:CMYK C="0" M="100" Y="70" K="60" />
+					<cdm:CIEXYZ X="8.349" Y="5.576" Z="2.671" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R35">
+					<cdm:CMYK C="20" M="0" Y="70" K="60" />
+					<cdm:CIEXYZ X="11.828" Y="14.158" Z="5.999" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S35">
+					<cdm:CMYK C="20" M="20" Y="70" K="60" />
+					<cdm:CIEXYZ X="9.876" Y="10.651" Z="5.021" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T35">
+					<cdm:CMYK C="20" M="40" Y="70" K="60" />
+					<cdm:CIEXYZ X="9.055" Y="8.979" Z="4.660" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U35">
+					<cdm:CMYK C="20" M="70" Y="70" K="60" />
+					<cdm:CIEXYZ X="7.463" Y="6.401" Z="3.704" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V35">
+					<cdm:CMYK C="20" M="100" Y="70" K="60" />
+					<cdm:CIEXYZ X="6.723" Y="5.032" Z="3.216" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W35">
+					<cdm:CMYK C="40" M="0" Y="70" K="60" />
+					<cdm:CIEXYZ X="8.318" Y="11.012" Z="5.709" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X35">
+					<cdm:CMYK C="40" M="20" Y="70" K="60" />
+					<cdm:CIEXYZ X="7.108" Y="8.492" Z="4.965" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B36">
+					<cdm:CMYK C="40" M="40" Y="70" K="60" />
+					<cdm:CIEXYZ X="6.532" Y="7.144" Z="4.262" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C36">
+					<cdm:CMYK C="40" M="70" Y="70" K="60" />
+					<cdm:CIEXYZ X="6.047" Y="5.703" Z="3.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D36">
+					<cdm:CMYK C="40" M="100" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.959" Y="4.949" Z="3.694" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E36">
+					<cdm:CMYK C="70" M="0" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.752" Y="8.505" Z="5.179" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F36">
+					<cdm:CMYK C="70" M="20" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.077" Y="6.839" Z="4.495" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G36">
+					<cdm:CMYK C="70" M="40" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.051" Y="6.117" Z="4.467" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H36">
+					<cdm:CMYK C="70" M="70" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.156" Y="5.457" Z="4.572" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I36">
+					<cdm:CMYK C="70" M="100" Y="70" K="60" />
+					<cdm:CIEXYZ X="5.424" Y="5.105" Z="4.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J36">
+					<cdm:CMYK C="100" M="0" Y="70" K="60" />
+					<cdm:CIEXYZ X="3.954" Y="6.554" Z="4.807" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K36">
+					<cdm:CMYK C="100" M="20" Y="70" K="60" />
+					<cdm:CIEXYZ X="4.212" Y="6.062" Z="4.980" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L36">
+					<cdm:CMYK C="100" M="40" Y="70" K="60" />
+					<cdm:CIEXYZ X="4.419" Y="5.781" Z="5.130" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M36">
+					<cdm:CMYK C="100" M="70" Y="70" K="60" />
+					<cdm:CIEXYZ X="4.871" Y="5.526" Z="5.301" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N36">
+					<cdm:CMYK C="100" M="100" Y="70" K="60" />
+					<cdm:CIEXYZ X="4.946" Y="5.095" Z="5.179" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O36">
+					<cdm:CMYK C="0" M="0" Y="100" K="60" />
+					<cdm:CIEXYZ X="14.782" Y="16.441" Z="3.978" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P36">
+					<cdm:CMYK C="0" M="20" Y="100" K="60" />
+					<cdm:CIEXYZ X="12.723" Y="12.769" Z="3.423" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q36">
+					<cdm:CMYK C="0" M="40" Y="100" K="60" />
+					<cdm:CIEXYZ X="11.368" Y="10.477" Z="3.043" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R36">
+					<cdm:CMYK C="0" M="70" Y="100" K="60" />
+					<cdm:CIEXYZ X="9.275" Y="7.266" Z="2.254" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S36">
+					<cdm:CMYK C="0" M="100" Y="100" K="60" />
+					<cdm:CIEXYZ X="8.369" Y="5.797" Z="2.187" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T36">
+					<cdm:CMYK C="20" M="0" Y="100" K="60" />
+					<cdm:CIEXYZ X="10.554" Y="12.850" Z="3.765" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U36">
+					<cdm:CMYK C="20" M="20" Y="100" K="60" />
+					<cdm:CIEXYZ X="8.969" Y="9.789" Z="3.158" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V36">
+					<cdm:CMYK C="20" M="40" Y="100" K="60" />
+					<cdm:CIEXYZ X="8.095" Y="8.118" Z="2.807" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W36">
+					<cdm:CMYK C="20" M="70" Y="100" K="60" />
+					<cdm:CIEXYZ X="7.362" Y="6.463" Z="2.682" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X36">
+					<cdm:CMYK C="20" M="100" Y="100" K="60" />
+					<cdm:CIEXYZ X="7.003" Y="5.450" Z="2.981" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A37">
+					<cdm:CMYK C="40" M="0" Y="100" K="60" />
+					<cdm:CIEXYZ X="7.449" Y="10.034" Z="3.490" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B37">
+					<cdm:CMYK C="40" M="20" Y="100" K="60" />
+					<cdm:CIEXYZ X="6.716" Y="8.226" Z="3.182" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C37">
+					<cdm:CMYK C="40" M="40" Y="100" K="60" />
+					<cdm:CIEXYZ X="6.408" Y="7.115" Z="2.918" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D37">
+					<cdm:CMYK C="40" M="70" Y="100" K="60" />
+					<cdm:CIEXYZ X="6.346" Y="6.106" Z="3.220" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E37">
+					<cdm:CMYK C="40" M="100" Y="100" K="60" />
+					<cdm:CIEXYZ X="6.393" Y="5.408" Z="3.383" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F37">
+					<cdm:CMYK C="70" M="0" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.179" Y="7.991" Z="3.347" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G37">
+					<cdm:CMYK C="70" M="20" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.031" Y="6.880" Z="3.393" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H37">
+					<cdm:CMYK C="70" M="40" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.313" Y="6.596" Z="3.866" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I37">
+					<cdm:CMYK C="70" M="70" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.666" Y="6.084" Z="4.257" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J37">
+					<cdm:CMYK C="70" M="100" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.609" Y="5.445" Z="4.253" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K37">
+					<cdm:CMYK C="100" M="0" Y="100" K="60" />
+					<cdm:CIEXYZ X="4.119" Y="6.822" Z="3.860" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L37">
+					<cdm:CMYK C="100" M="20" Y="100" K="60" />
+					<cdm:CIEXYZ X="4.523" Y="6.475" Z="4.495" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M37">
+					<cdm:CMYK C="100" M="40" Y="100" K="60" />
+					<cdm:CIEXYZ X="4.591" Y="6.059" Z="4.463" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N37">
+					<cdm:CMYK C="100" M="70" Y="100" K="60" />
+					<cdm:CIEXYZ X="4.994" Y="5.754" Z="4.745" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O37">
+					<cdm:CMYK C="100" M="100" Y="100" K="60" />
+					<cdm:CIEXYZ X="5.101" Y="5.305" Z="4.920" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P37">
+					<cdm:CMYK C="0" M="0" Y="0" K="80" />
+					<cdm:CIEXYZ X="13.476" Y="13.767" Z="12.355" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q37">
+					<cdm:CMYK C="0" M="40" Y="0" K="80" />
+					<cdm:CIEXYZ X="9.759" Y="8.473" Z="8.623" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R37">
+					<cdm:CMYK C="0" M="70" Y="0" K="80" />
+					<cdm:CIEXYZ X="7.733" Y="5.931" Z="6.396" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S37">
+					<cdm:CMYK C="0" M="100" Y="0" K="80" />
+					<cdm:CIEXYZ X="5.948" Y="4.154" Z="4.228" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T37">
+					<cdm:CMYK C="40" M="0" Y="0" K="80" />
+					<cdm:CIEXYZ X="7.367" Y="8.406" Z="9.765" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U37">
+					<cdm:CMYK C="40" M="40" Y="0" K="80" />
+					<cdm:CIEXYZ X="5.579" Y="5.453" Z="7.329" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V37">
+					<cdm:CMYK C="40" M="70" Y="0" K="80" />
+					<cdm:CIEXYZ X="4.742" Y="4.193" Z="5.949" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W37">
+					<cdm:CMYK C="40" M="100" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.791" Y="2.959" Z="4.021" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X37">
+					<cdm:CMYK C="70" M="0" Y="0" K="80" />
+					<cdm:CIEXYZ X="5.282" Y="6.394" Z="8.513" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A38">
+					<cdm:CMYK C="70" M="40" Y="0" K="80" />
+					<cdm:CIEXYZ X="4.160" Y="4.320" Z="6.325" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B38">
+					<cdm:CMYK C="70" M="70" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.513" Y="3.289" Z="5.084" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C38">
+					<cdm:CMYK C="70" M="100" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.355" Y="2.840" Z="4.200" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D38">
+					<cdm:CMYK C="100" M="0" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.798" Y="4.757" Z="7.043" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E38">
+					<cdm:CMYK C="100" M="40" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.128" Y="3.388" Z="5.725" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F38">
+					<cdm:CMYK C="100" M="70" Y="0" K="80" />
+					<cdm:CIEXYZ X="2.991" Y="2.918" Z="5.062" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G38">
+					<cdm:CMYK C="100" M="100" Y="0" K="80" />
+					<cdm:CIEXYZ X="3.242" Y="2.921" Z="4.740" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H38">
+					<cdm:CMYK C="0" M="0" Y="40" K="80" />
+					<cdm:CIEXYZ X="10.831" Y="11.651" Z="6.033" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I38">
+					<cdm:CMYK C="0" M="40" Y="40" K="80" />
+					<cdm:CIEXYZ X="8.612" Y="7.871" Z="4.743" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J38">
+					<cdm:CMYK C="0" M="70" Y="40" K="80" />
+					<cdm:CIEXYZ X="7.054" Y="5.774" Z="3.803" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K38">
+					<cdm:CMYK C="0" M="100" Y="40" K="80" />
+					<cdm:CIEXYZ X="5.371" Y="3.881" Z="2.554" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L38">
+					<cdm:CMYK C="40" M="0" Y="40" K="80" />
+					<cdm:CIEXYZ X="6.072" Y="7.494" Z="5.303" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M38">
+					<cdm:CMYK C="40" M="40" Y="40" K="80" />
+					<cdm:CIEXYZ X="4.763" Y="5.029" Z="4.198" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N38">
+					<cdm:CMYK C="40" M="70" Y="40" K="80" />
+					<cdm:CIEXYZ X="4.358" Y="4.120" Z="3.640" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O38">
+					<cdm:CMYK C="40" M="100" Y="40" K="80" />
+					<cdm:CIEXYZ X="4.381" Y="3.766" Z="3.524" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P38">
+					<cdm:CMYK C="70" M="0" Y="40" K="80" />
+					<cdm:CIEXYZ X="4.457" Y="5.936" Z="4.984" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q38">
+					<cdm:CMYK C="70" M="40" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.773" Y="4.299" Z="4.079" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R38">
+					<cdm:CMYK C="70" M="70" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.752" Y="3.808" Z="3.920" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S38">
+					<cdm:CMYK C="70" M="100" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.857" Y="3.612" Z="3.808" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T38">
+					<cdm:CMYK C="100" M="0" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.071" Y="4.356" Z="4.312" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U38">
+					<cdm:CMYK C="100" M="40" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.160" Y="3.808" Z="4.172" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V38">
+					<cdm:CMYK C="100" M="70" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.405" Y="3.710" Z="4.152" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W38">
+					<cdm:CMYK C="100" M="100" Y="40" K="80" />
+					<cdm:CIEXYZ X="3.538" Y="3.520" Z="4.168" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X38">
+					<cdm:CMYK C="0" M="0" Y="70" K="80" />
+					<cdm:CIEXYZ X="9.962" Y="10.893" Z="4.156" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A39">
+					<cdm:CMYK C="0" M="40" Y="70" K="80" />
+					<cdm:CIEXYZ X="6.998" Y="6.399" Z="2.898" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B39">
+					<cdm:CMYK C="0" M="70" Y="70" K="80" />
+					<cdm:CIEXYZ X="6.163" Y="5.054" Z="2.557" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C39">
+					<cdm:CMYK C="0" M="100" Y="70" K="80" />
+					<cdm:CIEXYZ X="5.342" Y="3.961" Z="2.177" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D39">
+					<cdm:CMYK C="40" M="0" Y="70" K="80" />
+					<cdm:CIEXYZ X="5.076" Y="6.528" Z="3.523" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E39">
+					<cdm:CMYK C="40" M="40" Y="70" K="80" />
+					<cdm:CIEXYZ X="4.064" Y="4.394" Z="2.769" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F39">
+					<cdm:CMYK C="40" M="70" Y="70" K="80" />
+					<cdm:CIEXYZ X="4.374" Y="4.176" Z="2.990" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G39">
+					<cdm:CMYK C="40" M="100" Y="70" K="80" />
+					<cdm:CIEXYZ X="4.491" Y="3.909" Z="3.085" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H39">
+					<cdm:CMYK C="70" M="0" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.761" Y="5.312" Z="3.359" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I39">
+					<cdm:CMYK C="70" M="40" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.658" Y="4.311" Z="3.284" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J39">
+					<cdm:CMYK C="70" M="70" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.994" Y="4.168" Z="3.543" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K39">
+					<cdm:CMYK C="70" M="100" Y="70" K="80" />
+					<cdm:CIEXYZ X="4.001" Y="3.880" Z="3.463" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L39">
+					<cdm:CMYK C="100" M="0" Y="70" K="80" />
+					<cdm:CIEXYZ X="2.959" Y="4.388" Z="3.416" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M39">
+					<cdm:CMYK C="100" M="40" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.415" Y="4.178" Z="3.761" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N39">
+					<cdm:CMYK C="100" M="70" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.652" Y="4.031" Z="3.782" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O39">
+					<cdm:CMYK C="100" M="100" Y="70" K="80" />
+					<cdm:CIEXYZ X="3.725" Y="3.775" Z="3.806" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P39">
+					<cdm:CMYK C="0" M="0" Y="100" K="80" />
+					<cdm:CIEXYZ X="8.527" Y="9.414" Z="2.622" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q39">
+					<cdm:CMYK C="0" M="40" Y="100" K="80" />
+					<cdm:CIEXYZ X="6.762" Y="6.276" Z="2.075" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R39">
+					<cdm:CMYK C="0" M="70" Y="100" K="80" />
+					<cdm:CIEXYZ X="5.849" Y="4.812" Z="1.846" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S39">
+					<cdm:CMYK C="0" M="100" Y="100" K="80" />
+					<cdm:CIEXYZ X="5.646" Y="4.290" Z="2.078" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T39">
+					<cdm:CMYK C="40" M="0" Y="100" K="80" />
+					<cdm:CIEXYZ X="4.510" Y="6.001" Z="2.407" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U39">
+					<cdm:CMYK C="40" M="40" Y="100" K="80" />
+					<cdm:CIEXYZ X="4.298" Y="4.723" Z="2.472" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V39">
+					<cdm:CMYK C="40" M="70" Y="100" K="80" />
+					<cdm:CIEXYZ X="4.576" Y="4.497" Z="2.796" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W39">
+					<cdm:CMYK C="40" M="100" Y="100" K="80" />
+					<cdm:CIEXYZ X="4.614" Y="4.201" Z="2.882" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X39">
+					<cdm:CMYK C="70" M="0" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.515" Y="5.120" Z="2.524" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A40">
+					<cdm:CMYK C="70" M="40" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.761" Y="4.435" Z="2.845" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B40">
+					<cdm:CMYK C="70" M="70" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.914" Y="4.164" Z="3.045" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C40">
+					<cdm:CMYK C="70" M="100" Y="100" K="80" />
+					<cdm:CIEXYZ X="4.298" Y="4.181" Z="3.363" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D40">
+					<cdm:CMYK C="100" M="0" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.250" Y="4.814" Z="3.095" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E40">
+					<cdm:CMYK C="100" M="40" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.643" Y="4.511" Z="3.392" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F40">
+					<cdm:CMYK C="100" M="70" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.646" Y="4.079" Z="3.441" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G40">
+					<cdm:CMYK C="100" M="100" Y="100" K="80" />
+					<cdm:CIEXYZ X="3.878" Y="3.985" Z="3.535" />
+				</cdm:Sample>
+			</cdm:ColorCube>
+		</cdm:MeasurementData>
+	</cdm:CMYKPrinterDevice>
+</cdm:ColorDeviceModel>
+

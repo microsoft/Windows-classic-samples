@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<Application xmlns='http://schemas.microsoft.com/windows/2009/Ribbon'>
+  <!-- Commands section -->
+  <Application.Commands>
+
+    <Command Name="cmdTab1"
+             Comment="These comments are optional and are inserted into the header file."
+             Symbol="IDC_CMD_TAB1" 
+             Id="10000" >
+      <Command.LabelTitle>
+        <String Id ="200">Tab 1</String>
+      </Command.LabelTitle>
+    </Command>
+    <!-- Optional Symbol and Id properties are not defined for the following commands.
+    A Symbol same as the name of the command 
+    and a valid Id for this command will be automatically generated. -->
+    <Command Name="cmdGroup1">
+      <!-- This image is used for when the group shrinks into a "pop-up".  The other groups
+      in the markup don't display as pop-ups, so we don't specify an image for them.  -->
+      <Command.SmallImages>
+        <Image Id="201">res/Button_Image.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdGroup2"/>
+    <Command Name="cmdGroup3"/>
+    <Command Name="cmdGroup4"/>
+    <Command Name="cmdButton1">
+      <Command.LabelTitle>
+        <String Id ="210">Button 1</String>
+      </Command.LabelTitle>
+      <!-- Providing both large and small images isn't required, but it usually improves the look
+      of your application if the control size changes. -->
+      <Command.LargeImages>
+        <Image Id="211">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+      <Command.SmallImages>
+        <Image Id="212">res/AddTableS.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton2">
+      <Command.LabelTitle>
+        <String Id ="220">Button 2</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="221">res/DeleteTableL.bmp</Image>
+      </Command.LargeImages>
+      <Command.SmallImages>
+        <Image Id="222">res/DeleteTableS.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton3">
+      <Command.LabelTitle>
+        <String Id ="230">Button 3</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="231">res/PrintRelationshipsL.bmp</Image>
+      </Command.LargeImages>
+      <Command.SmallImages>
+        <Image Id="232">res/PrintRelationshipsS.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton4">
+      <Command.LabelTitle>
+        <String Id ="240">Button 4</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="241">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+      <Command.SmallImages>
+        <Image Id="242">res/AddTableS.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton5">
+      <Command.LabelTitle>
+        <String Id ="250">Button 5</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="251">res/Cut.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton6"/>
+    <Command Name="cmdToggleButton1">
+      <Command.LabelTitle>
+        <String Id ="260">ToggleButton 1</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="261">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+      <Command.SmallImages>
+        <Image Id="262">res/AddTableS.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdToggleButton2">
+      <Command.LabelTitle>
+        <String Id ="270">ToggleButton 2</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="271">res/Copy.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdQat"/>
+    <Command Name="cmdFileMenu"/>
+    <Command Name="cmdMRUList">
+      <Command.LabelTitle>
+        <String Id ="280">MRU List</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="cmdExit" Symbol="IDC_CMD_EXIT">
+      <Command.LabelTitle>
+        <String Id ="290">Exit Button</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id ="291">res/ExitL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+  </Application.Commands>
+  <Application.Views>
+    <Ribbon>
+      <Ribbon.ApplicationMenu>
+        <ApplicationMenu CommandName="cmdFileMenu">
+          <ApplicationMenu.RecentItems>
+            <RecentItems CommandName="cmdMRUList" MaxCount="1" />
+          </ApplicationMenu.RecentItems>
+          <MenuGroup Class="MajorItems">
+            <Button CommandName="cmdExit" />
+          </MenuGroup>
+        </ApplicationMenu>
+      </Ribbon.ApplicationMenu>
+      <Ribbon.Tabs>
+        <Tab CommandName="cmdTab1">
+          <Tab.ScalingPolicy>
+            <ScalingPolicy>
+              <ScalingPolicy.IdealSizes>
+                <!-- This describes the maximum size of each group in the tab. -->
+                <Scale Group="cmdGroup1" Size="Large" />
+                <Scale Group="cmdGroup2" Size="Large" />
+                <Scale Group="cmdGroup3" Size="Large" />
+                <Scale Group="cmdGroup4" Size="Large" />
+              </ScalingPolicy.IdealSizes>
+              <!-- This describes the order and how the groups shrink when the window is
+              resized. -->
+              <Scale Group="cmdGroup3" Size="Medium" />
+              <Scale Group="cmdGroup4" Size="Medium" />
+              <Scale Group="cmdGroup1" Size="Popup" />
+              <Scale Group="cmdGroup4" Size="Small" />
+              <Scale Group="cmdGroup2" Size="Medium" />
+            </ScalingPolicy>
+          </Tab.ScalingPolicy>
+          <Group CommandName="cmdGroup1" SizeDefinition="OneButton">
+            <Button CommandName="cmdButton1" />
+          </Group>
+          <Group CommandName="cmdGroup2" SizeDefinition="TwoButtons">
+            <Button CommandName="cmdButton2" />
+            <Button CommandName="cmdButton3" />
+          </Group>
+          <Group CommandName="cmdGroup3" SizeDefinition="ThreeButtons">
+            <!-- You can put the same commands into multiple groups. -->
+            <Button CommandName="cmdButton1" />
+            <Button CommandName="cmdButton2" />
+            <Button CommandName="cmdButton3" />
+          </Group>
+          <!-- The SizeDefinitions describe how many buttons are in the group and how the
+          individual elements inside the group shrink.  -->
+          <Group CommandName="cmdGroup4" SizeDefinition="FiveOrSixButtons">
+            <Button CommandName="cmdButton3" />
+            <Button CommandName="cmdButton4" />
+            <ToggleButton CommandName="cmdToggleButton1" />
+            <Button CommandName="cmdButton5" />
+            <ToggleButton CommandName="cmdToggleButton2" />
+          </Group>
+        </Tab>
+      </Ribbon.Tabs>
+      <Ribbon.QuickAccessToolbar>
+        <QuickAccessToolbar CommandName="cmdQat" />
+      </Ribbon.QuickAccessToolbar>
+    </Ribbon>
+  </Application.Views>
+</Application>

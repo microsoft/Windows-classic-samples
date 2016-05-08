@@ -1,0 +1,8 @@
+:Base statlist.hlp>CONTENTS
+:Title Statlist: PDH Demonstration Program
+1 Overview=OVERVIEW
+1 Menu Items
+2 File=MENU_FILE@Statlist.hlp
+2 Configure=MENU_CONFIGURE@statlist.hlp
+2 Get Data!=MENU_GETDATA@statlist.hlp
+2 Help=MENU_HELP@statlist.hlp

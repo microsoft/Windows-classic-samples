@@ -1,0 +1,333 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 11 (filtered)">
+<title>Configuration Utility for the Windows® Installer Internet Download
+Bootstrapper</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:PMingLiU;
+	panose-1:2 2 3 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"\@PMingLiU";
+	panose-1:2 2 3 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	line-height:normal;
+	font-size:10.0pt;
+	font-family:Arial;
+	color:windowtext;}
+h1
+	{margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	line-height:normal;
+	font-size:17.5pt;
+	font-family:Verdana;
+	color:black;
+	font-weight:bold;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	line-height:normal;
+	page-break-after:avoid;
+	font-size:13.0pt;
+	font-family:Arial;
+	color:windowtext;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p
+	{margin-top:.1in;
+	margin-right:0in;
+	margin-bottom:.1in;
+	margin-left:0in;
+	line-height:18.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	color:black;}
+pre
+	{margin:0in;
+	margin-bottom:.0001pt;
+	line-height:normal;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	color:windowtext;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<h1 align=center style='text-align:center'><span style='font-family:Arial'>Configuration
+Utility for the Windows® Installer Internet Download Bootstrapper</span></h1>
+
+<p class=MsoNormal>Msistuff.exe is a configuration utility for Setup.exe, the
+bootstrap executable for Microsoft® Windows® Installer version 3.0. Msistuff
+provides the user with the ability to configure certain resources within
+setup.exe. Setup.exe uses the values of these resources to download and install
+Windows® Installer packages from the web. </p>
+
+<p class=MsoNormal>Thus, using Msistuff.exe, anyone can quickly configure
+setup.exe to download and install a package of their choice from the web
+without modifying or recompiling setup.exe.</p>
+
+<h3><span style='font-size:12.0pt'>Building the sample</span></h3>
+
+<p><span style='font-size:10.0pt;font-family:Arial'>The sample can be built by
+running the following command from a Platform SDK build environment window: </span></p>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nmake</pre>
+
+<p class=MsoNormal>In order to build the sample clean, the following commands
+should be used: </p>
+
+<pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nmake clean</pre><pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nmake</pre>
+
+<p style='line-height:normal'><b><span style='font-family:Arial'>Syntax</span></b></p>
+
+<p class=MsoNormal>msistuff setup.exe option {value}</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If no data is specified following an option, that resource
+is removed.</p>
+
+<p style='line-height:normal'><b><span style='font-family:Arial'>Command Line
+Parameters</span></b></p>
+
+<p class=MsoNormal>Msistuff.exe uses the following case-insensitive command
+line options. A slash delimiter may also be used in place of a dash. If an
+option is listed multiple times, only the last occurrence is used.</p>
+
+<table class=MsoNormalTable border=0 cellspacing=3 cellpadding=0 width="90%"
+ style='width:90.0%;background:#999999'>
+ <tr>
+  <td valign=bottom style='background:#CCCCCC;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Option</p>
+  </td>
+  <td width="40%" valign=bottom style='width:40.36%;background:#CCCCCC;
+  padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Resource ID</p>
+  </td>
+  <td width="47%" valign=bottom style='width:47.48%;background:#CCCCCC;
+  padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Description</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>no options specified</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>&nbsp;</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Display configurable resources in Setup.exe.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-u</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_BASEURL</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set BaseURL, the base URL location of Setup.exe. If no
+  value is present, the location of Setup.exe defaults to removable media. Only
+  URL based installs are subject to a check with <a
+  href="http://msdn.microsoft.com/library/en-us/seccrypto/security/winverifytrust.asp">WinVerifyTrust</a>.
+  The trailing slash on the URL is optional. This option may be omitted.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-d</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_DATABASE</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set Msi, the name of the .msi file. This is a relative
+  path to the .msi file in relation to the location of the Setup.exe program.
+  This option is required if the -m option is not specified. The -d and -m
+  options are mutually exclusive. They cannot both be specified.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-m</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_PATCH</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set Msp, the name of the .msp file. This is a relative
+  path to the .msp file in relation to the location of the Setup.exe program.
+  This option is required if the -d option is not specified. The -m and -d
+  options are mutually exclusive. They cannot both be specified.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-n</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_PRODUCTNAME</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set Product Name, the name of the product. This
+  provides the name used in the banner text for the downloaded user interface.
+  This option may be omitted. If omitted, the default is &quot;the
+  product&quot;.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-o</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_OPERATION</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Specify the type of operation to perform. The valid
+  values are INSTALL, MINPATCH, MAJPATCH and INSTALLUPD. For additional
+  information on these options, see <a
+  href="http://msdn.microsoft.com/library/en-us/msi/setup/internet_download_bootstrapping.asp">Internet
+  Download Bootstrapping</a>.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-v</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_MINIMUM_MSI</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set Minimum Msi Version, the minimum version of Windows®
+  Installer required on the computer. If the minimum version of the Windows®
+  Installer is not present on the machine, the update package is installed to
+  upgrade the Windows® Installer. The value of this property has the same
+  format as the PID_PAGECOUNT value. See <a
+  href="http://msdn.microsoft.com/library/en-us/msi/setup/page_count_summary_property.asp">Page
+  Count Summary Property</a>. The value must be at least 200, the value for the
+  Windows® Installer version 2.0. This option is required.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-i</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_UPDATELOCATION</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>The base URL location of Windows® Installer update
+  package. If this value is missing, the location of the update package
+  defaults to the location of Setup.exe. This option may be omitted.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-w</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_UPDATE</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set to the name of the Windows® Installer update
+  package. This is a relative path to the location specified by
+  ISETUPPROPNAME_UPDATELOCATION. This option is required.</p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>-p</p>
+  </td>
+  <td width="40%" valign=top style='width:40.36%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>ISETUPPROPNAME_PROPERTIES</p>
+  </td>
+  <td width="47%" valign=top style='width:47.48%;background:white;padding:2.4pt 4.8pt 2.4pt 4.8pt'>
+  <p class=MsoNormal style='margin-top:.1in;margin-right:0in;margin-bottom:
+  .05in;margin-left:0in'>Set the PROPERTY=VALUE strings. These are the
+  PROPERTY=VALUE pairs to include on the command line. This option may be
+  omitted. This option cannot be listed multiple times, and it must be listed
+  last on the command line. All of the command line following -p is considered
+  as a part of the {value}.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p style='line-height:normal'><b><span style='font-family:Arial'>Remarks</span></b></p>
+
+<p class=MsoNormal>Windows® Installer 3.0 redistributable is an update package
+instead of InstMsi thereby new resource set supported by MsiStuff.exe of Windows®
+Installer 3.0 SDK should be used to configure Setup.exe bootstrapper used to
+install Windows® Installer 3.0.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

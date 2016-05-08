@@ -1,0 +1,22 @@
+HKCR
+{
+	ComSpyPropPage.ComSpyPropPage.1 = s 'ComSpyPropPage Class'
+	{
+		CLSID = s '{AAF6270D-AC5E-11D0-B185-00AA00BA3258}'
+	}
+	ComSpyPropPage.ComSpyPropPage = s 'ComSpyPropPage Class'
+	{
+		CurVer = s 'ComSpyPropPage.ComSpyPropPage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {AAF6270D-AC5E-11D0-B185-00AA00BA3258} = s 'ComSpyPropPage Class'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

@@ -1,0 +1,18 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//
+//  Copyright (C) Microsoft Corporation. All rights reserved.
+//
+//  File:       process.dll
+//
+//--------------------------------------------------------------------------
+
+#define VER_ORIGINALFILENAME_STR "process.dll"
+#define VER_FILETYPE             VFT_DLL
+#define VER_FILEDESCRIPTION_STR  "Process UserAccounts Database Table Custom Action Sample"
+#define VER_INTERNALNAME_STR     "process"
+
+#include "version.h"
+
+#include "msi.rcv"

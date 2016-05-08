@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+<TITLE>Editable Regions Sample</TITLE>
+
+<LINK REL="stylesheet" HREF="/workshop/samples/author/dhtml/refs/samplessdkIE4.css" TYPE="text/css">
+
+<STYLE>
+body{ 
+margin:0;
+background:white;
+font-family:verdana;
+font-size:80%;
+}
+.bar{
+background:#336699;
+width:100%;
+height:30px;
+border-top:1px solid #99CCFF;
+border-bottom:1px solid #000000;
+}
+.desbar{
+background:#FFFFFF;
+width:100%;
+padding: 10px;
+border-top:1px solid #CCCCCC;
+border-bottom:1px solid #000000;
+color:black; 
+font-size:8pt;
+height:105;
+}
+.title{
+font-size:15pt;
+color:white;
+padding-left:10px;
+}
+PRE { margin:0}
+
+a:link
+{
+text-decoration:none;
+color:white
+}
+a:visited
+{
+text-decoration:none;
+color:white
+}
+a:active
+{
+text-decoration:none;
+color:white
+}
+a:hover
+{
+text-decoration:none;
+color:yellow
+}
+BUTTON {cursor:hand; background:#ffffff; border-color:#99ccff; font-weight:bold;}
+</STYLE>
+
+
+<SCRIPT>
+function fnToggleEdits(oObj,oBtn) {
+    currentState = oObj.isContentEditable;
+    newState = !currentState;
+    oObj.contentEditable = newState;
+    
+    newState==false ? oBtn.innerHTML='Editing On' :
+        oBtn.innerHTML='Editing Off';
+}
+</SCRIPT>
+
+</HEAD>
+
+<BODY >
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+<DIV CLASS="bar title">
+Editable Regions Sample
+</DIV> 
+<DIV CLASS="desbar">
+<H4 style="font-size:10pt;">
+This example demonstrates the features of Microsoft&#174; Internet Explorer that enable users to edit the content of an HTML element directly from the browser.
+</H3>
+<p style="color:red"><strong>Caution</strong>: For purposes of demonstration, this sample renders user input from a TEXTAREA element as HTML in another DIV element. If you employ the <strong>contentEditable</strong> property in your own application to display text as HTML, take precautions against trusting user input.  Inappropriate handling of user input can compromise the security of your application.</p>
+<P> This HTML editor is a DIV element set to be content editable. Any valid HTML content (text, images, form controls, etc.) can be pasted and edited in this editor.</P>
+
+<div align="center">
+<DIV UNSELECTABLE ALIGN="center" STYLE="height:210; width:90%; background-color:#99CCFF; border:1px solid black">  
+    <DIV CLASS="bar title">HTMLEditor (Content Editable DIV)</DIV>
+
+<DIV style="padding:10px">
+  <BUTTON UNSELECTABLE ID="oEditDiv" TITLE="Editing Off" onclick='fnToggleEdits(oDiv,oEditDiv);oDiv.focus();'>Editing Off</BUTTON>  
+  <BUTTON UNSELECTABLE  TITLE="Bold" onclick='if (oDiv.isContentEditable==true) document.execCommand("Bold"); oDiv.focus();' >Bold</BUTTON>  
+  <BUTTON UNSELECTABLE  TITLE="Italic" onclick='if (oDiv.isContentEditable==true) document.execCommand("Italic"); oDiv.focus();' ><I>Italic</I></BUTTON>  
+  <BUTTON UNSELECTABLE  TITLE="Underline" onclick='if (oDiv.isContentEditable==true) document.execCommand("Underline"); oDiv.focus();'><U>Underline</U> </BUTTON>
+  
+</DIV>
+  <DIV id=oDiv contenteditable ALIGN=left STYLE="height:100; width:95%;background-color:white; font-face:Arial; padding:3;    
+   border:inset #99ccff; scrollbar-base-color:#99ccff; overflow=auto;"></DIV> 
+<BUTTON UNSELECTABLE TITLE="Append from HTMLEditor" onclick='oTextarea.value+=oDiv.innerHTML;oTextarea.focus();'>
+	Append to TextEditor</BUTTON>
+   
+</DIV>
+</div>
+<BR/>
+
+<P>This text editor is a TEXTAREA element and is content editable by default. Only text can be edited in this tool. However, you can draft HTML in TEXTEditor and press the Append to HTMLEditor button to see the result appended to HTMLEditor. The Append to TextEditor button reverses this process by appending the HTMLEditor's HTML as text to TEXTEditor.<BR/><BR/>
+<br>
+
+<div align="center">
+<DIV UNSELECTABLE ALIGN="center" STYLE="height:210; width:90%; background-color:#99ccff; border:1px solid black">  
+    <DIV CLASS="bar title">TEXTEditor (TEXTAREA)</DIV> 
+	
+<DIV style="padding:10">
+	
+	<BUTTON UNSELECTABLE ID="oEditText" TITLE="Editing Off"
+	onclick='fnToggleEdits(oTextarea,oEditText);oTextarea.focus();'>Editing Off</BUTTON>
+</DIV>
+   
+  <TEXTAREA id=oTextarea ALIGN=left STYLE="height:100; width:95%;background-color:white; padding:3; border:inset #99ccff; scrollbar-base-color:#99ccff; overflow=auto;"></TEXTAREA>  
+  <BR/>
+	<BUTTON UNSELECTABLE TITLE="Append to HTMLEditor" onclick='oDiv.innerHTML+=oTextarea.value;oTextarea.focus();'>   
+   Append to HTMLEditor</BUTTON> 
+</DIV>
+</div>
+<BR/><P>Both editors use the same function to activate or deactivate editing. The function uses the <b>isContentEditable</b> property to test whether editing is active. Accordingly, the <b>contentEditable</b> property is then reversed to reset editing.
+</DIV> 
+<DIV></DIV>
+<DIV CLASS="bar" STYLE=" padding:5px; padding-left:10">
+<A href="http://www.microsoft.com/misc/cpyright.htm" target=_top>
+&#169; 2001 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</DIV> 
+<P><HR><font color="black" face="ms sans serif" size="1">&copy;<A HREF="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/info/cpyright.htm" TARGET="_top"> 2001 Microsoft Corporation.  All rights reserved.  Terms of use.</a></font>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!- Copyright (c)  Microsoft Corporation, All Rights Reserved ->
+<html>
+<!-------------------------------------------------------------------------
+ 
+	This sample illustrates the use of the WMI Scripting API within
+   an HTML page, using VBScript.  It displays a Win32_service name
+   using the asynchronous API.
+
+   The WMI Scripting objects are instantiated using their CLSID's
+   and the HTML <OBJECT> tag.
+
+---------------------------------------------------------------------------->
+
+<head>
+<title>WMI Scripting HTML Sample - Service Display 1 (VBScript asynchronous version)</title>
+<script FOR="mysink" EVENT="OnCompleted(hResult, pErrorObject, pAsyncContext)"
+LANGUAGE="VBScript">
+	alert("Completed")
+</script>
+<script FOR="mysink"
+EVENT="OnObjectReady(objObject, objAsyncContext)" LANGUAGE="VBScript">
+	document.all.info.innerText = objObject.DisplayName
+</script>
+<script
+LANGUAGE="VBScript"> 
+<!--
+	Sub Document_OnClick 
+		Set Service = Locator.ConnectServer()
+		Service.GetAsync mysink, "Win32_Service.Name=""Winmgmt"""
+	end sub
+-->
+</script>
+</head>
+
+<body>
+
+<p>Click in this window for the name of the WMI service: <span ID="info">unknown </span>. 
+<object ID="Locator" CLASSID="CLSID:76A64158-CB41-11D1-8B02-00600806D9B6">
+</object>
+<object ID="mysink" CLASSID="CLSID:75718C9A-F029-11d1-A1AC-00C04FB6C223">
+</object>
+</p>
+</body>
+</html>

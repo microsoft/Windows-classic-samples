@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+<specVersion>
+    <major>1</major>
+    <minor>0</minor>
+</specVersion>
+
+<device>
+    <deviceType>urn:microsoft-com:device:DimmerDevice:1</deviceType>
+    <friendlyName>UPNP SDK Dimmer Device Hosted by Windows</friendlyName>
+    <manufacturer>Microsoft</manufacturer>
+    <manufacturerURL>http://www.microsoft.com/</manufacturerURL>
+    <modelDescription>UPnP SDK Device Host Dimmer Device 1.0 </modelDescription>  
+    <modelName>Dimmer1.0</modelName>
+    <modelNumber>1-00-00</modelNumber>
+    <modelURL>http://www.microsoft.com/</modelURL>
+    <serialNumber>0000001</serialNumber>
+    <UDN>uuid:RootDevice</UDN>
+    <UPC>00000-00001</UPC>
+
+    <serviceList>
+        <service>
+            <serviceType>urn:microsoft-com:service:DimmerService:1</serviceType>
+            <serviceId>urn:microsoft-com:serviceId:DimmerService1.0</serviceId>
+            <controlURL></controlURL>
+            <eventSubURL></eventSubURL>
+            <SCPDURL>DimmingService_SCPD.xml</SCPDURL>
+        </service>
+    </serviceList>  
+
+    <presentationURL></presentationURL>
+</device>
+</root>

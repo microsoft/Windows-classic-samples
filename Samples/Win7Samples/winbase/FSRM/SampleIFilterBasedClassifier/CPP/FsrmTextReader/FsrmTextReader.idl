@@ -1,0 +1,46 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+// FsrmTextReader.idl : IDL source for FsrmTextReader
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (FsrmTextReader.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(5573E9A1-0D7F-4322-9B11-9CFA47788629),
+	dual,
+	nonextensible,
+	helpstring("ITextTokenizer Interface"),
+	pointer_default(unique)
+]
+interface ITextTokenizer : IDispatch{
+    [id(1), helpstring("method InitializeWithPropertyBag")] HRESULT InitializeWithPropertyBag([in] IUnknown * propertyBag);
+    [id(2), helpstring("method DoesContainWordsFromList")] HRESULT DoesContainWordsFromList([in] SAFEARRAY(BSTR) pWordList, [out,retval] VARIANT_BOOL* pBooleanResult);
+	[id(3), helpstring("method Cleanup")] HRESULT Cleanup();
+};
+[
+	uuid(064FDE65-FFC7-459B-B4F1-6B9E35D8CA55),
+	version(1.0),
+	helpstring("FsrmTextReader 1.0 Type Library")
+]
+library FsrmTextReaderLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(32AD5F48-C746-44A3-93FC-FEBF03079110),
+		helpstring("TextTokenizer Class")
+	]
+	coclass TextTokenizer
+	{
+		[default] interface ITextTokenizer;
+	};
+};

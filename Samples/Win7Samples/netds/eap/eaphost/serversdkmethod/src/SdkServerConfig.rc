@@ -1,0 +1,45 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+
+// PARTICULAR PURPOSE.
+
+//
+
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#pragma once
+
+#include <windows.h>
+#include "resource.h"
+
+IDD_CONFIG_IDENTITY_DIALOG DIALOG DISCARDABLE  0, 0, 186, 80
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Sample EAP Authenticator Config"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,55,50,14
+    LTEXT	    "!!! Only for Demo/Test Purposes !!!", IDC_STATIC, 5,5,130,10
+    LTEXT           "User name:",IDC_STATIC,5,20,40,10
+    LTEXT           "Password:",IDC_STATIC,5,35,35,10
+    EDITTEXT        IDC_EDIT_NAME,50,20,130,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PASSWD,50,35,130,12,ES_PASSWORD |
+                    ES_AUTOHSCROLL
+END
+
+#ifndef APSTUDIO_INVOKED
+
+// NT-standard version information
+
+#include <ntverp.h>
+
+#define VER_FILETYPE             VFT_DLL
+#define VER_FILESUBTYPE          VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR  "Sample Peer EAP"
+#define VER_INTERNALNAME_STR     "ClientSdkMethodDll.dll"
+#define VER_ORIGINALFILENAME_STR "ClientSdkMethodDll.dll"
+
+#endif

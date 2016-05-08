@@ -1,0 +1,736 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="ReadMe_files/filelist.xml">
+<link rel=Edit-Time-Data href="ReadMe_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>COM+ Administration - Explore Example (VC)</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>a-margam</o:Author>
+  <o:LastAuthor>a-margam</o:LastAuthor>
+  <o:Revision>5</o:Revision>
+  <o:TotalTime>24</o:TotalTime>
+  <o:Created>2005-07-07T14:18:00Z</o:Created>
+  <o:LastSaved>2005-07-07T14:33:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>468</o:Words>
+  <o:Characters>2670</o:Characters>
+  <o:Company>Microsoft Corporation</o:Company>
+  <o:Lines>22</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3132</o:CharactersWithSpaces>
+  <o:Version>10.6735</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="../../docs/Styles.css">
+<style>
+<!--a:visited
+	{color: 336666;}
+A:hover {background:Olive; color: White}
+
+ /* Font Definitions */
+ @font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:36.0pt;
+	font-weight:bold;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:24.0pt;
+	font-weight:bold;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:18.0pt;
+	font-weight:bold;
+	font-style:italic;}
+h4
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-weight:bold;}
+h5
+	{margin-top:12.0pt;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:10.0pt;
+	font-weight:bold;
+	font-style:italic;}
+h6
+	{margin-top:12.0pt;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:7.5pt;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;
+	mso-ascii-font-family:Verdana;
+	mso-hansi-font-family:Verdana;
+	color:olive;
+	mso-text-animation:none;
+	mso-hide:none;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;
+	mso-ascii-font-family:Verdana;
+	mso-hansi-font-family:Verdana;
+	color:blue;
+	mso-text-animation:none;
+	mso-hide:none;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+address
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-style:italic;}
+code
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+kbd
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+pre
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	mso-fareast-font-family:"Times New Roman";}
+samp
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+tt
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:39939835;
+	mso-list-template-ids:-1570710662;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:517888926;
+	mso-list-template-ids:743994318;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:1307124148;
+	mso-list-template-ids:1613166348;}
+@list l2:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3
+	{mso-list-id:1568614388;
+	mso-list-template-ids:153884782;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:1773356530;
+	mso-list-template-ids:279852174;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l4:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=olive vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h2><span style='font-family:Verdana;color:black'>VC Explore<o:p></o:p></span></h2>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>The COM+
+Explore sample demonstrates how to exercise the COM+ Administration services using
+Visual C++. <o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>It contains
+examples of the following: <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>navigating collections (including adding and removing objects and
+changing properties) <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>exporting and installing applications <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>importing and integrating components into applications <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>controlling the router on the machine <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>writing Start and Stop applications <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l4 level1 lfo2;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>connecting to different machines to administer their COM objects <o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>This document
+has the following sections:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l3 level1 lfo4;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><a href="#Overview">Overview</a> - provides a description of the
+sample <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l3 level1 lfo4;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><a href="#Build_/_Configuration">Build / Configuration</a> -
+provides step by step instructions for building and installing the sample <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l3 level1 lfo4;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><a href="#Tour">Tour</a> - provides a guided tour of the
+interesting features of the sample<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>For more
+information see <a
+href="http://msdn.microsoft.com/library/default.asp?URL=/library/psdk/cossdk/adreftoplevel_6o4l.htm">COM+
+Administration Reference</a><a
+href="http://msdn.microsoft.com/library/default.asp?URL=/library/psdk/cossdk/pgservices_events_2y9f.htm"
+target="_top"> </a>on MSDN<o:p></o:p></span></p>
+
+<h3><span style='font-family:Verdana;color:black'>Overview<o:p></o:p></span></h3>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>COM+
+administrative tasks can be managed programmatically by a rich set of
+interfaces as well as through the component services application.&nbsp;&nbsp;<o:p></o:p></span></p>
+
+<h3><span style='font-family:Verdana;color:black'>Build / Configuration<o:p></o:p></span></h3>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l2 level1 lfo6;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Open the file <b>Explore.
+<span class=SpellE>VC.sln</span></b> using Visual C++ 8.0. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l2 level1 lfo6;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Select <b>Build /
+Configuration Manager.</b> <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l2 level1 lfo6;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Select <b>x64 Debug.</b>
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l2 level1 lfo6;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>To build the
+application, select <b>Build / Build Solution or Build <span class=SpellE>Explore.VC</span>.</b>
+<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>You can also build from
+the command line by typing <span class=SpellE><b style='mso-bidi-font-weight:
+normal'>nmake</b></span><b style='mso-bidi-font-weight:normal'> /A</b> at the
+root folder.<span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp; </span>You do
+need to have VS 8.0 installed besides the PSDK.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Were you able
+to build the sample?&nbsp; If not, check with the <a href="#HelpDesk">Help Desk</a>&nbsp;<o:p></o:p></span></p>
+
+<h3><span style='font-family:Verdana;color:black'>Tour<o:p></o:p></span></h3>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>The COM+
+Administration interfaces expose a group of collections that are composed into
+a hierarchy of collections.&nbsp; Using this sample you can browse collections,
+set and change properties of elements in the collection and save your changes
+to the COM+ catalog.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Start the <a
+href="Debug/VCExplore.exe">VCExplore.exe</a> application.<br>
+To start with, you are on the root collection. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Click on <b>Applications</b>
+in the Related Collections <span class=SpellE>listbox</span>.&nbsp; This will
+display a list of COM+ applications installed on your system<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Click the <b>Add</b>
+button (third button from left) to add a new COM+ application.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>In the Objects list a
+new entry <b>New Application</b> appears.&nbsp; Click on <b>New Application.</b><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Now set the application
+name by selecting the <b>Name</b> property in the properties list.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Change the name to <b>My
+New App.</b> Then click the Set button.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l1 level1 lfo8;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:9.0pt;font-family:Verdana;mso-fareast-font-family:Verdana;
+mso-bidi-font-family:Verdana;color:black'><span style='mso-list:Ignore'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>Click on the <b>save</b>
+button to save your changes to the catalog.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>You have now
+created a new COM+ application with the COM+ Administrative interface<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Did the sample
+work as expected?&nbsp; If not, check with the <a href="#HelpDesk">Help Desk</a>&nbsp;<o:p></o:p></span></p>
+
+<h3><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_s1026" type="#_x0000_t75" alt="" style='position:absolute;
+ margin-left:197.5pt;margin-top:0;width:138.75pt;height:96pt;z-index:1;
+ mso-wrap-distance-left:0;mso-wrap-distance-right:0;mso-position-horizontal:right;
+ mso-position-vertical-relative:line' o:allowoverlap="f">
+ <v:imagedata src="../../Images/help.gif"/>
+ <w:wrap type="square"/>
+</v:shape><![endif]--><![if !vml]><img width=185 height=128
+src="../../Images/help.gif" align=right border=0 v:shapes="_x0000_s1026"><![endif]><span
+style='font-family:Verdana;color:black'><a name=HelpDesk>Help Desk</a><o:p></o:p></span></h3>
+
+<h5><span style='font-family:Verdana;color:black'>What are you have trouble
+with?<o:p></o:p></span></h5>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l0 level1 lfo10;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><a href="../../docs/BuildEnv.htm">Building the sample</a><o:p></o:p></span></p>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:1.0in;text-indent:-.25in;mso-list:l0 level1 lfo10;tab-stops:list .5in'><![if !supportLists]><span
+style='font-size:10.0pt;mso-bidi-font-size:9.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol;color:black'><span style='mso-list:Ignore'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><a href="../../docs/Troubleshooting.htm">My problem is not listed,
+just show me the FAQ</a><o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p class=MsoNormal><span style='font-size:7.5pt;font-family:Verdana;color:black'><a
+href="http://www.microsoft.com/info/cpyright.htm"><span style='font-size:9.0pt'><!--MSFT COPYRIGHT-->&copy;
+2000 Microsoft Corporation. All rights reserved. <span class=GramE>Terms of
+Use.</span></span></a> </span><span style='font-size:9.0pt;font-family:Verdana;
+color:black'><o:p></o:p></span></p>
+
+</div>
+
+<!--MSFT COPYRIGHT-->
+</body>
+
+</html>

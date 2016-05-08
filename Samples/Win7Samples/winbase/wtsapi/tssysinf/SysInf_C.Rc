@@ -1,0 +1,11 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_DLL
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Virtual Channel sample DLL"
+#define VER_INTERNALNAME_STR        "sysinf_c.dll"
+#define VER_ORIGINALFILENAME_STR    "sysinf_c.dll"
+
+#include "common.ver"
+

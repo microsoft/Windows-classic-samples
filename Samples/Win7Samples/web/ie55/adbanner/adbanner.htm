@@ -1,0 +1,97 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML xmlns:my>
+<?IMPORT namespace=my implementation=adbanner.htc />
+<HEAD>
+<TITLE>Ad Banner Demo</TITLE>
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+var toggle = true;
+
+function FooterClick()
+{
+    if(toggle)
+    {
+    	frmfly.style.visibility = "hidden";
+	fly2.style.visibility = 'visible';
+	fly2.style.display = "block";
+    }
+    else
+    {
+	frmfly.style.visibility = "visible";
+	fly2.style.visibility = "hidden";
+	fly2.style.display = "none";
+    }
+    toggle = !toggle;
+}
+-->
+</SCRIPT>
+</HEAD>
+
+<BODY onresize="beh1.relocate();" onscroll="beh1.relocate();">
+
+<my:adbanner id=beh1 bannerfromRight=135 bannerfromTop=2>
+
+<DIV id=frmfly>
+  <MAP NAME="StickyMap">
+    <AREA SHAPE="rect" COORDS="3,0,114,158" HREF="http://ads.msn.com/ads/adredir.asp?url=http://www.livecapital.com/cgi-bin/X/BCENTRAL/main.pl%3FReqLast%3D%26ReqThis%3Dhome%26OriginTag%3DMS_NBC_sticky_pencil&image=http://ads.msn.com/ads/NBCSCO/002280970034_TR.GIF">
+    <AREA SHAPE="rect" COORDS="3,159,114,176" HREF="javascript:FooterClick();">
+  </MAP>
+  <IMG SRC="http://ads.msn.com/ads/NBCSCO/002280970033_CC.GIF" WIDTH=115 HEIGHT=180 BORDER=0 USEMAP="#StickyMap" ALT="Apply now at LiveCapital.com!">
+</DIV>
+
+<DIV align=right id=fly2 style="POSITION:Absolute;background-color:none;top:2;WIDTH:115;HEIGHT:26;display:none;visibility:hidden;">
+  <SPAN STYLE="cursor:hand"><IMG SRC="http://www.msnbc.com/ads/sticky/images/show_ad.gif" onclick="javascript:FooterClick();"></SPAN>
+</DIV>
+
+</my:adbanner>
+
+<!-- Begin Content -->
+
+<TABLE CELLSPACING=0 BORDER=0 WIDTH=87%>
+  <TR VALIGN="TOP">
+    <TD COLSPAN=3 HEIGHT="35">
+      <FONT STYLE="color:000000;font-size:16pt;line-height:17pt; font-family:franklin gothic demi,arial">What's New for DHTML in Internet Explorer 5.5 and Internet Tools</FONT>
+      <FONT STYLE="font-size:5pt"><BR>&nbsp;</FONT>
+    </TD>
+  </TR>
+  <TR VALIGN=TOP>
+    <TD WIDTH="140" ALIGN=RIGHT>
+      <P>
+      <FONT STYLE="color:#000000;font-size:10pt;font-weight: bold; font-family: franklin gothic book, arial">by Dave Massy</FONT>
+      <BR>
+      <FONT STYLE="color:#000000;font-size:8pt;font-weight:bold;font-family:franklin gothic book,arial;">Microsoft&#174 Internet Explorer Program Manager</FONT>
+      <BR>
+      <FONT STYLE="color:#000000;font-size:8pt;font-weight:bold;font-family:franklin gothic book,arial"><I>Posted July 12, 2000</I></FONT>
+    </TD>
+    <TD WIDTH="15">&nbsp</TD>
+    <TD WIDTH="428">
+      <FONT STYLE="font-size:10pt;font-family:verdana">
+      <H2>Introduction</H2>
+      <P>This article refers to Microsoft&reg; Internet Explorer 5.5 and Internet Tools for Microsoft Windows&reg;, which are available for download at <A HREF="http://www.microsoft.com/windows/ie/default.htm">http://www.microsoft.com/windows/ie/default.htm</A>.</P>
+      <P>With Internet Explorer 5.5, users of the browser will benefit from enhancements such as improved navigation performance and support for print preview. In this article, though, I'd like to talk about what's new for DHTML content authors and developers&#151;and how the features of Internet Explorer version 5.5 make it an exciting platform to target for development of any application user interface (UI). Areas that have received particular focus in this release include enhancements to the behavior component model, improved editing features, and support for vertical text layout, as well as some compelling visual effects&#151;all of which I'll highlight here, with links to more detailed discussions of the features.</P>
+      <P>To make the best use of this article, it's helpful to understand previous DHTML support available in Internet Explorer. You can find full reference documentation, including samples, in the <A HREF="http://msdn.microsoft.com/workshop/default.asp">MSDN Online Web Workshop</A>.</P>
+      <P>Before describing the details of these exciting new features, I'd like to address an issue that has attracted some attention: standards support in Internet Explorer 5.5.  This release of Internet Explorer improves support for standards such as CSS1, with features such as borders, margin, and padding on inline elements, and first-letter and first-line pseudo-elements.  Internet Explorer also continues to support all the standards supported in previous releases, including leading support for technologies such as XML.  </P>
+      <P>In each release of the product, we improve our support for standards while providing the sets of features that customers require for building real-world solutions.  As we move forward with future releases of Internet Explorer, we will again evaluate which standards will be supported to offer developers a great platform for development. </P>
+      <P>For specific information about standards support for particular components or functionality, check out the new standards documentation in the MSDN Online Web Workshop <A HREF="http://msdn.microsoft.com/workshop/author/default.asp">DHTML reference pages</A>. For more information about our policy regarding standards support, please take a look at the February <A HREF="http://msdn.microsoft.com/workshop/standards/dude02072000.asp">&quot;DHTML Dude&quot; column</A>.  </P>
+      
+      <H2>Component Model</H2>
+      <P>The work on the behavior component model has focused on enabling developers to add their own custom elements for others to use in their DHTML documents. The term <I>component model </I>refers to a number of individual features that, when put together, allow developers to build their own DHTML elements to extend and enhance functionality. These extended or enhanced elements can then be reused in DHTML content by other developers. For example, a developer can create a tree-type list control that is as rich and robust as built-in HTML elements like INPUT, TEXTAREA, and SELECT. Built around the DHTML behavior support introduced in Internet Explorer 5, the enhanced Behavior Component Model allows the programmer to encapsulate and reuse code without encountering potential name conflicts and unforeseen style inheritance. A number of factors go into making a full and robust model for building reusable components. In this section, we'll discuss how these features play a key part in helping you to build up rich components with DHTML and make use of these components in DHTML documents.</P>
+
+      <H3>Element Behaviors</H3>
+      <P><A HREF="http://msdn.microsoft.com/workshop/author/behaviors/overview/elementb_ovw.asp">Element behaviors</A> are a new type of DHTML behavior introduced in Internet Explorer 5.5. Element behaviors build on the existing behavior support in Internet Explorer 5 to provide a different method of binding to an element. Like the DHTML behaviors introduced in version 5.0, element behaviors can be implemented in script or in native binary code. For clarity, we now refer to behaviors supported in Internet Explorer 5 as <I>attached</I> behaviors, as they are attached to any element either through CSS declaration of the <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/properties/behavior_1.asp">behavior</A> property or procedurally through <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/addbehavior.asp"><B>addBehavior</B></A> and <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/removebehavior.asp"><B>removeBehavior</B></A> methods. Element behaviors, by contrast, bind to the element such that they can never be detached, and they are considered to be an intrinsic part of the element being defined.</P>
+      <P>Unlike attached behaviors, only one element behavior is allowed per element&#151;and only <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/overview/customTags.asp">custom elements</A> (those elements that have explicit namespaces) can have an element behavior. You can think of an element behavior as implementing a custom element to which you can program as though it were a standard HTML element. </P>
+      <P>Remember that attached behaviors remain appropriate for many uses, so you probably don't want to eliminate them from your DHTML repertoire. Element behaviors are not better than attached behaviors, nor do element behaviors supersede attached behaviors. They simply offer advantages to developers who want to write their own custom elements. You can still attach <I>attached </I>behaviors to a custom element that is implemented as an element behavior.</P>
+      <P>So what does all this talk about robust custom elements mean? Consider developing a custom element, &lt;MYSTUFF:TREE&gt;, for a DHTML document that provides a rich tree-control user interface. You might want to reuse the &lt;MYSTUFF:TREE&gt; element in your documents in the same way you would use standard HTML elements (such as DIV, SPAN, INPUT, SELECT, and so forth). However, the traditional attached behavior mechanism for elements does not allow you to reuse this tree control, because it employs a secondary attachment mechanism that takes place after the custom element has been created. </P>
+      <P>For example, if the element were to be created in script using the <A HREF="http://msdn.microsoft.com/workshop/author/dhtml/reference/methods/createelement.asp"><B>createElement</B></A> method, and a behavior were attached using CSS, any script following <B>createElement</B> and referring to a method supplied by the behavior would probably fail, because the behavior would not have been attached at that moment. Element behaviors allow immediate behavior instantiation when the element is created, and when the methods provided by the behavior are reliably present.  Furthermore, the element behavior can be used without fear of a change in the CSS declaration that would result in the behavior being removed unexpectedly. You can achieve this binding of the element behavior to the custom element by declaring the behavior with a processing instruction rather than using CSS. For the full details of how to use and write your own element behaviors, take a look at the <A HREF="http://msdn.microsoft.com/workshop/author/behaviors/overview/elementb_ovw.asp">element behaviors</A> article.</P>
+
+<!-- End Content -->
+
+      <P>THE ABOVE MATERIAL IS COPYRIGHTED AND SHOULD NOT BE REPRODUCED OR DISTRIBUTED OUTSIDE OF MICROSOFT.</P>
+      </FONT>
+    </TD>
+  </TR>
+</TABLE>
+<P><HR><FONT COLOR="black" FACE="ms sans serif" SIZE="1">&copy;<A HREF="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" target="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</A></FONT>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

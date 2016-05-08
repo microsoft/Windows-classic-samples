@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Resource-en", "Resource-en\Resource-en.vcproj", "{95AF512C-864B-46B2-A67D-D2C8EB30FC26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalizedRegistrationSample", "LocalizedRegistrationSample.csproj", "{7B177AFD-1ED7-47B9-AD41-53133A6BC327}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95AF512C-864B-46B2-A67D-D2C8EB30FC26} = {95AF512C-864B-46B2-A67D-D2C8EB30FC26}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95AF512C-864B-46B2-A67D-D2C8EB30FC26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{95AF512C-864B-46B2-A67D-D2C8EB30FC26}.Debug|Win32.Build.0 = Debug|Win32
+		{95AF512C-864B-46B2-A67D-D2C8EB30FC26}.Release|Win32.ActiveCfg = Release|Win32
+		{95AF512C-864B-46B2-A67D-D2C8EB30FC26}.Release|Win32.Build.0 = Release|Win32
+		{7B177AFD-1ED7-47B9-AD41-53133A6BC327}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7B177AFD-1ED7-47B9-AD41-53133A6BC327}.Debug|Win32.Build.0 = Debug|Win32
+		{7B177AFD-1ED7-47B9-AD41-53133A6BC327}.Release|Win32.ActiveCfg = Release|Win32
+		{7B177AFD-1ED7-47B9-AD41-53133A6BC327}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

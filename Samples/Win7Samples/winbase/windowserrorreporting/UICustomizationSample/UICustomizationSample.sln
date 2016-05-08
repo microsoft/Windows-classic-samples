@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UICustomizationSample", "UICustomizationSample.vcproj", "{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 x86 = Debug|Win32 x86
+		Debug|Win64 x64 = Debug|Win64 x64
+		Release|Win32 x86 = Release|Win32 x86
+		Release|Win64 x64 = Release|Win64 x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Debug|Win32 x86.ActiveCfg = Debug|Win32
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Debug|Win32 x86.Build.0 = Debug|Win32
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Debug|Win64 x64.ActiveCfg = Debug|x64
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Debug|Win64 x64.Build.0 = Debug|x64
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Release|Win32 x86.ActiveCfg = Release|Win32
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Release|Win32 x86.Build.0 = Release|Win32
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Release|Win64 x64.ActiveCfg = Release|x64
+		{3C6FD9EC-273F-4F9B-A2DC-384BD84D88EA}.Release|Win64 x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

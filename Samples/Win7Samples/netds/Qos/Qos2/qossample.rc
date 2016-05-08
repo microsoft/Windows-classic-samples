@@ -1,0 +1,10 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft Windows QOS2 API sample"
+#define VER_INTERNALNAME_STR        "qossample.exe"
+#define VER_ORIGINALFILENAME_STR    "qossample.exe"
+
+#include "common.ver"

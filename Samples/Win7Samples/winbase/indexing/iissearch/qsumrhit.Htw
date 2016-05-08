@@ -1,0 +1,81 @@
+<HTML>
+
+<!--
+    This is the formatting page for webhits summary highlighting.
+    This file defines how the page header, highlighting, and
+    footer will appear.
+
+    It has been assumed that CiUserParam3 will be set to point to the
+    query form to issue new queries.
+-->
+
+<HEAD>
+    <!-- The title lists the Restriction -->
+        <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+    <TITLE> <%CiRestriction%> in <%CIURL%> </TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" TOPMARGIN=0>
+
+<TABLE>
+    <TR><TD><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Sample Condensed Hit Highlighting Form</H3></TD></TD></TR>
+    </TR>
+</TABLE>
+
+<!-- Print a header that displays the cirestriction and document vpath -->
+
+<p>Query <b><i><%CiRestriction%></i></b> against document <a href="<%CIURL%>"><%CiUrl%></a>.
+
+<p>Short excerpts immediately before and after each hit within the document are displayed.
+
+<!-- CiUserParam3 should contain the query form link -->
+
+<p align="right"><A HREF="<%CiUserParam3%>"> New Query </A></p>
+
+<HR>
+
+<TABLE>
+
+<TR>
+<TD>
+
+<!-- The highlighted summaries are printed here -->
+
+<%begindetail%>
+<%enddetail%>
+
+
+</TD>
+</TR>
+
+</TABLE>
+
+<P>
+
+<!-- BEGIN STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/windows.NetServer"><img src="win2k.gif" alt="Learn more about Microsoft Windows"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-2002 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/Info/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+<!-- END STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+</BODY>
+</HTML>

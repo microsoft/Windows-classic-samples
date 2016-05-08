@@ -1,0 +1,22 @@
+#include "resource.h"
+
+100 DIALOG 6, 18, 184, 111
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "ATSP32 Device Configuration"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Installed devices:", 101, 8, 8, 61, 8
+    LISTBOX         IDC_DEVICES, 72, 7, 104, 20, WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Device", 111, 8, 27, 168, 63
+    LTEXT           "Description:", 102, 16, 41, 45, 8
+    EDITTEXT        IDC_DESCRIPTION, 72, 40, 96, 9, ES_AUTOHSCROLL
+    LTEXT           "Port:", 103, 16, 57, 20, 8
+    LISTBOX         IDC_PORT, 72, 56, 96, 11, LBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Commands:", 104, 16, 73, 47, 8
+    EDITTEXT        IDC_COMMANDS, 72, 72, 96, 10, ES_AUTOHSCROLL
+    PUSHBUTTON      "Add", IDC_ADD, 8, 94, 40, 14
+    PUSHBUTTON      "Remove", IDC_REMOVE, 50, 94, 40, 14
+    PUSHBUTTON      "OK", IDOK, 93, 94, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 136, 94, 40, 14
+END

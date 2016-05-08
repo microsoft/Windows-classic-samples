@@ -1,0 +1,86 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE>WMI Sample - Datetime Behavior</TITLE>
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright (c) Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         datetime.htm
+//
+//  Description:  This is a sample HTA page to illustrate how to use
+//				  the WMI datetime behavior sample.  
+//
+//-------------------------------------------------------------------- -->
+
+<STYLE>
+BODY { 
+	font-family:verdana;
+	color:brown;
+	background-color:lightgreen;
+}
+
+INPUT {
+	background-color:green;
+	color:yellow;
+}
+
+HR {
+	color:darkgreen;
+}
+</STYLE>
+<SCRIPT language="VBScript">
+	Sub window_onload
+		' Set up a sample value to get us started
+		customValue.value = "19980401135809.000000+***"
+	End Sub
+	
+	Sub displayIt_onmouseover
+		displayIt.style.fontWeight = "bolder"
+		displayIt.style.cursor = "hand"
+	End Sub
+	
+	Sub displayIt_onmouseout
+		displayIt.style.fontWeight = "lighter"
+		displayIt.style.cursor = "auto"
+	End Sub
+	
+	Sub displayIt_onclick
+		window.status = ""
+		datetime.value = customValue.value
+	End Sub
+	
+	Sub HandleValueChange
+		window.status = ""
+		customValue.value = datetime.value
+	End Sub
+</SCRIPT>
+</HEAD>
+<BODY>
+
+<H1>WMI Datetime Behavior Sample</H1>This sample 
+illustrates how to use a simple DHTML behavior to parse WMI datetime values and 
+present them graphically using the generic Calendar and Datetime Picker 
+controls.<P>
+The other files or components used in this sample are:
+<UL>
+ <LI>datetime.htc - this is the behavior which exposes a WMI datetime value using a Calendar
+ and Datetime picker control.
+ <LI>calendar.htc - this is the standard Calendar behavior available from 
+ <A href="http://msdn.microsoft.com/downloads/samples/internet/behaviors/library/calendar/sample.asp">MSDN online</A>. 
+ It is used internally by the datetime behavior.
+ <LI>The Microsoft Common Controls (MSCOMCT2.OCX) are used to supply the datetime picker control.
+</UL>
+</P>
+
+<HR><P></P>
+
+Type a legal DMTF datetime value in here:
+<INPUT id=customValue style="WIDTH: 231px; HEIGHT: 22px" size=33>
+<SPAN id=displayIt>Display it</SPAN>
+<P>The graphical representation of the datetime value appears below. You can change the values in
+the display and see the textual datetime value above change accordingly.</P>
+<HR width="50%"><P></P>
+<DIV id=datetime style="BEHAVIOR: url(datetime.htc)" onvaluechange="HandleValueChange()"></DIV>
+</BODY>
+</HTML>

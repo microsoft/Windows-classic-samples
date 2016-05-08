@@ -1,0 +1,47 @@
+// **************************************************************************
+
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+//
+// File:  SampleViewer.mof
+//
+// Description:
+//    mof file defines event consumer provider registration and class
+//
+// History:
+//
+// **************************************************************************
+#pragma namespace ("\\\\.\\Root\\cimv2")
+#PRAGMA AUTORECOVER
+ 
+instance of __Namespace
+{
+    Name = "SAMPLE_Office";
+};
+
+#pragma namespace("\\root\\cimv2\\SAMPLE_Office")
+
+// register me as a Physical Event Consumer Provider.
+instance of __Win32Provider as $P
+{
+	Name = "SampleViewerConsumer";
+	Clsid = "{1E069401-087E-11d1-AD85-00AA00B8E05A}";
+};
+
+instance of __EventConsumerProviderRegistration
+{
+   Provider = $P;
+   ConsumerClassNames = {"SampleViewerConsumer"};
+};
+
+// This is my logical consumer class. You MUST derive a class from
+// __EventConsumer and you MUST add a [key] property. 
+class SampleViewerConsumer : __EventConsumer
+{
+	[key] string Name;
+};
+
+// Make an instance.
+instance of SampleViewerConsumer
+{
+	Name = "Sample says:";
+};    

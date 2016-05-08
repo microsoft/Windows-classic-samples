@@ -1,0 +1,123 @@
+<FlowDocument xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+  <Paragraph>
+    This tool allows you to experiment and learn the two speech recognition classes
+    that are present in System.Speech.Recognition namespace:    
+  </Paragraph>
+  <List>
+    <ListItem>
+      <Paragraph>
+        <Bold>SpeechRecognizer:</Bold>
+        This class allows you to use the system's default shared
+        speech recognizer. You have limited control over this shared recognizer.
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Bold>SpeechRecognitionEngine:</Bold>
+        Use this class if you need greater control over the
+        speech recognition engine such as selecting any engine installed on the system
+        or setting input to wave files or streams.
+      </Paragraph>
+    </ListItem>
+  </List>
+  <Paragraph>
+    You can just start experimenting with these classes by selecting the tabs above, or
+    continue reading to learn more.
+  </Paragraph>
+  
+  <Paragraph><Bold><Italic>How to use this tool</Italic></Bold></Paragraph>
+
+  <Paragraph>
+    First you need to decide what type of recognizer object you want to create.
+    You can use the system's default shared speech recognizer by creating a
+    SpeechRecognizer object. You have limited control over this shared recognizer.
+    In Windows Vista the settings of the shared recognizer can be accessed in
+    Control Panel under "Ease of Access -> Speech Recognition Options ->
+    Advanced Speech Options". Creating a SpeechRecognizer object will also activate
+    the Windows Speech Recognition if it's not running already.
+  </Paragraph>
+
+  <Paragraph>
+    If you want more control over speech recognition, you can create a
+    SpeechRecognitionEngine object. You'll be able to select the engine that you
+    want to use and to set the input to the engine. The recognizer created in this way
+    will only be accessible by your application (not shared among the system).
+  </Paragraph>
+
+  <Paragraph><Bold><Italic>Grammars</Italic></Bold></Paragraph>
+
+  <Paragraph>
+    After creating the engine, the next step is to load the grammars. Grammars
+    let the engine know which phrases to listen for. The Default Dictation grammar
+    allows the engine to recognize any free speech fragment and it's based on
+    statistical language models. Spelling Dictation grammar allows you to spell
+    any word.
+  </Paragraph>
+
+  <Paragraph>
+    If you want only some certain phrases to be recognized, or to add some semantic
+    information, you can create your own grammars. System.Speech.Recognition namespace
+    has the GrammarBuilder class to make it easy to create grammars programatically.
+    This application has a sample GrammarBuilder which recognizes phrases like:
+  </Paragraph>
+  
+  <List>
+    <ListItem>
+      <Paragraph>
+        Please check the status of today's flight from Seattle to Boston.
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        Status of tomorrow's flight from T. F. Green to Boston Logan International Airport.
+      </Paragraph>
+    </ListItem>
+  </List>
+
+  <Paragraph>
+    Try enabling the Flight Status Grammar on the right section by checking the box,
+    and speak the sentences above. Observe the semantics information on the bottom
+    right. You can check the source code (FlightStatusGrammarBuilder method) to see
+    how this grammar is created.
+  </Paragraph>
+
+  <Paragraph>
+    Another way of loading custom grammars is to open and load SRGS files. You can
+    learn more about this grammar specification format on
+    <Hyperlink NavigateUri="http://www.w3.org/TR/speech-grammar/">
+      http://www.w3.org/TR/speech-grammar/
+    </Hyperlink>
+    .
+  </Paragraph>
+    
+  <Paragraph><Bold><Italic>Events</Italic></Bold></Paragraph>
+
+  <Paragraph>
+    Various events are fired during the recognition process. This tool reports the
+    following events with color animations so you can see when and in which order
+    the events are fired.
+  </Paragraph>
+  <List>
+    <ListItem>
+      <Paragraph>
+        <Bold>SpeechHypothesized</Bold> event is generated when part of the
+        audio input speech has been tentatively recognized. This event is indicated
+        by blue color by the associated grammar.
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Bold>SpeechRecognized</Bold> event is generated when speech has been recognized.
+        A green color animation by the associated grammar will indicate this event.
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Bold>SpeechRecognitionRejected</Bold> event is generated when the engine
+        detects speech, but can only return candidate phrases with low confidence levels.
+        Red color will indicate this event.
+      </Paragraph>
+    </ListItem>
+  </List>
+
+</FlowDocument>

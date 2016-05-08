@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>New Page 1</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+<h2>FIXVBPRef Tool</h2>
+<hr>
+<h3>Overview</h3>
+<p>Visual Basic 6 applications store references to type libraries in the project
+(.vbp) file.&nbsp; VB allows you to link projects by setting references via the
+Project/References menu option.&nbsp; When you build a VB application that does
+not have binary compatibility enabled, VB will generate a new GUID for the
+typelib.&nbsp;&nbsp; Now when you wish to build any dependent VB projects, you
+must first remove the previous reference the old typelib and recreate the
+reference to the new typelib.</p>
+<p>When building a large VB project, this process can take quite a long
+time.&nbsp; FIXVBPRef is a tool that will automatically fix missing typelib
+references for you.</p>
+<h3>How It Works</h3>
+<p>In the VBP file, typelib references are stored in the following format</p>
+<p>Reference=*\G{2E4F4861-542D-11D2-8B41-00C04F991474}#1.0#0#..\..\..\..\DLLs\AdStatusEventsSvr.dll#AdStatusEventsSvr 1.0 Type Library</p>
+<p>The reference line is a # delimited string containing the following elements</p>
+<ol>
+  <li>GUID of the typelib 
+  <li>typelib version 
+  <li>? 
+  <li>Relative path to the typelib file (on the machine 
+  where the vbp file was created) 
+  <li>Description of the typelib</li>
+</ol>
+<p>To fix an invalid reference to a typelib, FIXVBPRef does the following</p>
+<ol>
+  <li>Extract the relative path of the typelib file from 
+  the reference string 
+  <li>Load the typelib 
+  <li>Get the GUID of the typelib using the ITypeLib 
+  interface 
+  <li>Replace the GUID on the reference string with the 
+  GUID from the typelib 
+  <li>Write the corrected reference string to the output file</li>
+</ol>
+<p>NOTE: FIXVBPRef will attempt to update the GUID of all referenced components,
+including some that may never change, therefore it must be able to load each
+referenced typelib.</p>
+<h3>Typelib Location</h3>
+<p>When the vbp file was created, the typelib locations are stored using a
+relative path.&nbsp; In most cases, this allows for better location transparency
+since most developers tend to use the same directory structure on a project by
+project basis.&nbsp; However, there are many cases where the relative path fails
+to locate the typelib correctly because it may be located on a different drive
+or directory.&nbsp; FIXVBPRef will first attempt to load the typelib using the
+relative path stored in the vbp file.&nbsp; If that fails it will search in
+order</p>
+<ul>
+  <li>System directory (as returned by GetSystemDirectory() 
+  usually WINNT\SYSTEM32)&nbsp; 
+  <li>ADO (%ProgramFiles%\Common Files\System\ADO) 
+  <li>The bin (as indicated on the command line) directory and all
+    subdirectories</li>
+</ul>
+<h3>Project BIN Directory</h3>
+<p>Most projects contain a BIN directory where the DLL and EXE files are written
+to.&nbsp; Some project further segregate binary components into subdirectories
+according to function or location.&nbsp; For example</p>
+<p><a href="file:///C:/MyProject">C:\MyProject&nbsp;&nbsp;&nbsp; - Project root<br>
+</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \Source&nbsp;&nbsp;&nbsp; - Root
+of source directories<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\Test&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Root of test directories<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\Bin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Root of bin
+directories<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\Client&nbsp;&nbsp;&nbsp; - Contains client components and applications<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\COM+&nbsp;&nbsp;&nbsp; - Contains COM+ applications<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\ASP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Contains ASP scripts</p>
+<p>When FIXVBPRef cannot find a typelib it looks at the Bin root you specify as
+an argument on the command line and will recursively search the bin directory
+and all child directories for the desired typelib.</p>
+<h3>FIXVBPRef.OPT</h3>
+<p>If you need to reference a component typelib that is not in the bin root, you
+can place a text file in the bin root directory that contains a list of
+directories (one per line) to recursively search as well.&nbsp; For example</p>
+<p>(Sample FIXVBPRef.OPT)<br>
+<a href="file:///C:/MyComponents/">C:\MyComponents\<br>
+</a>C:\SomeThirdPartyComponent\</p>
+<p>FIXVBPRef will look for the FIXVBPRef.opt file in the project root bin
+directory.</p>
+<h3>Command Line Options</h3>
+<p>FIXVBPREF MyProject.vbp [MyBinDir]</p>
+<ul>
+  <li>MyProject.vbp - the VBP project file to fix up 
+  (Required)&nbsp; 
+  <li>MyBinDir - (Optional) The project root bin directory</li>
+</ul>
+<h3>&nbsp;Building VB Projects using NMAKE</h3>
+<p>Using a tool like FIXVBPRef you can completely automate builds of VB
+projects.</p>
+<h4>Build Environment</h4>
+<ul>
+  <li>Add the directory where VB6.exe is located to your 
+  path (usually \Program Files\Microsoft Visual Studio\VB98) 
+  <li>MSSDK environment variable must be set 
+  <li>FIXVBPREF accessible via path (from %MSSDK%\BIN)</li>
+</ul>
+<h4>Sample Makefile</h4>
+<p>The sample makefile below is used to build the AdPublisher component of the
+Island Hopper Classifieds COM+ Sample Application</p>
+<p><font face="Courier New" size="2">#VB Project Make File<br>
+PROJNAME=AdPublisher <br>
+PROJECT=$(PROJNAME).vbp <br>
+BINROOT=$(MSSDK)Samples\Com\Application_Samples\Island_Hopper_Classifieds\DLLs <br>
+TARGET="$(BINROOT)\$(PROJNAME).dll" <br>
+VBLOG="$(BINROOT)\VBBUILD.LOG"<br>
+<br>
+#Modify the line below if you installed VB in a non-standard location <br>
+VB6="%ProgramFiles%\Microsoft Visual Studio\vb98\vb6.exe"<br>
+<br>
+ALL : CLEAN $(TARGET) POSTCLEAN<br>
+<br>
+CLEAN : <br>
+&nbsp;&nbsp;&nbsp; -@erase $(TARGET)<br>
+<br>
+$(TARGET) : $(PROJECT) <br>
+&nbsp;&nbsp;&nbsp; fixvbpref $(PROJECT) $(BINROOT) <br>
+&nbsp;&nbsp;&nbsp; $(VB6) /make /out $(VBLOG) $(PROJECT)</font></p>
+<p><font face="Courier New" size="2">POSTCLEAN : <br>
+&nbsp;&nbsp;&nbsp; -@erase $(BINROOT)\$(PROJNAME).exp <br>
+&nbsp;&nbsp;&nbsp; -@erase $(BINROOT)\$(PROJNAME).lib</font></p>
+<h3>Support / General Info</h3>
+<p>FIXVBPRef is provided as an unsupported application 
+sample.</p>
+<P>&nbsp;</P>
+</body>
+
+</html>

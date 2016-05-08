@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'FsrmTextReader'
+		'FsrmTextReader.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

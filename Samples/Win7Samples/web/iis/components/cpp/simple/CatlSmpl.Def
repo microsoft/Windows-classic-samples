@@ -1,0 +1,9 @@
+; CATLSmpl.def : Declares the module parameters.
+
+LIBRARY      CATLSMPL.DLL
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

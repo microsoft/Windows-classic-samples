@@ -1,0 +1,59 @@
+#pragma autorecover
+
+#pragma namespace("\\\\.\\root")
+
+
+instance of __Namespace
+{
+	Name = "cimv2" ;
+} ;
+
+#pragma namespace("\\\\.\\root\\cimv2")
+
+class DecoupledEventConsumer : __EventConsumer
+{
+	[key] string Name ;
+} ;
+
+/*
+ *	Registrations
+ */
+class MSFT_DecoupledProvider : __Win32Provider
+{
+	[Description ( "Decoupled provider CLSID, do not change. Do not override" ) , Override("Clsid")] 
+	String Clsid = "{54D8502C-527D-43F7-A506-A9DA075E229C}" ;
+	[Description ( "Hosting Model, provides compatibility with Windows XP and Windows Server .NET. Do not override." ) , Override("HostingModel")]
+	string HostingModel = "Decoupled:Com";
+	[Description("..."),Override("SecurityDescriptor")] 
+	string SecurityDescriptor; 		
+} ;
+
+instance of MSFT_DecoupledProvider as $PDecoupledEventConsumer
+{
+	Name = "DecoupledEventConsumer";
+	HostingModel = "Decoupled:Com" ;
+};    
+
+instance of __EventConsumerProviderRegistration
+{
+    Provider = $PDecoupledEventConsumer ;
+	ConsumerClassNames = { "DecoupledEventConsumer" } ;
+} ;
+
+instance of __EventFilter as $EventFilter
+{
+	Query = "select * from SampleEvent" ;
+	QueryLanguage = "WQL" ;
+	Name = "DecoupledFilter" ;
+} ;
+
+instance of DecoupledEventConsumer as $EventConsumer 
+{
+	Name = "DecoupledEventConsumer" ;
+} ;
+
+instance of __FilterToConsumerBinding
+{
+	Filter = $EventFilter ;
+	Consumer = $EventConsumer ;
+} ;

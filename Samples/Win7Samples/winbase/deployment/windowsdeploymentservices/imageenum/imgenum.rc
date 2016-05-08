@@ -1,0 +1,38 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING_USAGE        "Usage: %s <UserId@Domain> <Password> <WDS Server>\n"
+    IDS_STRING_HEADER       "\n***List of images***\n--------------------\n\n"
+    IDS_STRING_ENTRY        "Name = [%s]\nDescription = [%s]\nPath = [%s]\nIndex = [%d]\nArchitecture = [%s]\n\n"
+    IDS_STRING_SUCCESS      "\nSuccess!\n"
+    IDS_STRING_FAILURE      "\nFailed to enumerate images. HRESULT [0x%X]\n"
+    IDS_STRING_ARCH_UNKNOWN "Unknown"
+    IDS_STRING_ARCH_X86     "x86"
+    IDS_STRING_ARCH_X64     "x64"
+    IDS_STRING_ARCH_IA64    "ia64"
+END
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

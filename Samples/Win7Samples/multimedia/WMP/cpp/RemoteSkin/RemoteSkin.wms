@@ -1,0 +1,110 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<THEME>
+	<VIEW
+		height = "175"
+		width = "300"
+	>
+
+		<PLAYER
+			playStateChange = "JScript: if (NewState == 3) { playpause.value = 'Pause'; } else { playpause.value = 'Play'; } "
+		/>
+
+		<TEXT 
+			id = "playpause"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "Play"
+			cursor = "hand"
+			onClick = "JScript: if (player.playState == 3) { player.controls.pause(); } else { player.controls.play(); }"
+		/>
+		
+		<TEXT
+			top = "50"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "Stop"
+			cursor = "hand"
+			onClick = "JScript: player.controls.stop();"
+		/>
+
+		<TEXT
+			top = "105"
+			left = "0"
+			width = "150"
+			fontSize = "10"
+			fontStyle = "Underline"
+			justification = "Center"
+			value = "Volume"
+		/>
+
+		<TEXT
+			top = "115"
+			left = "0"
+			width = "150"
+			fontSize = "20"
+			justification = "Center"
+			value = "wmpprop:player.settings.volume"
+		/>
+
+		<TEXT
+			top = "118"
+			left = "25"
+			width = "40"
+			fontSize = "15"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "-"
+			cursor = "hand"
+			onClick = "JScript: player.settings.volume -= 5;"
+		/>
+
+		<TEXT
+			top = "118"
+			left = "83"
+			width = "40"	
+			fontSize = "15"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "+"
+			cursor = "hand"
+			onClick = "JScript: player.settings.volume += 5;"
+		/>
+
+		<STATUSTEXT
+			top = "155"
+			width = "300"
+			height = "30"
+			backgroundColor = "blue"
+			foregroundColor = "white"
+			justification = "Center"
+			scrolling = "true"			
+			scrollingAmount = "1"
+			scrollingDelay = "50"
+		/>
+
+    <EFFECTS
+	  id = "effectsviz"
+      top = "15"
+      left = "140"
+      width = "145"
+      height = "120"
+    />
+
+		<VIDEO
+			top = "15"
+			left = "140"
+			width = "145"
+			height = "120"
+		    visible = "wmpprop:player.currentMedia.imageSourceWidth"
+		/>
+
+	</VIEW>
+</THEME>

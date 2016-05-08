@@ -1,0 +1,241 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         coolbutton.htc
+//
+//  Description:  The coolbar behavior allows web authors to easily add 
+//                Explorer-style menus to their web pages and applications. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="SizeAll"      /> 
+<PROPERTY NAME="ButtonWidth"  />
+<PROPERTY NAME="ButtonHeight" />
+
+<METHOD   NAME="DoSizeAll"    />
+	
+
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables       
+//
+//-----------------------------------------------------------------------------
+
+var buttonReady = 0;            // Tracks the number of buttons that have
+                                //    been initialized
+                                
+var iWidth = 0;                 // Tracks global width of buttons
+
+var iHeight = 0;                // Tracks global height of buttons
+
+
+// Set visibility to hidden while the coolbar is formatted
+style.visibility = "hidden";
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties, and
+//                  attaches events.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+    //  CSS Property Defaults   
+    NormalDefault('backgroundColor','#ffffff','menu');
+            
+    style.visibility = "visible";
+        
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    propertyName = window.event.propertyName;
+    
+    if (propertyName == "ButtonWidth")
+    {
+        iWidth = ButtonWidth;
+        SizeButtons(true);
+    }
+    
+    if (propertyName == "ButtonHeight")
+    {
+        iHeight = ButtonHeight;
+        SizeButtons(true);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSizeAll
+//
+//  Description:    This function is called from each child coolbutton when
+//                  the button is finished initializing.  Once all of the 
+//                  buttons that are children of this element are initialized,
+//                  functions are called to properly size each button.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoSizeAll()
+{
+    buttonReady++;
+
+    if (buttonReady == element.all.urns("cb").length)
+    {
+        if (SizeAll == "true" || SizeAll == true) GetBiggest();
+        SizeButtons();
+        SetDefaults();
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       GetBiggest
+//
+//  Description:    Finds the widest button and the tallest button.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function GetBiggest()
+{
+    //  Get the collection of coolbutton's in this element
+    var oButtons = element.all.urns("cb");
+
+    for (i=0; i<oButtons.length; i++)
+    {
+        if (oButtons(i).offsetWidth > iWidth)
+        {
+            iWidth = oButtons(i).offsetWidth;
+        }
+        if (oButtons(i).offsetHeight > iHeight)
+        {
+            iHeight = oButtons(i).offsetHeight;
+        }
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SizeBar
+//
+//  Description:    Set the size of the element.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SizeBar()
+{
+    style.width = offsetWidth
+        + parseInt(currentStyle.paddingLeft)
+        + parseInt(currentStyle.paddingRight);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SizeButtons
+//
+//  Description:    Set the size of each child button of this element.
+//
+//  Arguments:      bRuntime - true when the function is being called at runtime
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SizeButtons(bRunTime)
+{
+    //  Get the collection of coolbutton's in this element
+    var oButtons = element.all.urns("cb");
+
+    //  Set the width of the coolbar to "auto"
+    style.width = "auto";
+
+    for (i=0; i<oButtons.length; i++)
+    {
+        //  If SizeAll is false, each button is sized according to its contents
+        if (SizeAll != "true" && SizeAll != true && !bRunTime)
+        {
+            iWidth = oButtons(i).offsetWidth;
+            iHeight = oButtons(i).offsetHeight;
+        }
+ 
+        //  Format the size of the button
+        oButtons(i).style.width = iWidth;
+        oButtons(i).style.height = iHeight;
+    }
+    
+    //  Call SizeBar() to set the width of the bar based on the new button sizes
+    SizeBar();
+}
+
+
+</SCRIPT>

@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dcmPS:AdvDiagnosticPackage SchemaVersion="1.0" Localized="false" xmlns:dcmPS="http://www.microsoft.com/schemas/dcm/package/2007" xmlns:dcmRS="http://www.microsoft.com/schemas/dcm/resource/2007" xmlns:wdem="http://diagnostics.microsoft.com/2007/08/WindowsDiagnosticExtendedMetadata">
+    <DiagnosticIdentification>
+        <ID>AeroDiagnostic</ID>
+        <Version>1.3</Version>
+    </DiagnosticIdentification>
+    <DisplayInformation>
+        <Parameters />
+        <Name>
+            <dcmRS:LocalizeResourceElement comment="Performance package name" index="1">Aero Sample</dcmRS:LocalizeResourceElement>
+        </Name>
+        <Description>
+            <dcmRS:LocalizeResourceElement comment="Performance package description" index="2">Fixes problems displaying Aero.</dcmRS:LocalizeResourceElement>
+        </Description>
+    </DisplayInformation>
+    <PrivacyLink>http://privacy.contoso.com</PrivacyLink>
+    <PowerShellVersion>2.0</PowerShellVersion>
+    <SupportedOSVersion clientSupported="true" serverSupported="true">6.1</SupportedOSVersion>
+    <Rootcauses>
+        <Rootcause>
+            <ID>RC_ServiceStopped</ID>
+            <DisplayInformation>
+                <Parameters />
+                <Name>
+                    <dcmRS:LocalizeResourceElement comment="Performance package name" index="601">Themes service isn't running</dcmRS:LocalizeResourceElement>
+                </Name>
+                <Description>
+                    <dcmRS:LocalizeResourceElement comment="Performance package description" index="602">Aero desktop effects require the Themes service to be running.</dcmRS:LocalizeResourceElement>
+                </Description>
+            </DisplayInformation>
+            <Troubleshooter>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_ServiceStopped.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Troubleshooter>
+            <Resolvers>
+                <Resolver>
+                    <ID>RS_ServiceStopped</ID>
+                    <DisplayInformation>
+                        <Parameters />
+                        <Name>
+                            <dcmRS:LocalizeResourceElement comment="Performance package name" index="607">Start the Themes service</dcmRS:LocalizeResourceElement>
+                        </Name>
+                        <Description>
+                            <dcmRS:LocalizeResourceElement comment="Performance package description" index="608">Starting Themes will enable Aero desktop effects to be displayed.</dcmRS:LocalizeResourceElement>
+                        </Description>
+                    </DisplayInformation>
+                    <RequiresConsent>false</RequiresConsent>
+                    <Script>
+                        <Parameters />
+                        <ProcessArchitecture>Any</ProcessArchitecture>
+                        <RequiresElevation>true</RequiresElevation>
+                        <RequiresInteractivity>false</RequiresInteractivity>
+                        <FileName>RS_ServiceStopped.ps1</FileName>
+                        <ExtensionPoint />
+                    </Script>
+                    <ExtensionPoint />
+                </Resolver>
+            </Resolvers>
+            <Verifier>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_ServiceStopped.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Verifier>
+            <ContextParameters />
+            <ExtensionPoint />
+        </Rootcause>
+        <Rootcause>
+            <ID>RC_PowerSaverBattery</ID>
+            <DisplayInformation>
+                <Parameters />
+                <Name>
+                    <dcmRS:LocalizeResourceElement comment="Performance package name" index="801">Current power settings don't support Aero desktop effects</dcmRS:LocalizeResourceElement>
+                </Name>
+                <Description>
+                    <dcmRS:LocalizeResourceElement comment="Performance package description" index="802">The Power Saver plan helps conserve power, and starts when your computer is running on battery power. When running your computer on battery power, Windows conserves power by disabling visual effects such as the Aero desktop experience.</dcmRS:LocalizeResourceElement>
+                </Description>
+            </DisplayInformation>
+            <Troubleshooter>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_PowerSaverBattery.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Troubleshooter>
+            <Resolvers>
+                <Resolver>
+                    <ID>RS_PowerSaverBattery</ID>
+                    <DisplayInformation>
+                        <Parameters />
+                        <Name>
+                            <dcmRS:LocalizeResourceElement comment="Performance package name" index="803">Change power plan to Balanced or High Performance</dcmRS:LocalizeResourceElement>
+                        </Name>
+                        <Description>
+                            <dcmRS:LocalizeResourceElement comment="Performance package description" index="804">Changing the power plan to Balanced or High Performance will allow Aero effects such as transparency, but will drain the battery more quickly than in Power Saver mode.</dcmRS:LocalizeResourceElement>
+                        </Description>
+                    </DisplayInformation>
+                    <RequiresConsent>false</RequiresConsent>
+                    <Script>
+                        <Parameters />
+                        <ProcessArchitecture>Any</ProcessArchitecture>
+                        <RequiresElevation>false</RequiresElevation>
+                        <RequiresInteractivity>true</RequiresInteractivity>
+                        <FileName>RS_PowerSaverBattery.ps1</FileName>
+                        <ExtensionPoint />
+                    </Script>
+                    <ExtensionPoint>
+                        <InteractionIDList>
+                            <InteractionID>IT_ChoosePowerScheme</InteractionID>
+                        </InteractionIDList>
+                    </ExtensionPoint>
+                </Resolver>
+            </Resolvers>
+            <Verifier>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_PowerSaverBattery.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Verifier>
+            <ContextParameters />
+            <ExtensionPoint />
+        </Rootcause>
+    </Rootcauses>
+    <Interactions>
+        <SingleResponseInteractions>
+            <SingleResponseInteraction>
+                <AllowDynamicResponses>false</AllowDynamicResponses>
+                <Choices>
+                    <Choice>
+                        <DisplayInformation>
+                            <Parameters />
+                            <Name>
+                                <dcmRS:LocalizeResourceElement comment="This is a comment" index="4">Balanced</dcmRS:LocalizeResourceElement>
+                            </Name>
+                            <Description>
+                                <dcmRS:LocalizeResourceElement comment="This is a comment" index="6">Automatically balances performance with energy consumption on capable hardware.</dcmRS:LocalizeResourceElement>
+                            </Description>
+                        </DisplayInformation>
+                        <Value>381b4222-f694-41f0-9685-ff5bb260df2e</Value>
+                        <ExtensionPoint />
+                    </Choice>
+                    <Choice>
+                        <DisplayInformation>
+                            <Parameters />
+                            <Name>
+                                <dcmRS:LocalizeResourceElement comment="This is a comment" index="5">High performance</dcmRS:LocalizeResourceElement>
+                            </Name>
+                            <Description>
+                                <dcmRS:LocalizeResourceElement comment="This is a comment" index="7">Favors performance, but may use more energy</dcmRS:LocalizeResourceElement>
+                            </Description>
+                        </DisplayInformation>
+                        <Value>8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</Value>
+                        <ExtensionPoint />
+                    </Choice>
+                </Choices>
+                <ID>IT_ChoosePowerScheme</ID>
+                <DisplayInformation>
+                    <Parameters />
+                    <Name>
+                        <dcmRS:LocalizeResourceElement comment="This is a comment" index="3">Please select a power plan to apply in order to enable Aero effects</dcmRS:LocalizeResourceElement>
+                    </Name>
+                    <Description>
+                        <dcmRS:LocalizeResourceElement comment="This is a comment" index="8">The "Power saver" plan doesn't support Aero effects when the computer is on battery power. Please choose from one of the following options.</dcmRS:LocalizeResourceElement>
+                    </Description>
+                </DisplayInformation>
+                <ContextParameters />
+                <ExtensionPoint />
+            </SingleResponseInteraction>
+        </SingleResponseInteractions>
+        <MultipleResponseInteractions />
+        <TextInteractions />
+        <PauseInteractions />
+        <LaunchUIInteractions />
+    </Interactions>
+    <ExtensionPoint />
+</dcmPS:AdvDiagnosticPackage>

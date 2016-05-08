@@ -1,0 +1,202 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winnt.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_APPICON             ICON    DISCARDABLE     "App.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winnt.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define VER_FILETYPE                VFT_APP\r\n"
+    "#define VER_FILEDESCRIPTION_STR     ""Advanced Recognition Sample Application""\r\n"
+    "#define VER_INTERNALNAME_STR        ""AdvReco""\r\n"
+    "#define VER_ORIGINALFILENAME_STR    ""AdvReco.exe""\r\n"
+    "#include ""tpcver.ver""\r\n"
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Ink"
+    BEGIN
+        MENUITEM "&Recognize",                  ID_RECOGNIZE
+        MENUITEM "&Clear",                      ID_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_EXIT
+    END
+    POPUP "&Recognizer"
+    BEGIN
+        MENUITEM "Default",                     ID_RECOGNIZER_DEFAULT
+    END
+    POPUP "&Inputscope"
+    BEGIN
+        MENUITEM "Coerce to InputScope",                ID_INPUTSCOPE_COERCE
+        MENUITEM SEPARATOR
+    END
+    POPUP "&Guide"
+    BEGIN
+        MENUITEM "None",                        ID_GUIDE_NONE
+        MENUITEM "Lines",                       ID_GUIDE_LINES
+        MENUITEM "Boxes",                       ID_GUIDE_BOXES
+    END
+    POPUP "&Mode"
+    BEGIN
+        MENUITEM "Ink Only",                    ID_MODE_INK
+        MENUITEM "Ink and Gestures",            ID_MODE_INK_AND_GESTURES
+        MENUITEM "Gestures Only",               ID_MODE_GESTURES
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING1             "John Doe"
+    IDS_STRING2             "johndoe123@somemail.com"
+    IDS_STRING3             "(555) 123-4567"
+    IDS_STRING4             "01/23/45"
+    IDS_STRING5             "C:\\Documents and Settings\\Default User\\JohnDoe.jpg"
+    IDS_STRING6             "http://www.johndoe.com"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_GESTURE_UNKNOWN     "unknown"
+    IDS_SSGESTURE_FIRST     "Scratchout"
+    IDS_STRING101           "Triangle"
+    IDS_STRING102           "Square"
+    IDS_STRING103           "Star"
+    IDS_STRING104           "Check"
+    IDS_STRING105           "Circle"
+    IDS_STRING106           "Double Circle"
+    IDS_STRING107           "Curlicue"
+    IDS_STRING108           "Double Curlicue"
+    IDS_STRING109           "Semicircle Left"
+    IDS_STRING110           "Semicircle Right"
+    IDS_STRING111           "Chevron Up"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING112           "Chevron Down"
+    IDS_STRING113           "Chevron Left"
+    IDS_STRING114           "Chevron Right"
+    IDS_STRING115           "Up"
+    IDS_STRING116           "Down"
+    IDS_STRING117           "Left"
+    IDS_STRING118           "Right"
+    IDS_STRING119           "Up-Down"
+    IDS_STRING120           "Down-Up"
+    IDS_STRING121           "Left-Right"
+    IDS_STRING122           "Right-Left"
+    IDS_STRING123           "Up-Left Long"
+    IDS_STRING124           "Up-Right Long"
+    IDS_STRING125           "Down-Left Long"
+    IDS_STRING126           "Down-Right Long"
+    IDS_STRING127           "Up-Left"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING128           "Up-Right"
+    IDS_STRING129           "Down-Left"
+    IDS_STRING130           "Down-Right"
+    IDS_STRING131           "Left-Up"
+    IDS_STRING132           "Left-Down"
+    IDS_STRING133           "Right-Up"
+    IDS_STRING134           "Right-Down"
+    IDS_STRING135           "Tap"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MSGESTURE_FIRST     "Arrow Up"
+    IDS_STRING201           "Arrow Down"
+    IDS_STRING202           "Arrow Left"
+    IDS_STRING203           "Arrow Right"
+    IDS_STRING204           "Exclamation"
+    IDS_STRING205           "Double Tap"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define VER_FILETYPE                VFT_APP
+#define VER_FILEDESCRIPTION_STR     "Advanced Recognition Sample Application"
+#define VER_INTERNALNAME_STR        "AdvReco.exe"
+#define VER_ORIGINALFILENAME_STR    "AdvReco.exe"
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,9 @@
+; RdcSdkTestServer.def : Declares the module parameters.
+
+LIBRARY      "RdcSdkTestServer.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

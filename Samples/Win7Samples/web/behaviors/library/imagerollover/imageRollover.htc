@@ -1,0 +1,154 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         imageRollover.htc
+//
+//  Description:  The image rollover behavior provides and easy, 
+//                declarative method to apply image rollover effects 
+//                without the use of script.  
+//
+//-------------------------------------------------------------------- -->
+
+
+<script language="javascript">
+
+//------------------------------------------------------------------------
+// Attach to mouse events and setup global variables
+//------------------------------------------------------------------------
+
+element.attachEvent("onmouseover",      fnOnMouseOver);
+element.attachEvent("onmouseout",       fnOnMouseOut);
+element.attachEvent("onmousedown",      fnOnMouseDown);
+element.attachEvent("onmouseup",        fnOnMouseUp);
+element.attachEvent("onpropertychange", fnOnPropertyChange);
+
+var originalSrc = element.src
+var state = "normal"
+var cacheRollover
+var cacheClicked
+
+
+//------------------------------------------------------------------------
+// Cache images needed for effects
+//------------------------------------------------------------------------
+
+if (element.hoverSrc)
+{
+  cacheRollover = new Image()
+  cacheRollover.src = element.hoverSrc
+}
+
+if (element.pressedSrc)
+{
+  cacheClicked = new Image()
+  cacheClicked.src = element.pressedSrc
+}
+
+//------------------------------------------------------------------------
+//
+//  Function:  fnOnMouseOver()
+//
+//  Synopsis:  When the mouse is over the image, change the src to
+//             the hoverSrc image (if specified).
+//
+//------------------------------------------------------------------------
+
+function fnOnMouseOver()
+{
+  state = "hover"
+
+  if (element.hoverSrc)
+  {
+    element.src = element.hoverSrc
+  }
+}
+
+//------------------------------------------------------------------------
+//
+//  Function:  fnOnMouseOut()
+//
+//  Synopsis:  When the mouse moves off the image, the image src back to
+//             the original image.
+//
+//------------------------------------------------------------------------
+
+function fnOnMouseOut()
+{
+  state = "normal"
+
+  element.src = originalSrc
+}
+
+//------------------------------------------------------------------------
+//
+//  Function:  fnOnMouseDown()
+//
+//  Synopsis:  When the image is clicked, set the src to the pressedSrc
+//             image (if specified).
+//
+//------------------------------------------------------------------------
+
+function fnOnMouseDown()
+{
+  state = "clicked"
+
+  if (element.pressedSrc)
+  {
+    element.src = element.pressedSrc
+  }
+}
+
+//------------------------------------------------------------------------
+//
+//  Function:  fnOnMouseUp()
+//
+//  Synopsis:  When the mouse button is released, set the src back to 
+//             the hoverSrc image (if specified).
+//
+//------------------------------------------------------------------------
+
+function fnOnMouseUp()
+{
+  state = "hover"
+
+  if (element.hoverSrc)
+  {
+    element.src = element.hoverSrc
+  }
+  else
+  {
+    element.src = originalSrc
+  }
+}
+
+//------------------------------------------------------------------------
+//
+//  Function:  fnOnPropertyChange()
+//
+//  Synopsis:  The hoverSrc or pressedSrc properties are changed while
+//             their image is being displayed, update the src.  Update
+//             the originalSrc global variable when the src property is
+//             changed.
+//
+//------------------------------------------------------------------------
+
+function fnOnPropertyChange()
+{
+  if ((window.event.src == "pressedSrc") && (state == "normal"))
+  {
+    originalSrc = element.src
+  }
+
+  if ((window.event.propertyName == "hoverSrc") && (state == "hover"))
+  {
+    element.src = element.hoverSrc
+  }
+
+  if ((window.event.propertyName == "pressedSrc") && (state == "clicked"))
+  {
+    element.src = element.pressedSrc
+  }
+}
+
+</script>

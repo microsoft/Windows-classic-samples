@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ducking Capture Sample", "DuckingCaptureSample.vcproj", "{AB63FA74-A901-4A67-B30B-A0EFD59050E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Debug|Win32.Build.0 = Debug|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Debug|x64.ActiveCfg = Debug|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Debug|x64.Build.0 = Debug|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Release|Win32.ActiveCfg = Release|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Release|Win32.Build.0 = Release|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Release|x64.ActiveCfg = Release|Win32
+		{AB63FA74-A901-4A67-B30B-A0EFD59050E4}.Release|x64.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

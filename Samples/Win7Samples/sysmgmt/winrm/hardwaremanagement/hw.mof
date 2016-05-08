@@ -1,0 +1,1848 @@
+#pragma namespace("\\\\.\\root")
+
+instance of __namespace
+{
+	name = "hardware";
+};
+
+#pragma namespace("\\\\.\\root\\hardware")
+
+#pragma locale ("en_US")
+
+#pragma autorecover
+#pragma classflags(64)
+
+qualifier write:ToInstance ToSubClass;
+qualifier read:ToInstance ToSubClass;
+Qualifier Description : ToSubClass Amended;
+Qualifier Values : ToSubClass Amended;
+Qualifier DisplayName : Amended;
+Qualifier BitValues:ToSubClass Amended ;
+
+#pragma namespace("\\\\.\\root")
+instance of __Namespace
+{
+    Name = "Hardware" ;
+} ;
+
+#pragma namespace("\\\\.\\root\\Hardware")
+
+// ==================================================================
+// ManagedElement
+// ==================================================================
+   [Abstract, Version ( "2.7.0" ), Description (
+       "ManagedElement is an abstract class that provides a common "
+       "superclass (or top of the inheritance tree) for the "
+       "non-association classes in the CIM Schema."),
+	Locale (0x409), UUID ("{d62c5793-c0eb-400e-a97b-2db5df757b8c}")]
+class CIM_ManagedElement {
+
+      [Description (
+          "The Caption property is a short textual description (one- "
+          "line string) of the object."), 
+       MaxLen ( 64 )]
+   string Caption;
+
+      [Description (
+          "The Description property provides a textual description of "
+          "the object.")]
+   string Description;
+
+      [Description (
+          "A user-friendly name for the object. This property allows "
+          "each instance to define a user-friendly name IN ADDITION TO "
+          "its key properties/identity data, and description "
+          "information. \n"
+          "Note that ManagedSystemElement's Name property is also "
+          "defined as a user-friendly name. But, it is often "
+          "subclassed to be a Key. It is not reasonable that the same "
+          "property can convey both identity and a user friendly name, "
+          "without inconsistencies. Where Name exists and is not a Key "
+          "(such as for instances of LogicalDevice), the same "
+          "information MAY be present in both the Name and ElementName "
+          "properties.")]
+   string ElementName;
+};
+
+// ==================================================================
+// ManagedSystemElement
+// ==================================================================
+   [Abstract, Version ( "2.8.1000" ), Description (
+       "CIM_ManagedSystemElement is the base class for the System "
+       "Element hierarchy. Any distinguishable component of a System "
+       "is a candidate for inclusion in this class. Examples of system "
+       "components include: \n"
+       "- software components such as application servers, databases, "
+       "and applications \n"
+       "- operating system components such as files, processes, and "
+       "threads \n"
+       "- device components such as disk drives, controllers, "
+       "processors, and printers \n"
+       "- physical components such as chips and cards."),
+	Locale (0x409), UUID ("{d62c5793-c0eb-400e-a97b-2db5df757b8c}")]
+class CIM_ManagedSystemElement : CIM_ManagedElement {
+
+      [Description (
+          "A datetime value indicating when the object was installed. "
+          "A lack of a value does not indicate that the object is not "
+          "installed."), 
+       MappingStrings { "MIF.DMTF|ComponentID|001.5" }]
+   datetime InstallDate;
+
+      [Description (
+          "The Name property defines the label by which the object is "
+          "known. When subclassed, the Name property can be overridden "
+          "to be a Key property."), 
+       MaxLen ( 1024 )]
+   string Name;
+
+      [Description (
+          "Indicates the current status(es) of the element. Various "
+          "operational statuses are defined. Many of the enumeration's "
+          "values are self- explanatory. However, a few are not and "
+          "are described in more detail. \n"
+          "\"Stressed\" indicates that the element is functioning, but "
+          "needs attention. Examples of \"Stressed\" states are "
+          "overload, overheated, etc. \n"
+          "\"Predictive Failure\" indicates that an element is "
+          "functioning nominally but predicting a failure in the near "
+          "future. \n"
+          "\"In Service\" describes an element being configured, "
+          "maintained, cleaned, or otherwise administered. \n"
+          "\"No Contact\" indicates that the monitoring system has "
+          "knowledge of this element, but has never been able to "
+          "establish communications with it. \n"
+          "\"Lost Communication\" indicates that the ManagedSystem "
+          "Element is known to exist and has been contacted "
+          "successfully in the past, but is currently unreachable. \n"
+          "\"Stopped\" and \"Aborted\" are similar, although the "
+          "former implies a clean and orderly stop, while the latter "
+          "implies an abrupt stop where the element's state and "
+          "configuration may need to be updated. \n"
+          "\"Dormant\" indicates that the element is inactive or "
+          "quiesced. \n"
+          "\"Supporting Entity in Error\" describes that this element "
+          "may be \"OK\" but that another element, on which it is "
+          "dependent, is in error. An example is a network service or "
+          "endpoint that cannot function due to lower layer networking "
+          "problems. \n"
+          "\"Completed\" indicates the element has completed its "
+          "operation. This value should be combined with either OK, "
+          "Error, or Degraded so that a client can till if the "
+          "complete operation passed (Completed with OK), and failure "
+          "(Completed with Error). Completed with Degraded would imply "
+          "the operation finished, but did not complete OK or report "
+          "an error. \n"
+          "\"Power Mode\" indicates the element has additional power "
+          "model information contained in the Associated "
+          "PowerManagementService association. \n"
+          "OperationalStatus replaces the Status property on "
+          "ManagedSystemElement to provide a consistent approach to "
+          "enumerations, to address implementation needs for an array "
+          "property, and to provide a migration path from today's "
+          "environment to the future. This change was not made earlier "
+          "since it required the DEPRECATED qualifier. Due to the "
+          "widespread use of the existing Status property in "
+          "management applications, it is strongly RECOMMENDED that "
+          "providers/instrumentation provide BOTH the Status and "
+          "OperationalStatus properties. Further, the first value of "
+          "OperationalStatus SHOULD contain the primary status for the "
+          "element. When instrumented, Status (since it is "
+          "single-valued) SHOULD also provide the primary status of "
+          "the element."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "11", "12", "13", "14", "15", "16", "17", "18", "..",
+          "0x8000.." }, 
+       Values { "Unknown", "Other", "OK", "Degraded", "Stressed",
+          "Predictive Failure", "Error", "Non-Recoverable Error",
+          "Starting", "Stopping", "Stopped", "In Service",
+          "No Contact", "Lost Communication", "Aborted", "Dormant",
+          "Supporting Entity in Error", "Completed", "Power Mode",
+          "DMTF Reserved", "Vendor Reserved" }, ArrayType ( "Indexed" ), 
+       ModelCorrespondence { 
+          "CIM_ManagedSystemElement.StatusDescriptions" }]
+   uint16 OperationalStatus[];
+
+      [Description (
+          "Strings describing the various OperationalStatus array "
+          "values. For example, if \"Stopping\" is the value assigned "
+          "to OperationalStatus, then this property may contain an "
+          "explanation as to why an object is being stopped. Note that "
+          "entries in this array are correlated with those at the same "
+          "array index in OperationalStatus."), 
+       ArrayType ( "Indexed" ), 
+       ModelCorrespondence { 
+          "CIM_ManagedSystemElement.OperationalStatus" }]
+   string StatusDescriptions[];
+
+      [Deprecated { "CIM_ManagedSystemElement.OperationalStatus" }, 
+       Description (
+          "A string indicating the current status of the object. "
+          "Various operational and non-operational statuses are "
+          "defined. This property is deprecated in lieu of "
+          "OperationalStatus, which includes the same semantics in its "
+          "enumeration. This change is made for 3 reasons: 1) Status "
+          "is more correctly defined as an array. This overcomes the "
+          "limitation of describing status via a single value, when it "
+          "is really a multi-valued property (for example, an element "
+          "may be OK AND Stopped. 2) A MaxLen of 10 is too restrictive "
+          "and leads to unclear enumerated values. And, 3) The change "
+          "to a uint16 data type was discussed when CIM V2.0 was "
+          "defined. However, existing V1.0 implementations used the "
+          "string property and did not want to modify their code. "
+          "Therefore, Status was grandfathered into the Schema. Use of "
+          "the Deprecated qualifier allows the maintenance of the "
+          "existing property, but also permits an improved definition "
+          "using OperationalStatus."), 
+       ValueMap { "OK", "Error", "Degraded", "Unknown", "Pred Fail",
+          "Starting", "Stopping", "Service", "Stressed", "NonRecover",
+          "No Contact", "Lost Comm", "Stopped" }, MaxLen ( 10 )]
+   string Status;
+
+      [Experimental, Description (
+          "Indicates the current health of the element. This attribute "
+          "expresses the health of this element but not necessarily "
+          "that of its subcomponents. The possible values are 0 to 30, "
+          "where 5 means the element is entirely healthy and 30 means "
+          "the element is completely non-functional. The following "
+          "continuum is defined: \n"
+          "\"Non-recoverable Error\" (30) - The element has completed "
+          "failed and recovery is not possible. All functionality "
+          "provided by this element has been lost. \n"
+          "\"Critical Failure\" (25) - The element is non-functional "
+          "and recovery MAY NOT be possible. \n"
+          "\"Major Failure\" (20) - The element is failing. It is "
+          "possible the some or all of the functionality of this "
+          "component is degraded or not working. \n"
+          "\"Minor Failure\" (15) - All functionality is available but "
+          "some MAY be degraded. \n"
+          "\"Degraded/Warning\" (10) - The element is in working order "
+          "and all functionality is provided. However, the element is "
+          "not working to the best of its abilities. For example, the "
+          "element may not be operating at optimal performance or it "
+          "may be reporting recoverable errors. \n"
+          "\"OK\" (5) - The element is fully functional and is "
+          "operating within normal operational parameters and without "
+          "error. \n"
+          "\"Unknown\" (0) - The implementation can not report on "
+          "HealthState at this time. \n"
+          "DMTF has reserved the unused portion of the continuum for "
+          "additional HealthStates in the future."), 
+       ValueMap { "0","5","10","15","20","25","30",".." }, 
+       Values { "Unknown","OK","Degraded/Warning",
+          "Minor failure","Major failure",
+          "Critical failure","Non-recoverable error","DMTF Reserved" }]
+   uint16 HealthState;
+};
+
+// ==================================================================
+// LogicalElement
+// ==================================================================
+   [Abstract, Version ( "2.6.0" ), Description (
+       "CIM_LogicalElement is a base class for all the components of a "
+       "System that represent abstract system components, such as "
+       "Files, Processes, or LogicalDevices."),
+	Locale (0x409), UUID ("{49a2db5a-ca82-4263-a16c-dcae87f43507}")]
+class CIM_LogicalElement : CIM_ManagedSystemElement {
+};
+
+// ==================================================================
+// EnabledLogicalElement
+// ==================================================================
+   [Abstract, Version ( "2.8.1000" ), Description (
+       "This class extends LogicalElement to abstract the concept of "
+       "an element that is enabled and disabled, such as a "
+       "LogicalDevice or a ServiceAccessPoint."),
+	Locale (0x409), UUID ("{a1d71610-3d63-4e02-9314-ae35d9b3233c}")]
+class CIM_EnabledLogicalElement : CIM_LogicalElement {
+
+      [Description (
+          "EnabledState is an integer enumeration that indicates the "
+          "enabled/disabled states of an element. It can also indicate "
+          "the transitions between these requested states. For "
+          "example, shutting down (value = 4) and starting (value=10) "
+          "are transient states between enabled and disabled. The "
+          "following text briefly summarizes the various "
+          "enabled/disabled states: \n"
+          "Enabled (2) indicates that the element is/could be "
+          "executing commands, will process any queued commands, and "
+          "queues new requests. \n"
+          "Disabled (3) indicates that the element will not execute "
+          "commands and will drop any new requests. \n"
+          "Shutting Down (4) indicates that the element is in the "
+          "process of going to a Disabled state. \n"
+          "Not Applicable (5) indicates the element doesn't support "
+          "being enabled/disabled. \n"
+          "Enabled but Offline (6) indicates that the element may be "
+          "completing commands, and will drop any new requests. \n"
+          "Test (7) indicates that the element is in a test state. \n"
+          "Deferred (8) indicates that the element may be completing "
+          "commands, but will queue any new requests. \n"
+          "Quiesce (9) indicates that the element is enabled but in a "
+          "restricted mode. The element's behavior is similar to the "
+          "Enabled state, but it only processes a restricted set of "
+          "commands. All other requests are queued. \n"
+          "Starting (10) indicates that the element is in the process "
+          "of going to an Enabled state. New requests are queued."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "11..32767", "32768..65535" }, 
+       Values { "Unknown", "Other", "Enabled", "Disabled",
+          "Shutting Down", "Not Applicable", "Enabled but Offline",
+          "In Test", "Deferred", "Quiesce", "Starting",
+          "DMTF Reserved", "Vendor Reserved" }, 
+       ModelCorrespondence { 
+          "CIM_EnabledLogicalElement.OtherEnabledState" }]
+   uint16 EnabledState = 5;
+
+      [Description (
+          "A string describing the element's enabled/disabled state "
+          "when the EnabledState property is set to 1 (\"Other\"). "
+          "This property MUST be set to NULL when EnabledState is any "
+          "value other than 1."), 
+       ModelCorrespondence { "CIM_EnabledLogicalElement.EnabledState" }]
+   string OtherEnabledState;
+
+      [Description (
+          "RequestedState is an integer enumeration indicating the "
+          "last requested or desired state for the element. The actual "
+          "state of the element is represented by EnabledState. This "
+          "property is provided to compare the last requested and "
+          "current enabled/disabled states. Note that when "
+          "EnabledState is set to 5 (\"Not Applicable\"), then this "
+          "property has no meaning. By default, the element's "
+          "RequestedState is 5 (\"No Change\"). Refer to the "
+          "EnabledState's property Description for explanations of the "
+          "values in the RequestedState enumeration. \n"
+          "\n"
+          "It should be noted that there are two new values in "
+          "RequestedState that build on the statuses of EnabledState. "
+          "These are \"Reboot\" (10) and \"Reset\" (11). The former, "
+          "Reboot, refers to doing a \"Shut Down\" and then moving to "
+          "an \"Enabled\" state. The latter, Reset, indicates that the "
+          "element is first \"Disabled\" and then \"Enabled\". The "
+          "distinction between requesting \"Shut Down\" and "
+          "\"Disabled\" should also be noted. The former, Shut Down, "
+          "requests an orderly transition to the Disabled state, and "
+          "MAY involve removing power, to completely erase any "
+          "existing state. The latter, the Disabled state, requests an "
+          "immediate disabling of the element, such that it will not "
+          "execute or accept any commands or processing requests. \n"
+          "\n"
+          "This property is set as the result of a method invocation "
+          "(such as Start or StopService on CIM_Service), or may be "
+          "overridden and defined as WRITEable in a subclass. The "
+          "method approach is considered superior to a WRITEable "
+          "property, since it allows an explicit invocation of the "
+          "operation and the return of a result code. \n"
+          "\n"
+          "It is possible that a particular instance of "
+          "EnabledLogicalElement may not support RequestedStateChange. "
+          "If this occurs, the value 12 (\"Not Applicable\") is used."), 
+       ValueMap { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
+          "12", "..", "32768..65535" }, 
+       Values { "Enabled", "Disabled", "Shut Down", "No Change",
+          "Offline", "Test", "Deferred", "Quiesce", "Reboot", "Reset",
+          "Not Applicable", "DMTF Reserved", "Vendor Reserved" }, 
+       ModelCorrespondence { "CIM_EnabledLogicalElement.EnabledState" }]
+   uint16 RequestedState = 12;
+
+      [Write, Description (
+          "An enumerated value indicating an administrator's "
+          "default/startup configuration for an element's Enabled "
+          "State. By default, the element is \"Enabled\" (value=2)."), 
+       ValueMap { "2", "3", "5", "6", "7", "8..32767", "32768..65535" }, 
+       Values { "Enabled", "Disabled", "Not Applicable",
+          "Enabled but Offline", "No Default", "DMTF Reserved",
+          "Vendor Reserved" }]
+   uint16 EnabledDefault = 2;
+
+      [Description (
+          "The date/time when the element's EnabledState last changed. "
+          "If the state of the element has not changed and this "
+          "property is populated, then it MUST be set to a 0 interval "
+          "value. If a state change was requested, but rejected or not "
+          "yet processed, the property MUST NOT be updated.")]
+   datetime TimeOfLastStateChange;
+
+      [Description (
+          "Requests that the element's state be changed to the value "
+          "specified in the RequestedState parameter. When the "
+          "requested state change takes place, the element's "
+          "EnabledState and RequestedState will be the same. Invoking "
+          "the RequestStateChange method multiple times could result "
+          "in earlier requests being overwritten/lost. \n"
+          "If 0 is returned, then the task completed successfully and "
+          "the use of ConcreteJob was not required. If 4096 (0x1000) "
+          "is returned, then the task will take some time to complete, "
+          "ConcreteJob will be created, and its reference returned in "
+          "the output parameter Job. Any other return code indicates "
+          "an error condition."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "..", "4096",
+          "4097", "4098", "4099", "4100..32767", "32768..65535" }, 
+       Values { "Completed with No Error", "Not Supported",
+          "Unknown/Unspecified Error",
+          "Can NOT complete within Timeout Period", "Failed",
+          "Invalid Parameter", "In Use", "DMTF Reserved",
+          "Method Parameters Checked - Job Started",
+          "Invalid State Transition",
+          "Use of Timeout Parameter Not Supported", "Busy",
+          "Method Reserved", "Vendor Specific" }, 
+       ModelCorrespondence { "CIM_EnabledLogicalElement.RequestedState" 
+          }]
+   uint32 RequestStateChange( 
+         [IN, Description (
+             "The state requested for the element. This information "
+             "will be placed into the instance's RequestedState "
+             "property if the RequestStateChange method's return code "
+             "is 0, 3, or 4096 (0x1000) - 'Completed with No Error', "
+             "'Timeout', or 'Job Started' respectively. Refer to the "
+             "description of the EnabledState and RequestedState "
+             "properties for the detailed meanings of the "
+             "RequestedState values."), 
+          ValueMap { "2", "3", "4", "6", "7", "8", "9", "10", "11",
+             "..", "32768..65535" }, 
+          Values { "Enabled", "Disabled", "Shut Down", "Offline",
+             "Test", "Defer", "Quiesce", "Reboot", "Reset",
+             "DMTF Reserved", "Vendor Reserved" }, 
+          ModelCorrespondence { 
+             "CIM_EnabledLogicalElement.RequestedState" }]
+      uint16 RequestedState, 
+         [IN ( false ), OUT, Description (
+             "Reference to the job (may be null if task completed).")]
+      CIM_ConcreteJob REF Job, 
+         [IN, Description (
+             "A timeout period that specifies the maximum amount of "
+             "time that the client expects the transition to the new "
+             "state to take. The interval format MUST be used to "
+             "specify the TimeoutPeriod. A value of 0 or a null "
+             "parameter indicates that the client has no time "
+             "requirements for the transition. \n"
+             "If this property does not contain 0 or null and the "
+             "implementation doesn't support this parameter. A return "
+             "code of 'Use Of Timeout Parameter Not Supported' MUST be "
+             "returned.")]
+      datetime TimeoutPeriod); 
+};
+
+// ==================================================================
+// System
+// ==================================================================
+   [Abstract, Version ( "2.7.0" ), Description (
+       "CIM_System represents an entity made up of component parts "
+       "(defined by the SystemComponent relationship), that operates "
+       "as a 'functional whole'. Systems are top level objects in the "
+       "CIM hierarchy, requiring no scoping or weak relationships in "
+       "order to exist and have context. It should be reasonable to "
+       "uniquely name and manage a System at an enterprise level. For "
+       "example, a ComputerSystem is a kind of System that can be "
+       "uniquely named and independently managed in an enterprise. "
+       "However, this is not true for the power supply (or the power "
+       "supply sub-'system') within the computer. \n"
+       "\n"
+       "Although a System may be viewed as a Collection, this is not "
+       "the correct model. A Collection is simply a 'bag' that 'holds' "
+       "its members. A System is a higher level abstraction, built out "
+       "of its individual components. It is more than a sum of its "
+       "parts. Note that System is a subclass of EnabledLogicalElement "
+       "which allows the entire abstraction to be functionally "
+       "enabled/disabled - at a higher level than enabling/disabling "
+       "its component parts."),
+	Locale (0x409), UUID ("{7ebb5755-1255-44aa-bd20-25f77b03d064}")]
+class CIM_System : CIM_EnabledLogicalElement {
+
+      [Key, Description (
+          "CreationClassName indicates the name of the class or the "
+          "subclass used in the creation of an instance. When used "
+          "with the other key properties of this class, this property "
+          "allows all instances of this class and its subclasses to be "
+          "uniquely identified."), 
+       MaxLen ( 256 )]
+   string CreationClassName;
+
+      [Key, Override ( "Name" ), Description (
+          "The inherited Name serves as key of a System instance in an "
+          "enterprise environment."), 
+       MaxLen ( 256 )]
+   string Name;
+
+      [Description (
+          "The System object and its derivatives are Top Level Objects "
+          "of CIM. They provide the scope for numerous components. "
+          "Having unique System keys is required. A heuristic can be "
+          "defined in individual System subclasses to attempt to "
+          "always generate the same System Name Key. The NameFormat "
+          "property identifies how the System name was generated, "
+          "using the subclass' heuristic."), 
+       MaxLen ( 64 )]
+   string NameFormat;
+
+      [Write, Description (
+          "The name of the primary system owner. The system owner is "
+          "the primary user of the system."), 
+       MaxLen ( 64 ), 
+       MappingStrings { "MIF.DMTF|General Information|001.3" }]
+   string PrimaryOwnerName;
+
+      [Write, Description (
+          "A string that provides information on how the primary "
+          "system owner can be reached (e.g. phone number, email "
+          "address, ...)."), 
+       MaxLen ( 256 ), 
+       MappingStrings { "MIF.DMTF|General Information|001.4" }]
+   string PrimaryOwnerContact;
+
+      [Write, Description (
+          "An array (bag) of strings that specify the administrator "
+          "-defined roles this System plays in the managed "
+          "environment. Examples might be 'Building 8 print server' or "
+          "'Boise user directories'. A single system may perform "
+          "multiple roles. \n"
+          "Note that instrumentation's view of a System's 'roles' is "
+          "defined by instantiating a specific subclass of System and/ "
+          "or by properties in a subclass. For example, a "
+          "ComputerSystem's purpose is defined using the Dedicated and "
+          "OtherDedicatedDescription properties.")]
+   string Roles[];
+};
+
+// ==================================================================
+// AdminDomain
+// ==================================================================
+
+   [Abstract, Version ( "2.8.0" ), Description (
+       "This is a special grouping of ManagedSystemElements. The "
+       "grouping is viewed as a single entity, reflecting that all of "
+       "its components are administered similarly - either by the same "
+       "user, group of users or policy. It serves as an aggregation "
+       "point to associate one or more of the following elements: "
+       "network devices, such as routers and switches, servers, and "
+       "other resources that can be accessed by end systems. This "
+       "grouping of devices plays an essential role in ensuring that "
+       "the same administrative policy and actions are applied to all "
+       "of the devices in the grouping. The specific behavior and/or "
+       "semantics of the AdminDomain can be identified through its "
+       "aggregated and associated entities."),
+	Locale (0x409), UUID ("{5ff6d537-9404-4324-9cba-f704aa329e01}")]
+class CIM_AdminDomain : CIM_System {
+
+      [Override ( "NameFormat" ), Description (
+          "The NameFormat property identifies how the Name of the "
+          "AdminDomain is generated, using the heuristic specified in "
+          "the CIM V2 System Model spec. It assumes that the "
+          "documented rules are traversed in order, to determine and "
+          "assign a Name. The NameFormat Values list defines the "
+          "precedence order for assigning the Name of the AdminDomain. "
+          "\n\n"
+          "\"FC\" has been deprecated and replaced by \"WWN\" to be "
+          "consistent with the other ValueMaps."), 
+       ValueMap { "Other", "AS", "NAP", "NOC", "POP", "RNP", "IP",
+          "IPX", "SNA", "Dial", "WAN", "LAN", "ISDN", "Frame Relay",
+          "ATM", "E.164", "IB", "FC", "Policy Repository", "WWN" }, 
+       Values { "Other", "Autonomous System",
+          "Network Access Provider", "Network Operations Center",
+          "Point of Presence", "Regional Network Provider", "IP",
+          "IPX", "SNA", "Dial", "WAN", "LAN", "ISDN", "Frame Relay",
+          "ATM", "E.164", "Infiniband", "Fibre Channel",
+          "Policy Repository", "Fibre Channel Worldwide Name" }, 
+       ModelCorrespondence { "CIM_AdminDomain.Name" }]
+   string NameFormat;
+};
+
+// ===================================================================
+// ComputerSystem
+// ===================================================================
+   [Abstract, Version ( "2.8.1000" ), Description (
+       "A class derived from System that is a special collection of "
+       "ManagedSystemElements. This collection provides compute "
+       "capabilities and serves as aggregation point to associate one "
+       "or more of the following elements: FileSystem, "
+       "OperatingSystem, Processor and Memory (Volatile and/or "
+       "NonVolatile Storage)."),
+	Locale (0x409), UUID ("{6e0e9528-e2d9-42e4-82f9-124727330ed9}")]
+class CIM_ComputerSystem : CIM_System {
+
+      [Override ( "NameFormat" ), Description (
+          "The ComputerSystem object and its derivatives are Top Level "
+          "Objects of CIM. They provide the scope for numerous "
+          "components. Having unique System keys is required. The "
+          "NameFormat property identifies how the ComputerSystem Name "
+          "is generated. The NameFormat ValueMap qualifier defines the "
+          "various mechanisms for assigning the name. Note that "
+          "another name can be assigned and used for the "
+          "ComputerSystem that better suit a business, using the "
+          "inherited ElementName property."), 
+       ValueMap { "Other", "IP", "Dial", "HID", "NWA", "HWA", "X25",
+          "ISDN", "IPX", "DCC", "ICD", "E.164", "SNA", "OID/OSI",
+          "WWN", "NAA" }]
+   string NameFormat;
+
+      [Description (
+          "OtherIdentifyingInfo captures additional data, beyond "
+          "System Name information, that could be used to identify a "
+          "ComputerSystem. One example would be to hold the Fibre "
+          "Channel World-Wide Name (WWN) of a node. Note that if only "
+          "the Fibre Channel name is available and is unique (able to "
+          "be used as the System key), then this property would be "
+          "NULL and the WWN would become the System key, its data "
+          "placed in the Name property."), 
+       MaxLen ( 256 ), ArrayType ( "Indexed" ), 
+       ModelCorrespondence { 
+          "CIM_ComputerSystem.IdentifyingDescriptions" }]
+   string OtherIdentifyingInfo[];
+
+      [Description (
+          "An array of free-form strings providing explanations and "
+          "details behind the entries in the OtherIdentifying Info "
+          "array. Note, each entry of this array is related to the "
+          "entry in OtherIdentifyingInfo that is located at the same "
+          "index."), 
+       ArrayType ( "Indexed" ), 
+       ModelCorrespondence { "CIM_ComputerSystem.OtherIdentifyingInfo" 
+          }]
+   string IdentifyingDescriptions[];
+
+      [Description (
+          "Enumeration indicating whether the ComputerSystem is a "
+          "special-purpose System (ie, dedicated to a particular use), "
+          "versus being 'general purpose'. For example, one could "
+          "specify that the System is dedicated to \"Print\" "
+          "(value=11) or acts as a \"Hub\" (value=8). \n"
+          "A clarification is needed with respect to the value 17 "
+          "(\"Mobile User Device\"). An example of a dedicated user "
+          "device is a mobile phone or a barcode scanner in a store "
+          "that communicates via radio frequency. These systems are "
+          "quite limited in functionality and programmability, and are "
+          "not considered 'general purpose' computing platforms. "
+          "Alternately, an example of a mobile system that is 'general "
+          "purpose' (i.e., is NOT dedicated) is a hand-held computer. "
+          "Although limited in its programmability, new software can "
+          "be downloaded and its functionality expanded by the user."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+          "20", "21", "22", "23", "24", "25", "26", "27", "28..32567",
+          "32568..65535" }, 
+       Values { "Not Dedicated", "Unknown", "Other", "Storage",
+          "Router", "Switch", "Layer 3 Switch",
+          "Central Office Switch", "Hub", "Access Server", "Firewall",
+          "Print", "I/O", "Web Caching", "Management", "Block Server",
+          "File Server", "Mobile User Device", "Repeater",
+          "Bridge/Extender", "Gateway", "Storage Virtualizer",
+          "Media Library", "ExtenderNode", "NAS Head",
+          "Self-contained NAS", "UPS", "IP Phone", "DMTF Reserved",
+		  "Vendor Reserved" },
+       MappingStrings { "MIB.IETF|MIB-II.sysServices",
+          "FC-GS.INCITS-T11 | Platform | PlatformType" },
+          ArrayType ( "Indexed" ), 
+       ModelCorrespondence { 
+          "CIM_ComputerSystem.OtherDedicatedDescriptions" }]
+   uint16 Dedicated[];
+
+      [Description (
+          "A string describing how or why the system is dedicated when "
+          "the Dedicated array includes the value 2, \"Other\"."), 
+       ArrayType ( "Indexed" ), 
+       ModelCorrespondence { "CIM_ComputerSystem.Dedicated" }]
+   string OtherDedicatedDescriptions[];
+
+      [Description (
+          "If enabled (value = 4), the ComputerSystem can be reset via "
+          "hardware (e.g. the power and reset buttons). If disabled "
+          "(value = 3), hardware reset is not allowed. In addition to "
+          "Enabled and Disabled, other Values for the property are "
+          "also defined - \"Not Implemented\" (5), \"Other\" (1) and "
+          "\"Unknown\" (2)."), 
+       ValueMap { "1", "2", "3", "4", "5" }, 
+       Values { "Other", "Unknown", "Disabled", "Enabled",
+          "Not Implemented" }, 
+       MappingStrings { "MIF.DMTF|System Hardware Security|001.4" }]
+   uint16 ResetCapability;
+
+      [Deprecated { "CIM_PowerManagementCapabilities.PowerCapabilities" 
+          }, Description (
+          "An enumerated array describing the power management "
+          "capabilities of the ComputerSystem. The use of this "
+          "property has been deprecated. Instead, the Power "
+          "Capabilites property in an associated PowerManagement "
+          "Capabilities class should be used."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7" }, 
+       Values { "Unknown", "Not Supported", "Disabled", "Enabled",
+          "Power Saving Modes Entered Automatically",
+          "Power State Settable", "Power Cycling Supported",
+          "Timed Power On Supported" }, 
+       MappingStrings { "MIF.DMTF|System Power Controls|001.2" }]
+   uint16 PowerManagementCapabilities[];
+
+      [Deprecated { "CIM_PowerManagementService.SetPowerState" }, 
+       Description (
+          "Sets the power state of the computer. The use of this "
+          "method has been deprecated. Instead, use the SetPowerState "
+          "method in the associated PowerManagementService class.")]
+   uint32 SetPowerState( 
+         [IN, Description (
+             "The Desired state for the COmputerSystem."), 
+          ValueMap { "1", "2", "3", "4", "5", "6", "7", "8" }, 
+          Values { "Full Power", "Power Save - Low Power Mode",
+             "Power Save - Standby", "Power Save - Other",
+             "Power Cycle", "Power Off", "Hibernate", "Soft Off" }]
+      uint32 PowerState, 
+         [IN, Description (
+             "Time indicates when the power state should be set, "
+             "either as a regular date-time value or as an interval "
+             "value (where the interval begins when the method "
+             "invocation is received.")]
+      datetime Time); 
+};
+
+// ==================================================================
+// Collection
+// ==================================================================
+   [Abstract, Version ( "2.6.0" ), Description (
+       "Collection is an abstract class that provides a common "
+       "superclass for data elements that represent collections of "
+       "ManagedElements and its subclasses."),
+	Locale (0x409), UUID ("{07136e6c-c254-436d-a200-1404e98881b6}")]
+class CIM_Collection : CIM_ManagedElement {
+};
+
+// ==================================================================
+// SystemSpecificCollection
+// ==================================================================
+   [Abstract, Version ( "2.7.0" ), Description (
+       "SystemSpecificCollection represents the general concept of a "
+       "collection which is scoped (or contained) by a System. It "
+       "represents a Collection that only has meaning in the context "
+       "of a System, and/or whose elements are restricted by the "
+       "definition of the System. This is explicitly described by the "
+       "(required) association, HostedCollection. \n"
+       "An example of a SystemSpecificCollection is a Fibre Channel "
+       "zone that collects network ports, port groupings and aliases "
+       "(as required by a customer) in the context of an AdminDomain. "
+       "The Collection is not a part of the domain, but merely an "
+       "arbitrary grouping of the devices and other Collections in the "
+       "domain. In other words, the context of the Collection is "
+       "restricted to the domain, and its members are also limited by "
+       "the domain."),
+	Locale (0x409), UUID ("{ccbd0dd0-c124-4e03-b4ae-81ba236b629f}")]
+class CIM_SystemSpecificCollection : CIM_Collection {
+
+      [Key, Description (
+          "Within the scope of the instantiating Namespace, InstanceID "
+          "opaquely and uniquely identifies an instance of this class. "
+          "In order to ensure uniqueness within the NameSpace, the "
+          "value of InstanceID SHOULD be constructed using the "
+          "following 'preferred' algorithm: \n"
+          "<OrgID>:<LocalID> \n"
+          "Where <OrgID> and <LocalID> are separated by a colon ':', "
+          "and where <OrgID> MUST include a copyrighted, trademarked "
+          "or otherwise unique name that is owned by the business "
+          "entity creating/defining the InstanceID, or is a registered "
+          "ID that is assigned to the business entity by a recognized "
+          "global authority (This is similar to the <Schema "
+          "Name>_<Class Name> structure of Schema class names.) In "
+          "addition, to ensure uniqueness <OrgID> MUST NOT contain a "
+          "colon (':'). When using this algorithm, the first colon to "
+          "appear in InstanceID MUST appear between <OrgID> and "
+          "<LocalID>. \n"
+          "<LocalID> is chosen by the business entity and SHOULD not "
+          "be re-used to identify different underlying (real-world) "
+          "elements. If the above 'preferred' algorithm is not used, "
+          "the defining entity MUST assure that the resultant "
+          "InstanceID is not re-used across any InstanceIDs produced "
+          "by this or other providers for this instance's NameSpace. \n"
+          "For DMTF defined instances, the 'preferred' algorithm MUST "
+          "be used with the <OrgID> set to 'CIM'.")]
+   string InstanceID;
+};
+
+// ===================================================================
+// LogicalDevice
+// ===================================================================
+   [Abstract, Version ( "2.8.0" ), Description (
+       "An abstraction or emulation of a hardware entity, that may or "
+       "may not be Realized in physical hardware. Any characteristics "
+       "of a LogicalDevice that are used to manage its operation or "
+       "configuration are contained in, or associated with, the "
+       "LogicalDevice object. Examples of the operational properties "
+       "of a Printer would be paper sizes supported, or detected "
+       "errors. Examples of the configuration properties of a Sensor "
+       "Device would be threshold settings. Various configurations "
+       "could exist for a LogicalDevice. These configurations could be "
+       "contained in Setting objects and associated with the "
+       "LogicalDevice."),
+	Locale (0x409), UUID ("{220b1188-a358-4be7-aa64-13f8033eb07a}")]
+class CIM_LogicalDevice : CIM_EnabledLogicalElement {
+
+      [Key, Propagated ( "CIM_System.CreationClassName" ), 
+       Description (
+          "The scoping System's CreationClassName."), 
+       MaxLen ( 256 )]
+   string SystemCreationClassName;
+
+      [Key, Propagated ( "CIM_System.Name" ), Description (
+          "The scoping System's Name."), 
+       MaxLen ( 256 )]
+   string SystemName;
+
+      [Key, Description (
+          "CreationClassName indicates the name of the class or the "
+          "subclass used in the creation of an instance. When used "
+          "with the other key properties of this class, this property "
+          "allows all instances of this class and its subclasses to be "
+          "uniquely identified."), 
+       MaxLen ( 256 )]
+   string CreationClassName;
+
+      [Key, Description (
+          "An address or other identifying information to uniquely "
+          "name the LogicalDevice."), 
+       MaxLen ( 64 )]
+   string DeviceID;
+
+      [Deprecated { "CIM_PowerManagementCapabilities" }, Description (
+          "Boolean indicating that the Device can be power managed. "
+          "The use of this property has been deprecated. Instead, the "
+          "existence of an associated PowerManagementCapabilities "
+          "class (associated using the ElementCapabilities "
+          "relationhip) indicates that power management is supported.")]
+   boolean PowerManagementSupported;
+
+      [Deprecated { "CIM_PowerManagementCapabilities.PowerCapabilities" 
+          }, Description (
+          "An enumerated array describing the power management "
+          "capabilities of the Device. The use of this property has "
+          "been deprecated. Instead, the PowerCapabilites property in "
+          "an associated PowerManagementCapabilities class should be "
+          "used."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7" }, 
+       Values { "Unknown", "Not Supported", "Disabled", "Enabled",
+          "Power Saving Modes Entered Automatically",
+          "Power State Settable", "Power Cycling Supported",
+          "Timed Power On Supported" }]
+   uint16 PowerManagementCapabilities[];
+
+      [Deprecated { "CIM_AssociatedPowerManagementService.PowerState",
+          "CIM_ManagedSystemElement.OperationalStatus",
+          "CIM_EnabledLogicalElement.EnabledState" }, Description (
+          "The primary availability and status of the Device. "
+          "(Additional status information can be specified using the "
+          "Additional Availability array property.) For example, the "
+          "Availability property indicates that the Device is running "
+          "and has full power (value=3), or is in a warning (4), test "
+          "(5), degraded (10) or power save state (values 13-15 and "
+          "17). Regarding the Power Save states, these are defined as "
+          "follows: Value 13 (\"Power Save - Unknown\") indicates that "
+          "the Device is known to be in a power save mode, but its "
+          "exact status in this mode is unknown; 14 (\"Power Save - "
+          "Low Power Mode\") indicates that the Device is in a power "
+          "save state but still functioning, and may exhibit degraded "
+          "performance; 15 (\"Power Save - Standby\") describes that "
+          "the Device is not functioning but could be brought to full "
+          "power 'quickly'; and value 17 (\"Power Save - Warning\") "
+          "indicates that the Device is in a warning state, though "
+          "also in a power save mode."), 
+       ValueMap { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+          "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+          "21" }, 
+       Values { "Other", "Unknown", "Running/Full Power", "Warning",
+          "In Test", "Not Applicable", "Power Off", "Off Line",
+          "Off Duty", "Degraded", "Not Installed", "Install Error",
+          "Power Save - Unknown", "Power Save - Low Power Mode",
+          "Power Save - Standby", "Power Cycle",
+          "Power Save - Warning", "Paused", "Not Ready",
+          "Not Configured", "Quiesced" }, 
+       MappingStrings { "MIF.DMTF|Operational State|006.5",
+          "MIB.IETF|HOST-RESOURCES-MIB.hrDeviceStatus",
+          "MIF.DMTF|Host Device|001.5" }, 
+       ModelCorrespondence { "CIM_LogicalDevice.AdditionalAvailability" 
+          }]
+   uint16 Availability;
+
+      [Deprecated { "CIM_EnabledLogicalElement.EnabledState" }, 
+       Description (
+          "The StatusInfo property indicates whether the Logical "
+          "Device is in an enabled (value = 3), disabled (value = 4) "
+          "or some other (1) or unknown (2) state. If this property "
+          "does not apply to the LogicalDevice, the value, 5 (\"Not "
+          "Applicable\"), should be used. StatusInfo has been "
+          "deprecated in lieu of a more clearly named property with "
+          "additional enumerated values (EnabledState), that is "
+          "inherited from ManagedSystemElement. \n"
+          "If a Device is (\"Enabled\")(value=3), it has been powered "
+          "up, and is configured and operational. The Device may or "
+          "may not be functionally active, depending on whether its "
+          "Availability (or AdditionalAvailability) indicate that it "
+          "is (\"Running/Full Power\")(value=3) or (\"Off line\") "
+          "(value=8). In an enabled but offline mode, a Device may be "
+          "performing out-of-band requests, such as running "
+          "Diagnostics. If (\"Disabled\") StatusInfo value=4), a "
+          "Device can only be \"enabled\" or powered off. In a "
+          "personal computer environment, (\"Disabled\") means that "
+          "the Device's driver is not available in the stack. In other "
+          "environments, a Device can be disabled by removing its "
+          "configuration file. A disabled device is physically present "
+          "in a System and consuming resources, but can not be "
+          "communicated with until a load of a driver, a load of a "
+          "configuration file or some other \"enabling\" activity has "
+          "occurred."), 
+       ValueMap { "1", "2", "3", "4", "5" }, 
+       Values { "Other", "Unknown", "Enabled", "Disabled",
+          "Not Applicable" }, 
+       MappingStrings { "MIF.DMTF|Operational State|006.4" }]
+   uint16 StatusInfo;
+
+      [Deprecated { "CIM_DeviceErrorData.LastErrorCode" }, 
+       Description (
+          "LastErrorCode captures the last error code reported by the "
+          "LogicalDevice.")]
+   uint32 LastErrorCode;
+
+      [Deprecated { "CIM_DeviceErrorData.ErrorDescription" }, 
+       Description (
+          "ErrorDescription is a free-form string supplying more "
+          "information about the error recorded in LastErrorCode, and "
+          "information on any corrective actions that may be taken.")]
+   string ErrorDescription;
+
+      [Deprecated { "CIM_ManagedSystemElement.OperationalStatus" }, 
+       Description (
+          "ErrorCleared is a boolean property indicating that the "
+          "error reported in LastErrorCode is now cleared.")]
+   boolean ErrorCleared;
+
+      [Description (
+          "OtherIdentifyingInfo captures additional data, beyond "
+          "DeviceID information, that could be used to identify a "
+          "LogicalDevice. One example would be to hold the Operating "
+          "System's user friendly name for the Device in this "
+          "property."), 
+       MaxLen ( 256 ), ArrayType ( "Indexed" ), 
+       ModelCorrespondence { 
+          "CIM_LogicalDevice.IdentifyingDescriptions" }]
+   string OtherIdentifyingInfo[];
+
+      [Deprecated { "CIM_PoweredStatisticalData.PowerOnHours" }, 
+       Description (
+          "The number of consecutive hours that this Device has been "
+          "powered, since its last power cycle."), 
+       Units ( "Hours" ), Counter]
+   uint64 PowerOnHours;
+
+      [Deprecated { "CIM_PoweredStatisticalData.TotalPowerOnHours" }, 
+       Description (
+          "The total number of hours that this Device has been "
+          "powered."), 
+       Units ( "Hours" ), Counter]
+   uint64 TotalPowerOnHours;
+
+      [Description (
+          "An array of free-form strings providing explanations and "
+          "details behind the entries in the OtherIdentifyingInfo "
+          "array. Note, each entry of this array is related to the "
+          "entry in OtherIdentifyingInfo that is located at the same "
+          "index."), 
+       ArrayType ( "Indexed" ), 
+       ModelCorrespondence { "CIM_LogicalDevice.OtherIdentifyingInfo" }]
+   string IdentifyingDescriptions[];
+
+      [Description (
+          "Additional availability and status of the Device, beyond "
+          "that specified in the Availability property. The "
+          "Availability property denotes the primary status and "
+          "availability of the Device. In some cases, this will not be "
+          "sufficient to denote the complete status of the Device. In "
+          "those cases, the AdditionalAvailability property can be "
+          "used to provide further information. For example, a "
+          "Device's primary Availability may be \"Off line\" "
+          "(value=8), but it may also be in a low power state "
+          "(AdditonalAvailability value=14), or the Device could be "
+          "running Diagnostics (AdditionalAvailability value=5, \"In "
+          "Test\")."), 
+       ValueMap { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+          "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+          "21" }, 
+       Values { "Other", "Unknown", "Running/Full Power", "Warning",
+          "In Test", "Not Applicable", "Power Off", "Off Line",
+          "Off Duty", "Degraded", "Not Installed", "Install Error",
+          "Power Save - Unknown", "Power Save - Low Power Mode",
+          "Power Save - Standby", "Power Cycle",
+          "Power Save - Warning", "Paused", "Not Ready",
+          "Not Configured", "Quiesced" }, 
+       ModelCorrespondence { "CIM_LogicalDevice.Availability" }]
+   uint16 AdditionalAvailability[];
+
+      [Deprecated { "No value" }, Description (
+          "The MaxQuiesceTime property has been deprecated. When "
+          "evaluating the use of Quiesce, it was determine that this "
+          "single property is not adequate for describing when a "
+          "device will automatically exit a quiescent state. In fact, "
+          "the most likely scenario for a device to exit a quiescent "
+          "state was determined to be based on the number of "
+          "outstanding requests queued rather than on a maximum time. "
+          "This will be re-evaluated and repositioned later. \n"
+          "Maximum time in milliseconds, that a Device can run in a "
+          "\"Quiesced\" state. A Device's state is defined in its "
+          "Availability and AdditionalAvailability properties, where "
+          "\"Quiesced\" is conveyed by the value 21. What occurs at "
+          "the end of the time limit is device-specific. The Device "
+          "may unquiesce, may offline or take other action. A value of "
+          "0 indicates that a Device can remain quiesced indefinitely."), 
+       Units ( "MilliSeconds" )]
+   uint64 MaxQuiesceTime;
+
+      [Deprecated { "CIM_PowerManagementService.SetPowerState" }, 
+       Description (
+          "Sets the power state of the Device. The use of this method "
+          "has been deprecated. Instead, use the SetPowerState method "
+          "in the associated PowerManagementService class.")]
+   uint32 SetPowerState( 
+         [IN, Description (
+             "The power state to set."), 
+          ValueMap { "1", "2", "3", "4", "5", "6" }, 
+          Values { "Full Power", "Power Save - Low Power Mode",
+             "Power Save - Standby", "Power Save - Other",
+             "Power Cycle", "Power Off" }]
+      uint16 PowerState, 
+         [IN, Description (
+             "Time indicates when the power state should be set, "
+             "either as a regular date-time value or as an interval "
+             "value (where the interval begins when the method "
+             "invocation is received.")]
+      datetime Time); 
+
+      [Description (
+          "Requests a reset of the LogicalDevice. The return value "
+          "should be 0 if the request was successfully executed, 1 if "
+          "the request is not supported and some other value if an "
+          "error occurred. In a subclass, the set of possible return "
+          "codes could be specified, using a ValueMap qualifier on the "
+          "method. The strings to which the ValueMap contents are "
+          "'translated' may also be specified in the subclass as a "
+          "Values array qualifier.")]
+   uint32 Reset(); 
+
+      [Deprecated { "CIM_EnabledLogicalElement.RequestStateChange" }, 
+       Description (
+          "The EnableDevice method has been deprecated in lieu of the "
+          "more general RequestStateChange method that directly "
+          "overlaps with the functionality provided by this method. \n"
+          "Requests that the LogicalDevice be enabled (\"Enabled\" "
+          "input parameter = TRUE) or disabled (= FALSE). If "
+          "successful, the Device's StatusInfo/EnabledState properties "
+          "should reflect the desired state (enabled/disabled). Note "
+          "that this method's function overlaps with the "
+          "RequestedState property. RequestedState was added to the "
+          "model to maintain a record (i.e., a persisted value) of the "
+          "last state request. Invoking the EnableDevice method should "
+          "set the RequestedState property appropriately. \n"
+          "The return code should be 0 if the request was successfully "
+          "executed, 1 if the request is not supported and some other "
+          "value if an error occurred. In a subclass, the set of "
+          "possible return codes could be specified, using a ValueMap "
+          "qualifier on the method. The strings to which the ValueMap "
+          "contents are 'translated' may also be specified in the "
+          "subclass as a Values array qualifier.")]
+   uint32 EnableDevice( 
+         [IN, Description (
+             "If TRUE enable the device, if FALSE disable the device.")]
+      boolean Enabled); 
+
+      [Deprecated { "CIM_EnabledLogicalElement.RequestStateChange" }, 
+       Description (
+          "The OnlineDevice method has been deprecated in lieu of the "
+          "more general RequestStateChange method that directly "
+          "overlaps with the functionality provided by this method. \n"
+          "Requests that the LogicalDevice be brought online "
+          "(\"Online\" input parameter = TRUE) or taken offline (= "
+          "FALSE). \"Online\" indicates that the Device is ready to "
+          "accept requests, and is operational and fully functioning. "
+          "In this case, the Device's Availability property would be "
+          "set to a value of 3 (\"Running/Full Power\"). \"Offline\" "
+          "indicates that a Device is powered up and operational, but "
+          "not processing functional requests. In an offline state, a "
+          "Device may be capable of running diagnostics or generating "
+          "operational alerts. For example, when the \"Offline\" "
+          "button is pushed on a Printer, the Device is no longer "
+          "available to process print jobs, but could be available for "
+          "diagnostics or maintenance. \n"
+          "If this method is successful, the Device's Availability and "
+          "AdditionalAvailability properties should reflect the "
+          "updated status. If a failure occurs trying to bring the "
+          "Device online or offline, it should remain in its current "
+          "state. IE, the request, if unsuccessful, should not leave "
+          "the Device in an indeterminate state. When bringing a "
+          "Device back \"Online\", from an \"Offline\" mode, the "
+          "Device should be restored to its last \"Online\" state, if "
+          "at all possible. Only a Device that has an "
+          "EnabledState/StatusInfo of \"Enabled\" and has been "
+          "configured can be brought online or taken offline. \n"
+          "OnlineDevice should return 0 if successful, 1 if the "
+          "request is not supported at all, 2 if the request is not "
+          "supported due to the current state of the Device, and some "
+          "other value if any other error occurred. In a subclass, the "
+          "set of possible return codes could be specified, using a "
+          "ValueMap qualifier on the method. The strings to which the "
+          "ValueMap contents are 'translated' may also be specified in "
+          "the subclass as a Values array qualifier. \n"
+          "Note that this method's function overlaps with the "
+          "RequestedState property. RequestedState was added to the "
+          "model to maintain a record (i.e., a persisted value) of the "
+          "last state request. Invoking the OnlineDevice method should "
+          "set the RequestedState property appropriately.")]
+   uint32 OnlineDevice( 
+         [IN, Description (
+             "If TRUE, take the device online, if FALSE, take the "
+             "device OFFLINE.")]
+      boolean Online); 
+
+      [Deprecated { "CIM_EnabledLogicalElement.RequestStateChange" }, 
+       Description (
+          "The QuiesceDevice method has been deprecated in lieu of the "
+          "more general RequestStateChange method that directly "
+          "overlaps with the functionality provided by this method. \n"
+          "Requests that the LogicalDevice cleanly cease all current "
+          "activity (\"Quiesce\" input parameter = TRUE) or resume "
+          "activity (= FALSE). For this method to quiesce a Device, "
+          "that Device should have an Availability (or Additional "
+          "Availability) of \"Running/Full Power\" (value=3) and an "
+          "EnabledStatus/StatusInfo of \"Enabled\". For example, if "
+          "quiesced, a Device may then be offlined for diagnostics, or "
+          "disabled for power off and hot swap. For the method to "
+          "\"unquiesce\" a Device, that Device should have an "
+          "Availability (or AdditionalAvailability) of \"Quiesced\" "
+          "(value=21) and an EnabledStatus/StatusInfo of \"Enabled\". "
+          "In this case, the Device would be returned to an "
+          "\"Enabled\" and \"Running/Full Power\" status. \n"
+          "The method's return code should indicate the success or "
+          "failure of the quiesce. It should return 0 if successful, 1 "
+          "if the request is not supported at all, 2 if the request is "
+          "not supported due to the current state of the Device, and "
+          "some other value if any other error occurred. In a "
+          "subclass, the set of possible return codes could be "
+          "specified, using a ValueMap qualifier on the method. The "
+          "strings to which the ValueMap contents are 'translated' may "
+          "also be specified in the subclass as a Values array "
+          "qualifier.")]
+   uint32 QuiesceDevice( 
+         [IN, Description (
+             "If set to TRUE then cleanly cease all activity, if FALSE "
+             "resume activity.")]
+      boolean Quiesce); 
+
+      [Deprecated { "CIM_ConfigurationData.ConfigurationInformation" }, 
+       Description (
+          "Requests that the Device capture its current configuration, "
+          "setup and/or state information in a backing store. This is "
+          "handled more generally by the ConfigurationData subclass of "
+          "SettingData. Therefore, this method is deprecated. \n"
+          "\n"
+          "The information returned by this method could be used at a "
+          "later time (via the RestoreProperties method), to return a "
+          "Device to its present \"condition\". This method may not be "
+          "supported by all Devices. The method should return 0 if "
+          "successful, 1 if the request is not supported, and some "
+          "other value if any other error occurred. In a subclass, the "
+          "set of possible return codes could be specified, using a "
+          "ValueMap qualifier on the method. The strings to which the "
+          "ValueMap contents are 'translated' may also be specified in "
+          "the subclass as a Values array qualifier.")]
+   uint32 SaveProperties(); 
+
+      [Deprecated { "CIM_ConfigurationData.ApplyConfiguration" }, 
+       Description (
+          "Requests that the Device re-establish its configuration, "
+          "setup and/or state information from a backing store. This "
+          "is handled more generally by the ConfigurationData subclass "
+          "of SettingData. Therefore, this method is deprecated. \n"
+          "\n"
+          "The information would have been captured at an earlier time "
+          "(via the SaveProperties method). This method may not be "
+          "supported by all Devices. The method should return 0 if "
+          "successful, 1 if the request is not supported, and some "
+          "other value if any other error occurred. In a subclass, the "
+          "set of possible return codes could be specified, using a "
+          "ValueMap qualifier on the method. The strings to which the "
+          "ValueMap contents are 'translated' may also be specified in "
+          "the subclass as a Values array qualifier.")]
+   uint32 RestoreProperties(); 
+};
+
+// ===================================================================
+// Sensor
+// ===================================================================
+   [Abstract, Version ( "2.6.0" ), Description (
+       "A Sensor is a hardware device capable of measuring the "
+       "characteristics of some physical property - for example, the "
+       "temperature or voltage characteristics of a UnitaryComputer "
+       "System."),
+	Locale (0x409), UUID ("{e6942f49-28f5-4d77-92dd-e1c8c6d1494c}")]
+class CIM_Sensor : CIM_LogicalDevice {
+
+      [Description (
+          "The Type of the Sensor, e.g. Voltage or Temperature Sensor. "
+          "If the type is set to \"Other\", then the OtherSensorType "
+          "Description can be used to further identify the type, or if "
+          "the Sensor has numeric readings, then the type of the "
+          "Sensor can be implicitly determined by the Units. A "
+          "description of the different Sensor types is as follows: A "
+          "Temperature Sensor measures the environmental temperature. "
+          "Voltage and Current Sensors measure electrical voltage and "
+          "current readings. A Tachometer measures speed/revolutions "
+          "of a Device. For example, a Fan Device can have an "
+          "associated Tachometer which measures its speed. A Counter "
+          "is a general purpose Sensor that measures some numerical "
+          "property of a Device. A Counter value can be cleared, but "
+          "it never decreases. A Switch Sensor has states like "
+          "Open/Close, On/Off, or Up/Down. A Lock has states of "
+          "Locked/Unlocked. Humidity, Smoke Detection and Air Flow "
+          "Sensors measure the equivalent environmental "
+          "characteristics. A Presence Sensor detects the presence of "
+          "a PhysicalElement."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "11", "12" }, 
+       Values { "Unknown", "Other", "Temperature", "Voltage",
+          "Current", "Tachometer", "Counter", "Switch", "Lock",
+          "Humidity", "Smoke Detection", "Presence", "Air Flow" }, 
+       ModelCorrespondence { "CIM_Sensor.OtherSensorTypeDescription" }]
+   uint16 SensorType;
+
+      [Description (
+          "A string describing the Sensor type - used when the "
+          "SensorType property is set to \"Other\"."), 
+       MaxLen ( 128 ), 
+       ModelCorrespondence { "CIM_Sensor.SensorType" }]
+   string OtherSensorTypeDescription;
+
+      [Description (
+          "PossibleStates enumerates the string outputs of the Sensor. "
+          "For example, a \"Switch\" Sensor may output the states "
+          "\"On\", or \"Off\". Another implementation of the Switch "
+          "may output the states \"Open\", and \"Close\". Another "
+          "example is a NumericSensor supporting thresholds. This "
+          "Sensor can report the states like \"Normal\", \"Upper "
+          "Fatal\", \"Lower Non-Critical\", etc. A NumericSensor that "
+          "does not publish readings and thresholds, but stores this "
+          "data internally, can still report its states."), 
+       MaxLen ( 128 )]
+   string PossibleStates[];
+
+      [Description (
+          "The current state indicated by the Sensor. This is always "
+          "one of the \"PossibleStates\"."), 
+       MaxLen ( 128 )]
+   string CurrentState;
+
+      [Description (
+          "The polling interval that the Sensor hardware or the "
+          "instrumentation uses to determine the current state of the "
+          "Sensor."), 
+       Units ( "NanoSeconds" )]
+   uint64 PollingInterval;
+};
+
+// ===================================================================
+// NumericSensor
+// ===================================================================
+   [Abstract, Version ( "2.8.0" ), Description (
+       "A Numeric Sensor is capable of returning numeric readings and "
+       "optionally supports thresholds settings."),
+	Locale (0x409), UUID ("{4c7acd5c-b440-442a-8c85-9c09bc36ada8}")]
+class CIM_NumericSensor : CIM_Sensor {
+
+      [Description (
+          "The base unit of the values returned by this Sensor. All "
+          "the values returned by this Sensor are represented in the "
+          "units obtained by (BaseUnits * 10 raised to the power of "
+          "the UnitModifier). For example, if BaseUnits is Volts and "
+          "the UnitModifier is -6, then the units of the values "
+          "returned are MicroVolts. However, if the RateUnits property "
+          "is set to a value other than \"None\", then the units are "
+          "further qualified as rate units. In the above example, if "
+          "RateUnits is set to \"Per Second\", then the values "
+          "returned by the Sensor are in MicroVolts/Second. The units "
+          "apply to all numeric properties of the Sensor, unless "
+          "explicitly overridden by the Units qualifier."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+          "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+          "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+          "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+          "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+          "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
+          "60", "61", "62", "63", "64", "65" }, 
+       Values { "Unknown", "Other", "Degrees C", "Degrees F",
+          "Degrees K", "Volts", "Amps", "Watts", "Joules", "Coulombs", 
+          //10 
+          "VA", "Nits", "Lumens", "Lux", "Candelas", "kPa", "PSI",
+          "Newtons", "CFM", "RPM", 
+          //20 
+          "Hertz", "Seconds", "Minutes", "Hours", "Days", "Weeks",
+          "Mils", "Inches", "Feet", "Cubic Inches", 
+          //30 
+          "Cubic Feet", "Meters", "Cubic Centimeters", "Cubic Meters",
+          "Liters", "Fluid Ounces", "Radians", "Steradians",
+          "Revolutions", "Cycles", 
+          //40 
+          "Gravities", "Ounces", "Pounds", "Foot-Pounds",
+          "Ounce-Inches", "Gauss", "Gilberts", "Henries", "Farads",
+          "Ohms", 
+          //50 
+          "Siemens", "Moles", "Becquerels", "PPM (parts/million)",
+          "Decibels", "DbA", "DbC", "Grays", "Sieverts",
+          "Color Temperature Degrees K", 
+          //60 
+          "Bits", "Bytes", "Words (data)", "DoubleWords", "QuadWords",
+          "Percentage" }, 
+       ModelCorrespondence { "CIM_NumericSensor.UnitModifier",
+          "CIM_NumericSensor.RateUnits" }]
+   uint16 BaseUnits;
+
+      [Description (
+          "The unit multiplier for the values returned by this Sensor. "
+          "All the values returned by this Sensor are represented in "
+          "the units obtained by (BaseUnits * 10 raised to the power "
+          "of the UnitModifier). For example, if BaseUnits is Volts "
+          "and the Unit Modifier is -6, then the units of the values "
+          "returned are MicroVolts. However, if the RateUnits property "
+          "is set to a value other than \"None\", then the units are "
+          "further qualified as rate units. In the above example, if "
+          "RateUnits is set to \"Per Second\", then the values "
+          "returned by the Sensor are in MicroVolts/Second. The units "
+          "apply to all numeric properties of the Sensor, unless "
+          "explicitly overridden by the Units qualifier."), 
+       ModelCorrespondence { "CIM_NumericSensor.BaseUnits",
+          "CIM_NumericSensor.RateUnits" }]
+   sint32 UnitModifier;
+
+      [Description (
+          "Specifies if the units returned by this Sensor are rate "
+          "units. All the values returned by this Sensor are "
+          "represented in the units obtained by (BaseUnits * 10 raised "
+          "to the power of the UnitModifier). This is true unless this "
+          "property (RateUnits) has a value different than \"None\". "
+          "For example, if BaseUnits is Volts and the UnitModifier is "
+          "-6, then the units of the values returned are MicroVolts. "
+          "But, if the RateUnits property is set to a value other than "
+          "\"None\", then the units are further qualified as rate "
+          "units. In the above example, if RateUnits is set to \"Per "
+          "Second\", then the values returned by the Sensor are in "
+          "MicroVolts/Second. The units apply to all numeric "
+          "properties of the Sensor, unless explicitly overridden by "
+          "the Units qualifier. Any implementation of CurrentReading "
+          "should be qualified with either a Counter or a Gauge "
+          "qualifier, depending on the characteristics of the sensor "
+          "being modeled."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }, 
+       Values { "None", "Per MicroSecond", "Per MilliSecond",
+          "Per Second", "Per Minute", "Per Hour", "Per Day",
+          "Per Week", "Per Month", "Per Year" }, 
+       ModelCorrespondence { "CIM_NumericSensor.UnitModifier",
+          "CIM_NumericSensor.BaseUnits" }]
+   uint16 RateUnits;
+
+      [Description (
+          "The current value indicated by the Sensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.5",
+          "MIF.DMTF|Electrical Current Probe|001.5",
+          "MIF.DMTF|Voltage Probe|001.5" }]
+   sint32 CurrentReading;
+
+      [Description (
+          "NominalReading indicates the 'normal' or expected value for "
+          "the NumericSensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.6",
+          "MIF.DMTF|Electrical Current Probe|001.6",
+          "MIF.DMTF|Voltage Probe|001.6" }]
+   sint32 NominalReading;
+
+      [Description (
+          "NormalMax provides guidance for the user as to the normal "
+          "maximum range for the NumericSensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.7",
+          "MIF.DMTF|Electrical Current Probe|001.7",
+          "MIF.DMTF|Voltage Probe|001.7" }]
+   sint32 NormalMax;
+
+      [Description (
+          "NormalMin provides guidance for the user as to the normal "
+          "minimum range for the NumericSensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.8",
+          "MIF.DMTF|Electrical Current Probe|001.8",
+          "MIF.DMTF|Voltage Probe|001.8" }]
+   sint32 NormalMin;
+
+      [Description (
+          "MaxReadable indicates the largest value of the measured "
+          "property that can be read by the NumericSensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.9",
+          "MIF.DMTF|Electrical Current Probe|001.9",
+          "MIF.DMTF|Voltage Probe|001.9" }]
+   sint32 MaxReadable;
+
+      [Description (
+          "MinReadable indicates the smallest value of the measured "
+          "property that can be read by the NumericSensor."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.10",
+          "MIF.DMTF|Electrical Current Probe|001.10",
+          "MIF.DMTF|Voltage Probe|001.10" }]
+   sint32 MinReadable;
+
+      [Description (
+          "Resolution indicates the ability of the Sensor to resolve "
+          "differences in the measured property. The units for this "
+          "measurement are determined by "
+          "BaseUnit*UnitModifier/RateUnit."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.17",
+          "MIF.DMTF|Electrical Current Probe|001.17",
+          "MIF.DMTF|Voltage Probe|001.17" }]
+   uint32 Resolution;
+
+      [Deprecated { "CIM_NumericSensor.Resolution",
+          "CIM_NumericSensor.Accuracy" }, Description (
+          "This property is being deprecated in lieu of using the "
+          "Resolution and Accuracy properties. \n"
+          "Indicates the tolerance of the Sensor for the measured "
+          "property. Tolerance, along with Resolution and Accuracy, is "
+          "used to calculate the actual value of the measured physical "
+          "property. Tolerance may vary depending on whether the "
+          "Device is linear over its dynamic range.")]
+   sint32 Tolerance;
+
+      [Description (
+          "Indicates the accuracy of the Sensor for the measured "
+          "property. Its value is recorded as plus/minus hundredths of "
+          "a percent. Accuracy, along with Resolution, is used to "
+          "calculate the actual value of the measured physical "
+          "property. Accuracy may vary depending on whether the Device "
+          "is linear over its dynamic range."), 
+       Units ( "Hundredths of Percent" ), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.19",
+          "MIF.DMTF|Electrical Current Probe|001.19",
+          "MIF.DMTF|Voltage Probe|001.19" }]
+   sint32 Accuracy;
+
+      [Description (
+          "Indicates that the Sensor is linear over its dynamic range.")]
+   boolean IsLinear;
+
+      [Description (
+          "Indicates the margin built around the thresholds. This "
+          "margin prevents unnecessary state changes when the Sensor "
+          "reading may fluctuate very close to its thresholds. This "
+          "could be due to the Sensor's tolerance/accuracy/resolution "
+          "or due to environmental factors. Once a threshold is "
+          "crossed, the state of the Sensor should change. However, "
+          "the state should not fluctuate between the old and new "
+          "states unless the Sensor's change in the reading exceeds "
+          "the hysteresis value. The units for this measurement are "
+          "determined by BaseUnit*UnitModifier/RateUnit.")]
+   uint32 Hysteresis;
+
+      [Write,Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "Current Reading is between LowerThresholdNonCritical and "
+          "Upper ThresholdNonCritical, then the Sensor is reporting a "
+          "normal value. If CurrentReading is between "
+          "LowerThresholdNonCritical and LowerThresholdCritical, then "
+          "the CurrentState is NonCritical."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.11",
+          "MIF.DMTF|Electrical Current Probe|001.11",
+          "MIF.DMTF|Voltage Probe|001.11" }]
+   sint32 LowerThresholdNonCritical;
+
+      [Write,Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "the CurrentReading is between LowerThresholdNonCritical and "
+          "UpperThresholdNonCritical, then the Sensor is reporting a "
+          "normal value. If the CurrentReading is between "
+          "UpperThreshold NonCritical and UpperThresholdCritical, then "
+          "the CurrentState is NonCritical."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.12",
+          "MIF.DMTF|Electrical Current Probe|001.12",
+          "MIF.DMTF|Voltage Probe|001.12" }]
+   sint32 UpperThresholdNonCritical;
+
+      [Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "the CurrentReading is between LowerThresholdCritical and "
+          "Lower ThresholdFatal, then the CurrentState is Critical."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.13",
+          "MIF.DMTF|Electrical Current Probe|001.13",
+          "MIF.DMTF|Voltage Probe|001.13" }]
+   sint32 LowerThresholdCritical;
+
+      [Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "the CurrentReading is between UpperThresholdCritical and "
+          "Upper ThresholdFatal, then the CurrentState is Critical."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.14",
+          "MIF.DMTF|Electrical Current Probe|001.14",
+          "MIF.DMTF|Voltage Probe|001.14" }]
+   sint32 UpperThresholdCritical;
+
+      [Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "the CurrentReading is below LowerThresholdFatal, then the "
+          "Current State is Fatal."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.15",
+          "MIF.DMTF|Electrical Current Probe|001.15",
+          "MIF.DMTF|Voltage Probe|001.15" }]
+   sint32 LowerThresholdFatal;
+
+      [Description (
+          "The Sensor's threshold values specify the ranges (min and "
+          "max values) for determining whether the Sensor is operating "
+          "under Normal, NonCritical, Critical or Fatal conditions. If "
+          "the CurrentReading is above UpperThresholdFatal, then the "
+          "Current State is Fatal."), 
+       MappingStrings { "MIF.DMTF|Temperature Probe|002.16",
+          "MIF.DMTF|Electrical Current Probe|001.16",
+          "MIF.DMTF|Voltage Probe|001.16" }]
+   sint32 UpperThresholdFatal;
+
+      [Description (
+          "An array representing the thresholds supported by this "
+          "Sensor."), 
+       ValueMap { "0", "1", "2", "3", "4", "5" }, 
+       Values { "LowerThresholdNonCritical",
+          "UpperThresholdNonCritical", "LowerThresholdCritical",
+          "UpperThresholdCritical", "LowerThresholdFatal",
+          "UpperThresholdFatal" }]
+   uint16 SupportedThresholds[];
+
+      [Description (
+          "An array representing the thresholds that are currently "
+          "enabled for this Sensor."), 
+       ValueMap { "0", "1", "2", "3", "4", "5" }, 
+       Values { "LowerThresholdNonCritical",
+          "UpperThresholdNonCritical", "LowerThresholdCritical",
+          "UpperThresholdCritical", "LowerThresholdFatal",
+          "UpperThresholdFatal" }]
+   uint16 EnabledThresholds[];
+
+      [Description (
+          "An array representing the writable thresholds supported by "
+          "Sensor."), 
+       ValueMap { "0", "1", "2", "3", "4", "5" }, 
+       Values { "LowerThresholdNonCritical",
+          "UpperThresholdNonCritical", "LowerThresholdCritical",
+          "UpperThresholdCritical", "LowerThresholdFatal",
+          "UpperThresholdFatal" }]
+   uint16 SettableThresholds[];
+
+      [Description (
+          "This method resets the values of the thresholds to hardware "
+          "defaults. This method returns 0 if successful, 1 if "
+          "unsupported and any other value if an error occurred. In a "
+          "subclass, the set of possible return codes could be "
+          "specified, using a ValueMap qualifier on the method. The "
+          "strings to which the ValueMap contents are 'translated' may "
+          "also be specified in the subclass as a Values array "
+          "qualifier.")]
+   uint32 RestoreDefaultThresholds(); 
+
+      [Deprecated { "No Value" }, Description (
+          "The use of this method is being deprecated, since Current "
+          "senor reading can be retrieved through the GetInstance "
+          "operation. \n"
+          "For a non-linear Sensor, the resolution, accuracy, "
+          "tolerance and hysteresis vary as the current reading moves. "
+          "This method can be used to get these factors for a given "
+          "reading. It returns 0 if successful, 1 if unsupported, and "
+          "any other value if an error occurred. In a subclass, the "
+          "set of possible return codes could be specified, using a "
+          "ValueMap qualifier on the method. The strings to which the "
+          "ValueMap contents are 'translated' may also be specified in "
+          "the subclass as a Values array qualifier.")]
+   uint32 GetNonLinearFactors( 
+         [IN, Description (
+             "The sensor reading to get information for.")]
+      sint32 SensorReading, 
+         [IN ( false ), OUT, Description (
+             "The accuracy of the reading.")]
+      sint32 Accuracy, 
+         [IN ( false ), OUT, Description (
+             "The resolution of the reading.")]
+      uint32 Resolution, 
+         [IN ( false ), OUT, Description (
+             "The tolerance of the reading.")]
+      sint32 Tolerance, 
+         [IN ( false ), OUT, Description (
+             "The Hysteresis of the reading.")]
+      uint32 Hysteresis); 
+};
+
+// ===================================================================
+// Log
+// ===================================================================
+   [Experimental, Abstract, Version ( "2.8.1000" ), Description (
+       "Log represents any type of event, error or informational "
+       "register or chronicle. The object describes the existence of "
+       "the log and its characteristics. Log does not dictate the form "
+       "of the data represented or how records/messages are stored in "
+       "the log and/or accessed. Subclasses will define the "
+       "appropriate methods and behavior."),
+	Locale (0x409), UUID ("{f8c12ed7-c769-49fa-bf3e-db0b0160c94e}")]
+class CIM_Log : CIM_EnabledLogicalElement {
+
+      [Description (
+          "Maximum number of records that can be captured in the Log. "
+          "If undefined, a value of zero should be specified.")]
+   uint64 MaxNumberOfRecords;
+
+      [Description (
+          "Current number of records in the Log."), 
+       Gauge]
+   uint64 CurrentNumberOfRecords;
+
+      [Description (
+          "Requests that the Log be cleared of all entries. \n"
+          "The return value should be 0 if the request was "
+          "successfully executed, 1 if the request is not supported, "
+          "and some other value, as indicated by the ValueMap/Values "
+          "qualifiers, if an error occurred."), 
+       ValueMap { "0", "1", "2", "3", "4", "5", "6..0x0FFF",
+          "0x1000..0x7FFF", "0x8000.." }, 
+       Values { "Completed with no error", "Not Supported",
+          "Unspecified Error", "Timeout", "Failed",
+          "Invalid Parameter", "DMTF_Reserved", "Method_Reserved",
+          "Vendor_Reserved" }]
+   uint32 ClearLog(); 
+
+};
+
+// ===================================================================
+// LogRecord
+// ===================================================================
+   [Abstract, Version ( "2.8.1000" ), Description (
+       "The LogRecord object can describe the definitional format for "
+       "entries in a MessageLog, or can be used to instantiate the "
+       "actual records in the Log. The latter approach provides a "
+       "great deal more semantic definition and management control "
+       "over the individual entries in a MessageLog, than do the "
+       "record manipulation methods of the Log class. It is "
+       "recommended that the data in individual Log entries be modeled "
+       "using subclasses of LogRecord, to avoid the creation of "
+       "LogRecords with one property (such as RecordData) without "
+       "semantics. \n"
+       "Definitional formats for LogRecords could be specified by "
+       "establishing a naming convention for the RecordID and Message "
+       "Timestamp key properties."),
+	Locale (0x409), UUID ("{93e5f37b-7071-4c21-8733-d2eea2691e1a}")]
+class CIM_LogRecord : CIM_ManagedElement {
+
+      [Key, Propagated ( "CIM_MessageLog.CreationClassName" ), 
+       Description (
+          "The scoping Log's CreationClassName."), 
+       MaxLen ( 256 )]
+   string LogCreationClassName;
+
+      [Key, Propagated ( "CIM_MessageLog.Name" ), Description (
+          "The scoping Log's Name."), 
+       MaxLen ( 256 )]
+   string LogName;
+
+      [Key, Description (
+          "CreationClassName indicates the name of the class or the "
+          "subclass used in the creation of an instance. When used "
+          "with the other key properties of this class, this property "
+          "allows all instances of this class and its subclasses to be "
+          "uniquely identified."), 
+       MaxLen ( 256 )]
+   string CreationClassName;
+
+      [Key, Description (
+          "RecordID, with the MessageTimestamp property, serve to "
+          "uniquely identify the LogRecord within a MessageLog. Note "
+          "that this property is different than the RecordNumber "
+          "parameters of the MessageLog methods. The latter are "
+          "ordinal values only, useful to track position when "
+          "iterating through a Log. On the other hand, RecordID is "
+          "truly an identifier for an instance of LogRecord. It may be "
+          "set to the record's ordinal position, but this is not "
+          "required."), 
+       MaxLen ( 256 )]
+   string RecordID;
+
+      [Key, Description (
+          "A LogRecord's key structure includes a timestamp for the "
+          "entry.")]
+   datetime MessageTimestamp;
+
+      [Deprecated { "CIM_LogRecord.RecordFormat" }, Description (
+          "A free-form string describing the LogRecord's data "
+          "structure.")]
+   string DataFormat;
+
+      [Experimental, Description (
+          "A string describing the data structure of the information "
+          "in the property, RecordData. If the RecordFormat string is "
+          "<empty>, RecordData should be interpreted as a free-form "
+          "string. \n"
+          "\n"
+          "To describe the data structure of RecordData, the "
+          "RecordFormat string should be constructed as follows: \n"
+          "- The first character is a delimiter character and is used "
+          "to parse the remainder of the string into sub-strings. \n"
+          "- Each sub-string is separated by the delimiter character "
+          "and should be in the form of a CIM property declaration "
+          "(i.e., datatype and property name). This set of "
+          "declarations may be used to interpret the similarly "
+          "delimited RecordData property. \n"
+          "For example, using a '*' delimiter, RecordFormat = "
+          "\"*string ThisDay*uint32 ThisYear*datetime SomeTime\" \n"
+          "may be used to interpret: RecordData = \"*This is "
+          "Friday*2002*20020807141000.000000-300\"."), 
+       ModelCorrespondence { "CIM_LogRecord.RecordData" }]
+   string RecordFormat;
+
+      [Experimental, Description (
+          "A string containing LogRecord data. \n"
+          "If the corresponding RecordFormat property is <empty>, or "
+          "cannot be parsed according to the recommended format, "
+          "RecordData should be interpreted as a free-form string. If "
+          "the RecordFormat property contains parseable format "
+          "information (as recommended in the RecordFormat Description "
+          "qualifier), the RecordData string SHOULD be parsed in "
+          "accordance with this format. In this case, RecordData "
+          "SHOULD begin with the delimiter character and this "
+          "character SHOULD be used to separate substrings in the "
+          "manner described. The RecordData string can then be parsed "
+          "by the data consumer and appropriately typed."), 
+       ModelCorrespondence { "CIM_LogRecord.RecordFormat" }]
+   string RecordData;
+};
+
+// ===================================================================
+// RecordLog
+// ===================================================================
+   [Abstract,Version ( "2.9.0" ), Description (
+       "RecordLog serves as an aggregation point for LogRecord "
+       "objects. This class presents a higher level view of a log than "
+       "its peer class MessageLog (which uses iterators) and "
+       "introduces a new key structure. Access to records in this log "
+       "is achieved through the use of the standard CIM Operations "
+       "defined as part of WBEM.")]
+class CIM_RecordLog : CIM_Log {
+
+      [Key, Description (
+          "Within the scope of the instantiating Namespace, InstanceID "
+          "opaquely and uniquely identifies an instance of this class. "
+          "\nIn order to ensure uniqueness within the NameSpace, the "
+          "value of InstanceID SHOULD be constructed using the "
+          "following 'preferred' algorithm: \n"
+          "<OrgID>:<LocalID> \n"
+          "Where <OrgID> and <LocalID> are separated by a colon ':', "
+          "and where <OrgID> MUST include a copyrighted, trademarked "
+          "or otherwise unique name that is owned by the business "
+          "entity creating/defining the InstanceID, or is a registered "
+          "ID that is assigned to the business entity by a recognized "
+          "global authority (This is similar to the <Schema "
+          "Name>_<Class Name> structure of Schema class names.) In "
+          "addition, to ensure uniqueness <OrgID> MUST NOT contain a "
+          "colon (':'). When using this algorithm, the first colon to "
+          "appear in InstanceID MUST appear between <OrgID> and "
+          "<LocalID>. \n"
+          "<LocalID> is chosen by the business entity and SHOULD not "
+          "be re-used to identify different underlying (real-world) "
+          "elements. If the above 'preferred' algorithm is not used, "
+          "the defining entity MUST assure that the resultant "
+          "InstanceID is not re-used across any InstanceIDs produced "
+          "by this or other providers for this instance's NameSpace. \n"
+          "For DMTF defined instances, the 'preferred' algorithm MUST "
+          "be used with the <OrgID> set to 'CIM'.")]
+   string InstanceID;
+
+};
+
+// ========================================================================
+// AdminDomain
+// ========================================================================
+	[Description ("AdminDomain for IPMI")]
+class AdminDomain : CIM_AdminDomain {
+};
+
+// ========================================================================
+// ComputerSystem
+// ========================================================================
+	[Description ("ComputerSystem for IPMI")]
+class ComputerSystem : CIM_ComputerSystem {
+};
+
+// ========================================================================
+// SystemSpecificCollection
+// ========================================================================
+	[Description ("SystemSpecificCollection for IPMI")]
+class SystemSpecificCollection : CIM_SystemSpecificCollection {
+};
+
+// ========================================================================
+// Sensor
+// ========================================================================
+	[Description ("Sensor (discrete sensor) for IPMI")]
+class Sensor : CIM_Sensor {
+};
+
+// ========================================================================
+// NumericSensor
+// ========================================================================
+	[Description ("NumericSensor for IPMI")]
+class NumericSensor : CIM_NumericSensor {
+};
+
+// ========================================================================
+// RecordLog
+// ========================================================================
+	[Description ("RecordLog for IPMI")]
+class RecordLog : CIM_RecordLog {
+      [Implemented]
+  uint32 ClearLog(); 
+};
+
+// ========================================================================
+// LogRecord
+// ========================================================================
+	[Description ("LogRecord for IPMI")]
+class LogRecord : CIM_LogRecord {
+};
+
+instance of NumericSensor
+{
+	Accuracy = 10800;
+	BaseUnits = 5;
+	Caption = "Voltage(12.0.32)";
+	CreationClassName = "NumericSensor";
+	CurrentReading = 121;
+	CurrentState = "OK";
+	Description = "Baseboard 1.2V(12.0.32):Voltage for System board 1";
+	DeviceID = "12.0.32";
+	ElementName = "Baseboard 1.2V(12.0.32)";
+	Hysteresis = 0;
+	IsLinear = TRUE;
+	LowerThresholdCritical = 107;
+	LowerThresholdNonCritical = 110;
+	MaxReadable = 250;
+	MinReadable = 0;
+	Name = "Baseboard 1.2V(12.0.32)";
+	NominalReading = 120;
+	NormalMax = 125;
+	NormalMin = 114;
+	PossibleStates = {"OK", "N/A", "at or below lower non-critical threshold", "at or below lower critical threshold", "at or below lower non-recoverable threshold", "at or above upper non-critical threshold", "at or above upper critical threshold", "at or above upper non-recoverable threshold"};
+	RateUnits = 0;
+	Resolution = 0;
+	SensorType = 3;
+	SystemCreationClassName = "ComputerSystem";
+	SystemName = "IPMI Controller 32";
+	UnitModifier = -2;
+	UpperThresholdCritical = 133;
+	UpperThresholdNonCritical = 129;
+};
+

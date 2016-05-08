@@ -1,0 +1,383 @@
+<html>
+  <!-------------------------
+  MINESWEEPER2002.HTM
+
+  Minesweeper 2002. 1999-2001
+
+  Version 1.02.008
+  -------------------------->
+
+  <head>
+    <title>Minesweeper 2002</title>
+  </head>
+
+  <style>
+    body	{margin: 0px; color: white}
+    table	{background: black; font: 8pt Verdana; text-align: center}
+    td		{margin: 0px; width: 9px; height: 9px; cursor: default}
+    .blowup	{color: black; background: white}
+    .R		{background: #FF3300}
+    .G		{background: #66CC33}
+    .B		{background: #0099FF}
+    .Y		{background: #FFCC00}
+    .W		{background: #FFFFFF}
+    .K		{background: #000000}
+    #ID_Count	{width: 30%}
+    #ID_Timer	{width: 30%}
+    #ID_Smile	{width: 40%; height: 20px; font: 12pt Wingdings; cursor: hand}
+    #ID_Field	{background: silver; font: 5pt Small Fonts; width: 81px}
+  </style>
+
+  <script src=shared.js> </script>
+
+  <!-- Button logic -- mouse event handlers must be loaded before <body> (esp. mousemove) -->
+  <script>
+
+    // global variables (used by mouse event handlers)
+    var g_clickedObject;
+    var g_isProcessingInput;
+
+    function TrackMouse()
+      {
+      // if not dragging, cancel tracking mode
+      if (window.event.button != 1)
+        {
+        g_isProcessingInput = false;
+        g_clickedObject = null;
+        return;
+        }
+      if (!g_isProcessingInput && g_clickedObject)
+        {
+        x = window.event.x, y = window.event.y;
+        objectUnderCursor = redir(window.document.elementFromPoint(x, y));
+        isMouseOver = g_clickedObject.contains(objectUnderCursor);
+        UpdateButton(isMouseOver);
+        }
+      }
+
+    function redir(ClickedObject)
+      {
+      // if clicked on grid (between the tiles), redirect to an adjacent tile
+      if (ClickedObject == ID_Field)
+        {
+        x = window.event.x, y = window.event.y;
+        for (dx = -1; dx <= 1; dx++)
+        for (dy = -1; dy <= 1; dy++)
+          if (!((dx == 0) && (dy == 0)))  // exclude the clicked point
+          {
+          objectRedirectTo = window.document.elementFromPoint(x + dx, y + dy);
+          if (ID_Field.contains(objectRedirectTo) && (objectRedirectTo != ID_Field))
+            return objectRedirectTo;
+          }
+        }
+      return ClickedObject;
+      }
+
+    function ButtonDown()
+      {
+      if (!g_isProcessingInput && window.event.button == 1)
+        {
+        targetObject = redir(window.event.srcElement);
+
+        if (ID_Field.contains(targetObject) && (targetObject.state != c_stateDone))
+          {
+          targetObject.classSave = targetObject.className;  // create a new tag property/parameter (CLASSSAVE)
+          g_clickedObject = targetObject;
+          UpdateButton(true);
+          }
+        }
+      }
+
+    function ButtonUp()
+      {
+      // handle click collisions -- ignore new clicks while processing one
+      if (!g_isProcessingInput)
+        {
+        g_isProcessingInput = true;
+
+        if (g_clickedObject == redir(window.event.srcElement)) // check if not clicked then dragged
+          if (g_clickedObject.state)	// if clicked object has state (contains adjacent mine count)
+            openOne(g_clickedObject);
+          else
+            openAll(g_clickedObject);
+        }
+      }
+
+    function UpdateButton(IsDown)
+      {
+      g_clickedObject.className = IsDown ? "W" : g_clickedObject.classSave;
+      }
+
+  </script>
+
+  <!-- Minesweeper layout -->
+  <body scroll=no
+    onSelectStart=Ignore()
+    onMouseDown=ButtonDown()
+    onMouseMove=TrackMouse()    
+    onMouseUp=ButtonUp()
+    >
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+    <table cellspacing=1 cellpadding=2>
+      <tr>
+        <td id=ID_Count></td>
+        <td id=ID_Smile onClick=location.reload()></td>
+        <td id=ID_Timer></td>
+      </tr>
+      <tr>
+        <td colspan=3>
+          <table id=ID_Field cellspacing=1 cellpadding=0>
+            <tr>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=R> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+              <td class=G> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+            </tr>
+            <tr>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=B> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+              <td class=Y> &nbsp; </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <!-- Minesweeper logic -->
+  <script>
+
+    // constants
+    var c_stateMine = "M";
+    var c_stateDone = "X";
+    var c_rowsCount = 8;
+    var c_colsCount = 8;
+    var c_minesCount = 10;
+    var c_charHappy = "J";      //  :-)
+    var c_charNormal = "K";     //  :-|
+    var c_charUnhappy = "L";    //  :-(
+
+    // global variables
+    var g_timer;
+    var g_fieldObject;
+    var g_Mine = new Array(c_minesCount);
+
+    // initialize UI
+    ID_Count.innerText = c_rowsCount * c_colsCount;
+    ID_Smile.innerText = c_charHappy;
+    ID_Timer.innerText = ID_Count.innerText;
+
+    // plant mines
+    for (k = 0; k < g_Mine.length; k++)
+      {
+      // pick a random tile; if it already has a mine, keep trying until a free tile is found
+      do
+        {
+        randomRow = Math.floor(c_rowsCount * Math.random());
+        randomCol = Math.floor(c_colsCount * Math.random());
+        randomTile = ID_Field.rows[randomRow].cells[randomCol];
+        }
+      while (randomTile.state == c_stateMine)
+
+      // plant a mine into the tile, save the tile object reference
+      randomTile.state = c_stateMine;
+      g_Mine[k] = randomTile;
+
+      // in tiles surrounding the planted mine, increment mine count by 1
+      for (deltaRow = -1; deltaRow <= 1; deltaRow++)
+      for (deltaCol = -1; deltaCol <= 1; deltaCol++)
+        {
+        i = randomRow + deltaRow;
+        j = randomCol + deltaCol;
+        if (ID_Field.rows[i] && ID_Field.rows[i].cells[j])  // check if (i,j) is within bounds
+          {
+          adjacentTile = ID_Field.rows[i].cells[j];
+          if (adjacentTile.state != c_stateMine)
+            {
+            mineCount = parseInt(adjacentTile.state);
+            adjacentTile.state = isNaN(mineCount) ? 1 : (mineCount + 1);
+            }
+          }
+        }
+      }
+
+    function openAll(clickedTile)
+      {
+      maxBlanksCount = c_rowsCount * c_colsCount - c_minesCount;
+      blankRows = new Array(maxBlanksCount);
+      blankCols = new Array(maxBlanksCount);
+
+      // get the clicked tile's row number and column number into the blankX arrays
+      blankRows[0] = RowNum(clickedTile);
+      blankCols[0] = ColNum(clickedTile);
+
+      for (currIndex = 0, lastIndex = 1; currIndex < lastIndex; currIndex++)
+        {
+        for (deltaRow = -1; deltaRow <= 1; deltaRow++)
+        for (deltaCol = -1; deltaCol <= 1; deltaCol++)
+          {
+          i = blankRows[currIndex] + deltaRow;
+          j = blankCols[currIndex] + deltaCol;
+          if (ID_Field.rows[i] && ID_Field.rows[i].cells[j])  // check if (i,j) is within bounds
+            {
+            nextTile = ID_Field.rows[i].cells[j];
+            if (!nextTile.state)  // if this is a blank tile, append it to the buffer
+              if (!((deltaRow == 0) && (deltaCol == 0)))  // skip the tile in the middle, it's already in
+                {
+                blankRows[lastIndex] = i;
+                blankCols[lastIndex] = j;
+                lastIndex++;
+                }
+            openOne(nextTile);
+            }
+          }
+        }
+      }
+
+    function openOne(clickedTile)
+      {
+      if (clickedTile)
+        {
+        // if first move (timer isn't running), start the game
+        if (!g_timer)
+          {
+          g_timer = window.setInterval("tick()", 1000);
+          ID_Smile.innerText = c_charNormal;
+          }
+
+        // update the clicked tile's state
+        tileState = clickedTile.state;
+        if (tileState)				  // if (typeOf tileState != "undefined")
+          switch (tileState)
+            {
+            case c_stateMine:
+              endGame (false);			  // fall through
+
+            case c_stateDone:			  // do nothing if the tile is done with
+              return;
+
+            default:
+              clickedTile.innerText = tileState;  // show the state (nothing or adjacent mine count)
+              break;
+            }
+
+        clickedTile.state = c_stateDone;	  // change the state so further clicks will be ignored
+        clickedTile.className = "K";		  // change tile from colored to black
+
+        // update remaining tiles counter
+        tilesCount = parseInt(ID_Count.innerText) - 1;
+        ID_Count.innerText = tilesCount;
+
+        // game is won when the remaining tiles can only have mines
+        if (tilesCount == c_minesCount)
+          endGame(true);
+        }
+      }
+
+    function endGame(isGameWon)
+      {
+      // stop timer
+      window.clearInterval(g_timer);
+
+      // show the mines
+      for (k = 0; k < g_Mine.length; k++)
+        with (g_Mine[k])
+          {
+          innerText = state;			// reveal the mines: put "M" inside the tile
+          if (!isGameWon)			// if game is lost,
+            className = "blowup";		// change the appearance of the mines 
+          }
+
+      // disable interactivity (ensure that any futher clicking will be ignored)
+      with (document.body)
+        onmousedown = onmouseup = onclick = "";
+
+      // update smiley
+      ID_Smile.innerText = isGameWon ? c_charHappy : c_charUnhappy;
+      }
+
+    function tick()
+      {
+      // update remaining time counter
+      // use radix 10 to parse '09', '08' as decimal vs. octal numbers (octal 9 and 8 are undefined)
+      timeCount = parseInt(ID_Timer.innerText, 10) - 1;
+
+      // when time is out, blow up
+      if (timeCount == 0)
+        endGame(false);
+
+      ID_Timer.innerText = timeCount < 10 ? "0" + timeCount : timeCount;
+      }
+
+  </script>
+
+</html>

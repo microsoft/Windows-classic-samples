@@ -1,0 +1,173 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winres.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+
+IDD_INTERIOR1 DIALOGEX 0, 0, 317, 143
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "You must click the checkbox or a radio button to advance to the next page",IDC_STATIC,0,1,282,14
+    CONTROL         "A  radio button",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,7,41,62,10
+    CONTROL         "Another radio Button",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,7,61,81,10
+    CONTROL         "A third radio button",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,7,80,75,10
+    GROUPBOX        "A Group of radio buttons",IDC_GROUP1,0,24,119,74,WS_GROUP
+    CONTROL         "Go directly to the last page",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,194,61,100,10
+END
+
+IDD_INTERIOR3 DIALOG  0, 0, 317, 143
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Some explanatory text",IDC_STATIC,0,1,70,8
+    LTEXT           "An Edit Box",IDC_STATIC,0,38,38,8
+    LTEXT           "Another Edit Box",IDC_STATIC,0,67,54,8
+    LTEXT           "A Third Edit Box",IDC_STATIC,0,96,52,8
+    EDITTEXT        IDC_EDIT2,87,38,86,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,87,67,86,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,87,96,86,14,ES_AUTOHSCROLL
+END
+
+IDD_INTERIOR2 DIALOGEX 0, 0, 287, 152
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Enable Buttons",IDC_STATIC,7,47,273,35
+    CONTROL         "Back",IDC_ENABLEBACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,62,31,10
+    CONTROL         "Enable Finish",IDC_ENABLEFINISH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,47,62,57,10
+    CONTROL         "Next",IDC_ENABLENEXT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,63,31,10
+    CONTROL         "Disable Finish",IDC_DISABLEFINISH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,105,62,59,10
+    PUSHBUTTON      "Update",IDC_UPDATEENABLE,222,59,50,14
+    GROUPBOX        "",IDC_STATIC,0,0,287,152
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_INTERIOR1, DIALOG
+    BEGIN
+        LEFTMARGIN, 28
+        RIGHTMARGIN, 310
+        VERTGUIDE, 28
+        VERTGUIDE, 189
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_INTERIOR3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        VERTGUIDE, 21
+        VERTGUIDE, 108
+        VERTGUIDE, 194
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 136
+        HORZGUIDE, 38
+        HORZGUIDE, 68
+        HORZGUIDE, 98
+    END
+
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_WIZICON               ICON                    "notepad.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+1                       RT_MANIFEST             "AeroWiz.exe.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE1              "Which Option do you want?"
+    IDS_TITLE2              "Click some buttons"
+    IDS_TITLE3              "Enter your order information"
+    IDS_WIZTITLE            "MSDN Sample Aero Wizard"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

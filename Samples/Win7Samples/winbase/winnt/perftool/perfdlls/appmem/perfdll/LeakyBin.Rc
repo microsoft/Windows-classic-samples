@@ -1,0 +1,142 @@
+/*++
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) Microsoft Corporation.  All rights reserved.
+--*/
+
+#include "windows.h"
+#include "leakybin.h"
+#include "winver.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+LEAKYBIN                ICON    DISCARDABLE     "LEAKYBIN.ICO"
+SMALL                   ICON    DISCARDABLE     "SMALL.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+LEAKYBIN MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+      BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+      END
+    POPUP "&Test"
+      BEGIN
+        MENUITEM "&Start Leaking",              IDM_START, GRAYED
+        MENUITEM "&Stop Leaking",               IDM_STOP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Reset Memory",               IDM_RESET
+      END
+    POPUP "&Help"
+      BEGIN
+        MENUITEM "&Help Topics...",             IDM_HELPTOPICS
+        MENUITEM SEPARATOR
+        MENUITEM "&About Leakybin...",          IDM_ABOUT
+      END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+LEAKYBIN ACCELERATORS MOVEABLE PURE
+BEGIN
+    VK_F1,          IDM_HELPTOPICS,         VIRTKEY
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ABOUTBOX DIALOG DISCARDABLE  22, 17, 200, 70
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,165,2,32,14,WS_GROUP
+    ICON            "LeakyBin",IDC_STATIC,3,2,18,20
+    LTEXT           "CompanyName",IDC_COMPANY,30,2,100,8
+    LTEXT           "FileDescription",IDC_FILEDESC,30,10,71,8
+    RTEXT           "ProductVersion",IDC_PRODVER,106,10,17,8
+    LTEXT           "LegalCopyright",IDC_COPYRIGHT,30,18,137,8
+    LTEXT           "OSVERSION",IDC_OSVERSION,46,34,138,8
+    LTEXT           "LegalTrademarks",IDC_TRADEMARK,3,49,194,18
+    LTEXT           "Running on:",IDC_LABEL,4,34,40,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,2,31,196,1
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,2,44,196,1
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 3,5,0,0
+ PRODUCTVERSION 3,5,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x10001L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+ BEGIN
+    BLOCK "StringFileInfo"
+      BEGIN
+        BLOCK "040904E4"
+          BEGIN
+            VALUE "Comments", "LeakyBin\0"
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Leakybin Demo Application\0"
+            VALUE "FileVersion", "0.0\0"
+            VALUE "InternalName", "Leakybin\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corp.\0"
+            VALUE "LegalTrademarks", "Microsoft(R) is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "\0"
+            VALUE "ProductName", "Leakybin\0"
+            VALUE "ProductVersion", "3.6\0"
+          END
+       END
+    BLOCK "VarFileInfo"
+      BEGIN
+            VALUE "Translation", 0x409, 0x04E4, 0x411, 0x04E4
+      END
+ END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+   IDS_APP_TITLE       "Leakybin: Sample Application"
+   IDS_DISPLAYCHANGED  "Display Changed"
+   IDS_VER_INFO_LANG   "\\StringFileInfo\\040904E4\\"
+   IDS_VERSION_ERROR   "Error %lu"
+   IDS_NO_HELP         "Unable to activate help"
+END
+
+
+

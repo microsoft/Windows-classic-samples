@@ -1,0 +1,206 @@
+{\rtf1
+{\comment ************************************************************
+* 
+* This is a simple RTF help file. It was constructed with a regular
+* text editor, and using normal RTF syntax to define the various
+* things that the Help Compiler knows how to interpret, and turn into
+* a proper WinHelp file.
+*
+* Where necessary and appropriate, there will be comments like this
+* one to assist you in understanding what this help file is doing.
+*
+**********************************************************************
+}
+
+{\comment ************************************************************
+* 
+* Before we do anything else, we need to define the font table that we
+* will be using, I will then set the default font to '0' (Arial)
+* and the font size to 16
+* 
+**********************************************************************
+}
+
+{\fonttbl
+\f0\fswiss Arial;
+\f1\froman Times New Roman;
+\f2\fmodern Courier New;
+\f3\fswiss MS Sans Serif;
+\f4\froman MS Serif;
+}
+\deff0
+\fs18
+
+{\comment ************************************************************
+* 
+* Now lets get started. Here is the first topic of this help file. It
+* is normal for this to be the OVERVIEW page.
+* 
+**********************************************************************
+}
+
+{\comment ************************************************************
+*         OVERVIEW
+**********************************************************************
+}
+\keepn
+{\comment ************************************************************
+* The WinHelp compiler turns 'footnotes' into the special index tags
+* used to organize the popups and jumps throughout your help file.
+**********************************************************************
+}
+
+{\comment ************************************************************
+* WinHelp used 'footnotes' to keep track of various aspects about a
+* particular help page. The three most common footnote types are
+* "#", "$", and "K".
+* --------------------------------------------------------------------
+* # Specifies a context string. The text parameter can be any
+*   combination of letters and digits but must not contain spaces.
+*   Uppercase and lowercase characters are treated as equivalent
+*   characters (case-insensitive). The context string can be used
+*   with the \v statement in other topics to create links to this
+*   topic. (I'll talk about this later). The Context string should be
+*   unique to this help file, and is never actually seen by the user.
+* --------------------------------------------------------------------
+* $ Specifies a topic title. Windows Help uses the topic title to
+*   identify the topic in the Search and History dialog boxes. The
+*   text parameter can be any combination of characters including
+*   spaces. 
+* --------------------------------------------------------------------
+* K Specifies a keyword. Windows Help displays all keywords in the
+*   Help file in the Search dialog box and allows a user to choose
+*   a topic to view by choosing a keyword. The text parameter can be
+*   any combination of characters including spaces. If the first
+*   character is the letter K, it must be preceded with an extra
+*   space or a semicolon. More than one keyword can be given by
+*   separating the keywords with semicolons (;). A topic cannot
+*   contain keywords unless it also has a topic title. 
+**********************************************************************
+}
+
+#{\footnote OVERVIEW}
+${\footnote Overview}
+K{\footnote Overview}
+\{bmc leakybin.bmp\} {\comment : Here we include the bitmap image}
+{
+\b
+\fs32
+\tab
+LeakyBin: Application Performance Counter Demo Application
+}
+\par
+\pard
+
+\sb150
+LeakyBin is a sample application that illustrates how an application 
+program can provide performance data to the Windows NT Performance 
+Registry and have that data displayed in Perfmon. 
+\par
+
+When started, LeakyBin will allocate blocks of memory repeatedly until 
+stopped or the system runs out of virtual memory. While doing this LeakyBin
+will display the current system virutal memory statistics in the main
+window and if enabled output it's use of the GlobalAlloc, GlobalReAlloc and 
+GlobalFree function calls to the Windows NT Performance Registry. The 
+memory allocations of this application can be monitored using Perfmon along
+with other related system performance counters for easy side by side
+comparison.
+\par
+
+
+{\comment ************************************************************
+* Hot Spots:
+* Here is where we actually end up using the 'Context String' data
+* that we specify in footnotes. There are two important parts of
+* this. First, is the 'label' for the footnote, which is followed
+* by the 'destination'. The 'label' must have some sort of underline
+* style associated with it. A double underline (as used here) means
+* that this is a 'jump' hotspot, which means WinHelp will jump to
+* the help topic indicated by the destination. A single underline
+* would cause a 'popup' hotspot, which means a popup window is
+* brought up temporarily with the help topic data. The 'destination'
+* must immediately follow the 'label', and uses the \v attribute
+* which would normally make the text 'invisible' or 'hidden' So
+* in the first example below, the user would see 'Introduction' on
+* their help page, and when they click on it, it jumps to the
+* topic with a '#' footnote label of 'INTRODUCTION'. To create
+* popup hotspots instead of \uldb, use \ul or \strike.
+**********************************************************************
+}
+{\fs18\b Menu Items:}\par
+\tab{\uldb File{\v MENU_FILE}}\par
+\tab{\uldb Test{\v MENU_TEST}}\par
+\tab{\uldb Help{\v MENU_HELP}}\par
+\pard
+\page
+
+{\comment ************************************************************
+*         Menu: File
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_FILE}
+${\footnote Menu Items}
+K{\footnote Menu Items: File}
+{\fs24\b File}
+\par\pard
+\sb100
+{\fs18\b Exit}\par
+Releases all allocated memory and terminates the program.
+\par
+\pard
+
+\page
+
+{\comment ************************************************************
+*         Menu: Test
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_TEST}
+${\footnote Menu Items}
+K{\footnote Menu Items: Test}
+{\fs24\b Test}
+\par\pard
+\sb100
+{\fs18\b Start Leaking}\par
+Starts periodic memory allocations without releasing and allocated 
+memory blocks.\par
+This option in only enabled if memory is not being allocated at the time.
+\par
+
+\sb100
+{\fs18\b Stop Leaking}\par
+Stops memory allocations, but does not release any memory blocks.\par
+This option is only available while memory is being allocated.\par
+
+\sb100
+{\fs18\b Reset Memory}\par
+Releases all allocated memory blocks.\par
+
+\par
+\pard
+
+\page
+
+{\comment ************************************************************
+*         Menu: Help
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_HELP}
+${\footnote Menu Items}
+K{\footnote Menu Items: Help}
+{\fs24\b Help}
+\par\pard
+\sb100
+Displays information about the program.
+\par
+\pard
+
+\page
+
+{\comment *** End of RTF File *** }
+}
+

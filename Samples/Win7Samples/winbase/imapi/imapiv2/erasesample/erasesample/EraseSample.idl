@@ -1,0 +1,123 @@
+/*--
+
+Copyright (C) Microsoft Corporation, 2006
+
+IDL source for EraseSample
+
+--*/
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EraseSample.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "imapi2.idl";
+
+// All interfaces here are scriptable unless otherwise noted:
+interface IEraseSample;
+interface DEraseSampleEvents;
+
+////////////////////////////////////////////////////////////////////////////////
+
+[
+    object, 
+    uuid(2A97995D-523A-40cc-AE40-D54EA214BAE5),
+    nonextensible,
+    dual,
+    pointer_default(unique),
+    helpstring("Optical media erase")
+]
+interface IEraseSample : IDiscFormat2
+{
+    [ //////////////////////////////////////////////////////////////////////////
+        propput, id(0x100),
+        helpstring("Sets the recorder object to use for an erase operation")
+    ]
+    HRESULT Recorder([in] IDiscRecorder2 * value);
+    
+    [ //////////////////////////////////////////////////////////////////////////
+        propget, id(0x100),
+        helpstring("Gets the recorder object to use for an erase operation")
+    ]
+    HRESULT Recorder([out,ref,retval] IDiscRecorder2 ** value);
+
+    [ //////////////////////////////////////////////////////////////////////////
+        propput, id(0x101),
+        helpstring("Sets the flag of performing a full erase")
+    ]
+    HRESULT FullErase( [in] VARIANT_BOOL value );
+
+    [ //////////////////////////////////////////////////////////////////////////
+        propget, id(0x101),
+        helpstring("Gets the flag of performing a full erase")
+    ]
+    HRESULT FullErase( [out,ref,retval] VARIANT_BOOL * value );
+
+    [ //////////////////////////////////////////////////////////////////////////
+        propget, id(0x102),
+        helpstring("Get the current physical media type.")
+    ]
+    HRESULT CurrentPhysicalMediaType( [out,ref,retval] IMAPI_MEDIA_PHYSICAL_TYPE * value );
+
+    [ //////////////////////////////////////////////////////////////////////////
+        propput, id(0x103),
+        helpstring("The friendly name of the client (used to determine recorder reservation conflicts).")
+    ]
+    HRESULT ClientName( [in] BSTR value );
+    [ //////////////////////////////////////////////////////////////////////////
+        propget, id(0x103),
+        helpstring("The friendly name of the client (used to determine recorder reservation conflicts).")
+    ]
+    HRESULT ClientName( [out,ref,retval] BSTR* value );
+
+
+    [ //////////////////////////////////////////////////////////////////////////
+        id(0x201),
+        helpstring("Erases the media in the active disc recorder")
+    ]
+    HRESULT EraseMedia();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+cpp_quote("#define DISPID_IERASESAMPLEEVENTS_UPDATE 0x200")
+[
+    object, 
+    uuid(E2DDFE2A-3BD5-4896-87E2-B6B2F58298E0),
+    nonextensible, 
+    oleautomation,
+    pointer_default(unique),
+    helpstring("Provides notification of media erase progress.")
+]
+interface DEraseSampleEvents : IDispatch
+{
+    [ 
+        id(0x200),
+        helpstring("Erase progress")
+    ]
+    HRESULT Update( [in] IDispatch /* IEraseSample */ * object, [in] LONG elapsedSeconds, [in] LONG estimatedTotalSeconds);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+[
+	uuid(32DAE09E-4A98-4967-A47C-C0744127B8CB),
+	version(1.0),
+	helpstring("EraseSample 1.0 Type Library")
+]
+library EraseSampleLib
+{
+    importlib("stdole2.tlb");
+
+    [
+        uuid(786e85d1-9f56-47ed-9cbb-9be1e9b2b074),
+        helpstring("Microsoft Media Erase/Blank Sample"),
+    ]
+    coclass MsftEraseSample
+    {
+        [default] interface IEraseSample;
+        interface IConnectionPointContainer;
+        [default,source] interface DEraseSampleEvents;
+    };
+
+};

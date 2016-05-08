@@ -1,0 +1,83 @@
+<HTML xmlns:cool>
+<HEAD>
+
+<TITLE>Behavior Library: Coolbar</title>
+
+<STYLE>
+    @media all
+    {
+	    cool\:bar   {
+	                behavior: url(coolbar.htc);
+	                padding: 5px
+	                }
+	                
+	    cool\:button{
+	                behavior: url(coolbutton.htc);
+	                text-align: center
+	                }
+    }
+    
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                }
+    A:link { color:#003399; text-decoration:none; }
+    A:visited { color:#6699CC; text-decoration:none; }
+    A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H1>Coolbar</H1>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT>
+<HR>
+
+<cool:bar SizeAll="true">
+
+	<cool:button type="check" group="oGroup" image="homeoff.gif" hoverImage="home.gif" href="home.htm" target="topic">
+	    Home
+	    </cool:button>
+
+	<cool:button type="check" group="oGroup" image="cartoff.gif" hoverImage="cart.gif" href="shop.htm" target="topic">
+	    Shop
+	    </cool:button>
+
+	<cool:button type="check" group="oGroup" image="bagoff.gif" hoverImage="bag.gif" href="buy.htm" target="topic">
+	    Buy
+	    </cool:button>
+        	    
+	<cool:button type="check" group="oGroup" image="exitoff.gif" hoverImage="exit.gif" href="exit.htm" target="topic">
+	    Exit
+	    </cool:button>
+        
+	<cool:button type="check" group="oGroup" image="helpoff.gif" hoverImage="help.gif" href="help.htm" target="topic">
+	    Help
+	    </cool:button>
+	    
+</cool:bar>
+
+<BR><BR>
+
+<!---------------------------------------------------------------------------->
+<!-- DESTINATION AREA, PAGES ARE SELECTED USING THE COOLBAR ------------------>
+<!---------------------------------------------------------------------------->
+
+<IFRAME NAME="topic" width="50%" SRC="intro.htm" SCROLLING="no" NORESIZE></IFRAME>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <a HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</a>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

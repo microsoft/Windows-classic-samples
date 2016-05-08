@@ -1,0 +1,98 @@
+<HTML>
+<HEAD>
+<TITLE>Indexing Service Sample Style Sheet</TITLE>
+</head>
+   <STYLE type="text/css">
+   <!--
+
+body p td {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10pt;
+        color: black;
+        }
+
+b {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10pt;
+        color: black;
+        }
+
+a {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10pt;
+        color: blue;
+        text-decoration: none;
+        }
+
+code {
+        font-family: Courier;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10pt;
+        color: black;
+        }
+
+strong {
+        font-family: Verdana, Arial, Helvetica;
+        font-variant: small-caps
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10pt;
+        color: black;
+        background-color: yellow;
+        }
+
+h1 {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18pt;
+        color: black;
+        }
+
+h2 {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14pt;
+        color: black;
+      }
+
+h3 {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12pt;
+        color: black;
+      }
+
+.RecordTitle {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 10pt;
+        color: black;
+        background-color: #A6CAF0;
+      }
+
+.RecordStats {
+        font-family: Verdana, Arial, Helvetica;
+        font-style: italic;
+        font-weight: normal;
+        font-size: 10pt;
+        color: black;
+        }
+
+-->
+   </style>
+
+<BODY>
+<COMMENT> The other pages display the real data</COMMENT>
+</BODY>
+</HTML>

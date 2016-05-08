@@ -1,0 +1,17 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows
+;
+;  Copyright (C) Microsoft Corporation, 1997 - 1999
+;
+;  File:       certxsam.def
+;
+;--------------------------------------------------------------------------
+
+LIBRARY
+
+EXPORTS
+    DllCanUnloadNow     PRIVATE
+    DllGetClassObject   PRIVATE
+    DllRegisterServer   PRIVATE
+    DllUnregisterServer PRIVATE

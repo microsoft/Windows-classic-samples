@@ -1,0 +1,28 @@
+<!- Copyright (c)  Microsoft Corporation, All Rights Reserved ->
+<html>
+<!-------------------------------------------------------------------------
+ 
+	This sample illustrates the use of the WMI Scripting API within
+   an HTML page, using JScript.  It displays a Win32_service name
+   using the synchronous API.
+
+   The WMI Scripting objects are instantiated using their PROGID's
+   and the ActiveXObject call.
+
+---------------------------------------------------------------------------->
+
+<head>
+<title>WMI Scripting HTML Sample - Service Display 2 (JScript synchronous version)</title>
+<script FOR="document" EVENT="onclick()" LANGUAGE="JScript">
+		var locator = new ActiveXObject ("WbemScripting.SWbemLocator");
+		var service = locator.ConnectServer();
+		var process = service.Get('Win32_Service.Name="Winmgmt"');
+		document.all.info.innerText = process.DisplayName;
+</script>
+</head>
+
+<body>
+
+<p>Click in this window for the name of the WMI service: <span ID="info">unknown </span>. </p>
+</body>
+</html>

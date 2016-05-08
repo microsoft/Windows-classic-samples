@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<myrecord>
+	<mytitle>title of the document</mytitle>
+	<mykeywords>dog,horse,cat</mykeywords>
+	<Author>AuthorXYZ</Author>
+	<body> this is a test of the emergency broadcasting system.
+
+This is the content of the document.
+
+I'm most pleased that it is the content of the document.
+	</body>
+	<lastmodified>12/3/1996</lastmodified>
+</myrecord>

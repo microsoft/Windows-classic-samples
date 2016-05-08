@@ -1,0 +1,45 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2003 <company name>
+//
+//  Module Name:
+//      ExtObjID.idl
+//
+//  Description:
+//      Definition of COM interfaces for the Cluster Administrator
+//      FileShareSampleEx Extension DLL.
+//
+//  Author:
+//      <name> (<e-mail name>) Mmmm DD, 2003
+//
+//  Revision History:
+//
+//  Notes:
+//      This file will be processed by the MIDL tool to
+//      produce the type library (ExtObj.tlb) and marshalling code.
+//
+/////////////////////////////////////////////////////////////////////////////
+
+[
+    uuid(14ACD802-BCC3-4116-9FB6-7FA3EAA2A837),
+    version(1.0),
+    helpstring("FileShareSampleEx 1.0 Type Library")
+]
+library CLUADMEXLib
+{
+    importlib("stdole2.tlb");
+    import "CluAdmEx.idl";
+
+    [
+        uuid(52C191F6-27F4-4F1C-840D-AB3A91C9DEAB),
+        helpstring("CoFileShareSampleEx Class")
+    ]
+    coclass CoFileShareSampleEx
+    {
+        interface IWEExtendPropertySheet;
+        interface IWEExtendWizard;
+        interface IWEExtendContextMenu;
+        interface IWEInvokeCommand;
+    };
+
+};

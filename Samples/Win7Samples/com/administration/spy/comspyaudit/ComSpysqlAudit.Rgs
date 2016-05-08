@@ -1,0 +1,23 @@
+HKCR
+{
+	ComSpy.SqlAudit.1 = s 'ComSpySqlAudit Class'
+	{
+		CLSID = s '{AFCF0623-1429-11D1-B1B8-00AA00BA3258}'
+	}
+	ComSpy.SqlAudit = s 'ComSpySqlAudit Class'
+	{
+		CurVer = s 'ComSpy.SqlAudit.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {AFCF0623-1429-11D1-B1B8-00AA00BA3258} = s 'ComSpySqlAudit Class'
+		{
+			ProgID = s 'ComSpy.SqlAudit.1'
+			VersionIndependentProgID = s 'ComSpy.SqlAudit'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+		}
+	}
+}

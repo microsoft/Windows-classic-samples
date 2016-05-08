@@ -1,0 +1,178 @@
+<head>
+<title>IIS Samples - ISAPI KeepAlive</title>
+</head>
+<body>
+
+<a name="top"></a>
+<p>
+<h2>IIS Samples - ISAPI KeepAlive</h2>
+<a name="IIS_KeepAlive"></a>
+
+<p>
+This sample demonstrates how to maintain a Keep-Alive connection.
+</p>
+
+<p><font color="blue"><b>Important</b></font> &nbsp; These samples are provided for educational purposes only. They are not 
+intended to be used in a production environment, have not been tested in a production 
+environment, and Microsoft does not provide technical support for them.
+
+<p>
+	&nbsp;</p>
+  <p>
+	<a href="#ovr">Sample Overview</a><br>
+	<a href="#req">Requirements</a><br>
+	<a href="#loc">Location of the Source Code</a><br>
+	<a href="#bld">Build and Install the Sample</a><br>
+	<a href="#run">Run the Sample</a><br>
+	<a href="#out">Sample Output</a><br>
+	<a href="#hlp">Helpdesk</a></p>
+  <p>
+	&nbsp;</p>
+  <h4><a name="ovr"></a>Sample Overview</h4>
+  <p>
+    This very simple DLL demonstrates the code to keep an HTTP connection alive.
+  </p>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="req"></a>Requirements</h4>
+  <p>This sample requires the installation of the following software to
+  function properly:</p>
+  <ul>
+    <li>Windows XP Professional with IIS 5.1 installed or Windows XP Server with 
+    IIS 6.0 installed.</li>
+  </ul>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="loc"></a>Location of the Source Code</h4>
+  <p>IIS samples are included in the IIS Software Developer Kit (SDK). 
+  You can download the IIS SDK from 
+  <a href="http://go.microsoft.com/fwlink/?LinkId=7298">Platform SDK Update</a>. 
+  You can view the SDK at <a href="http://go.microsoft.com/fwlink/?LinkId=1694">MSDN Online</a>. 
+  In the table of contents at MSDN Online, click <b>Web Development</b>, <b>Server Technologies</b>, 
+  <b>Internet Information Services (IIS)</b>, <b>SDK Documentation</b>, 
+  <b>Internet Information Services</b>, <b>Samples</b>.</p>
+  <p>The following source code files are required for this sample:</p>
+  <table border="1">
+    <tr>
+      <th>File</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>KeepAlive.sln</td>
+      <td>KeepAlive Visual Studio .NET solution file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>KeepAlive.vcproj</td>
+      <td>KeepAlive Visual Studio .NET C Project file, required to build this sample in Visual Studio .NET.</td>
+    </tr>
+    <tr>
+      <td>KeepAlive.dsp, KeepAlive.dsw</td>
+      <td>KeepAlive Visual Studio 6.0 project files, required to build this sample in Visual Studio Version 6.</td>
+    </tr>
+    <tr>
+      <td>KeepAlive.c</td>
+      <td>KeepAlive source modules containing the code that implements the sample.</td>
+    </tr>
+    <tr>
+      <td>KeepAlive.def</td>
+      <td>KeepAlive.dll definition containing code for creating the sample.</td>
+    </tr>
+    <tr>
+      <td>MAKEFILE</td>
+      <td>KeepAlive makefile for command line compilation</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="bld"></a>Build and Install the Sample</h4>
+  <p>To build  this sample using the Visual C++ IDE, the following
+  steps must be performed:</p>
+  <ol>
+    <li>Open the solution (VS.NET) or desktop (VS6) file to open the project.</li>
+    <li>Click <b>Build</b> to create the DLL.</li>
+  </ol>
+  <p>To build and run this sample without using the Visual C++ IDE, the
+  following steps must be performed:</p>
+  <ol>
+    <li>Type <b>NMAKE All</b> from the command line. For example, if your sample files are located in 
+	a folder called <code>C:\MySamples</code>, type the following at the command line:
+      <pre>cd /d c:\MySamples
+NMAKE All</pre>
+    </li>
+  </ol>
+  <p>&nbsp;</p>
+  <p>To install this sample, the following steps must be performed:</p>
+  <ol>
+  <li>Copy KeepAlive.dll to a physical folder on your computer. For example, 
+  create a folder called <code>C:\Samples</code> and copy KeepAlive.dll to that folder.</li>
+  <li>Create a virtual directory that maps to the physical folder containing your files. To create 
+  a virtual directory, open the Internet Information Services (IIS) Manager by clicking <b>Start</b>, 
+  <b>Run</b>, type <code>inetmgr</code> in the text box and click <b>OK</b>. Right-click on the Web 
+  site where you want to create a virtual directory, click <b>New</b>, and click <b>Virtual 
+  Directory</b>. In the <b>Alias</b> text box, type the name you want for your virtual directory, for 
+  example, <code>KeepAlive</code>. In the <b>Directory</b> text box, type the path to the 
+  folder that contains your files.
+  <li>Configure strong security on your new virtual directory. Right-click the virtual directory name, 
+  click <b>Properties</b>, and click the <b>Directory Security</b> tab. Press F1 for tips on 
+  securing your virtual directory.</li>
+  <li>Use Windows Explorer to set restricted access control on the sample .dll file in its physical folder. 
+  For more information, click <b>Start</b>, <b>Help and Support</b>, and search for <b>Access Control</b>.</li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="run"></a>Run the Sample</h4>
+  <p>In order to run this sample, follow the instructions listed below:</p>
+  <ol>
+    <li>Browse to your sample Web files in Internet Explorer (IE). For example, if your files are in a 
+  virtual directory called <code>KeepAlive</code>, type 
+  <code>http://localhost/KeepAlive/KeepAlive.dll</code> in the <b>Address</b> bar 
+  of IE.
+    </li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="out"></a>Sample Output</h4>
+  <p>
+    There is no output for this sample.
+  </p>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="hlp"></a>Help Desk</h4>
+  <p>If here you do not find answers to your questions, visit the 
+  <a href="http://go.microsoft.com/fwlink/?linkid=1782">Microsoft Help and Support</a> 
+  Web site.</p>
+  <table border="1">
+    <tr>
+      <th>Problem</th>
+      <th>Possible Solution</th>
+    </tr>
+    <tr>
+      <td>When browsing to the ASP page, IE returns <b>HTTP 404 - File not found</b></td>
+      <td>Verify that you have created a virtual directory of the same name you
+        are typing in the Address box of IE....</td>
+    </tr>
+    <tr>
+      <td>When building the dll, C++ or VB returns the a permissions error.</td>
+      <td>Once you have called the dll from your web page, your system considers
+        it a loaded dll. You must unload it to build it again, either by
+        unloading the ASP application or deleting the dll from system32\dllcache.</td>
+    </tr>
+    <tr>
+      <td>When building the dll, C++ returns a permissions error.</td>
+      <td>Once you have called the dll from your web page, your system considers
+        it a loaded dll. You must unload it to build it again, either by
+        unloading the ASP application or deleting the dll from system32\dllcache.</td>
+    </tr>
+    <tr>
+      <td>When browsing to the dll, IE gives you a permissions error.</td>
+      <td>The folder and virtual directory must have Execute permissions set on them.</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+
+<hr class="iis" size="1">
+<p align="center"><i>© 1997-2002 Microsoft Corporation. All rights reserved.</i></p>
+
+</body>
+</html>
+

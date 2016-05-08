@@ -1,0 +1,254 @@
+{\rtf1
+{\comment ************************************************************
+* 
+* This is a simple RTF help file. It was constructed with a regular
+* text editor, and using normal RTF syntax to define the various
+* things that the Help Compiler knows how to interpret, and turn into
+* a proper WinHelp file.
+*
+* Where necessary and appropriate, there will be comments like this
+* one to assist you in understanding what this help file is doing.
+*
+**********************************************************************
+}
+
+{\comment ************************************************************
+* 
+* Before we do anything else, we need to define the font table that we
+* will be using, I will then set the default font to '0' (Arial)
+* and the font size to 16
+* 
+**********************************************************************
+}
+
+{\fonttbl
+\f0\fswiss Arial;
+\f1\froman Times New Roman;
+\f2\fmodern Courier New;
+\f3\fswiss MS Sans Serif;
+\f4\froman MS Serif;
+}
+\deff0
+\fs18
+
+{\comment ************************************************************
+* 
+* Now lets get started. Here is the first topic of this help file. It
+* is normal for this to be the OVERVIEW page.
+* 
+**********************************************************************
+}
+
+{\comment ************************************************************
+*         OVERVIEW
+**********************************************************************
+}
+\keepn
+{\comment ************************************************************
+* The WinHelp compiler turns 'footnotes' into the special index tags
+* used to organize the popups and jumps throughout your help file.
+**********************************************************************
+}
+
+{\comment ************************************************************
+* WinHelp used 'footnotes' to keep track of various aspects about a
+* particular help page. The three most common footnote types are
+* "#", "$", and "K".
+* --------------------------------------------------------------------
+* # Specifies a context string. The text parameter can be any
+*   combination of letters and digits but must not contain spaces.
+*   Uppercase and lowercase characters are treated as equivalent
+*   characters (case-insensitive). The context string can be used
+*   with the \v statement in other topics to create links to this
+*   topic. (I'll talk about this later). The Context string should be
+*   unique to this help file, and is never actually seen by the user.
+* --------------------------------------------------------------------
+* $ Specifies a topic title. Windows Help uses the topic title to
+*   identify the topic in the Search and History dialog boxes. The
+*   text parameter can be any combination of characters including
+*   spaces. 
+* --------------------------------------------------------------------
+* K Specifies a keyword. Windows Help displays all keywords in the
+*   Help file in the Search dialog box and allows a user to choose
+*   a topic to view by choosing a keyword. The text parameter can be
+*   any combination of characters including spaces. If the first
+*   character is the letter K, it must be preceded with an extra
+*   space or a semicolon. More than one keyword can be given by
+*   separating the keywords with semicolons (;). A topic cannot
+*   contain keywords unless it also has a topic title. 
+**********************************************************************
+}
+
+#{\footnote OVERVIEW}
+${\footnote Overview}
+K{\footnote Overview}
+{
+\b
+\fs32
+statlist: A PDH Demonstration Program
+}
+\par
+\pard
+
+\sb150
+Statlist is a demonstration program to illustrate how the Performcnce
+Data Helper (PDH) library can be used to collect performance data and
+display statistical summaries of that performance data.
+\par
+
+To view system performance data with Statlist, you must first select
+one or more performance counters to monitor. Counters are added by selecting
+the Configure Menu Item, then selecting the \"Add Counter...\" menu 
+selection. A dialog box will then display all the counters available on 
+the system. Select the desired performance object and counter, then 
+press the \"OK\" button to add that counter to the list in the main
+window.
+\par
+
+To obtain the current data for the counter(s) that have been selected,
+simply click the \"Get Data!\" menu selection and the current data value
+will be displayed in the window along with all the updated
+statistical values. 
+\par
+
+{\b Note:} that only the last 100 samples are used in the
+computation of the statistics.
+\par
+
+\par
+\pard
+
+{\comment ************************************************************
+* Hot Spots:
+* Here is where we actually end up using the 'Context String' data
+* that we specify in footnotes. There are two important parts of
+* this. First, is the 'label' for the footnote, which is followed
+* by the 'destination'. The 'label' must have some sort of underline
+* style associated with it. A double underline (as used here) means
+* that this is a 'jump' hotspot, which means WinHelp will jump to
+* the help topic indicated by the destination. A single underline
+* would cause a 'popup' hotspot, which means a popup window is
+* brought up temporarily with the help topic data. The 'destination'
+* must immediately follow the 'label', and uses the \v attribute
+* which would normally make the text 'invisible' or 'hidden' So
+* in the first example below, the user would see 'Introduction' on
+* their help page, and when they click on it, it jumps to the
+* topic with a '#' footnote label of 'INTRODUCTION'. To create
+* popup hotspots instead of \uldb, use \ul or \strike.
+**********************************************************************
+}
+{\fs18 \b Menu Items:}\par
+\tab{\uldb File{\v MENU_FILE}}\par
+\tab{\uldb Configure{\v MENU_CONFIGURE}}\par
+\tab{\uldb Get Data!{\v MENU_GETDATA}}\par
+\tab{\uldb Help{\v MENU_HELP}}\par
+
+\pard
+\page
+
+{\comment ************************************************************
+*         File Menu Item
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_FILE}
+${\footnote Menu Items}
+K{\footnote Menu Items: File}
+{\fs24 \b File}
+\par\pard
+\sb100
+{\fs18 \b Exit}
+\par
+\pard
+
+Closes the application and exits the program.
+\par
+\pard
+
+\page
+
+{\comment ************************************************************
+*         Configure Menu Item
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_CONFIGURE}
+${\footnote Menu Items}
+K{\footnote Menu Items: Configure}
+{\fs24\b Configure}
+\par\pard
+\sb100
+{\fs18\b Add Counter...}
+\par\pard
+
+Displays a dialog box that lists the performance objects and counters that
+are available to be monitored. Selecting a performance counter from this
+dialog will add it to the list of performance counters displayed in the 
+main window.
+\par
+\pard
+
+\sb100
+{\fs18\b Clear All Counters}
+\par
+\pard
+
+Deletes all the counters from the display.
+\par
+\pard
+
+\page
+
+{\comment ************************************************************
+*         Menu: Get Data!
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_GETDATA}
+${\footnote Menu Items}
+K{\footnote Menu Items: Get Data!}
+{\fs24\b Get Data!}
+\par\pard
+\sb100
+{\fs18\b Get Data!}
+\par
+\pard
+
+Obtains the current value of all counters in the display from the system
+and updates the display with the current data and the current statistical
+values. If more than 100 samples have been collected, the statistics 
+represent only the 100 most recent samples.
+\par
+
+\sb100
+{\b Note:} If a counter has been added that is the same as one already in
+the list, it may take several data samples for the "last value" of each to 
+agree. This is due to the fact that many counters are differentiated over
+time and the time interval of the existing counter will be different than
+that of the newly added counter until several samples have been taken.
+\par
+\pard
+
+\page
+
+{\comment ************************************************************
+*         Menu: Help
+**********************************************************************
+}
+\keepn
+#{\footnote MENU_HELP}
+${\footnote Menu Items}
+K{\footnote Menu Items: Help}
+{\fs24\b Help}
+\par\pard
+\sb100
+Displays this help text.
+\par
+\pard
+
+\page
+
+
+{\comment *** End of RTF File *** }
+}
+

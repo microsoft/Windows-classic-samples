@@ -1,0 +1,852 @@
+<html>
+<head>
+<title>The VSHADOW sample client</title>
+
+<style>
+<!--
+
+body, table tr td {
+	margin: 10pt;
+	font-size:9.0pt;
+	font-family:"Arial","sans-serif";
+}
+
+h1 {
+	font-size:18.0pt;
+	font-family:"Arial","sans-serif";
+}
+
+h2 {
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	font-size:14.0pt;
+	font-family:"Arial","sans-serif";
+	font-style:italic;
+}
+
+h3 {
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	font-size:13.0pt;
+	font-family:"Arial","sans-serif";
+}
+
+h4 {
+	margin-top:10.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	font-weight:bold;
+	font-size:11.0pt;
+	font-family:"Arial","sans-serif";
+}
+
+ol {
+	margin-bottom:0in;
+}
+ul {
+	margin-bottom:0in;
+}
+
+table tr td {
+	border-bottom: 1px solid #ddd;
+	padding: 2pt;
+	padding-right: 6pt;
+}
+
+pre {
+	background-color: #ddd;
+	width: 708px;
+	padding: 4pt;
+}
+
+-->
+</style>
+
+</head>
+<body>
+<h1>The VSHADOW sample client</h1>
+
+<h2>Introduction</h2>
+
+<p>
+This tool serves as a sample VSS application that demonstrates various tasks performed by a regular VSS requestor. VSHADOW.EXE also offers a simple command-line interface for VSS management, including shadow copy creation, deletion and query.
+</p><p>
+This sample code must be compiled with Visual Studio 2005.
+</p>
+
+<h2>Command line options</h2>
+
+<p>
+The VSHADOW tool can be used for snapshot creation, deletion, query and other management operations like break or expose. If any of these commands fail, VSHADOW will return the appropriate exit code. You can detect this exit code through the ERRORLEVEL environment variable.
+</p>
+
+<h3>Shadow copy creation</h3>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW [optional list of flags] {list of volumes} 
+
+Flags:
+    -p                  - Creates persistent shadow copies
+    -nw                 - Creates shadow copies without involving writers
+    -ad                 - Creates Differential Hardware shadow copies
+    -ap                 - Creates Plex Hardware shadow copies
+    -scsf               - Creates Shadow Copies for Shared Folders (Client accessible)
+    -wi={writer}        - Verifies that a certain writer/component is included
+    -wx={writer}        - Excludes a certain writer/component from the shadow copy
+    -t={file.xml}       - Creates a transportable shadow copy and saves the Backup Components 
+                          document into the given file. This file can be used in a subsequent
+                          Import and/or restore.
+    -bc={file.xml}      - Creates a non-transportable shadow copy and saves the Backup 
+                          Components document into the given file. This file can be used in a 
+                          subsequent restore.
+    -script={file.cmd}  - Generates a CMD file containing  environment variables related to created 
+                          shadow copies (the shadow copy IDs, the shadow copy set ID, etc)
+    -exec={command}     - Executes a shell command between the shadow set creation and 
+                          VSHADOW program exit. Useful for non-persistent shadow copies.
+    -wait               - Wait for the user interaction before exiting. This will keep alive non-
+                          persistent shadows.
+    -tracing            - Verbose output - useful for diagnosis.
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The specified list of volumes should use spacing characters as separators. The volumes can optionally be terminated with a backspace, so both C: and C:\ are valid volumes. You can also specify mount points (for example c:\foo) or volume names (like \\?\Volume{edbed95e-7e8d-11d8-9d01-505054503030}\) 
+</p><p>
+When the shadow copy is created with writers, VSHADOW will automatically select all affected writer components by the specified volume. You can see the list of affected volumes for each writer by using the “-wm” option (listing the writer metadata). A writer can be specifically excluded from the shadow copy process by using the -wx option. Also, you can verify if a writer is included through the “-wi” option. Please see the chapter titled “Shadow Copy management topics” for more details on shadow creation with VSHADOW.
+</p><p>
+The shadow devices will appear in the system during creation, excepting in the transportable shadow creation mode (the -t option). In the transportable case, you must have a subsequent import phase on the same machine or on a different machine. Please see the “shadow copy import” chapter for more details. 
+</p>
+
+ 
+<h3>Shadow copy import</h3>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW [optional list of flags] -i={file.xml}
+
+Flags:
+    -exec={command}     - Executes a shell command between the shadow set creation and 
+                          VSHADOW program exit. Useful for non-persistent imported shadow copies.
+    -wait               - Wait for the user interaction before exiting. This will keep alive non-
+                          persistent shadows.
+    -tracing            - Verbose output - useful for diagnosis.
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The {file.xml} file must be a backup components file previously created with the -t option.
+</p><p>
+Note that when the shadow copy was originally created as non-persistent, the device will appear for a short time while the “VSHADOW -i=…” command is running, and will automatically go away when the program execution ends. You can access these devices only through an optional script executed through -exec command. 
+</p>
+
+<h3>Shadow copy query</h3>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW { -q | -qx={SnapSetID} }
+
+Flags:
+    -q                  - List all shadow copies in the system
+    -qx={SnapSetID}     - List all shadow copies in this set
+    -s={SnapID}         - List the snapshot with the given ID
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The implementation uses either QuerySnapshots or GetSnapshotProperties APIs to display the properties of the given set of shadow copies. 
+</p>
+
+<h3>Shadow copy deletion</h3>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW { -da | -dx={SnapSetID} | -ds={SnapSetID} }
+
+Flags:
+    -da                 - Deletes all shadow copies in the system
+    -dx={SnapSetID}     - Deletes all shadow copies in ths set
+    -ds={SnapID}        - Deletes this shadow copy
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The -da option requires user confirmation.
+</p><p>
+Non-persistent shadow copies will be automatically deleted when the VSHADOW creation/import process exits (except if Break was called on the shadow set prior to exit). 
+</p>
+
+<h3>Breaking a shadow copy set</h3>
+
+<p>
+This command is useful to convert the shadow volumes into standalone read-only/read-write volumes. Note that after this operation the shadow set is gone from VSS point of view and cannot be used for further management operations like query, expose or delete. 
+</p>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW { -b={SnapSetID} | -bw={SnapSetID} }
+
+Flags:
+    -b={SnapSetID}      - Break the given shadow copy set into standalone read-only volumes.
+    -bw={SnapSetID}     - Break the shadow copy set into standalone writable volumes
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+Non-persistent shadow copies can be accessed only though the -exec scripts. To preserve the device beyond the program VSHADOW execution you must break the non-persistent shadow in a special script through the -exec command. 
+</p>
+
+<h3>Exposing a shadow copy locally</h3>
+
+<p>
+This command is used to assign a drive letter or a mount point to a persistent shadow copy. Note that the volume will be still read-only unless you use a subsequent VSHADOW -bw to convert this shadow copy into a standalone volume. 
+</p><p>
+Non-persistent shadow copies or client accessible shadow copies cannot be exposed locally.
+</p>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW -el={SnapID},LocalEmptyDirectory
+
+    VSHADOW -el={SnapID},UnusedDriveLetter
+</pre>
+
+<h4>Example</h4>
+
+<p>
+Let’s assume that {8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c} is the ID of an existing persistent shadow copy, and that X: is an unused drive letter. The following command will expose the shadow copy under X:
+</p>
+
+<pre>
+    VSHADOW -el={8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c},x:
+</pre>
+
+<p>
+Alternatively, the following commands can be used to expose the persistent shadow copy under the mount point c:\ShadowCopies\Jun23:
+</p>
+
+<pre>
+    MKDIR c:\ShadowCopies\Jun23
+
+    VSHADOW -el={8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c}, c:\ShadowCopies\Jun23
+</pre>
+
+<h3>Exposing a shadow copy remotely</h3>
+
+<p>
+This command is used to assign a read-only share name to the root directory (or a subdirectory) from the shadow copy. Note that the share contents will remain read-only unless you use a subsequent VSHADOW -bw to convert this shadow copy into a standalone volume, and you change the security access to the share object. 
+</p><p>
+Client accessible shadow copies cannot be exposed remotely.
+</p>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW -er={SnapID},UnusedShareName
+
+    VSHADOW -er={SnapID}, UnusedShareName,PathFromRootOnShadow
+</pre>
+
+<h4>Example</h4>
+
+<p>
+Let’s assume that {8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c} is the ID of an existing shadow copy, and that share_123 is an unused share name. The following command will expose the shadow copy under this share:
+</p>
+
+<pre>
+    VSHADOW -er={8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c},share_123
+</prE>
+
+<p> 
+Alternatively, we can expose only a certain sub-tree of the shadow copy. Let’s assume that the shadow copy contains a directory \Folder1. The, you can expose the shadow copy image of the sub-tree under \Folder1\Folder2 like this:
+</p>
+
+<pre>
+    VSHADOW -er={8e8c4b6a-03b2-481c-94ac-6eb6c9bcdc1c},share_123,Folder1\Folder2
+</pre>
+
+
+<h3>Listing writers and their status/metadata</h3>
+
+<p>
+These commands are useful to detect potential failed writers, and to enumerate their components.
+</p>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW -ws
+
+    VSHADOW -wm
+
+    VSHADOW -wm2
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The -ws command is the equivalent of VSSADMIN LIST WRITERS. The -wm command will list a summary of the writer metadata (including the affected volumes). The -wm2 command will list the full writer metadata. You can use this information to determine what volumes to include in the snapshot set. 
+</p><p>
+Note that as long as the writer is in a STABLE state or WAITING_FOR_COMPLETION, the writer can be considered in a stable state, ready for the next backup.
+</p>
+
+<h3>Writer restore</h3>
+
+<h4>Syntax</h4>
+
+<pre>
+    VSHADOW [optional list of flags] -r={file.xml}
+
+    VSHADOW [optional list of flags] -rs={file.xml}
+
+Flags:
+    -wi={writer}        - Verifies that a certain writer/component is included in restore
+    -wx={writer}        - Excludes a certain writer/component from the restore
+    -exec={command}     - Executes a file restore command between the Pre-restore and Post-
+                          restore events that were sent to the writers.
+    -tracing            - Verbose output - useful for diagnosis.
+</pre>
+
+<h4>Notes</h4>
+
+<p>
+The {file.xml} file must be a backup components file previously created during a shadow copy creation with either the -t or -bc options. 
+</p><p>
+A writer can be specifically excluded from the restore process by using the -wx option (like in the case of shadow set creation). Also, you can verify if a writer is included through the “-wi” option. 
+</p><p>
+The restore process has four main parts: 
+</p>
+
+<ol>
+<li>Select the components that are present in the backup components document.
+<li>Notify the affected writers that a restore is about to begin (the Pre-restore event)
+<li>Performing the actual restore of the writer files. This must be done through the custom command specified in the -exec option.
+<li>Notify the affected writers that a restore has just happened (the Post-restore event)
+</ol>
+
+<p>
+You can also perform a simulated restore through the “-rs” option. A simulated restore performs only the first step above and does not affect writers nor does replace any data. This option might be very useful to “preview” the list of components that will be restored by a subsequent restore. 
+</p><p>
+There are various approaches to perform the actual restore. Some examples are given below:
+</p>
+
+<ol>
+<li>The most direct solution would be to manually stop/offline the writer processes through the restore script, and copy the files to their original location.
+<li>A more advanced solution for quick restore uses a transportable Import process, performed through the -exec script. In this script you can call another instance of vshadow that performs the Import. 
+<li>An alternative solution will dismount and mask the original volumes affected by the restore, and replacing them with a corresponding set of previously-imported volumes.
+</ol>
+
+<p>
+Note that VSHADOW.EXE implements only minimal restore functionality, and does not implement some advanced features that are required for a true requestor. Please consult the VSS documentation for more details on the restore process.
+</p><p>
+Designing a restore procedure with VSHADOW requires manual inspection the writer restore options through the “VSHADOW -wm” option. 
+</p>
+
+<h3>Other command-line flags</h3>
+
+<ul>
+<li>The “-tracing” flag will show a verbose output, including the call execution order. This might be useful to diagnose the source code. 
+<li>The “-wait” flag will stop VSHADOW at the end and ask the user to press ENTER to continue. This is useful when you create/import a non-persistent shadow copy since the shadow copy will be deleted right after the program exits. So this flag will allow you to see the created shadow copy. 
+</ul>
+ 
+<h2>Shadow copy management topics</h2>
+
+<h3>How to access shadow copy properties from a CMD script</h3>
+
+<p>
+If you use the “-script” option during shadow creation, VSHADOW can optionally create a CMD script containing environment variables representing various useful properties of the created shadow copy/set: 
+</p>
+
+<ul>
+<li>The shadow set ID: the %VSHADOW_SET_ID% environment variable
+<li>The shadow copy ID: the %VSHADOW_ID_NNN% variable where NNN represents the index of the source volume in the command-line)
+<li>The shadow copy device: the %VSHADOW_DEVICE_NNN% variable where NNN represents the index of the source volume in the command-line. 
+</ul>
+
+<p>
+You can use this generated script to perform controlled management on the created shadow copies. For example, you can expose a created shadow copy in this way:
+</p>
+
+<pre>
+    VSHADOW -p -nw -script=SETVAR1.cmd c:
+
+    call SETVAR1.cmd
+
+    VSHADOW -el=%VSHADOW_ID_1%,c:\directory1
+</pre>
+
+<h3>How to access non-persistent shadow copies</h3>
+
+<p>
+Any non-persistent shadow copies will be automatically deleted when the program that creates them (VSHADOW.EXE) exits. To access the contents of these shadow copies, VSHADOW offers the ability to execute a script after the shadow creation but before program exit. To run a script called “enum.cmd” you must use the -exec command-line option:
+</p>
+
+<pre>
+VSHADOW -nw -exec=enum.cmd C:
+</pre>
+
+<p>
+In the executed script you can also run the generated SETVAR script in this custom command. This allows the script to access the shadow contents directly. Remember that the shadow device can be retrieved from the VSHADOW_DEVICE_NNN environment variable. Here is an example: 
+</p>
+ 
+<pre>
+--- enum.cmd ----------------------------------------------------------
+
+    call SETVAR1.cmd
+
+    for /R %VSHADOW_DEVICE_1%\ %%i in (*.*) do @echo %%i
+
+-----------------------------------------------------------------------
+
+    shadow -nw -exec=c:\enum.cmd -script=setvar1.cmd c:
+</pre>
+
+<p>
+Note that shadow copies have a special volume device syntax that is not compatible with certain shell commands - something like \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopyXXX or \\?\GLOBALROOT\Device\HarddiskVolumeXXX. Still, many Win32 applications or shell commands can operate on this device. Some examples:
+</p>
+ 
+<ol>
+<li>Copying a file from a shadow copy:
+<pre>
+    dir > c:\somefile.txt
+
+    VSHADOW -p -nw -script=SETVAR1.cmd c:
+
+    call SETVAR1.cmd
+
+    copy %VSHADOW_DEVICE_1%\somefile.txt c:\somefile_bak.txt
+</pre>
+<li>Enumerating all files on a shadow copy device (from a batch file):
+<pre>
+    dir > c:\somefile.txt
+
+    VSHADOW -p -nw -script=SETVAR1.cmd c:
+
+    call SETVAR1.cmd
+
+    for /R %VSHADOW_DEVICE_1%\ %%i in (*) do @echo %%i
+</pre>
+</ol>
+
+<p>
+Remember that in a batch file you must use the %%i syntax for FOR variables. In a CMD window, use the %i syntax instead. 
+</p>
+
+<h4>Implementation notes</h4>
+
+<ul>
+<li>For security reasons and to keep the implementation simple, the -exec will not accepts parameters to be passed to the custom command. The whole string passed to the -exec command is treated as a single CMD/EXE file. See the sources for more comments on this limitation.
+<li>Note that the BackupComplete writer event is sent after the “-exec” script/command is executed. The BackupComplete sent to the writers signals that the backup is completed, and the writer can potentially truncate logs at this point. Therefore it is important to verify that the shadow/backup actually completed, and if the backup failed then you can abort the creation process by returning a non-zero exit code in the executed script/command (see the EXIT command for more details). If the custom command returns with a non-zero exit code, then the shadow copy creation is aborted and BackupComplete won’t be called.
+</ul>
+
+<h3>How to manage transportable shadow copies</h3>
+
+<p>
+First, you need two separate machines running Windows Server 2008. Both machines must be connected (through a SAN configuration) to a storage array that supports VSS hardware shadow copies. Then, on each machine, a VSS hardware provider must be installed. Some VSS HW providers require a manual setup process such that transportable shadow copies can be created on the first machine and imported on the second machine. The VSS SDK provides a software-simulated hardware provider (vsssampleprovider) that can be used for simulating hardware shadow copies. For more information on VSS Hardware shadow copy technology please see the VSS documentation.
+</p>
+
+<p>
+The import process is given below:
+</p>
+
+<ul>
+<li>Create the shadow copy set on machine A (the production server). This will not expose any shadow copy devices on this machine. 
+<pre>
+    VSHADOW -p -t=bc1.xml
+</pre>
+<li>Copy the backup components document on machine B
+<li>Import the shadow set on machine B. This will surface the created devices on this machine
+<pre>
+    VSHADOW -i=bc1.xml
+</pre>
+</ul>
+
+<p>
+Optionally, you could expose these shadow copies as drive letters or mount points. Also, you could potentially break the shadow set to make the new shadow copy volumes read-write. 
+</p>
+
+<p>
+To automate the shadow set management process you might use the -script option to generate the CMD script containing the shadow copy IDs. Then, you can copy the generated script along with the backup components on the other machine.
+<p>
+
+<p>
+As an example we present below a scriptable shadow creation, expose and break involving transportable shadow copies:
+</p>
+
+<ol>
+<li>Create the shadow copy set on machine A (the production server). This will not expose any shadow copy devices on this machine. Specify also the “-script” option to generate the script containing the proper environment variable definitions. 
+<pre>
+    VSHADOW -p -t=bc1.xml -script=sc1.cmd 
+</pre>
+<li>Copy the backup components document and the generated script on machine B
+<li>Import the shadow set on machine B. This will surface the created devices on this machine
+<pre>
+    VSHADOW -i=bc1.xml
+</pre>
+<li>Now, run the generated script to get the proper environment variables set up. The shadow set ID goes into the variable named VSHADOW_SET_ID. The shadow ID for the first volume specified during creation goes into the VSHADOW_ID_1 variable, and so on.
+<pre>
+    Sc1.cmd
+</pre>
+<li>Expose the shadow copies to certain drive letters on machine B. This will surface the created shadow copy devices on this machine. 
+<pre>
+    RD /s/q c:\mount_point
+
+    MD c:\mount_point
+
+    VSHADOW -el=%VSHADOW_ID_1%,c:\mount_point
+</pre>
+<li>Finally, break the shadow set to make the volumes writable. 
+<pre>
+    VSHADOW -bw=%VSHADOW_SET_ID%
+</pre>
+</ol>
+
+<p>
+One final note: non-persistent shadow copies can still be imported, but they will go away as soon as the “VSHADOW -i" process exits. To use these devices you must execute a script during import (through the -exec command) that would eventually expose the devices locally and then break the set. 
+</p>
+
+<h2>Writer and component related topics</h2>
+
+<p>
+VSHADOW allows certain writers in the system to participate in the shadow copy creation or restore process. For more details on writers and writer components please see the VSS online documentation.
+</p><p>
+By default, all writers will participate in shadow copy creation unless the option “-nw” is used. Also, you can use the “-wx” option to selectively exclude certain writers from the creation or restore process. 
+</p>
+
+<h3>Selecting volumes for shadow copy creation</h3>
+
+<p>
+Before the shadow copy creation, you might run a VSHADOW -wm or even VSHADOW -wm2 command to discover the affected paths and volumes for each component. Then, you should include enough volumes in the shadow set such that the interesting writers\components are being involved.
+</p><p>
+Remember that if you do not include the relevant volumes, the shadow copy will not contain the specified writers. 
+</p><p>
+You can use the “-wi” option to verify that a certain writer/component gets included. See below for more details. 
+</p>
+
+<h3>Verification of writer/component inclusion</h3>
+
+<p>
+During creation, you can test whether certain writers or components were included in the backup components through the “-wi” option. This option has a similar syntax with the “-wx” option. Similarly, you can use the same option to verify if certain components are restored.
+</p><p>
+<b>Important note:</b> The “-wi” command does not actually enforce the inclusion of the component - it just verifies that the component/writer is already included automatically by specifying the correct volumes in the shadow copy set. Ultimately, you must specify the correct volumes such that the desired components will get included. Please see the chapter titled “Component Selection in VSHADOW” for more details on the component selection algorithm. 
+</p><p>
+This option has two operational modes. First, with the “-wi” option, you can verify whether a certain component is included in the backup. There are various syntax options here. Some examples:
+</p>
+
+<pre>
+    VSHADOW -wi=WriterName:\LogicalPath\ComponentName    {creation options}
+
+    VSHADOW -wi="Writer name:\LogicalPath\ComponentName" {creation options}
+
+    VSHADOW -wi={WriterID}:\LogicalPath\ComponentName    {creation options}
+
+    VSHADOW -wi={InstanceID}:\LogicalPath\ComponentName  {creation options}
+</pre>
+
+<p>
+Additionally, you can verify if all components from a certain writer will be included:
+</p>
+
+<pre>
+    VSHADOW -wi=WriterName         {snapshot creation options}
+
+    VSHADOW -wi="Writer name"      {snapshot creation options}
+
+    VSHADOW -wi={WriterID}         {snapshot creation options}
+
+    VSHADOW -wi={InstanceID}       {snapshot creation options}
+</pre>
+
+<p>
+You can specify a set of writers/components by specifying the “-wi” flag several times in the same command line. For example: 
+</p>
+
+<pre>
+    VSHADOW -wi="Registry Writer:\Registry" -wi=”COM+ REGDB Writer”
+</pre>
+
+<p>
+The component string as accepted by VSHADOW can be viewed using the “VSHADOW -wm" command. Here is an example: 
+</p>
+
+<pre>
+C:\> VSHADOW -wm
+
+VSHADOW.EXE 3.0 - Volume Shadow Copy sample client
+
+Copyright (C) 2005 Microsoft Corporation. All rights reserved.
+
+
+(Option: List writer metadata)
+
+(Gathering writer metadata...)
+
+Initialize writer metadata ...
+
+Listing writer metadata ...
+
+
+* WRITER 'MSDEWriter'
+    - WriterId   = {01b5efaa-1b5f0ba-6f73c-6f7306f790-6f7286f73c6f73c1bd483c6f73c6f73c}
+    - InstanceId = {0006f74c-6f730-6f73c-6f7286f74c-6f73c0100001050e8a4d}
+    - Excluded files:
+    - Component "MSDEWriter:\AOLTEAN-DEV\SRMSERVICES\master"
+       - Name: 'master'
+       - Logical Path: 'AOLTEAN-DEV\SRMSERVICES'
+       - Full Path: '\AOLTEAN-DEV\SRMSERVICES\master'
+       - Caption: ''
+       - Type: VSS_CT_DATABASE [1]
+       - Is Selectable: 'TRUE'
+       - Is top level: 'TRUE'
+       - Notify on backup complete: 'FALSE'
+       - Affected paths by this component:
+         - C:\Program Files\Microsoft SQL Server\MSSQL$SRMSERVICES\Data
+       - Affected volumes by this component:
+         - \\?\Volume{4bcddd9a-9e9e-11d6-b7f4-806e6f6e6963}\ [C:\]
+
+
+C:\> VSHADOW -wi="MSDEWriter:\AOLTEAN-DEV\SRMSERVICES\master" c:
+</pre>
+
+<h3>Writer/component exclusion</h3>
+
+<p>
+Additionally, it is possible to explicitly exclude a certain list of writers\components during snapshot creation or restore. For example you would like to avoid certain writers that fail during snapshot creation. Or, you might want to restore only certain components. 
+</p><p>
+This option has a similar syntax with the “-wi” option. To exclude a certain writer, use the -wx option:
+</p>
+
+<pre>
+    VSHADOW -wx=WriterName         {snapshot creation options}
+
+    VSHADOW -wx="Writer name"      {snapshot creation options}
+
+    VSHADOW -wx={WriterID}         {snapshot creation options}
+
+    VSHADOW -wx={InstanceID}       {snapshot creation options}
+</pre>
+
+<p>
+Also, you can exclude a certain component from a writer. You can use the same syntax as above except that you append a colon character to the writer name, followed by the logical path and the component name. A backslash must be present between the logical path and the component name. 
+</p>
+
+<pre>
+    VSHADOW -wx=WriterName:\LogicalPath\ComponentName    {creation options}
+
+    VSHADOW -wx="Writer name:\LogicalPath\ComponentName" {creation options}
+
+    VSHADOW -wx={WriterID}:\LogicalPath\ComponentName    {creation options}
+
+    VSHADOW -wx={InstanceID}:\LogicalPath\ComponentName  {creation options}
+</pre>
+
+<p>
+You can specify a set of writers/components by specifying the “-wx” flag several times in the same command line. For example: 
+</p>
+
+<pre>
+    VSHADOW -wx="Registry Writer:\Registry" -wx=”COM+ REGDB Writer”
+</pre>
+
+<h3>Component selection during shadow copy creation</h3>
+
+<p>
+The sample code has a simple component selection algorithm. Based on the given set of volumes, it will safely select the maximal set of components from all writers, such that no selected component (implicitly or explicitly) will have its file descriptors on volumes not in the shadow set. In other words if the component X will have file descriptors on volume Y: outside the shadow copy set, then this component won’t be selected. 
+</p>
+
+<h4>Definitions</h4>
+
+<ul>
+<li>X is ancestor of Y = Y is descendent of X = including component X implies including component Y.
+<li>Directly excluded component = component that cannot be included since one of its file groups has data outside the shadow copy set.
+<li>Excluded component = component that cannot be included since one of its descendents is directly excluded.
+<li>Non-excluded component = component that is not excluded. Note that this component is not necessarily included. 
+<li>Included component = All components that are non-excluded and are equal or descendants of:
+<ul>
+<li>Either a selectable non-excluded component.
+<li>Or a non-selectable non-excluded top-level component.
+</ul>
+<li>Explicitly included component = non-excluded component on which IVssBackupComponents::AddComponent will be called. This component should be either:
+<ul>
+<li>A selectable, non-excluded component with no explicitly included ancestors.
+<li>Or a top-level non-selectable non-excluded component.
+</ul>
+<li>Implicitly included component = descendent of an explicitly included component. 
+<li>X is root in list L = X does not have ancestors in list L.
+</ul>
+
+<h4>General VSS selection rules</h4>
+<ul>
+<li>You can call AddComponent only on selectable components and/or on top-level non-selectable components. 
+<li>If you explicitly include a component (i.e. call AddComponent on it), then all descendents are implicitly included. You are not allowed to call AddComponent on one of its descendents. 
+<li>If at least one component is included from a writer X then all top-level non-selectable components from this writer must be explicitly included as well. 
+</ul>
+
+<h4>The component selection verification algorithm used by VSHADOW</h4>
+<ul>
+<li>First we discover all directly excluded components. These are components that have file groups containing data outside the volumes that have to be shadow copied.
+<li>Then we discover all excluded components. These are all components that have at least one directly excluded descendent. 
+<li>Then we discover if the writer needs to be excluded. The writer will be excluded if:
+<ul>
+<li>Either all its selectable components are excluded
+<li>Or the writer contains at least one excluded top-level non-selectable component 
+</ul>
+<li>We establish now the list of explicitly included components:
+<ul>
+<li>First, we isolate the subset of components that are candidate for explicit inclusion
+<ul>
+<li>Either selectable non-excluded components 
+<li>Or non-selectable top-level non-excluded components
+</ul>
+<li>From the list above we retain the roots, i.e. components that 
+<ul>
+<li>Are candidate for explicit exclusion 
+<li>Have no ancestors that are candidate for explicit exclusion
+</ul>
+</ul>
+<li>Finally, we select all the explicitly included components using AddComponent.
+</ul>
+
+<h4>Limitations of this algorithm</h4>
+
+<ul>
+<li>The component consistency verification algorithm in VSHADOW has two limitations. 
+<ul>
+<li>The algorithm will not follow component dependencies. In other words, if component X from writer A depends on component Y from writer B, and the component Y will be excluded, then this does not necessarily means that the component X will be excluded as well. However, the writer A might fail since its dependent component Y was not selected during the backup. 
+<li>The algorithm will not follow mount point chains. In other words, if component X defines a File Descriptor including all recursive files under a certain directory c:\foo, then VSHADOW will not verify if all mount points recursively mounted under C:\ are included in the shadow copy set. Therefore the component will still be added to the backup even if certain parts of the reported namespace are not shadow copied.
+</ul>
+</ul>
+
+<h3>Component selection for restore</h3>
+
+<p>
+In the case of restore, the component selection is done only on the components already present (backed-up) in the backup components document. By default, all components from the backup components document are considered for restore, unless “-wx” is used.
+</p><p>
+A backed-up component can be restored through VSHADOW only if the associated writer is already running on the machine. The existing components on the currently-running writers are ignored. 
+</p><p>
+The exclusion/inclusion rules mentioned above for the shadow creation case apply in a similar manner during restore. A previously backed-up component can be specifically excluded with the “-wx” option. Also, you can verify the selectability state of a certain component during restore through the “-wi” option. 
+</p>
+
+<h4>Limitations of this algorithm</h4>
+
+<p>
+The current VSHADOW code has only minimal restore support. The code does not offer any way to do partial restores, new targets, alternate targets, subcomponent selection or other advanced restore functionality that can be found in a true requestor. 
+</p>
+
+<h2>List of files in the VSHADOW project</h2>
+
+<table cellpadding="0" cellspacing="0">
+<tr><td>
+<b>File name</b>
+</td><td>
+<b>Description</b>
+</td></tr><tr><td>
+macros.h
+</td><td>
+Useful macros
+</td></tr><tr><td>
+create.cpp
+</td><td>
+VSS shadow copy creation code
+</td></tr><tr><td>
+delete.cpp
+</td><td>
+VSS shadow copy deletion code
+</td></tr><tr><td>
+break.cpp
+</td><td>
+VSS shadow copy break code
+</td></tr><tr><td>
+query.cpp
+</td><td>
+VSS shadow copy query code
+</td></tr><tr><td>
+stdafx.cpp
+</td><td rowspan="2">
+Precompiled header (general declarations)
+</td></tr><tr><td>
+stdafx.h
+</td></tr><tr><td>
+tracing.cpp
+</td><td rowspan="2">
+Very simple tracing/logging class
+</td></tr><tr><td>
+tracing.h
+</td></tr><tr><td>
+util.h
+</td><td>
+Utility routines (string conversion, volume APIs, etc)
+</td></tr><tr><td>
+shadow.cpp
+</td><td rowspan="2">
+VSHADOW command-line specific code (CLI parsing, usage routine, etc)
+</td></tr><tr><td>
+shadow.h
+</td></tr><tr><td>
+vssclient.cpp
+</td><td rowspan="2">
+Declaration/definition of the VSS API wrapper class. 
+</td></tr><tr><td>
+vssclient.h
+</td></tr><tr><td>
+Writer.h
+</td><td>
+VSS writer metadata wrappers (writer, component, file descriptor, etc)
+</td></tr><tr><td>
+Select.cpp
+</td><td>
+Component selection code.
+</td></tr><tr><td>
+writer.cpp	
+</td><td>
+Implementation of VSS writer metadata wrappers 
+</td></tr><tr><td>
+vshadow.vcproj
+</td><td>
+Visual Studio project file
+</td></tr><tr><td>
+readme 	
+</td><td>
+This document
+</td></tr><tr><td>
+VShadow.sln
+</td><td>
+Visual Studio solution for VSHADOW
+</td></tr></table>
+
+<h2>Building the VSHADOW project</h2>
+
+<p>
+Building the Visual Studio 2005 project will produce vshadow.exe. Start a cmd.exe window running as a local administrator, and run this program to see the list of available commands.
+</p><p>
+Building solution outside of SDK directory requires MSSdk environment variable defined or project file updated with paths to includes and libraries. For more information about MSSdk environment variable, please see the SetEnv.Cmd script in bin subdirectory inside SDK installation path.
+</p><p>
+Itanium architecture is available as a target for server SKUs only. Appropriate compiler is required.
+</p><p>
+Visual Studio 2005 solution is designed to work in Visual Studio 2008 as well after initial conversion performed by the IDE.
+</p><p>
+Building in Visual Studio 2005 against SDK libraries may require manual reconfiguration of Visual Studio 2005 directories configuration if you
+encounter linker errors related to uuid.lib. To do that, please select Tools > Options in the main menu. Navigate to Projects and Solutions >
+VC++ Directories branch and select "Library files" for your desired architecture from the "Show directories for" dropdown menu. SDK path
+will vary depending on the installation directory. By default it is c:\Program Files\Microsoft SDKs\Windows\v7.0\Include. Select and move
+this directory down the list using "Line Down" button in the upper right corner of the dialog.
+</p>
+
+</body>
+</html>

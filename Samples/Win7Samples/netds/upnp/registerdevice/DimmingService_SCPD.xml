@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <actionList>
+    <action>
+  <name>PowerOn</name>
+</action>
+<action>
+  <name>PowerOff</name>
+</action>
+<action>
+    	<name>GetPowerValue</name>
+      <argumentList>
+        <argument>
+          <name>powerVall</name>
+          <direction>out</direction>
+          <relatedStateVariable>Power</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+    	<name>SetDimLevel</name>
+      <argumentList>
+        <argument>
+          <name>dLevel</name>
+          <direction>in</direction>
+          <relatedStateVariable>dimLevel</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+    	<name>GetDimLevel</name>
+      <argumentList>
+        <argument>
+          <name>dLevel</name>
+          <direction>out</direction>
+          <relatedStateVariable>dimLevel</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+    	<name>GetConfigDetails</name>
+      <argumentList>
+        <argument>
+          <name>powerVal</name>
+          <direction>out</direction>
+         <relatedStateVariable>Power</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>dLevel</name>
+          <direction>out</direction>
+          <relatedStateVariable>dimLevel</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+  </actionList>
+
+  <serviceStateTable>
+<stateVariable>
+  <name>Power</name>
+  <dataType>Boolean</dataType>
+  <defaultValue>0</defaultValue>
+</stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>dimLevel</name>
+      <dataType>i4</dataType>
+      <defaultValue>0</defaultValue>
+      <allowedValueRange>
+        <minimum>0</minimum>
+        <maximum>100</maximum>
+      </allowedValueRange>
+    </stateVariable>
+  </serviceStateTable>
+</scpd>

@@ -1,0 +1,3064 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Microsoft Corporation Technical Documentation License Agreement (Standard)
+
+READ THIS! THIS IS A LEGAL AGREEMENT BETWEEN MICROSOFT CORPORATION 
+("MICROSOFT") AND THE RECIPIENT OF THESE MATERIALS, WHETHER AN INDIVIDUAL OR AN 
+ENTITY ("YOU"). IF YOU HAVE ACCESSED THIS AGREEMENT IN THE PROCESS OF 
+DOWNLOADING MATERIALS ("MATERIALS") FROM A MICROSOFT WEB SITE, BY CLICKING "I 
+ACCEPT", DOWNLOADING, USING OR PROVIDING FEEDBACK ON THE MATERIALS, YOU AGREE 
+TO THESE TERMS. IF THIS AGREEMENT IS ATTACHED TO MATERIALS, BY ACCESSING, USING 
+OR PROVIDING FEEDBACK ON THE ATTACHED MATERIALS, YOU AGREE TO THESE TERMS.
+
+1. For good and valuable consideration, the receipt and sufficiency of which 
+are acknowledged, You and Microsoft agree as follows:
+
+(a) If You are an authorized representative of the corporation or other entity 
+designated below ("Company"), and such Company has executed a Microsoft 
+Corporation Non-Disclosure Agreement that is not limited to a specific subject 
+matter or event ("Microsoft NDA"), You represent that You have authority to act 
+on behalf of Company and agree that the Confidential Information, as defined in 
+the Microsoft NDA, is subject to the terms and conditions of the Microsoft NDA 
+and that Company will treat the Confidential Information accordingly; 
+
+(b) If You are an individual, and have executed a Microsoft NDA, You agree that 
+the Confidential Information, as defined in the Microsoft NDA, is subject to 
+the terms and conditions of the Microsoft NDA and that You will treat the 
+Confidential Information accordingly; or
+
+(c)If a Microsoft NDA has not been executed, You (if You are an individual), or 
+Company (if You are an authorized representative of Company), as applicable, 
+agrees: (a) to refrain from disclosing or distributing the Confidential 
+Information to any third party for five (5) years from the date of disclosure 
+of the Confidential Information by Microsoft to Company/You; (b) to refrain 
+from reproducing or summarizing the Confidential Information; and (c) to take 
+reasonable security precautions, at least as great as the precautions it takes 
+to protect its own confidential information, but no less than reasonable care, 
+to keep confidential the Confidential Information. You/Company, however, may 
+disclose Confidential Information in accordance with a judicial or other 
+governmental order, provided You/Company either (i) gives Microsoft reasonable 
+notice prior to such disclosure and to allow Microsoft a reasonable opportunity 
+to seek a protective order or equivalent, or (ii) obtains written assurance 
+from the applicable judicial or governmental entity that it will afford the 
+Confidential Information the highest level of protection afforded under 
+applicable law or regulation. Confidential Information shall not include any 
+information, however designated, that: (i) is or subsequently becomes publicly 
+available without Your/Company's breach of any obligation owed to Microsoft; 
+(ii) became known to You/Company prior to Microsoft's disclosure of such 
+information to You/Company pursuant to the terms of this Agreement; (iii) 
+became known to You/Company from a source other than Microsoft other than by 
+the breach of an obligation of confidentiality owed to Microsoft; or (iv) is 
+independently developed by You/Company. For purposes of this paragraph, 
+"Confidential Information" means nonpublic information that Microsoft 
+designates as being confidential or which, under the circumstances surrounding 
+disclosure ought to be treated as confidential by Recipient. "Confidential 
+Information" includes, without limitation, information in tangible or 
+intangible form relating to and/or including released or unreleased Microsoft 
+software or hardware products, the marketing or promotion of any Microsoft 
+product, Microsoft's business policies or practices, and information received 
+from others that Microsoft is obligated to treat as confidential.
+
+2. You may review these Materials only (a) as a reference to assist You in 
+planning and designing Your product, service or technology ("Product") to 
+interface with a Microsoft Product as described in these Materials; and (b) to 
+provide feedback on these Materials to Microsoft. All other rights are retained 
+by Microsoft; this agreement does not give You rights under any Microsoft 
+patents. You may not (i) duplicate any part of these Materials, (ii) remove 
+this agreement or any notices from these Materials, or (iii) give any part of 
+these Materials, or assign or otherwise provide Your rights under this 
+agreement, to anyone else. 
+
+3. These Materials may contain preliminary information or inaccuracies, and may 
+not correctly represent any associated Microsoft Product as commercially 
+released. All Materials are provided entirely "AS IS." To the extent permitted 
+by law, MICROSOFT MAKES NO WARRANTY OF ANY KIND, DISCLAIMS ALL EXPRESS, IMPLIED 
+AND STATUTORY WARRANTIES, AND ASSUMES NO LIABILITY TO YOU FOR ANY DAMAGES OF 
+ANY TYPE IN CONNECTION WITH THESE MATERIALS OR ANY INTELLECTUAL PROPERTY IN 
+THEM.
+
+4. If You are an entity and (a) merge into another entity or (b) a controlling 
+ownership interest in You changes, Your right to use these Materials 
+automatically terminates and You must destroy them. 
+
+5. You have no obligation to give Microsoft any suggestions, comments or other 
+feedback ("Feedback") relating to these Materials. However, any Feedback you 
+voluntarily provide may be used in Microsoft Products and related 
+specifications or other documentation (collectively, "Microsoft Offerings") 
+which in turn may be relied upon by other third parties to develop their own 
+Products. Accordingly, if You do give Microsoft Feedback on any version of 
+these Materials or the Microsoft Offerings to which they apply, You agree: (a) 
+Microsoft may freely use, reproduce, license, distribute, and otherwise 
+commercialize Your Feedback in any Microsoft Offering; (b) You also grant third 
+parties, without charge, only those patent rights necessary to enable other 
+Products to use or interface with any specific parts of a Microsoft Product 
+that incorporate Your Feedback; and (c) You will not give Microsoft any 
+Feedback (i) that You have reason to believe is subject to any patent, 
+copyright or other intellectual property claim or right of any third party; or 
+(ii) subject to license terms which seek to require any Microsoft Offering 
+incorporating or derived from such Feedback, or other Microsoft intellectual 
+property, to be licensed to or otherwise shared with any third party. 
+
+6. Microsoft has no obligation to maintain confidentiality of any Microsoft 
+Offering, but otherwise the confidentiality of Your Feedback, including Your 
+identity as the source of such Feedback, is governed by Your NDA. 
+
+7. This agreement is governed by the laws of the State of Washington. Any 
+dispute involving it must be brought in the federal or state superior courts 
+located in King County, Washington, and You waive any defenses allowing the 
+dispute to be litigated elsewhere. If there is litigation, the losing party 
+must pay the other party's reasonable attorneys' fees, costs and other 
+expenses. If any part of this agreement is unenforceable, it will be considered 
+modified to the extent necessary to make it enforceable, and the remainder 
+shall continue in effect. This agreement is the entire agreement between You 
+and Microsoft concerning these Materials; it may be changed only by a written 
+document signed by both You and Microsoft.
+-->
+<cdm:ColorDeviceModel
+	xmlns:cdm="http://schemas.microsoft.com/windows/2005/02/color/ColorDeviceModel"
+	xmlns:wcs="http://schemas.microsoft.com/windows/2005/02/color/WcsCommonProfileTypes"
+	xmlns:xs='http://www.w3.org/2001/XMLSchema-instance'>
+
+	<cdm:ProfileName>
+		<wcs:Text xml:lang="en-US">RGBPrinter.cdmp</wcs:Text>
+	</cdm:ProfileName>
+	<cdm:Description>
+		<wcs:Text xml:lang="en-US">RGBPrinter device model test profile</wcs:Text>
+	</cdm:Description>
+	<cdm:Author>
+		<wcs:Text xml:lang="en-US">Jane Doe</wcs:Text>
+	</cdm:Author>
+
+	<cdm:MeasurementConditions>
+		<cdm:ColorSpace>CIEXYZ</cdm:ColorSpace>
+		<cdm:WhitePoint X=" 85.627" Y=" 88.893" Z=" 76.772" />
+		<cdm:Geometry>0/45</cdm:Geometry>
+		<cdm:ApertureSize>10</cdm:ApertureSize>
+	</cdm:MeasurementConditions>
+	<cdm:SelfLuminous>false</cdm:SelfLuminous>
+	<cdm:MaxColorant>255</cdm:MaxColorant>
+	<cdm:MinColorant>0</cdm:MinColorant>	
+
+	<cdm:RGBPrinterDevice>
+		<cdm:MeasurementData TimeStamp="2005-02-09T22:00:00">
+			<cdm:ColorCube>
+				<cdm:Sample Tag="C1">
+					<cdm:RGB R="0" G="0" B="0" />
+					<cdm:CIEXYZ X="0.786" Y="0.792" Z="1.300" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D1">
+					<cdm:RGB R="0" G="0" B="31" />
+					<cdm:CIEXYZ X="0.903" Y="0.840" Z="2.016" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E1">
+					<cdm:RGB R="0" G="0" B="63" />
+					<cdm:CIEXYZ X="1.145" Y="0.922" Z="3.344" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F1">
+					<cdm:RGB R="0" G="0" B="95" />
+					<cdm:CIEXYZ X="1.460" Y="1.004" Z="4.910" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G1">
+					<cdm:RGB R="0" G="0" B="127" />
+					<cdm:CIEXYZ X="1.863" Y="1.074" Z="6.979" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H1">
+					<cdm:RGB R="0" G="0" B="159" />
+					<cdm:CIEXYZ X="2.035" Y="1.102" Z="7.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I1">
+					<cdm:RGB R="0" G="0" B="191" />
+					<cdm:CIEXYZ X="2.195" Y="1.130" Z="8.687" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J1">
+					<cdm:RGB R="0" G="0" B="223" />
+					<cdm:CIEXYZ X="2.188" Y="1.136" Z="8.679" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K1">
+					<cdm:RGB R="0" G="0" B="255" />
+					<cdm:CIEXYZ X="2.369" Y="1.147" Z="9.660" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L1">
+					<cdm:RGB R="0" G="31" B="0" />
+					<cdm:CIEXYZ X="1.229" Y="1.691" Z="2.371" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M1">
+					<cdm:RGB R="0" G="31" B="31" />
+					<cdm:CIEXYZ X="1.095" Y="1.543" Z="2.462" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N1">
+					<cdm:RGB R="0" G="31" B="63" />
+					<cdm:CIEXYZ X="1.575" Y="1.506" Z="6.138" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O1">
+					<cdm:RGB R="0" G="31" B="95" />
+					<cdm:CIEXYZ X="2.108" Y="1.507" Z="9.181" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P1">
+					<cdm:RGB R="0" G="31" B="127" />
+					<cdm:CIEXYZ X="2.491" Y="1.498" Z="11.200" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q1">
+					<cdm:RGB R="0" G="31" B="159" />
+					<cdm:CIEXYZ X="2.797" Y="1.486" Z="12.788" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R1">
+					<cdm:RGB R="0" G="31" B="191" />
+					<cdm:CIEXYZ X="2.894" Y="1.450" Z="13.278" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S1">
+					<cdm:RGB R="0" G="31" B="223" />
+					<cdm:CIEXYZ X="2.786" Y="1.400" Z="12.587" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T1">
+					<cdm:RGB R="0" G="31" B="255" />
+					<cdm:CIEXYZ X="2.904" Y="1.351" Z="13.152" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U1">
+					<cdm:RGB R="0" G="63" B="0" />
+					<cdm:CIEXYZ X="1.058" Y="2.148" Z="2.000" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V1">
+					<cdm:RGB R="0" G="63" B="31" />
+					<cdm:CIEXYZ X="1.103" Y="2.216" Z="2.661" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W1">
+					<cdm:RGB R="0" G="63" B="63" />
+					<cdm:CIEXYZ X="1.437" Y="2.327" Z="5.202" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X1">
+					<cdm:RGB R="0" G="63" B="95" />
+					<cdm:CIEXYZ X="2.114" Y="2.301" Z="9.312" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y1">
+					<cdm:RGB R="0" G="63" B="127" />
+					<cdm:CIEXYZ X="2.670" Y="2.264" Z="12.453" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z1">
+					<cdm:RGB R="0" G="63" B="159" />
+					<cdm:CIEXYZ X="3.068" Y="2.203" Z="14.685" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B2">
+					<cdm:RGB R="0" G="63" B="191" />
+					<cdm:CIEXYZ X="3.430" Y="2.175" Z="16.530" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C2">
+					<cdm:RGB R="0" G="63" B="223" />
+					<cdm:CIEXYZ X="3.406" Y="2.004" Z="16.360" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D2">
+					<cdm:RGB R="0" G="63" B="255" />
+					<cdm:CIEXYZ X="3.645" Y="1.875" Z="17.551" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E2">
+					<cdm:RGB R="0" G="95" B="0" />
+					<cdm:CIEXYZ X="1.233" Y="3.060" Z="2.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F2">
+					<cdm:RGB R="0" G="95" B="31" />
+					<cdm:CIEXYZ X="1.240" Y="3.083" Z="2.694" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G2">
+					<cdm:RGB R="0" G="95" B="63" />
+					<cdm:CIEXYZ X="1.478" Y="3.253" Z="4.708" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H2">
+					<cdm:RGB R="0" G="95" B="95" />
+					<cdm:CIEXYZ X="2.173" Y="3.765" Z="9.089" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I2">
+					<cdm:RGB R="0" G="95" B="127" />
+					<cdm:CIEXYZ X="2.954" Y="3.741" Z="13.781" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J2">
+					<cdm:RGB R="0" G="95" B="159" />
+					<cdm:CIEXYZ X="3.434" Y="3.414" Z="16.607" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K2">
+					<cdm:RGB R="0" G="95" B="191" />
+					<cdm:CIEXYZ X="3.712" Y="2.981" Z="18.241" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L2">
+					<cdm:RGB R="0" G="95" B="223" />
+					<cdm:CIEXYZ X="3.791" Y="2.642" Z="18.672" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M2">
+					<cdm:RGB R="0" G="95" B="255" />
+					<cdm:CIEXYZ X="4.114" Y="2.399" Z="20.398" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N2">
+					<cdm:RGB R="0" G="127" B="0" />
+					<cdm:CIEXYZ X="1.374" Y="3.793" Z="2.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O2">
+					<cdm:RGB R="0" G="127" B="31" />
+					<cdm:CIEXYZ X="1.383" Y="3.900" Z="2.567" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P2">
+					<cdm:RGB R="0" G="127" B="63" />
+					<cdm:CIEXYZ X="1.548" Y="4.255" Z="4.273" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q2">
+					<cdm:RGB R="0" G="127" B="95" />
+					<cdm:CIEXYZ X="2.103" Y="4.853" Z="7.875" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R2">
+					<cdm:RGB R="0" G="127" B="127" />
+					<cdm:CIEXYZ X="3.020" Y="5.175" Z="13.578" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S2">
+					<cdm:RGB R="0" G="127" B="159" />
+					<cdm:CIEXYZ X="3.766" Y="4.853" Z="18.174" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T2">
+					<cdm:RGB R="0" G="127" B="191" />
+					<cdm:CIEXYZ X="4.167" Y="4.271" Z="20.669" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U2">
+					<cdm:RGB R="0" G="127" B="223" />
+					<cdm:CIEXYZ X="4.347" Y="3.669" Z="21.774" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V2">
+					<cdm:RGB R="0" G="127" B="255" />
+					<cdm:CIEXYZ X="4.741" Y="3.252" Z="24.010" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W2">
+					<cdm:RGB R="0" G="159" B="0" />
+					<cdm:CIEXYZ X="1.540" Y="4.632" Z="2.073" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X2">
+					<cdm:RGB R="0" G="159" B="31" />
+					<cdm:CIEXYZ X="1.545" Y="4.838" Z="2.547" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y2">
+					<cdm:RGB R="0" G="159" B="63" />
+					<cdm:CIEXYZ X="1.724" Y="5.479" Z="4.081" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z2">
+					<cdm:RGB R="0" G="159" B="95" />
+					<cdm:CIEXYZ X="2.169" Y="6.125" Z="7.064" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A3">
+					<cdm:RGB R="0" G="159" B="127" />
+					<cdm:CIEXYZ X="3.267" Y="7.238" Z="13.512" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B3">
+					<cdm:RGB R="0" G="159" B="159" />
+					<cdm:CIEXYZ X="4.457" Y="7.552" Z="20.854" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C3">
+					<cdm:RGB R="0" G="159" B="191" />
+					<cdm:CIEXYZ X="5.188" Y="6.905" Z="25.474" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D3">
+					<cdm:RGB R="0" G="159" B="223" />
+					<cdm:CIEXYZ X="5.409" Y="5.948" Z="27.125" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E3">
+					<cdm:RGB R="0" G="159" B="255" />
+					<cdm:CIEXYZ X="5.857" Y="5.202" Z="29.872" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F3">
+					<cdm:RGB R="0" G="191" B="0" />
+					<cdm:CIEXYZ X="1.800" Y="5.771" Z="2.216" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G3">
+					<cdm:RGB R="0" G="191" B="31" />
+					<cdm:CIEXYZ X="1.837" Y="6.115" Z="2.771" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H3">
+					<cdm:RGB R="0" G="191" B="63" />
+					<cdm:CIEXYZ X="1.942" Y="6.646" Z="4.114" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I3">
+					<cdm:RGB R="0" G="191" B="95" />
+					<cdm:CIEXYZ X="2.276" Y="7.222" Z="6.493" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J3">
+					<cdm:RGB R="0" G="191" B="127" />
+					<cdm:CIEXYZ X="2.946" Y="7.881" Z="11.003" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K3">
+					<cdm:RGB R="0" G="191" B="159" />
+					<cdm:CIEXYZ X="4.168" Y="8.707" Z="18.412" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L3">
+					<cdm:RGB R="0" G="191" B="191" />
+					<cdm:CIEXYZ X="5.671" Y="9.212" Z="27.379" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M3">
+					<cdm:RGB R="0" G="191" B="223" />
+					<cdm:CIEXYZ X="6.443" Y="8.672" Z="32.084" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N3">
+					<cdm:RGB R="0" G="191" B="255" />
+					<cdm:CIEXYZ X="6.824" Y="7.541" Z="34.835" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O3">
+					<cdm:RGB R="0" G="223" B="0" />
+					<cdm:CIEXYZ X="1.955" Y="6.501" Z="2.219" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P3">
+					<cdm:RGB R="0" G="223" B="31" />
+					<cdm:CIEXYZ X="1.957" Y="6.849" Z="2.760" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q3">
+					<cdm:RGB R="0" G="223" B="63" />
+					<cdm:CIEXYZ X="2.072" Y="7.444" Z="3.956" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R3">
+					<cdm:RGB R="0" G="223" B="95" />
+					<cdm:CIEXYZ X="2.270" Y="7.891" Z="5.689" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S3">
+					<cdm:RGB R="0" G="223" B="127" />
+					<cdm:CIEXYZ X="2.735" Y="8.544" Z="8.921" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T3">
+					<cdm:RGB R="0" G="223" B="159" />
+					<cdm:CIEXYZ X="3.736" Y="9.367" Z="15.283" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U3">
+					<cdm:RGB R="0" G="223" B="191" />
+					<cdm:CIEXYZ X="5.285" Y="10.342" Z="24.484" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V3">
+					<cdm:RGB R="0" G="223" B="223" />
+					<cdm:CIEXYZ X="7.226" Y="11.144" Z="35.943" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W3">
+					<cdm:RGB R="0" G="223" B="255" />
+					<cdm:CIEXYZ X="7.820" Y="10.251" Z="39.648" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X3">
+					<cdm:RGB R="0" G="255" B="0" />
+					<cdm:CIEXYZ X="2.122" Y="7.321" Z="2.319" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y3">
+					<cdm:RGB R="0" G="255" B="31" />
+					<cdm:CIEXYZ X="2.143" Y="7.781" Z="2.884" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z3">
+					<cdm:RGB R="0" G="255" B="63" />
+					<cdm:CIEXYZ X="2.216" Y="8.255" Z="3.768" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A4">
+					<cdm:RGB R="0" G="255" B="95" />
+					<cdm:CIEXYZ X="2.527" Y="9.255" Z="5.571" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B4">
+					<cdm:RGB R="0" G="255" B="127" />
+					<cdm:CIEXYZ X="2.918" Y="9.818" Z="8.419" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C4">
+					<cdm:RGB R="0" G="255" B="159" />
+					<cdm:CIEXYZ X="3.606" Y="10.589" Z="13.013" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D4">
+					<cdm:RGB R="0" G="255" B="191" />
+					<cdm:CIEXYZ X="4.956" Y="11.562" Z="21.414" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E4">
+					<cdm:RGB R="0" G="255" B="223" />
+					<cdm:CIEXYZ X="6.762" Y="12.575" Z="32.102" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F4">
+					<cdm:RGB R="0" G="255" B="255" />
+					<cdm:CIEXYZ X="8.896" Y="13.455" Z="44.747" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G4">
+					<cdm:RGB R="31" G="0" B="0" />
+					<cdm:CIEXYZ X="1.631" Y="1.502" Z="1.830" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H4">
+					<cdm:RGB R="31" G="0" B="31" />
+					<cdm:CIEXYZ X="2.101" Y="1.732" Z="2.057" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I4">
+					<cdm:RGB R="31" G="0" B="63" />
+					<cdm:CIEXYZ X="2.037" Y="1.372" Z="4.249" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J4">
+					<cdm:RGB R="31" G="0" B="95" />
+					<cdm:CIEXYZ X="2.145" Y="1.258" Z="6.130" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K4">
+					<cdm:RGB R="31" G="0" B="127" />
+					<cdm:CIEXYZ X="2.323" Y="1.239" Z="7.633" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L4">
+					<cdm:RGB R="31" G="0" B="159" />
+					<cdm:CIEXYZ X="2.510" Y="1.233" Z="8.976" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M4">
+					<cdm:RGB R="31" G="0" B="191" />
+					<cdm:CIEXYZ X="2.573" Y="1.225" Z="9.504" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N4">
+					<cdm:RGB R="31" G="0" B="223" />
+					<cdm:CIEXYZ X="2.495" Y="1.210" Z="9.271" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O4">
+					<cdm:RGB R="31" G="0" B="255" />
+					<cdm:CIEXYZ X="2.627" Y="1.210" Z="10.144" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P4">
+					<cdm:RGB R="31" G="31" B="0" />
+					<cdm:CIEXYZ X="2.345" Y="2.535" Z="1.593" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q4">
+					<cdm:RGB R="31" G="31" B="31" />
+					<cdm:CIEXYZ X="2.377" Y="2.430" Z="2.481" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R4">
+					<cdm:RGB R="31" G="31" B="63" />
+					<cdm:CIEXYZ X="2.666" Y="2.288" Z="6.847" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S4">
+					<cdm:RGB R="31" G="31" B="95" />
+					<cdm:CIEXYZ X="2.867" Y="1.941" Z="10.499" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T4">
+					<cdm:RGB R="31" G="31" B="127" />
+					<cdm:CIEXYZ X="3.099" Y="1.759" Z="12.646" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U4">
+					<cdm:RGB R="31" G="31" B="159" />
+					<cdm:CIEXYZ X="3.374" Y="1.709" Z="14.545" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V4">
+					<cdm:RGB R="31" G="31" B="191" />
+					<cdm:CIEXYZ X="3.392" Y="1.613" Z="14.889" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W4">
+					<cdm:RGB R="31" G="31" B="223" />
+					<cdm:CIEXYZ X="3.218" Y="1.499" Z="14.111" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X4">
+					<cdm:RGB R="31" G="31" B="255" />
+					<cdm:CIEXYZ X="3.334" Y="1.470" Z="14.709" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y4">
+					<cdm:RGB R="31" G="63" B="0" />
+					<cdm:CIEXYZ X="2.566" Y="3.948" Z="1.795" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z4">
+					<cdm:RGB R="31" G="63" B="31" />
+					<cdm:CIEXYZ X="2.833" Y="4.343" Z="3.087" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A5">
+					<cdm:RGB R="31" G="63" B="63" />
+					<cdm:CIEXYZ X="3.612" Y="4.904" Z="7.646" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B5">
+					<cdm:RGB R="31" G="63" B="95" />
+					<cdm:CIEXYZ X="3.678" Y="3.881" Z="12.598" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C5">
+					<cdm:RGB R="31" G="63" B="127" />
+					<cdm:CIEXYZ X="3.891" Y="3.293" Z="15.935" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D5">
+					<cdm:RGB R="31" G="63" B="159" />
+					<cdm:CIEXYZ X="4.029" Y="2.817" Z="17.707" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E5">
+					<cdm:RGB R="31" G="63" B="191" />
+					<cdm:CIEXYZ X="4.123" Y="2.508" Z="18.940" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F5">
+					<cdm:RGB R="31" G="63" B="223" />
+					<cdm:CIEXYZ X="4.007" Y="2.272" Z="18.543" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G5">
+					<cdm:RGB R="31" G="63" B="255" />
+					<cdm:CIEXYZ X="4.102" Y="2.040" Z="19.243" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H5">
+					<cdm:RGB R="31" G="95" B="0" />
+					<cdm:CIEXYZ X="2.325" Y="4.651" Z="1.879" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I5">
+					<cdm:RGB R="31" G="95" B="31" />
+					<cdm:CIEXYZ X="2.409" Y="5.048" Z="3.004" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J5">
+					<cdm:RGB R="31" G="95" B="63" />
+					<cdm:CIEXYZ X="2.761" Y="5.380" Z="5.867" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K5">
+					<cdm:RGB R="31" G="95" B="95" />
+					<cdm:CIEXYZ X="3.639" Y="5.668" Z="11.571" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L5">
+					<cdm:RGB R="31" G="95" B="127" />
+					<cdm:CIEXYZ X="4.121" Y="4.938" Z="16.402" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M5">
+					<cdm:RGB R="31" G="95" B="159" />
+					<cdm:CIEXYZ X="4.345" Y="4.160" Z="19.144" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N5">
+					<cdm:RGB R="31" G="95" B="191" />
+					<cdm:CIEXYZ X="4.521" Y="3.582" Z="20.927" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O5">
+					<cdm:RGB R="31" G="95" B="223" />
+					<cdm:CIEXYZ X="4.529" Y="3.182" Z="21.441" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P5">
+					<cdm:RGB R="31" G="95" B="255" />
+					<cdm:CIEXYZ X="4.734" Y="2.791" Z="22.941" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q5">
+					<cdm:RGB R="31" G="127" B="0" />
+					<cdm:CIEXYZ X="2.302" Y="5.482" Z="1.945" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R5">
+					<cdm:RGB R="31" G="127" B="31" />
+					<cdm:CIEXYZ X="2.358" Y="6.002" Z="2.798" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S5">
+					<cdm:RGB R="31" G="127" B="63" />
+					<cdm:CIEXYZ X="2.562" Y="6.452" Z="4.792" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T5">
+					<cdm:RGB R="31" G="127" B="95" />
+					<cdm:CIEXYZ X="3.302" Y="7.058" Z="9.468" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U5">
+					<cdm:RGB R="31" G="127" B="127" />
+					<cdm:CIEXYZ X="4.413" Y="7.373" Z="16.440" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V5">
+					<cdm:RGB R="31" G="127" B="159" />
+					<cdm:CIEXYZ X="4.987" Y="6.570" Z="21.324" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W5">
+					<cdm:RGB R="31" G="127" B="191" />
+					<cdm:CIEXYZ X="5.165" Y="5.423" Z="23.846" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X5">
+					<cdm:RGB R="31" G="127" B="223" />
+					<cdm:CIEXYZ X="5.202" Y="4.509" Z="24.827" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y5">
+					<cdm:RGB R="31" G="127" B="255" />
+					<cdm:CIEXYZ X="5.561" Y="4.015" Z="27.248" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z5">
+					<cdm:RGB R="31" G="159" B="0" />
+					<cdm:CIEXYZ X="2.590" Y="6.943" Z="2.092" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A6">
+					<cdm:RGB R="31" G="159" B="31" />
+					<cdm:CIEXYZ X="2.792" Y="7.999" Z="3.003" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B6">
+					<cdm:RGB R="31" G="159" B="63" />
+					<cdm:CIEXYZ X="2.991" Y="8.643" Z="4.837" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C6">
+					<cdm:RGB R="31" G="159" B="95" />
+					<cdm:CIEXYZ X="3.569" Y="9.306" Z="8.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D6">
+					<cdm:RGB R="31" G="159" B="127" />
+					<cdm:CIEXYZ X="4.662" Y="10.085" Z="15.584" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E6">
+					<cdm:RGB R="31" G="159" B="159" />
+					<cdm:CIEXYZ X="6.029" Y="10.400" Z="24.242" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F6">
+					<cdm:RGB R="31" G="159" B="191" />
+					<cdm:CIEXYZ X="6.532" Y="9.037" Z="29.025" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G6">
+					<cdm:RGB R="31" G="159" B="223" />
+					<cdm:CIEXYZ X="6.566" Y="7.468" Z="30.807" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H6">
+					<cdm:RGB R="31" G="159" B="255" />
+					<cdm:CIEXYZ X="6.729" Y="6.171" Z="32.940" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I6">
+					<cdm:RGB R="31" G="191" B="0" />
+					<cdm:CIEXYZ X="2.702" Y="7.913" Z="2.257" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J6">
+					<cdm:RGB R="31" G="191" B="31" />
+					<cdm:CIEXYZ X="2.736" Y="8.492" Z="2.942" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K6">
+					<cdm:RGB R="31" G="191" B="63" />
+					<cdm:CIEXYZ X="2.880" Y="9.194" Z="4.411" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L6">
+					<cdm:RGB R="31" G="191" B="95" />
+					<cdm:CIEXYZ X="3.329" Y="10.013" Z="7.292" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M6">
+					<cdm:RGB R="31" G="191" B="127" />
+					<cdm:CIEXYZ X="4.156" Y="10.838" Z="12.674" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N6">
+					<cdm:RGB R="31" G="191" B="159" />
+					<cdm:CIEXYZ X="5.466" Y="11.709" Z="20.628" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O6">
+					<cdm:RGB R="31" G="191" B="191" />
+					<cdm:CIEXYZ X="7.192" Y="12.310" Z="30.960" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P6">
+					<cdm:RGB R="31" G="191" B="223" />
+					<cdm:CIEXYZ X="7.691" Y="10.914" Z="35.572" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q6">
+					<cdm:RGB R="31" G="191" B="255" />
+					<cdm:CIEXYZ X="7.980" Y="9.211" Z="38.703" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R6">
+					<cdm:RGB R="31" G="223" B="0" />
+					<cdm:CIEXYZ X="2.665" Y="8.382" Z="2.308" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S6">
+					<cdm:RGB R="31" G="223" B="31" />
+					<cdm:CIEXYZ X="2.696" Y="8.902" Z="2.918" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T6">
+					<cdm:RGB R="31" G="223" B="63" />
+					<cdm:CIEXYZ X="2.833" Y="9.668" Z="4.191" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U6">
+					<cdm:RGB R="31" G="223" B="95" />
+					<cdm:CIEXYZ X="3.167" Y="10.464" Z="6.266" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V6">
+					<cdm:RGB R="31" G="223" B="127" />
+					<cdm:CIEXYZ X="3.748" Y="11.294" Z="10.218" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W6">
+					<cdm:RGB R="31" G="223" B="159" />
+					<cdm:CIEXYZ X="4.908" Y="12.309" Z="17.327" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X6">
+					<cdm:RGB R="31" G="223" B="191" />
+					<cdm:CIEXYZ X="6.632" Y="13.475" Z="27.340" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y6">
+					<cdm:RGB R="31" G="223" B="223" />
+					<cdm:CIEXYZ X="8.754" Y="14.411" Z="39.652" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z6">
+					<cdm:RGB R="31" G="223" B="255" />
+					<cdm:CIEXYZ X="9.380" Y="13.103" Z="44.502" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A7">
+					<cdm:RGB R="31" G="255" B="0" />
+					<cdm:CIEXYZ X="2.879" Y="9.508" Z="2.529" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B7">
+					<cdm:RGB R="31" G="255" B="31" />
+					<cdm:CIEXYZ X="2.900" Y="10.029" Z="3.201" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C7">
+					<cdm:RGB R="31" G="255" B="63" />
+					<cdm:CIEXYZ X="2.981" Y="10.607" Z="4.204" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D7">
+					<cdm:RGB R="31" G="255" B="95" />
+					<cdm:CIEXYZ X="3.191" Y="11.257" Z="5.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E7">
+					<cdm:RGB R="31" G="255" B="127" />
+					<cdm:CIEXYZ X="3.705" Y="12.166" Z="9.164" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F7">
+					<cdm:RGB R="31" G="255" B="159" />
+					<cdm:CIEXYZ X="4.522" Y="13.079" Z="14.405" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G7">
+					<cdm:RGB R="31" G="255" B="191" />
+					<cdm:CIEXYZ X="6.126" Y="14.434" Z="23.923" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H7">
+					<cdm:RGB R="31" G="255" B="223" />
+					<cdm:CIEXYZ X="8.097" Y="15.570" Z="35.616" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I7">
+					<cdm:RGB R="31" G="255" B="255" />
+					<cdm:CIEXYZ X="10.640" Y="16.923" Z="50.120" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J7">
+					<cdm:RGB R="63" G="0" B="0" />
+					<cdm:CIEXYZ X="3.297" Y="2.372" Z="1.596" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K7">
+					<cdm:RGB R="63" G="0" B="31" />
+					<cdm:CIEXYZ X="3.446" Y="2.358" Z="1.805" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L7">
+					<cdm:RGB R="63" G="0" B="63" />
+					<cdm:CIEXYZ X="3.939" Y="2.429" Z="2.872" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M7">
+					<cdm:RGB R="63" G="0" B="95" />
+					<cdm:CIEXYZ X="3.418" Y="1.980" Z="4.883" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N7">
+					<cdm:RGB R="63" G="0" B="127" />
+					<cdm:CIEXYZ X="3.192" Y="1.738" Z="6.633" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O7">
+					<cdm:RGB R="63" G="0" B="159" />
+					<cdm:CIEXYZ X="3.059" Y="1.571" Z="7.922" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P7">
+					<cdm:RGB R="63" G="0" B="191" />
+					<cdm:CIEXYZ X="2.968" Y="1.463" Z="8.800" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q7">
+					<cdm:RGB R="63" G="0" B="223" />
+					<cdm:CIEXYZ X="2.863" Y="1.379" Z="9.264" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R7">
+					<cdm:RGB R="63" G="0" B="255" />
+					<cdm:CIEXYZ X="2.930" Y="1.319" Z="10.448" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S7">
+					<cdm:RGB R="63" G="31" B="0" />
+					<cdm:CIEXYZ X="4.091" Y="3.648" Z="1.535" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T7">
+					<cdm:RGB R="63" G="31" B="31" />
+					<cdm:CIEXYZ X="4.213" Y="3.626" Z="2.274" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U7">
+					<cdm:RGB R="63" G="31" B="63" />
+					<cdm:CIEXYZ X="5.469" Y="4.216" Z="5.486" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V7">
+					<cdm:RGB R="63" G="31" B="95" />
+					<cdm:CIEXYZ X="4.771" Y="3.240" Z="9.494" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W7">
+					<cdm:RGB R="63" G="31" B="127" />
+					<cdm:CIEXYZ X="4.314" Y="2.561" Z="11.857" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X7">
+					<cdm:RGB R="63" G="31" B="159" />
+					<cdm:CIEXYZ X="4.090" Y="2.176" Z="13.591" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y7">
+					<cdm:RGB R="63" G="31" B="191" />
+					<cdm:CIEXYZ X="4.047" Y="1.979" Z="14.894" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z7">
+					<cdm:RGB R="63" G="31" B="223" />
+					<cdm:CIEXYZ X="3.862" Y="1.831" Z="14.848" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A8">
+					<cdm:RGB R="63" G="31" B="255" />
+					<cdm:CIEXYZ X="3.931" Y="1.704" Z="16.003" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B8">
+					<cdm:RGB R="63" G="63" B="0" />
+					<cdm:CIEXYZ X="6.266" Y="6.725" Z="1.705" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C8">
+					<cdm:RGB R="63" G="63" B="31" />
+					<cdm:CIEXYZ X="6.699" Y="7.304" Z="2.888" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D8">
+					<cdm:RGB R="63" G="63" B="63" />
+					<cdm:CIEXYZ X="7.438" Y="7.617" Z="7.979" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E8">
+					<cdm:RGB R="63" G="63" B="95" />
+					<cdm:CIEXYZ X="6.694" Y="6.111" Z="13.080" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F8">
+					<cdm:RGB R="63" G="63" B="127" />
+					<cdm:CIEXYZ X="6.109" Y="4.944" Z="16.537" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G8">
+					<cdm:RGB R="63" G="63" B="159" />
+					<cdm:CIEXYZ X="5.693" Y="4.046" Z="18.866" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H8">
+					<cdm:RGB R="63" G="63" B="191" />
+					<cdm:CIEXYZ X="5.259" Y="3.271" Z="19.951" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I8">
+					<cdm:RGB R="63" G="63" B="223" />
+					<cdm:CIEXYZ X="4.865" Y="2.744" Z="19.672" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J8">
+					<cdm:RGB R="63" G="63" B="255" />
+					<cdm:CIEXYZ X="4.664" Y="2.297" Z="20.293" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K8">
+					<cdm:RGB R="63" G="95" B="0" />
+					<cdm:CIEXYZ X="5.016" Y="7.039" Z="1.848" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L8">
+					<cdm:RGB R="63" G="95" B="31" />
+					<cdm:CIEXYZ X="5.292" Y="7.740" Z="2.858" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M8">
+					<cdm:RGB R="63" G="95" B="63" />
+					<cdm:CIEXYZ X="5.938" Y="8.233" Z="6.372" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N8">
+					<cdm:RGB R="63" G="95" B="95" />
+					<cdm:CIEXYZ X="6.950" Y="8.524" Z="12.756" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O8">
+					<cdm:RGB R="63" G="95" B="127" />
+					<cdm:CIEXYZ X="6.846" Y="7.545" Z="18.232" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P8">
+					<cdm:RGB R="63" G="95" B="159" />
+					<cdm:CIEXYZ X="6.417" Y="6.103" Z="21.244" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q8">
+					<cdm:RGB R="63" G="95" B="191" />
+					<cdm:CIEXYZ X="6.008" Y="4.881" Z="22.903" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R8">
+					<cdm:RGB R="63" G="95" B="223" />
+					<cdm:CIEXYZ X="5.609" Y="3.976" Z="23.207" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S8">
+					<cdm:RGB R="63" G="95" B="255" />
+					<cdm:CIEXYZ X="5.521" Y="3.263" Z="24.686" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T8">
+					<cdm:RGB R="63" G="127" B="0" />
+					<cdm:CIEXYZ X="4.593" Y="8.396" Z="2.077" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U8">
+					<cdm:RGB R="63" G="127" B="31" />
+					<cdm:CIEXYZ X="4.686" Y="8.850" Z="2.895" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V8">
+					<cdm:RGB R="63" G="127" B="63" />
+					<cdm:CIEXYZ X="5.282" Y="9.870" Z="5.345" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W8">
+					<cdm:RGB R="63" G="127" B="95" />
+					<cdm:CIEXYZ X="6.272" Y="10.616" Z="10.904" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X8">
+					<cdm:RGB R="63" G="127" B="127" />
+					<cdm:CIEXYZ X="7.306" Y="10.565" Z="18.294" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y8">
+					<cdm:RGB R="63" G="127" B="159" />
+					<cdm:CIEXYZ X="7.591" Y="9.327" Z="24.055" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z8">
+					<cdm:RGB R="63" G="127" B="191" />
+					<cdm:CIEXYZ X="7.222" Y="7.576" Z="26.819" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A9">
+					<cdm:RGB R="63" G="127" B="223" />
+					<cdm:CIEXYZ X="7.053" Y="6.382" Z="28.571" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B9">
+					<cdm:RGB R="63" G="127" B="255" />
+					<cdm:CIEXYZ X="7.032" Y="5.407" Z="31.125" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C9">
+					<cdm:RGB R="63" G="159" B="0" />
+					<cdm:CIEXYZ X="4.819" Y="10.494" Z="2.365" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D9">
+					<cdm:RGB R="63" G="159" B="31" />
+					<cdm:CIEXYZ X="4.865" Y="11.038" Z="3.174" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E9">
+					<cdm:RGB R="63" G="159" B="63" />
+					<cdm:CIEXYZ X="5.405" Y="12.304" Z="5.282" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F9">
+					<cdm:RGB R="63" G="159" B="95" />
+					<cdm:CIEXYZ X="6.097" Y="13.130" Z="9.796" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G9">
+					<cdm:RGB R="63" G="159" B="127" />
+					<cdm:CIEXYZ X="7.334" Y="13.933" Z="17.177" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H9">
+					<cdm:RGB R="63" G="159" B="159" />
+					<cdm:CIEXYZ X="8.654" Y="13.926" Z="26.206" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I9">
+					<cdm:RGB R="63" G="159" B="191" />
+					<cdm:CIEXYZ X="8.773" Y="11.844" Z="31.689" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J9">
+					<cdm:RGB R="63" G="159" B="223" />
+					<cdm:CIEXYZ X="8.195" Y="9.285" Z="33.403" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K9">
+					<cdm:RGB R="63" G="159" B="255" />
+					<cdm:CIEXYZ X="7.937" Y="7.301" Z="35.454" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L9">
+					<cdm:RGB R="63" G="191" B="0" />
+					<cdm:CIEXYZ X="4.497" Y="11.141" Z="2.454" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M9">
+					<cdm:RGB R="63" G="191" B="31" />
+					<cdm:CIEXYZ X="4.562" Y="11.823" Z="3.195" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N9">
+					<cdm:RGB R="63" G="191" B="63" />
+					<cdm:CIEXYZ X="4.924" Y="13.004" Z="4.891" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O9">
+					<cdm:RGB R="63" G="191" B="95" />
+					<cdm:CIEXYZ X="5.513" Y="13.966" Z="8.264" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P9">
+					<cdm:RGB R="63" G="191" B="127" />
+					<cdm:CIEXYZ X="6.456" Y="14.896" Z="14.267" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q9">
+					<cdm:RGB R="63" G="191" B="159" />
+					<cdm:CIEXYZ X="7.966" Y="15.821" Z="23.206" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R9">
+					<cdm:RGB R="63" G="191" B="191" />
+					<cdm:CIEXYZ X="9.700" Y="16.150" Z="33.947" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S9">
+					<cdm:RGB R="63" G="191" B="223" />
+					<cdm:CIEXYZ X="9.893" Y="14.034" Z="39.433" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T9">
+					<cdm:RGB R="63" G="191" B="255" />
+					<cdm:CIEXYZ X="9.590" Y="11.245" Z="42.063" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U9">
+					<cdm:RGB R="63" G="223" B="0" />
+					<cdm:CIEXYZ X="4.210" Y="11.562" Z="2.508" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V9">
+					<cdm:RGB R="63" G="223" B="31" />
+					<cdm:CIEXYZ X="4.276" Y="12.272" Z="3.209" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W9">
+					<cdm:RGB R="63" G="223" B="63" />
+					<cdm:CIEXYZ X="4.517" Y="13.342" Z="4.604" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X9">
+					<cdm:RGB R="63" G="223" B="95" />
+					<cdm:CIEXYZ X="4.912" Y="14.252" Z="6.997" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y9">
+					<cdm:RGB R="63" G="223" B="127" />
+					<cdm:CIEXYZ X="5.749" Y="15.472" Z="11.635" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z9">
+					<cdm:RGB R="63" G="223" B="159" />
+					<cdm:CIEXYZ X="7.192" Y="16.749" Z="19.695" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A10">
+					<cdm:RGB R="63" G="223" B="191" />
+					<cdm:CIEXYZ X="9.582" Y="18.675" Z="31.939" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B10">
+					<cdm:RGB R="63" G="223" B="223" />
+					<cdm:CIEXYZ X="11.595" Y="19.132" Z="44.549" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C10">
+					<cdm:RGB R="63" G="223" B="255" />
+					<cdm:CIEXYZ X="11.694" Y="16.689" Z="49.381" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D10">
+					<cdm:RGB R="63" G="255" B="0" />
+					<cdm:CIEXYZ X="4.226" Y="12.492" Z="2.714" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E10">
+					<cdm:RGB R="63" G="255" B="31" />
+					<cdm:CIEXYZ X="4.260" Y="13.143" Z="3.376" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F10">
+					<cdm:RGB R="63" G="255" B="63" />
+					<cdm:CIEXYZ X="4.375" Y="13.912" Z="4.459" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G10">
+					<cdm:RGB R="63" G="255" B="95" />
+					<cdm:CIEXYZ X="4.699" Y="14.860" Z="6.299" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H10">
+					<cdm:RGB R="63" G="255" B="127" />
+					<cdm:CIEXYZ X="5.412" Y="16.063" Z="10.298" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I10">
+					<cdm:RGB R="63" G="255" B="159" />
+					<cdm:CIEXYZ X="6.378" Y="17.206" Z="16.199" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J10">
+					<cdm:RGB R="63" G="255" B="191" />
+					<cdm:CIEXYZ X="8.125" Y="18.656" Z="26.298" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K10">
+					<cdm:RGB R="63" G="255" B="223" />
+					<cdm:CIEXYZ X="10.203" Y="19.718" Z="39.073" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L10">
+					<cdm:RGB R="63" G="255" B="255" />
+					<cdm:CIEXYZ X="12.861" Y="20.934" Z="54.737" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M10">
+					<cdm:RGB R="95" G="0" B="0" />
+					<cdm:CIEXYZ X="4.927" Y="3.175" Z="1.501" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N10">
+					<cdm:RGB R="95" G="0" B="31" />
+					<cdm:CIEXYZ X="5.044" Y="3.153" Z="1.696" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O10">
+					<cdm:RGB R="95" G="0" B="63" />
+					<cdm:CIEXYZ X="5.271" Y="3.134" Z="2.305" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P10">
+					<cdm:RGB R="95" G="0" B="95" />
+					<cdm:CIEXYZ X="6.065" Y="3.347" Z="3.736" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q10">
+					<cdm:RGB R="95" G="0" B="127" />
+					<cdm:CIEXYZ X="5.442" Y="2.887" Z="5.574" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R10">
+					<cdm:RGB R="95" G="0" B="159" />
+					<cdm:CIEXYZ X="4.628" Y="2.358" Z="7.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S10">
+					<cdm:RGB R="95" G="0" B="191" />
+					<cdm:CIEXYZ X="4.003" Y="1.958" Z="8.402" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T10">
+					<cdm:RGB R="95" G="0" B="223" />
+					<cdm:CIEXYZ X="3.614" Y="1.728" Z="9.150" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U10">
+					<cdm:RGB R="95" G="0" B="255" />
+					<cdm:CIEXYZ X="3.494" Y="1.547" Z="10.617" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V10">
+					<cdm:RGB R="95" G="31" B="0" />
+					<cdm:CIEXYZ X="6.106" Y="4.579" Z="1.470" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W10">
+					<cdm:RGB R="95" G="31" B="31" />
+					<cdm:CIEXYZ X="6.232" Y="4.566" Z="1.976" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X10">
+					<cdm:RGB R="95" G="31" B="63" />
+					<cdm:CIEXYZ X="6.900" Y="4.812" Z="3.665" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y10">
+					<cdm:RGB R="95" G="31" B="95" />
+					<cdm:CIEXYZ X="7.722" Y="4.961" Z="7.371" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z10">
+					<cdm:RGB R="95" G="31" B="127" />
+					<cdm:CIEXYZ X="6.991" Y="4.155" Z="10.808" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A11">
+					<cdm:RGB R="95" G="31" B="159" />
+					<cdm:CIEXYZ X="6.453" Y="3.570" Z="13.530" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B11">
+					<cdm:RGB R="95" G="31" B="191" />
+					<cdm:CIEXYZ X="5.657" Y="2.880" Z="14.944" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C11">
+					<cdm:RGB R="95" G="31" B="223" />
+					<cdm:CIEXYZ X="5.139" Y="2.462" Z="15.500" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D11">
+					<cdm:RGB R="95" G="31" B="255" />
+					<cdm:CIEXYZ X="4.805" Y="2.115" Z="16.488" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E11">
+					<cdm:RGB R="95" G="63" B="0" />
+					<cdm:CIEXYZ X="8.091" Y="7.277" Z="1.693" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F11">
+					<cdm:RGB R="95" G="63" B="31" />
+					<cdm:CIEXYZ X="8.514" Y="7.703" Z="2.468" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G11">
+					<cdm:RGB R="95" G="63" B="63" />
+					<cdm:CIEXYZ X="8.998" Y="7.983" Z="5.368" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H11">
+					<cdm:RGB R="95" G="63" B="95" />
+					<cdm:CIEXYZ X="9.904" Y="8.209" Z="11.023" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I11">
+					<cdm:RGB R="95" G="63" B="127" />
+					<cdm:CIEXYZ X="9.612" Y="7.239" Z="15.387" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J11">
+					<cdm:RGB R="95" G="63" B="159" />
+					<cdm:CIEXYZ X="8.171" Y="5.623" Z="18.052" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K11">
+					<cdm:RGB R="95" G="63" B="191" />
+					<cdm:CIEXYZ X="7.105" Y="4.416" Z="19.722" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L11">
+					<cdm:RGB R="95" G="63" B="223" />
+					<cdm:CIEXYZ X="6.212" Y="3.550" Z="19.933" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M11">
+					<cdm:RGB R="95" G="63" B="255" />
+					<cdm:CIEXYZ X="5.735" Y="2.847" Z="21.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N11">
+					<cdm:RGB R="95" G="95" B="0" />
+					<cdm:CIEXYZ X="10.528" Y="11.489" Z="2.002" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O11">
+					<cdm:RGB R="95" G="95" B="31" />
+					<cdm:CIEXYZ X="9.784" Y="11.005" Z="2.707" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P11">
+					<cdm:RGB R="95" G="95" B="63" />
+					<cdm:CIEXYZ X="10.195" Y="11.317" Z="6.028" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q11">
+					<cdm:RGB R="95" G="95" B="95" />
+					<cdm:CIEXYZ X="13.324" Y="13.887" Z="13.738" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R11">
+					<cdm:RGB R="95" G="95" B="127" />
+					<cdm:CIEXYZ X="12.122" Y="11.762" Z="19.596" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S11">
+					<cdm:RGB R="95" G="95" B="159" />
+					<cdm:CIEXYZ X="10.137" Y="8.967" Z="22.665" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T11">
+					<cdm:RGB R="95" G="95" B="191" />
+					<cdm:CIEXYZ X="8.497" Y="6.657" Z="24.154" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U11">
+					<cdm:RGB R="95" G="95" B="223" />
+					<cdm:CIEXYZ X="7.282" Y="5.068" Z="24.356" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V11">
+					<cdm:RGB R="95" G="95" B="255" />
+					<cdm:CIEXYZ X="6.638" Y="3.912" Z="25.455" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W11">
+					<cdm:RGB R="95" G="127" B="0" />
+					<cdm:CIEXYZ X="9.738" Y="13.199" Z="2.231" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X11">
+					<cdm:RGB R="95" G="127" B="31" />
+					<cdm:CIEXYZ X="8.923" Y="12.724" Z="2.990" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y11">
+					<cdm:RGB R="95" G="127" B="63" />
+					<cdm:CIEXYZ X="10.683" Y="14.792" Z="5.791" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z11">
+					<cdm:RGB R="95" G="127" B="95" />
+					<cdm:CIEXYZ X="12.637" Y="16.873" Z="12.604" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A12">
+					<cdm:RGB R="95" G="127" B="127" />
+					<cdm:CIEXYZ X="14.476" Y="17.531" Z="21.808" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B12">
+					<cdm:RGB R="95" G="127" B="159" />
+					<cdm:CIEXYZ X="12.758" Y="14.073" Z="27.355" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C12">
+					<cdm:RGB R="95" G="127" B="191" />
+					<cdm:CIEXYZ X="10.756" Y="10.666" Z="29.551" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D12">
+					<cdm:RGB R="95" G="127" B="223" />
+					<cdm:CIEXYZ X="9.219" Y="7.995" Z="29.955" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E12">
+					<cdm:RGB R="95" G="127" B="255" />
+					<cdm:CIEXYZ X="8.569" Y="6.386" Z="32.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F12">
+					<cdm:RGB R="95" G="159" B="0" />
+					<cdm:CIEXYZ X="9.042" Y="15.124" Z="2.533" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G12">
+					<cdm:RGB R="95" G="159" B="31" />
+					<cdm:CIEXYZ X="8.576" Y="15.072" Z="3.332" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H12">
+					<cdm:RGB R="95" G="159" B="63" />
+					<cdm:CIEXYZ X="9.731" Y="17.006" Z="5.649" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I12">
+					<cdm:RGB R="95" G="159" B="95" />
+					<cdm:CIEXYZ X="11.105" Y="18.648" Z="11.057" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J12">
+					<cdm:RGB R="95" G="159" B="127" />
+					<cdm:CIEXYZ X="12.491" Y="19.547" Z="19.290" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K12">
+					<cdm:RGB R="95" G="159" B="159" />
+					<cdm:CIEXYZ X="13.856" Y="19.441" Z="28.946" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L12">
+					<cdm:RGB R="95" G="159" B="191" />
+					<cdm:CIEXYZ X="12.401" Y="15.477" Z="34.047" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M12">
+					<cdm:RGB R="95" G="159" B="223" />
+					<cdm:CIEXYZ X="10.844" Y="11.787" Z="35.581" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N12">
+					<cdm:RGB R="95" G="159" B="255" />
+					<cdm:CIEXYZ X="9.805" Y="8.843" Z="37.278" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O12">
+					<cdm:RGB R="95" G="191" B="0" />
+					<cdm:CIEXYZ X="7.675" Y="15.354" Z="2.647" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P12">
+					<cdm:RGB R="95" G="191" B="31" />
+					<cdm:CIEXYZ X="7.502" Y="15.765" Z="3.382" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q12">
+					<cdm:RGB R="95" G="191" B="63" />
+					<cdm:CIEXYZ X="8.291" Y="17.477" Z="5.294" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R12">
+					<cdm:RGB R="95" G="191" B="95" />
+					<cdm:CIEXYZ X="9.132" Y="18.754" Z="9.207" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S12">
+					<cdm:RGB R="95" G="191" B="127" />
+					<cdm:CIEXYZ X="10.339" Y="19.911" Z="15.805" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T12">
+					<cdm:RGB R="95" G="191" B="159" />
+					<cdm:CIEXYZ X="12.128" Y="21.056" Z="25.658" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U12">
+					<cdm:RGB R="95" G="191" B="191" />
+					<cdm:CIEXYZ X="13.904" Y="21.209" Z="36.906" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V12">
+					<cdm:RGB R="95" G="191" B="223" />
+					<cdm:CIEXYZ X="13.147" Y="17.812" Z="42.461" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W12">
+					<cdm:RGB R="95" G="191" B="255" />
+					<cdm:CIEXYZ X="11.995" Y="13.746" Z="44.756" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X12">
+					<cdm:RGB R="95" G="223" B="0" />
+					<cdm:CIEXYZ X="6.853" Y="15.667" Z="2.732" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y12">
+					<cdm:RGB R="95" G="223" B="31" />
+					<cdm:CIEXYZ X="7.197" Y="16.834" Z="3.494" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z12">
+					<cdm:RGB R="95" G="223" B="63" />
+					<cdm:CIEXYZ X="7.703" Y="18.233" Z="5.100" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A13">
+					<cdm:RGB R="95" G="223" B="95" />
+					<cdm:CIEXYZ X="8.786" Y="20.220" Z="8.318" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B13">
+					<cdm:RGB R="95" G="223" B="127" />
+					<cdm:CIEXYZ X="9.705" Y="21.359" Z="13.770" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C13">
+					<cdm:RGB R="95" G="223" B="159" />
+					<cdm:CIEXYZ X="11.119" Y="22.483" Z="22.166" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D13">
+					<cdm:RGB R="95" G="223" B="191" />
+					<cdm:CIEXYZ X="13.370" Y="23.810" Z="34.283" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E13">
+					<cdm:RGB R="95" G="223" B="223" />
+					<cdm:CIEXYZ X="15.469" Y="24.114" Z="48.375" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F13">
+					<cdm:RGB R="95" G="223" B="255" />
+					<cdm:CIEXYZ X="14.740" Y="20.569" Z="52.926" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G13">
+					<cdm:RGB R="95" G="255" B="0" />
+					<cdm:CIEXYZ X="6.518" Y="16.451" Z="2.986" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H13">
+					<cdm:RGB R="95" G="255" B="31" />
+					<cdm:CIEXYZ X="6.711" Y="17.504" Z="3.669" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I13">
+					<cdm:RGB R="95" G="255" B="63" />
+					<cdm:CIEXYZ X="7.017" Y="18.634" Z="4.806" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J13">
+					<cdm:RGB R="95" G="255" B="95" />
+					<cdm:CIEXYZ X="7.165" Y="19.277" Z="6.985" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K13">
+					<cdm:RGB R="95" G="255" B="127" />
+					<cdm:CIEXYZ X="8.041" Y="20.716" Z="11.228" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L13">
+					<cdm:RGB R="95" G="255" B="159" />
+					<cdm:CIEXYZ X="9.222" Y="22.134" Z="17.681" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M13">
+					<cdm:RGB R="95" G="255" B="191" />
+					<cdm:CIEXYZ X="11.074" Y="23.660" Z="27.793" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N13">
+					<cdm:RGB R="95" G="255" B="223" />
+					<cdm:CIEXYZ X="13.411" Y="24.807" Z="42.156" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O13">
+					<cdm:RGB R="95" G="255" B="255" />
+					<cdm:CIEXYZ X="16.272" Y="26.059" Z="59.069" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P13">
+					<cdm:RGB R="127" G="0" B="0" />
+					<cdm:CIEXYZ X="7.233" Y="4.317" Z="1.517" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q13">
+					<cdm:RGB R="127" G="0" B="31" />
+					<cdm:CIEXYZ X="7.476" Y="4.366" Z="1.638" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R13">
+					<cdm:RGB R="127" G="0" B="63" />
+					<cdm:CIEXYZ X="7.955" Y="4.474" Z="2.060" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S13">
+					<cdm:RGB R="127" G="0" B="95" />
+					<cdm:CIEXYZ X="8.802" Y="4.739" Z="3.008" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T13">
+					<cdm:RGB R="127" G="0" B="127" />
+					<cdm:CIEXYZ X="8.845" Y="4.575" Z="4.845" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U13">
+					<cdm:RGB R="127" G="0" B="159" />
+					<cdm:CIEXYZ X="7.406" Y="3.718" Z="6.766" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V13">
+					<cdm:RGB R="127" G="0" B="191" />
+					<cdm:CIEXYZ X="6.239" Y="3.046" Z="8.337" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W13">
+					<cdm:RGB R="127" G="0" B="223" />
+					<cdm:CIEXYZ X="5.086" Y="2.421" Z="9.170" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X13">
+					<cdm:RGB R="127" G="0" B="255" />
+					<cdm:CIEXYZ X="4.540" Y="2.028" Z="10.796" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y13">
+					<cdm:RGB R="127" G="31" B="0" />
+					<cdm:CIEXYZ X="9.183" Y="6.086" Z="1.464" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z13">
+					<cdm:RGB R="127" G="31" B="31" />
+					<cdm:CIEXYZ X="9.403" Y="6.130" Z="1.813" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A14">
+					<cdm:RGB R="127" G="31" B="63" />
+					<cdm:CIEXYZ X="10.633" Y="6.719" Z="3.021" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B14">
+					<cdm:RGB R="127" G="31" B="95" />
+					<cdm:CIEXYZ X="11.443" Y="6.926" Z="5.547" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C14">
+					<cdm:RGB R="127" G="31" B="127" />
+					<cdm:CIEXYZ X="11.866" Y="6.795" Z="9.605" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D14">
+					<cdm:RGB R="127" G="31" B="159" />
+					<cdm:CIEXYZ X="10.121" Y="5.507" Z="12.434" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E14">
+					<cdm:RGB R="127" G="31" B="191" />
+					<cdm:CIEXYZ X="8.427" Y="4.351" Z="14.438" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F14">
+					<cdm:RGB R="127" G="31" B="223" />
+					<cdm:CIEXYZ X="7.008" Y="3.397" Z="15.425" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G14">
+					<cdm:RGB R="127" G="31" B="255" />
+					<cdm:CIEXYZ X="6.063" Y="2.696" Z="16.645" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H14">
+					<cdm:RGB R="127" G="63" B="0" />
+					<cdm:CIEXYZ X="11.566" Y="8.801" Z="1.634" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I14">
+					<cdm:RGB R="127" G="63" B="31" />
+					<cdm:CIEXYZ X="11.616" Y="8.874" Z="2.128" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J14">
+					<cdm:RGB R="127" G="63" B="63" />
+					<cdm:CIEXYZ X="12.585" Y="9.512" Z="3.872" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K14">
+					<cdm:RGB R="127" G="63" B="95" />
+					<cdm:CIEXYZ X="13.726" Y="10.032" Z="8.005" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L14">
+					<cdm:RGB R="127" G="63" B="127" />
+					<cdm:CIEXYZ X="14.016" Y="9.797" Z="13.227" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M14">
+					<cdm:RGB R="127" G="63" B="159" />
+					<cdm:CIEXYZ X="12.401" Y="8.119" Z="17.446" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N14">
+					<cdm:RGB R="127" G="63" B="191" />
+					<cdm:CIEXYZ X="10.332" Y="6.274" Z="19.503" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O14">
+					<cdm:RGB R="127" G="63" B="223" />
+					<cdm:CIEXYZ X="8.391" Y="4.739" Z="20.317" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P14">
+					<cdm:RGB R="127" G="63" B="255" />
+					<cdm:CIEXYZ X="7.444" Y="3.746" Z="21.943" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q14">
+					<cdm:RGB R="127" G="95" B="0" />
+					<cdm:CIEXYZ X="14.659" Y="13.440" Z="1.946" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R14">
+					<cdm:RGB R="127" G="95" B="31" />
+					<cdm:CIEXYZ X="13.831" Y="12.710" Z="2.498" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S14">
+					<cdm:RGB R="127" G="95" B="63" />
+					<cdm:CIEXYZ X="15.014" Y="13.997" Z="4.784" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T14">
+					<cdm:RGB R="127" G="95" B="95" />
+					<cdm:CIEXYZ X="17.575" Y="15.819" Z="10.683" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U14">
+					<cdm:RGB R="127" G="95" B="127" />
+					<cdm:CIEXYZ X="18.052" Y="15.645" Z="17.830" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V14">
+					<cdm:RGB R="127" G="95" B="159" />
+					<cdm:CIEXYZ X="15.158" Y="12.305" Z="22.594" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W14">
+					<cdm:RGB R="127" G="95" B="191" />
+					<cdm:CIEXYZ X="12.313" Y="9.200" Z="24.477" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X14">
+					<cdm:RGB R="127" G="95" B="223" />
+					<cdm:CIEXYZ X="10.017" Y="6.855" Z="25.262" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y14">
+					<cdm:RGB R="127" G="95" B="255" />
+					<cdm:CIEXYZ X="9.080" Y="5.564" Z="27.166" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z14">
+					<cdm:RGB R="127" G="127" B="0" />
+					<cdm:CIEXYZ X="16.744" Y="18.268" Z="2.317" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A15">
+					<cdm:RGB R="127" G="127" B="31" />
+					<cdm:CIEXYZ X="17.082" Y="18.971" Z="3.211" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B15">
+					<cdm:RGB R="127" G="127" B="63" />
+					<cdm:CIEXYZ X="17.684" Y="19.774" Z="5.799" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C15">
+					<cdm:RGB R="127" G="127" B="95" />
+					<cdm:CIEXYZ X="20.421" Y="22.329" Z="12.382" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D15">
+					<cdm:RGB R="127" G="127" B="127" />
+					<cdm:CIEXYZ X="22.688" Y="23.631" Z="22.312" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E15">
+					<cdm:RGB R="127" G="127" B="159" />
+					<cdm:CIEXYZ X="19.542" Y="19.153" Z="28.850" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F15">
+					<cdm:RGB R="127" G="127" B="191" />
+					<cdm:CIEXYZ X="15.787" Y="14.379" Z="31.017" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G15">
+					<cdm:RGB R="127" G="127" B="223" />
+					<cdm:CIEXYZ X="12.652" Y="10.473" Z="31.383" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H15">
+					<cdm:RGB R="127" G="127" B="255" />
+					<cdm:CIEXYZ X="10.577" Y="7.562" Z="32.977" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I15">
+					<cdm:RGB R="127" G="159" B="0" />
+					<cdm:CIEXYZ X="15.539" Y="20.920" Z="2.706" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J15">
+					<cdm:RGB R="127" G="159" B="31" />
+					<cdm:CIEXYZ X="15.089" Y="20.760" Z="3.416" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K15">
+					<cdm:RGB R="127" G="159" B="63" />
+					<cdm:CIEXYZ X="16.294" Y="22.694" Z="5.818" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L15">
+					<cdm:RGB R="127" G="159" B="95" />
+					<cdm:CIEXYZ X="17.987" Y="24.701" Z="11.464" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M15">
+					<cdm:RGB R="127" G="159" B="127" />
+					<cdm:CIEXYZ X="20.220" Y="26.545" Z="20.766" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N15">
+					<cdm:RGB R="127" G="159" B="159" />
+					<cdm:CIEXYZ X="21.160" Y="25.953" Z="31.486" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O15">
+					<cdm:RGB R="127" G="159" B="191" />
+					<cdm:CIEXYZ X="18.191" Y="20.532" Z="36.559" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P15">
+					<cdm:RGB R="127" G="159" B="223" />
+					<cdm:CIEXYZ X="14.598" Y="15.000" Z="37.444" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q15">
+					<cdm:RGB R="127" G="159" B="255" />
+					<cdm:CIEXYZ X="12.573" Y="10.983" Z="38.994" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R15">
+					<cdm:RGB R="127" G="191" B="0" />
+					<cdm:CIEXYZ X="12.981" Y="20.866" Z="2.818" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S15">
+					<cdm:RGB R="127" G="191" B="31" />
+					<cdm:CIEXYZ X="12.714" Y="21.276" Z="3.617" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T15">
+					<cdm:RGB R="127" G="191" B="63" />
+					<cdm:CIEXYZ X="13.726" Y="23.224" Z="5.577" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U15">
+					<cdm:RGB R="127" G="191" B="95" />
+					<cdm:CIEXYZ X="14.865" Y="24.788" Z="9.710" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V15">
+					<cdm:RGB R="127" G="191" B="127" />
+					<cdm:CIEXYZ X="16.411" Y="26.299" Z="17.216" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W15">
+					<cdm:RGB R="127" G="191" B="159" />
+					<cdm:CIEXYZ X="18.512" Y="27.651" Z="27.942" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X15">
+					<cdm:RGB R="127" G="191" B="191" />
+					<cdm:CIEXYZ X="19.947" Y="27.436" Z="39.712" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y15">
+					<cdm:RGB R="127" G="191" B="223" />
+					<cdm:CIEXYZ X="18.285" Y="23.120" Z="45.349" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z15">
+					<cdm:RGB R="127" G="191" B="255" />
+					<cdm:CIEXYZ X="16.030" Y="17.964" Z="47.825" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A16">
+					<cdm:RGB R="127" G="223" B="0" />
+					<cdm:CIEXYZ X="11.890" Y="22.058" Z="3.132" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B16">
+					<cdm:RGB R="127" G="223" B="31" />
+					<cdm:CIEXYZ X="12.124" Y="23.031" Z="4.018" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C16">
+					<cdm:RGB R="127" G="223" B="63" />
+					<cdm:CIEXYZ X="12.608" Y="24.490" Z="5.669" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D16">
+					<cdm:RGB R="127" G="223" B="95" />
+					<cdm:CIEXYZ X="13.271" Y="25.628" Z="8.720" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E16">
+					<cdm:RGB R="127" G="223" B="127" />
+					<cdm:CIEXYZ X="14.468" Y="27.028" Z="14.880" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F16">
+					<cdm:RGB R="127" G="223" B="159" />
+					<cdm:CIEXYZ X="16.151" Y="28.409" Z="23.861" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G16">
+					<cdm:RGB R="127" G="223" B="191" />
+					<cdm:CIEXYZ X="18.622" Y="29.866" Z="36.594" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H16">
+					<cdm:RGB R="127" G="223" B="223" />
+					<cdm:CIEXYZ X="20.677" Y="30.123" Z="51.328" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I16">
+					<cdm:RGB R="127" G="223" B="255" />
+					<cdm:CIEXYZ X="18.875" Y="25.199" Z="55.982" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J16">
+					<cdm:RGB R="127" G="255" B="0" />
+					<cdm:CIEXYZ X="10.001" Y="21.422" Z="3.128" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K16">
+					<cdm:RGB R="127" G="255" B="31" />
+					<cdm:CIEXYZ X="10.252" Y="22.605" Z="3.970" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L16">
+					<cdm:RGB R="127" G="255" B="63" />
+					<cdm:CIEXYZ X="10.900" Y="24.170" Z="5.252" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M16">
+					<cdm:RGB R="127" G="255" B="95" />
+					<cdm:CIEXYZ X="11.281" Y="25.233" Z="7.495" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N16">
+					<cdm:RGB R="127" G="255" B="127" />
+					<cdm:CIEXYZ X="11.932" Y="26.292" Z="12.119" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O16">
+					<cdm:RGB R="127" G="255" B="159" />
+					<cdm:CIEXYZ X="13.540" Y="28.059" Z="19.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P16">
+					<cdm:RGB R="127" G="255" B="191" />
+					<cdm:CIEXYZ X="15.674" Y="29.758" Z="30.097" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q16">
+					<cdm:RGB R="127" G="255" B="223" />
+					<cdm:CIEXYZ X="18.059" Y="30.977" Z="45.095" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R16">
+					<cdm:RGB R="127" G="255" B="255" />
+					<cdm:CIEXYZ X="21.249" Y="32.549" Z="63.220" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S16">
+					<cdm:RGB R="159" G="0" B="0" />
+					<cdm:CIEXYZ X="10.804" Y="6.057" Z="1.494" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T16">
+					<cdm:RGB R="159" G="0" B="31" />
+					<cdm:CIEXYZ X="11.139" Y="6.135" Z="1.598" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U16">
+					<cdm:RGB R="159" G="0" B="63" />
+					<cdm:CIEXYZ X="11.786" Y="6.336" Z="1.896" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V16">
+					<cdm:RGB R="159" G="0" B="95" />
+					<cdm:CIEXYZ X="12.520" Y="6.566" Z="2.607" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W16">
+					<cdm:RGB R="159" G="0" B="127" />
+					<cdm:CIEXYZ X="13.256" Y="6.742" Z="4.151" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X16">
+					<cdm:RGB R="159" G="0" B="159" />
+					<cdm:CIEXYZ X="13.219" Y="6.522" Z="6.382" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y16">
+					<cdm:RGB R="159" G="0" B="191" />
+					<cdm:CIEXYZ X="10.781" Y="5.228" Z="8.271" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A17">
+					<cdm:RGB R="159" G="0" B="223" />
+					<cdm:CIEXYZ X="9.113" Y="4.320" Z="10.055" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B17">
+					<cdm:RGB R="159" G="0" B="255" />
+					<cdm:CIEXYZ X="7.520" Y="3.412" Z="11.773" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C17">
+					<cdm:RGB R="159" G="31" B="0" />
+					<cdm:CIEXYZ X="14.106" Y="8.539" Z="1.495" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D17">
+					<cdm:RGB R="159" G="31" B="31" />
+					<cdm:CIEXYZ X="14.436" Y="8.625" Z="1.767" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E17">
+					<cdm:RGB R="159" G="31" B="63" />
+					<cdm:CIEXYZ X="15.046" Y="8.819" Z="2.441" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F17">
+					<cdm:RGB R="159" G="31" B="95" />
+					<cdm:CIEXYZ X="15.679" Y="8.983" Z="4.089" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G17">
+					<cdm:RGB R="159" G="31" B="127" />
+					<cdm:CIEXYZ X="16.616" Y="9.188" Z="7.274" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H17">
+					<cdm:RGB R="159" G="31" B="159" />
+					<cdm:CIEXYZ X="16.836" Y="8.947" Z="11.605" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I17">
+					<cdm:RGB R="159" G="31" B="191" />
+					<cdm:CIEXYZ X="13.774" Y="7.064" Z="14.337" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J17">
+					<cdm:RGB R="159" G="31" B="223" />
+					<cdm:CIEXYZ X="10.747" Y="5.271" Z="15.436" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K17">
+					<cdm:RGB R="159" G="31" B="255" />
+					<cdm:CIEXYZ X="8.923" Y="4.116" Z="17.078" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L17">
+					<cdm:RGB R="159" G="63" B="0" />
+					<cdm:CIEXYZ X="16.657" Y="11.152" Z="1.606" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M17">
+					<cdm:RGB R="159" G="63" B="31" />
+					<cdm:CIEXYZ X="16.793" Y="11.220" Z="1.997" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N17">
+					<cdm:RGB R="159" G="63" B="63" />
+					<cdm:CIEXYZ X="17.880" Y="11.888" Z="3.126" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O17">
+					<cdm:RGB R="159" G="63" B="95" />
+					<cdm:CIEXYZ X="18.789" Y="12.274" Z="5.793" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P17">
+					<cdm:RGB R="159" G="63" B="127" />
+					<cdm:CIEXYZ X="19.912" Y="12.648" Z="10.418" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q17">
+					<cdm:RGB R="159" G="63" B="159" />
+					<cdm:CIEXYZ X="19.846" Y="12.085" Z="15.995" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R17">
+					<cdm:RGB R="159" G="63" B="191" />
+					<cdm:CIEXYZ X="16.470" Y="9.676" Z="19.496" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S17">
+					<cdm:RGB R="159" G="63" B="223" />
+					<cdm:CIEXYZ X="12.758" Y="7.044" Z="20.562" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T17">
+					<cdm:RGB R="159" G="63" B="255" />
+					<cdm:CIEXYZ X="10.443" Y="5.322" Z="22.470" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U17">
+					<cdm:RGB R="159" G="95" B="0" />
+					<cdm:CIEXYZ X="19.772" Y="15.294" Z="1.894" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V17">
+					<cdm:RGB R="159" G="95" B="31" />
+					<cdm:CIEXYZ X="18.977" Y="14.626" Z="2.285" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W17">
+					<cdm:RGB R="159" G="95" B="63" />
+					<cdm:CIEXYZ X="20.622" Y="16.163" Z="3.864" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X17">
+					<cdm:RGB R="159" G="95" B="95" />
+					<cdm:CIEXYZ X="22.528" Y="17.422" Z="7.953" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C18">
+					<cdm:RGB R="159" G="95" B="127" />
+					<cdm:CIEXYZ X="25.700" Y="19.564" Z="15.220" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D18">
+					<cdm:RGB R="159" G="95" B="159" />
+					<cdm:CIEXYZ X="26.168" Y="19.410" Z="22.971" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E18">
+					<cdm:RGB R="159" G="95" B="191" />
+					<cdm:CIEXYZ X="21.041" Y="14.914" Z="26.245" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F18">
+					<cdm:RGB R="159" G="95" B="223" />
+					<cdm:CIEXYZ X="16.362" Y="10.860" Z="27.302" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G18">
+					<cdm:RGB R="159" G="95" B="255" />
+					<cdm:CIEXYZ X="13.284" Y="8.212" Z="29.302" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H18">
+					<cdm:RGB R="159" G="127" B="0" />
+					<cdm:CIEXYZ X="24.762" Y="22.314" Z="2.379" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I18">
+					<cdm:RGB R="159" G="127" B="31" />
+					<cdm:CIEXYZ X="24.191" Y="22.184" Z="3.070" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J18">
+					<cdm:RGB R="159" G="127" B="63" />
+					<cdm:CIEXYZ X="25.739" Y="23.781" Z="5.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K18">
+					<cdm:RGB R="159" G="127" B="95" />
+					<cdm:CIEXYZ X="27.853" Y="25.453" Z="10.601" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L18">
+					<cdm:RGB R="159" G="127" B="127" />
+					<cdm:CIEXYZ X="30.707" Y="27.251" Z="19.254" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M18">
+					<cdm:RGB R="159" G="127" B="159" />
+					<cdm:CIEXYZ X="30.630" Y="26.216" Z="28.236" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N18">
+					<cdm:RGB R="159" G="127" B="191" />
+					<cdm:CIEXYZ X="24.809" Y="20.623" Z="32.520" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O18">
+					<cdm:RGB R="159" G="127" B="223" />
+					<cdm:CIEXYZ X="19.284" Y="15.090" Z="33.233" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P18">
+					<cdm:RGB R="159" G="127" B="255" />
+					<cdm:CIEXYZ X="15.704" Y="11.512" Z="35.750" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q18">
+					<cdm:RGB R="159" G="159" B="0" />
+					<cdm:CIEXYZ X="27.647" Y="29.588" Z="2.881" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R18">
+					<cdm:RGB R="159" G="159" B="31" />
+					<cdm:CIEXYZ X="27.011" Y="29.535" Z="3.723" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S18">
+					<cdm:RGB R="159" G="159" B="63" />
+					<cdm:CIEXYZ X="28.142" Y="31.129" Z="6.085" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T18">
+					<cdm:RGB R="159" G="159" B="95" />
+					<cdm:CIEXYZ X="30.575" Y="33.742" Z="12.119" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U18">
+					<cdm:RGB R="159" G="159" B="127" />
+					<cdm:CIEXYZ X="33.719" Y="36.413" Z="21.584" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V18">
+					<cdm:RGB R="159" G="159" B="159" />
+					<cdm:CIEXYZ X="36.438" Y="37.874" Z="34.353" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W18">
+					<cdm:RGB R="159" G="159" B="191" />
+					<cdm:CIEXYZ X="30.393" Y="30.350" Z="40.408" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X18">
+					<cdm:RGB R="159" G="159" B="223" />
+					<cdm:CIEXYZ X="23.293" Y="21.952" Z="40.939" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y18">
+					<cdm:RGB R="159" G="159" B="255" />
+					<cdm:CIEXYZ X="19.333" Y="16.908" Z="42.989" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z18">
+					<cdm:RGB R="159" G="191" B="0" />
+					<cdm:CIEXYZ X="23.483" Y="30.281" Z="3.178" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B19">
+					<cdm:RGB R="159" G="191" B="31" />
+					<cdm:CIEXYZ X="23.469" Y="30.983" Z="4.053" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C19">
+					<cdm:RGB R="159" G="191" B="63" />
+					<cdm:CIEXYZ X="24.858" Y="33.247" Z="6.316" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D19">
+					<cdm:RGB R="159" G="191" B="95" />
+					<cdm:CIEXYZ X="26.313" Y="35.120" Z="11.260" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E19">
+					<cdm:RGB R="159" G="191" B="127" />
+					<cdm:CIEXYZ X="28.568" Y="37.361" Z="19.685" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F19">
+					<cdm:RGB R="159" G="191" B="159" />
+					<cdm:CIEXYZ X="31.477" Y="39.459" Z="31.941" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G19">
+					<cdm:RGB R="159" G="191" B="191" />
+					<cdm:CIEXYZ X="31.983" Y="38.533" Z="44.348" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H19">
+					<cdm:RGB R="159" G="191" B="223" />
+					<cdm:CIEXYZ X="27.878" Y="31.914" Z="49.602" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I19">
+					<cdm:RGB R="159" G="191" B="255" />
+					<cdm:CIEXYZ X="22.893" Y="24.255" Z="51.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J19">
+					<cdm:RGB R="159" G="223" B="0" />
+					<cdm:CIEXYZ X="19.262" Y="29.281" Z="3.319" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K19">
+					<cdm:RGB R="159" G="223" B="31" />
+					<cdm:CIEXYZ X="19.655" Y="30.528" Z="4.281" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L19">
+					<cdm:RGB R="159" G="223" B="63" />
+					<cdm:CIEXYZ X="20.703" Y="32.604" Z="6.092" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M19">
+					<cdm:RGB R="159" G="223" B="95" />
+					<cdm:CIEXYZ X="21.541" Y="33.984" Z="9.412" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N19">
+					<cdm:RGB R="159" G="223" B="127" />
+					<cdm:CIEXYZ X="23.094" Y="35.789" Z="16.116" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O19">
+					<cdm:RGB R="159" G="223" B="159" />
+					<cdm:CIEXYZ X="25.371" Y="37.667" Z="26.500" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P19">
+					<cdm:RGB R="159" G="223" B="191" />
+					<cdm:CIEXYZ X="27.880" Y="39.207" Z="39.832" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q19">
+					<cdm:RGB R="159" G="223" B="223" />
+					<cdm:CIEXYZ X="30.139" Y="39.586" Z="54.863" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R19">
+					<cdm:RGB R="159" G="223" B="255" />
+					<cdm:CIEXYZ X="26.208" Y="32.675" Z="59.503" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S19">
+					<cdm:RGB R="159" G="255" B="0" />
+					<cdm:CIEXYZ X="15.869" Y="28.357" Z="3.463" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T19">
+					<cdm:RGB R="159" G="255" B="31" />
+					<cdm:CIEXYZ X="16.618" Y="30.103" Z="4.413" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U19">
+					<cdm:RGB R="159" G="255" B="63" />
+					<cdm:CIEXYZ X="17.456" Y="31.900" Z="5.849" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V19">
+					<cdm:RGB R="159" G="255" B="95" />
+					<cdm:CIEXYZ X="17.826" Y="33.024" Z="8.406" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W19">
+					<cdm:RGB R="159" G="255" B="127" />
+					<cdm:CIEXYZ X="18.837" Y="34.377" Z="13.690" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X19">
+					<cdm:RGB R="159" G="255" B="159" />
+					<cdm:CIEXYZ X="20.214" Y="35.876" Z="21.238" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y19">
+					<cdm:RGB R="159" G="255" B="191" />
+					<cdm:CIEXYZ X="23.655" Y="38.816" Z="33.695" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z19">
+					<cdm:RGB R="159" G="255" B="223" />
+					<cdm:CIEXYZ X="26.625" Y="40.457" Z="49.193" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A20">
+					<cdm:RGB R="159" G="255" B="255" />
+					<cdm:CIEXYZ X="29.465" Y="41.681" Z="67.161" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B20">
+					<cdm:RGB R="191" G="0" B="0" />
+					<cdm:CIEXYZ X="16.140" Y="8.600" Z="1.487" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C20">
+					<cdm:RGB R="191" G="0" B="31" />
+					<cdm:CIEXYZ X="16.736" Y="8.822" Z="1.619" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D20">
+					<cdm:RGB R="191" G="0" B="63" />
+					<cdm:CIEXYZ X="17.461" Y="9.072" Z="1.885" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E20">
+					<cdm:RGB R="191" G="0" B="95" />
+					<cdm:CIEXYZ X="17.752" Y="9.076" Z="2.475" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F20">
+					<cdm:RGB R="191" G="0" B="127" />
+					<cdm:CIEXYZ X="18.500" Y="9.286" Z="3.755" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G20">
+					<cdm:RGB R="191" G="0" B="159" />
+					<cdm:CIEXYZ X="19.101" Y="9.374" Z="5.933" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H20">
+					<cdm:RGB R="191" G="0" B="191" />
+					<cdm:CIEXYZ X="19.048" Y="9.140" Z="8.489" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I20">
+					<cdm:RGB R="191" G="0" B="223" />
+					<cdm:CIEXYZ X="15.978" Y="7.568" Z="10.388" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J20">
+					<cdm:RGB R="191" G="0" B="255" />
+					<cdm:CIEXYZ X="12.368" Y="5.726" Z="11.884" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K20">
+					<cdm:RGB R="191" G="31" B="0" />
+					<cdm:CIEXYZ X="19.634" Y="11.157" Z="1.490" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L20">
+					<cdm:RGB R="191" G="31" B="31" />
+					<cdm:CIEXYZ X="20.068" Y="11.317" Z="1.717" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M20">
+					<cdm:RGB R="191" G="31" B="63" />
+					<cdm:CIEXYZ X="20.567" Y="11.454" Z="2.215" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N20">
+					<cdm:RGB R="191" G="31" B="95" />
+					<cdm:CIEXYZ X="21.281" Y="11.690" Z="3.478" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O20">
+					<cdm:RGB R="191" G="31" B="127" />
+					<cdm:CIEXYZ X="22.087" Y="11.894" Z="5.912" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P20">
+					<cdm:RGB R="191" G="31" B="159" />
+					<cdm:CIEXYZ X="22.976" Y="12.031" Z="9.727" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q20">
+					<cdm:RGB R="191" G="31" B="191" />
+					<cdm:CIEXYZ X="23.060" Y="11.712" Z="14.264" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R20">
+					<cdm:RGB R="191" G="31" B="223" />
+					<cdm:CIEXYZ X="19.395" Y="9.636" Z="16.513" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S20">
+					<cdm:RGB R="191" G="31" B="255" />
+					<cdm:CIEXYZ X="14.806" Y="7.044" Z="17.760" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T20">
+					<cdm:RGB R="191" G="63" B="0" />
+					<cdm:CIEXYZ X="22.686" Y="13.987" Z="1.663" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U20">
+					<cdm:RGB R="191" G="63" B="31" />
+					<cdm:CIEXYZ X="22.980" Y="14.168" Z="1.967" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V20">
+					<cdm:RGB R="191" G="63" B="63" />
+					<cdm:CIEXYZ X="24.170" Y="14.788" Z="2.814" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W20">
+					<cdm:RGB R="191" G="63" B="95" />
+					<cdm:CIEXYZ X="24.752" Y="15.018" Z="4.756" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X20">
+					<cdm:RGB R="191" G="63" B="127" />
+					<cdm:CIEXYZ X="25.979" Y="15.570" Z="8.430" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y20">
+					<cdm:RGB R="191" G="63" B="159" />
+					<cdm:CIEXYZ X="27.319" Y="15.992" Z="13.874" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z20">
+					<cdm:RGB R="191" G="63" B="191" />
+					<cdm:CIEXYZ X="27.372" Y="15.660" Z="19.757" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A21">
+					<cdm:RGB R="191" G="63" B="223" />
+					<cdm:CIEXYZ X="23.075" Y="12.678" Z="22.516" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B21">
+					<cdm:RGB R="191" G="63" B="255" />
+					<cdm:CIEXYZ X="17.656" Y="9.258" Z="24.169" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C21">
+					<cdm:RGB R="191" G="95" B="0" />
+					<cdm:CIEXYZ X="26.141" Y="18.058" Z="1.892" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D21">
+					<cdm:RGB R="191" G="95" B="31" />
+					<cdm:CIEXYZ X="26.013" Y="17.910" Z="2.296" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E21">
+					<cdm:RGB R="191" G="95" B="63" />
+					<cdm:CIEXYZ X="27.490" Y="19.121" Z="3.535" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F21">
+					<cdm:RGB R="191" G="95" B="95" />
+					<cdm:CIEXYZ X="28.732" Y="19.911" Z="6.424" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G21">
+					<cdm:RGB R="191" G="95" B="127" />
+					<cdm:CIEXYZ X="30.107" Y="20.648" Z="11.249" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H21">
+					<cdm:RGB R="191" G="95" B="159" />
+					<cdm:CIEXYZ X="31.579" Y="21.228" Z="18.103" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I21">
+					<cdm:RGB R="191" G="95" B="191" />
+					<cdm:CIEXYZ X="31.895" Y="20.909" Z="25.563" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J21">
+					<cdm:RGB R="191" G="95" B="223" />
+					<cdm:CIEXYZ X="26.489" Y="16.579" Z="28.451" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K21">
+					<cdm:RGB R="191" G="95" B="255" />
+					<cdm:CIEXYZ X="20.354" Y="12.228" Z="30.300" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L21">
+					<cdm:RGB R="191" G="127" B="0" />
+					<cdm:CIEXYZ X="29.903" Y="23.420" Z="2.242" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M21">
+					<cdm:RGB R="191" G="127" B="31" />
+					<cdm:CIEXYZ X="29.749" Y="23.491" Z="2.797" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N21">
+					<cdm:RGB R="191" G="127" B="63" />
+					<cdm:CIEXYZ X="31.434" Y="25.067" Z="4.427" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O21">
+					<cdm:RGB R="191" G="127" B="95" />
+					<cdm:CIEXYZ X="33.014" Y="26.283" Z="8.204" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P21">
+					<cdm:RGB R="191" G="127" B="127" />
+					<cdm:CIEXYZ X="34.686" Y="27.361" Z="14.387" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q21">
+					<cdm:RGB R="191" G="127" B="159" />
+					<cdm:CIEXYZ X="36.445" Y="28.079" Z="22.985" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R21">
+					<cdm:RGB R="191" G="127" B="191" />
+					<cdm:CIEXYZ X="36.527" Y="27.227" Z="31.363" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S21">
+					<cdm:RGB R="191" G="127" B="223" />
+					<cdm:CIEXYZ X="30.497" Y="21.681" Z="34.623" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T21">
+					<cdm:RGB R="191" G="127" B="255" />
+					<cdm:CIEXYZ X="23.656" Y="16.355" Z="37.161" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U21">
+					<cdm:RGB R="191" G="159" B="0" />
+					<cdm:CIEXYZ X="34.684" Y="31.376" Z="2.724" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V21">
+					<cdm:RGB R="191" G="159" B="31" />
+					<cdm:CIEXYZ X="34.519" Y="31.686" Z="3.511" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W21">
+					<cdm:RGB R="191" G="159" B="63" />
+					<cdm:CIEXYZ X="36.011" Y="33.450" Z="5.403" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X21">
+					<cdm:RGB R="191" G="159" B="95" />
+					<cdm:CIEXYZ X="37.924" Y="35.237" Z="10.030" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y21">
+					<cdm:RGB R="191" G="159" B="127" />
+					<cdm:CIEXYZ X="40.448" Y="37.462" Z="17.843" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z21">
+					<cdm:RGB R="191" G="159" B="159" />
+					<cdm:CIEXYZ X="43.731" Y="39.828" Z="29.326" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A22">
+					<cdm:RGB R="191" G="159" B="191" />
+					<cdm:CIEXYZ X="43.740" Y="38.318" Z="39.730" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B22">
+					<cdm:RGB R="191" G="159" B="223" />
+					<cdm:CIEXYZ X="36.710" Y="30.835" Z="43.284" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C22">
+					<cdm:RGB R="191" G="159" B="255" />
+					<cdm:CIEXYZ X="28.228" Y="22.587" Z="44.511" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D22">
+					<cdm:RGB R="191" G="191" B="0" />
+					<cdm:CIEXYZ X="38.561" Y="40.530" Z="3.303" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E22">
+					<cdm:RGB R="191" G="191" B="31" />
+					<cdm:CIEXYZ X="38.261" Y="40.953" Z="4.204" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F22">
+					<cdm:RGB R="191" G="191" B="63" />
+					<cdm:CIEXYZ X="39.583" Y="43.071" Z="6.411" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G22">
+					<cdm:RGB R="191" G="191" B="95" />
+					<cdm:CIEXYZ X="41.197" Y="45.010" Z="11.044" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H22">
+					<cdm:RGB R="191" G="191" B="127" />
+					<cdm:CIEXYZ X="43.309" Y="47.171" Z="18.713" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I22">
+					<cdm:RGB R="191" G="191" B="159" />
+					<cdm:CIEXYZ X="47.137" Y="50.264" Z="31.315" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J22">
+					<cdm:RGB R="191" G="191" B="191" />
+					<cdm:CIEXYZ X="50.455" Y="52.195" Z="46.592" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K22">
+					<cdm:RGB R="191" G="191" B="223" />
+					<cdm:CIEXYZ X="43.372" Y="43.643" Z="52.261" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L22">
+					<cdm:RGB R="191" G="191" B="255" />
+					<cdm:CIEXYZ X="33.458" Y="32.042" Z="53.787" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M22">
+					<cdm:RGB R="191" G="223" B="0" />
+					<cdm:CIEXYZ X="33.235" Y="40.699" Z="3.569" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N22">
+					<cdm:RGB R="191" G="223" B="31" />
+					<cdm:CIEXYZ X="33.409" Y="41.800" Z="4.543" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O22">
+					<cdm:RGB R="191" G="223" B="63" />
+					<cdm:CIEXYZ X="35.255" Y="44.555" Z="6.488" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P22">
+					<cdm:RGB R="191" G="223" B="95" />
+					<cdm:CIEXYZ X="36.160" Y="46.032" Z="10.145" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q22">
+					<cdm:RGB R="191" G="223" B="127" />
+					<cdm:CIEXYZ X="38.084" Y="48.165" Z="16.965" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R22">
+					<cdm:RGB R="191" G="223" B="159" />
+					<cdm:CIEXYZ X="40.858" Y="50.570" Z="27.739" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S22">
+					<cdm:RGB R="191" G="223" B="191" />
+					<cdm:CIEXYZ X="44.692" Y="53.292" Z="42.966" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T22">
+					<cdm:RGB R="191" G="223" B="223" />
+					<cdm:CIEXYZ X="46.404" Y="53.274" Z="58.709" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U22">
+					<cdm:RGB R="191" G="223" B="255" />
+					<cdm:CIEXYZ X="38.033" Y="42.736" Z="62.582" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V22">
+					<cdm:RGB R="191" G="255" B="0" />
+					<cdm:CIEXYZ X="26.419" Y="38.439" Z="3.693" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W22">
+					<cdm:RGB R="191" G="255" B="31" />
+					<cdm:CIEXYZ X="27.254" Y="40.317" Z="4.745" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X22">
+					<cdm:RGB R="191" G="255" B="63" />
+					<cdm:CIEXYZ X="27.794" Y="41.887" Z="6.374" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y22">
+					<cdm:RGB R="191" G="255" B="95" />
+					<cdm:CIEXYZ X="28.551" Y="43.415" Z="9.029" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z22">
+					<cdm:RGB R="191" G="255" B="127" />
+					<cdm:CIEXYZ X="29.809" Y="45.060" Z="14.689" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A23">
+					<cdm:RGB R="191" G="255" B="159" />
+					<cdm:CIEXYZ X="32.352" Y="47.679" Z="22.866" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B23">
+					<cdm:RGB R="191" G="255" B="191" />
+					<cdm:CIEXYZ X="35.015" Y="49.679" Z="35.843" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C23">
+					<cdm:RGB R="191" G="255" B="223" />
+					<cdm:CIEXYZ X="38.170" Y="51.514" Z="51.829" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D23">
+					<cdm:RGB R="191" G="255" B="255" />
+					<cdm:CIEXYZ X="42.011" Y="53.533" Z="70.871" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E23">
+					<cdm:RGB R="223" G="0" B="0" />
+					<cdm:CIEXYZ X="22.331" Y="11.480" Z="1.484" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F23">
+					<cdm:RGB R="223" G="0" B="31" />
+					<cdm:CIEXYZ X="22.798" Y="11.633" Z="1.586" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G23">
+					<cdm:RGB R="223" G="0" B="63" />
+					<cdm:CIEXYZ X="23.132" Y="11.735" Z="1.842" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H23">
+					<cdm:RGB R="223" G="0" B="95" />
+					<cdm:CIEXYZ X="23.496" Y="11.823" Z="2.262" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I23">
+					<cdm:RGB R="223" G="0" B="127" />
+					<cdm:CIEXYZ X="23.675" Y="11.761" Z="3.129" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J23">
+					<cdm:RGB R="223" G="0" B="159" />
+					<cdm:CIEXYZ X="24.218" Y="11.848" Z="4.868" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K23">
+					<cdm:RGB R="223" G="0" B="191" />
+					<cdm:CIEXYZ X="25.042" Y="12.019" Z="7.472" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L23">
+					<cdm:RGB R="223" G="0" B="223" />
+					<cdm:CIEXYZ X="25.307" Y="11.898" Z="10.456" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M23">
+					<cdm:RGB R="223" G="0" B="255" />
+					<cdm:CIEXYZ X="20.470" Y="9.558" Z="12.095" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N23">
+					<cdm:RGB R="223" G="31" B="0" />
+					<cdm:CIEXYZ X="26.170" Y="14.148" Z="1.493" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O23">
+					<cdm:RGB R="223" G="31" B="31" />
+					<cdm:CIEXYZ X="26.568" Y="14.295" Z="1.666" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P23">
+					<cdm:RGB R="223" G="31" B="63" />
+					<cdm:CIEXYZ X="26.892" Y="14.370" Z="2.030" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q23">
+					<cdm:RGB R="223" G="31" B="95" />
+					<cdm:CIEXYZ X="27.352" Y="14.509" Z="2.839" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R23">
+					<cdm:RGB R="223" G="31" B="127" />
+					<cdm:CIEXYZ X="27.922" Y="14.655" Z="4.531" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S23">
+					<cdm:RGB R="223" G="31" B="159" />
+					<cdm:CIEXYZ X="28.684" Y="14.784" Z="7.557" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T23">
+					<cdm:RGB R="223" G="31" B="191" />
+					<cdm:CIEXYZ X="29.505" Y="14.852" Z="11.821" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U23">
+					<cdm:RGB R="223" G="31" B="223" />
+					<cdm:CIEXYZ X="29.586" Y="14.525" Z="16.477" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V23">
+					<cdm:RGB R="223" G="31" B="255" />
+					<cdm:CIEXYZ X="24.443" Y="11.780" Z="18.309" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W23">
+					<cdm:RGB R="223" G="63" B="0" />
+					<cdm:CIEXYZ X="29.285" Y="16.855" Z="1.599" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X23">
+					<cdm:RGB R="223" G="63" B="31" />
+					<cdm:CIEXYZ X="29.610" Y="17.060" Z="1.872" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y23">
+					<cdm:RGB R="223" G="63" B="63" />
+					<cdm:CIEXYZ X="30.471" Y="17.485" Z="2.478" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z23">
+					<cdm:RGB R="223" G="63" B="95" />
+					<cdm:CIEXYZ X="30.871" Y="17.703" Z="3.769" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A24">
+					<cdm:RGB R="223" G="63" B="127" />
+					<cdm:CIEXYZ X="31.539" Y="17.923" Z="6.326" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B24">
+					<cdm:RGB R="223" G="63" B="159" />
+					<cdm:CIEXYZ X="32.380" Y="18.090" Z="10.575" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C24">
+					<cdm:RGB R="223" G="63" B="191" />
+					<cdm:CIEXYZ X="33.549" Y="18.356" Z="16.234" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D24">
+					<cdm:RGB R="223" G="63" B="223" />
+					<cdm:CIEXYZ X="33.761" Y="18.034" Z="22.415" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E24">
+					<cdm:RGB R="223" G="63" B="255" />
+					<cdm:CIEXYZ X="28.050" Y="14.555" Z="24.258" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F24">
+					<cdm:RGB R="223" G="95" B="0" />
+					<cdm:CIEXYZ X="32.589" Y="20.488" Z="1.860" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G24">
+					<cdm:RGB R="223" G="95" B="31" />
+					<cdm:CIEXYZ X="33.112" Y="20.881" Z="2.210" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H24">
+					<cdm:RGB R="223" G="95" B="63" />
+					<cdm:CIEXYZ X="33.873" Y="21.442" Z="3.040" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I24">
+					<cdm:RGB R="223" G="95" B="95" />
+					<cdm:CIEXYZ X="34.469" Y="21.773" Z="4.935" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J24">
+					<cdm:RGB R="223" G="95" B="127" />
+					<cdm:CIEXYZ X="35.131" Y="22.097" Z="8.211" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K24">
+					<cdm:RGB R="223" G="95" B="159" />
+					<cdm:CIEXYZ X="36.553" Y="22.771" Z="13.877" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L24">
+					<cdm:RGB R="223" G="95" B="191" />
+					<cdm:CIEXYZ X="38.156" Y="23.326" Z="21.035" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M24">
+					<cdm:RGB R="223" G="95" B="223" />
+					<cdm:CIEXYZ X="38.330" Y="22.869" Z="28.733" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N24">
+					<cdm:RGB R="223" G="95" B="255" />
+					<cdm:CIEXYZ X="31.915" Y="18.316" Z="30.738" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O24">
+					<cdm:RGB R="223" G="127" B="0" />
+					<cdm:CIEXYZ X="36.065" Y="24.992" Z="2.082" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P24">
+					<cdm:RGB R="223" G="127" B="31" />
+					<cdm:CIEXYZ X="36.436" Y="25.468" Z="2.570" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q24">
+					<cdm:RGB R="223" G="127" B="63" />
+					<cdm:CIEXYZ X="37.362" Y="26.227" Z="3.626" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R24">
+					<cdm:RGB R="223" G="127" B="95" />
+					<cdm:CIEXYZ X="38.063" Y="26.839" Z="6.020" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S24">
+					<cdm:RGB R="223" G="127" B="127" />
+					<cdm:CIEXYZ X="39.244" Y="27.535" Z="10.282" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T24">
+					<cdm:RGB R="223" G="127" B="159" />
+					<cdm:CIEXYZ X="40.657" Y="28.152" Z="17.103" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U24">
+					<cdm:RGB R="223" G="127" B="191" />
+					<cdm:CIEXYZ X="42.687" Y="29.058" Z="26.012" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V24">
+					<cdm:RGB R="223" G="127" B="223" />
+					<cdm:CIEXYZ X="43.205" Y="28.563" Z="34.977" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W24">
+					<cdm:RGB R="223" G="127" B="255" />
+					<cdm:CIEXYZ X="36.060" Y="23.047" Z="37.526" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X24">
+					<cdm:RGB R="223" G="159" B="0" />
+					<cdm:CIEXYZ X="40.917" Y="32.258" Z="2.567" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y24">
+					<cdm:RGB R="223" G="159" B="31" />
+					<cdm:CIEXYZ X="41.391" Y="32.987" Z="3.189" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z24">
+					<cdm:RGB R="223" G="159" B="63" />
+					<cdm:CIEXYZ X="42.633" Y="34.438" Z="4.637" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A25">
+					<cdm:RGB R="223" G="159" B="95" />
+					<cdm:CIEXYZ X="43.517" Y="35.405" Z="7.601" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B25">
+					<cdm:RGB R="223" G="159" B="127" />
+					<cdm:CIEXYZ X="44.991" Y="36.552" Z="13.142" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C25">
+					<cdm:RGB R="223" G="159" B="159" />
+					<cdm:CIEXYZ X="47.034" Y="37.800" Z="21.590" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D25">
+					<cdm:RGB R="223" G="159" B="191" />
+					<cdm:CIEXYZ X="49.291" Y="38.943" Z="32.266" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E25">
+					<cdm:RGB R="223" G="159" B="223" />
+					<cdm:CIEXYZ X="50.178" Y="38.456" Z="43.492" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F25">
+					<cdm:RGB R="223" G="159" B="255" />
+					<cdm:CIEXYZ X="41.809" Y="30.759" Z="45.790" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G25">
+					<cdm:RGB R="223" G="191" B="0" />
+					<cdm:CIEXYZ X="47.158" Y="43.003" Z="3.127" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H25">
+					<cdm:RGB R="223" G="191" B="31" />
+					<cdm:CIEXYZ X="47.234" Y="43.619" Z="3.964" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I25">
+					<cdm:RGB R="223" G="191" B="63" />
+					<cdm:CIEXYZ X="48.422" Y="45.492" Z="5.692" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J25">
+					<cdm:RGB R="223" G="191" B="95" />
+					<cdm:CIEXYZ X="49.561" Y="46.896" Z="9.075" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K25">
+					<cdm:RGB R="223" G="191" B="127" />
+					<cdm:CIEXYZ X="51.088" Y="48.587" Z="15.498" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L25">
+					<cdm:RGB R="223" G="191" B="159" />
+					<cdm:CIEXYZ X="53.794" Y="50.840" Z="25.369" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M25">
+					<cdm:RGB R="223" G="191" B="191" />
+					<cdm:CIEXYZ X="57.375" Y="53.440" Z="39.652" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N25">
+					<cdm:RGB R="223" G="191" B="223" />
+					<cdm:CIEXYZ X="58.389" Y="52.837" Z="52.678" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O25">
+					<cdm:RGB R="223" G="191" B="255" />
+					<cdm:CIEXYZ X="48.446" Y="41.784" Z="55.083" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P25">
+					<cdm:RGB R="223" G="223" B="0" />
+					<cdm:CIEXYZ X="52.525" Y="54.414" Z="3.705" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q25">
+					<cdm:RGB R="223" G="223" B="31" />
+					<cdm:CIEXYZ X="51.339" Y="54.118" Z="4.699" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R25">
+					<cdm:RGB R="223" G="223" B="63" />
+					<cdm:CIEXYZ X="52.574" Y="56.374" Z="6.625" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S25">
+					<cdm:RGB R="223" G="223" B="95" />
+					<cdm:CIEXYZ X="54.057" Y="58.432" Z="10.276" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T25">
+					<cdm:RGB R="223" G="223" B="127" />
+					<cdm:CIEXYZ X="55.750" Y="60.577" Z="17.067" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U25">
+					<cdm:RGB R="223" G="223" B="159" />
+					<cdm:CIEXYZ X="58.502" Y="63.192" Z="27.608" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V25">
+					<cdm:RGB R="223" G="223" B="191" />
+					<cdm:CIEXYZ X="62.419" Y="66.090" Z="42.995" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W25">
+					<cdm:RGB R="223" G="223" B="223" />
+					<cdm:CIEXYZ X="67.252" Y="69.417" Z="62.103" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X25">
+					<cdm:RGB R="223" G="223" B="255" />
+					<cdm:CIEXYZ X="55.725" Y="55.862" Z="65.002" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y25">
+					<cdm:RGB R="223" G="255" B="0" />
+					<cdm:CIEXYZ X="44.727" Y="53.427" Z="3.978" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z25">
+					<cdm:RGB R="223" G="255" B="31" />
+					<cdm:CIEXYZ X="45.838" Y="55.522" Z="5.054" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A26">
+					<cdm:RGB R="223" G="255" B="63" />
+					<cdm:CIEXYZ X="46.801" Y="57.615" Z="6.698" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B26">
+					<cdm:RGB R="223" G="255" B="95" />
+					<cdm:CIEXYZ X="47.813" Y="59.422" Z="9.655" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C26">
+					<cdm:RGB R="223" G="255" B="127" />
+					<cdm:CIEXYZ X="49.259" Y="61.341" Z="15.503" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D26">
+					<cdm:RGB R="223" G="255" B="159" />
+					<cdm:CIEXYZ X="51.320" Y="63.532" Z="23.751" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E26">
+					<cdm:RGB R="223" G="255" B="191" />
+					<cdm:CIEXYZ X="54.392" Y="65.944" Z="37.345" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F26">
+					<cdm:RGB R="223" G="255" B="223" />
+					<cdm:CIEXYZ X="57.999" Y="68.191" Z="54.492" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G26">
+					<cdm:RGB R="223" G="255" B="255" />
+					<cdm:CIEXYZ X="61.917" Y="70.216" Z="74.364" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H26">
+					<cdm:RGB R="255" G="0" B="0" />
+					<cdm:CIEXYZ X="30.753" Y="15.294" Z="1.497" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I26">
+					<cdm:RGB R="255" G="0" B="31" />
+					<cdm:CIEXYZ X="30.808" Y="15.260" Z="1.585" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J26">
+					<cdm:RGB R="255" G="0" B="63" />
+					<cdm:CIEXYZ X="30.912" Y="15.247" Z="1.745" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K26">
+					<cdm:RGB R="255" G="0" B="95" />
+					<cdm:CIEXYZ X="30.938" Y="15.198" Z="2.077" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L26">
+					<cdm:RGB R="255" G="0" B="127" />
+					<cdm:CIEXYZ X="31.004" Y="15.122" Z="2.711" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M26">
+					<cdm:RGB R="255" G="0" B="159" />
+					<cdm:CIEXYZ X="31.214" Y="15.084" Z="3.972" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N26">
+					<cdm:RGB R="255" G="0" B="191" />
+					<cdm:CIEXYZ X="31.672" Y="15.115" Z="6.231" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O26">
+					<cdm:RGB R="255" G="0" B="223" />
+					<cdm:CIEXYZ X="32.307" Y="15.159" Z="9.466" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P26">
+					<cdm:RGB R="255" G="0" B="255" />
+					<cdm:CIEXYZ X="32.905" Y="15.251" Z="12.010" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q26">
+					<cdm:RGB R="255" G="31" B="0" />
+					<cdm:CIEXYZ X="34.332" Y="17.766" Z="1.496" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R26">
+					<cdm:RGB R="255" G="31" B="31" />
+					<cdm:CIEXYZ X="34.386" Y="17.740" Z="1.652" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S26">
+					<cdm:RGB R="255" G="31" B="63" />
+					<cdm:CIEXYZ X="34.302" Y="17.573" Z="1.859" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T26">
+					<cdm:RGB R="255" G="31" B="95" />
+					<cdm:CIEXYZ X="34.407" Y="17.571" Z="2.358" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U26">
+					<cdm:RGB R="255" G="31" B="127" />
+					<cdm:CIEXYZ X="35.042" Y="17.854" Z="3.588" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V26">
+					<cdm:RGB R="255" G="31" B="159" />
+					<cdm:CIEXYZ X="35.457" Y="17.900" Z="5.720" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W26">
+					<cdm:RGB R="255" G="31" B="191" />
+					<cdm:CIEXYZ X="36.037" Y="17.915" Z="9.350" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X26">
+					<cdm:RGB R="255" G="31" B="223" />
+					<cdm:CIEXYZ X="36.976" Y="18.015" Z="14.265" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y26">
+					<cdm:RGB R="255" G="31" B="255" />
+					<cdm:CIEXYZ X="37.881" Y="18.163" Z="18.395" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z26">
+					<cdm:RGB R="255" G="63" B="0" />
+					<cdm:CIEXYZ X="37.318" Y="20.223" Z="1.557" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A27">
+					<cdm:RGB R="255" G="63" B="31" />
+					<cdm:CIEXYZ X="37.519" Y="20.333" Z="1.779" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B27">
+					<cdm:RGB R="255" G="63" B="63" />
+					<cdm:CIEXYZ X="37.541" Y="20.282" Z="2.143" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C27">
+					<cdm:RGB R="255" G="63" B="95" />
+					<cdm:CIEXYZ X="37.972" Y="20.534" Z="2.964" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D27">
+					<cdm:RGB R="255" G="63" B="127" />
+					<cdm:CIEXYZ X="38.426" Y="20.737" Z="4.788" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E27">
+					<cdm:RGB R="255" G="63" B="159" />
+					<cdm:CIEXYZ X="39.115" Y="20.969" Z="7.825" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F27">
+					<cdm:RGB R="255" G="63" B="191" />
+					<cdm:CIEXYZ X="40.046" Y="21.176" Z="12.757" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G27">
+					<cdm:RGB R="255" G="63" B="223" />
+					<cdm:CIEXYZ X="41.054" Y="21.156" Z="18.944" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H27">
+					<cdm:RGB R="255" G="63" B="255" />
+					<cdm:CIEXYZ X="41.669" Y="20.955" Z="23.701" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I27">
+					<cdm:RGB R="255" G="95" B="0" />
+					<cdm:CIEXYZ X="40.552" Y="23.395" Z="1.724" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J27">
+					<cdm:RGB R="255" G="95" B="31" />
+					<cdm:CIEXYZ X="41.180" Y="23.997" Z="2.030" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K27">
+					<cdm:RGB R="255" G="95" B="63" />
+					<cdm:CIEXYZ X="41.424" Y="24.241" Z="2.634" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L27">
+					<cdm:RGB R="255" G="95" B="95" />
+					<cdm:CIEXYZ X="41.244" Y="23.933" Z="3.700" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M27">
+					<cdm:RGB R="255" G="95" B="127" />
+					<cdm:CIEXYZ X="42.024" Y="24.503" Z="6.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N27">
+					<cdm:RGB R="255" G="95" B="159" />
+					<cdm:CIEXYZ X="43.078" Y="25.122" Z="10.245" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O27">
+					<cdm:RGB R="255" G="95" B="191" />
+					<cdm:CIEXYZ X="44.312" Y="25.596" Z="16.512" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P27">
+					<cdm:RGB R="255" G="95" B="223" />
+					<cdm:CIEXYZ X="45.911" Y="25.994" Z="24.591" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q27">
+					<cdm:RGB R="255" G="95" B="255" />
+					<cdm:CIEXYZ X="46.615" Y="25.658" Z="30.586" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R27">
+					<cdm:RGB R="255" G="127" B="0" />
+					<cdm:CIEXYZ X="44.511" Y="27.868" Z="1.981" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S27">
+					<cdm:RGB R="255" G="127" B="31" />
+					<cdm:CIEXYZ X="45.016" Y="28.545" Z="2.405" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T27">
+					<cdm:RGB R="255" G="127" B="63" />
+					<cdm:CIEXYZ X="45.737" Y="29.568" Z="3.225" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U27">
+					<cdm:RGB R="255" G="127" B="95" />
+					<cdm:CIEXYZ X="46.049" Y="29.807" Z="4.911" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V27">
+					<cdm:RGB R="255" G="127" B="127" />
+					<cdm:CIEXYZ X="46.020" Y="29.259" Z="7.888" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W27">
+					<cdm:RGB R="255" G="127" B="159" />
+					<cdm:CIEXYZ X="47.660" Y="30.772" Z="13.114" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X27">
+					<cdm:RGB R="255" G="127" B="191" />
+					<cdm:CIEXYZ X="49.413" Y="31.688" Z="20.993" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y27">
+					<cdm:RGB R="255" G="127" B="223" />
+					<cdm:CIEXYZ X="50.891" Y="31.751" Z="30.544" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z27">
+					<cdm:RGB R="255" G="127" B="255" />
+					<cdm:CIEXYZ X="51.926" Y="31.676" Z="38.070" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A28">
+					<cdm:RGB R="255" G="159" B="0" />
+					<cdm:CIEXYZ X="49.516" Y="34.836" Z="2.392" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B28">
+					<cdm:RGB R="255" G="159" B="31" />
+					<cdm:CIEXYZ X="49.681" Y="35.269" Z="2.930" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C28">
+					<cdm:RGB R="255" G="159" B="63" />
+					<cdm:CIEXYZ X="49.980" Y="35.739" Z="3.939" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D28">
+					<cdm:RGB R="255" G="159" B="95" />
+					<cdm:CIEXYZ X="50.065" Y="35.729" Z="5.779" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E28">
+					<cdm:RGB R="255" G="159" B="127" />
+					<cdm:CIEXYZ X="50.861" Y="36.367" Z="9.689" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F28">
+					<cdm:RGB R="255" G="159" B="159" />
+					<cdm:CIEXYZ X="52.640" Y="38.105" Z="16.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G28">
+					<cdm:RGB R="255" G="159" B="191" />
+					<cdm:CIEXYZ X="54.535" Y="39.170" Z="25.194" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H28">
+					<cdm:RGB R="255" G="159" B="223" />
+					<cdm:CIEXYZ X="56.781" Y="40.026" Z="36.945" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I28">
+					<cdm:RGB R="255" G="159" B="255" />
+					<cdm:CIEXYZ X="58.693" Y="40.620" Z="46.944" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J28">
+					<cdm:RGB R="255" G="191" B="0" />
+					<cdm:CIEXYZ X="54.877" Y="43.182" Z="2.856" />
+				</cdm:Sample>
+				<cdm:Sample Tag="K28">
+					<cdm:RGB R="255" G="191" B="31" />
+					<cdm:CIEXYZ X="55.362" Y="44.339" Z="3.625" />
+				</cdm:Sample>
+				<cdm:Sample Tag="L28">
+					<cdm:RGB R="255" G="191" B="63" />
+					<cdm:CIEXYZ X="55.585" Y="45.013" Z="4.796" />
+				</cdm:Sample>
+				<cdm:Sample Tag="M28">
+					<cdm:RGB R="255" G="191" B="95" />
+					<cdm:CIEXYZ X="55.990" Y="45.682" Z="7.159" />
+				</cdm:Sample>
+				<cdm:Sample Tag="N28">
+					<cdm:RGB R="255" G="191" B="127" />
+					<cdm:CIEXYZ X="57.296" Y="47.268" Z="11.925" />
+				</cdm:Sample>
+				<cdm:Sample Tag="O28">
+					<cdm:RGB R="255" G="191" B="159" />
+					<cdm:CIEXYZ X="59.047" Y="49.047" Z="19.065" />
+				</cdm:Sample>
+				<cdm:Sample Tag="P28">
+					<cdm:RGB R="255" G="191" B="191" />
+					<cdm:CIEXYZ X="60.761" Y="49.668" Z="29.939" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Q28">
+					<cdm:RGB R="255" G="191" B="223" />
+					<cdm:CIEXYZ X="63.705" Y="51.248" Z="44.038" />
+				</cdm:Sample>
+				<cdm:Sample Tag="R28">
+					<cdm:RGB R="255" G="191" B="255" />
+					<cdm:CIEXYZ X="65.794" Y="51.861" Z="55.605" />
+				</cdm:Sample>
+				<cdm:Sample Tag="S28">
+					<cdm:RGB R="255" G="223" B="0" />
+					<cdm:CIEXYZ X="61.843" Y="55.411" Z="3.457" />
+				</cdm:Sample>
+				<cdm:Sample Tag="T28">
+					<cdm:RGB R="255" G="223" B="31" />
+					<cdm:CIEXYZ X="62.589" Y="57.301" Z="4.431" />
+				</cdm:Sample>
+				<cdm:Sample Tag="U28">
+					<cdm:RGB R="255" G="223" B="63" />
+					<cdm:CIEXYZ X="63.206" Y="58.919" Z="5.964" />
+				</cdm:Sample>
+				<cdm:Sample Tag="V28">
+					<cdm:RGB R="255" G="223" B="95" />
+					<cdm:CIEXYZ X="63.671" Y="59.996" Z="8.655" />
+				</cdm:Sample>
+				<cdm:Sample Tag="W28">
+					<cdm:RGB R="255" G="223" B="127" />
+					<cdm:CIEXYZ X="65.013" Y="61.826" Z="14.299" />
+				</cdm:Sample>
+				<cdm:Sample Tag="X28">
+					<cdm:RGB R="255" G="223" B="159" />
+					<cdm:CIEXYZ X="66.634" Y="63.673" Z="22.202" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Y28">
+					<cdm:RGB R="255" G="223" B="191" />
+					<cdm:CIEXYZ X="69.639" Y="66.159" Z="35.678" />
+				</cdm:Sample>
+				<cdm:Sample Tag="Z28">
+					<cdm:RGB R="255" G="223" B="223" />
+					<cdm:CIEXYZ X="72.874" Y="67.950" Z="53.064" />
+				</cdm:Sample>
+				<cdm:Sample Tag="A29">
+					<cdm:RGB R="255" G="223" B="255" />
+					<cdm:CIEXYZ X="75.544" Y="69.180" Z="66.503" />
+				</cdm:Sample>
+				<cdm:Sample Tag="B29">
+					<cdm:RGB R="255" G="255" B="0" />
+					<cdm:CIEXYZ X="71.212" Y="72.604" Z="4.160" />
+				</cdm:Sample>
+				<cdm:Sample Tag="C29">
+					<cdm:RGB R="255" G="255" B="31" />
+					<cdm:CIEXYZ X="71.699" Y="74.572" Z="5.363" />
+				</cdm:Sample>
+				<cdm:Sample Tag="D29">
+					<cdm:RGB R="255" G="255" B="63" />
+					<cdm:CIEXYZ X="72.183" Y="76.474" Z="7.098" />
+				</cdm:Sample>
+				<cdm:Sample Tag="E29">
+					<cdm:RGB R="255" G="255" B="95" />
+					<cdm:CIEXYZ X="72.932" Y="78.299" Z="10.462" />
+				</cdm:Sample>
+				<cdm:Sample Tag="F29">
+					<cdm:RGB R="255" G="255" B="127" />
+					<cdm:CIEXYZ X="74.142" Y="80.223" Z="16.226" />
+				</cdm:Sample>
+				<cdm:Sample Tag="G29">
+					<cdm:RGB R="255" G="255" B="159" />
+					<cdm:CIEXYZ X="75.740" Y="82.263" Z="24.592" />
+				</cdm:Sample>
+				<cdm:Sample Tag="H29">
+					<cdm:RGB R="255" G="255" B="191" />
+					<cdm:CIEXYZ X="78.579" Y="84.728" Z="39.006" />
+				</cdm:Sample>
+				<cdm:Sample Tag="I29">
+					<cdm:RGB R="255" G="255" B="223" />
+					<cdm:CIEXYZ X="81.593" Y="86.675" Z="55.108" />
+				</cdm:Sample>
+				<cdm:Sample Tag="J29">
+					<cdm:RGB R="255" G="255" B="255" />
+					<cdm:CIEXYZ X="85.627" Y="88.893" Z="76.772" />
+				</cdm:Sample>
+			</cdm:ColorCube>
+		</cdm:MeasurementData>
+	</cdm:RGBPrinterDevice>
+</cdm:ColorDeviceModel>
+

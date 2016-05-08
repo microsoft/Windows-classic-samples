@@ -1,0 +1,298 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "winspool.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) (unknown sub-lang: 0x0) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, 0x0
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Print (via GetDC)",          IDM_PRINT
+        MENUITEM "Print&Dlg...",                IDM_PRINTDLG
+        MENUITEM "&GetDeviceCaps...",           IDM_GETDEVICECAPS
+        MENUITEM "&EnumPrinters...",            IDM_ENUMPRINTERS
+        MENUITEM "Ge&tPrinterDriver...",        IDM_GETPRINTERDRIVER
+        MENUITEM "EnumPrinterDriver&s...",      IDM_ENUMPRINTERDRIVERS
+        MENUITEM "&Refresh",                    IDM_REFRESH
+    END
+    POPUP "&Mapping Modes"
+    BEGIN
+        MENUITEM "MM_&HIENGLISH",               IDM_HIENGLISH
+        MENUITEM "MM_HI&METRIC",                IDM_HIMETRIC
+        MENUITEM "MM_&LOENGLISH",               IDM_LOENGLISH
+        MENUITEM "MM_L&OMETRIC",                IDM_LOMETRIC
+        MENUITEM "MM_T&WIPS",                   IDM_TWIPS
+        MENUITEM SEPARATOR
+        MENUITEM "MM_&ISOTROPIC",               IDM_ISOTROPIC
+        MENUITEM "MM_&ANISOTROPIC",             IDM_ANISOTROPIC
+        MENUITEM SEPARATOR
+        MENUITEM "MM_&TEXT",                    IDM_TEXT, CHECKED
+    END
+    POPUP "&Graphics"
+    BEGIN
+        MENUITEM "A&rc()",                      IDM_ARC
+        MENUITEM "E&llipse()",                  IDM_ELLIPSE
+        MENUITEM "LineT&o()",                   IDM_LINETO
+        MENUITEM "P&ie()",                      IDM_PIE
+        MENUITEM "PlgBl&t()",                   IDM_PLGBLT
+        MENUITEM "Poly&Bezier()",               IDM_POLYBEZIER
+        MENUITEM "Poly&gon()",                  IDM_POLYGON
+        MENUITEM "Pol&yLine()",                 IDM_POLYLINE
+        MENUITEM "&PolyPolygon()",              IDM_POLYPOLYGON
+        MENUITEM "Re&ctangle()",                IDM_RECTANGLE
+        MENUITEM "Ro&undRect()",                IDM_ROUNDRECT
+        MENUITEM "&StrectBlt()",                IDM_STRETCHBLT
+        MENUITEM "&All",                        IDM_ALLGRAPHICS
+        MENUITEM "&None",                       IDM_NOGRAPHICS
+        MENUITEM SEPARATOR
+        MENUITEM "&EnumFonts()",                IDM_ENUMFONTS
+        MENUITEM SEPARATOR
+        MENUITEM "&Draw axis",                  IDM_DRAWAXIS, CHECKED
+    END
+    POPUP "&Pen"
+    BEGIN
+        MENUITEM "&Color...",                   IDM_SETPENCOLOR
+        POPUP "&Width"
+        BEGIN
+            MENUITEM "&1",                          IDM_PENWIDTH_1, CHECKED
+            MENUITEM "&2",                          IDM_PENWIDTH_2
+            MENUITEM "&3",                          IDM_PENWIDTH_3
+            MENUITEM "&4",                          IDM_PENWIDTH_4
+            MENUITEM "&5",                          IDM_PENWIDTH_5
+            MENUITEM "&6",                          IDM_PENWIDTH_6
+            MENUITEM "&7",                          IDM_PENWIDTH_7
+            MENUITEM "&8",                          IDM_PENWIDTH_8
+        END
+        POPUP "&Style"
+        BEGIN
+            MENUITEM "PS_&SOLID",                   IDM_PENCOLOR_SOLID
+            , CHECKED
+            MENUITEM "PS_&DASH",                    IDM_PENCOLOR_DASH
+            MENUITEM "PS_D&OT",                     IDM_PENCOLOR_DOT
+            MENUITEM "PS_D&ASHDOT",                 IDM_PENCOLOR_DASHDOT
+            MENUITEM "PS_DASHDO&TDOT",              IDM_PENCOLOR_DASHDOTDOT
+            MENUITEM "PS_&NULL",                    IDM_PENCOLOR_NULL
+            MENUITEM "PS_&INSIDEFRAME",             IDM_PENCOLOR_INSIDEFRAME
+        END
+    END
+    POPUP "&Brush"
+    BEGIN
+        MENUITEM "&Color...",                   IDM_SETBRUSHCOLOR
+        POPUP "&Style"
+        BEGIN
+            MENUITEM "HS_&HORIZONTAL",              IDM_BRUSHSTYLE_HORIZONTAL
+
+            MENUITEM "HS_&VERTICAL",                IDM_BRUSHSTYLE_VERTICAL
+            MENUITEM "HS_&FDIAGONAL",               IDM_BRUSHSTYLE_FDIAGONAL
+            MENUITEM "HS_&BDIAGONAL",               IDM_BRUSHSTYLE_BDIAGONAL
+            MENUITEM "HS_&CROSS",                   IDM_BRUSHSTYLE_CROSS
+            MENUITEM "HS_&DIAGCROSS",               IDM_BRUSHSTYLE_DIAGCROSS
+        END
+    END
+    MENUITEM "&Text color...",              IDM_TEXTCOLOR
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ABOUT DIALOG DISCARDABLE  30, 14, 136, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About Printer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            MAIN_ICON,101,8,22,18,20
+    CTEXT           "Microsoft Developer Support",104,0,63,136,8
+    CTEXT           "Copyright © 1992 - 2000 Microsoft Corporation",105,0,74,
+                    136,8
+    LTEXT           "Printer Win32 SDK sample ",103,40,25,95,8
+    LTEXT           "Version 1.1",106,40,35,95,8
+    DEFPUSHBUTTON   "OK",IDOK,95,6,40,14
+    CONTROL         "",108,"Static",SS_BLACKRECT,0,53,136,2
+END
+
+LIST DIALOG DISCARDABLE  40, 30, 361, 194
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+FONT 9, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "OK",DID_OK,6,174,40,14
+    LISTBOX         DID_LISTBOX,6,7,348,162,LBS_USETABSTOPS | LBS_NOSEL | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+END
+
+ABORT DIALOG DISCARDABLE  66, 41, 160, 80
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Printing in progress...",101,40,20,80,8
+    PUSHBUTTON      "&Abort Print Job",DID_CANCEL,41,50,78,14
+END
+
+ENUMPRTOPT DIALOG DISCARDABLE  191, 100, 184, 142
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "EnumPrinters options:"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "PRINTER_ENUM_DEFAULT (Win9x only)",PRINTER_ENUM_DEFAULT,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,7,151,10
+    CONTROL         "PRINTER_ENUM_LOCAL",PRINTER_ENUM_LOCAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,21,121,10
+    CONTROL         "PRINTER_ENUM_CONNECTIONS",PRINTER_ENUM_FAVORITE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,35,129,10
+    CONTROL         "PRINTER_ENUM_NAME",PRINTER_ENUM_NAME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,49,120,10
+    CONTROL         "PRINTER_ENUM_REMOTE (NT/2000)",PRINTER_ENUM_REMOTE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,91,143,10
+    CONTROL         "PRINTER_ENUM_SHARED",PRINTER_ENUM_SHARED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,105,113,10
+    DEFPUSHBUTTON   "OK",DID_OK,37,124,40,14
+    PUSHBUTTON      "Cancel",DID_CANCEL,111,124,40,14
+    EDITTEXT        DID_EDITTEXT,25,73,150,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Formated as:  \\\\<print server name>",IDC_STATIC,25,62,
+                    132,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERR_PRINTER         "Error: PRINTER.EXE (PRINTER.C)"
+    IDS_ERR_PAINT           "Error: PRINTER.EXE (PAINT.C)"
+    IDS_ERR_GETCAPS         "Error: PRINTER.EXE (GETCAPS.C)"
+    IDS_ERR_GETPDRIV        "Error: PRINTER.EXE (GETPDRIV.C)"
+    IDS_ERR_ENUMPRT         "Error: PRINTER.EXE (ENUMPRT.C)"
+    IDS_MAINWNDTITLE        "Printer Sample Application"
+    IDS_FMT_OPNPRTFAIL      "OpenPrinter (%s) failed"
+    IDS_LALLOCFAIL          "LocalAlloc failed"
+    IDS_GETPRTDRVFAIL       "GetPrinterDriver failed"
+    IDS_ASKDOMSRVNM         "Please enter a valid domain/server name"
+    IDS_ENUMPRTLALLOCFAIL   "EnumPrinters/LocalAlloc failed"
+    IDS_ENUMPRT1FAIL        "EnumPrinters 1 failed"
+    IDS_ENUMPRTDRVRET0      "EnumPrinterDrivers returned 0 drivers"
+    IDS_FMT_MOREDSPFNTNL    "%ld more display fonts (not listed)"
+    IDS_GETDCFAIL           "GetDC failed"
+    IDS_FMT_CREDCFAIL       "CreateDC (%s, %s, %s, NULL) failed"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ASKSELPRT           "Please select a printer"
+    IDS_ENUMPRTFAIL         "EnumPrinters failed"
+    IDS_NOPRTLST            "No printers listed"
+    IDS_PRTDLGFAIL          "PrintDlg (PD_RETURNDC) failed"
+    IDS_PRTTST              "print test"
+    IDS_BLANKPG             "A blank page!"
+END
+
+#endif    // English (U.S.) (unknown sub-lang: 0x0) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+PRINTER                 BITMAP  MOVEABLE PURE   "printer.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+MAIN_ICON               ICON    DISCARDABLE     "printer.ico"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""winspool.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

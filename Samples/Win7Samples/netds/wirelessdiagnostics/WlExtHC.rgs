@@ -1,0 +1,13 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {00102030-4050-6070-8090-A0B0C0D0E0F0} = s 'WirelessHelperClassExtension'
+		{
+			LocalServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+		}
+	}
+}

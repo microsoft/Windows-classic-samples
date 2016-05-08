@@ -1,0 +1,16 @@
+# Microsoft Developer Studio Generated Dependency File, included by Rcv.mak
+
+.\main.cpp : \
+	"..\..\..\..\..\lib\mqoa.tlb"\
+	"..\queuedef.h"\
+	
+
+.\stdafx.cpp : \
+	"..\..\..\..\..\include\basetsd.h"\
+	"..\..\..\..\..\include\guiddef.h"\
+	"..\..\..\..\..\include\propidl.h"\
+	"..\..\..\..\..\include\tvout.h"\
+	"..\..\..\..\..\include\winefs.h"\
+	"..\graphobj\graphobj_i.c"\
+	".\stdafx.h"\
+	

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tasks", "Tasks.vcproj", "{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Debug|Win32.Build.0 = Debug|Win32
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Debug|x64.ActiveCfg = Debug|x64
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Debug|x64.Build.0 = Debug|x64
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Release|Win32.ActiveCfg = Release|Win32
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Release|Win32.Build.0 = Release|Win32
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Release|x64.ActiveCfg = Release|Win32
+		{DF70A217-EAD8-4B22-89E6-0456FC9CEBCF}.Release|x64.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,129 @@
+/*-----------------------------------------------------------------------------
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) 1993 - 2000.  Microsoft Corporation.  All rights reserved.
+
+This source code is only intended as a supplement to
+Microsoft Development Tools and/or WinHelp documentation.
+See these sources for detailed information regarding the
+Microsoft samples programs.
+-----------------------------------------------------------------------------*/
+
+#include <windows.h>
+#include "RegExplorer.h"
+
+RegExplorerDlg DIALOG 19, -26, 346, 223
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Registry Explorer Utility"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Key Name", -1, 5, 20, 40, 8
+    EDITTEXT        IDE_NAME, 5, 30, 125, 12, ES_AUTOHSCROLL
+    LTEXT           "Class", -1, 5, 45, 20, 8
+    LTEXT           "ACL", -1, 5, 70, 75, 8
+    EDITTEXT        IDE_CLASS, 5, 55, 125, 12, ES_AUTOHSCROLL
+    EDITTEXT        IDE_ACL, 5, 80, 125, 12, ES_AUTOHSCROLL
+    LTEXT           "Value: Data Type", -1, 5, 175, 65, 8
+    LTEXT           "Value: Data Entry", -1, 5, 198, 65, 8
+    EDITTEXT        IDE_VALUE1, 5, 185, 336, 12, ES_AUTOHSCROLL|ES_READONLY
+    EDITTEXT        IDE_VALUE2, 5, 208, 336, 12, ES_AUTOHSCROLL|ES_READONLY
+    LISTBOX         IDL_LISTBOX, 135, 19, 100, 150, WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDL_LISTBOX2, 240, 19, 100, 150, WS_VSCROLL | WS_TABSTOP
+    LTEXT           "CHILD KEYS:", -1, 162, 165, 45, 8
+    LTEXT           "VALUES:", -1, 265, 165, 30, 8
+    PUSHBUTTON      "Next/Down", IDB_NEXT, 79, 137, 51, 14
+    PUSHBUTTON      "Back/Up", IDB_BACK, 79, 118, 51, 14
+    EDITTEXT        IDE_CVALUES, 296, 165, 31, 12, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    EDITTEXT        IDE_TEXTOUT, 5, 3, 341, 12, ES_READONLY | NOT WS_BORDER
+END
+
+STRINGTABLE
+BEGIN
+    IDS_SELECTMSG   "Please select an item from the list box"
+    IDS_NAME        "Registry Explorer Utility"
+    IDS_TOPLEVEL    "Top Level: You can not backup any further."
+    IDS_CANTOPENKEY "Error: unable to open key.  Probably due to security reasons."
+    IDS_OPENKEYERR  "Error: Unable to open key, RegOpenKey = %d, Line = %d"
+    IDS_REGERR      "Line:%d 0 based index = %d, retValue = %d, ValueLen = %d"
+    IDS_DEBUG       "Debug"
+    IDS_NONAME      "<NO NAME>"
+    IDS_REGOPENERR  "Error: RegOpenKeyEx = %d"
+    IDS_REGQUERYERR "Error: RegQIK = %d, %d"
+    IDS_REGENUMERR  "Error: RegEnumValue = %d, cbData = %d, line %d"
+    IDS_REGNONE     "REG_NONE: No defined value type."
+    IDS_REGSZ       "REG_SZ: A null-terminated Unicode string."
+    IDS_REGEXPSZ    "REG_EXPAND_SZ: A String referencing environment variables i.e. PATH."
+    IDS_REGBIN      "REG_BINARY: Freeform binary data."
+    IDS_MALLOCERR   "Error: BinaryStrBuf = malloc failed"
+    IDS_DBGTITLE    "Debug: DisplayKeyData"
+    IDS_REGDWORD    "REG_DWORD: A 32 bit number."
+    IDS_REGBIGEND   "REG_DWORD_BIG_ENDIAN: A 32 bit number in big endian format."
+    IDS_REGLINK     "REG_LINK: A Unicode symbolic link."
+    IDS_REGMULTI    "REG_MULTI_SZ: An array of null-terminated strings."
+    IDS_REGRESLST   "REG_RESOURCE_LIST: A device-driver resource list."
+    IDS_REGFULLDESC "REG_FULL_RESOURCE_DESCRIPTOR: A resource list in the hardware description."
+    IDS_REGUNDEFINE "Undefine in this verion of the Registry Explorer. %d"
+END
+
+//Japanes language resources
+#ifdef JAPAN
+LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
+
+RegExplorerDlg DIALOG 19, -26, 310, 195
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Registry Explorer ユーティリティー"
+BEGIN
+    LTEXT           "キー名", -1, 5, 15, 40, 8
+    EDITTEXT        IDE_NAME, 5, 25, 110, 12, ES_AUTOHSCROLL
+    LTEXT           "クラス", -1, 5, 40, 40, 8
+    LTEXT           "ACL", -1, 5, 65, 50, 8
+    EDITTEXT        IDE_CLASS, 5, 50, 110, 12, ES_AUTOHSCROLL
+    EDITTEXT        IDE_ACL, 5, 75, 110, 12, ES_AUTOHSCROLL
+    LTEXT           "値: データ タイプ", -1, 5, 145, 75, 8
+    LTEXT           "値: データ エントリ", -1, 5, 170, 75, 8
+    EDITTEXT        IDE_VALUE1, 5, 155, 300, 12, ES_AUTOHSCROLL|ES_READONLY
+    EDITTEXT        IDE_VALUE2, 5, 180, 300, 12, ES_AUTOHSCROLL|ES_READONLY
+    LISTBOX         IDL_LISTBOX, 120, 16, 90, 120, WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDL_LISTBOX2, 215, 16, 90, 120, WS_VSCROLL | WS_TABSTOP
+    LTEXT           "チャイルド キー:", -1, 130, 137, 65, 10
+    LTEXT           "値 :", -1, 230, 137, 30, 10
+    PUSHBUTTON      "次/下", IDB_NEXT, 65, 125, 51, 14
+    PUSHBUTTON      "前/上", IDB_BACK, 65, 105, 51, 14
+    EDITTEXT        IDE_CVALUES, 250, 137, 32, 12, ES_AUTOHSCROLL | NOT
+                    WS_BORDER
+    EDITTEXT        IDE_TEXTOUT, 5, 3, 341, 12, ES_READONLY | NOT WS_BORDER
+END
+
+STRINGTABLE
+BEGIN
+    IDS_SELECTMSG   "リスト ボックスからアイテムをひとつ選んでください"
+    IDS_NAME        "Registry Explorer ユーティリティー"
+    IDS_TOPLEVEL    "トップ レベル: これ以上戻れません。"
+    IDS_CANTOPENKEY "エラー: キーをオープンできません。おそらくセキュリティー関係の理由によります。"
+    IDS_OPENKEYERR  "エラー: キーをオープンできません。RegOpenKey = %d, Line = %d"
+    IDS_REGERR      "行:%d ｲﾝﾃﾞｯｸｽ(0ﾍﾞｰｽ) = %d, retValue = %d, ValueLen = %d"
+    IDS_DEBUG       "デバッグ"
+    IDS_NONAME      "<名前なし>"
+    IDS_REGOPENERR  "エラー: RegOpenKeyEx = %d"
+    IDS_REGQUERYERR "エラー: RegQIK = %d, %d"
+    IDS_REGENUMERR  "エラー: RegEnumValue = %d, cbData = %d, 行 %d"
+    IDS_REGNONE     "REG_NONE: 値のタイプが定義されていません。"
+    IDS_REGSZ       "REG_SZ: Null で終了する Unicode 文字列。"
+    IDS_REGEXPSZ    "REG_EXPAND_SZ: 環境変数を参照する文字列。PATH など"
+    IDS_REGBIN      "REG_BINARY: 非定型バイナリ データ。"
+    IDS_MALLOCERR   "エラー: BinaryStrBuf = メモリ獲得失敗"
+    IDS_DBGTITLE    "デバッグ: DisplayKeyData"
+    IDS_REGDWORD    "REG_DWORD: 32 ビット数。"
+    IDS_REGBIGEND   "REG_DWORD_BIG_ENDIAN: ビッグ インディアン形式の 32 ビット数。"
+    IDS_REGLINK     "REG_LINK: Unicode シンボリック リンク。"
+    IDS_REGMULTI    "REG_MULTI_SZ: Null で終了する文字列の配列。"
+    IDS_REGRESLST   "REG_RESOURCE_LIST: デバイス ドライバ リソース リスト。"
+    IDS_REGFULLDESC "REG_FULL_RESOURCE_DESCRIPTOR: ハードウェア ディスクリプション内のリソース リスト。"
+    IDS_REGUNDEFINE "このバージョンのRegistry Explorerでは定義されていません。 %d"
+END
+
+#endif

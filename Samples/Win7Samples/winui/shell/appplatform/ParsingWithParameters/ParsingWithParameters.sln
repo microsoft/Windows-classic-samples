@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ParsingSample", "ParsingWithParameters.vcproj", "{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Debug|Win32.Build.0 = Debug|Win32
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Debug|x64.ActiveCfg = Debug|x64
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Debug|x64.Build.0 = Debug|x64
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Release|Win32.ActiveCfg = Release|Win32
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Release|Win32.Build.0 = Release|Win32
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Release|x64.ActiveCfg = Release|x64
+		{2EAC8F7E-3CE9-4CF2-B880-C04935271FFD}.Release|x64.Build.0 = Release|x64
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Debug|Win32.Build.0 = Debug|Win32
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Debug|x64.ActiveCfg = Debug|x64
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Debug|x64.Build.0 = Debug|x64
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Release|Win32.ActiveCfg = Release|Win32
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Release|Win32.Build.0 = Release|Win32
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Release|x64.ActiveCfg = Release|x64
+		{BAA65F73-6AC5-41F3-BAD8-AB2798CFE320}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

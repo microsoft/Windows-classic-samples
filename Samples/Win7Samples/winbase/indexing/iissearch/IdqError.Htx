@@ -1,0 +1,27 @@
+<HTML>
+
+<!--
+    <%CiTemplate%>
+
+    This is the error page for errors found in .idq files
+    A registry entry points to this page (where X is the current language):
+
+    \registry\machine\system\currentcontrolset\control\ContentIndex\
+    Language\X\ISAPIIDQErrorFile
+-->
+
+<HEAD>
+    <TITLE><%CiRestriction%> - error.</TITLE>
+</HEAD>
+
+<H3>
+    Error "<%CiErrorMessage%>" (<%CiErrorNumber%>) encountered while processing the query
+    "<%CiRestriction%>".
+</H3>
+
+<BR>
+<P>
+
+<A HREF="/iissamples/issamples/ixqlang.htm">Query Syntax Help</A>
+
+</HTML>

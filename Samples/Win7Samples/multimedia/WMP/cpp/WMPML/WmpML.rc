@@ -1,0 +1,101 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAINDLG DIALOGEX 0, 0, 447, 282
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Windows Media Player Library"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_MEDIATYPELIST,41,7,67,70,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_LIBLIST,151,7,139,214,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_TREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,7,25,142,230
+    LISTBOX         IDC_DETAILLIST,157,36,283,220,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_DETAILTEXT,43,262,341,12,SS_NOPREFIX | SS_SUNKEN
+    DEFPUSHBUTTON   "Close",IDOK,390,261,50,14
+    LTEXT           "Schema:",IDC_STATIC,10,8,28,8
+    LTEXT           "Library:",IDC_STATIC,124,8,26,8
+    LTEXT           "Details:",IDC_STATIC,13,263,25,8
+    LTEXT           "Media:",IDC_STATIC,160,26,22,8
+END
+
+IDD_QUERYDLG DIALOGEX 0, 0, 486, 190
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Advanced Queries"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_QUERYNAME,7,7,143,155,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_QUERYOPR,155,7,67,155,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_QUERYVAL,225,7,141,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add Condition",IDC_ADDCONDITION,375,7,50,14
+    PUSHBUTTON      "Add Group",IDC_ADDGROUP,429,7,50,14
+    CONTROL         "",IDC_QUERYLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,28,472,134
+    PUSHBUTTON      "Start Over",IDC_STARTOVER,7,169,50,14
+    PUSHBUTTON      "Show StringCollection",IDC_SHOWSC,392,169,80,14
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

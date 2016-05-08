@@ -1,0 +1,237 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 228, 73
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About WMI Sample #1"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            128,IDC_STATIC,11,17,21,20
+    LTEXT           "WMI Advanced Client Sample Version 1.0",IDC_STATIC,40,
+                    10,138,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) , Microsoft Corp.",IDC_STATIC,40,
+                    25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,189,7,32,14,WS_GROUP
+END
+
+IDD_SAMPLE_DIALOG DIALOGEX 0, 0, 381, 162
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "WMI Advanced Client Sample"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "&Namespace:",IDC_STATIC,17,9,41,8
+    EDITTEXT        IDC_NAMESPACE,60,7,142,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Connect",IDC_CONNECT,213,7,75,14
+    PUSHBUTTON      "&Enum Disks",IDC_ENUMDISKS,299,26,75,14,WS_DISABLED
+    PUSHBUTTON      "&Add Equipment",IDC_ADDEQUIPMENT,213,64,75,14,
+                    WS_DISABLED
+    PUSHBUTTON      "Enum &Services",IDC_ENUMSERVICES,213,26,75,14,
+                    WS_DISABLED
+    PUSHBUTTON      "E&xit",IDCANCEL,299,7,75,14
+    LISTBOX         IDC_OUTPUTLIST,7,28,194,61,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Get C: Disk &Details",IDC_DISKDETAILS,299,45,75,14,
+                    WS_DISABLED
+    PUSHBUTTON      "E&num Services Async",IDC_ENUMSERVICESASYNC,213,45,75,
+                    14,WS_DISABLED
+    PUSHBUTTON      "Register &Temp",IDC_REGTEMP,213,132,75,14,WS_DISABLED
+    PUSHBUTTON      "Register &Perm",IDC_REGPERM,213,111,75,14,WS_DISABLED
+    LISTBOX         IDC_EVENTLIST,7,105,194,49,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL
+    LTEXT           "Event Log:",IDC_STATIC,7,97,36,8
+    PUSHBUTTON      "A&bout disk properties",IDC_DISK_PROPS_DESCRIPTIONS,299,
+                    64,75,14,WS_DISABLED
+END
+
+IDD_OFFICEEQUIP DIALOG DISCARDABLE  0, 0, 242, 70
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Office Equipment"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&SKU:",IDC_STATIC,13,18,18,8
+    EDITTEXT        IDC_SKU,44,15,131,14,ES_AUTOHSCROLL
+    LTEXT           "&Item:",IDC_STATIC,19,45,16,8
+    EDITTEXT        IDC_ITEM,44,42,131,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,185,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,185,24,50,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "Microsoft Corp.\0"
+            VALUE "FileDescription", "WMI Advanced Client Sample\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "AdvClient\0"
+            VALUE "LegalCopyright", "Copyright (C) , Microsoft Corp.\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "AdvClient.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "WMI Advanced Client Sample\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_SAMPLE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 374
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_OFFICEEQUIP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About WMI Advanced Client..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

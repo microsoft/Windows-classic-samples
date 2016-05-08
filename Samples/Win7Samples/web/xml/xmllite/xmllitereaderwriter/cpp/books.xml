@@ -1,0 +1,8 @@
+<books>
+    <book name="My First Book">
+     <price>100.00</price>
+  </book>
+    <book name="A Less Expensive Book">
+     <price>25.00</price>
+  </book>
+</books>

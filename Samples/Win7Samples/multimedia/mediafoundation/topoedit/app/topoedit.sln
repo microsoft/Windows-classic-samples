@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "topoedit", "topoedit.vcproj", "{8499D343-0AC1-49B6-96B9-C1FD6C130EB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB} = {3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tedutil", "..\tedutil\tedutil.vcproj", "{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8499D343-0AC1-49B6-96B9-C1FD6C130EB4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8499D343-0AC1-49B6-96B9-C1FD6C130EB4}.Debug|Win32.Build.0 = Debug|Win32
+		{8499D343-0AC1-49B6-96B9-C1FD6C130EB4}.Release|Win32.ActiveCfg = Release|Win32
+		{8499D343-0AC1-49B6-96B9-C1FD6C130EB4}.Release|Win32.Build.0 = Release|Win32
+		{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}.Debug|Win32.Build.0 = Debug|Win32
+		{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}.Release|Win32.ActiveCfg = Release|Win32
+		{3BC60BEF-E69F-45B2-8FB2-20CD401B87BB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

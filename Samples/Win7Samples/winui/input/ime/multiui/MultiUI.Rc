@@ -1,0 +1,51 @@
+// MultiUI.rc
+//
+#include "resource.h"
+
+#include <windows.h>
+#include "multiui.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+MYICON                  ICON    DISCARDABLE     "multiui.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+MULTIUIMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&About...",                   IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ABOUTBOX DIALOG DISCARDABLE  19, 17, 184, 65
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "MULTIUI Sample"
+FONT 10, "System"
+BEGIN
+    CTEXT           "IME Apps Sample",-1,0,4,184,8
+    CTEXT           "Version 0.0",-1,0,17,184,8
+    CTEXT           "Copyright (c) 1995 - 2000 Microsoft Corporation",-1,0,32,184,8
+    DEFPUSHBUTTON   "OK",IDOK,73,47,38,14,WS_GROUP
+END
+
+
+

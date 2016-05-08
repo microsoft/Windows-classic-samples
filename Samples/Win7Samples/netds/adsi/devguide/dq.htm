@@ -1,0 +1,177 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Distributed Query</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><img border="0" src="banner.gif" width="250" height="60"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><img src="http://adsi/sdk/mslogo.gif"
+    alt="mslogo.gif (666 bytes)" width="112" height="40"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20"></map><img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="http://adsi/sdk/router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="40">
+  <tr>
+    <td width="2%" height="19"></td>
+    <td width="98%" height="19"><hr color="#0080C0">
+    </td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21"><img src="dq.gif" alt="dq.gif (8540 bytes)" width="364"
+    height="77"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21" valign="top"><font face="Verdana"><small>With Microsoft SQL
+    Server™ 7.0, Active Directory™, and ADSI, you will be able to get the data from Active
+    Directory into SQL Server tables or views. You'll be able to manipulate it with other SQL
+    Server tables, views, or any other tables obtained from other OLE DB data sources. One
+      interesting scenario is to join data between Active Directory and the SQL Server.
+      For example, Human Resource data may reside in the SQL Server database, while the account
+    and groups information is stored in Active Directory. An administrator can create a
+    quick report which combines the data from those two sources into one single SELECT
+    statement. Another scenario is to join information from Exchange, Active Directory,
+    and Index Server.&nbsp;</small></font><p><font face="Verdana"><small>SQL Server
+    Distributed Query, OLE DB, and ADSI technologies make these scenarios possible.</small> </font></p>
+      <p><strong><font face="Verdana" color="#0080C0"><small>Requirements</small></font></strong><ul>
+      <li><font face="Verdana"><small>You must install SQL Server 7.0 and <a href="http://www.microsoft.com/sql/downloads/sp3.htm">Service
+        Pack 2 or later</a>. For more information about
+        SQL Server, visit <a href="http://www.microsoft.com/sql">http://www.microsoft.com/sql</a>.</small></font></li>
+      <li><font face="Verdana"><small>You must install ADSI Runtime (<a
+        href="http://www.microsoft.com/adsi">http://www.microsoft.com/adsi</a>) on the machine
+        on which SQL
+        Server is installed.</small> </font></li>
+      <li><font face="Verdana"><small>You must install Active Directory, (<a
+        href="http://www.microsoft.com/windows">http://www.microsoft.com/windows</a>). You can
+        also use Exchange Server (<a href="http://www.microsoft.com/exchange">http://www.microsoft.com/exchange</a>).</small></font></li>
+    </ul>
+    <p><strong><font face="Verdana" color="#0080C0"><small>Step-by-Step Instructions</small></font></strong></p>
+    <p><font face="Verdana" color="#FF0000"><small>In SQL Server:</small></font>
+      <ol>
+      <li><font face="Verdana"><small>Run the <b> Query Analyzer</b> (<b>Start</b> |
+        <b> Programs</b> | <b> Microsoft SQL
+        Server 7.0</b>)</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Logon to the SQL Server machine.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Execute the following line (by highlighting it and pressing
+        CTRL+E)</small><br>
+        <br>
+        <small>sp_addlinkedserver 'ADSI', 'Active Directory Services', 'ADSDSOObject',
+        'adsdatasource'<br>
+        go</small><br>
+        <br>
+        <small>This tells SQL Server to associate the word 'ADSI' with </small><small>the
+        ADSI OLE DB provider - 'ADSDSOObject'.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Now we are ready to access Active Directory from SQL
+        Server. Type and execute:</small><br>
+        <br>
+        <small>SELECT * FROM OpenQuery(
+        ADSI,'&lt;LDAP://DC=Microsoft,DC=com&gt;;(&amp;(objectCategory=Person)(objectClass=user));name,
+        adspath;subtree')</small><br>
+        <br>
+        <small><b>Note:</b> you should change the DC=.., DC=.. accordingly. This query asks for all users
+        in the 'Microsoft.com' domain.</small><br>
+        <br>
+        <small>You may also use the ADSI SQL Dialect, for example:<br>
+        </small><br>
+        <small>SELECT * FROM OpenQuery( ADSI, 'SELECT name, adsPath FROM
+        ''LDAP://DC=Microsoft,DC=com'' WHERE objectCategory = ''Person'' AND objectClass=
+        ''user''')</small></font></li>
+      </ol>
+    <p><font face="Verdana" color="#FF0000"><small>Creating, Executing a View</small></font><ul>
+      <li><font face="Verdana"><small>You may create a view for data obtained from Active
+        Directory. Note that only the view definition is stored in SQL Server, not the actual
+        result set. Hence, you may get a different result when you execute a view later.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>To create a view, type and execute the
+        following:</small><br>
+        <br>
+        <small>CREATE VIEW viewADUsers AS</small><br>
+        <small>SELECT * FROM OpenQuery(
+        ADSI,'&lt;LDAP://DC=Microsoft,DC=com&gt;;(&amp;(objectCategory=Person)(objectClass=user));name,
+        adspath;subtree')</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>To execute a view, type the following:</small><br>
+        <br>
+        <small>SELECT * from viewADUsers</small></font></li>
+    </ul>
+    <p><font face="Verdana" color="#FF0000"><small>Heterogeneous Join Between SQL Server and
+    Active Directory</small></font><ul>
+      <li><font face="Verdana" color="#000000"><small>Create an
+        employee performance review table using SQL.</small><br>
+        <br>
+        <small>CREATE TABLE EMP_REVIEW<br>
+        (<br>
+        userName varChar(40),<br>
+        reviewDate datetime,<br>
+        rating decimal <br>
+        )</small><br>
+        </font></li>
+      <li><font face="Verdana" color="#000000"><small>Insert a few records.</small><br>
+        <br>
+        <small>INSERT EMP_REVIEW VALUES('Administrator', '2/15/1998', 4.5 )<br>
+        INSERT EMP_REVIEW VALUES('Administrator', '7/15/1998', 4.0 )</small><br>
+        <br>
+        <small><b>Note:</b> You can insert other user names.</small><br>
+        </font></li>
+      <li><font face="Verdana" color="#000000"><small>Now join the two.</small><br>
+        <br>
+        <small>SELECT ADsPath, userName, ReviewDate, Rating <br>
+        FROM EMP_REVIEW, viewADUsers<br>
+        WHERE userName = Name<br>
+        </small></font></li>
+      <li><font face="Verdana" color="#000000"><small>Viola! You should get the result from both
+        SQL Server and Active Directory.</small><br>
+        </font></li>
+      <li><font face="Verdana" color="#000000"><small>Now, you can even create another view for
+        this join.</small><br>
+        <br>
+        <small>CREATE VIEW reviewReport</small><br>
+        <small>SELECT ADsPath, userName, ReviewDate, Rating <br>
+        FROM EMP_REVIEW, viewADUsers<br>
+        WHERE userName = Name</small></font></li>
+    </ul>
+    <p><font face="Verdana" color="#FF0000"><small>Advanced Operations</small></font><ul>
+      <li><font face="Verdana"><small>You may log on as different user when connecting to
+        Active Directory. To specify the alternate credential, type the
+        following:</small><br>
+        <br>
+        <small>sp_addlinkedsrvlogin ADSI, false, 'MICROSOFT\Administrator',
+        'CN=Administrator,CN=Users,DC=Microsoft,DC=com', 'passwordHere'</small><br>
+        <br>
+        <small>This line tells Distributed Query that if someone logs on in SQL Server as
+        'Microsoft\Administrator', the Distributed Query will pass the 'CN=Administrator,CN=Users,
+        DC=Microsoft, DC=com' and 'passwordHere' to ADSI as the credentials.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>To stop connecting as an alternate credential,
+        type the following:</small><br>
+        <br>
+        <small>sp_droplinkedsrvlogin ADSI,'MICROSOFT\Administrator'</small></font></li>
+    </ul>
+    <p><small><font face="Verdana">You can get the SQL script source from <a
+    href="../samples/DistQuery">here</a>.</font></small></td>
+  </tr>
+</table>
+</body>
+</html>

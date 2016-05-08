@@ -1,0 +1,597 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\HTMLEdit.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\HTMLEdit.ico"
+IDR_HTMLEDTYPE          ICON                    "res\\HTMLEdDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+ID_TOOLBAR_EDITING      BITMAP                  "res\\id_toolb.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+ID_TOOLBAR_EDITING TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_BUTTON_FONTNAME
+    BUTTON      ID_BUTTON_FONTSIZE
+    SEPARATOR
+    BUTTON      ID_BUTTON_BLOCKFMT
+    SEPARATOR
+    BUTTON      ID_BUTTON_BOLD
+    BUTTON      ID_BUTTON_ITALIC
+    BUTTON      ID_BUTTON_UNDERLINE
+    BUTTON      ID_BUTTON_COLOR
+    SEPARATOR
+    BUTTON      ID_BUTTON_NUMBERLIST
+    BUTTON      ID_BUTTON_BULLETLIST
+    BUTTON      ID_BUTTON_OUTDENT
+    BUTTON      ID_BUTTON_INDENT
+    SEPARATOR
+    BUTTON      ID_BUTTON_LEFTJUSTIFY
+    BUTTON      ID_BUTTON_CENTERJUSTIFY
+    BUTTON      ID_BUTTON_RIGHTJUSTIFY
+    SEPARATOR
+    BUTTON      ID_BUTTON_IMAGE
+    SEPARATOR
+    BUTTON      ID_BUTTON_ABSOLUTE
+    BUTTON      ID_BUTTON_STATIC
+    SEPARATOR
+    BUTTON      ID_BUTTON_HYPERLINK
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open File...\tCtrl+O",       ID_FILE_OPEN
+        MENUITEM "Open &URL...",                ID_FILE_OPENURL
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM "Select All",                  ID_EDIT_SELECT_ALL
+    END
+    POPUP "F&ormat"
+    BEGIN
+        MENUITEM "&Font...",                    ID_EDIT_FONT
+        MENUITEM SEPARATOR
+        MENUITEM "Absolute &Position Element",  ID_FORMAT_ABSOLUTEPOSITIONELEMENT
+        MENUITEM "&Static Postion Element",     ID_FORMAT_STATICELEMENT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "Editing Toolbar",             ID_VIEW_EDITINGTOOLBAR
+        MENUITEM SEPARATOR
+        MENUITEM "&Web\tCtrl+W",                ID_VIEW_WEB
+        MENUITEM "Sou&rce\tCtrl+R",             ID_VIEW_SOURCE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About HTMLEdit...",          ID_APP_ABOUT
+    END
+END
+
+IDR_EDITPOPUP MENU 
+BEGIN
+    POPUP "ph"
+    BEGIN
+        MENUITEM "Copy",                        57634
+        MENUITEM "Paste",                       57637
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    "W",            ID_VIEW_WEB,            VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_VIEW_SOURCE,         VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 241, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "HTMLEditRibbon!"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "HTMLEditRibbon!",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "© 1998 - 2008 Microsoft Corporation. All rights reserved.",
+                    IDC_STATIC,40,25,123,17
+    DEFPUSHBUTTON   "OK",IDOK,177,7,50,14,WS_GROUP
+END
+
+IDD_URLDIALOG DIALOG  0, 0, 303, 183
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,246,7,50,14
+    LTEXT           "Address:",IDC_STATIC,7,30,28,8
+    CONTROL         "",IDC_EXPLORER,"{8856F961-340A-11D0-A96B-00C04FD705A2}",
+                    WS_TABSTOP,7,65,289,111
+    LTEXT           "Static",IDC_PHSTATIC,7,50,217,12
+    PUSHBUTTON      "Go",IDC_BTNGO,231,48,19,14
+    PUSHBUTTON      "Cancel",IDCANCEL,246,24,50,14
+    PUSHBUTTON      "Search",IDC_BTN_SEARCH,254,48,30,14
+END
+
+IDD_INSERT_TABLE DIALOG  0, 0, 235, 141
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Insert Table"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,178,24,50,14
+    LTEXT           "Number of Rows:",IDC_STATIC,19,17,56,8
+    LTEXT           "Number of Columns:",IDC_STATIC,11,36,64,8
+    EDITTEXT        IDC_EDIT_NUMROWS,79,14,31,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,111,14,10,
+                    14
+    EDITTEXT        IDC_EDIT_NUMCOLS,79,33,31,14,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Spin2",IDC_SPIN2,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,33,11,
+                    14
+    EDITTEXT        IDC_EDIT_TABLEATTRIBS,5,60,211,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CELLATTRIBS,5,90,211,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CAPTION,5,120,211,14,ES_AUTOHSCROLL
+    LTEXT           "Table Attributes:",IDC_STATIC,5,51,52,8
+    LTEXT           "Cell Attributes:",IDC_STATIC,5,80,46,8
+    LTEXT           "Table Caption:",IDC_STATIC,5,110,47,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "HTMLEditRibbon!"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "HTMLEdit"
+            VALUE "LegalCopyright", L"\251 Microsoft Corporation.  All rights reserved."
+            VALUE "OriginalFilename", "HTMLEdit.EXE"
+            VALUE "ProductName", "HTMLEdit Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 234
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_URLDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 296
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 176
+    END
+
+    IDD_INSERT_TABLE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 134
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_URLDIALOG DLGINIT
+BEGIN
+    IDC_EXPLORER, 0x376, 160, 0
+0x0000, 0x0000, 0x004c, 0x0000, 0x2cdb, 0x0000, 0x129b, 0x0000, 0x0001, 
+0x0000, 0x0005, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x004c, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x0000, 0xd0e0, 0x0057, 0x3573, 0x11cf, 0x69ae, 0x0008, 0x2e2b, 0x6212, 
+0x0008, 0x0000, 0x0000, 0x0000, 0x004c, 0x0000, 0x1401, 0x0002, 0x0000, 
+0x0000, 0x00c0, 0x0000, 0x0000, 0x4600, 0x0080, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "HTMLEditRibbon\nMyWebPage\nWebPage\nWeb Pages (*.htm, *.html)\n.htm;.html\nHTMLEdit.Document\nHTMLEdit Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "HTMLEdit"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_VIEW       "WEB VIEW"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_EDIT_EDITMODE       "Toggles Edit mode"
+    ID_FILE_OPENURL         "Opens an internet URL"
+    IDC_EDIT_DESIGNMODE     "Toggle Design Mode"
+    ID_EDIT_SELECTALL       "Select All"
+    ID_EDIT_FONT            "Change the text font"
+    ID_EDIT_TEST            "Test Handler"
+    ID_TABLE_INSERT         "Insert a new table."
+    ID_TABLE_INSERTROW      "Insert a row into the table at the current curosor location"
+    ID_TABLE_INSERTCOLUMN   "Insert a column into the table at the current cursof location"
+    ID_TABLE_DELETEROWS     "Delete the currently selected Rows"
+END
+
+STRINGTABLE 
+BEGIN
+    CG_ID_VIEW_FONTDLGBAR   "Show or hide FontDlgBar\nToggle FontDlgBar"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TABLE_DELETECOLUMNS  "Delete the currently selected columns."
+    ID_TABLE_MERGECELLS     "Merge the currently selected cells into one cell."
+    ID_TABLE_SPLITCELL      "Split the cell at the current cursor location into two cells."
+    ID_TABLE_INSERTCELL     "Insert a cell into the table at the current cursor location."
+    ID_TABLE_DELETECELLS    "Delete the currently selected cells."
+    ID_BUTTON_IMAGE         "Insert an image\nInsert Image"
+    ID_VIEW_EDITINGTOOLBAR  "Hide or show the editing toolbar"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_FONTSIZE      "Font Size\nFont Size"
+    ID_VIEW_WEB             "View the document as it will appear on the web."
+    ID_VIEW_SOURCE          "View the HTML source for this document."
+    ID_BUTTON_HYPERLINK     "Create Hyperlink\nHyperlink"
+    ID_BUTTON_CENTERJUSTIFY "Center Justify Text\nCenter Justify"
+    ID_BUTTON_ABSOLUTE      "Postion Element as Absolute\nPosition Element as Absolute"
+    ID_BUTTON_STATIC        "Position Element as Static\nPosition Element as Static"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_BOLD          "Bold text\nBold"
+    ID_BUTTON_FONTNAME      "Font Name\nFont Name"
+    ID_BUTTON_ITALIC        "Italisize text\nItalic"
+    ID_BUTTON_UNDERLINE     "Underline text\nUnderline"
+    ID_BUTTON_CENTER        "Center Text\nCenter"
+    ID_BUTTON_LEFTJUSTIFY   "Left Justify Text\nLeft Justify"
+    ID_BUTTON_RIGHTJUSTIFY  "Right Justify Text\nRight Justify"
+    ID_BUTTON_BULLETLIST    "Make text a bulleted list\nBulleted List"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_OUTDENT       "Outdent text\nOutdent"
+    ID_BUTTON_INDENT        "Indent text\nIndent"
+    ID_BUTTON_NUMBERLIST    "Make text a numbered list\nNumbered List"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BUTTON_COLOR         "Set text color\nText Color"
+    ID_BUTTON_BLOCKFMT      "Select Block Format\nBlock Format"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RECENTFILES         "Recent Files"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\HTMLEdit.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#include "RibbonRes\ribbonres.rc2"  // Ribbon resources
+
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

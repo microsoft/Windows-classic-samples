@@ -1,0 +1,430 @@
+<html>
+
+<head>
+<title>Windows Peer-to-Peer Sample Applications</title>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h2
+	{mso-style-link:"Heading 2 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:18.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h4
+	{mso-style-link:"Heading 4 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.Heading2Char
+	{mso-style-name:"Heading 2 Char";
+	mso-style-link:"Heading 2";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+span.Heading4Char
+	{mso-style-name:"Heading 4 Char";
+	mso-style-link:"Heading 4";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+p.BulletPoints, li.BulletPoints, div.BulletPoints
+	{mso-style-name:"Bullet Points";
+	mso-style-link:"Bullet Points Char";
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.BulletPointsChar
+	{mso-style-name:"Bullet Points Char";
+	mso-style-link:"Bullet Points";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<h2 align=center style='text-align:center'>Windows Peer-to-Peer Sample
+Applications</h2>
+
+<h4>Feedback</h4>
+
+<h4><span style='color:black;font-weight:normal'>The following sample
+applications are included in the Platform SDK. The samples can help you when
+you develop your own Peer-to-Peer applications using the Peer-to-Peer
+Infrastructure.</span></h4>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><a href="#_Collaboration_Sample">Collaboration Sample</a></p>
+
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><a href="#_DRT_Sample">Distributed Routing Table Sample</a></p>
+
+<p class=BulletPoints><a name="_Graph_Chat_Sample"></a><span style='font-size:
+10.0pt;font-family:Symbol'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><a href="#_Graph_Chat_Sample_1">Graph Chat Sample</a></p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><a href="#_Group_Chat_Sample">Group Chat Sample</a></p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><a href="#_Peer_Name_Resolution">Peer Name Resolution Protocol
+Sample</a></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal> Tip: To enable the Peer to Peer Networking components on XP follow the guidelines at <a href="http://www.microsoft.com/technet/network/p2p/p2pintro.mspx">http://www.microsoft.com/technet/network/p2p/p2pintro.mspx</a>. </p>
+
+<p> If you have any questions or feedback, please contact us using any of the mechanisms below: </p>
+
+<p>Email: <a href="mailto:peerfb@microsoft.com">peerfb@microsoft.com</a> <br>
+Website: <a href="http://www.microsoft.com/p2p">http://www.microsoft.com/p2p</a> <br>
+Blog: <a href="http://blogs.msdn.com/p2p/">http://blogs.msdn.com/p2p/</a> <br>
+MSDN Forum: <a href="http://forums.microsoft.com/msdn/showforum.aspx?forumid=1505&amp;siteid=1">http://forums.microsoft.com/msdn/showforum.aspx?forumid=1505&siteid=1</a>
+</p>
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<h3><a name="_Collaboration_Sample"></a>Collaboration Sample</h3>
+
+<p class=MsoNormal>The Collaboration sample is a console based application. The
+goal of the application is to demonstrate proper use of the Collaboration APIs.
+Specifically, it demonstrates how to: </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Sign In, Sign Out and display Sign In Options </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Set and get your endpoint name </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Display endpoint information </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerate People Near Me </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Add a People Near Me endpoint to contacts </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Export, Parse, Import and Delete contacts </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerate contacts </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Watch a contact's presence changes </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Give a contact permission to watch you for presence changes </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Get presence information for an endpoint </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Set your presence information </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Subscribe and Unsubscribe from an endpoint </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Publish an object and stop publishing an object </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Register and Unregister a application for collaboration </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Display applications registered for collaboration </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Send an Invitation to an endpoint to participate in a collaboration
+session </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Upon accepting an invite launch a collaboration session and
+access data sent with the invitation </p>
+
+
+<h3><a name="_DRT_Sample"></a>Distributed Routing Table Sample</h3>
+
+<p class=MsoNormal>The Distributed Routing Table (DRT) sample is a console based application that demonstrates the use of the DRT APIs.  Specifically, it demonstrates how to: </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Register DRT Keys </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Search for DRT keys</p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Process DRT events</p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Use DRT providers</p>
+
+
+<h3><a name="_Ref160862651"></a><a name="_Graph_Chat_Sample_1"></a>Graph Chat
+Sample</h3>
+
+<p class=MsoNormal>The Graph Chat Sample Application is a simple chat
+application demonstrating how to use the Peer-to-Peer Graphing API. The XP
+version demonstrates how to use the Peer Name Resolution Protocol (PNRP) with the Winsock2 API. Any address provider can be used. The Vista version demonstrates how to use the PNRP via the PNRP APIs. More specifically, the application demonstrates:
+</p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Creating a graph </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Connecting to an existing graph </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Disconnecting from an existing graph </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerating Peer-to-Peer entities </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Adding records to the graph </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Using direct connections with a graph </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Using the notification and event infrastructure with graphs </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Registering names with PNRP </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Resolving names with PNRP </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Unregistering names with PNRP </p>
+
+<h3><a name="_Group_Chat_Sample"></a>Group Chat Sample</h3>
+
+<p class=MsoNormal>The Group Chat Sample Application is a simple chat
+application demonstrating how to use the Peer-to-Peer Grouping and Identity
+Manager API. More specifically the application demonstrates: </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Creating an identity </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Creating and obtaining identity information </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerating identities </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerating groups associated with an identity </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Creating a group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Creating invitations for a group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Connecting to an existing group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Disconnecting from an existing group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Extracting information from the group properties </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Using direct connections with a group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Using the enumeration functions within a group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Enumerating group members </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Adding records to a group </p>
+
+<p class=BulletPoints><span style='font-size:10.0pt;font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Using the notification and event infrastructure with groups </p>
+
+
+<h3><a name="_Peer_Name_Resolution"></a>Peer Name Resolution Protocol Sample</h3>
+
+<p class=MsoNormal>The Peer Name Resolution Protocol (PNRP) sample is a console
+based application. The goal of the application is to demonstrate proper use of
+the PNRP APIs. Specifically, it demonstrates how to: </p>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal>Register a peer name</li>
+ <li class=MsoNormal>Resolve a peer name</li>
+ <li class=MsoNormal>Enumerate the available clouds</li>
+</ul>
+
+
+
+
+</div>
+
+</body>
+
+</html>

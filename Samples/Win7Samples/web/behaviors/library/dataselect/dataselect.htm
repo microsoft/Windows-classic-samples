@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Behavior Library: Dataselect</title>
+
+<style>
+    .bound    { behavior: url("../dataselect/DataSelect.htc") }
+    
+    H1        { font: bold 18pt verdana; color: navy }
+                    
+    P         { font: 10pt verdana;}
+    
+    A:link    { color:#003399; text-decoration:none; }
+    A:visited { color:#6699CC; text-decoration:none; }
+    A:hover   { text-decoration:underline; }
+</style>
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<h1>Databound Select Box</h1>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><hr>
+
+<p>Use the Databound Select to create Select elements populated by
+databinding.</p>
+
+<p>This text file:<br>
+<iframe src="dataselect.txt" width="150"></iframe>
+</p>
+
+<p>Creates the OPTION elements in this SELECT element<br>
+<select name="oTest" class="bound" datasrc="#oData" value="4a" dataFldText="column2" dataFldValue="column1"></select>
+</p>
+<object ID="oData" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83">
+    <param NAME="DataURL" VALUE="dataselect.txt">
+    <param NAME="FieldDelim" VALUE=",">
+</object>
+
+<p>&nbsp;
+<p>&nbsp;
+
+<hr>
+<font FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <a HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</a>.
+</font>
+<p>
+	
+
+
+</body>
+</html>

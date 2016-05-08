@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PersistedConfiguration xmlns="http://schemas.microsoft.com/wms/2002/07/wmsCacheProxyConfigSchema">
+    <cacheDirectoryPath>c:\wmscache</cacheDirectoryPath>
+    <diskQuota>1024</diskQuota>
+    <archiveQuotaPerStream>-1</archiveQuotaPerStream>
+    <reverseProxyRedirectURL>null</reverseProxyRedirectURL>
+    <backendServer>null</backendServer>
+    <enableCaching>true</enableCaching>
+    <enableProxy>true</enableProxy>
+    <proxyOnDemandCacheMiss>true</proxyOnDemandCacheMiss>
+    <cacheOnDemandCacheMiss>true</cacheOnDemandCacheMiss>
+    <handleUpstreamCacheRequests>true</handleUpstreamCacheRequests>
+    <protocol>clientprotocol</protocol>
+</PersistedConfiguration>

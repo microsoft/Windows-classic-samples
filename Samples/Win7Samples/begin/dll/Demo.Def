@@ -1,0 +1,14 @@
+NAME	     Demo
+
+
+STUB	     'WINSTUB.EXE'
+
+CODE	     PRELOAD MOVEABLE DISCARDABLE
+DATA	     PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE     1024
+STACKSIZE    5120
+
+EXPORTS
+    DemoWndProc      @1
+    About            @2

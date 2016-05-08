@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RSACert", "rsacert\RSACert.vcproj", "{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RSAKey", "rsakey\RSAKey.vcproj", "{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SessionKey", "sessionkey\SessionKey.vcproj", "{24B9DF15-603D-4A55-8A22-D9FB97959C75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Debug|Win32.Build.0 = Debug|Win32
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Debug|x64.ActiveCfg = Debug|x64
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Debug|x64.Build.0 = Debug|x64
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Release|Win32.ActiveCfg = Release|Win32
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Release|Win32.Build.0 = Release|Win32
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Release|x64.ActiveCfg = Release|x64
+		{EA46C223-42BA-4DFF-A2C0-8FFE1F6CB645}.Release|x64.Build.0 = Release|x64
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Debug|Win32.Build.0 = Debug|Win32
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Debug|x64.ActiveCfg = Debug|x64
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Debug|x64.Build.0 = Debug|x64
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Release|Win32.ActiveCfg = Release|Win32
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Release|Win32.Build.0 = Release|Win32
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Release|x64.ActiveCfg = Release|x64
+		{7592865B-19B1-412E-B3AA-F8BAAFDC04E7}.Release|x64.Build.0 = Release|x64
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Debug|Win32.ActiveCfg = Debug|Win32
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Debug|Win32.Build.0 = Debug|Win32
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Debug|x64.ActiveCfg = Debug|x64
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Debug|x64.Build.0 = Debug|x64
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Release|Win32.ActiveCfg = Release|Win32
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Release|Win32.Build.0 = Release|Win32
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Release|x64.ActiveCfg = Release|x64
+		{24B9DF15-603D-4A55-8A22-D9FB97959C75}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

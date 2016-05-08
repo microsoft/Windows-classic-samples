@@ -1,0 +1,25 @@
+HKCR
+{
+	Line.Line.1 = s 'Line Class'
+	{
+		CLSID = s '{8650EE03-E4C0-11D0-81C4-204C4F4F5020}'
+	}
+	Line.Line = s 'Line Class'
+	{
+		CLSID = s '{8650EE03-E4C0-11D0-81C4-204C4F4F5020}'
+  		CurVer = s 'Line.Line.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {8650EE03-E4C0-11D0-81C4-204C4F4F5020} = s 'Line Class'
+		{
+			ProgID = s 'Line.Line.1'
+			VersionIndependentProgID = s 'Line.Line'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

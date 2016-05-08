@@ -1,0 +1,1600 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - WinNT</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="38">
+
+  <tr>
+    <td width="3%" height="19"></td>
+    <td width="97%" height="19"></td>
+  </tr>
+  
+  <tr>
+    <td width="3%" height="74"></td>
+    <td width="97%" height="74"><img src="http://adsi/sdk/winnt.gif" alt="winnt.gif (3693 bytes)" width="201"
+    height="80"></td>
+  </tr>
+  
+  <tr>
+  
+    <td width="3%" height="21"></td>
+    
+    <td width="97%" height="21">
+    
+    &nbsp;
+    <p>
+    
+    <font face="Verdana"><small>The ADSI WinNT provider allows you to
+    communicate to a Windows NT® 4.0 directory. Since Windows 2000 maintains backward compatibility, you
+    can also communicate with Windows<small>®</small> 2000 machines using WinNT. However, we recommend
+    that you use the LDAP provider to communicate with Windows 2000 domain controllers. For the Windows 2000
+    standalone server and Professional Edition, you must use the WinNT provider to access the
+    directory.</small></font>
+    
+    </p>
+    
+    <p><font face="Verdana"><small>WinNT supports local and remote
+      accounts, services, computers, security management and other functionalities. With ADSI extensions, 
+      you'll be able to extend the functionality. For more information on ADSI extensions, click 
+      <a href="extension.htm">here</a>.</small></font></p>
+      
+    <p><strong><font face="Verdana" color="#0080C0"><small>Requirements</small></font></strong></p>
+
+    <ul>
+    
+      <li><font face="Verdana"><small>Install ADSI. To download the runtime, visit
+        <a href="http://www.microsoft.com/adsi">http://www.microsoft.com/adsi</a> on
+        Windows NT 4.0 or Windows 95. <b>Note:</b> If you have Windows 2000 machine, 
+        you don't need to install ADSI. ADSI is a built-in component for Windows 2000.</small><br>
+        </font></li>
+        
+      <li><font face="Verdana"><small>You must have a Windows NT 4.0 or Windows 2000 or higher to connect
+        to. The client and server may be on the same machine.</small></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><small><font face="Verdana">Set up your <a href="dev.htm">development environment</a>.</font></small></li>
+    
+    </ul>
+    
+    <p>&nbsp;</p>
+    
+    <p><font face="Verdana" color="#0080C0"><strong><small>How do I...</small>
+    </strong></font></p>
+    
+      <p><a name="top_bind"></a><font face="Verdana" color="#0080C0"><strong><small>Bind</small></strong></font></p>
+      
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#bind_domain">Binding to
+        a Windows NT 4.0 domain directory</a></small></font></strong>
+        
+      <br>
+        
+      <font face="Verdana" color="#000000"><small>A Windows machine may participate in a domain. 
+      You must know the domain name to which you want to bind.</small></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#bind_local">Binding to a
+      Windows NT 4.0 local directory of a machine</a></small></strong></font>
+      
+      <br>
+      
+      <font face="Verdana" color="#000000"><small>Each Windows NT workstation and standalone server 
+      has its own directory. You use the Mini User Manager (or Windows 2000 Local User Manager) tool 
+      to manage it. You must know the machine name to which you want to bind.</small></font></li>
+        
+    </ul>
+    
+    <p>&nbsp;</p>
+    
+      <p><a name="top_user"></a><strong><font face="Verdana" color="#0080C0"><small>Manage
+      Users</small></font></strong></p>
+      
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_create">Creating a
+      User</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_fullname">Changing
+      the User's Full Name and Description</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#user_pwd_change">Changing
+      the User's Password</a></small></font></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#user_pwd_set">Setting
+      the User's Password</a></small></font></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#user_pwd_expire">Setting
+      the User's Password Expiration Date</a></small></font></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#usr_pwd_nextLogon">Making
+      the User Change the Password at Next Logon</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_pwd_cant_change">Preventing
+      the User from changing the Password</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_pwd_never">Setting
+      the User's Password so that it Never Expires</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_acct_disabled">Disabling
+      the User's Account</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#usr_acct_expire">Setting
+      the Expiration Date on the User's Account</a></small></strong></font></li>
+      
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#user_acct_unlock">Unlocking
+      the User's Account</a></small></font></strong></li>
+      
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_home_dir">Setting
+      the User's Home Directory and Home Drive Directory</a></small></strong></font></li>
+    
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_login_script">Setting
+      the User's Login Script</a></small></strong></font></li>
+      
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#usr_primary_group">Getting
+        the User's Primary Group</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#user_sid">Getting the
+      User's SID (Security ID)</a></small></strong></font></li>
+        
+    </ul>
+        
+    <ul>
+    
+      <li><strong><small><font face="Verdana" color="#0080C0"><a href="#user_group">Getting
+        groups a user belongs to</a></font></small></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#usr_delete">Deleting a
+        User</a></small></font></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#user_rename">Renaming a
+      User</a></small></font></strong></li>
+        
+    </ul>
+    
+      <p><font face="Verdana"><small>You can the source code for these tasks in the
+      <a href="../samples/WinNT/User">\\samples\WinNT\User</a> directory.</small></font></p>
+    
+      <p>&nbsp;</p>
+    
+      <p><a name="top_group"></a><strong><font face="Verdana" color="#0080C0"><small>Manage
+      a Group</small></font></strong>
+      
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_create">Creating a
+      Group</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#group_add_user">Adding a
+      User to a Group</a></small></font></strong></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_add">Adding a
+      Group to a Group</a></small></strong></font></li>
+      
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_enumerate">Enumerating
+        Group in a Domain or Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_member">Enumerating
+        Group Membership</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_remove">Removing
+        a Member from the Group</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#group_ismember">Finding
+        Out if a User or Group is a Member of a Group</a></small></strong></font></li>
+        
+    </ul>
+    
+    <p><font face="Verdana"><small>You can the source code for these tasks in the
+    <a href="../samples/WinNT/PrintQueue">\\samples\WinNT\Group</a> directory.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="top_computer"></a><font face="Verdana" color="#0080C0"><strong><small>Manage
+      a Computer</small></strong></font>
+      
+    <ul>
+      
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#computer">Connecting to a
+      Computer</a></small></strong></font></li>
+      
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#service_enumerate">Enumerating
+      Services in a Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#service_display">Displaying
+      a Service's Properties</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#service_operations">Stopping
+      and Starting a Service</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#fileshare_enumerate">Enumerating
+      File Shares in a Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#fileshare_create">Creating a
+      File Share in a Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#fileshare_delete">Deleting a
+      File Share</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#fileshare_security">Setting
+      File Share Security</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#session">Enumerating
+      Sessions in a Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#resource">Enumerating
+      Resources in a Computer</a></small></strong></font></li>
+      
+    </ul>
+    
+    <ul>
+      
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#resource">Creating
+      a Machine Account</a></small></strong></font></li>
+        
+    </ul>
+    
+    <p><font face="Verdana"><small>You can the source code for these tasks in the
+    <a href="../samples/WinNT/Computer">\\samples\WinNT\Computer</a> directory.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="top_file"></a><font face="Verdana" color="#0080C0"><strong><small>Manage
+    Printers</small></strong></font><ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#print_enumerate">Enumerating
+      Print Queues in a Computer</a></small></strong></font></li>
+        
+    </ul>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#0080C0"><strong><small><a href="#print_job">Listing Print Jobs
+      in a Queue</a></small></strong></font></li>
+        
+    </ul>
+    
+      <p><font face="Verdana"><small>You can the source code for these tasks in the
+      <a href="../samples/WinNT/PrintQueue">
+      \\samples\WinNT\PrintQueue</a>
+      directory.</small></font></p>
+      
+    <p>&nbsp;</p>
+    
+      <p><a name="top_file"></a><strong><font face="Verdana" color="#0080C0"><small>Manage
+      Files</small></font></strong>
+      
+    <ul>
+      
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#file">Setting and
+        Getting File Security</a></small></font></strong></li>
+        
+    </ul>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="bind_domain"></a><font face="Verdana" color="#0080C0"><strong><small>Binding
+    to a Windows NT 4.0 Domain Directory</small></strong></font></p>
+    
+    <p><font face="Verdana" color="#000000"><small>You must supply the Windows NT 4.0 domain name.
+    ADSI will transparently connect to one of the domain controllers.</small></font></p>
+    
+    <p><font face="Verdana"><small>
+    '--- Binding to a domain&nbsp;
+    <br>
+    <br>
+    domainName = &quot;INDEPENDENCE&quot;<br>
+    userName = &quot;Administrator&quot;<br>
+    password = &quot;password&quot;<br>
+    <br>
+    <br>
+    '--- Binding to a domain as a currently logged on user<br>
+    <br>
+    Set dom = GetObject(&quot;WinNT://&quot; &amp; domainName)<br>
+    <br>
+    <br>
+    '--- Enumerating an object in a domain<br>
+    <br>
+    For Each obj In dom<br>
+    &nbsp;&nbsp; Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp; &quot;)&quot;<br>
+    Next<br>
+    <br>
+    <br>
+    '--- Binding to a domain with alternate credentials<br>
+    <br>
+    Set dso = GetObject(&quot;WinNT:&quot;)<br>
+    Set dom = dso.OpenDSObject(&quot;WinNT://&quot; &amp; domainName, userName, password,
+    ADS_SECURE_AUTHENTICATION)<br>
+    <br>
+    <br>
+    '--- Enumerating the object in a domain<br>
+    <br>
+    For Each obj In dom<br>
+    &nbsp;&nbsp; Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp; &quot;)&quot;<br>
+    Next</small></font></p>
+    
+    <!--
+    <p><font face="Verdana"><small>For VBScript click here.</small><br>
+    <small>For VC++ Source Code, click here.</small></font></p>
+    -->
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_bind">top</a>.</small></font></p>
+    <p>&nbsp;</p>
+    <p><a name="bind_local"></a><font face="Verdana" color="#0080C0"><strong><small>Binding to
+    a Windows NT 4.0 Local Directory on a Machine</small></strong></font><br>
+    
+    <br>
+    <br>
+    
+    <font face="Verdana"><small>'--- Binding to a computer<br>
+    
+    <br>
+    
+    computerName = &quot;ADSI&quot;<br>
+    userName = &quot;Administrator&quot;<br>
+    password = &quot;password&quot;<br>
+    
+    <br>
+    <br>
+    
+    '--- Binding to a computer as a currently logged on user<br>
+    
+    <br>
+    
+    Set com = GetObject(&quot;WinNT://&quot; &amp; computerName &amp; &quot;,computer&quot;)<br>
+    '- Enumerate object in a computer<br>
+    For Each obj In com<br>
+    Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp; &quot;)&quot;<br>
+    Next<br>
+    
+    <br>
+    <br>
+    
+    '--- Binding to a computer with alternate credentials<br>
+    
+    <br>
+    
+    Set dso = GetObject(&quot;WinNT:&quot;)<br>
+    Set com = dso.OpenDSObject(&quot;WinNT://&quot; &amp; computerName &amp;
+    &quot;,computer&quot;, userName, password, ADS_SECURE_AUTHENTICATION)<br>
+    
+    <br>
+    <br>
+    
+    '--- Enumerating an object in a computer<br>
+    
+    <br>
+    
+    For Each obj In com<br>
+    &nbsp;&nbsp; Debug.Print obj.Name<br>
+    Next</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_bind">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_create"></a><font face="Verdana" color="#0080C0"><strong><small>Creating
+    a User</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>domainName = &quot;INDEPENDENCE&quot;<br>
+    
+    <br>
+    <br>
+
+    '--- Binding to a domain as currently logged on user<br>
+
+    <br>
+
+    Set dom = GetObject(&quot;WinNT://&quot; &amp; domainName)<br>
+    
+    <br>
+    <br>
+
+    '--- Creating a user<br>
+    
+    <br>
+
+    Set usr = dom.Create(&quot;user&quot;, &quot;JSmith&quot;)<br>
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_fullname"></a><font face="Verdana" color="#0080C0"><strong><small>Changing
+    the User's Full Name and Description</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set usr =
+    GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    usr.FullName = &quot;John Smith&quot;<br>
+    usr.Description = &quot;DSys WOSD Program Manager&quot;<br>
+    usr.SetInfo
+    </font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_pwd_change"></a><font face="Verdana" color="#0080C0"><strong><small>Changing
+    the User's Password</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>A user may change his/her own password, but not others.
+    Administrators have privileges to change any user's password. <strong>ChangePassword</strong>
+    requires an old password and the user must already exist in the directory, while <strong>SetPassword</strong>
+    does not. Both functions do not require <b> SetInfo</b> to commit the changes.</small></font></p>
+    
+    
+    <small><font face="Verdana">'--- Changing the password</font></small>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    usr.ChangePassword &quot;secret&quot;, &quot;password&quot;</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p><a name="user_pwd_set"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    the User's Password</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Administrators may reset the user password.</small></font></p>
+    
+    <p><font face="Verdana"><small>'--- Setting the password</small></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)</small>
+    
+    <br>
+    
+    <small>usr.SetPassword &quot;secret&quot;</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_pwd_expire"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    the User's Password Expiration Date</small></strong></font>
+    
+    <p><font face="Verdana" color="#000000"><small>The password expiration date is a
+    calculated field. The value is computed as follows:</small></font>
+    
+    <ul>
+    
+      <li><font face="Verdana" color="#000000"><small>If the user's &quot;Password Never
+        Expires&quot; (UF_DONT_EXPIRE_PASSWD) f lag is set, then there's no need to
+        compute an expiration date. The user password is valid.</small></font></li>
+        
+      <li><font face="Verdana" color="#000000"><small>If the user's flag is not set, then it
+        computes the difference between when the password was last set and current time.</small></font></li>
+        
+      <li><font face="Verdana" color="#000000"><small>If the difference is greater or equal to
+        the <b>MaxPasswordAge</b> found in the domain object, then the user's password is expired.</small></font></li>
+        
+      <li><font face="Verdana" color="#000000"><small>If the difference is less than
+        <b>MaxPasswordAge</b>, then the user's password expiration date = user's password last set +
+        <b>MaxPasswordAge</b>.</small></font></li>
+        
+    </ul>
+    
+    <p><font face="Verdana" color="#000000"><small>To get the user's password expiration date:</small></font></p>
+    
+    <p><font face="Verdana" color="#000000"><small>To set user's password expiration date,
+    you set <b>MaxPasswordAge</b> in the domain object. Note that this will affect all users since
+    the password expiration date is a calculated field from the domain object.</small></font></p>
+    
+    <p><small><font face="Verdana">
+    
+    expInDay = 60&amp;<br>
+    
+    expInSec = expInDay * (3600&amp; * 24&amp;)<br>
+    
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    
+    dom.Put &quot;MaxPasswordAge&quot;, CLng(expInSec)<br>
+    
+    dom.SetInfo</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="usr_pwd_nextLogon"></a><font face="Verdana" color="#0080C0"><strong><small>Making
+    a User Change the Password at Next Logon</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    
+    usr.Put &quot;PasswordExpired&quot;, CLng(1)<br>
+    usr.SetInfo
+    
+    <br>
+    <br>
+    
+    '--- Clear this flag so that the user does <u>not</u> have to change the
+    password at next logon.<br>
+    
+    <br>
+    
+    usr.Put &quot;PasswordExpired&quot;, CLng(0)<br>
+    
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_pwd_cant_change"></a><font face="Verdana" color="#0080C0"><strong><small>Preventing
+    the User from Changing the Password</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    
+    usr.Put &quot;userFlags&quot;, usr.Get(&quot;UserFlags&quot;) Or ADS_UF_PASSWD_CANT_CHANGE<br>
+    
+    usr.SetInfo
+    
+    <br>
+    <br>
+    
+    '--- To clear this flag, use Xor and allow the user to change his/her password.<br>
+    <br>
+    
+    usr.Put &quot;userFlags&quot;, usr.Get(&quot;UserFlags&quot;) Xor ADS_UF_PASSWD_CANT_CHANGE<br>
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_pwd_never"></a><font face="Verdana" color="#0080C0"><strong><small>Preventing
+    the User's Password from Expiring</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    
+    usr.Put &quot;userFlags&quot;, usr.Get(&quot;UserFlags&quot;) Or UF_DONT_EXPIRE_PASSWD<br>
+    
+    usr.SetInfo
+    
+    <br>
+    <br>
+
+    '--- To clear this flag, use XOr.<br>
+    
+    <br>
+    
+    usr.Put &quot;userFlags&quot;, usr.Get(&quot;UserFlags&quot;) Xor UF_DONT_EXPIRE_PASSWD<br>
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_acct_disabled"></a><font face="Verdana" color="#0080C0"><strong><small>Disabling
+    the User's Account</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)</small>
+    
+    <br>
+    
+    <small>usr.AccountDisabled = True&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    'Disabled the account</small></font></p>
+    
+    <p><font face="Verdana">
+    
+    <small><br>
+    
+    usr.SetInfo
+    
+    <br>
+    
+    usr.AccountDisabled = False&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    'Enabled the account<br>
+    
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="usr_acct_expire"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    the User's Account Expiration Date</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)</font></small></p>
+    
+    <p><font face="Verdana"><small>'--Set a user account expiration 90 days from now.</small></font></p>
+    
+    <p><font face="Verdana">
+    
+    <small>usr.AccountExpirationDate = Now() + 90<br>
+    
+    usr.SetInfo
+     
+     <br>
+    
+     <br>
+    
+    '--- To set the account expiration to <u>NEVER</u> (default).<br>
+     
+     <br>
+    
+    usr.AccountExpirationDate = &quot;01/01/1970&quot;<br>
+    
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_acct_unlock"></a><font face="Verdana" color="#0080C0"><strong><small>Unlocking
+    the User's Account</small></strong></font></p>
+    
+    <p><font face="Verdana"><small> You can read the value of account lockout,
+    and you can set the lockout to FALSE (not locked), but you can't
+    lock the user's account. Only the system
+    can set the account lockout to TRUE.&nbsp;<br>
+     
+     <br>
+    
+    '--- Unlocking the user's account</small></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user)</small><br>
+    <small>usr.IsAccountLocked = False<br>
+    
+    usr.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_home_dir"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    the User's Home Directory and Home Drive Directory</small></strong></font></p>
+    
+    <p><a name="usr_primary_group"></a><small><font face="Verdana">Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)
+    
+    <br>
+    
+    usr.HomeDirectory = &quot;UserHomeDirHere&quot;<br>
+    usr.HomeDirDrive = &quot;HomeDirDriveHere&quot;<br>
+    usr.SetInfo</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_login_script"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    the User's Login Script</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)
+    
+    <br>
+    
+    usr.LoginScript = &quot;LoginScriptHere&quot;
+    
+    <br>
+    
+    usr.SetInfo</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_primary_group"></a><font face="Verdana" color="#0080C0"><strong><small>Getting
+    the User's Primary Group</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)
+    
+    <br>
+    
+    grpPrimaryID = usr.Get(&quot;PrimaryGroupID&quot;)</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_sid"></a><font face="Verdana" color="#0080C0"><strong><small>Getting the
+    User's SID (Security ID)</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)
+    
+    <br>
+    
+    sid = usr.Get(&quot;objectSID&quot;)<br>
+    For Each element In sid<br>
+    &nbsp;&nbsp; Debug.Print Hex(element)<br>
+    Next</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="user_group"></a>Getting
+    groups a user belongs to</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Set usr = GetObject(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;)<br>
+    For each grp in usr.Groups<br>
+    &nbsp;&nbsp; Debug.Print grp.Name<br>
+    Next</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="user_rename"></a><font face="Verdana" color="#0080C0"><strong><small>Renaming
+    a User</small></strong></font></p>
+    
+    <p><font face="Verdana" color="#000000"><small>Renaming a user is similar to <a
+    href="start.htm#rename">renaming an object</a>.</small></font></p>
+    
+    <p><small><font face="Verdana">Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    Set usr = dom.MoveHere(&quot;WinNT://INDEPENDENCE/jsmith,user&quot;, &quot;jjohnson&quot;)<br>
+    usr.FullName = &quot;Jane Johnson&quot;<br>
+    usr.SetInfo</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="usr_delete"></a><font face="Verdana" color="#0080C0"><strong><small>Deleting a
+    User</small></strong></font></p>
+    
+    <p><font face="Verdana" color="#000000"><small>Deleting a user is similar to <a
+    href="start.htm#delete">deleting an object</a>.</small></font></p>
+    
+    <p><small><font face="Verdana">Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    dom.Delete &quot;user&quot;, &quot;jjohnson&quot;</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_user">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_create"></a><font face="Verdana" color="#0080C0"><strong><small>Creating
+    a Group</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>This code snippet shows how to create a local group in a domain.<br>
+    
+    <br>
+
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    Set grp = dom.Create(&quot;group&quot;, &quot;DSys&quot;)<br>
+    grp.Put &quot;groupType&quot;, ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP<br>
+    grp.Description = &quot;Distributed System Group&quot;<br>
+    grp.SetInfo<br>
+    
+    <br>
+    <br>
+
+    This shows how to create a global group in a domain.<br>
+    
+    <br>
+    
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    Set grp = dom.Create(&quot;group&quot;, &quot;PM&quot;)<br>
+    grp.Put &quot;groupType&quot;, ADS_GROUP_TYPE_GLOBAL_GROUP<br>
+    grp.Description = &quot;Program Managers&quot;<br>
+    grp.SetInfo<br>
+    
+    <br>
+    <br>
+    
+    And finally, this snippet shows how to create a local group in a computer.<br>
+    
+    <br>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set grp = comp.Create(&quot;group&quot;, &quot;TheSmiths&quot;)<br>
+    grp.Put &quot;groupType&quot;, ADS_GROUP_TYPE_LOCAL_GROUP<br>
+    grp.Description = &quot;The Smiths Family Member&quot;<br>
+    grp.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_add_user"></a><font face="Verdana" color="#0080C0"><strong><small>Adding
+    a User to a Group</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>'--- Adding a user in a
+    local domain or global group.<br>
+    
+    <br>
+    
+    Set grp = GetObject(&quot;WinNT://INDEPENDENCE/DSys,group&quot;)<br>
+    grp.Add (&quot;WinNT://INDEPENDENCE/JSmith&quot;)<br>
+    <br>
+     
+     <br>
+    
+    '--- Adding a user in a
+    local group in a computer.<br>
+    
+     <br>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set grp = comp.GetObject(&quot;group&quot;, &quot;TheSmiths&quot;)<br>
+    grp.Add (&quot;WinNT://INDEPENDENCE/JSmith&quot;)</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_add"></a><font face="Verdana" color="#0080C0"><strong><small>Adding a
+    Group to a Group</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>A global group can be added to a local group in a
+    Windows NT 4.0 domain. Note that in the Windows 2000 domain environment, you can nest a
+    group.</small></font></p>
+    
+    <p><small><font face="Verdana">Set grp = GetObject(&quot;WinNT://INDEPENDENCE/DSys,group&quot;)<br>
+    
+    grp.Add (&quot;WinNT://INDEPENDENCE/PM,group&quot;)</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_enumerate"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Group in a Domain or Computer</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>'--- Enumerating groups in a domain.<br>
+    
+     <br>
+    
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    dom.Filter = Array(&quot;Group&quot;)<br>
+    
+     <br>
+    
+    '--- Enumerating a local group.
+    
+    <br>
+    
+     <br>
+    
+    Debug.Print &quot;Local Groups---&quot;<br>
+    For Each grp In dom<br>
+    If (grp.GroupType = ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP) Then<br>
+    &nbsp;&nbsp; Debug.Print grp.Name<br>
+    End If<br>
+    Next<br>
+    
+     <br>
+    
+    '--- Enumerating a global group.
+    
+    <br>
+    
+     <br>
+    
+    Debug.Print &quot;Global Groups---&quot;<br>
+    For Each grp In dom<br>
+    If (grp.GroupType = ADS_GROUP_TYPE_GLOBAL_GROUP) Then<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print grp.Name<br>
+    End If<br>
+    Next<br>
+    
+     <br>
+    
+    '--- Enumerating groups in a computer.<br>
+    
+     <br>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    comp.Filter = Array(&quot;Group&quot;)<br>
+    
+     <br>
+    
+    'A local group consists of all groups in a computer<br>
+    
+    Debug.Print &quot;Groups:&quot;<br>
+    For Each grp In comp<br>
+    &nbsp;&nbsp; Debug.Print grp.Name<br>
+    Next
+    
+    </small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_member"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Group Membership</small></strong></font></p>
+    
+    <font face="Verdana"><small>Local groups may contain global groups.</small></font>
+    <p><font face="Verdana"><small>Set grp = GetObject(&quot;WinNT://INDEPENDENCE/DSys,group&quot;)<br>
+    
+    For Each member In grp.Members<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print member.Name &amp; &quot; (&quot; &amp; member.Class
+    &amp; &quot;)&quot;
+    
+    </small></font></p>
+    <p><font face="Verdana">
+    
+    <small>
+     
+     <br>
+    
+    'Global group memberships may also be enumerated.<br>
+    
+     <br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp; If (member.Class = &quot;Group&quot;) Then<br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For Each obj In
+    member.Members<br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Debug.Print &quot; &quot; &amp; obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp;
+    &quot;)&quot;<br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Next<br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End If<br>
+    
+    <br>
+    
+    Next</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_remove"></a><font face="Verdana" color="#0080C0"><strong><small>Removing
+    a Member from Group</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Set grp = GetObject(&quot;WinNT://INDEPENDENCE/PM,group&quot;)<br>
+    
+    grp.Remove (&quot;WinNT://INDEPENDENCE/ChristyH&quot;)</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="group_ismember"></a><font face="Verdana" color="#0080C0"><strong><small>Finding
+    Out if a User or Group is a Member of a Group</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>
+    Set grp = GetObject(&quot;WinNT://INDEPENDENCE/DSys,group&quot;)<br>
+    If (grp.IsMember(&quot;WinNT://INDEPENDENCE/JSmith&quot;)) Then<br>
+    &nbsp;&nbsp; Debug.Print &quot;Yes&quot;<br>
+    Else<br>
+    &nbsp;&nbsp; Debug.Print &quot;No&quot;<br>
+    End If</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_group">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="computer"></a><font face="Verdana" color="#0080C0"><strong><small>Connecting
+    to a Computer</small></strong></font></p>
+    <p><font face="Verdana"><small>
+    
+    Set comp = GetObject(&quot;WinNT://INDEPENDENCE/SEATTLE,computer&quot;)<br>
+    Debug.Print comp.Division<br>
+    Debug.Print comp.OperatingSystem<br>
+    Debug.Print comp.OperatingSystemVersion<br>
+    Debug.Print comp.Owner<br>
+    Debug.Print comp.Processor<br>
+    Debug.Print comp.ProcessorCount</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="service_enumerate"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Services in a Computer</small></strong></font><small><font face="Verdana"><br>
+    
+    <br>
+    
+    Set comp = GetObject(&quot;WinNT://INDEPENDENCE/SEATTLE,computer&quot;)<br>
+    comp.Filter = Array(&quot;Service&quot;)<br>
+    
+    <br>
+    
+    For Each svc In comp<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print svc.Name &amp; &quot; &quot; &amp; svc.DisplayName<br>
+    Next</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="service_display"></a><strong><font face="Verdana" color="#0080C0"><small>Displaying
+    the Service's Properties</small></font></strong></p>
+    
+    <p><font face="Verdana"><small>This code snippet shows how to display a service's properties,
+    as defined in winnt.h.</small></font></p>
+    
+    <p><font face="Verdana"><small>
+    
+    Const SERVICE_BOOT_START = &amp;H0<br>
+    Const SERVICE_SYSTEM_START = &amp;H1<br>
+    Const SERVICE_AUTO_START = &amp;H2<br>
+    Const SERVICE_DEMAND_START = &amp;H3<br>
+    Const SERVICE_DISABLED = &amp;H4<br>
+     
+     <br>
+    
+    '--- Error control type<br>
+     
+     <br>
+    
+    Const SERVICE_ERROR_IGNORE = &amp;H0<br>
+    Const SERVICE_ERROR_NORMAL = &amp;H1<br>
+    Const SERVICE_ERROR_SEVERE = &amp;H2<br>
+    Const SERVICE_ERROR_CRITICAL = &amp;H3<br>
+     
+     <br>
+    
+    Const SERVICE_KERNEL_DRIVER = &amp;H1<br>
+    Const SERVICE_FILE_SYSTEM_DRIVER = &amp;H2<br>
+    Const SERVICE_ADAPTER = &amp;H4<br>
+    Const SERVICE_RECOGNIZER_DRIVER = &amp;H8<br>
+     
+     <br>
+    
+    Const SERVICE_DRIVER = &amp;HB<br>
+    Const SERVICE_WIN32_OWN_PROCESS = &amp;H10<br>
+    Const SERVICE_WIN32_SHARE_PROCESS = &amp;H20<br>
+    Const SERVICE_WIN32 = &amp;H30<br>
+    Const SERVICE_INTERACTIVE_PROCESS = &amp;H100<br>
+     
+     <br>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set svc = comp.GetObject(&quot;Service&quot;, &quot;Browser&quot;)</small><br>
+    
+    <small>
+     
+     <br>
+    
+    Debug.Print &quot;Display Name: &quot; &amp; svc.DisplayName<br>
+    Debug.Print &quot;Order Group: &quot; &amp; svc.LoadOrderGroup<br>
+    Debug.Print &quot;Host Name: &quot; &amp; svc.HostComputer<br>
+     
+     <br>
+    
+    s = &quot;Startup: &quot;<br>
+     
+     <br>
+    
+    Select Case svc.StartType<br>
+    Case SERVICE_BOOT_START<br>
+    &nbsp;&nbsp; s = s + &quot;Boot Start&quot;<br>
+    Case SERVICE_SYSTEM_START<br>
+    &nbsp;&nbsp; s = s + &quot;System Start&quot;<br>
+    Case SERVICE_AUTO_START<br>
+    &nbsp;&nbsp; s = s + &quot;Automatic&quot;<br>
+    Case SERVICE_DEMAND_START<br>
+    &nbsp;&nbsp; s = s + &quot;Manual&quot;<br>
+    Case SERVICE_DISABLED<br>
+    &nbsp;&nbsp; s = s + &quot;Disabled&quot;<br>
+    Case Else<br>
+    &nbsp;&nbsp; s = s + &quot;Unknown&quot;<br>
+    End Select<br>
+    Debug.Print s<br>
+     
+     <br>
+    
+    'Dependencies<br>
+     
+     <br>
+    
+    Debug.Print &quot;Dependencies: &quot;<br>
+    For Each dpc In svc.Dependencies<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print &quot; &quot; &amp; dpc<br>
+    Next
+     
+     <br>
+    
+     <br>
+    
+    'Service Type</small></font>
+    <br>
+    
+    <font face="Verdana">
+    
+    <small>
+     
+     <br>
+    
+    s = &quot;Service Type: &quot;</small><br>
+    
+    <small>
+     
+     <br>
+    
+    Select Case svc.ServiceType<br>
+    Case SERVICE_KERNEL_DRIVER<br>
+    &nbsp;&nbsp; s = s + &quot;Kernel Driver&quot;<br>
+    Case SERVICE_FILE_SYSTEM_DRIVER<br>
+    &nbsp;&nbsp; s = s + &quot;File System Driver&quot;<br>
+    Case SERVICE_ADAPTER<br>
+    &nbsp;&nbsp; s = s + &quot;Adapter&quot;<br>
+    Case SERVICE_RECOGNIZER_DRIVER<br>
+    &nbsp;&nbsp; s = s + &quot;Recognizer Driver&quot;<br>
+    Case SERVICE_WIN32_OWN_PROCESS<br>
+    &nbsp;&nbsp; s = s + &quot;Win32 Process&quot;<br>
+    Case SERVICE_WIN32_SHARE_PROCESS<br>
+    &nbsp;&nbsp; s = s + &quot;Win32 Share Process&quot;<br>
+    Case SERVICE_WIN32<br>
+    &nbsp;&nbsp; s = s + &quot;Win32&quot;<br>
+    Case SERVICE_INTERACTIVE_PROCESS<br>
+    &nbsp;&nbsp; s = s + &quot;Interactive Process&quot;<br>
+    End Select<br>
+    Debug.Print s<br>
+     
+     <br>
+    
+    'Error Control<br>
+    
+     <br>
+    
+    s = &quot;Error Control: &quot;<br>
+    Select Case svc.ErrorControl<br>
+     
+     <br>
+    
+    Case SERVICE_ERROR_IGNORE<br>
+    &nbsp;&nbsp; s = s + &quot;Service ignores error&quot;<br>
+    Case SERVICE_ERROR_NORMAL<br>
+    &nbsp;&nbsp; s = s + &quot;No Error&quot;<br>
+    Case SERVICE_ERROR_SEVERE<br>
+    &nbsp;&nbsp; s = s + &quot;Severe error&quot;<br>
+    Case SERVICE_ERROR_CRITICAL<br>
+    &nbsp;&nbsp; s = s + &quot;Critical error&quot;<br>
+    Case Else<br>
+    &nbsp;&nbsp; s = s + &quot;Unknown&quot;<br>
+    End Select<br>
+    Debug.Print s</small></font></p>
+    
+    <p><font face="Verdana"><small>
+    
+    Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="service_operations"></a><font face="Verdana" color="#0080C0"><strong><small>Stopping,
+    Starting, and Pausing a Service</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set svcOp = comp.GetObject(&quot;Service&quot;, &quot;Browser&quot;)<br>
+     
+     <br>
+    
+    'Stopping a service.<br>
+     
+     <br>
+    
+    svcOp.Stop<br>
+     
+     <br>
+    
+    'Starting a service.<br>
+     
+     <br>
+    
+    svcOp.Start<br>
+     
+     <br>
+    
+    'Pausing a service.<br>
+     
+     <br>
+    
+    svcOp.Pause</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="fileshare_enumerate"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    File Shares in a Computer</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set svc = GetObject(comp.ADsPath &amp; &quot;/&quot; &amp; &quot;LanmanServer&quot;)<br>
+    For Each fileShare In svc<br>
+    &nbsp;&nbsp; Debug.Print fileShare.Name &amp; &quot; &quot; &amp; &quot; &quot; &amp;
+    fileShare.CurrentUserCount &amp; &quot; &quot; &amp; fileShare.Path<br>
+    Next</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="fileshare_create"></a><font face="Verdana" color="#0080C0"><strong><small>Creating
+    a File Share in a Computer</small></strong></font></p>
+    <p><small><font face="Verdana">
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set svc = GetObject(comp.ADsPath &amp; &quot;/&quot; &amp; &quot;LanmanServer&quot;)<br>
+    Set fileShare = svc.Create(&quot;FileShare&quot;, &quot;public&quot;)<br>
+    fileShare.Path = &quot;c:\public&quot;<br>
+    fileShare.SetInfo
+    </font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="fileshare_delete"></a><font face="Verdana" color="#0080C0"><strong><small>Deleting
+    a File Share</small></strong></font></p>
+    <p><font face="Verdana"><small>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set svc = GetObject(comp.ADsPath &amp; &quot;/&quot; &amp; &quot;LanmanServer&quot;)<br>
+    svc.Delete &quot;FileShare&quot;, &quot;public&quot;</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="session"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Sessions in a Computer</small></strong></font></p>
+    
+    <p><small><font face="Verdana">Dim fileSvc As IADsFileService<br>
+    Dim session As IADsSession</font></small><br>
+    <small><font face="Verdana"><br>
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set fileSvc = GetObject(comp.ADsPath &amp; &quot;/&quot; &amp; &quot;LanmanServer&quot;)<br>
+    For Each session In fileSvc.Sessions<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print session.Name &amp; &quot; &quot; &amp;
+    session.ConnectTime<br>
+    Next</font></small></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="resource"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Resources in a Computer</small></strong></font></p>
+    <p><font face="Verdana"><small>
+    
+    Set comp = GetObject(&quot;WinNT://SEATTLE,computer&quot;)<br>
+    Set fileSvc = GetObject(comp.ADsPath &amp; &quot;/&quot; &amp; &quot;LanmanServer&quot;)<br>
+    For Each resource In fileSvc.Resources<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print resource.Name &amp; &quot; - &quot; &amp; resource.User<br>
+    Next</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="computer_creating"></a>Creating
+    a Machine Account</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>machinename = &quot;mymachine&quot;<br>
+    Set oProv = GetObject(&quot;WinNT:&quot;)<br>
+    Set oTarg = oProv.OpenDSObject(&quot;WinNT://myDomain&quot;, &quot;domain\user&quot;,&quot;password&quot;,ADS_SECURE_AUTHENTICATION)<br>
+    Set oComp = oTarg.Create(&quot;computer&quot;, machinename)<br>
+    oComp.SetInfo</small></font>
+    
+    <br>
+    
+    <font face="Verdana">
+    
+    <small>
+     
+     <br>
+    
+    '--- Rebind as a user and set the
+    initial password.
+     
+     <br>
+    
+     <br>
+    
+    Set oCompUser = GetObject(&quot;WinNT://domain/&quot; &amp; machinename
+    &quot;$,user&quot;)<br>
+    sPwd = machinename<br>
+    sPwd = StrConv(sPwd, vbLowerCase)<br>
+    oCompUser.SetPassword sPwd<br>
+    oCompUser.SetInfo</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="fileshare_security"></a><font face="Verdana" color="#0080C0"><strong><small>Setting
+    File Share Security</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Setting file share security is supported
+    in the <a href="rtk.htm">ADSI Resource Tool Kit</a>.</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_computer">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="file"></a><font face="Verdana" color="#0080C0"><strong><small>Setting File
+    security</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>Setting file security is supported in the
+    <a href="rtk.htm">ADSI Resource Tool Kit</a>.</small></font></p>
+    
+    <p><font face="Verdana"><small>Back to <a href="#top_file">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="print_enumerate"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    Print Queues in a Computer</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>computerName = &quot;MSPRINT44&quot;<br>
+    printQueueName = &quot;CORPF&quot;<br>
+    
+    <br>
+    
+    Set comp = GetObject(&quot;WinNT://&quot; &amp; computerName &amp; &quot;,computer&quot;)<br>
+    
+    <br>
+    
+    comp.Filter = Array(&quot;PrintQueue&quot;)<br>
+    
+    <br>
+     
+     <br>
+    
+    '--- Enumerating a Printer in a computer.<br>
+    
+     <br>
+    
+    For Each printQueue In comp<br>
+    
+    <br>
+    
+    s = printQueue.Name &amp; &quot; &quot; &amp; printQueue.Description &amp; &quot; (&quot;
+    &amp; printQueue.PrinterPath &amp; &quot;)&quot;<br>
+    'Debug.Print printQueue.status<br>
+    
+     <br>
+    
+    '--- QI the PrintQueueOperations (this is optional step in VB/VBScript).<br>
+    
+     <br>
+    
+    Set printQOps = printQueue<br>
+    s = s &amp; &quot;Status: &quot; &amp; GetPrintStatus(printQueue.status)<br>
+    Debug.Print s ' Report the printQueue and Printer status<br>
+    Next</small></font></p>
+    
+    <p><font face="Verdana"><small>You can find the source code for this example
+    at <a href="../samples/winnt/PrintQueue/vb">\\samples\WinNT\PrintQueue</a>.
+    
+    <br>
+    <br>
+    
+    Back to <a href="#top_file">top</a>.</small></font></p>
+    
+    <p>&nbsp;</p>
+    
+    <p><a name="print_job"><font face="Verdana" color="#0080C0"><strong><small>Listing Print
+    Jobs in a Queue</small></strong></font></a></p>
+    
+    <font face="Verdana"><small>
+    Dim printQueue As IADsPrintQueue<br>
+    Dim printQOps As IADsPrintQueueOperations<br>
+    Dim printJob As IADsPrintJob<br>
+    Dim printJobOps As IADsPrintJobOperations<br>
+     
+     <br>
+    
+    '--- Bind to a printer queue.
+    
+    <br>
+    
+     <br>
+    
+    Set comp = GetObject(&quot;WinNT://&quot; &amp; computerName &amp; &quot;,computer&quot;)<br>
+    Set printQueue = comp.GetObject(&quot;PrintQueue&quot;, printQueueName)<br>
+    
+     <br>
+    
+    '--- Get print queue characteristics.
+    
+    <br>
+    
+     <br>
+    
+    Debug.Print printQueue.Name &amp; &quot; &quot; &amp; printQueue.Description &amp; &quot;
+    (&quot; &amp; printQueue.PrinterPath &amp; &quot;)&quot;<br>
+    Debug.Print s
+    <br>
+    
+     <br>
+    
+    '--- Switch to print queue operation.<br>
+    
+     <br>
+    
+    Set printQOps = printQueue<br>
+    Debug.Print &quot;Status: &quot; &amp; GetPrintStatus(printQueue.status)<br>
+    
+     <br>
+    
+    '--- Get print jobs for this specific queue.<br>
+    
+     <br>
+    
+    Debug.Print &quot;--- Jobs in the queue ----- &quot;<br>
+    For Each printJob In printQOps.PrintJobs<br>
+    Debug.Print printJob.Description &amp; &quot; &quot; &amp; printJob.User &amp; &quot;
+    &quot; &amp; printJob.Priority<br>
+    Set printJobOps = printJob<br>
+    Debug.Print &quot;Page printed: &quot; &amp; printJobOps.PagesPrinted &amp; &quot;Page(s)
+    &quot; &amp; GetJobStatus(printJobOps.status)<br>
+    Debug.Print &quot;-----&quot;<br>
+    Next
+    </small></font>
+    
+    <p><font face="Verdana"><small>You can find the source code for this example
+    at <a href="../samples/winnt/PrintQueue/vb">\\samples\WinNT\PrintQueue</a>.<br>
+    
+    <br>
+    
+    Back to <a href="#top_file">top</a>.</small></font></p>
+    
+    <br>
+    
+    <p>&nbsp;</p>
+    
+    </td>
+    
+  </tr>
+  
+</table>
+</body>
+</html>

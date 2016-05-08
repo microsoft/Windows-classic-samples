@@ -1,0 +1,20 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//
+//  Copyright (C) Microsoft Corporation. All rights reserved.
+//
+//  File:       msistuff.rc
+//
+//--------------------------------------------------------------------------
+
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_ORIGINALFILENAME_STR "msistuff.exe"
+#define VER_FILETYPE             VFT_APP
+#define VER_FILESUBTYPE          VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR  "Configuration utility for Windows\256 Installer Internet Download Bootstrapper"
+#define VER_INTERNALNAME_STR     "msistuff.exe"
+
+#include <common.ver>

@@ -1,0 +1,21 @@
+BODY
+{
+    COLOR: white;
+    BACKGROUND-COLOR: #0066cc
+}
+TH
+{
+    FONT-SIZE: 14pt;
+    MARGIN-LEFT: 0pt;
+    COLOR: white;
+    TEXT-ALIGN: left
+}
+.StatusBar
+{
+    BORDER-RIGHT: gray 1pt solid;
+    BORDER-TOP: gray 1pt solid;
+    BORDER-LEFT: gray 1pt solid;
+    COLOR: white;
+    BORDER-BOTTOM: gray 1pt solid;
+    BACKGROUND-COLOR: #0066cc
+}

@@ -1,0 +1,49 @@
+#pragma autorecover
+
+#pragma namespace("\\\\.\\root")
+
+
+instance of __Namespace
+{
+	Name = "cimv2" ;
+} ;
+
+#pragma namespace("\\\\.\\root\\cimv2")
+
+class SampleEvent : __ExtrinsicEvent
+{
+	String Name ;
+} ;
+
+/*
+ *	Registrations
+ */
+class MSFT_DecoupledProvider : __Win32Provider
+{
+	[Description ( "Decoupled provider CLSID, do not change. Do not override" ) , Override("Clsid")] 
+	String Clsid = "{54D8502C-527D-43F7-A506-A9DA075E229C}" ;
+	[Description ( "Hosting Model, provides compatibility with Windows XP and Windows Server .NET. Do not override." ) , Override("HostingModel")]
+	string HostingModel = "Decoupled:Com";
+	[Description("..."),Override("SecurityDescriptor")] 
+	string SecurityDescriptor; 		
+} ;
+
+instance of MSFT_DecoupledProvider as $PDecoupledEvent
+{
+	Name = "DecoupledEventProvider";
+	HostingModel = "Decoupled:Com" ;
+	SecurityDescriptor = "O:BAG:SYD:(A;;0x10000001;;;BA)(A;;0x10000001;;;SY)" ;
+
+};    
+
+instance of __EventProviderRegistration
+{
+    Provider = $PDecoupledEvent ;
+
+	EventQueryList = { 
+
+		"Select * from SampleEvent"
+	} ;
+} ;
+
+

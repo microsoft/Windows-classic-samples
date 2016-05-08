@@ -1,0 +1,13 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows
+;
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       remove.def
+;
+;--------------------------------------------------------------------------
+
+
+EXPORTS
+RemoveUserAccount	@5

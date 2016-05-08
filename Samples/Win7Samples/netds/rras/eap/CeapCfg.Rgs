@@ -1,0 +1,58 @@
+HKEY_CLASSES_ROOT
+{
+	EapSampleCfg.EapSampleCfg.1 = s 'EapSampleCfg Class'
+	{
+		CLSID = s '{3b9aae60-a032-11d2-95f6-00104b98f3f5}'
+	}
+	EapSampleCfg.EapSampleCfg = s 'EapSampleCfg Class'
+	{
+		CurVer = s 'EapSampleCfg.EapSampleCfg.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3b9aae60-a032-11d2-95f6-00104b98f3f5} = s 'EapSampleCfg Class'
+		{
+			ProgID = s 'EapSampleCfg.EapSampleCfg.1'
+			VersionIndependentProgID = s 'EapSampleCfg.EapSampleCfg'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}
+
+HKEY_LOCAL_MACHINE
+{
+    System
+    {
+        CurrentControlSet
+        {
+            Services
+            {
+                RasMan
+                {
+                    PPP
+                    {
+                        EAP
+                        {
+                            ForceRemove 20
+                            {
+                                val ConfigCLSID = s '{3b9aae60-a032-11d2-95f6-00104b98f3f5}'
+                                val FriendlyName = s 'Sample EAP'
+                                val InvokeUsernameDialog = d '0'
+                                val InvokePasswordDialog = d '0'
+                                val StandaloneSupported = d '1'
+                                val MPPEEncryptionSupported = d '1'
+                                val Path = s '%MODULE%'
+                                val ConfigUIPath = s '%MODULE%'
+                                val IdentityPath = s '%MODULE%'
+                                val InteractiveUIPath = s '%MODULE%'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

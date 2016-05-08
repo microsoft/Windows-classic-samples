@@ -1,0 +1,730 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ADQI.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\ADQI.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ADQI_DIALOG DIALOGEX 0, 0, 346, 257
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Active Directory Service Interfaces - Quest for Interfaces"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "ADs Path",IDC_STATIC,7,7,332,52
+    EDITTEXT        IDC_ADSPATH,14,34,261,14,ES_AUTOHSCROLL
+    LISTBOX         IDC_INTERFACES,17,91,258,132,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Supported Interfaces",IDC_STATIC,7,66,278,165
+    DEFPUSHBUTTON   "OK",IDOK,281,33,51,14
+    PUSHBUTTON      "&Close",IDCANCEL,143,236,50,14
+    LTEXT           "eg: LDAP://DC=ArcadiaBay, DC=COM - You can use ADSVW.EXE to copy the ADsPath",
+                    IDC_STATIC,15,16,301,8
+    LTEXT           "Double click to view. For alternate credentials use IADsOpenDsObject, e.g LDAP:",
+                    IDC_STATIC,17,77,261,8
+END
+
+IDD_IADS DIALOG DISCARDABLE  0, 0, 288, 285
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IADs"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "ADsPath:",IDC_STATIC,7,10,31,9
+    EDITTEXT        IDC_ADSPATH,59,7,163,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Name:",IDC_STATIC,7,26,23,8
+    EDITTEXT        IDC_NAME,59,23,163,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "&Parent...",IDC_PARENTPATH,7,42,46,14
+    EDITTEXT        IDC_PARENT,59,42,163,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Class:",IDC_STATIC,7,63,33,11
+    EDITTEXT        IDC_CLASS,59,61,163,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "&Schema...",IDC_SCHEMAPATH,7,79,44,14
+    EDITTEXT        IDC_SCHEMA,59,79,163,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "&GUID...",IDC_BINDGUID,7,97,44,14
+    EDITTEXT        IDC_GUID,59,98,163,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,122,
+                    274,1
+    LTEXT           "Attributes:",IDC_STATIC,7,132,32,8
+    COMBOBOX        IDC_ATTRLIST,60,131,167,146,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Value(s):",IDC_STATIC,7,163,28,8
+    LISTBOX         IDC_ATTRVALUE,60,159,164,109,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Get",IDC_GET,231,129,50,14
+    PUSHBUTTON      "GetEx",IDC_GETEX,231,145,50,14
+    PUSHBUTTON      "GetInfo",IDC_GETINFO,231,162,50,14
+    PUSHBUTTON      "GetInfoEx...",IDC_GETINFOEX,231,178,50,14
+    PUSHBUTTON      "Put...",IDC_PUT,231,196,50,14,WS_DISABLED
+    PUSHBUTTON      "PutEx...",IDC_PUTEX,231,212,50,14,WS_DISABLED
+    PUSHBUTTON      "SetInfo",IDC_SETINFO,231,229,50,14
+    PUSHBUTTON      "Close",IDOK,231,7,50,14
+    LTEXT           "(if an interface is shown, you may double click)",
+                    IDC_STATIC,61,147,161,8
+    PUSHBUTTON      "&Copy",IDC_COPY,231,254,50,14
+END
+
+IDD_GETINFOEX DIALOG DISCARDABLE  0, 0, 186, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "GetInfoEx"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Attributes ( separated by comma)",IDC_STATIC,7,13,104,
+                    8
+    EDITTEXT        IDC_ATTR,7,28,172,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,36,53,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,91,52,50,14
+END
+
+IDD_IADSCONTAINER DIALOG DISCARDABLE  0, 0, 256, 234
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IADsContainer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Class &Filter",IDC_STATIC,7,7,184,51
+    EDITTEXT        IDC_FILTER,13,33,121,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Set",IDC_SET,138,33,45,14
+    LTEXT           "Children Objects:",IDC_STATIC,7,60,54,8
+    LISTBOX         IDC_CHILDRENLIST,7,73,178,138,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "View",IDC_VIEW,34,213,50,14
+    PUSHBUTTON      "Close",IDOK,199,7,50,14
+    PUSHBUTTON      "&Delete",IDC_DELETE,199,59,50,14
+    PUSHBUTTON      "&Rename...",IDC_RENAME,199,79,50,14
+    PUSHBUTTON      "&Create...",IDC_CREATE,199,119,50,14,WS_DISABLED
+    PUSHBUTTON      "&Move",IDC_MOVE,199,101,50,14
+    LTEXT           "(type object class(es), separated by comma",IDC_STATIC,
+                    15,20,143,8
+    LTEXT           "(double click to view the child)",IDC_STATIC,64,60,99,8
+END
+
+IDD_RENAME DIALOG DISCARDABLE  0, 0, 163, 69
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&New Name:",IDC_STATIC,7,8,38,8
+    EDITTEXT        IDC_NAME,7,20,149,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,26,48,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,81,48,50,14
+END
+
+IDD_IDIRECTORYSEARCH DIALOG DISCARDABLE  0, 0, 483, 322
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDirectorySearch"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "",IDC_STATIC,7,7,168,82
+    LTEXT           "Attributes: (separate by comma )",IDC_STATIC,16,13,110,
+                    8
+    EDITTEXT        IDC_ATTRIBUTE,15,23,152,14,ES_AUTOHSCROLL
+    LTEXT           "Search &Filter",IDC_STATIC,15,41,77,8
+    EDITTEXT        IDC_FILTER,15,50,152,14,ES_AUTOHSCROLL
+    CONTROL         "Enable Set Preferences",IDC_ENABLED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,7,96,89,10
+    GROUPBOX        "",IDC_STATIC,7,104,167,187
+    LTEXT           "&Time Out:",IDC_TIMEOUT_TXT,16,117,35,8
+    EDITTEXT        IDC_TIMEOUT,71,114,59,14,ES_AUTOHSCROLL
+    LTEXT           "Search &Scope:",IDC_SEARCHSCOPE_TXT,16,134,48,8
+    COMBOBOX        IDC_SEARCHSCOPE,71,132,59,41,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Page Size:",IDC_PAGESIZE_TXT,16,151,35,8
+    EDITTEXT        IDC_PAGESIZE,71,148,59,14,ES_AUTOHSCROLL
+    LTEXT           "Chase &Referral:",IDC_CHASEREFERRAL_TXT,16,169,50,8
+    COMBOBOX        IDC_CHASEREFERRAL,71,166,59,52,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "S&ort on:",IDC_SORTON_TXT,16,185,26,8
+    EDITTEXT        IDC_SORTON,71,182,87,14,ES_AUTOHSCROLL
+    LTEXT           "Time Limit",IDC_TIMELIMIT_TXT,16,202,32,8
+    EDITTEXT        IDC_TIMELIMIT,71,200,58,14,ES_AUTOHSCROLL
+    LTEXT           "Size Limit:",IDC_SIZELIMIT_TXT,16,221,32,8
+    EDITTEXT        IDC_SIZELIMIT,71,218,59,14,ES_AUTOHSCROLL
+    LTEXT           "Deref Alias:",IDC_DEREF_TXT,16,239,37,8
+    COMBOBOX        IDC_DEREF,71,236,78,49,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "&Attribute Only",IDC_ATTRIBONLY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,252,61,10
+    CONTROL         "Cache Results",IDC_CACHERESULTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,265,62,10
+    CONTROL         "&Asynchronous",IDC_ASYNCH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,278,69,10
+    PUSHBUTTON      "&Execute Now",IDC_EXECUTE,15,70,50,14
+    GROUPBOX        "Results (double click to view)",IDC_STATIC,179,7,297,
+                    285
+    PUSHBUTTON      "Close",IDOK,217,301,50,14
+    LTEXT           "Total :",IDC_STATIC,191,278,21,8
+    LTEXT           "",IDC_TOTAL,218,278,51,8
+    CONTROL         "List1",IDC_LISTVIEW,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,188,26,280,248
+END
+
+IDD_IDIRECTORYOBJECT DIALOG DISCARDABLE  0, 0, 274, 269
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDirectoryObject"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "RDN",IDC_STATIC,15,23,17,8
+    EDITTEXT        IDC_RDN,48,19,144,14,ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_TABSTOP
+    LTEXT           "DN",IDC_STATIC,15,36,12,8
+    EDITTEXT        IDC_DN,48,36,144,14,ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_TABSTOP
+    LTEXT           "Parent:",IDC_STATIC,15,54,24,8
+    EDITTEXT        IDC_PARENT,48,53,144,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_TABSTOP
+    LTEXT           "Schema",IDC_STATIC,15,73,27,8
+    EDITTEXT        IDC_SCHEMA,48,68,144,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_TABSTOP
+    LTEXT           "Class",IDC_STATIC,15,90,27,8
+    EDITTEXT        IDC_CLASS,48,86,144,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_TABSTOP
+    GROUPBOX        "Attributes",IDC_STATIC,7,112,260,119
+    EDITTEXT        IDC_ATTRIBUTE,22,125,127,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Get",IDC_GET,151,125,50,14
+    LISTBOX         IDC_VALUELIST,21,143,235,78,LBS_USETABSTOPS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Delete...",IDC_DELETE,217,13,50,14
+    PUSHBUTTON      "&Create...",IDC_CREATE,217,31,50,14,WS_DISABLED
+    PUSHBUTTON      "Set...",IDC_SET,206,125,50,14,WS_DISABLED
+    PUSHBUTTON      "Close",IDCANCEL,113,237,50,14
+    GROUPBOX        "Object Info",IDC_STATIC,7,7,199,101
+END
+
+IDD_DELETEOBJECT DIALOG DISCARDABLE  0, 0, 229, 57
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete Object"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&Child object to be deleted ( eg. CN=jsmith)",
+                    IDC_STATIC,7,7,132,8
+    EDITTEXT        IDC_DELETE,7,20,136,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,172,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,172,24,50,14
+END
+
+IDD_PROPERTYLIST DIALOG DISCARDABLE  0, 0, 243, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IADsPropertyList"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Close",IDOK,100,173,50,14
+    GROUPBOX        "Attribute",IDC_STATIC,7,7,168,161
+    EDITTEXT        IDC_ATTRIBUTE,22,20,141,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Get",IDC_GET,22,55,50,14
+    LISTBOX         IDC_VALUELIST,22,84,142,76,LBS_USETABSTOPS | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Set...",IDC_SET,100,56,50,14,WS_DISABLED
+    COMBOBOX        IDC_ADSTYPE,21,37,144,62,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Purge",IDC_PURGE,181,14,50,14
+END
+
+IDD_IADSOPENDSOBJECT DIALOG DISCARDABLE  0, 0, 264, 189
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IADsOpenDSObject / ADsOpenObject"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "&ADsPath:",IDC_STATIC,14,16,31,8
+    EDITTEXT        IDC_ADSPATH,55,14,135,14,ES_AUTOHSCROLL
+    LTEXT           "&UserName:",IDC_STATIC,14,34,36,8
+    EDITTEXT        IDC_USERNAME,55,31,135,14,ES_AUTOHSCROLL
+    LTEXT           "&Password:",IDC_STATIC,13,51,34,8
+    EDITTEXT        IDC_PASSWORD,55,49,135,14,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,207,8,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,207,25,50,14
+    CONTROL         "&Secured",IDC_SECURED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,84,107,10
+    CONTROL         "&Encrypt",IDC_ENCRYPT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,95,107,10
+    CONTROL         "&Read Only",IDC_READONLY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,106,107,10
+    CONTROL         "&Prompt for credential",IDC_PROMPTCREDENTIAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,117,107,10
+    CONTROL         "&No Authentication",IDC_NOAUTHENTICATION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,128,107,10
+    CONTROL         "&Fast Bind",IDC_FASTBIND,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,139,94,10
+    GROUPBOX        "Options",IDC_STATIC,7,74,155,102
+    CONTROL         "&Use Signing",IDC_SIGNING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,150,94,10
+    CONTROL         "Use &Sealing",IDC_SEALING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,161,94,10
+END
+
+IDD_SECURITY DIALOG DISCARDABLE  0, 0, 436, 298
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Security"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,191,277,50,14
+    LISTBOX         IDC_ACELIST,7,50,205,193,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Directory Rights",IDC_STATIC,222,121,207,142
+    GROUPBOX        "Access Type",IDC_STATIC,224,7,205,44
+    CONTROL         "&Create Child",IDC_CREATECHILD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,137,52,10
+    CONTROL         "&Delete Child",IDC_DELETECHILD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,151,55,10
+    CONTROL         "List Children",IDC_LISTCONTENT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,165,64,10
+    CONTROL         "Show this Object",IDC_LISTOBJECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,231,179,67,10
+    CONTROL         "Read Property",IDC_READPROP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,207,60,10
+    CONTROL         "Write Property",IDC_WRITEPROP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,222,57,10
+    CONTROL         "Delete Tree",IDC_DELETETREE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,193,54,10
+    EDITTEXT        IDC_CREATECHILD_EDIT,296,135,78,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_DELETECHILD_EDIT,296,151,78,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_READPROP_EDIT,296,206,78,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_WRITEPROP_EDIT,296,222,78,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "Change..",IDC_CHANGE_CREATE_CHILD,380,135,41,14
+    PUSHBUTTON      "Change..",IDC_CHANGE_CREATE_CHILD2,379,152,41,14
+    PUSHBUTTON      "Change..",IDC_CHANGE_CREATE_CHILD3,377,204,41,14
+    PUSHBUTTON      "Change..",IDC_CHANGE_CREATE_CHILD4,378,222,41,14
+    COMBOBOX        IDC_ACETYPE,282,16,140,87,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Access Type",IDC_STATIC,231,18,43,8
+    LTEXT           "Inheritance:",IDC_STATIC,233,34,35,8
+    COMBOBOX        IDC_INHERITANCE,282,32,140,39,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Standard Right",IDC_STATIC,223,54,206,64
+    CONTROL         "Delete this Object",IDC_DELETEOBJECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,231,66,90,10
+    CONTROL         "Read Permission",IDC_READPERMISSION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,231,78,98,10
+    CONTROL         "Modify Permission",IDC_MODIFYPERMISSION,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,231,90,118,10
+    CONTROL         "Modify Owner",IDC_MODIFYOWNER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,102,59,10
+    EDITTEXT        IDC_EXTENDEDRIGHT_EDIT,296,239,78,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    CONTROL         "Extended Right",IDC_EXTENDEDRIGHT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,231,239,65,10
+END
+
+IDD_MOVE DIALOG DISCARDABLE  0, 0, 246, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Move"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Object you want to move to this container (ADsPath):",
+                    IDC_STATIC,7,7,208,8
+    EDITTEXT        IDC_ADSPATH,7,20,232,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,65,44,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,121,44,50,14
+END
+
+IDD_LARGEINTEGER DIALOG DISCARDABLE  0, 0, 168, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Large Integer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,32,44,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,87,44,50,14
+    LTEXT           "Hi Part:",IDC_STATIC,7,7,36,8
+    EDITTEXT        IDC_HIPART,7,18,70,14,ES_AUTOHSCROLL
+    LTEXT           "Low Part:",IDC_STATIC,90,7,36,8
+    EDITTEXT        IDC_LOWPART,91,18,70,14,ES_AUTOHSCROLL
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "ADQI MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "ADQI\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998 - 2000\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "ADQI.EXE\0"
+            VALUE "ProductName", "ADQI Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ADQI_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 339
+        VERTGUIDE, 65
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 250
+    END
+
+    IDD_IADS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 281
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 278
+    END
+
+    IDD_GETINFOEX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+
+    IDD_IADSCONTAINER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 249
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 227
+    END
+
+    IDD_RENAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 156
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 62
+    END
+
+    IDD_IDIRECTORYSEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 476
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 315
+    END
+
+    IDD_IDIRECTORYOBJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 267
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 262
+    END
+
+    IDD_DELETEOBJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 222
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+
+    IDD_PROPERTYLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_IADSOPENDSOBJECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 257
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
+
+    IDD_SECURITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 429
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 291
+    END
+
+    IDD_MOVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 239
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_LARGEINTEGER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 161
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 58
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_IDIRECTORYSEARCH DLGINIT
+BEGIN
+    IDC_SEARCHSCOPE, 0x403, 5, 0
+0x6142, 0x6573, "\000" 
+    IDC_SEARCHSCOPE, 0x403, 10, 0
+0x6e4f, 0x2065, 0x654c, 0x6576, 0x006c, 
+    IDC_SEARCHSCOPE, 0x403, 9, 0
+0x7553, 0x2062, 0x7254, 0x6565, "\000" 
+    IDC_CHASEREFERRAL, 0x403, 6, 0
+0x654e, 0x6576, 0x0072, 
+    IDC_CHASEREFERRAL, 0x403, 12, 0
+0x7553, 0x6f62, 0x6472, 0x6e69, 0x7461, 0x0065, 
+    IDC_CHASEREFERRAL, 0x403, 9, 0
+0x7845, 0x6574, 0x6e72, 0x6c61, "\000" 
+    IDC_CHASEREFERRAL, 0x403, 7, 0
+0x6c41, 0x6177, 0x7379, "\000" 
+    IDC_DEREF, 0x403, 6, 0
+0x654e, 0x6576, 0x0072, 
+    IDC_DEREF, 0x403, 7, 0
+0x6553, 0x7261, 0x6863, "\000" 
+    IDC_DEREF, 0x403, 5, 0
+0x6946, 0x646e, "\000" 
+    IDC_DEREF, 0x403, 7, 0
+0x6c41, 0x6177, 0x7379, "\000" 
+    0
+END
+
+IDD_PROPERTYLIST DLGINIT
+BEGIN
+    IDC_ADSTYPE, 0x403, 18, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4e44, 0x535f, 0x5254, 0x4e49, 0x0047, 
+
+    IDC_ADSTYPE, 0x403, 26, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4143, 0x4553, 0x455f, 0x4158, 0x5443, 
+0x535f, 0x5254, 0x4e49, 0x0047, 
+    IDC_ADSTYPE, 0x403, 27, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4143, 0x4553, 0x495f, 0x4e47, 0x524f, 
+0x5f45, 0x5453, 0x4952, 0x474e, "\000" 
+    IDC_ADSTYPE, 0x403, 25, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x5250, 0x4e49, 0x4154, 0x4c42, 0x5f45, 
+0x5453, 0x4952, 0x474e, "\000" 
+    IDC_ADSTYPE, 0x403, 23, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x554e, 0x454d, 0x4952, 0x5f43, 0x5453, 
+0x4952, 0x474e, "\000" 
+    IDC_ADSTYPE, 0x403, 16, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4f42, 0x4c4f, 0x4145, 0x004e, 
+    IDC_ADSTYPE, 0x403, 16, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4e49, 0x4554, 0x4547, 0x0052, 
+    IDC_ADSTYPE, 0x403, 21, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x434f, 0x4554, 0x5f54, 0x5453, 0x4952, 
+0x474e, "\000" 
+    IDC_ADSTYPE, 0x403, 17, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x5455, 0x5f43, 0x4954, 0x454d, "\000" 
+    IDC_ADSTYPE, 0x403, 22, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x414c, 0x4752, 0x5f45, 0x4e49, 0x4554, 
+0x4547, 0x0052, 
+    IDC_ADSTYPE, 0x403, 22, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x5250, 0x564f, 0x535f, 0x4550, 0x4943, 
+0x4946, 0x0043, 
+    IDC_ADSTYPE, 0x403, 21, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x424f, 0x454a, 0x5443, 0x435f, 0x414c, 
+0x5353, "\000" 
+    IDC_ADSTYPE, 0x403, 24, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4143, 0x4553, 0x4749, 0x4f4e, 0x4552, 
+0x4c5f, 0x5349, 0x0054, 
+    IDC_ADSTYPE, 0x403, 19, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x434f, 0x4554, 0x5f54, 0x494c, 0x5453, 
+"\000" 
+    IDC_ADSTYPE, 0x403, 13, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4150, 0x4854, "\000" 
+    IDC_ADSTYPE, 0x403, 22, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4f50, 0x5453, 0x4c41, 0x4441, 0x5244, 
+0x5345, 0x0053, 
+    IDC_ADSTYPE, 0x403, 18, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4954, 0x454d, 0x5453, 0x4d41, 0x0050, 
+
+    IDC_ADSTYPE, 0x403, 17, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4142, 0x4b43, 0x494c, 0x4b4e, "\000" 
+    IDC_ADSTYPE, 0x403, 18, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x5954, 0x4550, 0x4e44, 0x4d41, 0x0045, 
+
+    IDC_ADSTYPE, 0x403, 13, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4f48, 0x444c, "\000" 
+    IDC_ADSTYPE, 0x403, 19, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x454e, 0x4154, 0x4444, 0x4552, 0x5353, 
+"\000" 
+    IDC_ADSTYPE, 0x403, 23, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4552, 0x4c50, 0x4349, 0x5041, 0x494f, 
+0x544e, 0x5245, "\000" 
+    IDC_ADSTYPE, 0x403, 18, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4146, 0x4e58, 0x4d55, 0x4542, 0x0052, 
+
+    IDC_ADSTYPE, 0x403, 14, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4d45, 0x4941, 0x004c, 
+    IDC_ADSTYPE, 0x403, 31, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x544e, 0x535f, 0x4345, 0x5255, 0x5449, 
+0x5f59, 0x4544, 0x4353, 0x4952, 0x5450, 0x524f, "\000" 
+    IDC_ADSTYPE, 0x403, 16, 0
+0x4441, 0x5453, 0x5059, 0x5f45, 0x4e55, 0x4e4b, 0x574f, 0x004e, 
+    0
+END
+
+IDD_SECURITY DLGINIT
+BEGIN
+    IDC_ACETYPE, 0x403, 15, 0
+0x6341, 0x6563, 0x7373, 0x4120, 0x6c6c, 0x776f, 0x6465, "\000" 
+    IDC_ACETYPE, 0x403, 14, 0
+0x6341, 0x6563, 0x7373, 0x4420, 0x6e65, 0x6569, 0x0064, 
+    IDC_ACETYPE, 0x403, 25, 0
+0x6341, 0x6563, 0x7373, 0x4120, 0x6c6c, 0x776f, 0x6465, 0x4f20, 0x206e, 
+0x624f, 0x656a, 0x7463, "\000" 
+    IDC_ACETYPE, 0x403, 24, 0
+0x6341, 0x6563, 0x7373, 0x4420, 0x6e65, 0x6569, 0x2064, 0x6e4f, 0x4f20, 
+0x6a62, 0x6365, 0x0074, 
+    IDC_ACETYPE, 0x403, 20, 0
+0x6341, 0x6563, 0x7373, 0x5320, 0x7379, 0x6574, 0x206d, 0x7541, 0x6964, 
+0x0074, 
+    IDC_ACETYPE, 0x403, 30, 0
+0x6341, 0x6563, 0x7373, 0x5320, 0x7379, 0x6574, 0x206d, 0x7541, 0x6964, 
+0x2074, 0x6e4f, 0x4f20, 0x6a62, 0x6365, 0x0074, 
+    IDC_INHERITANCE, 0x403, 12, 0
+0x6e49, 0x6568, 0x6972, 0x2074, 0x4341, 0x0045, 
+    IDC_INHERITANCE, 0x403, 20, 0
+0x7250, 0x7665, 0x6e65, 0x2074, 0x6e49, 0x6568, 0x6972, 0x6174, 0x636e, 
+0x0065, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About ADQI..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\ADQI.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

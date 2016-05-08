@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTScratchpadRTStylus", "MTScratchpadRTStylus.csproj", "{301E2744-ED93-460D-BA67-386123E144ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{301E2744-ED93-460D-BA67-386123E144ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301E2744-ED93-460D-BA67-386123E144ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301E2744-ED93-460D-BA67-386123E144ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301E2744-ED93-460D-BA67-386123E144ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

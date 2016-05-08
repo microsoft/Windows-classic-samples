@@ -1,0 +1,45 @@
+Creating a Microsoft Windows Cluster Server Administrator Extension DLL
+(using a shared copy of MFC) and Resource DLL.
+
+A Resource DLL project and a Cluster Administrator Extension DLL project
+will be generated for the "ClipBook Server" resource type.
+
+The following options have been chosen:
+- Controls a service: "ClipSrv"
+- Use Network Name for computer name.
+- Only one instance of the resource type is permitted in the cluster.
+- Required dependencies on other resources.
+
+The following properties are used with this resource type:
+
+RESOURCE DLL AND CLUSCFG PROJECT (ClipBook Server)
+------------------------------------------
+Files:
+  Main resource code: ClipBook Server.cpp
+  DLL entry points: ClRes.cpp ClipBook Server.def
+  Resource files: ClipBook Server.rc
+
+Other Files:
+  Configuration: settings.txt
+  Readme.txt
+
+CLUSTER ADMINISTRATOR EXTENSION (ClipBook ServerEx)
+-----------------------------------------------------
+Classes to be created:
+  Application: CClipBookServerApp in ClipBook ServerEx.h and ClipBook ServerEx.cpp
+  Extensions: CExtObject in ExtObj.h, ExtObj.cpp, and ExtObjID.idl,
+      CExtObjData in ExtObjData.h, ExtObjData.cpp
+  Base Property Page: CBasePropertyPage in BasePage.h and
+      BasePage.cpp
+  Resource Property Page: CClipBookServerParamsPage in ResProp.h and
+      ResProp.cpp
+  Propert List: CClusPropList and CObjectProperty in PropList.h and
+      PropList.cpp
+
+Other Files:
+  Precompiled header: StdAfx.h and StdAfx.cpp
+  Dialog Data Exchange and Validation: DDxDDv.h and DDxDDv.cpp
+  Registration: RegExt.h and RegExt.cpp
+  Resource files: resource.h and ClipBook ServerEx.rc
+  Dll entry points: ClipBook ServerEx.def
+

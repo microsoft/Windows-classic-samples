@@ -1,0 +1,324 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+
+<HTML DIR="LTR">
+
+<HEAD>
+   <TITLE>Online Store Plug-in Wizard</TITLE>
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+   <STYLE TYPE="text/css">
+      @import url(); 
+   </STYLE>
+
+   <SCRIPT>
+      var strPath = window.external.FindSymbol("ABSOLUTE_PATH");
+      strPath += window.external.GetHostLocale();
+      strPath += "/Styles.css";
+      document.styleSheets(0).imports(0).href = strPath;
+   </SCRIPT>
+
+   <SYMBOL NAME='WIZARD_DIALOG_TITLE' TYPE="text" VALUE='Windows Media Player Online Store Plug-in Wizard'></SYMBOL>
+   <SYMBOL NAME="MAX_SYMBOL_LENGTH" TYPE="num" VALUE="64"></SYMBOL>
+   <SYMBOL NAME="root" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="Root" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="ROOT" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="safe_root" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="Safe_root" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="SAFE_ROOT" TYPE="text"></SYMBOL>
+   <SYMBOL NAME='FRIENDLYNAME' TYPE="text"></SYMBOL>
+   <SYMBOL NAME='DESCRIPTION' TYPE="text"></SYMBOL>
+   <SYMBOL NAME='CONTENTDISTRIBUTOR' TYPE="text"></SYMBOL>
+   <SYMBOL NAME='REMOVEURL' TYPE="text"></SYMBOL>
+   <SYMBOL NAME='HASPROPERTYPAGE' TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME='LISTENTOEVENTS' TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="PROJECT_NAME_OEM" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="RES_PATH" TYPE="text" VALUE="res"></SYMBOL>
+   <SYMBOL NAME="HELP_PATH" TYPE="text" VALUE="hlp"></SYMBOL>
+   <SYMBOL NAME="EMPTY_PROJECT" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="SUPPORT_ATL" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="SUPPORT_MFC" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="SOURCE_FILTER" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="HEADER_FILTER" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="RESOURCE_FILTER" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="DO_KANA" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="TARGET_INTEL" TYPE="checkbox" VALUE="true"></SYMBOL>
+   <SYMBOL NAME="TARGET_MIPS" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="TARGET_ALPHA" TYPE="checkbox" VALUE="false"></SYMBOL>
+   <SYMBOL NAME="CC" TYPE="text" VALUE="cl"></SYMBOL>
+   <SYMBOL NAME="LINKER" TYPE="text" VALUE="link"></SYMBOL>
+   <SYMBOL NAME="CPU" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="HOST_CPU" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="YEAR" TYPE="text"></SYMBOL>
+   <SYMBOL NAME="APP_TYPE_SUMMARY" TYPE="text" VALUE=""></SYMBOL>
+   <SYMBOL NAME="VSNET" TYPE="checkbox" VALUE="true"></SYMBOL>
+   <SYMBOL NAME='TYPE1_RADIO' TYPE="radio" VALUE="true"></SYMBOL>
+  
+</HEAD>
+
+
+<BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        
+  <DIV id="logo" style="POSITION: absolute">
+    <IMG src="..\..\Images\logo.png">
+  </DIV>
+
+  <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            
+    <P>
+      <FONT face="Arial" size="4">
+        Welcome to the 
+        <BR>Windows Media Player
+        <BR>Online Store Plug-in Wizard
+      </FONT>
+    </P>
+ 
+    <SPAN CLASS="itemText">
+
+      <FONT face="Arial" size="2">
+
+        Choose the type of plug-in you wish to create.
+
+        <BR><BR>
+
+        <DIV CLASS="itemTextRadioB" TITLE="Type 1" ID="Div1">
+          <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="TYPE1_RADIO" ACCESSKEY="D" TITLE="Type 1" VALUE="TYPE1_RADIO">                         
+          <LABEL FOR="TYPE1_RADIO" TITLE="Type 1" ID="Label1">
+            Type 1 (<U>D</U>eep integration)
+          </LABEL>
+        </DIV>
+                    
+        <BR>
+
+        <DIV CLASS="itemTextRadioB" TITLE="Type 2" ID="Div2">
+          <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="TYPE2_RADIO" ACCESSKEY="B" TITLE="Type 2" VALUE="TYPE2_RADIO">                
+          <LABEL FOR="TYPE2_RADIO" TITLE="Type 2" ID="Label2">
+            Type 2 (<U>B</U>asic integration)
+          </LABEL>
+        </DIV>
+                                 
+        <BR><BR>
+
+        To continue, click Next. 
+
+      </FONT>
+
+    </SPAN>
+
+  </DIV>
+
+
+  <DIV style="LEFT: 0px; WIDTH: 600px; POSITION: absolute; TOP: 304px; HEIGHT: 2px">
+    <HR>
+  </DIV>
+
+  <DIV style="LEFT: 250px; WIDTH: 200px; POSITION: absolute; TOP: 328px; HEIGHT: 48px">
+
+    <TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0" ID="Table1">
+          
+      <TR>
+
+        <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+          <BUTTON CLASS="BUTTONS" ID="FinishBtn" ACCESSKEY="N" onClick="OnNext(document);">
+            <U>N</U>ext
+          </BUTTON>
+        </TD>
+
+        <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+          &nbsp;
+        </TD>
+
+        <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+          <BUTTON CLASS="BUTTONS" ID="CancelBtn" ACCESSKEY="C" onClick="window.external.Finish(document, 'cancel');">
+            <U>C</U>ancel
+          </BUTTON>
+        </TD>  
+
+      </TR>
+    </TABLE>
+
+  </DIV>
+
+</BODY>
+
+</HTML>
+
+<SCRIPT LANGUAGE="JSCRIPT">
+
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+   setDirection();
+
+   if (window.external.FindSymbol("DOCUMENT_FIRST_LOAD"))
+   {
+      var L_WizardDialogTitle_Text = "Online Store Plug-in Wizard";
+      window.external.AddSymbol("WIZARD_DIALOG_TITLE", L_WizardDialogTitle_Text);
+      var strProjName = window.external.FindSymbol("PROJECT_NAME");
+      var coll = document.all.tags("SYMBOL");
+      var numSymbols = coll.length;
+
+      for (i = 0; i < numSymbols; i++)
+      {
+         var obj = coll(i);
+
+         if (typeof(obj.VALUE) == "undefined")
+         {
+            obj.VALUE = getval(obj, strProjName);
+         }
+      }
+
+      window.external.SetDefaults(document);		
+   }
+	
+   window.external.Load(document);
+}
+
+
+function OnNext(document)
+{
+   var conDist;
+   var frName;
+		
+   if(TYPE1_RADIO.checked)
+   {
+      window.external.AddSymbol("TYPE1PLUGIN", true);
+      window.external.AddSymbol("TYPE2PLUGIN", false);
+          
+      window.external.RemoveSymbol("CONTENTDISTRIBUTOR");
+      window.external.AddSymbol("CONTENTDISTRIBUTOR", "MSSampleType1Store");
+      window.external.RemoveSymbol("FRIENDLYNAME");
+      window.external.AddSymbol("FRIENDLYNAME", "Sample Type1 Store");
+
+      window.external.Next(document, "Type1Settings.htm");
+   }
+
+   else if(TYPE2_RADIO.checked)
+   {
+      window.external.AddSymbol("TYPE2PLUGIN", true);
+      window.external.AddSymbol("TYPE1PLUGIN", false);
+      window.external.Next(document, "Type2Settings.htm");
+   }	
+}
+
+
+function getval(obj, strProjName)
+{
+   var SymbolValue = "";
+
+   switch(obj.NAME)
+   {
+      case "PROJECT_NAME_OEM":
+         SymbolValue = strProjName; 
+         break;
+
+      case "root":
+         SymbolValue = strProjName;
+         break;
+
+      case "Root":
+         {
+            SymbolValue = strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1);
+         }
+         break;
+
+      case "ROOT":
+         {
+            SymbolValue = strProjName.toUpperCase();
+         }
+         break;
+
+      case "safe_root":
+         SymbolValue = CreateSafeName(strProjName);
+         break;
+
+      case "Safe_root":
+         {
+            var strSafeProjName = CreateSafeName(strProjName);
+            SymbolValue = strSafeProjName.substr(0, 1).toUpperCase() + strSafeProjName.substr(1);
+         }
+         break;
+
+      case "SAFE_ROOT":
+         {
+            var strSafeProjName = CreateSafeName(strProjName);
+            SymbolValue = strSafeProjName.toUpperCase();
+         }
+         break;
+
+      case  "SOURCE_FILTER":
+         SymbolValue = "cpp;c;cxx;rc;def;odl;idl;hpj;bat;asm"; 
+         break;
+
+      case  "HEADER_FILTER":
+         SymbolValue = "h;hpp;hxx;hm;inl;inc"; 
+         break;
+
+      case  "RESOURCE_FILTER":
+         SymbolValue = "ico;cur;bmp;dlg;rc;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"; 
+         break;
+
+      case  "CPU":
+         SymbolValue = "i386"; 
+         break;
+
+      case  "HOST_CPU":
+         SymbolValue = "X86"; 
+         break;
+
+      case  "YEAR":
+        {
+           d = new Date();
+           SymbolValue = d.getFullYear().toString();
+        }
+        break;
+
+      case "FRIENDLYNAME":
+         SymbolValue = strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1) + " Service"; 
+         break;
+
+      case "CONTENTDISTRIBUTOR":
+         var cd = strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1);
+         SymbolValue = CreateSafeName(cd);
+         break;
+
+      case "REMOVEURL":
+         SymbolValue = "http://";
+         break; 
+       
+      default:
+         SymbolValue = "";
+         break;
+   }
+
+   return (SymbolValue);
+}
+
+
+function OnFinish(obj)
+{
+   // Called when the user clicks the finish button.  OnWizFinish is a function in common.js. 
+   OnWizFinish(obj);
+} 
+
+</SCRIPT>
+
+
+
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+
+<SCRIPT>
+	var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+	strPath += "VCWizards/";
+	strPath += window.external.GetHostLocale();
+	var strScriptPath = strPath + "/Script.js";
+	var strCommonPath = strPath + "/Common.js";
+	document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+	document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

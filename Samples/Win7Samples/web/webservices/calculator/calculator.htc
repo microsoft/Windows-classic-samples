@@ -1,0 +1,112 @@
+<HTML>
+<PUBLIC:COMPONENT TAGNAME="calculator">
+    <PUBLIC:ATTACH EVENT="oncontentready" ONEVENT="OnContentReady()" />
+    <PUBLIC:ATTACH EVENT="ondocumentready" ONEVENT="Init()" />
+    <PUBLIC:ATTACH EVENT="onkeydown" ONEVENT="fromKeyBD()"/>
+    <PUBLIC:ATTACH EVENT="onclick" ONEVENT="fnCalculation()" />
+    <PUBLIC:PROPERTY NAME="url" />
+</PUBLIC:COMPONENT>
+<HEAD>
+    <SCRIPT>
+    /*************************************************************************/
+    /* Function: OnContentReady()                                            */
+    /* Purpose: Attaches the WebService behavior.                            */
+    /* Output: None.                                                         */
+    /*************************************************************************/
+    function OnContentReady(){
+        if (url != null && url != "")
+            //Map the WebService URL to the friendly name 'oCalc'.
+            myService.useService(url, "oCalc");
+        window.resizeTo(263,304);
+    }
+    /*************************************************************************/
+    /* Function: Init()                                                      */
+    /* Purpose:                                                              */
+    /* Output: None                                                          */
+    /*************************************************************************/
+    function Init(){
+        //Invoke the doCalc method and obtain the results with the "calcResult" callback function.
+        myService.oCalc.callService(calcResult, "doCalc", "load");
+        //Set focus to the calculator.
+        oCalc.focus();
+    }        
+    /*************************************************************************/
+    /* Function: fnCalculation()                                             */
+    /* Purpose: Call the WebService method.                                  */
+    /* Output: None. A callback function (calcResult) handles the results    */
+    /*      from the WebService call.                                        */
+    /*************************************************************************/
+    function fnCalculation(){
+        //Only call the WebService method when a button is clicked or a calculator pad key is pressed.
+        if(event.srcElement.value == null || event.srcElement.value == "undefined"){
+            // Do nothing. The mouse button was not clicked on a button.
+        }else{
+            //The equals button was clicked.
+            if(event.srcElement.value == "="){
+                //Invoke the doCalc method and obtain the results with the "calcResult" callback function.
+                myService.oCalc.callService(calcResult, "doCalc", "equals");
+            //The percentage sign button was clicked.
+            }else if(event.srcElement.value == "%"){
+                //Invoke the doCalc method and obtain the results with the "calcResult" callback function.
+                myService.oCalc.callService(calcResult, "doCalc", "divBy100");
+            }else{
+                //Invoke the doCalc method and obtain the results with the "calcResult" callback function.
+                myService.oCalc.callService(calcResult, "doCalc", event.srcElement.value);
+            }
+        }
+    }
+    /*************************************************************************/
+    /* Function: calcResult(result)                                          */
+    /* Purpose: Obtains the results from the WebService method call.         */
+    /* Output: Display the results in the resultWindow if call to function   */
+    /*      is successful.                                                   */ 
+    /*************************************************************************/
+    function calcResult(result){
+        if(!result.error)
+            resultWindow.innerText = result.value;
+    }
+    /*************************************************************************/
+    /* Function: fromKeyBD()                                                 */
+    /* Purpose: Sets focus and dynamically clicks the corresponding button   */
+    /*      for a key that the users presses.                                */
+    /* Output: None.                                                         */
+    /*************************************************************************/
+    function fromKeyBD(){
+        // The CTRL and C keys were pressed simultaneously. Click the copy span object.
+        if(event.ctrlKey == true && event.keyCode == 67){
+            window.clipboardData.setData("Text", resultWindow.innerText);
+        }        
+        // The CTRL and V keys were pressed simultaneously. Click the paste span object.
+        if(event.ctrlKey == true && event.keyCode == 86){
+            if(!isNaN(window.clipboardData.getData("Text")) && window.clipboardData.getData("Text") != null){
+                resultWindow.innerText = window.clipboardData.getData("Text");
+                myService.oCalc.callService(calcResult, "doPaste", resultWindow.innerText);
+            }
+        }        
+        //Switch the keyCode for the key pressed. 
+        switch(event.keyCode){
+            case 48: case 96: btn0.focus(); btn0.click(); break;
+            case 49: case 97: btn1.focus(); btn1.click(); break;
+            case 50: case 98: btn2.focus(); btn2.click(); break;
+            case 51: case 99: btn3.focus(); btn3.click(); break;
+            case 52: case 100: btn4.focus(); btn4.click(); break;
+            case 53: case 101: btn5.focus(); btn5.click(); break;
+            case 54: case 102: btn6.focus(); btn6.click(); break;
+            case 55: case 103: btn7.focus(); btn7.click(); break;
+            case 56: case 104: btn8.focus(); btn8.click(); break;
+            case 57: case 105: btn9.focus(); btn9.click(); break;
+            case 110: case 190: btnPeriod.focus(); btnPeriod.click(); break;
+            case 111: btnDivide.focus(); btnDivide.click(); break;
+            case 106: btnTimes.focus(); btnTimes.click(); break;
+            case 109: btnMinus.focus(); btnMinus.click(); break;
+            case 107: btnPlus.focus(); btnPlus.click(); break;
+            case 13: btnEquals.focus(); btnEquals.click(); break;
+            case 27: btnC.focus(); btnC.click(); break;
+            case 8: btnBackSpace.focus(); btnBackSpace.click(); event.returnValue=false; break;
+        }
+    }        
+    </SCRIPT>
+</HEAD>
+<BODY id="myService" style="behavior:url(webservice.htc);">
+</BODY>
+</HTML>

@@ -1,0 +1,157 @@
+<html>
+  <!-------------------
+  CLOCK2002.HTM
+
+  Clock 2002. 1998-2001
+
+  Version 1.20.033
+  -------------------->
+
+  <head>
+    <title>Clock 2002</title>
+  </head>
+
+  <style>
+    body	{margin: 0px}
+    td		{width: 84px; text-align: center}
+    div		{position: absolute; top: -10000px; left: 0px}
+    #ID_Clock	{width: 89px; font: 8pt Verdana; color: white; background: black URL(Clock2002.gif)}
+    #ID_Analog	{height: 84px; font-size: 30pt; cursor: default}
+    #ID_Digital	{height: 20px; cursor: hand}
+  </style>
+
+  <script src=shared.js> </script>
+
+  <body scroll=no onLoad=Initialize() onSelectStart=Ignore()>
+  <!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+    <table id=ID_Clock>
+      <tr>
+        <td id=ID_Analog>
+          <div id=ID_C> &#8226 </div>
+          <div id=ID_H> &#8226 </div>
+          <div id=ID_M> &#8226 </div>
+        </td>
+      </tr>
+      <tr>
+        <td id=ID_Digital onClick=SwitchMode() onDblClick=this.click()>
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <script>
+
+    // constants
+    // clock center is at client (45px, 45px)
+    // client (0px, 0px) == div (-12px, -28px)
+    // (for 30pt Verdana, different otherwise)
+    var c_offsetX = 45 - 12;
+    var c_offsetY = 45 - 28;
+    var c_radiusH = 16;
+    var c_radiusM = 24;
+    var c_2pi60 = Math.PI / 30;   // = 2 * Math.PI / 60
+
+    // global variables
+    var g_displayMode;
+
+    function Initialize()
+      {
+      GetCookie("g_displayMode");
+      // for precise time tracking, set time polling interval to 10 ms (not to 1 second)
+      window.setInterval("tick()", 10);
+      }
+
+    // static variables for tick()
+    var thisSecond = -1;
+    var thisMinute = -1;
+
+    function tick()
+      {
+      now = new Date();
+
+      // on the second, update digital display (don't update it every 10 ms)
+      sec = now.getSeconds();
+      if (sec == thisSecond)
+        return;
+      thisSecond = sec;
+      updateDigital();
+
+      // on the minute, update analog display (don't update it every 10 ms)
+      min = now.getMinutes();
+      if (min == thisMinute)
+        return;
+      thisMinute = min;
+      updateAnalog(now);
+      }
+
+    function updateAnalog(Now)
+      {
+      // int() "fixes" Math.round() for the Clock's purposes
+      function int(Num)
+        {
+        if (Math.round(Num) == 0)
+          return 0;
+        else
+          return (Num > 0) ? Math.ceil(Num) : Math.floor(Num);
+        }
+
+      // .offsetX helps when the clock is embedded inline (e.g. in HTML email), not via <iframe>
+      x0 = ID_Clock.offsetLeft + c_offsetX;
+      y0 = ID_Clock.offsetTop  + c_offsetY;
+
+      // show the center dot
+      ID_C.style.left = x0;
+      ID_C.style.top  = y0;
+
+      // calculate the clock arms' positions on the clock's angular grid [0..59]
+      m = Now.getMinutes();
+      h = 5 * (Now.getHours() % 12) + Math.floor(m / 12);
+
+      // show the hour arm's dot
+      ID_H.style.left = x0 + int(c_radiusH * Math.sin(c_2pi60 * h));
+      ID_H.style.top  = y0 - int(c_radiusH * Math.cos(c_2pi60 * h));
+
+      // show the minute arm's dot
+      ID_M.style.left = x0 + int(c_radiusM * Math.sin(c_2pi60 * m));
+      ID_M.style.top  = y0 - int(c_radiusM * Math.cos(c_2pi60 * m));
+      }
+
+    function updateDigital()
+      {
+      ID_Digital.style.background = "black";
+      switch (g_displayMode)
+        {
+        case 0:
+          displayString = CurrentShortTime();
+          break;
+
+        case 1:
+          displayString = CurrentShortDate();
+          break;
+
+        case 2:
+          displayString = CurrentLongWeekdayName();
+          break;
+
+        default:
+          // this takes care of display mode initialization, cycling and recovery from cookie corruptions
+          g_displayMode = 0;	// set mode to default
+          updateDigital();	// recursively show default display string
+          return;
+        }
+      ID_Digital.innerText = displayString;
+      }
+
+    function SwitchMode()
+      {
+      g_displayMode++;
+      updateDigital();
+      SetCookie("g_displayMode");
+      }
+
+  </script>
+
+  <!-- VBScript provides richer Windows locale support. -->
+  <script language=VBScript src=shared.vbs> </script>
+
+</html>

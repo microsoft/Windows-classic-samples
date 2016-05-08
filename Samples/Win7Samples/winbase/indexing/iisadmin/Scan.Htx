@@ -1,0 +1,172 @@
+<HTML>
+
+<!--
+    <%CiTemplate%>
+
+    This is the formatting page for scan admin query results.  This file defines
+    how the result page header, rows, and footer will appear.
+-->
+
+<HEAD>
+
+	<LINK REL=STYLESHEET HREF="is2admin.css" TYPE="text/css">
+
+    <!-- The title lists the # of documents -->
+
+    <%if CiMatchedRecordCount eq 0%>
+        <TITLE><%escapeHTML CiRestriction%> - no documents matched.</TITLE>
+    <%else%>
+        <TITLE><%escapeHTML CiRestriction%> - documents <%CiFirstRecordNumber%> to <%CiLastRecordNumber%></TITLE>
+    <%endif%>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#000066" VLINK="#808080" ALINK="#FF0000" TOPMARGIN=0>
+
+<TABLE>
+    <TR><TD><A HREF="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT border=0></a></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Administration - Virtual Root Data</H3></TD></TR>
+</TABLE>
+
+<!-- Print a header that lists the query and the number of hits -->
+
+<H5>
+    <%if CiMatchedRecordCount eq 0%>
+        No virtual roots matched the query "<%EscapeHTML CiRestriction%>".
+    <%else%>
+        Virtual roots <%CiFirstRecordNumber%> to <%CiLastRecordNumber%> of
+        <%CiMatchedRecordCount%> matching the query
+        "<%EscapeHTML CiRestriction%>" for catalog <%CiCatalog%>
+    <%endif%>
+</H5>
+
+
+<!--
+    The begindetail/enddetail section describes how each row of output
+    is be formatted.
+-->
+
+<FORM ACTION="/iisadmin/isadmin/scan.ida" METHOD="GET" target=_top>
+<table width=100%>
+    <tr class=RecordTitle>
+        <th align="left">Virtual Root</th>
+        <th align="left">Physical Root</th>
+        <th align="left">Type</th>
+        <th colspan = 3 align="center">Type Of Scan</th>
+    </tr>
+
+    <!--
+           NAME: PROOT_<virtual root> VALUE: physical path to root
+           NAME: SCAN_<virtual root>  VALUE: "NoScan".    Implies no scan will be performed
+           NAME: SCAN_<virtual root>  VALUE: "FullScan".  Implies full scan will be performed
+           NAME: SCAN_<virtual root>  VALUE: "IncrementalScan".  Implies incremental scan will be performed
+
+-->
+
+<%begindetail%>
+    <INPUT TYPE="HIDDEN" NAME="PROOT_<%if StorageType eq 1%>NNTP_<%endif%><%vpath%>" VALUE="<%path%>">
+        <tr class=RecordStats style="font-style:normal;">
+            <td><%vpath%></td>
+            <td><%path%></td>
+            <td><%if StorageType eq 1%>News<%else%>Web<%endif%></td>
+            <td><input type=radio checked name="SCAN_<%if StorageType eq 1%>NNTP_<%endif%><%vpath%>" value="NoScan">None</td>
+            <td><input type=radio name="SCAN_<%if StorageType eq 1%>NNTP_<%endif%><%vpath%>" value="IncrementalScan">Incremental</td>
+            <td><input type=radio name="SCAN_<%if StorageType eq 1%>NNTP_<%endif%><%vpath%>" value="FullScan">Full</td>
+        </tr>
+<%enddetail%>
+
+	<tr>
+		<td colspan=6 align=right height=50><INPUT TYPE="SUBMIT" VALUE="Submit Changes"></td>
+	</tr>
+</table>
+</FORM>
+
+<P>
+
+<!-- Only display a line if there were any hits that matched the query -->
+
+<%if CiMatchedRecordCount ne 0%>
+    <HR>
+<%endif%>
+
+<TABLE>
+
+    <%if CiContainsFirstRecord eq 0%>
+    <!-- Define a "previous" button if this isn't the first page -->
+
+        <TD ALIGN=LEFT>
+            <FORM ACTION="/iisadmin/isadmin/scan.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="-<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiRestriction" VALUE="<%CiRestriction%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Previous <%CiMaxRecordsPerPage%> Roots">
+            </FORM>
+        </TD>
+    <%endif%>
+
+    <%if CiContainsLastRecord eq 0%>
+    <!-- Define a "next" button if this isn't the last page -->
+
+        <TD ALIGN=RIGHT>
+            <FORM ACTION="/iisadmin/isadmin/scan.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiRestriction" VALUE="<%CiRestriction%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Next <%CiRecordsNextPage%> Roots">
+            </FORM>
+        </TD>
+    <%endif%>
+</TABLE>
+
+<table width=100%>
+	<tr>
+		<td class=RecordStats align=center valign=middle bgcolor=pink>
+
+			<%if CiOutOfDate ne 0%>
+			<!--
+				 If the index is out of date (for example, if it's still being created
+				 or updated after changes to files in an indexed directory) let the
+				 user know.
+			-->
+
+				<P><BR>
+				<I><B>The index is out of date.</B></I>
+			<%endif%>
+
+			<%if CiQueryIncomplete eq 1%>
+			<!--
+				If the query was not executed because it needed to enumerate to
+				resolve the query instead of using the index, but CiForceUseCi
+				was TRUE, let the user know
+			-->
+
+				<P><BR>
+				<I><B>The query is too expensive to complete.</B></I>
+			<%endif%>
+		</td>
+	</tr>
+</table>
+
+			<%if CiTotalNumberPages gt 0%>
+			<!-- Output a page number and count of pages -->
+
+				<P align=right>
+				Page <%CiCurrentPageNumber%> of <%CiTotalNumberPages%>
+				<P>
+			<%endif%>
+
+
+</body>
+
+</HTML>

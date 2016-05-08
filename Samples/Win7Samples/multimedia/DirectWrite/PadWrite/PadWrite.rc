@@ -1,0 +1,58 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+#include "resource.h"
+#include "WinResrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// IMAGE
+
+INLINEOBJECTS           IMAGE                   "InlineObjects.png"
+
+/////////////////////////////////////////////////////////////////////////////
+// Menu
+
+1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Exit",                        IDCLOSE
+    END
+    POPUP "Edit"
+    BEGIN
+        MENUITEM "Copy text",                   CommandIdCopy
+        MENUITEM "Paste text",                  CommandIdPaste
+        MENUITEM SEPARATOR
+        MENUITEM "Set inline image...",         CommandIdSetInlineImage
+    END
+    POPUP "View"
+    BEGIN
+        MENUITEM "Zoom in",                     CommandIdZoomIn
+        MENUITEM "Zoom out",                    CommandIdZoomOut
+        MENUITEM "Rotate",                      CommandIdRotateCW
+        MENUITEM "Reset view",                  CommandIdResetView
+    END
+    POPUP "Format"
+    BEGIN
+        MENUITEM "Font...",                     CommandIdFont
+        MENUITEM SEPARATOR
+        MENUITEM "Leading alignment",           CommandIdAlignLeading
+        MENUITEM "Centered alignment",          CommandIdAlignHCenter
+        MENUITEM "Trailing alignment",          CommandIdAlignTrailing
+        MENUITEM SEPARATOR
+        MENUITEM "Left-to-right",               CommandIdLeftToRight
+        MENUITEM "Right-to-left",               CommandIdRightToLeft
+        MENUITEM SEPARATOR
+        MENUITEM "Wrap",                        CommandIdWrap CHECKED
+        MENUITEM "Trim",                        CommandIdTrim
+    END
+    POPUP "Options"
+    BEGIN
+        MENUITEM "Render to DIB",               CommandIdRenderDW
+        MENUITEM "Render to D2D surface",       CommandIdRenderD2D
+    END
+END

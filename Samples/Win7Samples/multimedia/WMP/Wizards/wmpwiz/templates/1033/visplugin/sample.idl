@@ -1,0 +1,40 @@
+// i[!output root].idl : IDL source for [!output root].dll
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+// This file will be processed by the MIDL tool to
+// produce the type library (i[!output root].tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+    [
+        object,
+        uuid([!output INTERFACEID]),
+        dual,
+        helpstring("I[!output Safe_root] Interface"),
+        pointer_default(unique)
+    ]
+    interface I[!output Safe_root] : IDispatch
+    {
+        [propget, id(1), helpstring("property foregroundColor")] HRESULT foregroundColor([out, retval] BSTR *pVal);
+        [propput, id(1), helpstring("property foregroundColor")] HRESULT foregroundColor([in] BSTR newVal);
+    };
+
+[
+    uuid([!output LIBRARYID]),
+    version(1.0),
+    helpstring("[!output Safe_root] 1.0 Type Library")
+]
+library [!output SAFE_ROOT]Lib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid([!output CLASSID]),
+        helpstring("[!output Safe_root] Class")
+    ]
+    coclass [!output Safe_root]
+    {
+        [default] interface I[!output Safe_root];
+    };
+};

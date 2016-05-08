@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EhStorManaged", "EhStorManaged\EhStorManaged.csproj", "{1828C9F6-CBAF-44BA-BE5C-FC483BDB8D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microsoft.storage.EhStorage", "microsoft.storage.EhStorage.dll\microsoft.storage.EhStorage.csproj", "{4BB26ACF-5404-44AE-85CD-DCCB19EC8A9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1828C9F6-CBAF-44BA-BE5C-FC483BDB8D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1828C9F6-CBAF-44BA-BE5C-FC483BDB8D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1828C9F6-CBAF-44BA-BE5C-FC483BDB8D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1828C9F6-CBAF-44BA-BE5C-FC483BDB8D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB26ACF-5404-44AE-85CD-DCCB19EC8A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB26ACF-5404-44AE-85CD-DCCB19EC8A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB26ACF-5404-44AE-85CD-DCCB19EC8A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB26ACF-5404-44AE-85CD-DCCB19EC8A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

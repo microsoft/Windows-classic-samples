@@ -1,0 +1,23 @@
+HKCR
+{
+	COMRTS.PacketModifier.1 = s 'PacketModifier Class'
+	{
+		CLSID = s '{38C6395F-0C50-47D2-8373-BA576ECE3DFE}'
+	}
+	COMRTS.PacketModifier = s 'PacketModifier Class'
+	{
+		CLSID = s '{38C6395F-0C50-47D2-8373-BA576ECE3DFE}'
+		CurVer = s 'COMRTS.PacketModifier.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {38C6395F-0C50-47D2-8373-BA576ECE3DFE} = s 'PacketModifier Class'
+		{
+			ProgID = s 'COMRTS.PacketModifier.1'
+			VersionIndependentProgID = s 'COMRTS.PacketModifier'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{7819C446-8B13-4409-852D-B04BAA2198DE}'
+		}
+	}
+}

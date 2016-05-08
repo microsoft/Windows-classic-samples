@@ -1,0 +1,36 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include "resource.h"
+
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_ALARMS    ICON                    "Alarms.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_ALARM DIALOGEX 0, 0, 145, 74
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | DS_CENTER
+CAPTION "My Alarm"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Quit",IDCANCEL,88,53,50,14
+    CONTROL         "",IDC_DATETIMEPICKER_ALARM,"SysDateTimePick32",DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,7,24,64,15
+    LTEXT           "Alarm Time",IDC_STATIC,7,7,75,8
+    PUSHBUTTON      "Set Alarm",IDC_BUTTON_SETALARM,88,24,50,14
+END
+
+

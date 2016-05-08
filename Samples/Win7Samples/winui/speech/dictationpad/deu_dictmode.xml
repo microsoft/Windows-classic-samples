@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<GRAMMAR LANGID="407">
+    <DEFINE>
+      <ID NAME="PID_DictMode" VAL="1"/>
+      <ID NAME="PID_DictCommand" VAL="901"/>
+
+    </DEFINE>
+
+    <RULE NAME="PID_DictMode" ID="PID_DictMode" TOPLEVEL="ACTIVE">
+      <L PROPNAME="PID_DictMode" PROPID="PID_DictMode">
+        <P VAL="PID_DictCommand">befehlen</P>
+        <P VAL="PID_DictCommand">Computer</P>
+      </L>
+    </RULE>
+
+</GRAMMAR>

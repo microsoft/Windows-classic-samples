@@ -1,0 +1,127 @@
+/**********************************************************************/
+/*                                                                    */
+/*      IMEAPPS.RC                                                    */
+/*                                                                    */
+/*      Copyright (c) 1995 - 2000  Microsoft Corporation                     */
+/*                                                                    */
+/**********************************************************************/
+#include <windows.h>
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+MYICON                  ICON    DISCARDABLE     "imeapps.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+IDB_BMP                 BITMAP  MOVEABLE PURE   "toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDM_FONT         "Select Font for the composition string"
+    IDM_OPENSTATUS   "Change Open/Close Status"
+    IDM_CONVERT      "Convert the composition string"
+    IDM_REVERT       "Revert the composition string"
+    IDM_CANCEL       "Cancel the composition string"
+    IDM_COMPLETE     "Complete the composition string"
+    IDM_SHOWCAND     "Draw the candidate strings"
+    IDM_NEXTCAND     "Next the candidate string"
+    IDM_PREVCAND     "Prev the candidate string"
+    IDM_NEXTCLAUSE   "Next target clause"
+    IDM_PREVCLAUSE   "Prev target clause"
+    IDM_OPENCAND     "Open the candidate list"
+    IDM_CLOSECAND    "Close the candidate list"
+    IDM_NATIVEMODE   "Alpha, Native Katakana Mode"
+    IDM_FULLHALF     "Full and Half shape Mode"
+    IDM_ROMAN        "Roman NoRoman Mode"
+    IDM_CHARCODE     "CharCode Mode"
+    IDM_HANJA        "Hanja Mode"
+    IDM_SOFTKBD      "SoftKeyboard Mode"
+    IDM_EUDC         "EUDC Mode"
+    IDM_SYMBOL       "Symbol Mode"
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IMEAPPSMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Font...",                 IDM_FONT
+        MENUITEM "&About...",                IDM_ABOUT
+    END
+
+    POPUP "&Mode"
+    BEGIN
+        MENUITEM "Native"                    IDM_NATIVEMODE
+        MENUITEM "Full/Half"                 IDM_FULLHALF
+        MENUITEM "Roman"                     IDM_ROMAN
+        MENUITEM "CharCode"                  IDM_CHARCODE
+        MENUITEM "Hanja"                     IDM_HANJA
+        MENUITEM "SoftKeyboard"              IDM_SOFTKBD
+        MENUITEM "EUDC"                      IDM_EUDC
+        MENUITEM "Symbol"                    IDM_SYMBOL
+    END
+
+    POPUP "&Convert"
+    BEGIN
+        MENUITEM "&Open",                    IDM_OPENSTATUS
+        MENUITEM SEPARATOR
+        MENUITEM "&Convert",                 IDM_CONVERT
+        MENUITEM "&Revert",                  IDM_REVERT
+        MENUITEM "C&ancel",                  IDM_CANCEL
+        MENUITEM "C&omplete",                IDM_COMPLETE
+        MENUITEM SEPARATOR
+        MENUITEM "Next Target Clause",       IDM_NEXTCLAUSE
+        MENUITEM "Prev Target Clause",       IDM_PREVCLAUSE
+  
+    END
+
+    POPUP "C&andidate"
+    BEGIN
+        MENUITEM "&ShowCand",                IDM_SHOWCAND
+        MENUITEM SEPARATOR
+        MENUITEM "O&penCand",                IDM_OPENCAND
+        MENUITEM "C&loseCand",               IDM_CLOSECAND
+        MENUITEM SEPARATOR
+        MENUITEM "NextCand",                 IDM_NEXTCAND
+        MENUITEM "PrevCand",                 IDM_PREVCAND
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ABOUTBOX DIALOG DISCARDABLE  19, 17, 184, 65
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "IMEAPPS Sample"
+FONT 10, "System"
+BEGIN
+    CTEXT           "IME Apps Sample",-1,0,4,184,8
+    CTEXT           "Version 0.0",-1,0,17,184,8
+    CTEXT           "Copyright (c) 1995 - 2000 Microsoft Corporation",-1,0,32,184,8
+    DEFPUSHBUTTON   "OK",IDOK,73,47,38,14,WS_GROUP
+END
+

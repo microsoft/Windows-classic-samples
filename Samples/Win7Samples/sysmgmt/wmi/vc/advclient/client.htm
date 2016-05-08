@@ -1,0 +1,1137 @@
+<!- Copyright (c)  Microsoft Corporation, All Rights Reserved ->
+<!doctype html public "-//W3C//DTD HTML 4.0 Draft//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns:oa="urn:schemas-microsoft-com:office:activation"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="client_files/filelist.xml">
+<title>WMI SDK Sample - Client</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Michael Maston</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Zina Pozen</o:LastAuthor>
+  <o:Revision>66</o:Revision>
+  <o:TotalTime>174</o:TotalTime>
+  <o:Created>1999-01-25T00:44:00Z</o:Created>
+  <o:LastSaved>2002-05-03T21:11:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1427</o:Words>
+  <o:Characters>8135</o:Characters>
+  <o:Company>Microsoft</o:Company>
+  <o:Lines>67</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>9543</o:CharactersWithSpaces>
+  <o:Version>10.3501</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-alt:"?? ??";
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:994183607;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-208100182 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	font-family:"Times New Roman";}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1009480874;
+	mso-list-type:hybrid;
+	mso-list-template-ids:33181096 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l1:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+<meta name=MS-HAID content=VJsamples>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="4098"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width=160 style='width:120.0pt;background:#330099;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:white'>&nbsp;<nobr><b>Windows Management Instrumentation SDK Sample</b></span>
+  <o:p></o:p></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText><br>
+<strong><span style='font-size:13.5pt;font-family:Verdana;mso-bidi-font-family:
+"Courier New"'>Advanced Client</span></strong><br>
+<br>
+<span style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";
+mso-bidi-font-family:"Times New Roman"'>The Advanced Client sample demonstrates
+various ways to use WMI features.<span style='mso-spacerun:yes'>  </span>Where
+multiple ways exist to do the same things, an effort was made to show each way.
+Use the following table of user interface support functions to find the
+technique you want. The implementation of each 'button' is in a separate .CPP
+file to make it easier to deal with. Common helper routines are in the <span
+class=SpellE>AdvClientDlg.cpp</span> file itself. Class-wise, all WMI code is
+in the main dialog.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>This sample is a
+dialog-based application created by AppWizard and uses the Microsoft Foundation
+Classes (MFC) for simplicity. The code is designed to be easy to follow and
+doesn't necessarily show a good practice for building 'real' WMI client apps.
+Concentrate on the steps and architect your application in a way that makes
+sense for you.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Building the Advanced Client Application<o:p></o:p></span></p>
+
+<p class=MsoPlainText>&nbsp;</p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>The application can be
+built from the command line using NMAKE, or it can be built using Microsoft
+Visual C++.<span yes>&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>From the command line
+in the sample installation directory: <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in'><b><span style='font-family:
+Verdana'>NMAKE /f &quot;<span class=SpellE>Makefile</span>&quot;<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>From Microsoft Visual
+C++: <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText l0 level1 lfo2 list .5in><span style='font-family:Verdana'>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Select File + Open Workspace<o:p></o:p></span></p>
+
+<p class=MsoPlainText l0 level1 lfo2 list .5in><span style='font-family:Verdana'>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Select the <span class=SpellE>AdvClient.dsp</span> file<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><strong><span style='font-family:Verdana;font-weight:normal'>Summary
+of User Interface Functions</span></strong><strong><span style='mso-fareast-font-family:
+"MS Mincho";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-family:Verdana'>Button<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 2.25pt;
+  border-left:none;mso-border-left-alt:solid windowtext 2.25pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-family:Verdana'>File<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 2.25pt;
+  border-left:none;mso-border-left-alt:solid windowtext 2.25pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-family:Verdana'>Action<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 2.25pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho"'>Connect</span><span style='font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 2.25pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnConnect.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 2.25pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Connects to
+  namespace.</span><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Exit</span><span
+  style='font-family:Verdana;mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>WBEMSampDlg.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Exits the
+  application.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Enum</span></span><span
+  style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+  "Times New Roman"'> Disks<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnEnumDisks.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Lists the logical
+  disks.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Get C: Disk Details<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnDiskDetails.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Lists C: disk
+  properties.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Enum</span></span><span
+  style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+  "Times New Roman"'> Services<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnEnumSvcs.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Lists the services.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Enum</span></span><span
+  style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+  "Times New Roman"'> Services <span class=SpellE>Async</span><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnAsync.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>Lists the services
+  using the asynchronous functions.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Add Equipment<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnAddEquipment.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho"'>Adds to a list of office equipment.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Register Perm<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnPerm.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Registers and <span
+  class=SpellE>unregisters</span> local-server event consumer PermConsumer.exe.</span><span
+  style='font-family:Verdana;mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Register Temp<span
+  style='mso-tab-count:2'>          </span><span style='mso-tab-count:3'>                             </span><span
+  style='mso-tab-count:1'>          </span><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnTemp.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>Registers and <span
+  class=SpellE>unregisters</span> the in-proc event consumer <span
+  class=SpellE>CEventSink</span> in <span class=SpellE>OnTemp</span>.*.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10;mso-yfti-lastrow:yes'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>About Disk Properties<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana;mso-fareast-font-family:"MS Mincho"'>OnDiskPropsDescriptions.cpp</span></span><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana;
+  mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+  "MS Mincho";mso-bidi-font-family:"Times New Roman"'>lists the description of
+  the logical disk class, as well as descriptions of all its properties. Note
+  that this information is<span style='mso-tab-count:1'>  </span>localizable
+  and will be displayed in the language that corresponds to the<span
+  style='mso-tab-count:1'> </span>current user locale on the client machine, as
+  long as the server has corresponding localized resources.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText><o:p>&nbsp;</o:p></p>
+
+<p class=MsoPlainText><o:p>&nbsp;</o:p></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Common WMI Client Tasks Demonstrated by the Sample
+Functions<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Connecting to a
+namespace<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementations:<span
+style='mso-spacerun:yes'>  </span><o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnConnect.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> shows how to connect to a namespace.<span
+style='mso-spacerun:yes'>  </span>This will enable the rest of the buttons
+because they all require the client to be connected.<span
+style='mso-spacerun:yes'>  </span>\root\cimv2 is the most commonly used namespace
+since the Win32 schema classes are in it. \root\security is also built-in but
+it only contains security related classes. In this example, the '.' (period)
+can be replaced with a remote machine's name to connect remotely. Dot is used
+to refer to the local machine.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnAddEquipment.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> uses <span class=SpellE>OpenNamespace</span>() to connect
+to root\cimv2\office because its UNDER root\cimv2 and relative navigation is
+possible.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Enumerating classes<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnEnumDisks.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> creates an enumerator for all instances of disks then walks
+the result list using the 'classic' OLE enumerator scheme.<span
+style='mso-spacerun:yes'>  </span>Properties are extracted for display.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Enumerating
+properties<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnDiskDetails.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> enumerates the properties for your C: drive. It uses <span
+class=SpellE>GetNames</span>() to get a SAFEARRAY of property names which is
+then using to Get() property values directly.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> Retrieving (amended) qualifiers<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'>:<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnDiskPropsDescriptions.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> lists class description and property descriptions for
+Win32_LogicalDisk class. Note that description qualifiers can be quite lengthy and
+are normally not retrieved, unless WBEM_FLAG_USE_AMENDED_QUALIFIERS flag is
+specified in <span class=SpellE>IWbemServices::GetObject</span>(). <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Object qualifiers are
+retrieved by <span class=SpellE>IWbemClassObject::GetQualifierSet</span>().
+Property qualifiers are retrieved by <span class=SpellE>WbemClassObject::GetPropertyQualifierSet</span>()
+- you need to supply property name as a parameter.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Get() method on the <span
+class=SpellE>IWbemQualifierSet</span> retrieves specific qualifier values - in
+this case, descriptions.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Amended qualifiers (such as
+descriptions) are localizable and will be displayed in the language that
+corresponds to the current user <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>locale on the client
+machine, as long as the server is able to provide appropriate localized
+resources.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:<span
+style='mso-spacerun:yes'>  </span></span></b><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Using
+WQL for queries<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnEnumSvcs.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> uses <span class=SpellE>ExecQuery</span>() to issue a WQL
+query to find all services running on the machine. It then uses the <span
+class=SpellE>BeginEnumeration</span>()/Next()/<span class=SpellE>EndEnumeration</span>()
+scheme to walk through the properties for each service-- looking for the
+properties of interest. This is a contrived example for demo purposes only. This
+scheme is normally used for displaying ALL properties rather than looking for
+particular ones.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task: </span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'> </span>Using WQL for
+asynchronous queries<o:p></o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></b></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnAsync.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> does exactly the same thing as <span class=SpellE>OnEnumSvcs.cpp</span>
+except it does it asynchronously. <span class=SpellE>ExecQueryAsync</span>() is
+passed a <span class=SpellE>CAsyncQuerySink</span> COM object which implements
+an <span class=SpellE>IWbemObjectSink</span>. This object has it's Indicate()
+and <span class=SpellE>SetStatus</span>() called for the result of the query
+instead of creating an enumerator.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Creating
+user-defined classes<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnAddEquipment.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> shows how to create classes and instances. After prompting
+for items in your office, the <span class=SpellE>OfficeEquipment</span> class
+is created if it already doesn't exist then a new instance of the class is
+created for the item you typed into the dialog box. Once the first equipment is
+added, the special namespace will exist and the &quot;Register&quot; buttons
+will enable since they get events from this namespace. The namespace must exist
+before you can register for its events.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Creating instances<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementations:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnAddEquipment.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> creates instances of the user-defined classes.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Creating new
+namespaces<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnAddEquipment.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> creates a namespace of root\cimv2\office to store the <span
+class=SpellE>OfficeEquipment</span> class and instances.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Temporary Event
+Consumers<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnTemp.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> registers and <span class=SpellE>unregisters</span>
+temporary events. The sample demonstrates semi-synchronous event polling
+technique. It polls for instance creation events of &quot;<span class=SpellE>OfficeEquipment</span>&quot;.
+This is the class defined/used by <span class=SpellE>OnAddEquipment.cpp</span>.
+Event traces are displayed in the lower <span class=SpellE>listbox</span>.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Permanent Event
+Consumers<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span class=SpellE><span style='font-family:Verdana;
+mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>OnPerm.cpp</span></span><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'> registers and <span class=SpellE>unregisters</span>
+Permanent events. It consumes the same events as <span class=SpellE>OnTemp.cpp</span>
+so that you can compare and contrast. The events are also handled by the SDK <span
+class=SpellE>EventConsumer</span> sample. Events are displayed in this separate
+application. The registry entries required for CIMOM to spawn a local server,
+which displays to the user's desktop, are documented in the <span class=SpellE>RegisterServer</span>()
+routine of that application.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana'>NOTE:</span></b><span
+style='font-family:Verdana'><span style='mso-spacerun:yes'>  </span>In order
+for the “Register Perm” function to work, the <span class=SpellE>SampleViewer</span>
+MOF in the SDK <span class=SpellE>EventConsumer</span> sample directory needs
+to be compiled into the CIMOM repository.<span style='mso-spacerun:yes'> 
+</span>From the command line type the following:<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='text-indent:.5in'><b><span style='font-family:
+Verdana'>MOFCOMP <span class=SpellE>SampleViewer.mof</span></span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>This registers the
+Client sample as a consumer of the events generated by adding instances of <span
+class=SpellE>OfficeEquipment</span> within the Advanced Client sample.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Task:</span></b><span
+style='font-family:Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:
+"Times New Roman"'><span style='mso-spacerun:yes'>  </span>Dealing With
+Security<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Implementation:<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>You must call
+IClientSecurity::SetBlanket() for any <span class=SpellE>IWbemServices</span>
+or <span class=SpellE>IEnumWbemClassObject</span>. See <span class=SpellE>CAdvClientDlg::SetBlanket</span>()
+in <span class=SpellE>OnConnect.cpp</span> for this technique.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><strong><span style='font-size:12.0pt;mso-bidi-font-size:
+10.0pt;font-family:Verdana;mso-bidi-font-family:"Courier New";font-weight:normal'>User
+Interface Notes</span></strong><span style='font-size:12.0pt;mso-bidi-font-size:
+10.0pt;font-family:"Times New Roman";mso-fareast-font-family:"MS Mincho"'> <o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l1 level1 lfo2;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:Verdana;mso-fareast-font-family:Verdana;mso-bidi-font-family:
+Verdana'><span style='mso-list:Ignore'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>You can connect to remote
+machines by changing the namespace before connecting.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l1 level1 lfo2;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:Verdana;mso-fareast-font-family:Verdana;mso-bidi-font-family:
+Verdana'><span style='mso-list:Ignore'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>The results of actions show
+up in the upper <span class=SpellE>listbox</span>. Event related messages go in
+the lower <span class=SpellE>listbox</span>. The Permanent Event Consumer is a
+separate application that will start as needed.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l1 level1 lfo2;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:Verdana;mso-fareast-font-family:Verdana;mso-bidi-font-family:
+Verdana'><span style='mso-list:Ignore'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>On Windows 95, no services
+will list because win95 doesn't have services. This is normal.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><strong><span style='font-family:
+Verdana;font-weight:normal'>General Notes</span></strong><strong><span
+style='font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><strong><span style='font-family:
+Verdana;font-weight:normal'><o:p>&nbsp;</o:p></span></strong></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'>Things
+to remember when you're building your own WMI client application:</span><span
+style='mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>If you want your client to
+run on NT and non-DCOM versions of Windows 95, manually load the ole32.dll and
+see if <span class=SpellE>CoInitializeSecurity</span>() exists. This routine
+won’t exist on Windows 95 installations that don’t have DCOM installed
+separately. If this routine doesn't exist, the asynchronous routines in this
+sample won’t work because of mismatched security level problems. The
+synchronous techniques will still work.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>If you don’t care about non-DCOM
+versions of Windows 95, you can define<span style='mso-spacerun:yes'> 
+</span>_WIN32_DCOM so that <span class=SpellE>CoInitializeSecurity</span>() is
+available for implicit linking. Don't use _WIN32_WINNT to get this prototype
+since it won't compile under the Windows 95/98 operating systems.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>In any case, the <span
+class=SpellE>CoInitializeSecurity</span>() call (in <span class=SpellE>InitInstance</span>())
+is required to work around a security problem when WMI trying to call a Sink
+object but won't identify itself. The <span class=SpellE>CoInitializeSecurity</span>()
+call turns off the authentication requirement. <o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>WMI interfaces are defined
+in <span class=SpellE>wbemcli.h</span> and <span class=SpellE>wbemprov.h</span>
+found in the <span class=SpellE>wbem</span>\include directory.<span
+style='mso-spacerun:yes'>  </span>You may #include both these files by
+including just <span class=SpellE>wbemidl.h</span> located in the same
+directory.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>WMI interface <span
+class=SpellE>CLSIDs</span> are defined in <span class=SpellE>wbemuuid.lib</span>.
+If you get unresolved externals in interfaces and <span class=SpellE>CLSIDs</span>,
+this is what is missing. <o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>You'll need to link with
+oleaut32.lib and ole32.lib to get the needed COM support.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho";mso-bidi-font-family:"Times New Roman"'>In the <span class=SpellE>Link|Output</span>
+settings, specify '<span class=SpellE>wWinMainCRTStartup</span>' as the entry
+point. This is per the Unicode programming instructions.<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='tab-stops:list .5in'><span style='font-family:
+Verdana;mso-fareast-font-family:"MS Mincho";mso-bidi-font-family:"Times New Roman"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho"'>If you're using the <span class=SpellE>makefiles</span>, don't
+forget to set the VC vars. In VC++ 5.0, it is VCVARS32.BAT.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho"'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.25in;text-indent:-.25in;mso-list:
+l0 level1 lfo4;tab-stops:list .25in .5in'><![if !supportLists]><span
+style='font-family:"Times New Roman"'><span style='mso-list:Ignore'>9.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='font-family:Verdana;mso-fareast-font-family:
+"MS Mincho"'>If you are running Microsoft Visual Studio .NET, you should modify
+the sample’s MAKEFILE (and/or project file) to reference MFC70 libraries
+instead of MFC42 libraries which shipped with earlier versions of Visual C++.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><br>
+<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]></p>
+
+</div>
+
+</body>
+
+</html>

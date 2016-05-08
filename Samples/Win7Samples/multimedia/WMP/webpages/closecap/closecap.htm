@@ -1,0 +1,77 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<html>
+<head>
+	<title>Closed Captioning Example</title>
+</head>
+
+<body>
+	<OBJECT ID="Player1" CLASSID="clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6"
+			height=200 width=200>
+		<param name="UIMode" value="none">
+		<param name="autoStart" value="True">
+		
+	</OBJECT>
+
+	<table height=100 width=200 border=3 bordercolor=blue>
+		<tr align=center>
+			<td bgcolor=white>
+			<font color=blue size=2>Captioning</font></td>
+		</tr>
+		<tr height=75>
+			<td bgcolor="blue" ><div id=CapText ></div></td>
+		</tr>
+	</table>
+<BR>
+	<INPUT TYPE="BUTTON" NAME="BtnPlay" VALUE="Play" OnClick="StartMeUp()">
+	<INPUT TYPE="BUTTON" NAME="BtnStop" VALUE="Stop" OnClick="ShutMeDown()">
+
+<SCRIPT>
+<!--
+
+function StartMeUp ()
+{
+	var URL;
+
+	// Set the closed captioning display DIV.
+	Player1.closedCaption.CaptioningID = "CapText"
+
+	//////////////////////////////////////////////////////////
+	//
+	//  The sample media file is on the local machine,
+ 	//  which changes how this function must use SAMI.
+        //  When using media on a Web server, use the following
+	//  syntax:
+        //   
+  	//  Player1.URL = "http://www.proseware.com/seattle.wmv;
+ 	//  Player1.closedCaption.SAMIFileName = "ccsample.smi";
+	//
+	//  This syntax assumes that ccsample.smi is located in the
+	//  same folder on the Web server as seattle.wmv.
+	//
+	///////////////////////////////////////////////////////////  
+
+	// Retrieve the media file.
+	Player1.currentMedia = Player1.mediaCollection.getByName("seattle").item(0);
+
+	// Get the URL of the media file.
+	URL = Player1.currentMedia.sourceURL;
+
+	// Remove the file name from the URL.	
+	URL = URL.slice(0, URL.lastIndexOf("\\"));
+
+	// Append the SAMI file name.
+	Player1.closedCaption.SAMIFileName = URL + "\\ccsample.smi"
+
+	Player1.controls.play();
+}
+
+function ShutMeDown ()
+{
+    Player1.controls.stop();
+}
+
+-->
+</SCRIPT>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+LANGUAGE 0x7, SUBLANG_NEUTRAL
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SRGRAMMAR
+//
+
+IDR_SOL_CFG             SRGRAMMAR DISCARDABLE   "deu_cardinals.cfg"

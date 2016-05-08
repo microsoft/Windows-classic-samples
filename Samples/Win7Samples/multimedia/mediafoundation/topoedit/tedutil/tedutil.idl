@@ -1,0 +1,372 @@
+//*@@@+++@@@@******************************************************************
+//
+// Microsoft Windows Media Foundation
+// Copyright (C) Microsoft Corporation. All rights reserved.
+//
+//*@@@---@@@@******************************************************************
+//
+import "unknwn.idl";
+import "objidl.idl";
+import "mfidl.idl";
+
+typedef enum TED_ATTRIBUTE_CATEGORY
+{
+    TED_ATTRIBUTE_CATEGORY_NONE = 0,
+    TED_ATTRIBUTE_CATEGORY_TOPONODE = 1,
+    TED_ATTRIBUTE_CATEGORY_MEDIATYPE = 2,
+    TED_ATTRIBUTE_CATEGORY_STREAMDESCRIPTOR = 3,
+    TED_ATTRIBUTE_CATEGORY_PRESENTATIONDESCRIPTOR = 4,
+    TED_ATTRIBUTE_CATEGORY_OTA = 5,
+} TED_ATTRIBUTE_CATEGORY;
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(72D92BD9-CA59-4bc7-9F40-2E6064826098),
+    local
+]
+/// <summary>
+///     Interface for obtaining window handles when needed by the EVR
+/// </summary>
+interface ITedVideoWindowHandler : IUnknown
+{
+    HRESULT GetVideoWindow([out] LONG_PTR* pHwnd);
+    HRESULT ReleaseVideoWindow([in] LONG_PTR hwnd);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(C2C3A379-3D36-4566-AC1B-A562466C021F),
+    local
+]
+/// <summary>
+///     Interface for notifying the application of events in the topology editor
+/// </summary>
+interface ITedTopoEventHandler : IUnknown
+{
+    HRESULT NotifyAddedNode(int nNodeID);
+    HRESULT NotifyRemovedNode(int nNodeID);
+    HRESULT NotifyConnection(int nUpNodeID, int nDownNodeID);
+    HRESULT NotifyDisconnection(int nUpNodeID, int nDownNodeID);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(C311E957-D926-4dd8-BCDE-6F31B4DDB1AD),
+    local
+]
+/// <summary>
+///     Represents information concerning properties and attributes of topology objects
+/// </summary>
+interface ITedPropertyInfo : IUnknown
+{
+    HRESULT GetPropertyInfoName([out, annotation("__deref_out")] LPWSTR* szName, [out, annotation("__out")] TED_ATTRIBUTE_CATEGORY* pCategory);
+    HRESULT GetPropertyCount([out] DWORD* pdwCount);
+    HRESULT GetProperty([in] DWORD dwIndex, [out, annotation("__deref_out")] LPWSTR* szName, [out, annotation("__deref_out")] LPWSTR* szValue);
+    HRESULT GetPropertyType([in] DWORD dwIndex, [out] VARTYPE* pVT);
+    HRESULT IsWriteable();
+    
+    HRESULT SetProperty([in] DWORD dwIndex, [in] LPCWSTR szName, [in] VARTYPE vt, [in] LPCWSTR szValue);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(D3903C3E-D5DF-43c1-A099-ABF74A536770),
+    local
+]
+/// <summary>
+///     Handles displaying of properties
+/// </summary>
+interface ITedPropertyController : IUnknown
+{
+    HRESULT ClearProperties();
+    HRESULT AddPropertyInfo([in] ITedPropertyInfo* pInfo);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(4C086376-9583-4906-A06D-AA57042407DA),
+    dual,
+    helpstring("TED Topo View Interface"),
+    local
+]
+/// <summary>
+///     View for displaying an MF topology
+/// </summary>
+interface ITedTopoView : IDispatch
+{
+    /// <summary>
+    ///     Initialize the topology viewer
+    /// </summary>
+    /// <param name="pVideoWindowHandler">
+    ///     The video window provider.  May be NULL if a video playback from the viewed topology is not required.
+    /// </param>
+    /// <param name="pPropertyController">
+    ///     The property controller.  May be NULL if viewing and editing properties is not required.
+    /// </param>
+    HRESULT Init([in] ITedVideoWindowHandler* pVideoWindowHandler, [in] ITedPropertyController* pPropertyController, [in] ITedTopoEventHandler* pEventHandler);
+    
+    /// <summary>
+    ///     Create a window for displaying the topology
+    /// </summary>
+    /// <param name="szTitle">
+    ///     Title of the window.  See CreateWindow in the Platform SDK
+    /// </param>
+    /// <param name="dwStyle">
+    ///     Style flags of the window.  See CreateWindow in the Platform SDK
+    /// </param>
+    /// </param name="x">
+    ///     X position of the new window
+    /// </param>
+    /// </param name="y">
+    ///     Y position of the new window
+    /// </param>
+    /// </param name="width">
+    ///     Width of the new window
+    /// </param>
+    /// </param name="height">
+    ///     Height of the new window
+    /// </param>
+    /// <param name="hWndParent">
+    ///     Specifies the parent window, or NULL for a top-level window
+    /// </param>
+    /// <param name="phWnd">
+    ///     Pointer to an HWND variable that will receive the HWND of the created client window
+    /// </param>
+    HRESULT CreateTopoWindow([in] LPCWSTR szTitle, [in] DWORD dwStyle, [in] DWORD x, [in] DWORD y, [in] DWORD width, [in] DWORD height, [in] LONG_PTR hWndParent, [out] LONG_PTR* phWnd);
+
+    /// <summary>
+    ///     Close the topology view window created with CreateTopoWindow
+    /// </summary>
+    HRESULT CloseTopoWindow();
+
+    /// <summary>
+    ///     Set whether or not the view should be editable.  Editable views allow the user to move around nodes,
+    ///     create connections, and remove connections.
+    /// </summary>
+    /// <param name="fEditable">
+    ///     TRUE if the view should be editable, FALSE if it should be static.
+    /// </param>
+    HRESULT SetEditable([in] BOOL fEditable);
+    
+    /// <summary>
+    ///     Specifies whether or not the topology has changed since the last time it was saved.
+    /// </summary>
+    /// <param name="pfIsSaved">
+    ///     TRUE if the topology has been saved and is unchanged since; FALSE if the topology has been edited and
+    ///     the changes have not been saved.
+    /// </param>
+    HRESULT IsSaved([out] BOOL* pfIsSaved);
+
+    /// <summary>
+    ///     Clears the old topology and sets up a new, blank topology to work with.
+    /// </summary>
+    HRESULT NewTopology();
+
+    /// <summary>
+    ///     Shows the given topology on the view.
+    /// </summary>
+    /// <param name="pTopology">
+    ///     Pointer to a media foundation topology to show on the view.
+    /// </param>
+    /// <param name="wszSourceURL">
+    ///     URL of the input file for the media source.  May be NULL, in which case if the topology is saved
+    ///     it will not be able to be properly loaded.
+    /// </param>
+    HRESULT ShowTopology([in] IMFTopology* pTopology, [in] LPCWSTR wszSourceURL);
+
+    /// <summary>
+    ///     Inserts new nodes from the input topology into the view's topology and draws the resultant topology
+    ///     on the screen.  Will fail if the sources in the topologies are different.
+    /// </summary>
+    /// <param name="pTopology">
+    ///     Pointer to the media foundation topology to merge.
+    /// </param>
+    HRESULT MergeTopology([in] IMFTopology* pTopology);
+
+    /// <summary>
+    ///     Load a topology from an XML file and draw it on the view.
+    /// </summary>
+    /// <param name="wszFileName">
+    ///     XML file to load.
+    /// </param>
+    HRESULT LoadTopology([in] LPCWSTR wszFilename);
+
+    /// <summary>
+    ///    Save the topology on the view to an XML file
+    /// </summary>
+    /// <param name="wszFileName">
+    ///     XML file to save to.
+    /// </param>
+    HRESULT SaveTopology([in] LPCWSTR wszFilename);
+
+    /// <summary>
+    ///     Acquire the internal topology on the view
+    /// </summary>
+    /// <param name="ppTopology">
+    ///     Pointer to an IMFTopology pointer, receives a clone of the internal topology
+    /// </param>
+    /// <param name="pfIsProtected">
+    ///     Pointer to a boolean value, receives TRUE if the topology has a protected source and thus needs PMP
+    ///     playback, or FALSE if the source is clear and can be played in a normal session.
+    /// </param>
+    HRESULT GetTopology([out] IMFTopology** ppTopology, [out] BOOL* pfIsProtected);
+
+
+    /// <summary>
+    ///     Add a source to the view's topology in an open location
+    /// </summary>
+    /// <param name="wszSourceURL">
+    ///     URL of the source file to create the media source
+    /// </param>
+    HRESULT AddSource([in] LPCWSTR wszSourceURL);
+
+    /// <summary>
+    ///     Add a SAR (audio renderer) to the view's topology in an open location
+    /// </summary>
+    HRESULT AddSAR();
+
+    /// <summary>
+    ///     Add an EVR (video renderer) to the view's topology in an open location.  If this EVR will be used
+    ///     for video playback, a valid ITedVideoWindowHandler must have been supplied upon creation of the
+    ///     view (see TEDCreateTopoViewer)
+    /// </summary>
+    HRESULT AddEVR();
+
+    /// <summary>
+    ///     Add a transform to the view's topology in an open location.  
+    /// </summary>
+    /// <param name="gidTransformID">
+    ///     CLSID of the transform.  TED must be able to instantiate a transform with CoCreateInstance using this CLSID.
+    /// </param>
+    /// <param name="wszTransformName">
+    ///     A friendly name for the transform that will be displayed on the node
+    /// </param>
+    HRESULT AddTransform([in] GUID gidTransformID, [in] LPCWSTR wszTransformName);
+
+    /// <summary>
+    ///     Add a transform to the view's topology in an open location.  
+    /// </summary>
+    /// <param name="pActivate">
+    ///     Activate from which the transform can be created.
+    /// </param>
+    HRESULT AddTransformActivate([in] IMFActivate* pTransformActivate);
+
+    /// <summary>
+    ///     Add a tee node with a default of one output to the view's topology in an open location
+    /// </summary>
+    HRESULT AddTee();
+
+    /// <summary>
+    ///     Add a sink from an IMFMediaSink object
+    /// </summary>
+    /// <param name="pSink">
+    ///     Pointer to the sink to add.
+    /// </param>
+    HRESULT AddSink([in] IMFMediaSink* pSink);
+
+    /// <summary>
+    ///     Add a custom sink (not a SAR or EVR) to the view's topology in an open location
+    /// </summary>
+    /// <param name="gidSinkID">
+    ///     CLSID of the sink to add.  TED must be able to instantiate the sink with CoCreateInstance using this CLSID.
+    /// </param>
+    HRESULT AddCustomSink([in] GUID gidSinkID);
+
+    /// <summary>
+    ///     Add a capture source from an IMFMediaSource object
+    /// </summary>
+    /// <param name="pActivate">
+    ///     Pointer to the sink to add
+    /// </param>
+    HRESULT AddCaptureSource([in] IMFMediaSource* pSource);
+
+    /// <summary>
+    ///     Delete the topology node currently selected by the user
+    /// </summary>
+    HRESULT DeleteSelectedNode();
+
+    /// <summary>
+    ///     Spy calls on a selected transform or stream sink node.  If a source is selected, nothing will be done.
+    ///     Output will be directed to a text file.
+    /// </summary>
+    HRESULT SpySelectedNode();
+};
+
+/// <summary>
+///     Creates a topology viewer.
+/// </summary>
+/// <param name="pVideoWindowHandler">
+///     Specifies a pointer to an ITedVideoWindowHandler interface.  May be NULL.  Required if the view's
+///     topology will be used for video playback.
+/// </param>
+/// <param name="pPropertyController">
+///     Specifies a pointer to an ITedPropertyController interface.  May be NULL.  Called by the view
+///     when properties for a node or connection should be shown to the user.
+/// </param>
+/// <param name="ppTopoViewer">
+///     Specifies a pointer to a variable where the topo viewer object will be stored
+/// </param>
+cpp_quote( "STDAPI TEDCreateTopoViewer(" )
+cpp_quote( "    ITedVideoWindowHandler* pVideoWindowHandler," )
+cpp_quote( "    ITedPropertyController* pPropertyController," )
+cpp_quote( "    ITedTopoEventHandler* pEventHandler," )
+cpp_quote( "    __out ITedTopoView** ppTopoViewer" )
+cpp_quote( "    );" )
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(AAEB0E96-0214-42c4-80F1-3BAD06F54F58),
+    local
+]
+interface ITedDataSaver : IDispatch
+{
+    HRESULT Init(LPCWSTR strDocName);
+    HRESULT BeginSaveObject(LPCWSTR strName);
+    HRESULT BeginSaveChildObjects();
+    HRESULT EndSaveChildObjects();
+    HRESULT SaveData(LPCWSTR strName, LPCWSTR strValue);
+    HRESULT SaveToFile(LPCWSTR strFileName);
+};
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid(892FADFF-90BB-4189-9910-3FBF58DAA1E8),
+    local
+]
+interface ITedDataLoader : IDispatch
+{
+    HRESULT HasNextObject([out, annotation("__out")] BOOL* pfHasNextObject);
+    HRESULT GetNextObject([out, annotation("__deref_out")] LPWSTR* strName);
+    HRESULT HasChildObjects([out, annotation("__out")] BOOL* pfHasChildObjects);
+    HRESULT BeginLoadChildObjects();
+    HRESULT EndLoadChildObjects();
+    HRESULT LoadData(LPCWSTR strName, [out, annotation("__deref_out")] LPWSTR* strValue, long nIndex);
+    HRESULT LoadFromFile(LPCWSTR strFileName, LPCWSTR strDocName);
+};
+
+[ 
+    uuid(64D3D369-B1E9-4aff-B1A4-8D8518E14A97),
+    helpstring("TedUtil Type Library"),
+    helpstringdll("TEDUTIL"),
+    version(1.0)
+] 
+library TedUtil {
+  [ uuid(7B0BB325-CC66-459e-B393-5D42937AAAA2), helpstring("TED Topo Viewer Class") ] coclass CTopoViewerController { [default] interface ITedTopoView; }
+  [ uuid(F517B713-86B1-4bc3-BF16-F09119F6725A), helpstring("TED XML Data Saver Class") ] coclass CXMLDataSaver  { [default] interface ITedDataSaver; }
+  [ uuid(01917079-8954-49a8-B9B8-3318728ADA25), helpstring("TED XML Data Loader Class") ] coclass CXMLDataLoader { [default] interface ITedDataLoader; }
+  [ uuid(3A59CBE9-E5D7-4769-9D3A-4EE0F327A3C3), helpstring("TED Multi-input Test Sink Class") ] coclass CTedTestSink { [default] interface IMFMediaSInk; }
+}

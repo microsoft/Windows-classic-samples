@@ -1,0 +1,11 @@
+AUTO-GUID
+[Specify your app-signing Private Key location here]
+
+MODULELIST
+            REQ HASH OfflinePublishing.exe
+            REQ NOHASH %SYSTEMROOT%\\system32\\msdrm.dll
+
+POLICYLIST
+            INCLUSION
+		[Specify your app-signing Public Key location]
+            EXCLUSION

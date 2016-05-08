@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<!DOCTYPE root [<!ENTITY date SYSTEM "local://current_date">]>
+<root>&date;</root>
+

@@ -1,0 +1,27 @@
+HKCR
+{
+	tedutil.TedTopoViewerController.1 = s 'TED Topology Viewer Class'
+	{
+		CLSID = s '{7B0BB325-CC66-459e-B393-5D42937AAAA2}'
+	}
+	tedutil.TedTopoViewerController = s 'TED Topology Viewer Class'
+	{
+		CLSID = s '{7B0BB325-CC66-459e-B393-5D42937AAAA2}'
+		CurVer = s 'tedutil.TedTopoViewerController.1'
+	}	   
+	NoRemove CLSID
+	{
+		ForceRemove {7B0BB325-CC66-459e-B393-5D42937AAAA2} = s 'TED Topo View'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+                        val AppID = s '%APPID%'
+                        'TypeLib' = s '{64D3D369-B1E9-4aff-B1A4-8D8518E14A97}'
+			'Version' = s '1.0'
+		}
+	}
+
+}

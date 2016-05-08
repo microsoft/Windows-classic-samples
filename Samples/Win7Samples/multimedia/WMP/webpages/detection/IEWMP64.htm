@@ -1,0 +1,52 @@
+<!--     Copyright (c) Microsoft Corporation.  All rights reserved.     -->
+
+<!------------------------------------------------------------------------>
+<!--                           IEWMP64.htm                              -->
+<!--                                                                    -->
+<!-- Purpose:  This web page is part of the Windows Media Player sample -->
+<!--   that detects the version of WMP installed.  This demonstrates    -->
+<!--   the use of the v6.4 player within the Internet Explorer browser. -->
+<!------------------------------------------------------------------------>
+<html>
+<head>
+<title>Windows Media Player Detection Sample</title>
+<link rel="stylesheet" href="basic.css" type="text/css">
+<script language="JavaScript" src="PlayerDetection.js"></script>
+<body language="JavaScript" topmargin=0 leftmargin=0>
+<img border=0 src=wmt-title.jpg width="250" height="60">
+<table>
+  <tr><th>Windows Media Player Detection Sample</th><tr>
+  <tr><td>
+      <OBJECT ID="MediaPlayer" WIDTH=200 HEIGHT=200
+            CLASSID="CLSID:22D6f312-B0F6-11D0-94AB-0080C74C7E95"
+            STANDBY="Loading Windows Media Player components..."
+            TYPE="application/x-oleobject" VIEWASTEXT>
+            <PARAM NAME="FileName" VALUE="http://go.microsoft.com/fwlink/?LinkId=10710">
+            <PARAM NAME="ShowStatusBar" VALUE="True">
+            <PARAM NAME="AutoStart" VALUE="True">
+            <!-- Params below are equivalent to v7+ uiMode="mini" -->
+            <PARAM NAME="ShowControls" VALUE="True">
+            <PARAM NAME="ShowTracker" VALUE="False">
+            <PARAM NAME="EnableTracker" VALUE="False">
+            <PARAM NAME="ShowPositionControls" VALUE="False">
+            <PARAM NAME="EnablePositionControls" VALUE="False">
+      </OBJECT>
+  </td></tr>
+  <tr><td>
+       <form id=form name=form>
+         <INPUT id="Toggle" type="button" value="Toggle Mode" name="Toggle" onClick="ToggleMode()"><br><br>
+         <TEXTAREA class="StatusBar" NAME="StatusText" COLS=50 ROWS=3 WRAP="SOFT"></TEXTAREA> 
+       </form>
+  </td></tr>
+  <script language="javascript">WMPVer="6.4";AddDownloadLink(GetPlayerMajorVer());</script>
+</table>
+</body>
+<!-- Handler for PlayStateChange event -->
+<SCRIPT FOR="MediaPlayer" EVENT="PlayStateChange(lOldState, lNewState)" LANGUAGE="javascript">
+        document.form.StatusText.value=GetPlayerState(lNewState);
+</SCRIPT>
+
+<SCRIPT language="javascript">
+    fHasWMP64=true;
+</SCRIPT>
+</html>

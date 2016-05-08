@@ -1,0 +1,23 @@
+HKCR
+{
+	COMRTS.GestureHandler.1 = s 'GestureHandler Class'
+	{
+		CLSID = s '{9826AFCB-62B0-4FEB-AD62-7BAC3DC4AE74}'
+	}
+	COMRTS.GestureHandler = s 'GestureHandler Class'
+	{
+		CLSID = s '{9826AFCB-62B0-4FEB-AD62-7BAC3DC4AE74}'
+		CurVer = s 'COMRTS.GestureHandler.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9826AFCB-62B0-4FEB-AD62-7BAC3DC4AE74} = s 'GestureHandler Class'
+		{
+			ProgID = s 'COMRTS.GestureHandler.1'
+			VersionIndependentProgID = s 'COMRTS.GestureHandler'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{7819C446-8B13-4409-852D-B04BAA2198DE}'
+		}
+	}
+}

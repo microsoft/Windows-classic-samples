@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>AdvWorks Photos</ShortName>
+  <Description>An example OpenSearch location that queries the AdventureWorks Database.</Description>
+  <Url type="application/rss+xml" template="http://localhost:63000/AdventureSearch/searchrss.aspx?q={searchTerms}&amp;type=photos" />
+  <mse:ResultsProcessing format="application/rss+xml" xmlns:mse="http://schemas.microsoft.com/opensearchext/2009/">
+    <mse:PropertyMapList>
+      <mse:PropertyMap sourceNameSpaceURI="http://sdk.microsoft.com/example/">
+        <mse:Source path="color">
+          <mse:Property name="System.Note.ColorText" />
+        </mse:Source>
+        <mse:Source path="copyright">
+          <mse:Property name="System.Copyright" />
+        </mse:Source>
+        <mse:Source path="company">
+          <mse:Property name="System.Company" />
+        </mse:Source>
+      </mse:PropertyMap>
+    </mse:PropertyMapList>
+    <mse:PropertyDefaultValues>
+      <mse:Property name="System.PropList.ContentViewModeForSearch">prop:~System.ItemNameDisplay;System.Note.ColorText;System.Company;~System.Search.AutoSummary;System.Copyright</mse:Property>
+      <mse:Property name="System.PropList.PreviewDetails">prop:System.Company;System.Copyright;System.Search.AutoSummary</mse:Property>
+    </mse:PropertyDefaultValues>
+  </mse:ResultsProcessing>
+</OpenSearchDescription>

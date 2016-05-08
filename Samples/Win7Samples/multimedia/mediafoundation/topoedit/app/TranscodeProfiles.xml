@@ -1,0 +1,87 @@
+<TedTranscodeProfiles>
+  <TedTranscodeProfile>
+    <ProfileName Value="ASF - A/V - Simple Profile - Low Quality" />
+    <ContainerType Value="MFTranscodeContainerType_ASF" />
+    <AudioFormat Value="MFAudioFormat_WMAudioV8" />
+    <AudioAvgBytesPerSecond Value="2000" />
+    <AudioSamplesPerSecond Value="16000" />
+    <AudioBlockAlignment Value="640" />
+    <AudioNumChannels Value="1" />
+    <VideoFormat Value="MFVideoFormat_WMV3" />
+    <VideoBitrate Value="96000" />
+    <VideoFrameWidth Value="176" />
+    <VideoFrameHeight Value="144" />
+    <VideoFrameRateNumerator Value="15" />
+    <VideoFrameRateDenominator Value="1" />
+    <VideoEncodingProfile Value="SP" />
+  </TedTranscodeProfile>
+  <TedTranscodeProfile>
+    <ProfileName Value="ASF - A/V - Simple Profile - Medium Quality" />
+    <ContainerType Value="MFTranscodeContainerType_ASF" />
+    <AudioFormat Value="MFAudioFormat_WMAudioV8" />
+    <AudioAvgBytesPerSecond Value="6003" />
+    <AudioSamplesPerSecond Value="44100" />
+    <AudioBlockAlignment Value="2230" />
+    <AudioNumChannels Value="1" />
+    <VideoFormat Value="MFVideoFormat_WMV3" />
+    <VideoBitrate Value="384000" />
+    <VideoFrameWidth Value="240" />
+    <VideoFrameHeight Value="176" /> 
+    <VideoFrameRateNumerator Value="30" />
+    <VideoFrameRateDenominator Value="1" />
+    <VideoEncodingProfile Value="SP" />
+  </TedTranscodeProfile>
+  <TedTranscodeProfile>
+    <ProfileName Value="ASF - A/V - Main Profile - 128kb audio, 1Mb video" />
+    <ContainerType Value="MFTranscodeContainerType_ASF" />
+    <AudioFormat Value="MFAudioFormat_WMAudioV9" />
+    <AudioAvgBytesPerSecond Value="24002" />
+    <AudioNumChannels Value="2" />
+    <AudioSamplesPerSecond Value="44100" />
+    <AudioBlockAlignment Value="8917" />
+    <VideoFormat Value="MFVideoFormat_WMV3" />
+    <VideoBitrate Value="1000000" />
+    <VideoEncodingProfile Value="MP" />
+  </TedTranscodeProfile>
+  <TedTranscodeProfile>
+    <ProfileName Value="MP4 - Video only - 320x240, 29.97fps 528kbps" />
+    <ContainerType Value="MFTranscodeContainerType_MPEG4" />
+    <SkipMetadataTransfer Value="1" />
+    <VideoFormat Value="MFVideoFormat_H264" />
+    <VideoBitrate Value="528560" />
+    <VideoFrameRateNumerator Value="30000" />
+    <VideoFrameRateDenominator Value="1001" />
+    <VideoFrameSizeNumerator Value="320" />
+    <VideoFrameSizeDenominator Value="240" />
+    <VideoPixelAspectRatioNumerator Value="1" />
+    <VideoPixelAspectRatioDenominator Value="1" />
+  </TedTranscodeProfile>
+  <TedTranscodeProfile>
+    <ProfileName Value="MP4 - Audio only - 44.1 khz, 96kbps" />
+    <ContainerType Value="MFTranscodeContainerType_MPEG4" />
+    <SkipMetadataTransfer Value="1" />
+    <AudioFormat Value="MFAudioFormat_AAC" />
+    <AudioAvgBytesPerSecond Value="12000" />
+    <AudioNumChannels Value="2" />
+    <AudioSamplesPerSecond Value="44100" />
+    <AudioBlockAlignment Value="1" />
+  </TedTranscodeProfile>
+  <TedTranscodeProfile>
+    <ProfileName Value="MP4 - AV - 320x240, 29.97fps, 528kbps, 44.1khz, 96kbps" />
+    <ContainerType Value="MFTranscodeContainerType_MPEG4" />
+    <SkipMetadataTransfer Value="1" />
+    <VideoFormat Value="MFVideoFormat_H264" />
+    <VideoBitrate Value="528560" />
+    <VideoFrameRateNumerator Value="30000" />
+    <VideoFrameRateDenominator Value="1001" />
+    <VideoFrameSizeNumerator Value="320" />
+    <VideoFrameSizeDenominator Value="240" />
+    <VideoPixelAspectRatioNumerator Value="1" />
+    <VideoPixelAspectRatioDenominator Value="1" />
+    <AudioFormat Value="MFAudioFormat_AAC" />
+    <AudioAvgBytesPerSecond Value="12000" />
+    <AudioNumChannels Value="2" />
+    <AudioSamplesPerSecond Value="44100" />
+    <AudioBlockAlignment Value="1" />
+  </TedTranscodeProfile>
+</TedTranscodeProfiles>

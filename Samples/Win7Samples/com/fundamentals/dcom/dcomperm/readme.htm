@@ -1,0 +1,1086 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="readme_files/filelist.xml">
+<link rel=Edit-Time-Data href="readme_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>COM+ SDK Sample: DCOM Permissions</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>John Franklin</o:Author>
+  <o:LastAuthor>John Franklin</o:LastAuthor>
+  <o:Revision>8</o:Revision>
+  <o:TotalTime>134</o:TotalTime>
+  <o:Created>2004-04-06T20:19:00Z</o:Created>
+  <o:LastSaved>2004-04-07T01:42:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1034</o:Words>
+  <o:Characters>5899</o:Characters>
+  <o:Company>Microsoft Corporation</o:Company>
+  <o:Lines>49</o:Lines>
+  <o:Paragraphs>13</o:Paragraphs>
+  <o:CharactersWithSpaces>6920</o:CharactersWithSpaces>
+  <o:Version>10.6626</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="../../../docs/Styles.css">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:36.0pt;
+	font-weight:bold;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:24.0pt;
+	font-weight:bold;}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:18.0pt;
+	font-weight:bold;
+	font-style:italic;}
+h4
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:12.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-weight:bold;}
+h5
+	{margin-top:12.0pt;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:10.0pt;
+	font-weight:bold;
+	font-style:italic;}
+h6
+	{margin-top:12.0pt;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:7.5pt;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;
+	mso-ascii-font-family:Verdana;
+	mso-hansi-font-family:Verdana;
+	color:olive;
+	mso-text-animation:none;
+	mso-hide:none;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-ansi-font-size:9.0pt;
+	mso-bidi-font-size:9.0pt;
+	mso-ascii-font-family:Verdana;
+	mso-hansi-font-family:Verdana;
+	color:blue;
+	mso-text-animation:none;
+	mso-hide:none;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+strong
+	{mso-hide:none;}
+em
+	{mso-hide:none;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+address
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-style:italic;}
+cite
+	{mso-hide:none;}
+code
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+kbd
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+pre
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	mso-fareast-font-family:"Times New Roman";}
+samp
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+tt
+	{mso-fareast-font-family:"Times New Roman";
+	mso-hide:none;}
+var
+	{mso-hide:none;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+</head>
+
+<body lang=EN-US link=olive vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h2><span style='font-family:Verdana;color:black'>DCOM Permissions<o:p></o:p></span></h2>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>The DCOMPERM
+sample provides source code and several wrapper functions to simplify the
+process of manipulating the access and launch permissions for a COM server.
+Additionally, this sample provides code which demonstrates how to set and retrieve
+the <span class=SpellE>RunAs</span> password for a COM server.<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeDefaultAccessACL</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><span
+  style='font-family:Verdana;color:black'>&nbsp;<b><i><! ---Begin your cited code after this comment--- >DWORD</i></b><o:p></o:p></span></pre><pre><span
+  class=SpellE><b><span style='font-family:Verdana;color:black'>ChangeDefaultAccessACL</span></b></span><span
+  style='font-family:Verdana;color:black'> (<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>LPTSTR</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>tszPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fSetPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fPermit</span>,<o:p></o:p></span></pre><pre><b
+  style='mso-bidi-font-weight:normal'><span style='font-family:Verdana;
+  color:black'>DWORD</span></b><span style='font-family:Verdana;color:black'> <span
+  class=SpellE>dwAccessMask</span><o:p></o:p></span></pre><pre><span
+  style='font-family:Verdana;color:black'>);<o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Description:&nbsp;&nbsp;&nbsp;
+Modify the default access <span class=SpellE>access</span> control list. The system
+uses the default access ACL to determine if a principal is allowed to access
+the COM server if the COM server does not have its own access ACL in the <span
+class=SpellE>AppID</span> section of the registry.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:&nbsp;&nbsp;&nbsp;&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to access the object, FALSE
+  if you want to prevent the principal from accessing the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'>dwAccessMask</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeAppIDAccessACL</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><b><span
+  style='color:black;mso-bidi-font-style:italic'><! ---Begin your cited code after this comment--- >DWORD</span></b><span
+  style='color:black'><o:p></o:p></span></pre><pre><span class=SpellE><b><span
+  style='color:black'>ChangeAppIDAccessACL</span></b></span><span
+  style='color:black'> (<o:p></o:p></span></pre><pre><b><span style='color:
+  black'>LPTSTR</span></b><span style='color:black'> <span class=SpellE>tszAppID</span>,<o:p></o:p></span></pre><pre><b><span
+  style='color:black'>LPTSTR</span></b><span style='color:black'> <span
+  class=SpellE>tszPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='color:black'>BOOL</span></b><span style='color:black'> <span
+  class=SpellE>fSetPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='color:black'>BOOL</span></b><span style='color:black'> <span
+  class=SpellE>fPermit</span>,<o:p></o:p></span></pre><pre><span
+  style='color:black'>DWORD <span class=SpellE>dwAccessMask</span><o:p></o:p></span></pre><pre><span
+  style='color:black'>);<o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Modify an <span
+class=SpellE>AppID's</span> access <span class=SpellE>access</span> control
+list. The system uses the <span class=SpellE>AppID</span> access ACL to
+determine if a principal is allowed to access the COM server associated with
+the <span class=SpellE>AppID</span>.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszAppID</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>The Application ID you wish to modify (e.g.
+  &quot;{99999999-9999-9999-9999-00AA00BBF7C7}&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to access the object,
+  FALSE if you want to prevent the principal from accessing the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>dwAccessMask</span></b></span><b><span style='font-size:
+  9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeDefaultLaunchACL</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><b><span
+  style='color:black'><! ---Begin your cited code after this comment--- >DWORD<o:p></o:p></span></b></pre><pre><span
+  class=SpellE><b><span style='color:black'>ChangeDefaultLaunchACL</span></b></span><b><span
+  style='color:black'> (<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszPrincipal</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>BOOL </span></b><span class=SpellE><span
+  style='color:black'>fSetPrincipal</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>BOOL </span></b><span class=SpellE><span
+  style='color:black'>fPermit</span></span><span style='color:black'>,<o:p></o:p></span></pre><pre><b
+  style='mso-bidi-font-weight:normal'><span style='color:black'>DWORD </span></b><span
+  class=SpellE><span style='color:black'>dwAccessMask</span></span><span
+  style='color:black;mso-bidi-font-weight:bold'><o:p></o:p></span></pre><pre><b><span
+  style='color:black'>);</span></b><span style='color:black'><o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Modify the
+default launch access control list. The system uses the default launch ACL to
+determine if a principal is allowed to launch a COM server if the COM server
+does not have its own launch ACL in the <span class=SpellE>AppID</span> section
+of the registry.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'>&nbsp;&nbsp;&nbsp;</span></b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to launch the object
+  FALSE if you want to prevent the principal from launching the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>dwAccessMask</span></b></span><b><span style='font-size:
+  9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeMachineAccessACL</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><span
+  style='font-family:Verdana;color:black'>&nbsp;<b><i><! ---Begin your cited code after this comment--- >DWORD</i></b><o:p></o:p></span></pre><pre><span
+  class=SpellE><b><span style='font-family:Verdana;color:black'>ChangeMachineAccessACL</span></b></span><span
+  style='font-family:Verdana;color:black'> (<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>LPTSTR</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>tszPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fSetPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fPermit</span>,<o:p></o:p></span></pre><pre><b
+  style='mso-bidi-font-weight:normal'><span style='font-family:Verdana;
+  color:black'>DWORD</span></b><span style='font-family:Verdana;color:black'> <span
+  class=SpellE>dwAccessMask</span><o:p></o:p></span></pre><pre><span
+  style='font-family:Verdana;color:black'>);<o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Modify the
+machine-wide access <span class=SpellE>access</span> control list. The system
+uses the machine-wide access ACL to determine the type of access a principal
+has to servers on this machine.<span style='mso-spacerun:yes'>  </span>This
+value will override any default or application specific settings.<br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'><span
+style='mso-spacerun:yes'> </span>Parameters:&nbsp;&nbsp;&nbsp;&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to access the object, FALSE
+  if you want to prevent the principal from accessing the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'>dwAccessMask</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeMachineLaunchACL</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><span
+  style='font-family:Verdana;color:black'>&nbsp;<b><span style='mso-bidi-font-style:
+  italic'><! ---Begin your cited code after this comment--- >DWORD</span></b><o:p></o:p></span></pre><pre><span
+  class=SpellE><b><span style='font-family:Verdana;color:black'>ChangeMachineLaunchACL</span></b></span><span
+  style='font-family:Verdana;color:black'> (<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>LPTSTR</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>tszPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fSetPrincipal</span>,<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Verdana;color:black'>BOOL</span></b><span
+  style='font-family:Verdana;color:black'> <span class=SpellE>fPermit</span>,<o:p></o:p></span></pre><pre><b
+  style='mso-bidi-font-weight:normal'><span style='font-family:Verdana;
+  color:black'>DWORD</span></b><span style='font-family:Verdana;color:black'> <span
+  class=SpellE>dwAccessMask</span><o:p></o:p></span></pre><pre><span
+  style='font-family:Verdana;color:black'>);<o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Modify the
+machine-wide launch access control list. The system uses the machine-wide launch
+ACL to determine the type of launch and/or activation privileges a principal
+has for servers on this machine.<span style='mso-spacerun:yes'>  </span>This
+value will override any default or application specific settings.<br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'><span
+style='mso-spacerun:yes'> </span>Parameters:&nbsp;&nbsp;&nbsp;&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to access the object,
+  FALSE if you want to prevent the principal from accessing the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'>dwAccessMask</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>ChangeAppIDLaunchACL</span></span><span
+style='font-family:Verdana;color:black'>&nbsp;<o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><b><span
+  style='color:black'><! ---Begin your cited code after this comment--- >DWORD<o:p></o:p></span></b></pre><pre><span
+  class=SpellE><b><span style='color:black'>ChangeAppIDLaunchACL</span></b></span><b><span
+  style='color:black'> (<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszAppID</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszPrincipal</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>BOOL </span></b><span class=SpellE><span
+  style='color:black'>fSetPrincipal</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>BOOL </span></b><span class=SpellE><span
+  style='color:black'>fPermit</span></span><span style='color:black'>,<o:p></o:p></span></pre><pre><b
+  style='mso-bidi-font-weight:normal'><span style='color:black'>DWORD</span></b><span
+  style='color:black'> <span class=SpellE>dwAccessMask</span><o:p></o:p></span></pre><pre><b><span
+  style='color:black'>);</span></b><span style='color:black'><o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Modify an <span
+class=SpellE>AppID's</span> launch access control list. The system uses the <span
+class=SpellE>AppID</span> launch ACL to determine if a principal (a user or
+group of users) is allowed to launch the COM server associated with the <span
+class=SpellE>AppID</span>.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt;
+ mso-border-insideh:.75pt outset windowtext;mso-border-insidev:.75pt outset windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszAppID</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>The Application ID you wish to modify (e.g.
+  &quot;{99999999-9999-9999-9999-00AA00BBF7C7}&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>&nbsp;Name of user or group (e.g. &quot;<span class=SpellE>redmond\johndoe</span>&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fSetPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to add/update the principal's entry in the ACL,
+  FALSE if you want to remove the principal from the ACL<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>fPermit</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>TRUE if you want to allow the principal to launch the object
+  FALSE if you want to prevent the principal from launching the object<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes;height:10.5pt'>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span class=SpellE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>dwAccessMask</span></b></span><b><span style='font-size:
+  9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt;height:10.5pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Specifies what type of access the principal is to be given.<span
+  style='mso-spacerun:yes'>  </span>Can be any combination of the COM_RIGHTS_*
+  values<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>(Note that the
+Permit flag applies only when <span class=SpellE>SetPrincipal</span> is TRUE.)<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>GetRunAsPassword</span></span><span
+style='font-family:Verdana;color:black'><o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><b><span
+  style='color:black'><! ---Begin your cited code after this comment--- >DWORD <span
+  class=SpellE>GetRunAsPassword</span> (<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszAppID</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszPassword</span></span><span style='color:black'><o:p></o:p></span></pre><pre><b><span
+  style='color:black'>);</span></b><span style='color:black'><o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span class=GramE><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>Retrieves the <span class=SpellE>RunAs</span> password for an <span
+class=SpellE>AppID</span>.</span></span><span style='font-size:9.0pt;
+font-family:Verdana;color:black'><o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszAppID</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>The Application ID you wish to modify (e.g. &quot;{99999999-9999-9999-9999-00AA00BBF7C7}&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPassword</span></b></span><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Password of the user you have specified in the <span
+  class=SpellE>RunAs</span> named value under the <span class=SpellE>AppID</span>
+  registry key.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>&nbsp;<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h4><span class=SpellE><span style='font-family:Verdana;color:black'>SetRunAsPassword</span></span><span
+style='font-family:Verdana;color:black'>&nbsp;<o:p></o:p></span></h4>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:9.0pt;font-family:Verdana;color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<div align=center>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="80%"
+ style='width:80.0%;mso-cellspacing:1.5pt;background:#EEF0FF;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width="100%" style='width:100.0%;padding:.75pt .75pt .75pt .75pt'><pre><b><span
+  style='color:black'><! ---Begin your cited code after this comment--- >DWORD <span
+  class=SpellE>SetRunAsPassword</span> (<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszAppID</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszPrincipal</span></span><b><span style='color:black'>,<o:p></o:p></span></b></pre><pre><b><span
+  style='color:black'>LPTSTR </span></b><span class=SpellE><span
+  style='color:black'>tszPassword</span></span><span style='color:black'><o:p></o:p></span></pre><pre><b><span
+  style='color:black'>);</span></b><span style='color:black'><o:p></o:p></span></pre></td>
+ </tr>
+</table>
+
+</div>
+
+<p><span class=GramE><span style='font-size:9.0pt;font-family:Verdana;
+color:black'>Sets the <span class=SpellE>RunAs</span> password for an <span
+class=SpellE>AppID</span>.</span></span><span style='font-size:9.0pt;
+font-family:Verdana;color:black'> Note that if you have specified the <span
+class=SpellE>RunAs</span> named value to &quot;Interactive User&quot; you do
+not need to set the <span class=SpellE>RunAs</span> password.<o:p></o:p></span></p>
+
+<p><span style='font-size:9.0pt;font-family:Verdana;color:black'>Parameters:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszAppID</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>The Application ID you wish to modify (e.g. &quot;{99999999-9999-9999-9999-00AA00BBF7C7}&quot;)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPrincipal</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Name of the principal you have specified in the <span
+  class=SpellE>RunAs</span> named value under the <span class=SpellE>AppID</span>
+  registry key<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span class=SpellE><b><span style='font-size:9.0pt;
+  font-family:Verdana;color:black'>tszPassword</span></b></span><b><span
+  style='font-size:9.0pt;font-family:Verdana;color:black'><o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Verdana;
+  color:black'>Password of the user you have specified in the <span
+  class=SpellE>RunAs</span> named value under the <span class=SpellE>AppID</span>
+  registry key.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

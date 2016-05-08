@@ -1,0 +1,62 @@
+<!--
+ *************************************************************************
+ *
+ * File: HelloWorld.html
+ *
+ * Description: 
+ * Root of the "HelloWorld" Desktop Gadget sample.
+ * Displays the string "Hello World!" with a background graphic.
+ * 
+ * This file is part of the Microsoft Windows SDK Code Samples.
+ * 
+ * Copyright (C) Microsoft Corporation.  All rights reserved.
+ * 
+ * This source code is intended only as a supplement to Microsoft
+ * Development Tools and/or on-line documentation.  See these other
+ * materials for detailed information regarding Microsoft code samples.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ ************************************************************************
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	    <title>Hello World</title>
+	    <style type="text/css">
+		    body
+		    {
+		        margin: 0;
+		        width: 130px;
+		        height: 85px;
+                font-family: verdana;
+                font-weight: bold;
+                font-size: small;
+		    }
+		    #gadgetContent
+		    {
+		        margin-top: 30px;
+		        width: 130px;
+		        vertical-align: middle;
+		        text-align: center;
+                overflow: hidden;
+		    }
+	    </style>
+	    <script type="text/jscript" language="jscript">
+        // Initialize the gadget
+	    function init()
+	    {
+	        var oBackground = document.getElementById("imgBackground");
+	        oBackground.src = "url(images/background.png)";
+        }
+	    </script>
+    </head>
+	
+<body onload="init()">
+    <g:background id="imgBackground">
+	<span id="gadgetContent">Hello World!</span>
+	</g:background>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<HTML>
+
+<!--
+    <%CiTemplate%>
+
+    This is the formatting page for query results.  This file defines
+    how the result page header, rows, and footer will appear.
+-->
+
+<HEAD>
+    <!-- The title lists the # of documents -->
+
+        <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+
+    <%if CiMatchedRecordCount eq 0%>
+        <TITLE><%OriginalQuery%> - no documents matched.</TITLE>
+    <%else%>
+        <TITLE><%OriginalQuery%> - documents <%CiFirstRecordNumber%> to <%CiLastRecordNumber%></TITLE>
+    <%endif%>
+</HEAD>
+
+<BODY background="is2bkgnd.gif">
+
+<TABLE>
+    <TR>
+        <TD><a href="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" border=0></a></TD>
+        </TR>
+    <TR>
+            <TD ALIGN=RIGHT VALIGN=MIDDLE><h3>Search Results</h3></TD>
+    </TR>
+</TABLE>
+
+<!-- Print a header that lists the query and the number of hits -->
+
+<H5>
+    <%if CiMatchedRecordCount eq 0%>
+        No documents matched the query "<%OriginalQuery%>".
+    <%else%>
+        Documents <%CiFirstRecordNumber%> to <%CiLastRecordNumber%> of
+        <%if CiMatchedRecordCount eq CiMaxRecordsInResultSet%>
+            the best
+        <%endif%>
+        <%CiMatchedRecordCount%> matching the query
+        "<%OriginalQuery%>".
+    <%endif%>
+</H5>
+
+<!--
+    This table has a link to a new query page, a previous button, and
+    a next page button.  The buttons are only displayed when appropriate.
+-->
+
+<TABLE WIDTH=80%>
+
+    <!--
+         Query.htm set HTMLQueryForm as the name of the page to return to
+         for a new query.
+    -->
+
+    <TD> <A HREF="<%HTMLQueryForm%>">New query</A> </TD>
+
+    <!-- Define a "previous" button if this isn't the first page -->
+
+    <%if CiContainsFirstRecord eq 0%>
+        <TD ALIGN=LEFT>
+            <FORM ACTION="query.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="-<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsInResultSet" VALUE="<%EscapeRAW CiMaxRecordsInResultSet%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="OriginalQuery" VALUE="<%OriginalQuery%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiScope" VALUE="<%CiScope%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="TemplateName" VALUE="<%TemplateName%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiSort" VALUE="<%CiSort%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="HTMLQueryForm" VALUE="<%HTMLQueryForm%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Previous <%CiMaxRecordsPerPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+
+    <!-- Define a "next" button if this isn't the last page -->
+
+    <%if CiContainsLastRecord eq 0%>
+        <TD ALIGN=RIGHT>
+            <FORM ACTION="query.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsInResultSet" VALUE="<%EscapeRAW CiMaxRecordsInResultSet%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="OriginalQuery" VALUE="<%OriginalQuery%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiScope" VALUE="<%CiScope%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="TemplateName" VALUE="<%TemplateName%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiSort" VALUE="<%CiSort%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="HTMLQueryForm" VALUE="<%HTMLQueryForm%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Next <%CiRecordsNextPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+</TABLE>
+
+<HR>
+
+<!--
+    The begindetail/enddetail section describes how each row of output
+    is be formatted.  The sample below prints:
+
+        - record number
+        - document title (if one exists) or virtual path of the file
+        - the abstract for the file
+        - the url for the file
+        - the file's size and last write time
+        - an HREF to the file for the hit highlighter.
+          The parameters the hit highlighter include the CiQueryFile and
+          CiTemplateFile. The CiQueryFile is not really needed as long as
+          you don't have any custom properties. However, if you add custom
+          properties, make sure the .idq file you use for queries is same
+          as the one specified for CiQueryFile. The CiTemplateFile is used
+          by webhits to format the output text.
+-->
+
+<%begindetail%>
+
+<table border=0>
+        <tr class="RecordTitle">
+                <td align="right" valign="top" class="RecordTitle" style="background-color:white;">
+                        <%CiCurrentRecordNumber%>.
+                </td>
+                <td><b class="RecordTitle">
+                                <%if DocTitle isempty%>
+                                        <a href="javascript:NAF('http://<%server_name%><%vpath%>','<%OriginalQuery%>')" class="RecordTitle"><%filename%></a>
+                                <%else%>
+                                        <a href="javascript:NAF('http://<%server_name%><%vpath%>','<%OriginalQuery%>')" class="RecordTitle"><%DocTitle%></a>
+                                <%endif%>
+                </b></td>
+        </tr>
+        <tr>
+                <td></td>
+                <td>
+                        <b><i>Abstract:  </i></b><%characterization%>
+        </td>
+        </tr>
+        <tr>
+                <td></td>
+                <td>
+                        <i class="RecordStats"><a href="javascript:NAF('http://<%server_name%><%vpath%>','<%OriginalQuery%>')" class="RecordStats" style="color:blue;">http://<%server_name%><%vpath%></a>
+            <br><%if size eq ""%>(size and time unknown)<%else%>size <%size%> bytes - <%write%> GMT<%endif%>
+            </i>
+                </td>
+        </tr>
+        <tr>
+                <td></td>
+                <td>
+                        <a href="qsumrhit.htw?CiWebHitsFile=<%escapeURL vpath%>&CiRestriction=<%escapeURL CiRestriction%>&CiQueryFile=/iissamples/issamples/query.idq&CiUserParam3=<%escapeURL HTMLQueryForm%>"><IMG src="hilight.gif" align=middle alt="Highlight matching terms in document using Summary mode."> Summary</a>
+                        <a href="qfullhit.htw?CiWebHitsFile=<%escapeURL vpath%>&CiRestriction=<%escapeURL CiRestriction%>&CiQueryFile=/iissamples/issamples/query.idq&CiUserParam3=<%escapeURL HTMLQueryForm%>&CiHiliteType=Full"><IMG src="hilight.gif" align=middle alt="Highlight matching terms in document."> Full</a>
+                </td>
+        </tr>
+</table>
+
+<br>
+
+<%enddetail%>
+
+</dl>
+<P>
+
+<%if CiMatchedRecordCount ne 0%>
+<!-- Only display a line if there were any hits that matched the query -->
+    <HR>
+<%endif%>
+
+<TABLE WIDTH=80%>
+
+    <!--
+         Query.htm set HTMLQueryForm as the name of the page to return to
+         for a new query.
+    -->
+
+    <TD> <A HREF="<%HTMLQueryForm%>">New query</A> </TD>
+
+    <!-- Define a "previous" button if this isn't the first page -->
+
+    <%if CiContainsFirstRecord eq 0%>
+        <TD ALIGN=LEFT>
+            <FORM ACTION="query.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="-<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsInResultSet" VALUE="<%EscapeRAW CiMaxRecordsInResultSet%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="OriginalQuery" VALUE="<%OriginalQuery%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiScope" VALUE="<%CiScope%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="TemplateName" VALUE="<%TemplateName%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiSort" VALUE="<%CiSort%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="HTMLQueryForm" VALUE="<%HTMLQueryForm%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Previous <%CiMaxRecordsPerPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+
+    <!-- Define a "next" button if this isn't the last page -->
+
+    <%if CiContainsLastRecord eq 0%>
+        <TD ALIGN=RIGHT>
+            <FORM ACTION="query.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsInResultSet" VALUE="<%EscapeRAW CiMaxRecordsInResultSet%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="OriginalQuery" VALUE="<%OriginalQuery%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiScope" VALUE="<%CiScope%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="TemplateName" VALUE="<%TemplateName%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiSort" VALUE="<%CiSort%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="HTMLQueryForm" VALUE="<%HTMLQueryForm%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Next <%CiRecordsNextPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+</TABLE>
+
+<P><BR>
+
+
+<%if CiOutOfDate eq 0%>
+<!--
+     If the index is up-to-date let the user know.
+-->
+    <P>
+    <I><B>The index is up-to-date.</B></I><BR>
+<%endif%>
+
+
+<%if CiQueryIncomplete ne 0%>
+<!--
+    If the query was not executed because it needed to enumerate to
+    resolve the query instead of using the index, but CiForceUseCi
+    was TRUE, let the user know
+-->
+    <P>
+    <I><B>The query is too expensive to complete.</B></I><BR>
+<%endif%>
+
+
+<%if CiQueryTimedOut ne 0%>
+<!--
+    If the query took too long to execute (for example, if too much work
+    was required to resolve the query), let the user know
+-->
+<P>
+    <I><B>The query took too long to complete.</B></I><BR>
+<%endif%>
+
+
+<%if CiTotalNumberPages gt 0%>
+<!-- Output a page number and count of pages -->
+    <P>
+    Page <%CiCurrentPageNumber%> of <%CiTotalNumberPages%>
+    <P>
+<%endif%>
+
+<hr width=500 align=left>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/Windows.NetServer"><img src="win2k.gif" alt="Learn more about Microsoft Windows"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-2002 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/Info/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+
+</BODY>
+
+<SCRIPT>
+function msieversion()
+{
+    var ua   = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE");
+    if (msie>0)
+        return parseInt(ua.substring(msie+5, ua.indexOf(".", msie)));
+    else
+        return 0;
+}
+
+function NAF(szUrl, szQuery)
+{
+    if (msieversion() >= 5)
+        window.external.NavigateAndFind(szUrl, szQuery, "_main");
+    else
+        window.navigate(szUrl, target="_main");
+}
+</SCRIPT>
+
+</HTML>

@@ -1,0 +1,28 @@
+// TheProvider.idl : IDL source for TheProvider.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (TheProvider.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(B14C8EA5-3632-11D3-AC81-00C04F8DB3D5),
+	version(1.0),
+	helpstring("TheProvider 1.0 Type Library")
+]
+library THEPROVIDERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(B14C8EB2-3632-11D3-AC81-00C04F8DB3D5),
+		helpstring("MSOmniProv OLE DB Provider")
+	]
+	coclass MSOmniProv
+	{
+		interface IUnknown;
+	};
+};

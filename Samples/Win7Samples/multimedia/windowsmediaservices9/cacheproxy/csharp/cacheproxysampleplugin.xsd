@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<xs:schema id="PersistedConfigurationDataSet" targetNamespace="http://schemas.microsoft.com/wms/2002/07/wmsCacheProxyConfigSchema" xmlns:mstns="http://schemas.microsoft.com/wms/2002/07/wmsCacheProxyConfigSchema" xmlns="http://schemas.microsoft.com/wms/2002/07/wmsCacheProxyConfigSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+    <xs:simpleType name="protocolEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="clientprotocol" />
+            <xs:enumeration value="HTTP" />
+            <xs:enumeration value="RTSPU" />
+            <xs:enumeration value="RTSPT" />
+            <xs:enumeration value="RTSP" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="PersistedConfiguration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cacheDirectoryPath" type="xs:normalizedString" minOccurs="1" maxOccurs="1" />
+                <xs:element name="diskQuota" type="xs:int" minOccurs="1" maxOccurs="1" />
+                <xs:element name="archiveQuotaPerStream" type="xs:int" minOccurs="1" maxOccurs="1" />
+                <xs:element name="reverseProxyRedirectURL" type="xs:anyURI" minOccurs="0" maxOccurs="1" nillable="true" />
+                <xs:element name="backendServer" type="xs:normalizedString" minOccurs="0" maxOccurs="1" nillable="true" />
+                <xs:element name="enableCaching" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                <xs:element name="enableProxy" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                <xs:element name="proxyOnDemandCacheMiss" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                <xs:element name="cacheOnDemandCacheMiss" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                <xs:element name="handleUpstreamCacheRequests" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                <xs:element name="protocol" type="protocolEnum" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersistedConfigurationDataSet" msdata:IsDataSet="true" msdata:EnforceConstraints="False">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="PersistedConfiguration" />
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,23 @@
+HKCR
+{
+	ADOPriv.ParseInitFile.1 = s 'ParseInitFile Class'
+	{
+		CLSID = s '{D9824552-5964-11D1-8AE1-00C04FB90A5E}'
+	}
+	ADOPriv.ParseInitFile = s 'ParseInitFile Class'
+	{
+		CLSID = s '{D9824552-5964-11D1-8AE1-00C04FB90A5E}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D9824552-5964-11D1-8AE1-00C04FB90A5E} = s 'ParseInitFile Class'
+		{
+			ProgID = s 'ADOPriv.ParseInitFile.1'
+			VersionIndependentProgID = s 'ADOPriv.ParseInitFile'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

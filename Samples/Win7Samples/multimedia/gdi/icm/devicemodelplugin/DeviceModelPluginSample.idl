@@ -1,0 +1,62 @@
+//+--------------------------------------------------------------------------
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+//  Abstract:
+//      IDL source for DeviceModelPluginSample
+//      This file will be processed by the MIDL tool to
+//      produce the type library (DeviceModelPluginSample.tlb) and
+//      marshalling code.
+//
+//----------------------------------------------------------------------------
+import "oaidl.idl";
+import "ocidl.idl";
+#ifdef USE_SDK_INC
+import "WcsPlugin.idl";
+#else
+import "WcsPlugin.idl";
+#endif
+//
+// Sample private interface
+//
+[
+    object,
+    // TODO: Replace all occurences with new GUID when developing plugin
+    uuid(94617F91-2C14-4485-9B94-A78579B73523),
+    helpstring("ISampleDeviceModelPrivateInterface Interface"),
+    pointer_default(unique)
+]
+interface ISampleDeviceModelPrivateInterface:IUnknown
+{    
+   HRESULT SamplePrivateMethod();
+};
+
+
+//
+// Plugin class object
+//
+[
+    // TODO: Replace all occurences with new GUID when developing plugin
+	uuid(6EEE65CE-1F38-4a04-9A66-075A67C99E9F),
+	version(1.0),
+	helpstring("DeviceModelPluginSample 1.0 Type Library")
+]
+library DeviceModelPluginSampleLib
+{
+	importlib("stdole2.tlb");
+	[
+        // TODO: Replace all occurences with new GUID when developing plugin
+		uuid(48D2ACFF-1716-4262-9163-CC8ADB245D58),
+		helpstring("Wcs Sample Device Model Plugin")
+	]
+	coclass DeviceModelPluginSample
+	{   
+		[default] interface IDeviceModelPlugIn;
+        interface ISampleDeviceModelPrivateInterface;
+	};
+};

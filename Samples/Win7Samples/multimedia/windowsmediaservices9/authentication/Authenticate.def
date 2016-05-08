@@ -1,0 +1,18 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows Media Technologies
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       Authenticate.def
+;
+;  Contents:
+;
+;--------------------------------------------------------------------------
+
+LIBRARY      "Authenticate.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE

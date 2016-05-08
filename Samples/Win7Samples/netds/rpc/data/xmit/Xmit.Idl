@@ -1,0 +1,27 @@
+[ uuid(56BF67C0-6503-1068-BF67-00DD010FBF25),
+  version(1.0),
+  pointer_default(unique)
+]
+interface xmit
+{
+
+typedef struct _DOUBLE_LINK_LIST {
+    short sNumber;
+    struct _DOUBLE_LINK_LIST * pNext;
+    struct _DOUBLE_LINK_LIST * pPrevious;
+} DOUBLE_LINK_LIST;
+
+typedef struct _DOUBLE_XMIT_TYPE {
+    short sSize;
+    [size_is(sSize)] short asNumber[];
+} DOUBLE_XMIT_TYPE;
+
+/* transmit a double-linked list as an array */
+typedef [transmit_as(DOUBLE_XMIT_TYPE)] DOUBLE_LINK_LIST DOUBLE_LINK_TYPE;
+
+
+void ModifyListProc([in, out] DOUBLE_LINK_TYPE *pHead);
+
+void Shutdown(void);
+
+}

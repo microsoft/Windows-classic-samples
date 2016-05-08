@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iphdrinc", "iphdrinc.vcproj", "{321D8F3F-5448-4DC6-827D-F6ED3277D688}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BOTH_RETAIL|Win32 = BOTH_RETAIL|Win32
+		BOTH_RETAIL|x64 = BOTH_RETAIL|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{321D8F3F-5448-4DC6-827D-F6ED3277D688}.BOTH_RETAIL|Win32.ActiveCfg = BOTH_RETAIL|Win32
+		{321D8F3F-5448-4DC6-827D-F6ED3277D688}.BOTH_RETAIL|Win32.Build.0 = BOTH_RETAIL|Win32
+		{321D8F3F-5448-4DC6-827D-F6ED3277D688}.BOTH_RETAIL|x64.ActiveCfg = BOTH_RETAIL|x64
+		{321D8F3F-5448-4DC6-827D-F6ED3277D688}.BOTH_RETAIL|x64.Build.0 = BOTH_RETAIL|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

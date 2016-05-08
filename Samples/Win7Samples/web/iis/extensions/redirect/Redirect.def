@@ -1,0 +1,6 @@
+LIBRARY Redirect
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+	TerminateExtension

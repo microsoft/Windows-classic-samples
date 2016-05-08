@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReadOnlyPlugin", "ReadOnlyPlugin.vcproj", "{7E2FE1FE-60F3-4605-9026-BCACB2E0C0BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7E2FE1FE-60F3-4605-9026-BCACB2E0C0BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E2FE1FE-60F3-4605-9026-BCACB2E0C0BD}.Debug|Win32.Build.0 = Debug|Win32
+		{7E2FE1FE-60F3-4605-9026-BCACB2E0C0BD}.Release|Win32.ActiveCfg = Release|Win32
+		{7E2FE1FE-60F3-4605-9026-BCACB2E0C0BD}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,832 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html><head><title>Indexing Service: Query Language</title>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+	TempString = navigator.appVersion
+	if (navigator.appName == "Microsoft Internet Explorer"){	
+// Check to see if browser is Microsoft
+		if (TempString.indexOf ("4.") >= 0){
+// Check to see if it is IE 4
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+		}
+		else {
+			document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+		}
+	}
+	else if (navigator.appName == "Netscape") {						
+// Check to see if browser is Netscape
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">');
+	}
+	else
+		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/cocss.css">');
+</script>
+
+<META NAME="DESCRIPTION" CONTENT="Tells how to refine searches by using complex queries"></head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<font face="Verdana,Arial,Helvetica">	
+
+<h1><a name="QueryLanguage">Query Language</a></h1>
+
+<p>You can search for any word or phrase on a Web site by typing the word or phrase into a query form and clicking the button to execute the query (for example, the Execute Query button on the sample query form). This section covers the following topics:</p>
+
+<ul>
+<li><strong><a href="#Operators">Boolean and Proximity Operators</a>:</strong> Shows how to make more precise queries by inserting Boolean and proximity operators.</li>
+<li><strong><a href="#Wildcards">Wildcards</a>:</strong> Helps you find pages containing words similar to a given word.</li>
+<li><strong><a href="#FreeTextQueries">Free-Text Queries</a>:</strong> Describes how to formulate a query based on the meaning of a phrase rather than the exact wording.</li>
+<li><strong><a href="#VectorQueries">Vector Space Queries</a>:</strong> Explains how to get query results that match a list of words and phrases.</li>
+<li><strong><a href="#PropertyValueQueries">Property Value Queries</a>:</strong> Tells how to query for the property values of a file.</li>
+<li><strong><a href="#Examples">Query Examples</a>:</strong> Gives examples of various queries.</li>
+<li><strong><a href="#PropertyNamesList">List of Property Names</a>:</strong> Lists and describes property names always available for queries.</li>
+</ul>
+
+<p>Searches produce a list of files that contain the word or phrase no matter where they appear in the text. This list gives the rules for formulating queries:</p>
+
+<ul>
+<li>Consecutive words are treated as a phrase; they must appear in the same order within a matching document.</li>
+<li>Queries are case-insensitive, so you can type your query in uppercase or lowercase.</li>
+<li>You can search for any word except for those in the exception list (for English, this includes <em>a</em>, <em>an</em>, <em>and</em>, <em>as</em>, and other common words), which are ignored during a search.</li>
+<li>Words in the exception list are treated as placeholders in phrase and proximity queries. For example, if you searched for &#147;Word for Windows&#148;, the results could give you &#147;Word for Windows&#148; and &#147;Word and Windows&#148;, because <em>for </em>is a noise word and appears in the exception list.</li>
+<li>Punctuation marks such as the period (.), colon (:), semicolon (;), and comma (,) are ignored during a search.</li>
+<li>To use specially treated characters such as &amp;, |, ^, #, @, $, (, ), in a query, enclose your query in quotation marks (&#147;).</li>
+<li>To search for a word or phrase containing quotation marks, enclose the entire phrase in quotation marks and then double the quotation marks around the word or words you want to surround with quotes. For example, &#147;World-Wide Web or &#147;&#147;Web&#148;&#148;&#148; searches for <em>World-Wide Web or &#147;Web&#148;.</em></li>
+<li>You can insert <a href="#Operators">Boolean operators</a> (<strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong>) and the <a href="#Operators">proximity operator</a> (<strong>NEAR</strong>) to specify additional search information.</li>
+<li>The <a href="#Wildcards">wildcard character</a> (*) can match words with a given prefix. The query esc* matches the terms &#147;ESC,&#148; &#147;escape,&#148; 
+and so on.</li>
+<li><a href="#FreeTextQueries">Free-text queries</a> can be specified without regard to query syntax.</li>
+<li><a href="#VectorQueries">Vector space queries</a> can be specified.</li>
+<li>ActiveX&#153; (OLE) and file attribute <a href="#PropertyValueQueries">property value queries</a> can be issued.</li>
+</ul>
+
+<h1><a name="Operators">Boolean and Proximity Operators</a></h1>
+
+<p>Boolean and proximity operators can create a more precise query.</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>To Search For</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>Example</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>Results</th>
+</tr>
+<tr>
+<td valign="top">Both terms in the same page </td>
+<td valign="top"><font size="3" face="Courier"><code>access and basic</code></font> <br>
+<strong>&#151;</strong>Or<strong>&#151;</strong><br>
+<font size="3" face="Courier"><code>access &amp; basic</code></font></td>
+<td valign="top">Pages with both the words &#147;access&#148; and 
+&#147;basic&#148; </td>
+</tr>
+<tr>
+<td valign="top">Either term in a page </td>
+<td valign="top"><font size="3" face="Courier"><code>cgi or isapi</code></font><br>
+<strong>&#151;</strong>Or<strong>&#151;</strong><br>
+<font size="3" face="Courier"><code>cgi | isapi</code></font></td>
+<td valign="top">Pages with the words &#147;cgi&#148; or &#147;isapi&#148; </td>
+</tr>
+<tr>
+<td valign="top">The first term without the second term </td>
+<td valign="top"><font size="3" face="Courier"><code>access and not basic</code></font><br>
+<strong>&#151;</strong>Or<strong>&#151;</strong><br>
+<font size="3" face="Courier"><code>access &amp; ! basic</code></font></td>
+<td valign="top">Pages with the word &#147;access&#148; but not &#147;basic&#148; </td>
+</tr>
+<tr>
+<td valign="top">Pages not matching a property value </td>
+<td valign="top"><font size="3" face="Courier"><code>not @size = 100</code></font><br>
+<strong>&#151;</strong>Or<strong>&#151;</strong><br>
+<font size="3" face="Courier"><code>! @size = 100</code></font></td>
+<td valign="top">Pages that are not 100 bytes </td>
+</tr>
+<tr>
+<td valign="top">Both terms in the same page, close together </td>
+<td valign="top"><font size="3" face="Courier"><code>excel near project</code></font><br>
+<strong>&#151;</strong>Or<strong>&#151;</strong><br>
+<font size="3" face="Courier"><code>excel ~ project</code></font></td>
+<td valign="top">Pages with the word &#147;excel&#148; near the word 
+&#147;project&#148; </td>
+</tr>
+</table>
+
+<p>Hints:</p>
+
+<ul>
+<li>You can add parentheses to nest expressions within a query. The expressions in parentheses are evaluated before the 
+rest of the query.</li>
+<li>Use double quotes (&#147;) to indicate that a Boolean or <strong>NEAR</strong> operator keyword should be ignored in your query. For 
+example, &#147;Abbott and Costello&#148; will match pages with the phrase, not pages that match the Boolean expression. In 
+addition to being an operator, the word <em>and</em> is a noise word in English.</li>
+<li>The<strong> NEAR</strong> operator is similar to the <strong>AND</strong> operator in that <strong>NEAR</strong> returns a match if both words being searched for are in the same page. However, the <strong>NEAR</strong> operator differs from <strong>AND</strong> because the rank assigned by <strong>NEAR</strong> depends on the proximity of words. That is, the rank of a page with the searched-for words closer together is greater than or 
+equal to the rank of a page where the words are farther apart. If the searched-for words are more than 50 words apart, they are not considered near enough, and the page is assigned a rank of zero.</li>
+<li>The <strong>NOT</strong> operator can be used only after an <strong>AND</strong> operator in content queries; it can be used only to exclude pages 
+that match a previous content restriction. For property value queries, the <strong>NOT</strong> operator can be used apart from the 
+<strong>AND</strong> operator.</li>
+<li>The <strong>AND</strong> operator has a higher precedence than <strong>OR</strong>. For example, the first three queries are equal, but the fourth is 
+not:a AND b OR c<br>
+c OR a AND b<br>
+c OR (a AND b)<br>
+(c OR a) AND b</li>
+</ul>
+
+<p><strong>Note</strong>&nbsp;&nbsp;&nbsp;The symbols (&amp;, |, !, ~) and the English keywords <strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong>, and <strong>NEAR</strong> work the same way in all languages 
+supported by Indexing Service. Localized keywords are also available when the browser locale is set to one of the following six 
+languages:</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="40%">Language</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="60%">Keywords</th>
+</tr>
+<tr>
+<td valign="top">German</td>
+<td valign="top"><strong>UND</strong>, <strong>ODER</strong>, <strong>NICHT</strong>, <strong>NAH</strong></td>
+</tr>
+<tr>
+<td valign="top">French</td>
+<td valign="top"><strong>ET</strong>, <strong>OU</strong>, <strong>SANS</strong>, <strong>PRES</strong></td>
+</tr>
+<tr>
+<td valign="top">Spanish</td>
+<td valign="top"><strong>Y</strong>, <strong>O</strong>, <strong>NO</strong>, <strong>CERCA</strong></td>
+</tr>
+<tr>
+<td valign="top">Dutch</td>
+<td valign="top"><strong>EN</strong>, <strong>OF</strong>, <strong>NIET</strong>, <strong>NABIJ</strong></td>
+</tr>
+<tr>
+<td valign="top">Swedish</td>
+<td valign="top"><strong>OCH</strong>, <strong>ELLER</strong>, <strong>INTE</strong>, <strong>N&Auml;RA</strong></td>
+</tr>
+<tr>
+<td>Italian</td><td><strong>E</strong>, <strong>O</strong>, <strong>NO</strong>, <strong>VICINO</strong></td>
+</tr>
+</table>
+<p><strong>Note</strong>&nbsp;&nbsp;&nbsp;The NEAR operator can be applied only to words or phrases.</p>
+
+<h1><a name="Wildcards">Wildcards</a></h1>
+
+<p><a name="Wildcards">Wildcard operators help you find pages containing words similar to a given word. </a></p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="Wildcards">To Search For</a></th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="Wildcards">Example</a></th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="Wildcards">Results</a></th></tr>
+<tr>
+<td valign="top"><a name="Wildcards">Words with the same prefix</a></td>
+<td valign="top"><a name="Wildcards"><font size="3" face="Courier"><code>comput*</code></font></a></td>
+<td valign="top"><a name="Wildcards">Pages with words that have the prefix 
+&#147;comput,&#148; such as &#147;computer,&#148; &#147;computing,&#148; 
+and so on</a></td>
+</tr>
+<tr>
+<td valign="top"><a name="Wildcards">Words based on the same stem word</a></td>
+<td valign="top"><a name="Wildcards"><font size="3" face="Courier"><code>fly**</code></font></a></td>
+<td valign="top"><a name="Wildcards">Pages with words based on the same stem as 
+&#147;fly,&#148; such as &#147;flying,&#148; &#147;flown,&#148; &#147;flew,&#148; and 
+so on </a></td>
+</tr>
+</table>
+
+<h1><a name="FreeTextQueries">Free-Text Queries</a></h1>
+
+<p><a name="FreeTextQueries">The query engine finds pages that best match the words and phrases in a free-text query. This is done by automatically finding pages that match the meaning, not the exact wording, of the query. Boolean, proximity, and wildcard operators are ignored within a free-text query. Free-text queries are prefixed with $contents.</a></p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr><th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="FreeTextQueries">To Search For</a></th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="FreeTextQueries">Example </a></th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0"><a name="FreeTextQueries">Results</a></th>
+</tr>
+<tr>
+<td valign="top"><a name="FreeTextQueries">Files that match free-text</a></td>
+<td valign="top"><a name="FreeTextQueries"><font size="3" face="Courier"><code>$contents how do I print in 
+Microsoft Excel? </code></font></a></td>
+<td valign="top"><a name="FreeTextQueries">Pages that mention printing and Microsoft 
+Excel.</a></td>
+</tr>
+</table>
+
+<h1><a name="VectorQueries">Vector Space Queries</a></h1>
+
+<p>The query engine supports vector space queries. Vector queries return pages that match a list of words and phrases. The rank of each page indicates how well the page matched the query. </p>
+
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0">To Search For</th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0">Example</th>
+<th align="Left" valign="bottom" width=33% bgcolor="#C0C0C0">Results</th></tr>
+<tr>
+<td valign="top">Pages that contain specific words</td>
+<td valign="top"><font size="3" face="Courier"><code>light, bulb</code></font></td>
+<td valign="top">Files with words that best match the words 
+being searched for</td>
+</tr>
+<tr>
+<td valign="top">Pages that contain weighted prefixes, words, 
+and phrases</td>
+<td valign="top"><font size="3" face="Courier"><code>invent*, light[50], bulb[10], 
+&quot;light bulb&quot;[400]</code></font></td>
+<td valign="top">Files that contain words prefixed by &#147;invent,&#148; 
+the words &#147;light,&#148; &#147;bulb,&#148; and the phrase 
+&#147;light bulb&#148; (the terms are weighted)</td>
+</tr>
+</table>
+
+<p>&nbsp;<!-- </p> --><br>
+
+<ul>
+<li>Components in vector queries are separated by commas. </li>
+<li>Components in vector queries can be weighted by using the [weight] syntax. </li>
+<li>Pages returned by vector queries do not necessarily match every term in the query. </li>
+<li>Vector queries work best when the results are sorted by rank. </li>
+</ul>
+
+<h1><a name="PropertyValueQueries">Property Value Queries</a></h1>
+
+<p>With property value queries, you can find files that have property values that match a given criteria. The properties over which you can query include basic file information like file name and file size, and ActiveX properties including the document summary (information) that is stored in files created by ActiveX-aware applications.</p>
+
+<p>There are two types of property queries:</p>
+
+<ul>
+<li><a name="PropertyValueQueries"><em>Relational property queries</em> consist of an &#147;at&#148; character (@), a </a><a href="#PropertyNames">property name</a>, a <a href="#RelationalOperators">relational operator</a>, and a <a href="#PropertyValues">property value</a>. For example, to find all of the files larger than one million bytes, issue the query @size &gt; 1000000.</li>
+<li><em>Regular expression property queries</em> consist of a number sign (#), a property name, and a <a href="#RegularExpressions">regular expression</a> for the property value. For example, to find to find all of the video (.avi) files, issue the query #filename *.avi. Regular expressions will never match the special properties contents (#contents) and all (#all). Properties that are not retrievable at query time cannot be used in # queries. these include HTML META properties not stored in the property cache.</li>
+</ul>
+
+<p>This section covers the following topics:</p>
+
+<ul>
+<li><a href="#PropertyNames">Property Names</a></li>
+<li><a href="#RelationalOperators">Relational Operators</a></li>
+<li><a href="#PropertyValues">Property Values</a></li>
+</ul>
+
+<h2><a name="PropertyNames">Property Names</a></h2>
+
+<p>Property names are preceded by either the &#147;at&#148; (@) or number sign (#) character. Use @ for relational queries, and # for regular expression queries.</p>
+
+<p>If no property name is specified, <em>@contents</em> is assumed.</p>
+
+<p>Properties available for all files include:</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="40%">Property Name</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="60%">Description</th></tr>
+<tr>
+<td valign="top">All</td>
+<td valign="top">Matches words, phrases, and any property</td>
+</tr>
+<tr>
+<td valign="top">Contents</td>
+<td valign="top">Words and phrases in the file</td>
+</tr>
+<tr>
+<td valign="top">Filename</td>
+<td valign="top">Name of the file</td>
+</tr>
+<tr>
+<td valign="top">Size</td>
+<td valign="top">File size</td>
+</tr>
+<tr>
+<td valign="top">Write</td>
+<td valign="top">Last time the file was modified</td>
+</tr>
+</table>
+
+<p>ActiveX property values can also be used in queries. Web sites with files created by most ActiveX-aware applications can be queried for these properties:</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="40%">Property Name </th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="60%">Description</th></tr>
+<tr>
+<td valign="top">DocTitle</td>
+<td valign="top">Title of the document</td>
+</tr>
+<tr>
+<td valign="top">DocSubject</td>
+<td valign="top">Subject of the document </td>
+</tr>
+<tr>
+<td valign="top">DocAuthor</td>
+<td valign="top">The document&#146;s author </td>
+</tr>
+<tr>
+<td valign="top">DocKeywords</td>
+<td valign="top">Keywords for the document </td>
+</tr>
+<tr>
+<td valign="top">DocComments</td>
+<td valign="top">Comments about the document </td>
+</tr>
+</table>
+
+<p>For a complete list of property names, see the <a href="#PropertyNamesList">List of Property Names</a> later on this page.</p>
+
+<h2><a name="RelationalOperators">Relational Operators</a></h2>
+
+<p>Relational operators are used in relational property queries. </p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>To Search For</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>Example</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width=33%>Results</th></tr>
+<tr>
+<td valign="top">Property values in relation to a fixed value </td>
+<td valign="top"><font size="3" face="Courier"><code>@size &lt; 100 <br>
+@size &lt;= 100 <br>
+@size = 100 <br>
+@size != 100 <br>
+@size &gt;= 100 <br>
+@size &gt; 100 </code></font></td>
+<td valign="top">Files whose size matches the query</td>
+</tr>
+<tr>
+<td valign="top">Property values with all of a set of bits on </td>
+<td valign="top"><font size="3" face="Courier"><code>@attrib ^a 0x820</code></font></td>
+<td valign="top">Compressed files with the archive bit on </td>
+</tr>
+<tr>
+<td valign="top">Property values with some of a set of bits on </td>
+<td valign="top"><font size="3" face="Courier"><code>@attrib ^s 0x20</code></font></td>
+<td valign="top">Files with the archive bit on </td>
+</tr>
+</table>
+
+<h2><a name="PropertyValues">Property Values</a></h2>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="130">To Search For</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="200">Example</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="170">Results</th></tr>
+<tr>
+<td valign="top">A specific value</td>
+<td valign="top"><font size="3" face="Courier"><code>@DocAuthor = Bill Barnes </code></font></td>
+<td valign="top">Files authored by &#147;Bill Barnes&#148;</td>
+</tr>
+<tr>
+<td valign="top">Values beginning with a prefix</td>
+<td valign="top"><font size="3" face="Courier"><code>#DocAuthor George* </code></font></td>
+<td valign="top">Files whose author property begins with 
+&#147;George&#148; </td>
+</tr>
+<tr>
+<td valign="top">Files with any of a set of extensions</td>
+<td valign="top"><font size="3" face="Courier"><code>#filename *.|(exe|,dll|,sys|) </code></font></td>
+<td valign="top">Files with .exe, .dll, or .sys extensions </td>
+</tr>
+<tr>
+<td valign="top">Files modified after a certain date</td>
+<td valign="top"><font size="3" face="Courier"><code>@write &gt; 96/2/14 10:00:00</code></font></td>
+<td valign="top">Files modified after February 14, 1996 at 10:00 
+GMT</td>
+</tr>
+<tr>
+<td valign="top">Files modified after a relative date</td>
+<td valign="top"><font size="3" face="Courier"><code>@write &gt; -1d2h</code></font></td>
+<td valign="top">Files modified in the last 26 hours</td>
+</tr>
+<tr>
+<td valign="top">Vectors matching a vector</td>
+<td valign="top"><font size="3" face="Courier"><code>@vectorprop = { 10, 15, 20 }</code></font></td>
+<td valign="top">ActiveX documents with a vectorprop value 
+of { 10, 15, 20 }</td>
+</tr>
+<tr>
+<td valign="top">Vectors where each value matches a criteria</td>
+<td valign="top"><font size="3" face="Courier"><code>@vectorprop &gt;^a 15</code></font></td>
+<td valign="top">ActiveX documents with a vectorprop value 
+in which all values in the vector are greater 
+than 15</td>
+</tr>
+<tr>
+<td valign="top">Vectors where at least one value matches a 
+criteria</td>
+<td valign="top"><font size="3" face="Courier"><code>@vectorprop =^s 15</code></font></td>
+<td valign="top">ActiveX documents with a vectorprop value 
+in which at least one value is 15</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<ul>
+<li>Be sure to use the pound (#) character before the property name when using a regular expression in a property value, 
+and an &#147;at&#148; (@) character otherwise. The equal (=) relational operator is assumed for regular-expression queries.</li>
+<li>File name (#filename) is the only property that efficiently supports regular expressions with wildcards to the <em>left</em> of text.</li>
+<li>Date and time values are of the form <em>yyyy/mm/dd hh:mm:ss</em> or <EM>yyyy-mm-dd hh:mm:ss</EM>. The first two characters of the year and the entire time can be omitted. If you omit the first two characters of the year, then 29 or less is interpreted as the year 2000, and 30 or greater is interpreted as the year 1900. All dates and times are in Greenwich Mean Time (GMT).</li>
+<li>Dates and times relative to the current time can be expressed with a minus (-) character followed by zero or by more integer unit and time unit pairs. Time units are expressed as: (y) for years, (m) for months, (w) for weeks, (d) for days, (h) for hours, (n) for minutes, and (s) for seconds. A three-digit millisecond value can be optionally specified after the seconds value in date expressions. For example, 1997/12/8 10:10:03:452</li>
+<li>Currency values are of the form <em>x.y</em>, where <em>x</em> is the whole value amount and <em>y</em> is the fractional amount. There is no 
+assumption about units.</li>
+<li>Boolean values are (t) or (true) for <strong>TRUE</strong> and (f) or (false) for <strong>FALSE</strong>.</li>
+<li>Vectors (VT_VECTOR) are expressed as an opening brace ({), followed by a comma-separated list of values, then a 
+closing brace (}).</li>
+<li>Single-value expressions that are compared against vectors are expressed as a <a href="#RelationalOperators">relational operator</a>, then a (^a) for <em>all of</em> 
+or a (^s) for <em>some of</em>.
+<li>Numeric values can be in decimal or hexadecimal (preceded by 0x).</li>
+<li>The <em>contents</em> property does not support relational operators. If a relational operator is specified, no results will be 
+found. For example, @contents Microsoft will find documents containing Microsoft, but @contents<strong>=</strong>Microsoft 
+will find none. </li>
+</ul>
+
+<h3><a name="RegularExpressions">Regular Expressions</a></h3>
+
+<p>Regular expressions in property queries are defined as follows: </p>
+
+<ul>
+<li>Any character except asterisk (*), period (.), question mark (?), and vertical bar (|) defaults to matching just itself.</li>
+<li>Regular expressions can be enclosed in matching quotes (&#147;), and must be enclosed in quotes if they contain a space ( ) 
+or closing parenthesis ()).</li>
+<li>The characters *, ., and ? behave as they behave in Windows; they match any number of characters, match (.) or end 
+of string, and match any one character, respectively.</li>
+<li>The character | is an escape character. After |, the following characters have special meaning:</li>
+<p>( opens a group. Must be followed by a matching ).<!--</p>--><br>
+<p>) closes a group. Must be preceded by a matching (. <!--</p>--><br>
+<p>[ opens a character class. Must be followed by a matching (un-escaped) ]. <!--</p>--><br>
+<p>{ opens a counted match. Must be followed by a matching }. <!--</p>--><br>
+<p>} closes a counted match. Must be preceded by a matching {. <!--</p>--><br>
+<p>, separates <strong>OR</strong> clauses. <!--</p>--><br>
+<p>* matches zero or more occurrences of the preceding expression.<!--</p>--><br>
+<p>? matches zero or one occurrences of the preceding expression.<!--</p>--><br>
+<p>+ matches one or more occurrences of the preceding expression. <!--</p>--><br>
+<p>Anything else, including |, matches itself.<!--</p>--><br>
+<li>Between square brackets ([]) the following characters have special meaning:</li>
+<p>^ matches everything but following classes. Must be the first character. <!--</p>--><br>
+<p>] matches ]. May only be preceded by ^, otherwise it closes the class. <!--</p>--><br>
+<p>- range operator. Preceded and followed by normal characters.<!--</p>--><br>
+<p>Anything else matches itself (or begins or ends a range at itself).<!--</p>--><br>
+<li>Between curly braces ({}) the following syntax applies:</li>
+<p>|{m|} matches exactly <em>m</em> occurrences of the preceding expression. (0 &lt; m &lt; 256). <!--</p>--><br>
+<p>|{m,|} matches at least <em>m</em> occurrences of the preceding expression. (1 &lt; m &lt; 256). <!--</p>--><br>
+<p>|{m,n|} matches between <em>m</em> and <em>n</em> occurrences of the preceding expression, inclusive. (0 &lt; m &lt; 256, 0 &lt; n &lt; 
+256).<!--</p>--><br>
+<li>To match *, ., and ?, enclose them in brackets (for example, |[*]sample will match &#147;*sample&#148;).</li>
+</ul>
+
+<h1><a name="Examples">Query Examples</a></h1>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="40%">Example</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="60%">Results</th></tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@size &gt; 1000000</code></font></td>
+<td valign="top">Pages larger than one million bytes</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@write &gt; 95/12/23</code></font></td>
+<td valign="top">Pages modified after the date</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>Apple tree</code></font></td>
+<td valign="top">Pages with the phrase &#147;apple tree&#148;</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>&quot;apple tree&quot;</code></font></td>
+<td valign="top">Same as above</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@contents apple tree</code></font></td>
+<td valign="top">Same as above</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>Microsoft and @size &gt; 1000000</code></font></td>
+<td valign="top">Pages with the word &#147;Microsoft&#148; that are larger than one million bytes</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>&quot;microsoft and @size &gt; 1000000&quot;</code></font></td>
+<td valign="top">Pages with the phrase specified (not the same as above)</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>#filename *.avi</code></font></td>
+<td valign="top">Video files (the # prefix is used because the query contains a regular expression)</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@attrib ^s 32</code></font></td>
+<td valign="top">Pages with the archive attribute bit on</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@docauthor = John Smith</code></font></td>
+<td valign="top">Pages with the given author</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>$contents why is the sky blue?</code></font></td>
+<td valign="top">Pages that match the query</td>
+</tr>
+<tr>
+<td valign="top"><font size="3" face="Courier"><code>@size &lt; 100 &amp; #filename *.gif</code></font></td>
+<td valign="top">Graphics Interchange Format (GIF) files less than 100 bytes in size</td>
+</tr>
+</table>
+
+<h1><a name="PropertyNamesList">List of Property Names</a></h1>
+
+<p>These properties are always available for queries. Additional properties may also be available depending on the configuration of the Web server.</p>
+
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+<tr>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="15%">Friendly Name</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="20%">Datatype</th>
+<th align="Left" valign="bottom" bgcolor="#C0C0C0" width="65%">Property</th></tr>
+<tr>
+<td valign="top">A_HRef</td>
+<td valign="top">DBTYPE_WSTR |
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML HREF. This property name was created for Microsoft&#174; Site Server and corresponds with the Indexing Service property name HtmlHRef. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">Access</td>
+<td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Last time file was accessed.</td>
+</tr>
+<tr>
+<td valign="top">All</td><td valign="top">(not applicable)</td>
+<td valign="top" width=65%>Searches every property for a string. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">AllocSize</td><td valign="top">DBTYPE_I8</td>
+<td valign="top" width=65%>Size of disk allocation for file.</td>
+</tr>
+<tr>
+<td valign="top">Attrib</td><td valign="top">DBTYPE_UI4</td>
+<td valign="top" width=65%>File attributes. Documented in Win32 SDK.</td>
+</tr>
+<tr>
+<td valign="top">ClassId</td><td valign="top">DBTYPE_GUID</td>
+<td valign="top" width=65%>Class ID of object, for example, WordPerfect, Word, and so on.</td>
+</tr>
+<tr>
+<td valign="top"><a name="Characterization">Characterization</a></td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Characterization, or abstract, of document. Computed by Indexing Service.</td>
+</tr>
+<tr>
+<td valign="top">Contents</td><td valign="top">(not applicable)</td>
+<td valign="top" width=65%>Main contents of file. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">Create</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Time file was created.</td>
+</tr>
+<tr>
+<td valign="top">Directory</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Physical path to the file, not including the file name.</td>
+</tr>
+<tr>
+<td valign="top">DocAppName</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Name of application that created the file.</td>
+</tr>
+<tr>
+<td valign="top">DocAuthor</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Author of document.</td>
+</tr>
+<tr>
+<td>DocByteCount</td><td>DBTYPE_14</td><td>Number of bytes in a document.</td>
+</tr>
+<tr>
+<td>DocCategory</td><td>DBTYPE_STR | 
+DBTYPE_BYREF</td><td>Type of document such as a memo, schedule, or whitepaper.</td>
+</tr>
+<tr>
+<td valign="top">DocCharCount</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Number of characters in document.</td>
+</tr>
+<tr>
+<td valign="top">DocComments</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Comments about document.</td>
+</tr>
+<tr>
+<td>DocCompany</td><td>DBTYPE_STR | 
+DBTYPE_BYREF</td><td>Name of the company for which the document was written.</td>
+</tr>
+<tr>
+<td valign="top">DocCreatedTm</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Time document was created.</td>
+</tr>
+<tr>
+<td valign="top">DocEditTime</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Total time spent editing document.</td>
+</tr>
+<tr>
+<td>DocHiddenCount</td><td>DBTYPE_14</td><td>Number of hidden slides in a Microsoft&#174; PowerPoint document.</td>
+</tr>
+<tr>
+<td valign="top">DocKeywords</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Document keywords.</td>
+</tr>
+<tr>
+<td valign="top">DocLastAuthor</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Most recent user who edited document.</td>
+</tr>
+<tr>
+<td valign="top">DocLastPrinted</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Time document was last printed.</td>
+</tr>
+<tr>
+<td valign="top">DocLastSavedTm</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Time document was last saved.</td>
+</tr>
+<tr>
+<td>DocLineCount</td><td>DBTYPE_14</td><td>Number of lines contained in a document.</td>
+</tr>
+<tr>
+<td>DocManager</td><td>DBTYPE_STR | 
+DBTYPE_BYREF</td><td>Name of the manager of the document&#146;s author.</td>
+</tr>
+<tr>
+<td>DocNoteCount</td><td>DBTYPE_14</td><td>Number of pages with notes in a PowerPoint document.</td>
+</tr>
+<tr>
+<td valign="top">DocPageCount</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Number of pages in document.</td>
+</tr>
+<tr>
+<td>DocParaCount</td><td>DBTYPE_14</td><td>Number of paragraphs in a document.</td>
+</tr>
+<tr>
+<td>DocPartTitles</td><td>DBTYPE_STR | DBTYPE_VECTOR</td><td>Names of document parts. For example, in Excel part titles are the names of spread sheets, in PowerPoint slide titles, and in Word for Windows the names of the documents in the master document.</td>
+</tr>
+<tr>
+<td>DocPresentationTarget</td><td>DBTYPE_STR|DBTYPE_BYREF</td><td>Target format (35mm, printer, video, and so on) for a presentation in PowerPoint.</td>
+</tr>
+<tr>
+<td valign="top">DocRevNumber</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Current version number of document.</td>
+</tr>
+<tr>
+<td>DocSlideCount</td><td>DBTYPE_14</td><td>Number of slides in a PowerPoint document.</td>
+</tr>
+<tr>
+<td valign="top">DocSubject</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Subject of document.</td>
+</tr>
+<tr>
+<td valign="top">DocTemplate</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Name of template for document.</td>
+</tr>
+<tr>
+<td valign="top"><a name="DocTitle">DocTitle</a></td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Title of document.</td>
+</tr>
+<tr>
+<td valign="top">DocWordCount</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Number of words in document.</td>
+</tr>
+<tr>
+<td valign="top">FileIndex</td><td valign="top">DBTYPE_I8</td>
+<td valign="top" width=65%>Unique ID of file.</td>
+</tr>
+<tr>
+<td valign="top"><a name="FileName">FileName</a></td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Name of file.</td>
+</tr>
+<tr>
+<td valign="top">HitCount</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Number of hits (words matching query) in file.</td>
+</tr>
+<tr>
+<td valign="top">HtmlHRef</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML HREF. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading1</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H1. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading2</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H2. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading3</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H3. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading4</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H4. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading5</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H5. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">HtmlHeading6</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Text of HTML document in style H6. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top">Img_Alt</td>
+<td valign="top">DBTYPE_WSTR | DBTYPE_BYREF</td>
+<td valign="top" width=65%>Alternate text for &lt;IMG&gt; tags. <em>Can be queried but not retrieved.</em></td>
+</tr>
+<tr>
+<td valign="top"><a name="Path">Path</a></td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Full physical path to file, including file name.</td>
+</tr>
+<tr>
+<td valign="top">Rank</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Rank of row. Ranges from 0 to 1000. Larger numbers indicate better matches.</td>
+</tr>
+<tr>
+<td valign="top">RankVector</td><td valign="top">DBTYPE_I4 | 
+DBTYPE_VECTOR</td>
+<td valign="top" width=65%>Ranks of individual components of a <a href="#VectorQueries">vector query</a>.</td>
+</tr>
+<tr>
+<td valign="top">ShortFileName</td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Short (8.3) file name.</td>
+</tr>
+<tr>
+<td valign="top">Size</td><td valign="top">DBTYPE_I8</td>
+<td valign="top" width=65%>Size of file, in bytes.</td>
+</tr>
+<tr>
+<td valign="top">USN</td><td valign="top">DBTYPE_I8</td>
+<td valign="top" width=65%>Update Sequence Number. NTFS drives only.</td>
+</tr>
+<tr>
+<td valign="top"><a name="VPath">VPath</a></td><td valign="top">DBTYPE_WSTR | 
+DBTYPE_BYREF</td>
+<td valign="top" width=65%>Full virtual path to file, including file name. If more than one possible path, then the best 
+match for the specific query is chosen.</td>
+</tr>
+<tr>
+<td valign="top">WorkId</td><td valign="top">DBTYPE_I4</td>
+<td valign="top" width=65%>Internal ID for file. Used within Indexing Service.</td>
+</tr>
+<tr>
+<td valign="top">Write</td><td valign="top">VT_FILETIME</td>
+<td valign="top" width=65%>Last time file was written.</td>
+</tr>
+</table>
+
+
+<h2><a name="DefiningNewPropertyNames">Defining New Property Names</a></h2>
+
+<p>To define properties that are not in the previous list, you must list them in a [Names] section in the .idq file. To use these properties in a restriction, sort specification, or as a retrieved column, you have define them in the .idq file, using the following format:</p>
+
+<p>[Names]<br>
+#Properties that are not in the standard list<br>
+<em>Propertyname</em> ( <em>Datatype </em>) = <em>GUID</em> ["<em>Name</em>" | <em>propid</em>]<br>
+</p>
+
+<p>In the syntax, <em>"Name"</em> is the property name (<strong>"Sales"</strong> in the following example), and <em>propid</em> is the property ID in hexadecimal. Note that you need to surround the friendly name with quotation marks, but the property ID does not take quotation marks.</p>
+
+<p>For example, suppose you want to define an HTML meta tag as a property name that somebody can search for. The property you want to define is <strong>Sales</strong>.</p>
+
+<p><big>To define the <strong>Sales</strong> property</big><!--</p>--><br>
+
+<ol>
+<li>In the .idq file, under the [Names] section, add the following line.</li>
+
+<p>MetaDescription(DBTYPE_WSTR) = d1b5d3f0-c0b3-11cf-9a92-00a0c908dbf1 "Sales"<!--</p>--><br>
+
+<li>Then, in the HTML files where you want the tag to appear, define the meta description.</li>
+<p>For example, say you want to search for all files that give sales projections for the future:<!--</p>--><br>
+<p>In File1.htm:<!--</p>--><br>
+<p>&lt;META NAME="Sales" CONTENT="Projections for 2006"&gt;<!--</p>--><br>
+<p>In File2.htm:<!--</p>--><br>
+<p>&lt;META NAME="Sales" CONTENT="Projections for 2007"&gt;<!--</p>--><br>
+<p>In File3.htm:<!--</p>--><br>
+<p>&lt;META NAME="Sales" CONTENT="Sales in 2005"&gt;<!--</p>--><br>
+</ol>
+
+<p><strong>Note</strong>&nbsp;&nbsp;&nbsp;Be sure to add your META NAME tags between the &lt;head&gt; and &lt;/head&gt; HTML tags at the beginning of the file.</p>
+<p>You can now search for all files that show sales projections. Send the following query:</p>
+<p>@metadescription projections<!--</p>--><br>
+<p>This query returns all the files with the word <em>projections</em> in the CONTENT field of the meta tag. In this example, File1.htm and File2.htm are returned.</p>
+<p>But suppose you want to search for sales by year, for example a list of sales in 1997. Send the following query:</p>
+<p>@metadescription 1997<!--</p>--><br>
+<p>File3.htm is returned.</p>
+
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2002 by Microsoft Corporation. All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>
+

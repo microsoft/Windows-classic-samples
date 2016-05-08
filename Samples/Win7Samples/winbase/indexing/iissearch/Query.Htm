@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
+<HTML>
+
+<HEAD>
+
+<!--
+                *****      INSTRUCTIONS FOR CUSTOMIZING THIS FORM      *****
+
+                To customize this form, look for remarks in the file beginning with
+                5 stars ("*****"). These lines contain instructions for easily
+                customizing the most common qury form elements.
+
+-->
+
+        <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+
+    <TITLE>Indexing Service Sample HTM/IDQ/HTX Search Form</TITLE>
+    <META NAME="DESCRIPTION" CONTENT="Sample query form for Indexing Service">
+    <META NAME="AUTHOR"      CONTENT="Indexing Service Team">
+    <META NAME="KEYWORDS"    CONTENT="query, content, hit">
+    <META NAME="SUBJECT"     CONTENT="sample form">
+    <META NAME="MS.CATEGORY" CONTENT="Internet">
+    <META NAME="MS.LOCALE"   CONTENT="EN-US">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Windows-1252">
+</HEAD>
+
+<!-- ***** To change the form's background pattern, simply save your background pattern
+       using the name IS2BKGND.GIF in the same directory as this form. ***** -->
+<BODY OnLoad="Init()" LANGUAGE="JSCRIPT" background="is2bkgnd.gif">
+
+<TABLE>
+
+        <TR><TD><A href="http://www.microsoft.com/ntserver/search" target="_top">
+
+<!-- ***** To change the form's logo, simply save your logo using the name IS2LOGO.GIF
+       in the same directory as this form. -->
+    <IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT  border=0>
+
+        </A></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>
+
+<!-- ***** The following line of text is displayed next to the form logo. -->
+        Sample HTM/IDQ/HTX Search Form
+
+        </H3></TD></TD></TR>
+    </TR>
+</TABLE>
+
+<FORM NAME=QueryForm ACTION="query.idq" METHOD="GET">
+    <TABLE WIDTH=500>
+                        <TR>
+                                <td>Enter your query below:</td>
+                        </TR>
+                        <TR>
+                                <TD><INPUT TYPE="TEXT" NAME="OriginalQuery" SIZE="65" MAXLENGTH="100" VALUE=""></TD>
+                                <TD><BUTTON TYPE=SUBMIT>Go</BUTTON></TD>
+                        </TR>
+                                <TR>
+                                <TD ALIGN="RIGHT"><A HREF="ixtiphlp.htm">Tips for searching</A></TD>
+                        </TR>
+                        <TR>
+                                <TD>
+                                        <P><INPUT NAME="Advanced" TYPE=CHECKBOX>Use <a href="ixtiphlp.htm">Advanced Query</a>.
+                                </TD>
+                        </TR>
+        </TABLE>
+
+<!-- The CiScope parameter allows you to control which documents are searched. To search
+                the entire document set, use a value of "/", which corresponds to the root of your web
+                virtual namespace. To search a subset of your documents, set the value equal to the
+                virtual directory you want to search.  -->
+        <INPUT TYPE="HIDDEN" NAME="CiScope" VALUE="/">
+
+        <INPUT TYPE="HIDDEN" NAME="CiMaxRecordsPerPage" VALUE="10">
+    <INPUT TYPE="HIDDEN" NAME="TemplateName" VALUE="query">
+    <INPUT TYPE="HIDDEN" NAME="CiSort" VALUE="rank[d]">
+        <INPUT TYPE="HIDDEN" NAME="HTMLQueryForm" VALUE="query.htm">
+</FORM>
+
+
+<!-- STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+<hr width=500 align=left>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/Windows.NetServer"><img src="win2k.gif" alt="Learn more about Microsoft Windows"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-2002 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/Info/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+
+<!-- END STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+</BODY>
+
+<SCRIPT LANGUAGE=JSCRIPT>
+function Init()
+{
+  QueryForm.OriginalQuery.focus();
+}
+</SCRIPT>
+
+</HTML>
+

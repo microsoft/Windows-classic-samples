@@ -1,0 +1,295 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+// Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 197, 73
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Generic UCP"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,39,17,21,20
+    LTEXT           "GenericUCP ",IDC_STATIC,81,21,58,8,SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,70,47,50,14,WS_GROUP
+END
+
+IDD_GENERICUCP_DIALOG DIALOG DISCARDABLE  3, 1, 335, 365
+STYLE DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "Generic UCP"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Generic UCP",IDC_STATIC,133,9,80,18,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    GROUPBOX        "",IDC_STATIC,11,34,315,301
+    GROUPBOX        "",IDC_STATIC,21,44,294,55
+    CONTROL         "Find by &Type",IDC_FINDBYTYPE,"Button",
+                    BS_AUTORADIOBUTTON,32,59,59,8
+    CONTROL         "Find by &UDN",IDC_FINDBYUDN,"Button",BS_AUTORADIOBUTTON,
+                    136,59,59,8
+    CONTROL         "&Async Find",IDC_ASYNCFIND,"Button",BS_AUTORADIOBUTTON,
+                    240,59,59,8
+    COMBOBOX        IDC_COMBOFIND,29,73,271,50,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Start &Discovery",IDC_DISCOVERY,144,103,65,15
+    LTEXT           "Status",IDC_STATIC,16,123,38,10,NOT WS_GROUP
+    LTEXT           "",IDC_STATUS,59,123,256,10,WS_BORDER | NOT WS_GROUP
+    LTEXT           "Devices Found",IDC_STATIC,15,138,65,10,NOT WS_GROUP
+    COMBOBOX        IDC_COMBODEVICE,17,148,298,50,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Device &Properties",IDC_DEVPROP,78,164,65,15
+    PUSHBUTTON      "View P&resentation",IDC_PRESENTATION,189,165,65,15,
+                    WS_DISABLED
+    LTEXT           "Choose Service",IDC_STATIC,15,182,70,10,NOT WS_GROUP
+    COMBOBOX        IDC_COMBOSERVICE,16,196,298,50,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Service Desc. URL",IDC_STATIC,15,217,70,10,WS_DISABLED | 
+                    NOT WS_GROUP
+    EDITTEXT        IDC_SCPDURL,93,217,221,13,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Query Variable : ",IDC_STATIC,15,235,70,10,NOT WS_GROUP
+    EDITTEXT        IDC_VARIABLENAME,93,233,221,13,ES_AUTOHSCROLL
+    LTEXT           "Invoke Action :",IDC_STATIC,15,254,70,10,NOT WS_GROUP
+    EDITTEXT        IDC_ACTIONNAME,93,249,221,13,ES_AUTOHSCROLL
+    LTEXT           "Action Arguments :",IDC_STATIC,15,272,70,10,NOT 
+                    WS_GROUP
+    EDITTEXT        IDC_ACTIONINARGUMENT,93,265,221,13,ES_AUTOHSCROLL
+    LTEXT           "Query State Value / Action Out Arguments ",IDC_STATIC,
+                    15,286,70,15,NOT WS_GROUP
+    EDITTEXT        IDC_ACTIONOUTARGUMENT,93,281,221,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "&View Service        Desc.",IDC_VIEWSCPD,24,310,49,20,
+                    BS_MULTILINE | WS_DISABLED
+    PUSHBUTTON      "&Query",IDC_QUERYVARIABLE,101,310,49,20
+    PUSHBUTTON      "&Invoke",IDC_INVOKEACTION,181,310,49,20
+    PUSHBUTTON      "&Close",IDC_CLOSE,261,310,49,20
+    LTEXT           "Events",IDC_STATIC,11,345,38,10,NOT WS_GROUP
+    LTEXT           "",IDC_EVENTS,53,340,273,20,WS_BORDER | NOT WS_GROUP
+END
+
+IDD_DEVPROP_DIALOG DIALOG DISCARDABLE  3, 1, 428, 343
+STYLE DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "Device Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Static",IDC_STATIC,5,30,417,281
+    EDITTEXT        IDC_EDITSERIALNUMBER,95,284,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITUPC,95,262,313,15,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDITMODELURL,95,240,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITMODELDESCRIPTION,95,218,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITMODELNUMBER,95,196,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITMODELNAME,95,174,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITMANUFACTURERURL,95,152,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITMANUFACTURER,95,130,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITPRESENTATIONURL,95,108,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITDEVICETYPE,95,86,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDITFRIENDLYNAME,95,64,313,15,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_WANTRETURN
+    EDITTEXT        IDC_EDITUDN,95,42,313,15,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "UDN :",IDC_STATIC,16,42,71,15,NOT WS_GROUP
+    LTEXT           "friendlyName :",IDC_STATIC,16,64,71,15,NOT WS_GROUP
+    LTEXT           "deviceType :",IDC_STATIC,16,87,71,15,NOT WS_GROUP
+    LTEXT           "presentationURL :",IDC_STATIC,16,110,71,15,NOT WS_GROUP
+    LTEXT           "manufacturer :",IDC_STATIC,16,132,71,15,NOT WS_GROUP
+    LTEXT           "manufacturerURL :",IDC_STATIC,16,154,71,15,NOT WS_GROUP
+    LTEXT           "modelName :",IDC_STATIC,16,177,71,15,NOT WS_GROUP
+    LTEXT           "modelNumber :",IDC_STATIC,16,200,71,15,NOT WS_GROUP
+    LTEXT           "modelDescription :",IDC_STATIC,16,222,71,15,NOT 
+                    WS_GROUP
+    LTEXT           "modelURL :",IDC_STATIC,16,245,71,15,NOT WS_GROUP
+    LTEXT           "UPC :",IDC_STATIC,16,268,71,15,NOT WS_GROUP
+    LTEXT           "serialNumber :",IDC_STATIC,16,290,71,15,NOT WS_GROUP
+    PUSHBUTTON      "Ok",IDC_OK,187,315,49,20
+    CTEXT           "Device Properties",IDC_STATIC,181,10,80,14,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "GenericUCP MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "GenericUCP\0"
+            VALUE "LegalCopyright", "Copyright (C) 2009\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "GenericUCP.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "GenericUCP Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 65
+    END
+
+    IDD_GENERICUCP_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 334
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "GenericUCP.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About GenericUCP..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

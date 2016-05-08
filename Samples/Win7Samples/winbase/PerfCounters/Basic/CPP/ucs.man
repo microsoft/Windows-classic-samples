@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events"
+    xmlns:trace="http://schemas.microsoft.com/win/2004/08/events/trace"
+    xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.microsoft.com/win/2004/08/events eventman.xsd"
+    >
+  <instrumentation>
+    <counters
+        xmlns="http://schemas.microsoft.com/win/2005/12/counters"
+        xmlns:auto-ns1="http://schemas.microsoft.com/win/2004/08/events"
+        schemaVersion="1.1"
+        >
+            <provider callback            = "custom"
+                      applicationIdentity = "ucs.exe"
+                      providerName        = "UsermodeCountersSample"
+                      providerType        = "userMode"
+                      symbol              = "UserModeCountersSample"
+                      providerGuid        = "{ffeeaadd-965a-4cf9-9c07-fe25378c2a23}">
+                <counterSet    guid        = "{ffeeaadd-c923-4794-b696-70577630b5cf}"
+                               uri         = "Microsoft.Sdk.Samples.Ucs.GeometricWave"
+                               name        = "Geometric Waves"
+                               description = "This counter set displays a Triangle and a Square wave"
+                               symbol      = "GeometricWave"
+                               instances   = "multipleAggregate">
+                  <counter id           = "1"
+                           uri          = "Microsoft.Sdk.Samples.Ucs.GeometricWave.Triangle"
+                           name         = "Triangle Wave"
+                           description  = "This counter displays triangle wave"
+                           type         = "perf_counter_rawcount"
+                           aggregate    = "sum"
+                           detailLevel  = "standard">
+                    </counter>
+                    <counter id           = "2"
+                             uri          = "Microsoft.Sdk.Samples.Ucs.GeometricWave.Square"
+                             name         = "Square Wave"
+                             description  = "This counter displays Square Wave"
+                             type         = "perf_counter_rawcount"
+                             aggregate    = "avg"
+                             detailLevel  = "standard">
+                    </counter>
+                </counterSet>
+		            <counterSet    guid        = "{ffeeaadd-eaa6-45ba-bf6d-4c7cb0d6ef73}"
+                               uri         = "Microsoft.Sdk.Samples.Ucs.TrignometricWave"
+                               name        = "Trignometric Waves"
+                               description = "This counter set displays a sine, cosine and a constant wave"
+                               symbol      = "TrignometricWave"
+                               instances   = "single">
+                  <counter id           = "1"
+                           uri          = "Microsoft.Sdk.Samples.Ucs.TrignometricWave.Sine"
+                           name         = "Sine Wave"
+                           description  = "This counter displays Sine Wave"
+                           type         = "perf_counter_rawcount"
+                           detailLevel  = "standard">
+                        <counterAttributes>
+                            <counterAttribute name = "reference" />
+                        </counterAttributes>
+                    </counter>
+                    <counter id           = "2"
+                             uri          = "Microsoft.Sdk.Samples.Ucs.TrignometricWave.Cosine"
+                             name         = "Cosine Wave"
+                             description  = "This counter displays Cosine Wave"
+                             type         = "perf_counter_rawcount"
+                             detailLevel  = "standard">
+                        <counterAttributes>
+                            <counterAttribute name = "reference" />
+                        </counterAttributes>
+                    </counter>
+                    <counter id           = "3"
+                             uri          = "Microsoft.Sdk.Samples.Ucs.TrignometricWave.Constant"
+                             name         = "Constant Value"
+                             description  = "This counter displays Constant Value"
+                             type         = "perf_counter_rawcount"
+                             detailLevel  = "standard"
+                             defaultScale = "1">
+                        <counterAttributes>
+                            <counterAttribute name = "reference" />
+                        </counterAttributes>
+                    </counter>
+                    <counter id           = "4"
+                             uri          = "Microsoft.Sdk.Samples.Ucs.TrignometricWave.ConstantNoDisplay"
+                             name         = "Constant Number"
+                             description  = "This counter stores Constant Value but do not display"
+                             type         = "perf_raw_base"
+                             detailLevel  = "standard">
+                        <counterAttributes>
+                            <counterAttribute name="noDisplay" />
+                        </counterAttributes>
+                    </counter>
+                    <counter id           = "5"
+                             uri          = "Microsoft.Sdk.Samples.Ucs.TrignometricWave.RawFraction"
+                             name         = "Raw Fraction"
+                             description  = "RawFraction ; Takes counter with ID = 4 as base counter"
+                             type         = "perf_raw_fraction"
+                             baseID       = "4"
+                             detailLevel  = "standard">
+                        <counterAttributes>
+                            <counterAttribute name="reference" />
+                        </counterAttributes>
+                    </counter>
+                </counterSet>
+            </provider>
+        </counters>
+    </instrumentation>
+</instrumentationManifest>
+

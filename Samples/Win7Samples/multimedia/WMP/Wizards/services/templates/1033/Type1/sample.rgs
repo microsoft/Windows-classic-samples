@@ -1,0 +1,49 @@
+HKCR
+{
+	NoRemove AppID
+	{
+	    ForceRemove {[!output APPID]} = s '[!output Safe_root]'
+		{
+			val DllSurrogate = s ''
+		}
+	}
+	
+	NoRemove CLSID
+	{
+	
+	    ForceRemove {[!output CLASSID]} = s '[!output Safe_root] Class'
+		{
+		    val AppID = s '{[!output APPID]}'
+
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+		
+	}
+}
+
+
+HKEY_LOCAL_MACHINE
+{
+	NoRemove SOFTWARE
+	{
+		NoRemove Microsoft
+		{
+			NoRemove MediaPlayer
+			{
+				NoRemove Subscriptions
+				{				
+					ForceRemove '[!output CONTENTDISTRIBUTOR]'
+					{
+						val Capabilities = d &H58
+						val SubscriptionObjectGUID = s '{[!output CLASSID]}'
+						val FriendlyName = s '[!output FRIENDLYNAME]'
+						val RemoveUrl = s '[!output REMOVEURL]'			
+					}
+				}
+			}
+		}	
+	}	
+}

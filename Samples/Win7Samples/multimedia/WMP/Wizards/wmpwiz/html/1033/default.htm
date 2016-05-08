@@ -1,0 +1,344 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+<HTML DIR="LTR">
+    <HEAD>
+        <TITLE>Windows Media Player Plug-in Wizard</TITLE>
+        <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <STYLE TYPE="text/css">@import url();</STYLE>
+        <SCRIPT>
+        var strURL = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+        strURL += "VCWizards/";
+        strURL += window.external.GetHostLocale();
+        strURL += "/NewStyles.css";
+        document.styleSheets(0).imports(0).href = strURL;
+        </SCRIPT>
+        <SYMBOL NAME='WIZARD_DIALOG_TITLE' TYPE="text" VALUE='Windows Media Player Plug-in Wizard'></SYMBOL>
+        <SYMBOL NAME="MAX_SYMBOL_LENGTH" TYPE="num" VALUE="64"></SYMBOL>
+        <SYMBOL NAME="root" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="Root" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="ROOT" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="safe_root" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="Safe_root" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="SAFE_ROOT" TYPE="text"></SYMBOL>
+        <SYMBOL NAME='FRIENDLYNAME' TYPE="text"></SYMBOL>
+        <SYMBOL NAME='DESCRIPTION' TYPE="text"></SYMBOL>
+        <SYMBOL NAME="PROJECT_NAME_OEM" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="RES_PATH" TYPE="text" VALUE="res"></SYMBOL>
+        <SYMBOL NAME="HELP_PATH" TYPE="text" VALUE="hlp"></SYMBOL>
+        <SYMBOL NAME="EMPTY_PROJECT" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="SUPPORT_ATL" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="SUPPORT_MFC" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="SOURCE_FILTER" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="INCLUDE_FILTER" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="RESOURCE_FILTER" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="DO_KANA" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="TARGET_INTEL" TYPE="checkbox" VALUE="true"></SYMBOL>
+        <SYMBOL NAME="TARGET_MIPS" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="TARGET_ALPHA" TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME="CC" TYPE="text" VALUE="cl"></SYMBOL>
+        <SYMBOL NAME="LINKER" TYPE="text" VALUE="link"></SYMBOL>
+        <SYMBOL NAME="CPU" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="HOST_CPU" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="YEAR" TYPE="text"></SYMBOL>
+        <SYMBOL NAME="APP_TYPE_SUMMARY" TYPE="text" VALUE=""></SYMBOL>
+        <SYMBOL NAME="VSNET" TYPE="checkbox" VALUE="true"></SYMBOL>
+        <SYMBOL NAME='VIZ_RADIO' TYPE="checkbox" VALUE="true"></SYMBOL>
+        <SYMBOL NAME='UI_RADIO' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='DSP_RADIO' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='RENDERING_RADIO' TYPE="checkbox" VALUE="false"></SYMBOL>
+   </HEAD>
+    <BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        <DIV id="logo" style="POSITION: absolute"><IMG src="..\..\Images\logo.png">
+        </DIV>
+        <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            <P><FONT face="Arial" size="4">Welcome to the Windows Media Player Plug-in 
+                    Wizard </FONT>
+            </P>
+            <SPAN CLASS="itemText">
+                <FONT face="Arial" size="2">Choose the type of plug-in you wish to create:
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="VIZ_RADIO" ACCESSKEY="V" TITLE="Visualization" VALUE="VIZ_RADIO">
+                    <DIV CLASS="itemTextRadioB" TITLE="Visualization" ID="Div1">
+                        <LABEL FOR="VIZ_RADIO" TITLE="Visualization" ID="Label1"><U>V</U>isualization</LABEL>
+                    </DIV>
+                    <BR>
+                    <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="UI_RADIO" ACCESSKEY="U" TITLE="UI Plugin" VALUE="UI_RADIO">
+                    <DIV CLASS="itemTextRadioB" TITLE="UI Plugin" ID="Div2">
+                        <LABEL FOR="UI_RADIO" TITLE="UI Plugin" ID="AUT_ID4"><U>U</U>I Plug-in</LABEL>
+                    </DIV>
+                    <BR>
+                    <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="DSP_RADIO" ACCESSKEY="D" TITLE="DSP Plugin" VALUE="DSP_RADIO">
+                    <DIV CLASS="itemTextRadioB" TITLE="DSP Plugin" ID="Div3">
+                        <LABEL FOR="DSP_RADIO" TITLE="DSP Plugin" ID="Label2"><U>D</U>SP Plug-in</LABEL>
+                    </DIV>
+                    <BR>
+                    <INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="RENDERING_RADIO" ACCESSKEY="R" TITLE="Rendering Plugin" VALUE="RENDERING_RADIO">
+                    <DIV CLASS="itemTextRadioB" TITLE="Rendering Plugin" ID="Div4">
+                        <LABEL FOR="RENDERING_RADIO" TITLE="Rendering Plugin" ID="Label3"><U>R</U>endering 
+                            Plug-in</LABEL>
+                    </DIV>
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    To continue, click Next </FONT>
+            </SPAN>
+        </DIV>
+        <DIV style="LEFT: 0px; WIDTH: 600px; POSITION: absolute; TOP: 304px; HEIGHT: 2px">
+            <hr>
+        </DIV>
+        <DIV style="LEFT: 250px; WIDTH: 200px; POSITION: absolute; TOP: 316px; HEIGHT: 48px">
+            <TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0" ID="Table1">
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="FinishBtn" ACCESSKEY="N" onClick="OnNext(document);"><U>N</U>ext</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="CancelBtn" ACCESSKEY="C" onClick="window.external.Finish(document, 'cancel');">
+                        <U>C</U>ancel</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+                    &nbsp;
+                </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+    </BODY>
+</HTML>
+<SCRIPT LANGUAGE="JSCRIPT">
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+    setDirection();
+
+    if (window.external.FindSymbol("DOCUMENT_FIRST_LOAD"))
+    {
+        var L_WizardDialogTitle_Text = "Windows Media Player Plug-in Wizard";
+        window.external.AddSymbol("WIZARD_DIALOG_TITLE", L_WizardDialogTitle_Text);
+        var strProjName = window.external.FindSymbol("PROJECT_NAME");
+        var coll = document.all.tags("SYMBOL");
+        var numSymbols = coll.length;
+        for (i = 0; i < numSymbols; i++)
+        {
+            var obj = coll(i);
+            if (typeof(obj.VALUE) == "undefined")
+            {
+                obj.VALUE = getval(obj, strProjName);
+            }
+        }
+        window.external.SetDefaults(document);
+        CreateGuids();
+    }
+    window.external.Load(document);
+    InitControls();
+}
+
+
+function CreateGuids()
+{
+    var strGuid = window.external.CreateGuid();
+
+    var strVal = window.external.FormatGuid(strGuid, 0);
+    window.external.AddSymbol("CLASSID", strVal);
+
+    strVal = window.external.FormatGuid(strGuid, 1);
+    window.external.AddSymbol("DEFINEGUID", strVal);
+
+    strGuid = window.external.CreateGuid();
+    strVal = window.external.FormatGuid(strGuid, 0);
+    window.external.AddSymbol("LIBRARYID", strVal);
+
+    strGuid = window.external.CreateGuid();
+    strVal = window.external.FormatGuid(strGuid, 0);
+    window.external.AddSymbol("INTERFACEID", strVal);
+
+    strGuid = window.external.CreateGuid();
+    strVal = window.external.FormatGuid(strGuid, 0);
+    window.external.AddSymbol("CLASSIDPROPPAGE", strVal);
+    strVal = window.external.FormatGuid(strGuid, 1);
+    window.external.AddSymbol("DEFINEGUIDPROPPAGE", strVal);
+
+    strGuid = window.external.CreateGuid();
+    strVal = window.external.FormatGuid(strGuid, 1);
+    window.external.AddSymbol("MEDIATYPEID", strVal);
+}
+
+
+
+function InitControls()
+
+// Creates text for the 'Application Summary' based on the control values
+
+{
+
+    if (window.external.FindSymbol("EMPTY_PROJECT"))
+    {
+/*      APP_SETTINGS_SUMMARY.innerText="Empty project"; */
+    }
+    else
+    {
+/*      APP_SETTINGS_SUMMARY.innerText="Simple project";
+
+        if (window.external.FindSymbol("SUPPORT_ATL"))
+            APP_SETTINGS_SUMMARY.innerText += ", support ATL";
+        else
+            APP_SETTINGS_SUMMARY.innerText += ", no ATL";
+
+        if (window.external.FindSymbol("SUPPORT_MFC"))
+            APP_SETTINGS_SUMMARY.innerText += ", support MFC";
+        else
+            APP_SETTINGS_SUMMARY.innerText += ", no MFC"; */
+    }
+
+}
+
+function OnNext(document)
+{
+    var bVS70 = window.external.FindSymbol("VS70");
+    
+    if(bVS70)
+    {
+        window.external.RemoveSymbol("VISPLUGIN");
+        window.external.RemoveSymbol("UIPLUGIN");
+        window.external.RemoveSymbol("DSPPLUGIN");
+        window.external.RemoveSymbol("RENDERINGPLUGIN");
+    }
+    else
+    {
+        window.external.AddSymbol("VISPLUGIN", false);
+        window.external.AddSymbol("UIPLUGIN", false);
+        window.external.AddSymbol("DSPPLUGIN", false);
+        window.external.AddSymbol("RENDERINGPLUGIN", false);
+    }
+    
+
+    if (VIZ_RADIO.checked)
+    {
+        window.external.AddSymbol("VISPLUGIN", true);
+        window.external.Next(document, "vissettings.htm");
+    }
+    else if (UI_RADIO.checked)
+    {
+        window.external.AddSymbol("UIPLUGIN", true);
+        window.external.Next(document, "uichoice.htm");
+    }
+    else if (DSP_RADIO.checked)
+    {
+        window.external.AddSymbol("DSPPLUGIN", true);
+        window.external.Next(document, "dspchoice.htm");
+    }
+    else if (RENDERING_RADIO.checked)
+    {
+        window.external.AddSymbol("RENDERINGPLUGIN", true);
+        OnWizFinish(document);
+    }
+}
+
+function Next(document, linkto)
+
+// Tell the wizard control which page to load next
+
+{
+    window.external.Next(document, linkto);
+}
+
+
+
+function OnFinish(obj)
+
+// Called when the user clicks the finish button.  OnWizFinish is a function in common.js
+
+{
+    OnWizFinish(obj);
+}
+
+
+
+function getval(obj, strProjName)
+{
+    var SymbolValue = "";
+    switch(obj.NAME)
+    {
+        case "PROJECT_NAME_OEM":
+            SymbolValue = strProjName; 
+            break;
+        case "root":
+            SymbolValue	= strProjName;
+            break;
+        case "Root":
+            {
+                SymbolValue = strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1);
+            }
+            break;
+        case "ROOT":
+            {
+                SymbolValue = strProjName.toUpperCase();
+            }
+            break;
+        case "safe_root":
+            SymbolValue	= CreateSafeName(strProjName);
+            break;
+        case "Safe_root":
+            {
+                var strSafeProjName = CreateSafeName(strProjName);
+                SymbolValue = strSafeProjName.substr(0, 1).toUpperCase() + strSafeProjName.substr(1);
+            }
+            break;
+        case "SAFE_ROOT":
+            {
+                var strSafeProjName = CreateSafeName(strProjName);
+                SymbolValue = strSafeProjName.toUpperCase();
+            }
+            break;
+        case  "SOURCE_FILTER":
+            SymbolValue = "cpp;c;cxx;rc;def;odl;idl;hpj;bat;asm"; 
+            break;
+        case  "INCLUDE_FILTER":
+            SymbolValue = "h;hpp;hxx;hm;inl;inc"; 
+            break;
+        case  "RESOURCE_FILTER":
+            SymbolValue = "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"; 
+            break;
+        case  "CPU":
+            SymbolValue = "i386"; 
+            break;
+        case  "HOST_CPU":
+            SymbolValue = "X86"; 
+            break;
+        case  "YEAR":
+            {
+                d = new Date();
+                SymbolValue = d.getFullYear().toString();
+            }
+            break;
+        case "FRIENDLYNAME":
+            SymbolValue = strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1) + " plugin"; 
+            break;
+        case "DESCRIPTION":
+            SymbolValue = "Description of " + strProjName.substr(0, 1).toUpperCase() + strProjName.substr(1) + " plugin"; 
+            break;
+        default:
+            SymbolValue = "";
+            break;
+    }
+    return (SymbolValue);
+}
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT>
+    var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+    strPath += "VCWizards/";
+    strPath += window.external.GetHostLocale();
+    var strScriptPath = strPath + "/Script.js";
+    var strCommonPath = strPath + "/Common.js";
+    document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+    document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

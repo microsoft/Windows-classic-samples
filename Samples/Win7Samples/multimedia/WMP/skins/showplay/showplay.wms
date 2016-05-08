@@ -1,0 +1,150 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<THEME>
+    <VIEW
+        width="600" height="300"
+        backgroundColor="pink"
+        >
+
+        <TEXT width="600" justification="center"
+            fontSize="14" fontStyle="bold"
+            value="Demonstration of playlist attributes"
+            />
+
+        <PLAYLIST id="myPlaylist"
+            left="10" top="30"
+            width="150" height="150"
+            backgroundColor="black"
+            foregroundColor="white"
+            />
+
+        <BUTTON id="bVisible" sticky="true"
+            left="270" top="30"
+            upToolTip="Hide playlist"
+            downToolTip="Show playlist"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.visible=!down;tVisible.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tVisible" toolTip=""
+            left="330" top="30"
+            value="jscript:bVisible.upToolTip;"
+            />
+
+        <BUTTON id="bDropdown" sticky="true"
+            left="270" top="60"
+            upToolTip="Hide dropdown"
+            downToolTip="Show dropdown"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            disabledImage="button_disabled.bmp"
+            onClick="myPlaylist.dropdownVisible=bItems.enabled=!down;tDropdown.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tDropdown" toolTip=""
+            left="330" top="60"
+            value="jscript:bDropdown.upToolTip;"
+            />
+
+        <BUTTON id="bItems" sticky="true"
+            left="270" top="90"
+            upToolTip="Hide playlist items"
+            downToolTip="Show playlist items"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            disabledImage="button_disabled.bmp"
+            onClick="myPlaylist.playlistItemsVisible=bDropdown.enabled=!down;tItems.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tItems" toolTip=""
+            left="330" top="90"
+            value="jscript:bItems.upToolTip;"
+            />
+
+        <BUTTON id="bColumnTitle" sticky="true"
+            left="270" top="120"
+            upToolTip="Hide column names"
+            downToolTip="Show column names"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.columnsVisible=!down;tColumnTitle.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tColumnTitle" toolTip=""
+            left="330" top="120"
+            value="jscript:bColumnTitle.upToolTip;"
+            />
+
+        <BUTTON id="bColumns" sticky="true"
+            left="270" top="150"
+            upToolTip="Show track names and lengths only"
+            downToolTip="Show track names, lengths, artist, and genre"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.columns=(down?'name=Name;duration=Time;':'name=Name;duration=Time;artist=Artist;genre=Genre;');tColumns.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tColumns" toolTip=""
+            left="330" top="150"
+            value="jscript:bColumns.upToolTip;"
+            />
+
+        <BUTTON id="bWidth" sticky="true"
+            left="270" top="180"
+            upToolTip="Increase width to 250 pixels"
+            downToolTip="Decrease width to 150 pixels"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.width=(down?250:150);tWidth.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tWidth" toolTip=""
+            left="330" top="180"
+            value="jscript:bWidth.upToolTip;"
+            />
+
+        <BUTTON id="bHeight" sticky="true"
+            left="270" top="210"
+            upToolTip="Increase height to 250 pixels"
+            downToolTip="Decrease height to 150 pixels"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.height=(down?250:150);tHeight.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tHeight" toolTip=""
+            left="330" top="210"
+            value="jscript:bHeight.upToolTip;"
+            />
+
+        <BUTTON id="bBackground" sticky="true"
+            left="270" top="240"
+            upToolTip="Change background color to blue"
+            downToolTip="Change background color to black"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.backgroundColor=(down?'blue':'black');tBackground.value=(down?downToolTip:upToolTip);"
+            />
+        <TEXT id="tBackground" toolTip=""
+            left="330" top="240"
+            value="jscript:bBackground.upToolTip;"
+            />
+
+        <BUTTON id="bForeground" sticky="true"
+            left="270" top="270"
+            upToolTip="Change foreground color to orange"
+            downToolTip="Change foreground color to white"
+            image="button.bmp"
+            hoverImage="button_hover.bmp"
+            downImage="button_down.bmp"
+            onClick="myPlaylist.itemPlayingColor=(down?'orange':'white');tForeground.value=(down?downToolTip:upToolTip);"
+            />
+			
+        <TEXT id="tForeground" toolTip=""
+            left="330" top="270"
+            value="jscript:bForeground.upToolTip;"
+            />
+
+    </VIEW>
+</THEME>

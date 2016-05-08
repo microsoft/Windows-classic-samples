@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WSAPollSample", "WSAPollSample.vcproj", "{347CF6CD-67E2-4ADF-94D5-8B656951F48C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{347CF6CD-67E2-4ADF-94D5-8B656951F48C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{347CF6CD-67E2-4ADF-94D5-8B656951F48C}.Debug|Win32.Build.0 = Debug|Win32
+		{347CF6CD-67E2-4ADF-94D5-8B656951F48C}.Release|Win32.ActiveCfg = Release|Win32
+		{347CF6CD-67E2-4ADF-94D5-8B656951F48C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

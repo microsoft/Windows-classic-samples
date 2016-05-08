@@ -1,0 +1,23 @@
+REGEDIT4
+;
+;	registry initialization file that installs the Application Memory 
+;	performance counters.
+;
+;		BEFORE RUNNING this file, make sure the APPMEM.DLL has been built and
+;		moved into a directory in the system's path, or the correct path has been
+;		entered in the Library entry below.
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AppMem\Performance]
+"Library" = "appmem.dll"
+"Open" = "OpenAppMemPerformanceData"
+"Collect" = "CollectAppMemPerformanceData"
+"Close" = "CloseAppMemPerformanceData"
+;
+;	the following lines register this app as an event log message provider. This
+;	allows the event log to read the message text resource strings from the .DLL
+;
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application\AppMem]
+"EventMessageFile" = "%systemroot%\\system32\\appmem.dll"
+"TypesSupported" = dword:00000007
+
+

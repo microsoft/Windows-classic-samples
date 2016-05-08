@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<TITLE>Benefits of using Viewlink</TITLE>
+<STYLE TYPE="text/css">
+
+H1 { font-size:14pt; margin:0; margin-bottom:5px; font-weight:normal}
+.bar {background:#336699; border-top:1px solid #99ccff; border-bottom:1px solid black; width:100%; color:white; padding:3px; margin-bottom:5px }
+BUTTON {width:300px; font-size:80%; }
+
+</STYLE>
+
+<SCRIPT TYPE="text/jscript" LANGUAGE="JavaScript">
+function addstyles(){
+oIframe1.document.styleSheets.oStyle.addRule("TD", "border:2px solid red");
+oIframe2.document.styleSheets.oStyle.addRule("TD", "border:2px solid red");
+}
+</SCRIPT>
+
+</HEAD>
+
+<BODY STYLE="margin:0; background:white; color:black; font-family:verdana; font-size:70%;">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<DIV class="bar">
+<H1>Benefits of using ViewLink</H1>
+</DIV>
+<DIV STYLE="padding:5px; line-height:1.3; width:750">
+The two samples below demonstrate a Calendar HTC component implemented using two variations of Element Behaviors. The first page implements a regular Element Behavior and the second implements an Element Behavior with a ViewLink. The samples show how a ViewLink encapsulates document content and permits greater control over CSS Style inheritance.<br><br>
+<B>Control:</B> Clicking the button below will apply a new stylesheet rule to all of the &lt;TD&gt; elements on page 1 and 2. Notice that the &lt;TD&gt; elements in the Element Behavior sample are changed, but the ViewLink elements stay the same.
+</DIV>
+<DIV STYLE="position:absolute; top:532; left:10; width:750">
+<b>Encapsulation:</b> Clicking on the buttons in each of the pages above builds a page that displays the document tree. Notice that the primary document tree with the ViewLink is dramatically less complex than the Element behavior tree, this is because the document content in the ViewLink component is encapsulated in the component HTC document.<br><hr><A href="http://www.microsoft.com/misc/cpyright.htm" target=_top>
+&#169;Microsoft Corporation. All rights reserved. Terms of use</A>.</DIV>
+<BUTTON ID="addstbutton" onclick="addstyles()" STYLE="position:absolute; top: 135; left:200">Add red border to table cells</BUTTON>
+<DIV STYLE="text-align:center; padding:2px;color:white; font-family:verdana; font-weight:bold; font-size: 9pt; border:1px solid black; background:black; position:absolute; top:160; left:10; height:20px; width:340;">Page 1 - Calendar using Element Behavior</DIV>
+
+<DIV STYLE="text-align:center; padding:2px;color:white; font-family:verdana; font-weight:bold; font-size: 9pt; border:1px solid black; background:black; position:absolute; top:160; left:356; height:20px; width:340;">Page 2 - Calendar using ViewLink</DIV>
+
+<IFRAME ID="oIframe1" src="vlelementbehavior.htm" FRAMEBORDER="no" scrolling="NO" STYLE="position:absolute; top:180; left:10; width:340; height:350">
+
+<IFRAME ID="oIframe2" src="vlviewlink.htm" FRAMEBORDER="no" scrolling="NO" STYLE="position:absolute; top:180; left:356; width:340; height:350">
+<P><HR><FONT COLOR="black" FACE="ms sans serif" SIZE="1">&copy;<A HREF="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" TARGET="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</A></FONT>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

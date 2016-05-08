@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "iproute", "iproute.vcproj", "{98BCCE38-9501-4A44-A6E7-4F8F0B8A2051}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98BCCE38-9501-4A44-A6E7-4F8F0B8A2051}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98BCCE38-9501-4A44-A6E7-4F8F0B8A2051}.Debug|Win32.Build.0 = Debug|Win32
+		{98BCCE38-9501-4A44-A6E7-4F8F0B8A2051}.Release|Win32.ActiveCfg = Release|Win32
+		{98BCCE38-9501-4A44-A6E7-4F8F0B8A2051}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

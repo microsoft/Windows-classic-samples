@@ -1,0 +1,14 @@
+#include "resource.h"
+#include <windows.h>
+
+IDD_DIALOG DIALOGEX 0, 0, 295, 210
+STYLE DS_SETFONT | DS_CENTER | WS_OVERLAPPEDWINDOW
+CAPTION "Shell Change Notify Watcher"
+FONT 9, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LISTVIEW,"SysListView32",WS_CLIPCHILDREN | WS_TABSTOP | WS_BORDER,
+                    7,7,281,183
+    CONTROL         "Recursive",IDC_RECURSIVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,248,194,40,10
+    DEFPUSHBUTTON   "Pick...",IDC_PICK,7,192,40,14
+    CONTROL         "",IDC_GRIPPER,"SCROLLBAR", SBS_SIZEGRIP,288,203,7,7
+END

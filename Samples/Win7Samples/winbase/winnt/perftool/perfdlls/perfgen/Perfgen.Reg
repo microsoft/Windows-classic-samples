@@ -1,0 +1,12 @@
+REGEDIT4
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfGen\Performance]
+"Library" = "perfgen.dll"
+"Open" = "OpenSigGenPerformanceData"
+"Collect" = "CollectSigGenPerformanceData"
+"Close" = "CloseSigGenPerformanceData"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Application\PerfGen]
+"EventMessageFile" = "%systemroot%\\system32\\perfgen.dll"
+"TypesSupported" = dword:00000007
+
+

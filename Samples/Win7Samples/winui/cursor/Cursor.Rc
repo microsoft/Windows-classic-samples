@@ -1,0 +1,34 @@
+
+//-----------------------------------------------------------------------------
+// This is a part of the Microsoft Source Code Samples. 
+// Copyright 1993 - 2000 Microsoft Corp.
+// All rights reserved. 
+//  
+// This source code is only intended as a supplement to 
+// Microsoft Development Tools and/or WinHelp documentation.
+// See these sources for detailed information regarding the 
+// Microsoft samples programs.
+//-----------------------------------------------------------------------------
+
+#include <windows.h>
+#include "cursor.h"
+
+bullseye CURSOR bullseye.cur
+
+CursorMenu MENU
+BEGIN
+    POPUP        "&Help"
+    BEGIN
+        MENUITEM "&About Cursor...", IDM_ABOUT
+    END
+END
+
+AboutBox DIALOG 22, 17, 144, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About Cursor"
+BEGIN
+    CTEXT "Microsoft Windows"     -1,       0,  5, 144,  8
+    CTEXT "Cursor Application"    -1,       0, 14, 144,  8
+    CTEXT "Version 3.64"          -1,       0, 34, 144,  8
+    DEFPUSHBUTTON "OK"          IDOK,      53, 59,  32, 14,      WS_GROUP
+END
