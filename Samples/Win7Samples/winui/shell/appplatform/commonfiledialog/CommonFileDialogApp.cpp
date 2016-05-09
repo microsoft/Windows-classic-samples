@@ -64,6 +64,7 @@ public:
             QITABENT(CDialogEventHandler, IFileDialogEvents),
             QITABENT(CDialogEventHandler, IFileDialogControlEvents),
             { 0 },
+#pragma warning(suppress:4838)
         };
         return QISearch(this, qit, riid, ppv);
     }
