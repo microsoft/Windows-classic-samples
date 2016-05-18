@@ -1,0 +1,39 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+#include "resource.h"
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SEARCH              BITMAP                  "search.bmp"
+IDB_SEARCHWH            BITMAP                  "searchwh.bmp"
+IDB_CLEAR               BITMAP                  "clear.bmp"
+IDB_CLEARWH             BITMAP                  "clearwh.bmp"
+IDB_CLEARHOT            BITMAP                  "clearhot.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 319, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_OVERLAPPEDWINDOW
+CAPTION "Simple Explorer Browser Search Example"
+FONT 9, "Segoe UI", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_EXPLORER_BROWSER,"Static",NOT WS_VISIBLE,7,27,305,210
+    DEFPUSHBUTTON   "Open",IDC_OPEN_ITEM,6,241,50,14
+    LTEXT           "",IDC_NAME,61,244,227,12
+    SCROLLBAR       IDC_GRIPPER,312,253,7,7,SBS_SIZEGRIP
+    CONTROL         "",IDC_SEARCHBOXBGND,"Static",SS_WHITERECT | SS_SUNKEN,185,11,127,11
+    EDITTEXT        IDC_SEARCHBOX,186,13,113,9,ES_AUTOHSCROLL | NOT WS_BORDER
+    CONTROL         IDB_SEARCHWH,IDC_SEARCHIMG,"Static",SS_BITMAP | SS_CENTERIMAGE | SS_NOTIFY,300,13,9,8
+END

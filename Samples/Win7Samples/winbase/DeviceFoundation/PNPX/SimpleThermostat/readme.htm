@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>PnP-X Simple Thermostat Sample</title>
+    <style type="text/css">
+        .style1
+        {
+            font-family: Calibri;
+        }
+        .style2
+        {
+            font-family: Calibri;
+            font-style: italic;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+  <p>
+    <span style="font-size: 18pt; color: #0000cc; font-family: Calibri"><strong>
+    PnP-X Simple Thermostat Sample</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">
+    Last Updated: February 2009</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Demonstrates</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">
+    This sample demonstrates an end-to-end scenario using PnP-X. It includes device
+    samples using UPnP and WSD, a driver to install the devices in PnP, proxies to talk
+    with the devices, and a client application that uses the devices through the proxies. Developers will find this sample useful when implementing
+    end-to-end scenarios using PnP-X or just implementing a small portions of a scenario,
+    like a PnP-X compliant device.</span></p>
+  <p>
+    <span style="font-family: Calibri">
+    This sample uses the following technologies: PnP-X, Function Discovery (FD), Web
+    Services on Devices (WSD), Universal Plug and Play
+      (UPnP), and Windows Plug and Play (PnP).</span></p>
+  <p>
+    <span style="font-family: Calibri">
+    The following diagram shows how all the parts of the scenario fit together from
+    a process perspective. The brown colored components are the components this sample contains and the blue colored components are built into Windows (Vista and later). The names of brown components
+    directly correspond to the Visual Studio projects in the sample.&nbsp; The numbers on the arrows correspond to&nbsp; the steps involved
+      in running the scenario (see 'Running the Sample' further down in this document).</span></p>
+  <p class="style1">
+      <i><b>Windows 7 Notes:</b></i></p>
+    <p class="style2">
+      The new way to pair a device in Windows 7 is via Devices and Printers&#39; Add a 
+      device wizard instead of the Network folder.&nbsp; <b>Start Menu</b> -&gt; <b>
+      Devices and Printers</b> -&gt; <b>Add a device</b>.&nbsp; For this sample, when you 
+      see the Network folder referred to, you can replace that with the &#39;Add a device&#39; 
+      wizard.&nbsp; Further, PnP-X devices will be shown (and can be managed) from 
+      Devices and Printers after they have been paired and installed.</p>
+  <p>
+    <span style="font-family: Calibri"></span>&nbsp;</p>
+  <p>
+    <img src="scenario.jpg" alt="Scenario Diagram" style="font-family: Calibri; font-size: 12pt; color: #000000;"/><span
+      style="font-family: Calibri">&nbsp;</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Prerequisites</strong></span></p>
+    <ul>
+        <li><span style="font-family: Calibri">This sample requires Windows Vista or later to run.</span></li>
+        <li class="style1">Visual Studio 2008 is needed to edit the Solution and Projects.</li>
+        <li class="style1">Sample supports x86 and x64.</li>
+    </ul>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Languages</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">C++</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Folders and Files</strong></span></p>
+  <ol style="list-style-position: outside; list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>\ </strong></span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>readme.htm </strong>- This file. </span>
+    </li>
+    <li><span style="font-family: Calibri"><strong>scenario.jpg</strong> - Diagram showing the scenario layout from a process
+    perspective. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat.sln</strong> - Visual Studio 
+        2008 solution file. This solution
+    file encapsulates all the projects for this sample. Each folder under the root defines
+    a project and contains a Visual Studio project file. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatClient\ </strong></span>
+    </li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>main.cpp</strong> - Implements a client
+      application that uses ISimpleThermostat devices. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatDriver\ </strong></span>
+    </li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat.inf </strong>- INF file used when installing the sample devices. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatInterface\ </strong>
+    </span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat.idl</strong> - Defines ISimpleThermostat.&nbsp; ISimpleThermostat is the interface this sample revolves
+      around: from devices supporting ISimpleThermostat functionality to the client that
+      uses ISimpleThermostat.&nbsp;</span></li></ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatProxy\ </strong></span>
+    </li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>common.h</strong> - Common header used
+      by all source files in this project. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatProviderFactory.h</strong>
+      - Defines the CSimpleThermostatProviderFactory class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatServiceProvider.h</strong>
+      - Defines the CSimpleThermostatServiceProvider class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatProviderFactory.cpp</strong>
+      - Implements the CSimpleThermostatProviderFactory class which is used to create
+      CSimpleThermostatServiceProvider objects. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatServiceProvider.cpp</strong>
+      - Implements the CSimpleThermostatServiceProvider class which is used by FD to create
+      the device proxies. </span></li>
+    <li><span style="font-family: Calibri"><strong>dllmain.cpp</strong> - Standard functions
+      needed to implement and register the dll. </span></li>
+    <li><span style="font-family: Calibri"><strong>helpers.cpp</strong> - Helper functions used by CSimpleThermostatServiceProvider. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatProxy.def</strong>
+      - Defines the exports for the dll. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatProxy.idl</strong>
+      - Defines the type library and CoClass for
+    the SimpleThermostatProxy. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>UPnP\UPnPSimpleThermostatDevice\ </strong>
+    </span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>main.cpp</strong> - Implements control
+      code for the UPnP device. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>UPnP\UPnPSimpleThermostatDeviceDLL\
+    </strong></span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>common.h</strong> - Common header used
+      by all the source files in this project. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatDevice.h</strong>
+      - Defines the CSimpleThermostatDevice class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatDeviceFactory.h</strong>
+      - Defines the CSimpleThermostatDeviceFactory class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatService.h</strong>
+      - Defines the CSimpleThermostatService class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatDevice.cpp</strong>
+      - Implements the CSimpleThermostatDevice
+    class which is the core UPnP device class. This is the object that will be registered
+    with the UPnPHost. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatDeviceFactory.cpp</strong>
+      - Implements the CSimpleThermostatDeviceFactory class which is used to create CSimpleThermostatDevice
+      objects. </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatService.cpp</strong>
+      - Implements the CSimpleThermostatService class which is the service for the UPnP
+      device. This service contains the ISimpleThermostat functionality. </span></li>
+    <li><span style="font-family: Calibri"><strong>dllmain.cpp</strong> - Standard functions
+      needed to implement and register the dll. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatDevice.def </strong>
+      - Defines the exports for the dll. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatDevice.idl</strong>
+      - Defines the type library, coclass, and
+    service interface for the UPnP device.
+    </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatDevice.xml </strong>
+      - Description document for the UPnP device. Defines the metadata for the device.
+    </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostatService.xml </strong>
+      - Description document for the UPnP service. Defines the metadata for the service.
+    </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"></span></li>
+    <li><span style="font-family: Calibri"><strong>UPnP\UPnPSimpleThermostatProxy\ </strong>
+    </span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>CUPnPSimpleThermostatProxy.h </strong>
+      - Defines the CUPnPSimpleThermostatProxy class. </span></li>
+    <li><span style="font-family: Calibri"><strong>CUPnPSimpleThermostatProxy.cpp</strong>
+      - Implements the CUPnPSimpleThermostatProxy
+    class which is used by client applications to communicate with the device's service.
+    This class exposes ISimpleThermostat to the client, which then knows how to talk with
+    the device using protocol specific commands.
+    </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"></span></li>
+    <li><span style="font-family: Calibri"><strong>WSD\WSDSimpleThermostatContract\ </strong>
+    </span></li>
+    <li>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>codegen.config </strong>- WsdCodeGen
+      configuration file. This file essentially
+    describes everything about the WSD device.
+      WsdCodeGen can consume this file to
+    auto generate C++ code that implements the device. </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat.wsdl</strong> - WSDL file used by WsdCodeGen to create a
+    template codegen.config file. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"></span></li>
+    <li><span style="font-family: Calibri"><strong>WSD\WSDSimpleThermostatDevice\ </strong>
+    </span>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatService.h</strong>
+      - Defines the CSimpleThermostatService class. </span><span style="font-family: Calibri"> </span></li>
+    <li><span style="font-family: Calibri"><strong>CSimpleThermostatService.cpp</strong>
+      - Implements the CSimpleThermostatService class which is the service for the WSD
+      device. This service contains the ISimpleThermostat functionality. </span></li>
+    <li><span style="font-family: Calibri"><strong>main.cpp</strong> - Implements the
+      control code for the WSD device.</span></li></ol>
+    </li>
+    <li><span style="font-family: Calibri"></span></li>
+    <li><span style="font-family: Calibri"><strong>WSD\WSDSimpleThermostatGenerated\ </strong>
+    </span>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat_WSDProxy.h</strong>
+      - GENERATED by WsdCodeGen. Defines the CSimpleThermostat_WSDProxy class.</span></li>
+      <li><span style="font-family: Calibri"><strong>SimpleThermostat_WSDTypes.h</strong>
+        - GENERATED by WsdCodeGen. Defines all the custom types used by the device, proxy,
+        and stub.</span></li>
+      <li><span style="font-family: Calibri"><strong>SimpleThermostat_WSD.idl</strong> -
+        GENERATED by WsdCodeGen. Defines the WSD protocol specific version of the
+      ISimpleThermostat interface: ISimpleThermostat_WSD.</span></li><li><span style="font-family: Calibri"><strong>SimpleThermostat_WSDProxy.cpp</strong>
+        - <span style="font-family: Calibri">GENERATED by WsdCodeGen. Implements
+          the CSimpleThermostat_WSDProxy class, which is used by the CWSDSimpleThermostatProxy
+          class.&nbsp;</span> </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat_WSDStub.cpp</strong>
+      - GENERATED by WsdCodeGen. Implements the stub code for the device's service.
+    </span></li>
+    <li><span style="font-family: Calibri"><strong>SimpleThermostat_WSDTypes.cpp</strong>
+      - GENERATED by WsdCodeGen. Implements the custom types used by the device, proxy, and stub. </span></li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri"><strong></strong></span></li>
+    <li><span style="font-family: Calibri"><strong>WSD\WSDSimpleThermostatProxy\ </strong>
+    </span>
+    <ol style="list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>CWSDSimpleThermostatProxy.h</strong>
+      - Defines the CWSDSimpleThermostatProxy class.</span></li><li><span style="font-family: Calibri"><strong>CWSDSimpleThermostatProxy.cpp</strong>
+      - Implements the CWSDSimpleThermostatProxy class which is used by the client application
+      to communicate with the device's service. This class exposes ISimpleThermostat to
+      the client, which then knows how to talk with the device using protocol specific commands.
+    </span></li>
+    </ol>
+  </li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Building the Sample (using Visual Studio)</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Open SimpleThermostat.sln in Visual Studio.
+    </span></li>
+    <li><span style="font-family: Calibri">In the Build menu, select <strong>Build Solution</strong>.
+      The application will be built in the
+      default \Debug or \Release directory. </span></li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Building the Sample (from SDK build environment)</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Open the SDK command shell. </span></li>
+    <li><span style="font-family: Calibri">Navigate to the sample folder where SimpleThermostat.sln is located. </span></li>
+    <li><span style="font-family: Calibri">Type <strong>vcbuild SimpleThermostat.sln</strong>.
+      The application will be built in the default
+      \Debug or \Release directory. </span></li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Running the Sample</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">
+    All files can be used from the binplaced location from the build (typically \debug
+    or \release). Note that the driver package is built to support both x86 and x64, 
+      so you&#39;ll find the driver package in a folder called &quot;DriverPackage&quot;.</span></p>
+  <p>
+    <span style="font-family: Calibri">
+    The step numbers here directly correspond to the arrow labels on the scenario diagram
+    above. As you run the sample you can look at the scenario diagram to better understand
+    what's happening.</span></p>
+  <ol>
+      <li><span class="style1">Pre-install the Simple Thermostat Driver package.</span><ol style="list-style-type: lower-alpha;">
+          <li><span style="font-family: Calibri">From the \DriverPackage folder run <strong>pnputil -a SimpleThermostat.inf
+              </strong>.</span></li>
+          <li><span style="font-family: Calibri">A Windows Security dialog will pop-up because
+        the driver is not signed. Click <strong>Install this driver software anyway</strong>.
+              </span></li>
+          <li><span style="font-family: Calibri">After several seconds the driver installation will complete, resulting in SimpleThermostatProxy.dll being copied to &lt;windir&gt;\system32 and being registered as a COM object.<br />&nbsp;</span></li>
+          </ol>
+      </li>
+      <li><span class="style1">Start the simple thermostat devices. You can run one or both of the UPnP and WSD
+      devices. </span>
+          <ol style="list-style-type: lower-alpha;">
+              <li><span style="font-family: Calibri">Run <b>WSDSimpleThermostatDevice.exe</strong></b>.</span></li><li><span style="font-family: Calibri">Run <strong>regsvr32 UPnPSimpleThermostatDevice.dll</strong>
+        (you must have administrative rights to do this).</span></li><li><span style="font-family: Calibri">Run <strong>UPnPSimpleThermostatDevice.exe</strong>.
+      <em>Note: If this returns a FILE_NOT_FOUND
+        error (0x80070002) then UPnPHost most likely does not have rights to access the device's
+        description documents. To fix this you need to change permissions on the folder
+        where the description documents are located.
+        From Windows Explorer, right click the folder and click <strong>Properties</strong>.
+        Click the <strong>Security</strong> tab and click <strong>Edit.</strong> Click <strong>
+          Add</strong> and in the
+        text box type "<strong>LOCAL SERVICE</strong>". Click
+        <strong>OK </strong>on all three dialog boxes and
+        rerun the device.</em><br />&nbsp;
+      </span>
+      </li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri">Install the devices from the Network folder.
+    </span>
+    <ol style="list-style-type: lower-alpha;">
+      <li><span style="font-family: Calibri">Open the Network folder by clicking <strong>
+        Start Menu </strong>-&gt; <strong>Network</strong>.
+      </span></li>
+      <li><span style="font-family: Calibri">&nbsp;After a few seconds you should see the two devices listed in the Network
+        folder. One is named 'UPnP Simple Thermostat' and the other 'WSD Simple Thermostat'. </span></li>
+      <li><span style="font-family: Calibri">If for some reason you are unable to see the devices in the list after a short
+        period, have the devices start again. You can perform this by pressing the 'p' key
+        and then the 's' key for each device. </span>
+      </li>
+      <li><span style="font-family: Calibri">Install each device by double clicking it,
+        or by selecting it and clicking install
+        from the command bar. Windows will ask for your permission to install the device.<br />&nbsp;
+      </span>
+      </li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri">The IPBusEnum service communicates with the device to get the metadata needed for installation in PnP.
+      <br />&nbsp;
+    </span>
+    </li>
+    <li><span style="font-family: Calibri">The IPBusEnum service installs the device in PnP after several seconds.<br />&nbsp;
+    </span>
+    </li>
+    <li><span style="font-family: Calibri">Find installed ISimpleThermostat devices using
+      the client application. </span>
+    <ol style="list-style-type: lower-alpha;">
+      <li><span style="font-family: Calibri">Run <strong>SimpleThermostatClient.exe</strong>.</span></li><li><span style="font-family: Calibri">The client asks FD for all the ISimpleThermostat devices in PnP. It should list
+        the two devices you just installed. Select the one you want to use.<br />&nbsp;
+      </span>
+      </li>
+    </ol>
+    </li>
+    <li><span style="font-family: Calibri">Use ISimpleThermostat devices using the client application. </span>
+    <ol style="list-style-type: lower-alpha;">
+      <li><span style="font-family: Calibri">After selecting one of the devices the client will attempt to call some of the
+        ISimpleThermostat functions on the device using the SimpleThermostatProxy.dll.</span></li><li><span style="font-family: Calibri">The client will display the name, ID, current temperature setting, and desired
+      temperature of the thermostat device. It will also display a small list of options
+      you can choose from. </span></li>
+      <li><span style="font-family: Calibri">From the menu you can refresh device info, make a call to the device to set the
+        desired temperature, or exit the client. </span>
+      </li>
+    </ol>
+  </li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>
+    Removing the Sample</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Before shutting down the devices, select them in the Network folder and click <strong>Uninstall </strong>from the command bar. </span></li>
+    <li><span style="font-family: Calibri">Run <strong>regsvr32 -u UPnPSimpleThermostatDevice.dll</strong>.
+    </span></li>
+    <li><span style="font-family: Calibri">From &lt;windir&gt;\system32 run <strong>regsvr32
+      -u SimpleThermostatProxy.dll</strong>.</span></li><li><span style="font-family: Calibri">Find the oemXX.inf file in &lt;windir&gt;\inf that corresponds to SimpleThermostat.inf.
+      The INF file will contain the comment
+      description "INF for WSD and SSDP ISimpleThermostat devices". </span></li>
+    <li><span style="font-family: Calibri">Run <strong>pnputil -f -d [oemxx.inf file from above]</strong>. You do not need the path to the
+      .inf file. (Example: pnputil -f
+      -d oem99.inf). </span>
+    </li>
+    <li><span style="font-family: Calibri">Delete &lt;windir&gt;\system32\SimpleThermostatProxy.dll.
+    </span></li>
+  </ol>
+  <p>
+  </p>
+
+</body>
+</html>

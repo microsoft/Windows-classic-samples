@@ -1,0 +1,18 @@
+
+objectClass 		User
+sAMAccountName 		BILLBOB
+
+// Set the logon hours to Monday - Friday 5 AM to 6 PM
+LogonHours			x00 x00 x00 x00 xe0 xff x03 xe0 xff x03 xe0 xff x03 xe0 xff x03 xe0 xff x03 x00 x00
+
+// Set account Expiration to January 31st, 2000
+accountExpires		125938656000000000
+
+assistant			CN=Jim Finnie,CN=Users,DC=nwnexus,DC=nttest,DC=microsoft,DC=com 
+
+description			This is a user created from a file..
+
+//expirationTime		12/6/99 12:01:00 PM
+
+
+

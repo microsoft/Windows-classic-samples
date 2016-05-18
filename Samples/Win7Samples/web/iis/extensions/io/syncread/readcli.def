@@ -1,0 +1,8 @@
+LIBRARY           readcli.dll
+;DESCRIPTION       'ReadClient ISAPI DLL'
+HEAPSIZE          0x200000
+STACKSIZE         16384
+EXPORTS
+    GetExtensionVersion
+    HttpExtensionProc
+    TerminateExtension

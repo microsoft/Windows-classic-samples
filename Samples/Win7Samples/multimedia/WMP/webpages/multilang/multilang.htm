@@ -1,0 +1,114 @@
+<HTML>
+<HEAD>
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+  <TITLE>Multiple Language Track Example</TITLE>
+</HEAD>
+
+<BODY>
+<H1>Multiple Language Track Example</H1>
+<OBJECT id=Player  
+        classid=CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6>
+  <PARAM NAME="uiMode" VALUE="none">
+  <PARAM NAME="autoStart" VALUE="true">
+</OBJECT>
+<BR><BR>
+<INPUT onclick="StartMeUp()" TYPE="button" VALUE="Play" NAME="BtnPlay"> 
+<INPUT onclick="ShutMeDown()" TYPE="button" VALUE="Stop" NAME="BtnStop"><BR><BR>
+Number of languages supported: 
+<INPUT TYPE="text" NAME="countText" SIZE="10" READONLY><BR><BR>
+Current audio language:
+<INPUT TYPE="text" NAME="langText" SIZE="50" READONLYH><BR><BR>
+Choose a language: 
+<SELECT ID="langList" NAME="langList" onChange="NewLangSelected()"
+	SIZE="1" STYLE="width:350px">
+</SELECT>
+
+<SCRIPT>
+<!--
+// General script functions are stored here.
+
+// Called when Play button is clicked.
+function StartMeUp ()
+{
+  // Assumes that the "multilang.wma" file has been added to Media Library.
+  Player.currentPlaylist = Player.mediaCollection.getByName('multilang');	
+}
+
+// Called when the Stop button is clicked.
+function ShutMeDown ()
+{
+  // Stops the Player playing.
+  Player.controls.stop();
+}
+
+// Called when a new option is selected.
+function NewLangSelected()
+{
+  // Sets the current audio language to the new option selected.
+  Player.controls.currentAudioLanguage = langList.value;
+}
+
+// Called when the current language display needs to be updated.
+function ChangeDisplay()
+{
+  // Gets the current audio language and displays it in the current language textbox.
+  var currentID = Player.controls.currentAudioLanguage;
+  var currentName = Player.controls.getLanguageName(currentID);
+  langText.value = currentID + " - " + currentName;
+}
+-->
+</SCRIPT>
+ 
+<SCRIPT LANGUAGE="JScript"  FOR="Player" EVENT="playStateChange(NewState)">
+<!--
+  // Handler for the playStateChange event. Called when the Player's state changes.
+
+  // If the Player is playing, get the number of languages and create the option list.
+  // Only do this once, but wait until the Player is playing.
+
+  // Is the Player playing and is the countText value null?
+  // The countText input box will not be null after this block runs once.
+  if ((NewState == 3)  && (countText.value == ""))
+    {
+      // Get the count of the languages and display it in the count text box.
+      var currentCount =Player.controls.audioLanguageCount;
+      countText.value = currentCount;
+
+      // Create an option text and value for every language.
+      // Create an option element, give it text and value, and add it to the option list.
+      for (var i = 0; i < currentCount; i++)
+        {
+          // Create the new OPTION element using Dynamic HTML.
+          var newOpt = document.createElement("OPTION");
+          // Create the ID for this option number - note that it's not zero-based.
+          var myNewID = Player.controls.getAudioLanguageID(i + 1);
+          // Create the Name for this option number using the ID.
+          var myNewName = Player.controls.getLanguageName(myNewID);
+          // Assign the complete text to the option text. This is what will be displayed.
+          newOpt.text = myNewID + " - " + myNewName;
+          // The value of the option will be used to set new audio languages with an ID.
+          newOpt.value = myNewID;
+          // Once you've created the option, add it to the option list.
+          langList.add(newOpt);
+        }
+
+      // Set the index to 0 and make that the current language;
+      langList.selectedIndex = 0;
+      NewLangSelected();
+
+      // Update the display.
+      ChangeDisplay();
+    }
+-->
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JScript"  FOR="Player" EVENT="audioLanguageChange(LCID)">
+<!--
+  // Handler for the audioLanguageChange event.
+
+  // Update the display each time the audio language is changed.
+  ChangeDisplay();
+-->
+</SCRIPT>
+
+</BODY></HTML>

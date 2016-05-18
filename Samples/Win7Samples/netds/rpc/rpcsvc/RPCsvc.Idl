@@ -1,0 +1,321 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright 1995 - 1998 Microsoft Corporation.  All Rights Reserved.
+//
+//  MODULE:   rpcsvc.idl
+//
+//  PURPOSE:  Simple RPC service .idl file.  This defines the wire
+//            "contract" between a client and server using this
+//            interface.  All data types and functions (methods,
+//            operations) that go over the wire must be defined here.
+//
+//
+[
+uuid(d69a7cc4-9aa9-4a01-990d-800e8a5e97b4),
+version(1.0)
+]
+interface RpcServiceSample
+{
+
+    error_status_t
+	Ping(
+	    [in] handle_t Binding
+	    );
+
+
+    error_status_t
+	CheckSecurity(
+	    [in] handle_t Binding
+	    );
+
+
+	// Sending a buffer (writing) to the server.
+
+	//
+	// BufferIn1 and BufferIn2 both use length_is() and size_is().
+	// This slows performance, because a larger buffer must be
+	// allocated on the sever and the data copied into this larger
+	// buffer.
+	//
+	// BufferIn2 has the most problems because it forces a 16K
+	// allocation which may be much larger then needed and requires
+    // and extra data copy.  It also limits clients to writing 16K
+    // at a time.
+	//
+	// The BufferIn3() function saves the allocation and copy
+    // and gives the client complete control of the size.
+    //
+	// Notes: Avoid length_is() on [in] parameters.  Usually
+    //        size_is() is all that is really needed.
+
+    const unsigned long BUFFER_SIZE = 100;
+
+	error_status_t
+	BufferIn1(
+	         [in] handle_t Binding,
+	         [length_is(BufferLength), size_is(BufferSize),
+		      in ] byte Buffer[],
+	         [in] unsigned long BufferLength,
+             [in] unsigned long BufferSize
+	         );
+
+    error_status_t
+	BufferIn2(
+	         [in] handle_t Binding,
+	         [length_is(BufferLength), in ] byte Buffer[16*1024],
+             [in] unsigned long BufferLength
+             );
+
+    error_status_t
+    BufferIn3(
+	         [in] handle_t Binding,
+	         [size_is(BufferLength), in ] byte Buffer[],
+	         [in] unsigned long BufferLength
+             );
+
+    // Getting a buffer (reading) from the server.
+    //
+    // In BufferOut1 the size of the output is limited to 16K,
+    // which will force extra round trips when more then 16K
+    // is being returned. This requires the client to supply a
+    // 16K buffer and the stub to allocate 16K on the server side.
+    //
+    // In BufferOut2 the client decides how big the buffer
+    // should be and only as much as the client wants is
+    // allocated in the server.  Similar to BufferOut4
+    // which is better.
+    //
+    // In BufferOut3 the server allocates a buffer exactly
+    // as large as it wants.  This results in two allocations,
+    // one in the server manager and one in the client.  This
+    // is best if the clients have no idea how much data the
+    // server will give them.
+    //
+    // In BufferOut4 the client decides how big the buffer
+    // should be.  The server can shorten (this should
+    // be uncommon) the buffer if needed.
+    //
+    // Notes: Consider how the client and server interact
+    //   in your application when choosing a "read" style
+    //   interface.
+
+
+    error_status_t
+    BufferOut1(
+              [in] handle_t Binding,
+              [out,length_is(*pBufferLength)] byte Buffer[16*1024],
+              [out] unsigned long *pBufferLength
+              );
+
+    error_status_t
+    BufferOut2(
+              [in] handle_t Binding,
+              [size_is(BufferSize), length_is(*pBufferLength),
+               out] byte Buffer[],
+              [in] unsigned long BufferSize,
+              [out] unsigned long *pBufferLength
+              );
+
+    typedef struct {
+        unsigned long BufferLength;
+        [unique, size_is(BufferLength)] byte *Buffer;
+        } BUFFER;
+
+    error_status_t
+    BufferOut3(
+              [in] handle_t Binding,
+              [out] BUFFER *pBuffer
+              );
+
+    error_status_t
+    BufferOut4(
+              [in] handle_t Binding,
+              [out, size_is(*pBufferLength)] byte Buffer[],
+              [in, out] unsigned long *pBufferLength
+              );
+
+    // Structures and Enums.
+    //
+    // Use -Zp8 (or higher). (Default on Win32 platforms)
+    //
+    // Make sure the structure ends on a 0 mod 4 address.
+    //
+    // Use [v1_enum] on all enumerated types.
+    //
+    // Following these rules will result in structures (and
+    // arrays of structures) which can be memcpy()'ed to and from
+    // the wire.  Otherwise the structures will be copied
+    // member-by-member. (ouch!)
+    // 
+
+    typedef enum {
+        A = 1,
+        B,
+        C,
+        D
+        } BAD_ENUM;
+
+    typedef [v1_enum] enum {
+        E = 5,
+        F,
+        G,
+        H
+        } GOOD_ENUM;
+
+    struct BAD1 {
+        long l;
+        short s;  // Ends on 6 % 4 = 2 byte address.
+        };
+
+    struct BAD2 {
+        BAD_ENUM e;  // 16bits on the wire, 32bits in memory!
+        long l;      // How big is it?
+        };
+
+    struct GOOD {
+        GOOD_ENUM e;  // v1_enum 32bits on wire and in memory.
+        long l;
+        long l2;      // Ends on 12 % 4 = 0 byte address.
+        };
+
+    error_status_t
+    StructsIn1(
+              [in] handle_t Binding,
+              [in] struct BAD1 array[50]
+              );
+
+    error_status_t
+    StructsIn2(
+              [in] handle_t Binding,
+              [in] struct BAD2 array[50]
+              );
+
+    error_status_t
+    StructsIn3(
+              [in] handle_t Binding,
+              [in] struct GOOD array[50]
+              );
+    // Linked list examples
+    //
+    // Follow the rules for structs when defining your linked
+    // list nodes.
+    //
+    // ListIn and ListOut1 are the basic linked list functions,
+    // ListOut1 is more expensive because each node must be copied
+    // into nodes on the client.  (In ListIn the list pointers
+    // are fixed up in one big buffer.)
+    //
+    // ListOut2 is identical to ListOut1 except that it turns
+    // on the RPC allocator in the server.
+    //
+    // Linked lists are not very efficient for RPC because the
+    // often require many memory allocations.  When possible,
+    // replace linked lists with variably sized arrays of structures.
+    //
+
+    const unsigned long LIST_SIZE = 50;
+
+    typedef struct LIST {
+        [unique] struct LIST *pNext;
+        unsigned long data;
+        } LIST;
+
+    typedef [unique] LIST *PLIST;
+
+    error_status_t
+    ListIn(
+          [in] handle_t Binding,
+          [in] PLIST pList
+          );
+
+    error_status_t
+    ListOut1(
+            [in] handle_t Binding,
+            [out] LIST *pListHead
+            );
+
+    // [enable_allocate] in .acf.
+    error_status_t
+    ListOut2(
+            [in] handle_t Binding,
+            [out] LIST *pListHead
+            );
+
+    // Unions
+    //
+    // Avoid using very many unions. For example, don't pass an array in
+    // which each element contains a union with several arms.  Instead,
+    // define several different structures and define a union with several
+    // arms each being an array of one of the different types of structures.
+    // 
+    // Do NOT define a [default] arm for your unions.  This way a future
+    // version of the union can include new arms and still interoperate
+    // with older versions of the interface.
+    //
+    // Avoid passing unions by value.
+    //
+
+    const unsigned long UNION_ARRAY_LEN = 50;
+
+    typedef struct BAD_UNION {
+        unsigned long Tag;
+        [switch_is(Tag)] union
+            {
+            [case(1)]
+                unsigned long ulData;
+            [case(2)]
+                unsigned hyper uhData;
+            [default]
+                // The default arm here prevents the addition of
+                // another case in future versions.
+                ;
+            } u;
+        } BAD_UNION;
+
+    typedef struct ONE {
+        unsigned long DataLength;
+        [size_is(DataLength)] unsigned long *Data;
+        } ARM_ONE;
+
+    typedef struct TWO {
+        unsigned long DataLength;
+        [size_is(DataLength)] unsigned hyper *Data;
+        } ARM_TWO;
+
+    typedef struct {
+        unsigned long Tag;
+        [switch_is(Tag)] union
+            {
+            [case (1)]
+                [unique] ARM_ONE *pOne;
+            [case (2)]
+                [unique] ARM_TWO *pTwo;
+
+            // May add [case(3)] in a future version.
+            //
+            // When calling a down level server with Tag == 3 the
+            // error RPC_S_INVALID_TAG will get returned.  Values
+            // 1 and 2 will continue to work.
+            //
+            // If there was a [default] arm this wouldn't work.
+
+            } u;
+        } GOOD_UNION;
+
+        error_status_t
+        UnionCall1(
+                  [in] handle_t Binding,
+                  [in] unsigned long Length,
+                  [in, size_is(Length)] BAD_UNION ArrayOfUnions[]
+                  );
+    
+        error_status_t
+        UnionCall2(
+                  [in] handle_t Binding,
+                  [in] GOOD_UNION *pUnionContainingArrays
+                  );
+ 
+}

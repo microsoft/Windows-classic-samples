@@ -1,0 +1,109 @@
+<HTML xmlns:expand>
+<HEAD>
+
+<TITLE>Behavior Library: Expand</TITLE>
+
+<STYLE>
+    @media all
+    {
+        expand\:node    {
+                        behavior: url(expand_js.htc);
+                        font: bold 10pt verdana
+                        }
+    }
+	                
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+
+    .container      {
+                    position:relative;
+                    top: 25px;
+                    left: 25px;
+                    height:175px
+                    }
+
+    .contents       {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    height: 150px;
+                    border: solid 1 black;
+                    padding: 10px;
+                    width: 125px
+                    }
+                    
+    .topic          {
+                    left: 125px;
+                    overflow: hidden;
+                    position: absolute;
+                    top: 0px;
+                    height: 150px;
+                    width: 175px
+                    }
+    A:link { color:#003399; text-decoration:none; }
+    A:visited { color:#6699CC; text-decoration:none; }
+    A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H1>Expand/Collapse Menu</H1>
+
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+
+<!---------------------------------------------------------------------------->
+<!-- TABLE OF CONTENTS, USING THE EXPAND/COLLAPSE BEHAVIOR ------------------->
+<!---------------------------------------------------------------------------->
+
+<DIV class="container">
+
+<DIV class="contents">
+<expand:node imgExpand="default" href="book.htm" target="topic" title="A Book">The Book
+
+	<expand:node imgExpand="default" href="chap1.htm" target="topic" title="Chapter 1">Chapter 1
+		
+		<expand:node imgExpand="default" href="chap1pt1.htm" target="topic" title="Chapter 1, Part 1">Part 1
+		</expand:node>
+		
+        <expand:node imgExpand="default" href="chap1pt2.htm" target="topic" title="Chapter 1, Part 2">Part 2
+		</expand:node>
+		
+	</expand:node>
+
+	<expand:node imgExpand="default" href="chap2.htm" target="topic" title="Chapter 2">Chapter 2
+	</expand:node>
+
+	<expand:node imgExpand="default" href="chap3.htm" target="topic" title>Chapter 3
+	</expand:node>
+
+</expand:node>
+</DIV>
+
+<!---------------------------------------------------------------------------->
+<!-- TOPIC AREA, PAGES ARE SELECTED USING THE TABLE OF CONTENTS -------------->
+<!---------------------------------------------------------------------------->
+
+<IFRAME NAME="topic" CLASS="topic" SRC="book.htm" SCROLLING="no" NORESIZE></IFRAME>
+
+</DIV>
+
+<DIV style="position:relative">
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="http://www.microsoft.com/misc/info/cpyright.htm" TARGET="_top">2001 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</DIV>
+
+</BODY>
+</HTML>

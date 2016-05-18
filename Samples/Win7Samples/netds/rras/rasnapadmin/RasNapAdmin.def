@@ -1,0 +1,11 @@
+
+LIBRARY "RasNapAdmin.dll"
+
+EXPORTS
+        MprAdminLinkHangupNotification	@1
+        MprAdminAcceptNewConnection3	@2
+        MprAdminConnectionHangupNotification3	@3
+        MprAdminAcceptNewLink	@4
+        MprAdminInitializeDll	@5
+        MprAdminTerminateDll	@6
+

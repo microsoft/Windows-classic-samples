@@ -1,0 +1,2026 @@
+<!--
+Copyright (c) 2000-2001 Microsoft Corp. All rights reserved.
+Version 0.6.1.612
+-->
+
+<PUBLIC:COMPONENT  ID=_webservice  Name="WEBSERVICE" >
+<PUBLIC:PROPERTY NAME="version"
+VALUE="Microsoft WebService Behavior 0.6.1.612" />
+<PUBLIC:PROPERTY NAME="showProgress" VALUE=false />
+<PUBLIC:METHOD   NAME="useService"/>
+<PUBLIC:METHOD   NAME="createCallOptions"/>
+<PUBLIC:METHOD   NAME="createUseOptions"/>
+<PUBLIC:METHOD   NAME="invokeNext"/>
+<PUBLIC:EVENT    ID="eventResult"  NAME="onresult"/>
+<PUBLIC:EVENT    ID="eventService" NAME="onserviceavailable"/>
+</PUBLIC:COMPONENT>
+<SCRIPT LANGUAGE="JSCRIPT">
+var _nextId  = 0;
+var _sdl = new Array();
+var _mProg = null;
+var _st = new Array();
+var _fVBon = false;
+var xsi99 = "http://www.w3.org/1999/XMLSchema-instance";
+var xsi01 = "http://www.w3.org/2001/XMLSchema-instance";
+var xsd01 = "http://www.w3.org/2001/XMLSchema";
+var xsd99 = "http://www.w3.org/1999/XMLSchema";
+_st["int"] = 0;
+_st["integer"] = 0;
+_st["float"] = 0;
+_st["double"] = 0;
+_st["byte"] = 0;
+_st["decimal"] = 0;
+_st["long"] = 0;
+_st["short"] = 0;
+_st["unsignedByte"] = 0;
+_st["unsignedInt"] = 0;
+_st["unsignedShort"] = 0;
+_st["unsignedLong"] = 0;
+_st["boolean"] = 0;
+_st["negativeInteger"] = 0;
+_st["enum"] = 1;
+_st["QName"] = 1;
+_st["string"] = 2;
+_st["timeInstant"] = 3;
+_st["dateTime"] = 3;
+_st["date"] = 4;
+_st["time"] = 5;
+_st["base64"] = 6;
+function ErrDetail(errCode, errString, errRaw)
+{
+this.code = errCode;
+this.string = errString;
+this.raw = errRaw;
+}
+var _errInvalArg = new ErrDetail("Client", "Invalid argument",       null);
+var _errNotReady = new ErrDetail("Client", "Service unavailable",    null);
+var _errInvalRes = new ErrDetail("Server", "Invalid response",       null);
+var _errUnsupFun = new ErrDetail("Client", "Unsupported function",   null);
+var _errUnknownS = new ErrDetail("Server", "Unknown server error",   null);
+var _errAcDenied = new ErrDetail("Server", "Permission denied",      null);
+var _errSoapUnav = new ErrDetail("Client", "Soap not available",     null);
+var _errHtcInter = new ErrDetail("Client", "HTC internal error",     null);
+var _errInvaPort = new ErrDetail("Client", "Invalid active port",    null);
+var _errInvaHead = new ErrDetail("Client", "Invalid headers",        null);
+var _aryError = new Array(
+_errInvalArg,
+_errNotReady,
+_errInvalRes,
+_errUnsupFun,
+_errUnknownS,
+_errAcDenied,
+_errSoapUnav,
+_errHtcInter,
+_errInvaPort,
+_errInvaHead
+);
+function postError(oCall, refError)
+{
+if (oCall.co != null && !oCall.co.async)
+return returnError(oCall, refError);
+var s = function(){returnError(oCall, refError);};
+setTimeout(s, 0);
+return oCall.id;
+}
+function returnError(oCall, refError)
+{
+hideProgress();
+var r = new Object();
+r.id = oCall.id;
+r.error = true;
+r.errorDetail = _aryError[refError];
+if (oCall.co.async == false)
+{
+return r;
+}
+var cb = oCall.cb;
+if (cb == null)
+{
+var evt = createEventObject();
+evt.result = r;
+try { eventResult.fire(evt); } catch(e) {};
+}
+else
+{
+try { cb(r); } catch(e) {};
+}
+return oCall.id;
+}
+function createCallOptions(fn, pn, cm, to, un, pw, hd)
+{
+var o = new Object();
+o.funcName = fn;
+o.portName = pn;
+o.async    = cm;
+o.timeout  = to;
+o.userName = un;
+o.password = pw;
+o.SOAPHeader= hd;
+return o;
+}
+function createUseOptions(rc, sh)
+{
+var o = new Object();
+o.reuseConnection = false;
+o.SOAPHeader = sh;
+return o;
+}
+function cloneObject(co)
+{
+var o = new Object();
+for (var x in co)
+o[x] = co[x];
+return o;
+}
+function ensureVBArray(d)
+{
+if (!_fVBon)
+{
+var s1 =
+"Function VBGetArySize(a, d)\n"
++ "Dim x\n"
++ "Dim s\n"
++ "s=UBound(a, 1)\n"
++ "For x = 2 To d \n"
++ 's = s & "," & UBound(a, x)\n'
++ "Next\n"
++ "VBGetArySize=s\n"
++ "End Function";
+var o = document.createElement("script");
+o.language = "VBS";
+o.text = s1;
+document.body.appendChild(o);
+_fVBon = true;
+}
+var fn = "VBGetAryItem" + d;
+if (eval("typeof " + fn) != 'undefined')
+return;
+var a  = new Array();
+for (var i = 0; i < d; i++)
+a[i] = 'p' + i;
+var sp = a.join(",");
+var s2 = "Function " + fn + "(a," + sp + ")\n"
++ fn + "=a(" + sp + ")\n"
++ "End Function\n";
+var o = document.createElement("script");
+o.language = "VBS";
+o.text = s2;
+document.body.appendChild(o);
+}
+var _b64="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+function encb64hlp(s, iFrom, iTo)
+{
+var d = 0;
+for (var i = 0; i + iFrom <= iTo; i ++)
+d |= s.charCodeAt(i + iFrom) << (16 - 8*i);
+var s = "";
+for (var i = 0; i <= iTo - iFrom + 1; i ++)
+s += _b64.charAt(d>>>(18 - i*6)&0x3f);
+return s;
+}
+function decb64hlp(a, ai, s, iFrom, iTo)
+{
+var d = 0;
+var l = iTo - iFrom;
+for (var i = 0; i + iFrom <= iTo; i ++)
+{
+d |= _b64.indexOf(s.charAt(i + iFrom)) << (18 - 6*i);
+}
+for (var i = 0; i < l; i ++)
+a[ai + i] = (d >>> (16 - i*8)) & 0xff;
+return ai + i;
+}
+function encb64(s)
+{
+var sb64 = "";
+var i;
+var l = s.length;
+for (i = 2; i < l; i = i + 3)
+sb64 += encb64hlp(s, i - 2, i);
+if (i - 3 < l)
+sb64 +=encb64hlp(s, i - 2, l-1);
+return sb64;
+}
+function decb64(s)
+{
+var sDec = "";
+var i;
+var ip = s.indexOf('=');
+var l = ip >= 0 ? ip : s.length;
+var a = new Array((l >>> 2) * 3 + 1);
+var ai = 0;
+for (i = 3; i < l; i = i + 4)
+ai = decb64hlp(a, ai, s, i-3, i);
+if (i-4 < l)
+ai = decb64hlp(a, ai, s, i-3, l-1);
+var s;
+try
+{
+s = String.fromCharCode.apply(null, a);
+}
+catch (E)
+{
+s = eval("String.fromCharCode(" + a.join(',') + ")");
+}
+return s;
+}
+function buildServiceUrl(szService)
+{
+if (szService.indexOf("://") > 0)
+return szService;
+var baseUrl = element.document.URL;
+return  baseUrl.substr(0, baseUrl.lastIndexOf("/"))
++ "/" + szService + (szService.indexOf(".")>=0 ? "" : ".asmx?wsdl");
+}
+function allocCall()
+{
+var o = new Object();
+o.fDone = false;
+o.next = null;
+o.id = _nextId;
+_nextId++;
+return o;
+}
+function fnShowProgress()
+{
+if (_mProg == null)
+{
+var s = "<MARQUEE WIDTH=160 HEIGHT=20 BEHAVIOR=alternate SCROLLDELAY=1"
++ " STYLE='background:lightblue;position:absolute;top:0;left:0'>"
++ "</MARQUEE>";
+_mProg = element.document.createElement(s);
+_mProg.innerHTML = "In Progress";
+}
+if (_mProg.parentElement == null)
+element.document.body.insertAdjacentElement("beforeEnd",_mProg);
+}
+function isSimpleType(os, oschm, t)
+{
+return isPrimitive(os, t) || oschm == null || oschm.sTypes[t.type]!=null;
+}
+function isPrimitive(os, t)
+{
+return os.ns[t.ns] == os.ns["xsd"];
+}
+function getSdl()
+{
+var szService = null;
+for (var aService in _sdl)
+{
+if (_sdl[aService] == null)
+continue;
+var xmlisld = _sdl[aService]._oXml;
+if (xmlisld == null)
+continue;
+if (   _sdl[aService].fPending
+&&  xmlisld.XMLDocument.readyState == 4)
+{
+_sdl[aService].fPending = false;
+szService = aService;
+break;
+}
+}
+if (szService == null)
+return;
+var oS = _sdl[szService];
+var xmlSdl = oS._oXml.documentElement;
+parseSdl(xmlSdl, szService);
+var evt = createEventObject();
+evt.serviceUrl = szService;
+evt.userName = _sdl[szService]._oXml.service;
+evt.serviceAvailable = xmlSdl != null;
+oS._oXml.removeNode(true);
+oS._oXml = null;
+if (xmlSdl == null)
+{
+for (var nc = oS.nextCall; nc != null; nc = nc.next)
+returnError(nc, 1);
+_sdl[szService] = null;
+eventService.fire(evt);
+return;
+}
+eventService.fire(evt);
+if (oS.fSeq)
+return callNext(oS);
+while (oS.nextCall != null)
+{
+var nc = oS.nextCall;
+oS.nextCall = oS.nextCall.next;
+_invoke(nc);
+}
+}
+function invokeNext(svcName)
+{
+var oS = _sdl[svcName];
+if (oS == null)
+return;
+var oC = oS.nextCall;
+if (oC == null)
+return null;
+oS.nextCall = oC.next;
+if (oS.nextCall == null)
+oS.lastCall = null;
+_invoke(oC);
+}
+function callNext(oS)
+{
+if (oS.fSeq)
+setTimeout(element.uniqueID + '.invokeNext("' + oS.url + '")', 0);
+}
+function getAttrib(o, sAName)
+{
+var a = o.attributes.getNamedItem(sAName);
+if (a != null)
+return a.value;
+return null;
+}
+function getBaseName(str)
+{
+var a = str.split(":");
+if (a.length > 1)
+return a[1];
+return str;
+}
+function getQualifier(str)
+{
+var a = str.split(":");
+if (a.length > 1)
+return a[0];
+return '';
+}
+function parseSimpleType(oS, oschm, o, ssffx)
+{
+var ns = getQualifier(o.tagName);
+var o1 = o.firstChild;
+if (o1 == null)
+return null;
+var sn = getAttrib(o, "name");
+if (sn == null)
+return null;
+sn = getBaseName(sn);
+var ot;
+switch(o1.baseName)
+{
+case 'restriction' :
+var ao = o1.selectNodes(ns.length?(ns + ':enumeration'):'enumeration');
+if (ao.length == 0)
+return null;
+ot = new Object();
+ot.name = sn;
+ot.type = 'enum';
+try
+{
+ot.base = getBaseName(getAttrib(o1, "base"));
+}
+catch (e)
+{
+ot.base = "string";
+}
+oschm.sTypes[sn] = ot;
+break;
+default:
+ot = null;
+}
+return ot;
+}
+function parseType(oS, oschm, o, ssffx)
+{
+if (o == null)
+return null;
+switch(o.baseName)
+{
+case "complexType" :
+return parseComplexType(oS, oschm, o, ssffx);
+case "simpleType" :
+return parseSimpleType(oS, oschm, o, ssffx);
+}
+return null;
+}
+function getAttribEx(o, bn)
+{
+var a = o.attributes;
+for (var i = 0; i < a.length; i++)
+if (a[i].baseName == bn)
+return a[i].value;
+return null;
+}
+function parseArrayType(at, sz)
+{
+var asa = sz.split("[");
+if (asa.length <= 1)
+{
+asa = sz.split(",");
+for (var i = 0; i < asa.length; i++)
+{
+var ii = parseInt(asa[i]);
+at[at.length] = isNaN(ii) ? null : ii;
+}
+return;
+}
+for (var i=0; i < asa.length; i++)
+parseArrayType(at, asa[i]);
+}
+function parseComplexType(oS, oschm, o, ssffx)
+{
+var ns = getQualifier(o.tagName);
+if (!o.hasChildNodes())
+return null;
+var ot = null;
+for (var j = 0; j < o.childNodes.length; j++)
+{
+var o1 = o.childNodes[j];
+switch(o1.baseName)
+{
+case 'sequence' :
+case 'all' :
+var ao = o1.selectNodes(ns.length ? (ns+':any') : 'any');
+if (ao.length != 0)
+continue;
+ao = o1.selectNodes(ns.length ? (ns+':element') : 'element');
+if (ao.length == 0)
+continue;
+ot = new Array();
+for (var i = 0; i < ao.length; i++)
+{
+var s = getAttrib(ao[i], "name");
+if (s == null)
+{
+var s = getAttrib(ao[i], "ref");
+if (s != null)
+{
+oS.refs[s] = ot;
+}
+}
+else
+ot[s] = parseElem(oS, oschm, ao[i], true, ssffx);
+}
+continue;
+case 'complexContent' :
+var o2 = o1.firstChild;
+switch(o2.baseName)
+{
+case 'restriction' :
+var tn = getAttrib(o, "name");
+if (tn == null)
+continue;
+tn = getBaseName(tn);
+var tt =  parseComplexType(oS, oschm, o2, ssffx);
+oschm.aTypes[tn] = tt;
+return tt;
+case 'all' :
+return parseComplexType(oS, oschm, o1, ssffx);
+}
+continue;
+case 'attribute' :
+var arrayType = getAttribEx(o1, "arrayType");
+if (arrayType == null)
+{
+if (ot == null)
+ot = new Array();
+ot[getAttrib(o1, "name")] = parseAttrib(o1);
+continue;
+}
+var tn = getBaseName(arrayType);
+if (ot != null)
+{
+var oe = get1stAryItem(ot);
+oe.fArray = true;
+oe.fNested = true;
+oe.sizeArray = new Array();
+parseArrayType(oe.sizeArray,
+tn.substring(tn.indexOf("[")+1, tn.length));
+continue;
+}
+var oe = new Object();
+var a = tn.split("[");
+if (a.length < 2)
+continue;
+oe.ns = getQualifier(arrayType);
+oe.name = a[0];
+oe.fArray = true;
+oe.type = a[0];
+oe.sizeArray = new Array();
+oe.fNested = true;
+parseArrayType(oe.sizeArray,
+tn.substring(tn.indexOf("[")+1, tn.length));
+ot = new Array();
+ot[a[0]] = oe;
+continue;
+default:
+ot = null;
+}
+}
+return ot;
+}
+function parseAttrib(o)
+{
+var attrib = new Object();
+attrib.fAttrib = true;
+attrib.type = getAttrib(o, "type");
+return attrib;
+}
+function parseElem(oS, oschm, o, fNested, ssffx)
+{
+var oe = new Object();
+oe.name = getAttrib(o, "name");
+var st = getAttrib(o, "type");
+var minOccurs = getAttrib(o, "minOccurs");
+var maxOccurs = getAttrib(o, "maxOccurs");
+oe.fArray = (maxOccurs != null && maxOccurs != "1");
+if (st != null)
+{
+oe.type = getBaseName(st);
+oe.ns = getQualifier(st);
+oe.fFinal = true;
+return oe;
+}
+oe.fFinal = false;
+var ct = parseType(oS, oschm, o.firstChild, oe.name);
+if (fNested && ct != null)
+{
+var k = null;
+for (var j in ct)
+{
+if (k == null)
+k = j;
+else
+{
+k = null; break;
+}
+}
+if (k != null)
+{
+oe.type = ct[k].type;
+oe.ns = ct[k].ns;
+oe.fArray = ct[k].fArray;
+oe.fNested = true;
+return oe;
+}
+}
+if (typeof ssffx != 'undefined')
+oe.type = ssffx + '_' + oe.name;
+else
+oe.type = oe.name;
+oschm.types[oe.type] = ct;
+return oe;
+}
+function parseSoapHeader(oS, o)
+{
+var hdrInfo = new Object();
+hdrInfo.ns = getAttrib(o, "namespace");
+hdrInfo.es = getAttrib(o, "encodingStyle");
+var sUs = getAttrib(o, "use");
+hdrInfo.fLiteral = (sUs != null && sUs.toLowerCase()=='literal');
+var smsg = getAttrib(o, "message");
+var amh = oS.msgs[getBaseName(smsg)];
+var spart = getAttrib(o, "part");
+hdrInfo.fRequired = getAttrib(o, "required") == "true";
+hdrInfo.type = amh.args[getBaseName(spart)];
+return hdrInfo;
+}
+function parseSdl(xmlSdl, szService)
+{
+if (xmlSdl == null)
+return;
+var nsq      = getQualifier(xmlSdl.nodeName);
+var nsq      = nsq.length == 0 ? "" : (nsq + ":");
+var nMsgs    = xmlSdl.selectNodes(nsq + "message");
+var nPort    = xmlSdl.selectNodes(nsq + "portType");
+var nBinding = xmlSdl.selectNodes(nsq + "binding");
+var nService = xmlSdl.selectNodes(nsq + "service");
+var nTypes   = xmlSdl.selectNodes(nsq + "types");
+var aMsgs    = new Array();
+var aPort    = new Array();
+var aBinding = new Array();
+var oS = _sdl[szService];
+oS.targetns = getAttrib(xmlSdl, "targetNamespace");
+oS.ns = new Array();
+oS.ns[""] = "";
+oS.ns["xsd"] = "http://www.w3.org/2001/XMLSchema";
+oS.ns["soapenc"] = "http://schemas.xmlsoap.org/soap/encoding/";
+oS.ns["SOAP-ENV"] = 'http://schemas.xmlsoap.org/soap/envelope/';
+oS.schemas = new Array();
+oS.nsalias = new Array();
+oS.msgs = aMsgs;
+oS.refs = new Array();
+for (var i = 0; i < xmlSdl.attributes.length; i++)
+{
+var oAtt = xmlSdl.attributes.item(i);
+if (oAtt.name == "xmlns")
+{
+continue;
+}
+var ii = oAtt.name.indexOf("xmlns:");
+if (ii != 0)
+continue;
+var nsn = oAtt.name.substring(6, oAtt.name.length);
+oS.ns[nsn] = oAtt.value;
+oS.nsalias[oAtt.value] = nsn;
+}
+if (oS.ns["xsi"] == null)
+oS.ns["xsi"] = oS.ns["xsd"] == xsd99 ? xsi99 : xsi01;
+for (var i = 0; i < nTypes.length; i ++)
+{
+var nSchemas = nTypes[i].childNodes;
+for (var j = 0; j < nSchemas.length; j ++)
+{
+var oSchm = new Object();
+oSchm.uri = getAttrib(nSchemas[j], "targetNamespace");
+oSchm.efd = getAttrib(nSchemas[j], "elementFormDefault");
+oSchm.afd = getAttrib(nSchemas[j], "attributeFormDefault");
+oSchm.service = szService;
+oSchm.elems = new Array();
+oSchm.types = new Array();
+oSchm.sTypes = new Array();
+oSchm.aTypes = new Array();
+var nElements = nSchemas[j].childNodes;
+for (var k = 0; k < nElements.length; k ++)
+{
+var sn = getAttrib(nElements[k], "name");
+if (sn == null)
+continue;
+switch(nElements[k].baseName)
+{
+case 'element' :
+oSchm.elems[sn] = parseElem(oS,oSchm,nElements[k],false,sn);
+break;
+case 'simpleType' :
+case 'complexType' :
+oSchm.types[sn] = parseType(oS, oSchm, nElements[k]);
+break;
+}
+}
+oS.schemas[oSchm.uri] = oSchm;
+}
+}
+for (var x in oS.refs)
+{
+var q = getQualifier(x);
+var nsUri = oS.ns[q];
+var oschm = oS.schemas[nsUri];
+if (oschm == null)
+continue;
+var ot = oschm.elems[getBaseName(x)];
+oS.refs[x][ot.name] = ot;
+}
+for (var i = 0; i < nMsgs.length; i++)
+{
+var sName = getAttrib(nMsgs[i], 'name');
+aMsgs[sName] = new Object();
+var ps = nMsgs[i].selectNodes(nsq + "part");
+aMsgs[sName].args = new Array();
+for (var j = 0; j < ps.length; j ++)
+{
+var ap = new Object();
+ap.name = getAttrib(ps[j], "name");
+ap.type = getAttrib(ps[j], "type");
+ap.elem = getAttrib(ps[j], "element");
+if (ap.elem != null)
+{
+ap.ns = getQualifier(ap.elem);
+ap.elem = getBaseName(ap.elem);
+}
+if (ap.type != null)
+{
+ap.ns = getQualifier(ap.type);
+ap.type = getBaseName(ap.type);
+}
+if (ap.ns != null && ap.ns != '')
+{
+var nsuri = getAttrib(ps[j],'xmlns:'+ap.ns);
+if (nsuri != null)
+oS.ns[ap.ns] = nsuri;
+}
+aMsgs[sName].args[ap.name] = ap;
+}
+aMsgs[sName].argl = ps.length;
+}
+for (var i = 0; i < nPort.length; i++)
+{
+var sName = getAttrib(nPort[i], "name");
+aPort[sName] = new Object();
+var nops = nPort[i].selectNodes(nsq + "operation");
+var oops = new Array();
+aPort[sName].ops = oops;
+for (var j = 0; j < nops.length; j++)
+{
+var sOpName = getAttrib(nops[j], "name");
+var nInputs = nops[j].selectNodes(nsq + "input");
+var mInput = null;
+if (nInputs.length > 0)
+{
+var s = getAttrib(nInputs[0], "message");
+var sMsgName = getBaseName(s);
+var sNS = getQualifier(s);
+if (oops[sOpName] == null)
+oops[sOpName] = new Array();
+var sin = getAttrib(nInputs[0], "name");
+if (sin != null)
+oops[sOpName][sin] = aMsgs[sMsgName];
+else
+oops[sOpName][sOpName] = aMsgs[sMsgName];
+if (aMsgs[sMsgName] == null)
+break;
+aMsgs[sMsgName].opname = sOpName;
+mInput = aMsgs[sMsgName];
+}
+var nOutputs = nops[j].selectNodes(nsq + "output");
+if (nOutputs.length > 0)
+{
+var s = getAttrib(nOutputs[0], "message");
+var sMsgName = getBaseName(s);
+var sSoapName = aMsgs[sMsgName].soapName;
+if (sSoapName == null)
+aPort[sName].ops[sMsgName] = aMsgs[sMsgName];
+else
+{
+aPort[sName].ops[sSoapName] = aMsgs[sMsgName];
+aMsgs[sSoapName] = aMsgs[sMsgName];
+}
+if (mInput != null)
+mInput.response = aMsgs[sMsgName];
+}
+}
+}
+for (var i = 0; i < nBinding.length; i++)
+{
+var osoapb = nBinding[i].selectNodes("soap:binding");
+if (osoapb == null || osoapb.length == 0)
+continue;
+var sStyle= getAttrib(osoapb[0], "style");
+var sName = getAttrib(nBinding[i], "name");
+aBinding[sName] = new Object();
+var stype = getBaseName(getAttrib(nBinding[i], "type"));
+aBinding[sName].msgs = aPort[stype].ops;
+var nops = nBinding[i].selectNodes(nsq + "operation");
+for (var j = 0; j < nops.length; j++)
+{
+var sOpName = getAttrib(nops[j], "name");
+var input = nops[j].selectSingleNode(nsq + "input");
+if (input == null)
+continue;
+var sin = getAttrib(input, "name");
+if (sin == null)
+sin = sOpName;
+var oM = aBinding[sName].msgs[sOpName][sin];
+if (oM == null)
+continue;
+var nsoapops = nops[j].selectNodes("soap:operation");
+if (nsoapops.length == 0)
+continue;
+var sOpStyle= getAttrib(nsoapops[0], "style");
+oM.soapAction = getAttrib(nsoapops[0], "soapAction");
+var nsoapbody = nops[j].selectNodes(nsq + "input/soap:body");
+if (nsoapbody.length > 0)
+{
+oM.ns = getAttrib(nsoapbody[0], "namespace");
+oM.es = getAttrib(nsoapbody[0], "encodingStyle");
+var sUs = getAttrib(nsoapbody[0], "use");
+oM.fLiteral = (sUs != null && sUs.toLowerCase() == 'literal');
+}
+var nsoaphead = nops[j].selectNodes(nsq + "input/soap:header");
+oM.headers = new Array();
+for (var k = 0; k < nsoaphead.length; k ++)
+oM.headers[k] = parseSoapHeader(oS, nsoaphead[k])
+if (sOpStyle != null)
+oM.fRpc = sOpStyle.toLowerCase()=='rpc';
+else
+oM.fRpc=(sStyle !=null && sStyle.toLowerCase()=='rpc');
+}
+}
+var nports = nService[0].selectNodes(nsq + "port");
+oS.soapPort = new Array();
+for (var j = 0; j < nports.length; j++)
+{
+var oAddress = nports[j].selectNodes("soap:address");
+if (oAddress.length == 0)
+continue;
+var oSOAPHdr = nports[j].selectNodes("soap:header");
+oS.headers = new Array();
+for (var k = 0; k < oSOAPHdr.length; k ++)
+oS.headers[k] = parseSoapHeader(oS, oSOAPHdr[k]);
+oPort = new Object();
+oPort.location = getAttrib(oAddress[0], "location");
+var b = aBinding[getBaseName(getAttrib(nports[j], "binding"))];
+oPort.msgs = b.msgs;
+var szname = getAttrib(nports[j], "name");
+oS.soapPort[szname] = oPort;
+if (oS.defPortName == null)
+oS.defPortName = szname;
+}
+}
+function ensureXmlHttp(fAsync, oS)
+{
+var fCreate = fAsync ? oS.aXmlHttp == null : oS.sXmlHttp == null;
+if (!fCreate && oS.fSeq)
+return fAsync ? oS.aXmlHttp : oS.sXmlHttp;
+var oXmlHttp;
+try
+{
+oXmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+catch (e)
+{
+return null;
+}
+if (!oS.fSeq)
+return oXmlHttp;
+if (fAsync)
+oS.aXmlHttp = oXmlHttp;
+else
+oS.sXmlHttp = oXmlHttp;
+return oXmlHttp;
+}
+function _invoke(oCall)
+{
+var szS = oCall.service;
+var oS = _sdl[szS];
+var co = oCall.co;
+if (oS == null)
+{
+return postError(oCall, 1);
+}
+if (co.portName == null)
+co.portName = oS.defPortName;
+if (oS.soapPort[co.portName] == null)
+{
+callNext(oS);
+return returnError(oCall, 8);
+}
+var xmlHttp = ensureXmlHttp(co.async, oS);
+if (xmlHttp == null)
+{
+callNext(oS);
+return returnError(oCall, 6);
+}
+var args = oCall.args;
+var cb = oCall.cb;
+var j = cb == null ? 1 : 2;
+var oM = getMsg(szS, co, args, j);
+var szParams = null;
+if (oM != null)
+szParams = encodeArgs(oM, szS, args, j);
+if (szParams == null)
+{
+callNext(oS);
+return returnError(oCall, 0);
+}
+oCall.fRpc = oM.fRpc;
+oCall.fLiteral = oM.fLiteral;
+oCall.response = oM.response;
+if (showProgress == "true" || showProgress == true)
+fnShowProgress();
+var oP = oS.soapPort[co.portName];
+try
+{
+if (co.userName == null)
+xmlHttp.open("POST", oP.location, co.async);
+else
+xmlHttp.open("POST", oP.location, co.async,
+co.userName, co.password == null ? "" : co.password);
+}
+catch (e)
+{
+return returnError(oCall, 5);
+}
+var szAction = oM.soapAction;
+if (szAction != null && szAction.length > 0)
+xmlHttp.setRequestHeader("SOAPAction", '"'+szAction+'"');
+xmlHttp.setRequestHeader("Content-Type", "text/xml");
+var sNS = "";
+for (var ns in oS.ns)
+{
+sNS +=  " xmlns" + (ns==''?'':':') + ns + '="' + oS.ns[ns] + '"';
+}
+szHeader = "";
+var sh = co.SOAPHeader == null ? oS.SOAPHeader : co.SOAPHeader;
+var ht = (oM.headers == null) ? oS.headers : oM.headers;
+if (sh != null)
+{
+fEncoded = false;
+if (typeof sh == 'string')
+szHeader = sh;
+else if (typeof sh != 'object')
+szHeader = "";
+else if (sh.xml != null)
+szHeader = sh.xml;
+else if (ht.length != 0)
+{
+if (sh.length == null)
+{
+var he = ht[0].type;
+if (he.elem != null)
+{
+he = getSchema(oS, he).elems[he.elem];
+}
+szHeader=encodeVar(oS, true, sh, he);
+}
+else
+{
+for (var i = 0; i < ht.length; i++)
+{
+if (sh[i] == null)
+{
+if (ht[i].fRequired)
+return returnError(oCall, 9);
+continue;
+}
+var he = ht[i].type;
+if (he.elem != null)
+{
+he = getSchema(oS, he).elems[he.elem];
+}
+szHeader += encodeVar(oS, true, sh[i], he);
+}
+}
+fEncoded = !ht[0].fLiteral;
+}
+szHeader = '<SOAP-ENV:Header xmlns="'
++ (fEncoded ? '' : oS.targetns ) + '">\n'
++ szHeader + "\n</SOAP-ENV:Header>\n";
+}
+var szPayload = "<?xml version='1.0'?>\n"
++ '<SOAP-ENV:Envelope SOAP-ENV:encodingStyle="'
++ oM.es + '" ' + sNS + ">\n"
++ szHeader
++ '<SOAP-ENV:Body>'
++ szParams + "\n</SOAP-ENV:Body>\n"
++ "</SOAP-ENV:Envelope>\n";
+if (co.async)
+{
+oCall.oXmlHttp = xmlHttp;
+xmlHttp.onreadystatechange = function() {getResult(oCall);};
+try
+{
+xmlHttp.send(szPayload);
+}
+catch(e)
+{
+return postError(oCall, 5);
+}
+return oCall.id;
+}
+try
+{
+xmlHttp.send(szPayload);
+}
+catch (e)
+{
+return returnError(oCall, 5);
+}
+if (xmlHttp.responseXML.parseError.errorCode != 0)
+{
+_errUnknownS.raw = sXmlHttp.responseText;
+return returnError(oCall, 4);
+}
+var sXmlHttpDoc = xmlHttp.responseXML.documentElement;
+if (sXmlHttpDoc == null)
+return returnError(oCall, 4);
+var r;
+try
+{
+r = processResult(oCall, sXmlHttpDoc);
+}
+catch (e)
+{
+return returnError(oCall, 7);
+}
+return r;
+}
+function callService(service, args)
+{
+var oC = allocCall();
+if (args.length < 1)
+{
+return postError(oC, 0);
+}
+var cb = null;
+var iM = 0;
+if (    typeof args[0] == "function"
+||  typeof args[0] == "object" && args[0].funcName == null)
+{
+iM = 1;
+cb = args[0];
+}
+var co;
+if (typeof args[iM] == 'string')
+co = createCallOptions(args[iM]);
+else
+co = cloneObject(args[iM]);
+oC.co = co;
+oC.cb = cb;
+oC.service = service;
+oC.args = args;
+if (co.async == null)
+co.async = true;
+if (co.funcName == null)
+{
+return postError(oC, 0);
+}
+var oS = _sdl[service];
+if (oS == null)
+{
+return postError(oC, 1);
+}
+if (co.async == false)
+return oS.fPending ? returnError(oC, 1) : _invoke(oC);
+if (oS.fSeq || oS.fPending)
+{
+if (oS.lastCall != null)
+oS.lastCall.next = oC;
+else
+oS.nextCall = oC;
+oS.lastCall = oC;
+}
+if (oS.fPending)
+return oC.id;
+if (!oS.fSeq)
+_invoke(oC);
+else if (oC == oS.nextCall)
+callNext(oS);
+return oC.id;
+}
+function useService(szService, userName, options)
+{
+if (    szService == null || szService.length == 0
+||  userName == null  || userName.length == 0)
+{
+throw("Invalid arguments");
+return;
+}
+var url = buildServiceUrl(szService);
+var oProp = getAttribute(userName);
+if (oProp == null)
+{
+oProp=document.createElement("<PUBLIC:PROPERTY NAME="+userName+" />");
+_webservice.appendChild(oProp);
+}
+var oPropValue = new Object();
+setAttribute(userName, oPropValue);
+oPropValue.callService = function(){return callService(url, arguments)};
+if (_sdl[url] != null)
+{
+return;
+}
+var oXml = element.document.createElement("XML");
+element.document.body.appendChild(oXml);
+oS = new Object();
+oS.sXmlHttp = null;
+oS.aXmlHttp = null;
+oS.fPending = true;
+oS.nextCall = null;
+oS.lastCall = null;
+oS.url      = url;
+if (options != null)
+{
+oS.fSeq = options.reuseConnection;
+oS.SOAPHeader = options.SOAPHeader;
+}
+if (oS.fSeq == null)
+oS.fSeq = false;
+oS.fEscString = true;
+oPropValue.setEscapeString = function(f){oS.fEscString = f;};
+oS._oXml    = oXml;
+_sdl[url]   = oS;
+oXml.service = userName;
+oXml.onreadystatechange = getSdl;
+oXml.src = url;
+return;
+}
+function getMsg(service, co, args, argIdx)
+{
+var oM;
+var mn = co.funcName;
+var oS = _sdl[service];
+try
+{
+var sp = oS.soapPort[co.portName];
+oM  = sp.msgs[mn];
+}
+catch (e)
+{
+return null;
+}
+if (oM == null || oM.length == null)
+{
+return null;
+}
+var om1;
+for (om1 in oM)
+{
+if (oM[om1].args.length == args.length - argIdx)
+{
+oM = oM[om1];
+break;
+}
+}
+if (oM.length != null)
+oM = oM[om1];
+return oM;
+}
+function fixupDT(x)
+{
+return (x < 10) ? ("0" + x) : x;
+}
+function encTZ(d)
+{
+var tzo = d.getTimezoneOffset();
+return (tzo > 0 ? '-' : '+') + fixupDT(tzo / 60) + ':' + fixupDT(tzo % 60);
+}
+function encodePrimitive(os, argType, argVal)
+{
+var sz = '';
+switch(_st[argType])
+{
+case 2 :
+if (os.fEscString)
+sz = escape(argVal);
+else
+sz = "<![CDATA[" + argVal + "]]>";
+break;
+case 3 :
+try
+{
+sz  =   argVal.getFullYear()
++   "-" + fixupDT(argVal.getMonth() + 1)
++   "-" + fixupDT(argVal.getDate())
++   "T" + fixupDT(argVal.getHours())
++   ":" + fixupDT(argVal.getMinutes())
++   ":" + fixupDT(argVal.getSeconds())
++   (argVal.getMilliseconds==null
+? '' : ('.' + argVal.getMilliseconds()))
++   encTZ(argVal);
+}
+catch (e) { sz = argVal; }
+break;
+case 4 :
+try
+{
+sz  =   argVal.getFullYear()
++   "-" + fixupDT(argVal.getMonth() + 1)
++   "-" + fixupDT(argVal.getDate())
++   encTZ(argVal);
+}
+catch (e) { sz = argVal; }
+break;
+case 5 :
+try
+{
+sz  =   fixupDT(argVal.getHours())
++   ":" + fixupDT(argVal.getMinutes())
++   ":" + fixupDT(argVal.getSeconds())
++   (argVal.getMilliseconds==null
+? '' : ('.' + argVal.getMilliseconds()))
++   encTZ(argVal);
+}
+catch (e) { sz = argVal; }
+break;
+case 6 :
+sz = encb64(argVal);
+break;
+default :
+sz = argVal;
+}
+return sz;
+}
+function bldJsAry(a, as, d)
+{
+if (d == as.length-1)
+return;
+for (var i = 0; i < as[d]; i++)
+{
+a[i] = new Array();
+bldJsAry(a[i], as, d+1)
+}
+}
+function getNextIndexAry(a, ai)
+{
+var i;
+var l = a.length;
+if (ai.length == 0)
+{
+for (i = 0; i < l; i++)
+ai[i] = 0;
+return true;
+}
+for (i = l - 1; i >= 0; i--)
+{
+if (i == 0 && 1 + ai[0] > a[0] - 1)
+return false;
+var x = ai[i] + 1;
+if (x <= a[i] - 1)
+{
+ai[i] = x;
+return true;
+}
+ai[i] = 0;
+}
+return true;
+}
+function vbArrayToJs(a, d)
+{
+ensureVBArray(d);
+var szSize;
+try { szSize = VBGetArySize(a, d); } catch (e) {return new Array()}
+var aSize = szSize.split(",");
+var aszIndex = new Array();
+var ajs = new Array();
+bldJsAry(ajs, aSize, 0);
+var ai = new Array();
+while (true == getNextIndexAry(aSize, ai))
+{
+var s = "ajs["+ai.join("][")+"]=VBGetAryItem"+d+"(a,"+ai.join(",")+");";
+try { eval(s);} catch (e) {break;}
+}
+return ajs;
+}
+function encodeArray(os, t, v, d, fnEnc)
+{
+var sz = "";
+for (var i in v)
+{
+if (d == 1)
+sz += '\n<' + t + '>' + fnEnc(os, t, v[i]) + '</' + t + '>';
+else
+sz += encodeArray(os, t, v[i], d-1, fnEnc);
+}
+return sz;
+}
+function encodeVar(os, fDocEnc, v, t)
+{
+var qn = t.ns == null ? "" : (t.ns + ":");
+var szBeg = fDocEnc ? ("<"+qn+t.type+' xsi:type="'+qn+t.type+'"'+">") : "";
+var szEnd = fDocEnc ? ("</" + qn + t.type + ">") : "";
+var sz = '';
+if (v == null)
+return szBeg + sz + szEnd;
+var oschm = getSchema(os, t);
+if (isSimpleType(os, oschm, t))
+{
+if (t.fArray)
+{
+if (typeof v != 'object' && typeof v != 'unknown')
+return szBeg + sz + szEnd;
+var sArr = t.sizeArray;
+var k = 1;
+k = (sArr == null) ? 1 : sArr.length;
+if (typeof v == 'unknown')
+v = vbArrayToJs(v, k);
+sz += encodeArray(os, t.type, v, k, encodePrimitive);
+return szBeg + sz + szEnd;
+}
+else
+{
+sz = encodePrimitive(os, t.type, v);
+return sz;
+}
+}
+var et = oschm.types[t.type];
+if (et == null)
+{
+try
+{
+var os = v.childNodes;
+for (var i = 0; i < os.length; i ++)
+{
+sz += os[i].xml;
+}
+return szBeg + sz + szEnd;
+}
+catch (e)
+{
+return szBeg + sz + szEnd;
+}
+}
+if (t.fArray)
+{
+if (typeof v != 'object' && typeof v != 'unknown')
+return szBeg + sz + szEnd;
+var nt = new Object();
+nt.name = t.name;
+nt.fArray = false;
+nt.type = t.type;
+nt.ns   = t.ns;
+var fnEnc = function(oS, t, vi){return encodeVar(oS, fDocEnc, vi, nt);};
+var sArr = t.sizeArray;
+var k = 1;
+k = (sArr == null) ? 1 : sArr.length;
+if (typeof v == 'unknown')
+v = vbArrayToJs(v, k);
+sz += encodeArray(os, t.type, v, k, fnEnc);
+return szBeg + sz + szEnd;
+}
+if (typeof v != 'object' || v.length > 0)
+{
+var et1 = get1stAryItem(et);
+if (et1 == null)
+return szBeg + sz + szEnd;
+if (v.length == null || v.length == 0)
+sz += '\n<' + et1.name + '>';
+sz += encodeVar(os, fDocEnc, v, et1)
+if (v.length == null || v.length == 0)
+sz += '</' + et1.name + '>';
+return szBeg + sz + szEnd;
+}
+for (var k in v)
+{
+if (et[k] == null)
+continue;
+if (v[k] == null)
+{
+sz += '\n<' + et[k].name + ' xsi:null="true"' + '/>\n';
+continue;
+}
+var qt = "";
+if (isPrimitive(os, et[k]))
+qt = ' xsi:type="xsd:' + et[k].type + '"';
+sz += '\n<' + et[k].name + qt + '>'
++ encodeVar(os, fDocEnc, v[k], et[k])
++ '</' + et[k].name + '>';
+}
+return szBeg + sz + szEnd;
+}
+function getNs(os, oM)
+{
+var sNSMeth = oM.ns == null ? os.targetns : oM.ns;
+return ' xmlns' + (oM.fRpc ? ':mswsb' : '') + '="' + sNSMeth + '"';
+}
+function getArySize(a)
+{
+var l = 0;
+for (var x in a)
+l++;
+return l;
+}
+function get1stAryItem(a)
+{
+for (var x in a)
+return a[x];
+}
+function getSchema(os, t)
+{
+if (t.ns==null)
+return get1stAryItem(os.schemas);
+var nsUrl = os.ns[t.ns];
+var oschm = os.schemas[nsUrl];
+if (oschm != null || t.ns.length == 0)
+return oschm;
+for (var x in os.schemas)
+if (x.indexOf(nsUrl) == 0 && os.schemas[x].types[t.type] != null)
+return os.schemas[x];
+return null;
+}
+function encodeArgs(oM, service, args, argIdx)
+{
+var os = _sdl[service];
+var l = args.length;
+var sz = '';
+var mn = oM.opname;
+var fDocEnc = !oM.fRpc && !oM.fLiteral;
+if (!oM.fRpc && oM.argl == 1)
+{
+var pn = null;
+for (pn in oM.args)
+break;
+if (pn == null)
+{
+return null;
+}
+var a = oM.args[pn];
+if (!oM.fLiteral && a.type == null)
+{
+a.type = a.elem;
+}
+var et = a;
+if (a.elem != null)
+{
+var oschm = getSchema(os, a);
+et = oschm == null ? a : oschm.elems[a.elem];
+}
+var qn = a.ns == null ? "" : (a.ns + ":");
+var nsd = ' xmlns ="'+(a.ns == null ? os.targetns : os.ns[a.ns]) + '"';
+if (oM.fLiteral && a.elem != null)
+sz += '\n<' + a.elem + nsd + '>';
+else
+sz += '\n<' +qn+a.type+' xmlns="" xsi:type="' + qn + a.type + '">';
+var i = argIdx;
+if (et.fFinal == true)
+{
+sz += encodeVar(os, fDocEnc, args[i], et);
+}
+else
+{
+if (isPrimitive(os, et))
+{
+sz += '\n<' + et.type + '>';
+sz += encodePrimitive(os, et.type, args[i]);
+sz += '</' + et.type + '>';
+}
+else
+{
+var oschm = getSchema(os, et);
+if (oschm == null)
+return null;
+var tat = oschm.types[et.type];
+for (var tn in tat)
+{
+if (i >= l)
+break;
+sz += '\n<' + tat[tn].name + '>';
+sz += encodeVar(os, fDocEnc, args[i], tat[tn]);
+sz += '</' + tat[tn].name + '>';
+i ++;
+}
+}
+}
+if (oM.fLiteral && a.elem != null)
+sz += '</' + a.elem + '>';
+else
+sz += '</' + qn + a.type + '>';
+return sz;
+}
+if (oM.fRpc)
+sz =  "\n<mswsb:" + mn + getNs(os, oM) + '>';
+var i = argIdx;
+for (var pn in oM.args)
+{
+if (i >= l)
+break;
+var a = oM.args[pn];
+if (a.elem == null && a.type == null)
+return null;
+var pns = oM.fLiteral ? "mswsb:" : "";
+if (oM.fRpc)
+{
+var szt = '';
+if (a.type!=null && isPrimitive(os, a))
+szt = ' xsi:type="xsd:' + a.type + '"';
+var oschm = getSchema(os, a);
+var ct = oschm == null ? null : oschm.types[a.type];
+var aryItem = null;
+if (ct != null)
+{
+aryItem = get1stAryItem(ct);
+if (!aryItem.fArray)
+aryItem = null;
+}
+if (aryItem != null)
+{
+var as = aryItem.sizeArray;
+var k = 1;
+k = (as == null) ? 1 : as.length;
+var arr = args[i];
+if (typeof arr == 'unknown')
+arr = vbArrayToJs(arr, k);
+var sArr = getArySize(arr);
+if (as != null)
+{
+sArr = "";
+for (var j = 0;;)
+{
+var l2 = getArySize(arr);
+if (as[j] == null)
+sArr+=l2;
+else
+sArr+=Math.min(as[j], l2);
+j = j + 1;
+if (j == as.length)
+break;
+sArr += ",";
+if (l2 == 0)
+return null;
+arr = get1stAryItem(arr);
+}
+}
+var oschm = getSchema(os, aryItem);
+if (oschm != null)
+aryItem.ns = os.nsalias[oschm.uri];
+var ts = (isPrimitive(os, aryItem) || aryItem.ns == "")
+? "xsd:" : (aryItem.ns + ":");
+szt = ' xsi:type="soapenc:Array"'
++ ' soapenc:arrayType="'+ts+aryItem.type+'['+sArr+']"';
+}
+else
+szt = ' xsi:type="' + (a.ns == '' ? '' : (a.ns + ':'))
++ a.type + '"';
+sz += '\n<' + pns +a.name+(oM.fLiteral?'':' xmlns=""')+szt+'>';
+}
+var et = (a.elem == null ? a : getSchema(os, a).elems[a.elem]);
+if (oM.fLiteral)
+{
+if (a.elem != null)
+sz += '\n<' + a.elem + getNs(os, oM) + '>'
+sz += encodeVar(os, fDocEnc, args[i], et);
+if (a.elem != null)
+sz += '</' + a.elem + '>';
+}
+else
+{
+if (a.type == null)
+return null;
+if (oM.fRpc)
+{
+sz += encodeVar(os, fDocEnc, args[i], et);
+}
+else
+{
+sz += '\n<' + a.type + '>'
++ encodeVar(os, fDocEnc, args[i], et)
++ '</' + a.type + '>'
+}
+}
+if (oM.fRpc)
+sz += '</' + pns + a.name + '>';
+i ++;
+}
+if (oM.fRpc)
+sz += "</mswsb:" + mn + ">";
+return sz;
+}
+function returnResult(oCall, r)
+{
+hideProgress();
+if (oCall.co.async == false)
+{
+return r;
+}
+if (oCall.cb == null)
+{
+var evt = createEventObject();
+evt.result = r;
+try { eventResult.fire(evt); } catch (e) {};
+}
+else
+{
+try { oCall.cb(r); } catch (e) {};
+}
+}
+function decTZ(s)
+{
+var a = s.split(':');
+if (a.length == 0)
+return 0;
+var h = parseInt(a[0],10);
+return (-h)*60 + (a.length > 1 ? ((h > 0 ? -1:1) * parseInt(a[1],10)) : 0);
+}
+function applyTZ(d, tzo)
+{
+d.setTime(d.getTime() + (tzo - d.getTimezoneOffset()) * 60000);
+}
+function decDate(d, s)
+{
+var a = s.split('-');
+if (a.length < 3)
+return;
+d.setYear(a[0]);
+d.setMonth(parseInt(a[1], 10) - 1);
+d.setDate(a[2]);
+var tzo = d.getTimezoneOffset();
+var tzi = s.indexOf('+');
+if (a.length >= 4)
+tzo = -decTZ(a[3]);
+else if (tzi > 0)
+tzo = decTZ(s.substring(tzi, s.length));
+else
+return;
+applyTZ(d, tzo);
+}
+function decTime(d, s)
+{
+var tzi = s.indexOf('+');
+if (tzi < 0)
+tzi = s.indexOf('-');
+var a = s.split(':');
+if (a.length < 3)
+return;
+d.setHours(a[0]);
+d.setMinutes(a[1]);
+d.setSeconds(parseInt(a[2], 10));
+var msec = a[2].split('.')[1];
+if (msec != null && d.setMilliseconds != null)
+d.setMilliseconds(parseInt(msec.substring(0, 3, 10)));
+applyTZ(d, tzi < 0 ? 0 : decTZ(s.substring(tzi, s.length)));
+}
+function decodePrimitive(os, st, o)
+{
+var r = o.hasChildNodes() ? o.firstChild.nodeValue : o.nodeValue;
+if (r == null && st == 'string')
+{
+if (st == 'string')
+return '';
+return null;
+}
+switch(_st[st])
+{
+case 0:
+r = eval(r);
+break;
+case 1 :
+break;
+case 2 :
+r = unescape(r); break;
+case 3 :
+case 4:
+var aXmlDT = r.split("T");
+r = new Date();
+if (aXmlDT.length > 0)
+{
+decDate(r, aXmlDT[0]);
+if (aXmlDT.length > 1)
+decTime(r, aXmlDT[1]);
+}
+break;
+case 5:
+var s = r;
+r = new Date();
+decTime(r, s);
+break;
+case 6 :
+r = decb64(r); break;
+default:
+break;
+}
+return r;
+}
+function getArrayInfo(o)
+{
+for (var i = 0; i < o.attributes.length; i++)
+{
+var oAtt = o.attributes.item(i);
+var an = oAtt.name;
+var a = oAtt.name.split(":");
+if (a.length > 1)
+an = a[1];
+if (an != "arrayType")
+continue;
+var at = new Array();
+var asa= oAtt.value.split("[");
+if (asa.length > 1)
+parseArrayType(at, asa[1]);
+else
+at[0] = o.childNodes.length;
+return at;
+}
+return null;
+}
+function decodeArray(c, a, s, d, o, fnDec)
+{
+for (var i = 0; i < s[d-1]; i++)
+{
+if (d == s.length)
+a[i] = fnDec(o[c++]);
+else
+{
+a[i] = new Array();
+c = decodeArray(c, a[i], s, d+1, o, fnDec);
+}
+}
+return c;
+}
+function decodeType(os, ot, o, aNodes)
+{
+if (ot == null)
+return null;
+var oschm = null;
+var j = -1;
+var or = new Array();
+if (ot.type != null)
+{
+var st = ot.type;
+oschm = getSchema(os, ot);
+if (isSimpleType(os, oschm, ot))
+{
+var stype = oschm == null ? null : oschm.sTypes[st];
+if (stype != null)
+st = stype.type;
+if (ot.fArray)
+{
+or["result"] = new Array();
+var o2 = o.childNodes;
+if (o2.length == 0)
+return or;
+var ai = ot.sizeArray;
+if (ai == null)
+{
+ai = new Array();
+ai[0] = o2.length;
+}
+if (ai.length == 1 && ai[0] == null)
+ai[0] = o2.length;
+var fnDec = function(vi) {return decodePrimitive(os, st, vi)};
+decodeArray(0, or["result"], ai, 1, o2, fnDec);
+}
+else
+or["result"] = decodePrimitive(os, st, o);
+return or;
+}
+else
+{
+or["result"] = decodeType(os, oschm.types[st],o,aNodes);
+return or;
+}
+}
+for (var sn in ot)
+{
+j++;
+var st = ot[sn].type;
+oschm = getSchema(os, ot[sn]);
+if (st == null)
+{
+or[sn] = null;
+continue;
+}
+if (ot[sn].fAttrib == true)
+{
+var attrib = o.attributes.getNamedItem(sn);
+if (attrib != null)
+or[sn] = attrib.value;
+continue;
+}
+var o1s = o.selectNodes(sn);
+if (o1s.length == 0)
+{
+if (!o.hasChildNodes())
+o1 = o;
+else
+{
+o1 = o.childNodes[j];
+if (o1 == null)
+continue;
+}
+}
+else
+o1 = o1s[0];
+if (!o1.hasChildNodes())
+{
+var sr = null;
+try {sr = getAttrib(o1, "href")} catch (e) {};
+if (sr != null && sr.charAt(0) == '#')
+o1 = aNodes[sr.substring(1, sr.length)];
+else if (isSimpleType(os, oschm, ot[sn]))
+{
+or[sn] = decodePrimitive(os, st, o1);
+continue;
+}
+}
+if (isSimpleType(os, oschm, ot[sn]))
+{
+var stype = oschm == null ? null : oschm.sTypes[st];
+if (stype != null)
+st = stype.type;
+if (ot[sn].fArray)
+{
+var o2;
+var ai = getArrayInfo(o1);
+var fNested = ot[sn].fNested == true || ai != null;
+if (fNested)
+{
+or[sn] = new Array();
+o2 = o1.childNodes;
+}
+else
+o2 = o.childNodes;
+if (o2.length == 0)
+return or;
+if (ai == null)
+{
+ai = ot[sn].sizeArray;
+if (ai == null)
+{
+ai = new Array();
+ai[0] = o2.length;
+}
+}
+if (ai.length == 1 && ai[0] == null)
+ai[0] = o2.length;
+var fnDec = function(vi) {return decodePrimitive(os, st, vi)};
+decodeArray(0,fNested?or[sn]:or,ai, 1, o2, fnDec);
+}
+else
+or[sn] = decodePrimitive(os, st, o1);
+continue;
+}
+var ot1 = oschm.aTypes[st];
+var fCompArray = true;
+if (ot1 == null)
+{
+fCompArray = false;
+ot1 = oschm.types[st];
+}
+if (fCompArray)
+{
+return decodeType(os, ot1, o, aNodes);
+}
+if (ot1 == null)
+{
+or[sn] = o1;
+continue;
+}
+if (ot[sn].fArray)
+{
+var ai = getArrayInfo(o1);
+var fNested = ot[sn].fNested == true || ai != null;
+var o2 = fNested ? o1.childNodes : o.childNodes;
+if (ai == null)
+{
+ai = ot[sn].sizeArray;
+if (ai == null)
+{
+ai = new Array();
+ai[0] = o2.length;
+}
+}
+if (ai.length == 1 && ai[0] == null)
+ai[0] = o2.length;
+var fnDec = function(vi)
+{
+var sr = getAttrib(vi, "href");
+if (sr != null && sr.charAt(0) == '#')
+vi = aNodes[sr.substring(1, sr.length)];
+return decodeType(os, ot1, vi, aNodes);
+};
+if (fNested)
+or[sn] = new Array();
+decodeArray(0,fNested?or[sn]:or,ai, 1, o2, fnDec);
+}
+else
+{
+or[sn] = decodeType(os, ot1, o1, aNodes);
+}
+}
+return or;
+}
+function processResult(oC, oResult)
+{
+var r = new Object();
+r.id = oC.id;
+if (oResult == null)
+{
+r.error = true;
+r.errorDetail = _errUnknownS;
+return returnResult(oC, r);
+}
+try
+{
+var pf = oResult.prefix;
+}
+catch (e)
+{
+pf = null;
+}
+var ns = pf == null ? "" : (pf + ":");
+var oBody = oResult.selectSingleNode(ns + "Body");
+if (oBody == null)
+{
+r.error = true;
+r.errorDetail = _errInvalRes;
+return returnResult(oC, r);
+}
+var aryFault = oBody.selectNodes(ns + "Fault");
+if (aryFault.length > 0)
+{
+r.error = true;
+r.errorDetail = new Object();
+var ac = aryFault[0].selectNodes(ns+"faultcode");
+if (ac.length == 0)
+ac = aryFault[0].selectNodes("faultcode");
+r.errorDetail.code=ac.length > 0 ? ac[0].firstChild.nodeValue:"Unknown";
+var as = aryFault[0].selectNodes(ns+"faultstring");
+if (as.length == 0)
+as = aryFault[0].selectNodes("faultstring");
+if (as.length > 0 && as[0].hasChildNodes())
+r.errorDetail.string= as[0].firstChild.nodeValue;
+else
+r.errorDetail.string= "";
+r.errorDetail.raw = oResult;
+return returnResult(oC, r);
+}
+r.error = false;
+r.raw   = oResult;
+if (!oBody.hasChildNodes())
+{
+r.value = null;
+return returnResult(oC, r);
+}
+var oS = _sdl[oC.service];
+if (oS == null || oS.fPending)
+{
+r.error = true;
+r.errorDetail = _errNotReady;
+return returnResult(oC, r);
+}
+var o = oBody.firstChild;
+var szResName = o.baseName;
+var oschm = oS.schemas[o.namespaceURI];
+var args = null;
+var oM = oC.fRpc ? oC.response : null;
+if (oM)
+{
+args = oM.args;
+}
+else
+{
+oM = oS.soapPort[oC.co.portName].msgs[szResName];
+if (oM == null)
+{
+var el = oschm == null ? null : oschm.elems[szResName];
+if (el == null)
+{
+if (!oC.fLiteral && oschm != null)
+{
+args = oschm.types[szResName];
+}
+if (args == null)
+args = oC.response.args;
+if (args == null)
+{
+r.error = true;
+r.errorDetail = _errInvalRes;
+return returnResult(oC, r);
+}
+}
+else if (el.fFinal)
+args = el;
+else
+args = oschm.types[el.type];
+}
+else
+{
+args = oM.args;
+}
+}
+if (args == null)
+{
+r.value = null;
+return returnResult(oC, r);
+}
+var l = 0;
+for (var i in args)
+l++;
+if (l == 0)
+{
+r.value = null;
+}
+else
+{
+if (args.type != null)
+l = 1;
+var aryNwId = o.selectNodes("//*[@id]");
+var aNodes = new Array();
+for (var i = 0; i < aryNwId.length; i++)
+{
+aNodes[getAttrib(aryNwId[i], "id")] = aryNwId[i];
+}
+var ar = decodeType(oS, args, o, aNodes);
+if (l == 1)
+{
+for (var i in ar)
+{
+r.value = ar[i];
+break;
+}
+}
+else
+r.value = ar;
+}
+return returnResult(oC, r);
+}
+function hideProgress()
+{
+if (_mProg == null || _mProg.parentElement == null)
+return;
+element.document.body.removeChild(_mProg);
+}
+function getResult(oC)
+{
+if (oC == null) return;
+var oS = _sdl[oC.service];
+var xmlHttp = oC.oXmlHttp;
+if (xmlHttp == null || xmlHttp.readyState != 4) return;
+if (oC.fDone)
+return;
+oC.fDone = true;
+oC.oXmlHttp = null;
+if (xmlHttp.responseXML.parseError.errorCode != 0)
+{
+_errUnknownS.raw = xmlHttp.responseText;
+returnError(oC, 4);
+}
+else if (xmlHttp.responseXML.documentElement == null)
+{
+returnError(oC, 4);
+}
+else
+{
+try
+{
+processResult(oC, xmlHttp.responseXML.documentElement);
+}
+catch (e)
+{
+returnError(oC, 7);
+}
+}
+callNext(oS);
+}
+</SCRIPT>

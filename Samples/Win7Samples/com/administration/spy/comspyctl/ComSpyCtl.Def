@@ -1,0 +1,9 @@
+; ComSpyCtl.def : Declares the module parameters.
+
+LIBRARY      "ComSpyCtl.DLL"
+
+EXPORTS
+	DllCanUnloadNow      PRIVATE
+	DllGetClassObject    PRIVATE
+	DllRegisterServer    PRIVATE
+	DllUnregisterServer  PRIVATE

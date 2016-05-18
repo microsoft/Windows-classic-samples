@@ -1,0 +1,11 @@
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                VFT_APP
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Microsoft\256 IMAPI2 Test Utility"
+
+#define VER_INTERNALNAME_STR        "imapi2sample.exe"
+#define VER_ORIGINALFILENAME_STR    "imapi2sample.exe"
+
+#include <common.ver>

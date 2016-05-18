@@ -1,0 +1,52 @@
+<HTML>
+
+<HEAD>
+<TITLE>ISAPI Sample Filter AuthFilt</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1>Microsoft Internet Information Server</H1>
+
+<P>
+<I>AuthFilt - A Filter for Advanced Authentication</I>
+<HR>
+
+<P>
+AuthFilt demonstrates how to write an authentication filter based on an external
+datasource.  Authentication is the process of accepting or denying a request from a client,
+so AuthFilt will be notified each time an authentication request comes in.  This sample uses a
+file (c:\inetsrv\userdb.txt) to keep track of authorized users, but you
+might modify this sample to access a database which holds user info.  The file c:\inetsrv\userdb.txt
+does not exist.  Please look at Db.c to see how to make such a file and change the location
+of the file if you so desire.
+<P>
+For each authentication request, AuthFilt first looks in a cache of recently
+authenticated users, and when that fails, AuthFilt looks in the userdb.txt file.
+This shows an efficient way to authorize connections: a cache allows the
+filter to quickly authenticate users, and because each request comes in through the
+filter, speed is critical.
+<P>
+Steps to build the sample:
+<P>
+<OL>
+<LI>Type "nmake" at the command line in the AuthFilt directory.  If you 
+ encounter problems with missing header files, make sure your INCLUDE
+ variable points to the Win32 SDK include directory, the VC++ include
+ directory, and the IIS 4.0 include directory.  Also, make sure LIB 
+ variable points to the Win32 SDK lib directory.
+<P>
+<STRONG>OR</STRONG>
+<P>
+You can load the authfilt project file (authfilt.dsp for Visual Studio 6, or
+authfilt.sln for Visual Studio .NET) and build the sample using the build authfilt.dll command.
+<P>
+<LI>Run the Internet Server Manager and add the full path to authfilt.dll as a filter
+to either the Master Root Properties or as a Website filter.
+</OL>
+
+<P>
+
+</BODY>
+
+</HTML>

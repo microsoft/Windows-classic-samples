@@ -1,0 +1,64 @@
+BODY {
+	font: 85% "Verdana"}
+	
+h1, h2, h3, h4 {
+	font-family: verdana, Arial, Helvetica, sans-serif;	
+	font-size: 85%; }
+	
+P  {
+	font: 85% "Verdana";
+	color: black}
+
+CODE {
+	font: 100% "courier new"}
+
+PRE {
+	font: 100% "courier new"}
+	
+PRE CODE {
+	font-size: 110% }
+
+TD {
+	font-size: 85%;
+	color: black }
+
+A:LINK {
+	color: #0000FF }
+	
+A:VISITED {
+	color: #660066 }
+	
+	
+.label {
+	font-weight: bold }
+	
+.tl {
+	margin-bottom: 6pt }
+	
+.atl {
+	margin-left: .25in;
+	margin-bottom: -0pt }
+
+.cfe {
+	font-weight: bold }
+	
+.mini {
+	font-size: 65% }
+	
+LI {
+	color: #000000 }
+
+LI UL {
+	margin-top: 9pt;
+	margin-bottom: 9pt }
+	
+
+LI OL {
+	margin-top: 9pt;
+	margin-bottom: 9pt }
+	
+.dt {
+	margin-bottom: -9pt }
+	
+.indent {
+	margin-left: .25in }

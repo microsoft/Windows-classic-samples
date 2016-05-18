@@ -1,0 +1,81 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+
+#include "Resources.h"
+#include "winres.h"
+#include <windows.h>
+
+IDI_DEVICE_ICON ICON "PDA.ico"
+
+IDD_PROPPAGE DIALOGEX 0, 0, 195, 127
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION ""
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    CTEXT           "",IDC_PROPS_TEXT,7,59,181,24
+END
+
+REGINST REGINST MOVEABLE PURE "SelfReg.inf"
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_DEVICE_FORMAT               "%1 Sample Device"
+    IDS_HANDLER_TYPE_LABEL          "Personal Digital Assistant"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_MENU_DISPLAY_INFO           "&Display Info"
+    IDS_MENU_DESC_DISPLAY_INFO      "Display information about the current partnership"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_ITEM_NOT_FOUND              "Item not found"
+    IDS_START_ITEM_SYNC             "Starting to synchronize"
+    IDS_FILE_SYNC_STEP              "File %1!d! of %2!d!"
+    IDS_ITEM_SYNC_DONE              "All files up to date"
+    IDS_DOC_SYNC_STEP               "Document %1!d! of %2!d!"
+    IDS_SONG_SYNC_STEP              "Song %1!d! of %2!d!"
+    IDS_PIC_SYNC_STEP               "Picture %1!d! of %2!d!"
+    IDS_ITEM_FAILED                 "%1!d! of %2!d! files up to date"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_ITEMNAME_DOCUMENTS          "Documents"
+    IDS_ITEMNAME_MUSIC              "Music"
+    IDS_ITEMNAME_PICTURES           "Pictures"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_ITEMLABEL_DOCUMENTS          "Personal Files"
+    IDS_ITEMLABEL_MUSIC              "Songs & Ringtones"
+    IDS_ITEMLABEL_PICTURES           "Cameraphone Images"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_SYNC_ERROR_1                "PDA Read Error"
+    IDS_SYNC_ERROR_DESC_1           "An error occurred while reading from the PDA device"
+    IDS_SYNC_WARNING_1              "PDA Memory Low"
+    IDS_SYNC_WARNING_DESC_1         "The memory on the device is 90%% full"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_SETUP_TITLE                 "Setup Sample Device Partnership"
+    IDS_SETUP_QUESTION              "Do you want to setup a sync relationship with %1?"
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_PROPS_TEXT                 "Sync Partnership Extended Properties"
+    IDS_PROPS_TITLE                "Sync partnership custom properties and settings"
+END

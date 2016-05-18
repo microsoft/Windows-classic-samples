@@ -1,0 +1,48 @@
+Creating a Microsoft Windows Cluster Server Administrator Extension DLL
+(using a shared copy of MFC) and Resource DLL.
+
+A Resource DLL project and a Cluster Administrator Extension DLL project
+will be generated for the "File Share Sample" resource type.
+
+The following options have been chosen:
+- No application or service control required.
+- Resource depends on a service: "LanmanServer"
+- Extend context menus for all "File Share Sample" resources.
+
+The following properties are used with this resource type:
+ShareName - type SZ (Required)
+Path - type EXPAND_SZ (Required)
+Remark - type SZ
+MaxUsers - type DWORD Default=4294967295 Range=(0,4294967295)
+
+RESOURCE DLL PROJECT (File Share Sample)
+------------------------------------------
+Files:
+  Main resource code: File Share Sample.cpp
+  DLL entry points: ClRes.cpp File Share Sample.def
+  Resource files: File Share Sample.rc
+
+Other Files:
+  Configuration: settings.txt
+  Readme.txt
+
+CLUSTER ADMINISTRATOR EXTENSION (File Share SampleEx)
+-----------------------------------------------------
+Classes to be created:
+  Application: CFileShareSampleApp in File Share SampleEx.h and File Share SampleEx.cpp
+  Extensions: CExtObject in ExtObj.h, ExtObj.cpp, and ExtObjID.idl,
+      CExtObjData in ExtObjData.h, ExtObjData.cpp
+  Base Property Page: CBasePropertyPage in BasePage.h and
+      BasePage.cpp
+  Resource Property Page: CFileShareSampleParamsPage in ResProp.h and
+      ResProp.cpp
+  Propert List: CClusPropList and CObjectProperty in PropList.h and
+      PropList.cpp
+
+Other Files:
+  Precompiled header: StdAfx.h and StdAfx.cpp
+  Dialog Data Exchange and Validation: DDxDDv.h and DDxDDv.cpp
+  Registration: RegExt.h and RegExt.cpp
+  Resource files: resource.h and File Share SampleEx.rc
+  Dll entry points: File Share SampleEx.def
+

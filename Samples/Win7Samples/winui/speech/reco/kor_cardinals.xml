@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="euc-kr" ?>
+<GRAMMAR LANGID="412"> <!-- KOREAN -->
+
+	<!-- Allow a loop of syllables; should be framed by possible silence on edges -->
+	<RULE NAME="Cardinals" TOPLEVEL="ACTIVE">
+        <P MIN="1" MAX="400">
+            <RULEREF NAME="SEQ1"/>
+        </P>
+	</RULE>
+
+	<!-- Not sure what this SYL1 means; see h:\KOR\YCEV2M1\MSRA_drop\KSREngine\m220HTK\networks\digi.gram -->
+	<RULE NAME="SYL1" TOPLEVEL="INACTIVE">
+        <O> <RULEREF NAME="SEQ3"/> </O>
+		<L>
+			<RULEREF NAME="SEQ1"/>
+			<RULEREF NAME="SEQ2"/>
+		</L>
+	</RULE>
+	
+	<!-- Not sure what this SEQ1 means; see h:\KOR\YCEV2M1\MSRA_drop\KSREngine\m220HTK\networks\digi.gram -->
+	<RULE NAME="SEQ1" TOPLEVEL="INACTIVE">
+            <!-- <O> -->
+                <O> <RULEREF NAME="Integer 1-9 pron A"/> </O>
+                <P> 십 </P> <!-- TEN (PRON A) -->
+            <!-- <O> -->
+            <O> <RULEREF NAME="Integer 1-9 pron A"/> </O>
+	</RULE>
+	
+	<!-- Not sure what this SEQ2 means; see h:\KOR\YCEV2M1\MSRA_drop\KSREngine\m220HTK\networks\digi.gram -->
+	<RULE NAME="SEQ2" TOPLEVEL="INACTIVE">
+            <O> <RULEREF NAME="Integer tens"/> </O>
+            <O> <RULEREF NAME="Integer 1-9 pron B"/> </O>
+	</RULE>
+
+	<!-- Not sure what this SEQ3 means; see h:\KOR\YCEV2M1\MSRA_drop\KSREngine\m220HTK\networks\digi.gram -->
+	<RULE NAME="SEQ3" TOPLEVEL="INACTIVE">
+            <O>
+                <O> <RULEREF NAME="Integer 1-9 pron A"/> </O>
+                <O> <P> 만 </P> <!-- TEN THOUSAND --> </O>
+            </O>
+            <O>
+                <O> <RULEREF NAME="Integer 1-9 pron A"/> </O>
+                <O> <P> 천 </P> <!-- THOUSAND --> </O>
+            </O>
+            <O>
+                <O> <RULEREF NAME="Integer 1-9 pron A"/> </O>
+                <O> <P> 백 </P> <!-- HUNDRED --> </O>
+            </O>
+	</RULE>
+
+	<RULE NAME="Integer 1-9" TOPLEVEL="INACTIVE">
+		<L>
+		    <RULEREF NAME="Integer 1-9 pron A"/>
+		    <RULEREF NAME="Integer 1-9 pron B"/>
+		</L>
+	</RULE>
+
+	<RULE NAME="Integer 1-9 pron A" TOPLEVEL="INACTIVE">
+		<L>
+            <P>영 </P> <!-- ZERO_A -->
+            <P>일 </P> <!-- ONE_A -->
+            <P>이 </P> <!-- TWO -->
+            <P>삼 </P> <!-- THREE -->
+            <P>사 </P> <!-- FOUR -->
+            <P>오 </P> <!-- FIVE -->
+            <P>육 </P> <!-- SIX -->
+            <P>칠 </P> <!-- SEVEN -->
+            <P>팔 </P> <!-- EIGHT -->
+            <P>구 </P> <!-- NINE -->
+		</L>
+	</RULE>
+
+	<RULE NAME="Integer 1-9 pron B" TOPLEVEL="INACTIVE">
+		<L>
+            <P> 공 </P> <!-- ZERO -->
+            <P> 하나 </P> <!-- ONE -->
+            <P> 둘 </P> <!-- TWO -->
+            <P> 셋 </P> <!-- THREE -->
+            <P> 넷 </P> <!-- FOUR -->
+            <P> 다섯 </P> <!-- FIVE -->
+            <P> 여섯 </P> <!-- SIX -->
+            <P> 일곱 </P> <!-- SEVEN -->
+            <P> 여덟 </P> <!-- EIGHT -->
+            <P> 아홉 </P> <!-- NINE -->
+		</L>
+	</RULE>
+
+	<RULE NAME="Integer tens" TOPLEVEL="INACTIVE">
+		<L>
+            <P> 열 </P> <!-- TEN (PRON B) -->
+            <P> 스물 </P> <!-- TWENTY -->
+            <P> 서른 </P> <!-- THIRTY -->
+            <P> 마흔 </P> <!-- FORTY -->
+            <P> 쉰 </P> <!-- FIFTY -->
+            <P> 예순 </P> <!-- SIXTY -->
+            <P> 일흔 </P> <!-- SEVENTY -->
+            <P> 여든 </P> <!-- EIGHTY -->
+            <P> 아흔 </P> <!-- NINETY -->
+		</L>
+	</RULE>
+	
+</GRAMMAR>

@@ -1,0 +1,13 @@
+LIBRARY	"RoutingExtension"
+EXPORTS
+    FaxRouteDeviceEnable
+    FaxRouteGetRoutingInfo
+    FaxRouteSetRoutingInfo
+    FaxRouteInitialize
+    FaxRouteDeviceChangeNotification
+    RouteIt
+    FaxExtInitializeConfig
+    DllRegisterServer            PRIVATE
+    DllUnregisterServer            PRIVATE
+    
+

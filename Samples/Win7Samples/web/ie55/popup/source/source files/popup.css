@@ -1,0 +1,53 @@
+BODY{ 
+margin:0;
+background:white;
+font-family:verdana;
+font-size:80%;
+}
+.bar{
+background:#336699;
+width:100%;
+height:30px;
+border-top:1px solid #99CCFF;
+border-bottom:1px solid #000000;
+}
+.desbar{
+background:#FFFFFF;
+width:100%;
+padding: 10px;
+border-top:1px solid #CCCCCC;
+
+color:black; 
+font-size:8pt;
+height:105;
+}
+.title{
+font-size:15pt;
+color:white;
+padding-left:10px;
+}
+PRE { margin:0}
+
+a:link
+{
+text-decoration:none;
+color:white
+}
+a:visited
+{
+text-decoration:none;
+color:white
+}
+a:active
+{
+text-decoration:none;
+color:white
+}
+a:hover
+{
+text-decoration:none;
+color:yellow
+}
+h1 {font-size:13pt; margin:0; margin-bottom:5px; }
+h2 {font-size:10pt; margin:0; margin-bottom:5px; }
+.cbutton {position:relative; top:0; left:0; background:#cccccc; border:1px solid black; border-top: 1px solid white; border-left:1px solid white; height:20px; color:black;}

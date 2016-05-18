@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML XMLNS:myCalculator
+      XMLNS:myMenu>
+<?IMPORT NAMESPACE="myCalculator" IMPLEMENTATION="calculator.htc">
+<?IMPORT NAMESPACE="myMenu" IMPLEMENTATION="menu.htc">
+
+<HEAD>
+<TITLE>WebService Calculator Sample</TITLE>
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=iso-8859-1">
+<META NAME="AUTHOR" CONTENT="InetSDK">
+<META NAME="MS.LOCALE" CONTENT="EN-US">
+<META NAME="ROBOTS" CONTENT="noindex">
+<LINK REL="stylesheet" HREF="/workshop/samples/samples.css" TYPE="text/css">
+
+<HTA:APPLICATION ID="oHTA" APPLICATIONNAME="Calculator" BORDER="thin" BORDERSTYLE="normal" CAPTION="yes" ICON="calc.ico" MAXIMIZEBUTTON="yes" MINIMIZEBUTTON="yes" SHOWINTASKBAR="yes" SINGLEINSTANCE="yes" SYSMENU="yes" VERSION="1.0" WINDOWSTATE="normal"/>
+<STYLE>
+    TD{background-color:menu;}
+    BUTTON {width:30px; cursor:hand;}
+    .backspace{width:80px;}
+    .clear{width:75px;}
+    .number{color:blue;}
+    .operator{color:red;}
+</STYLE>
+<SCRIPT>
+function doFunction(){
+    var x = event.result;
+    // Switch the result passed back from the event.
+    switch(x){
+        case "copy":
+            // Copy to the clipboard.
+            window.clipboardData.setData("Text", window.parent.resultWindow.innerText);
+            break;
+        case "paste":
+            // Paste from the clipboard if the clipboardData is a number and clipboardData is not null.
+            if(!isNaN(window.clipboardData.getData("Text")) && window.clipboardData.getData("Text") != null){
+                resultWindow.innerText = window.clipboardData.getData("Text");
+            }
+            break;
+        case "close":
+            // Close the window.
+            window.close();
+            break;
+        case "about":
+            // Alert user with the information for the calculator.
+            alert("This is an example of a WebService Calculator.\n© Microsoft Corporation. All rights reserved.");
+            break;
+        default: break;
+    }
+}
+</SCRIPT>
+</HEAD>
+<BODY style="overflow:hidden;">
+
+<myCalculator:calculator style="position:absolute; top:0px; left:0px;" url="calculator.asmx?WSDL">
+<TABLE id="oCalc" CELLSPACING=0 WIDTH="253px" HEIGHT="275px">
+    <TR>
+        <TD COLSPAN=6><DIV STYLE="border:solid 1px; padding:5px; background-color:lightblue; font-weight:bold; font-size:12px;" ALIGN="CENTER">WebService Calculator</DIV></TD>
+    </TR>
+    <TR>
+        <TD colspan=3>
+            <myMenu:menu id="File" onsubmenu_click="doFunction()">File
+                <myMenu:menu id="close">Close</myMenu:menu>
+            </myMenu:menu>
+            <myMenu:menu id="Edit" onsubmenu_click="doFunction()">Edit
+                <myMenu:menu id="copy">Copy Ctrl+C</myMenu:menu>
+                <myMenu:menu id="paste">Paste Ctrl+V</myMenu:menu>
+            </myMenu:menu>
+            <myMenu:menu id="Help" onsubmenu_click="doFunction()">Help
+                <myMenu:menu id="about">About</myMenu:menu>
+            </myMenu:menu>
+        </TD>
+        <TD colspan=3></TD>
+    </TR>
+    <TR>
+        <TD COLSPAN=6 ALIGN="CENTER"><DIV ID="resultWindow" VALUE="0" STYLE="font-size:12px; border-style:groove 1px black; padding:5; background-color:white" ALIGN="RIGHT">0.</DIV></TD>
+    </TR>
+    <TR>
+        <TD ALIGN="CENTER"><BUTTON id="statusBtn" DISABLED> </BUTTON></TD>
+        <TD colspan=2 ALIGN="CENTER"><BUTTON id="btnBackSpace" class="backspace operator"> BackSpace </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnCE" class="operator"> CE </BUTTON></TD>
+        <TD colspan=2 ALIGN="CENTER"><BUTTON id="btnC" class="clear operator"> C </BUTTON></TD>
+    </TR>
+    <TR>
+        <TD ALIGN="CENTER"><BUTTON id="MC" class="operator" onclick="statusBtn.innerText='';"> MC </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn7" class="number"> 7 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn8" class="number"> 8 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn9" class="number"> 9 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnDivide" class="operator"> / </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnSqrt" class="number"> sqrt </BUTTON></TD>
+    </TR>
+        <TR>
+        <TD ALIGN="CENTER"><BUTTON id="MR" class="operator"> MR </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn4" class="number"> 4 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn5" class="number"> 5 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn6" class="number"> 6 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnTimes" class="operator"> * </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnPercentage" class="number"> % </BUTTON></TD>
+    </TR>
+    <TR>
+        <TD ALIGN="CENTER"><BUTTON id="MS" class="operator" onclick="statusBtn.innerText='M';"> MS </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn1" class="number"> 1 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn2" class="number"> 2 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn3" class="number"> 3 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnMinus" class="operator"> - </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnInvert" class="number"> 1/x </BUTTON></TD>
+    </TR>
+    <TR>
+        <TD ALIGN="CENTER"><BUTTON id="MP" class="operator" onclick="statusBtn.innerText='M';"> M+ </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btn0" class="number"> 0 </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON class="number"> +/- </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnPeriod" class="number"> . </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnPlus" class="operator"> + </BUTTON></TD>
+        <TD ALIGN="CENTER"><BUTTON id="btnEquals" class="operator"> = </BUTTON></TD>
+    </TR>
+</TABLE>
+</myCalculator:calculator>
+
+</BODY>
+</HTML>

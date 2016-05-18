@@ -1,0 +1,427 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winresrc.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+DVDSAMPLE_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Select Disc",                ID_FILE_SELECTDISC
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_FILE_EXIT
+    END
+    POPUP "&Playback"
+    BEGIN
+        MENUITEM "&Play",                       ID_PLAYBACK_PLAY
+        MENUITEM "P&ause",                      ID_PLAYBACK_PAUSE
+        MENUITEM "&Stop",                       ID_PLAYBACK_STOP
+        MENUITEM "Step &Forward",               ID_PLAYBACK_STEPFORWARD
+        MENUITEM SEPARATOR
+        POPUP "&Go To"
+        BEGIN
+            MENUITEM "&Next Chapter",               ID_PLAYBACK_NEXTCHAPTER
+            MENUITEM "&Previous Chapter",           ID_PLAYBACK_PREVIOUSCHAPTER
+
+            MENUITEM SEPARATOR
+            MENUITEM "&Chapter...",                 ID_PLAYBACK_GOTO_CHAPTER
+            MENUITEM "&Time...",                    ID_PLAYBACK_GOTO_TIME
+            MENUITEM "T&itle...",                   ID_PLAYBACK_GOTO_TITLE
+        END
+        POPUP "Pla&y Speed"
+        BEGIN
+            MENUITEM "&Fast Forward",               ID_PLAYBACK_FASTFORWARD
+            MENUITEM "&Rewind",                     ID_PLAYBACK_REWIND
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Menu (Root)",                ID_PLAYBACK_MENUROOT
+        MENUITEM "&Title Menu",                 ID_PLAYBACK_TITLEMENU
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Subpicture...",              ID_OPTIONS_SUBPICTURE
+        MENUITEM "&Audio...",                   ID_OPTIONS_AUDIOLANGUAGE
+        MENUITEM "&Parental Level...",          ID_OPTIONS_PARENTALLEVEL
+        MENUITEM "&Closed Caption",             ID_OPTIONS_CLOSEDCAPTION
+        MENUITEM "&Full Screen",                ID_OPTIONS_FULLSCREEN
+        MENUITEM "An&gle...",                   ID_OPTIONS_ANGLE
+        MENUITEM SEPARATOR
+        POPUP "&Bookmarks"
+        BEGIN
+            MENUITEM "&Save Bookmark",              ID_OPTIONS_SAVEBOOKMARK
+            MENUITEM "&Restore Bookmark",           ID_OPTIONS_RESTOREBOOKMARK
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Get Disc Te&xt",              ID_OPTIONS_GETDISCTEXT
+        MENUITEM "Get Audio Attributes",        ID_OPTIONS_GETAUDIOATTRIBUTES
+
+        MENUITEM "Get Video Attributes",        ID_OPTIONS_GETVIDEOATTRIBUTES
+
+        MENUITEM "Get Subpicture Attributes",   ID_OPTIONS_GETSUBPICTUREATTRIBUTES
+
+        MENUITEM "Set Karaoke Mixing",          ID_OPTIONS_SETKARAOKEMIXING
+        MENUITEM SEPARATOR
+        MENUITEM "Use VMR9",                    ID_OPTIONS_USEVMR9
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About DVDSample...",         ID_HELP_ABOUTDVDSAMPLE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR1 TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_PLAYBACK_PREVIOUSCHAPTER
+    BUTTON      ID_PLAYBACK_REWIND
+    BUTTON      ID_PLAYBACK_PAUSE
+    BUTTON      ID_PLAYBACK_PLAY
+    BUTTON      ID_PLAYBACK_STOP
+    BUTTON      ID_PLAYBACK_FASTFORWARD
+    BUTTON      ID_PLAYBACK_NEXTCHAPTER
+    SEPARATOR
+    BUTTON      ID_PLAYBACK_MENUROOT
+    BUTTON      ID_OPTIONS_FULLSCREEN
+    BUTTON      ID_BUTTON40027
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR1            BITMAP                  "toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PARENTLEVELS DIALOG  0, 0, 173, 78
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Parental Levels"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,116,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,116,24,50,14
+    LTEXT           "Level:",IDC_STATIC,7,24,20,8
+    LTEXT           "Select Parental Level",IDC_STATIC,7,7,100,8
+    LISTBOX         IDC_LEVEL_LIST,32,24,76,40,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ABOUT DIALOG  0, 0, 166, 87
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About DVDSample"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,95,14,50,14
+    ICON            IDI_APPICON,IDC_STATIC,38,13,20,20
+    CTEXT           "DVDSample - Version 9.0",IDC_STATIC,9,35,147,8
+    CTEXT           "DVD-Video Sample Application",IDC_STATIC,9,46,147,8
+    CTEXT           "Copyright © Microsoft Corporation.",
+                    IDC_STATIC,9,57,147,8
+    CTEXT           "All rights reserved.",IDC_STATIC,9,68,147,8
+END
+
+IDD_SPDLG DIALOG  0, 0, 167, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Subpicture Stream"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,110,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,24,50,14
+    LTEXT           "Choose Subpicture Stream:",IDC_STATIC,7,6,94,8
+    COMBOBOX        IDC_SPLANG,7,20,94,33,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Show Subpicture",IDC_SHOWSP,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,47,70,10
+END
+
+IDD_AUDIODLG DIALOG  0, 0, 167, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Audio Stream"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,110,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,24,50,14
+    COMBOBOX        IDC_AUDIOLANG,7,20,93,35,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Choose Audio Stream:",IDC_STATIC,7,6,71,8
+END
+
+IDD_ANGLEDLG DIALOG  0, 0, 167, 65
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Angle"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,110,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,110,24,50,14
+    COMBOBOX        IDC_ANGLE,7,20,93,35,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Choose Angle:",IDC_STATIC,7,6,47,8
+END
+
+IDD_CHAPTERDLG DIALOG  0, 0, 145, 49
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Play Chapter"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,88,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,88,24,50,14
+    LTEXT           "Chapter:",IDC_STATIC,7,19,28,8
+    EDITTEXT        IDC_PLAYCHAPTER,37,17,42,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_TITLEDLG DIALOG  0, 0, 144, 47
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Play Chapter In Title"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,87,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,87,26,50,14
+    LTEXT           "Title:",IDC_STATIC,7,10,28,8
+    LTEXT           "Chapter:",IDC_STATIC,7,28,28,8
+    EDITTEXT        IDC_PLAYTITLE,40,7,33,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_PLAYCHAPTER,39,25,34,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_TIMEDLG DIALOG  0, 0, 189, 46
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Play at Specified Time"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,132,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,132,24,50,14
+    EDITTEXT        IDC_HOURS,45,15,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_MINUTES,74,15,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_SECONDS,103,15,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "HH:MM:SS",IDC_STATIC,7,18,37,8
+END
+
+IDD_KARAOKEDLG DIALOG  0, 0, 161, 50
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Karoake Mixing"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,104,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,104,24,50,14
+    CONTROL         "Channel 2",IDC_CHANNEL2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,7,92,10
+    CONTROL         "Channel 3",IDC_CHANNEL3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,19,92,10
+    CONTROL         "Channel 4",IDC_CHANNEL4,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,31,92,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PARENTLEVELS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 166
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 71
+    END
+
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+    END
+
+    IDD_SPDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_AUDIODLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_ANGLEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 58
+    END
+
+    IDD_CHAPTERDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 138
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 42
+    END
+
+    IDD_TITLEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 137
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 40
+    END
+
+    IDD_TIMEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_KARAOKEDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 154
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x30003fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comment", "DirectShow Sample"
+            VALUE "CompanyName", "Microsoft Corporation"
+            VALUE "FileDescription", "DVD Sample Application"
+            VALUE "FileVersion", "9.00"
+            VALUE "InternalName", "DVDSample.exe"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corporation"
+            VALUE "OLESelfRegister", "AM20"
+            VALUE "OriginalFilename", "DVDSample.exe"
+            VALUE "ProductName", "DirectX SDK"
+            VALUE "ProductVersion", "9.00"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "DVD Sample"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

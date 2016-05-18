@@ -1,0 +1,54 @@
+#include <windows.h>
+#include "spincube.h"
+
+SpincubeStyle DIALOG 44, 42, 102, 86
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Spincube Styles"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Basic Styles", 100, 8, 8, 88, 50
+    AUTOCHECKBOX    "Erase", DID_ERASE, 20, 25, 40, 10
+    AUTOCHECKBOX    "InMotion", DID_INMOTION, 21, 40, 40, 10
+    DEFPUSHBUTTON   "OK", DID_OK, 8, 66, 40, 14
+END
+
+STRINGTABLE
+BEGIN
+  IDS_REGCLASSFAIL     "DllMain(): RegisterClass() failed"
+  IDS_UNREGFAIL        "DllMain(): UnregisterClass() failed"
+  IDS_DLGBOXFAIL       "SpincubeStyle(): DialogBox failed"
+  IDS_ALLOCFAIL        "SpincubeWndProc(): LocalAlloc() failed"
+  IDS_CREATEDCFAIL     "SpincubeWndProc(): CreateCompatibleDC() failed"
+  IDS_CREATEBITMAPFAIL "SpincubeWndProc(): CreateCompatibleBitmap() failed"
+
+END
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+#ifdef JAPAN
+LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
+
+
+SpincubeStyle DIALOG 44, 42, 102, 86
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "スピンキューブ スタイル"
+BEGIN
+    GROUPBOX        "基本スタイル", 100, 8, 8, 88, 50
+    AUTOCHECKBOX    "消去", DID_ERASE, 20, 25, 40, 10
+    AUTOCHECKBOX    "動作中", DID_INMOTION, 21, 40, 40, 10
+    DEFPUSHBUTTON   "OK", DID_OK, 8, 66, 40, 14
+END
+
+
+STRINGTABLE
+BEGIN
+  IDS_REGCLASSFAIL     "DllMain(): RegisterClass() が失敗しました。"
+  IDS_UNREGFAIL        "DllMain(): UnregisterClass() が失敗しました。"
+  IDS_DLGBOXFAIL       "SpincubeStyle(): DialogBox が失敗しました。"
+  IDS_ALLOCFAIL        "SpincubeWndProc(): LocalAlloc() が失敗しました。"
+  IDS_CREATEDCFAIL     "SpincubeWndProc(): CreateCompatibleDC() が失敗しました。"
+  IDS_CREATEBITMAPFAIL "SpincubeWndProc(): CreateCompatibleBitmap() が失敗しました。"
+
+END
+
+#endif

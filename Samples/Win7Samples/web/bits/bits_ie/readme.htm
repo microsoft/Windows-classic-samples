@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>BITS IE Plugin Sample</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1><CENTER>BITS IE Plugin Sample</CENTER></H1>
+
+<H2>Summary</H2> 
+
+<P> 
+This sample demonstrates basic application use of BITS by providing an 
+IE plugin to schedule a background download.   The sample allows the 
+user to monitor progress, perform basic operations such as cancel and finish,
+and even allows the user to resume the download after a logoff or a shutdown.  
+</P>
+
+<H2>Key Concepts</H2>
+<UL>
+  <LI>Basic connection with manager and job submission.</LI>
+  <LI>Example presentation to user of job state.</LI>
+  <LI>Job control such as suspend/resume/cancel/complete.</LI>
+  <LI>Interface based callbacks for updating progress/state.</LI>
+  <LI>Retrieving text messages for a BITS error code.</LI>
+</UL>
+
+<H2>Installation</H2>
+<UL>
+  <LI>Run the "install.js" script.</LI>
+  <LI>Restart IE for the changes to take effect.</LI>
+  <LI>To uninstall run the "uninstall.js" script.</LI>
+  <LI>To build the sources, with PSDK installed on your machine, run "nmake makefile" in the directory where the sources are. Then go to the SDK binary output directory and follow the above instructions to install. 
+</UL>
+
+<H2>Basic Usage</H2>
+
+<H3>Simple Download</H3>
+
+<UL>
+  <LI>Open IE and right click on an anchor that points to a static HTTP file.</LI>
+  <LI>Select the "Background Download As" option.</LI>
+  <LI>Type in the destination file name at the prompt.</LI>
+  <LI>Wait for job to finish. The sample will signal you when it is finished.</LI>
+</UL>
+
+<H3>Demonstrating Reactivation On Logon</H3>
+
+<UL>
+  <LI>Submit a download as described in the "Simple Download" section.</LI>
+  <LI>While the sample is still downloading, logoff or exit windows.</LI>
+  <LI>Log back on. The sample will restart.</LI>
+</UL>
+
+
+</BODY>
+
+</HTML>

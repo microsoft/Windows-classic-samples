@@ -1,0 +1,541 @@
+<html>
+  <!------------------------
+  CALCULATOR2002.HTM
+
+  Calculator 2002. 1997-2001
+
+  Version 1.25.006
+  ------------------------->
+
+  <head>
+    <title>Calculator 2002</title>
+  </head>
+
+  <style>
+    body	{margin: 0px; color: white}
+    table	{background: none; width: 89px; font: 8pt Verdana; cursor: default}
+    td		{background: black; width: 14px; height: 16px; text-align: center}
+    div		{position: absolute; text-align: right}
+    .MLCD	{height: 18px}
+    .mKey	{font: 6pt Small Fonts}
+    .lKey	{padding-top: 18px}
+    .mem0	{color: black}
+    .mem1	{color: white}
+    .R		{background: #FF3300; top: 19px; left:  1px; width: 44px; height:  45px; z-index: -100}
+    .G		{background: #66CC33; top: 19px; left: 46px; width: 42px; height:  45px; z-index: -100}
+    .B		{background: #0099FF; top: 65px; left:  1px; width: 44px; height:  44px; z-index: -100}
+    .Y		{background: #FFCC00; top: 65px; left: 46px; width: 42px; height:  44px; z-index: -100}
+    .K		{background: #000000; top:  0px; left:  0px; width: 89px; height: 110px; z-index: -100}
+    #Mem	{left: -1px; top: 7px; width: 8px; height: 8px; font: 5pt Small Fonts}
+    #LCD	{width: 77px; height: 12px; left: 10px; top: 3px}
+  </style>
+
+  <script language=JScript src=shared.js> </script>
+  <script language=VBScript src=shared.vbs> </script>
+
+  <!-- Button logic (mouse event handlers must be loaded before <body>) -->
+  <script language=JScript>
+
+    var g_buttonObject;
+
+    function TrackMouse()
+      {
+      if (g_buttonObject)
+        {
+        // if not dragging, cancel tracking mode
+        if (window.event.button != 1)
+          {
+          g_buttonObject = null;
+          return;
+          }
+        x = window.event.x, y = window.event.y;
+        objectUnderCursor = window.document.elementFromPoint(x, y);
+        isMouseOver = g_buttonObject.contains(objectUnderCursor);
+        UpdateButton(isMouseOver);
+        window.event.returnValue = false;
+        }
+      }
+
+    function ButtonDown()
+      {
+      if (window.event.button == 1)
+        {
+        obj = window.event.srcElement;
+        // buttons are <td>s with a non-empty id
+        if ((obj.tagName == "TD") && obj.id)
+          {
+          g_buttonObject = obj;
+          UpdateButton(true);
+          }
+        }
+      }
+
+    function DoubleClick()
+      {
+      // track double click dragging
+      if (g_buttonObject)
+        if (g_buttonObject.contains(window.event.srcElement))
+          g_buttonObject.click();
+      }
+
+    function UpdateButton(bDown)
+      {
+      if (g_buttonObject)
+        {
+        g_buttonObject.style.color = bDown ? "black" : "white";
+        g_buttonObject.style.background = bDown ? "white" : "black";
+        }
+      }
+
+  </script>
+
+  <!-- Calculator layout -->
+  <body scroll=no
+    onLoad=Initialize()
+    onUnload=Persist()
+    onKeyPress=ReadKey()
+    onKeyUp=UpdateButton(false)
+    onMouseDown=ButtonDown()
+    onMouseMove=TrackMouse()
+    onMouseUp=UpdateButton(false)
+    onDblClick=DoubleClick()>
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+    <table class=MLCD cellspacing=0 onSelectStart=Ignore()>
+      <tr>
+        <td>
+          <div id=Mem> M </div>
+          <div id=LCD></div>
+        </td>
+      </tr>
+      <tr>
+        <table cellspacing=2 onSelectStart=Ignore()>
+          <tr>
+            <td id=C onClick=ReadClear(true)> C </td>
+            <td id=% onClick=ReadPercent()> % </td>
+            <td id=/ onClick=ReadOp(this.id)> &divide; </td>
+            <td id=* onClick=ReadOp(this.id)> &times;  </td>
+            <td id=- onClick=ReadOp(this.id)> &minus;  </td>
+          </tr>
+          <tr>
+            <td id=MC class=mKey onClick=ReadMemClear(true)> MC </td>
+            <td id=7 onClick=ReadDigit(this.id)> 7 </td>
+            <td id=8 onClick=ReadDigit(this.id)> 8 </td>
+            <td id=9 onClick=ReadDigit(this.id)> 9 </td>
+            <td id=+ class=lKey onClick=ReadOp(this.id) rowspan=2> + </td>
+          </tr>
+          <tr>
+            <td id=MR class=mKey onClick=ReadMemRecall()> MR </td>
+            <td id=4 onClick=ReadDigit(this.id)> 4 </td>
+            <td id=5 onClick=ReadDigit(this.id)> 5 </td>
+            <td id=6 onClick=ReadDigit(this.id)> 6 </td>
+          </tr>
+          <tr>
+            <td id=M+ class=mKey onClick=ReadMemAdd()> M+ </td>
+            <td id=1 onClick=ReadDigit(this.id)> 1 </td>
+            <td id=2 onClick=ReadDigit(this.id)> 2 </td>
+            <td id=3 onClick=ReadDigit(this.id)> 3 </td>
+            <td id== class=lKey onClick=ReadEqual() rowspan=2> = </td>
+          </tr>
+          <tr>
+            <td id=M- class=mKey onClick=ReadMemSub()> M- </td>
+            <td id=0 onClick=ReadDigit(this.id) colspan=2> 0 </td>
+            <td id=. onClick=ReadPoint()> . </td>
+          </tr>
+        </table>
+      </tr>
+    </table>
+
+    <div class=K> &nbsp; </div>
+    <div class=R> &nbsp; </div> <div class=G> &nbsp; </div>
+    <div class=B> &nbsp; </div> <div class=Y> &nbsp; </div>
+
+  </body>
+
+  <!-- Calculator logic -->
+  <script language=JScript>
+    // constants			calculator states (g_state values, see below)
+    var c_state0  =  0;			// zero arguments available, initial state
+    var c_state1  =  1;			// one argument (left) available
+    var c_state1a = -1;			// one argument (left) and opcode available
+    var c_state2  =  2;			// two arguments (left and right) and opcode available
+    var c_state2a = -2;			// result calculated (via "="), two arguments and opcode available
+    var c_state3  =  3;			// right argument modified (either percentage or square root taken)
+
+    var c_maxDigits = 11;		// maximum display or input length (incl sign & dot)
+    var c_maxPosNum = 99999999999;	// maximum positive number that can be displayed
+    var c_minPosNum = 0.000000001;	// minimum positive number that can be displayed
+    var c_maxNegNum = -0.00000001;	// maximum negative number that can be displayed
+    var c_minNegNum = -9999999999;	// minimum negative number that can be displayed
+
+    // global variables, persisted via cookies
+    var g_register = new Array(2); 	// [0] left argument, [1] right argument
+    var g_memory = 0;			// memory
+    var g_focus = 0;			// register index that has input and display focus
+    var g_argReady = false;		// argument available?
+    var g_decPoint = false;		// decimal point entered?
+    var g_opCode = "";			// operation code ("+", "-", "*", "/")
+    var g_state = c_state0;		// calculator state (see constants for possible values and meaning)
+
+    // global variables, not persisted
+    var g_timer = 0;			// timeout ID used in processing hot keys for memory functions
+    var g_decSeparator;			// decimal separator (obtained from the system locale settings)
+
+    function ReadKey()
+      {
+      UpdateButton(false);
+      keyCode = window.event.keyCode;
+      switch (keyCode)
+        {
+        case 8:   // BACKSPACE
+        case 27:  // ESCAPE
+          buttonID = "C";
+          break;
+
+        case 13:  // RETURN or ENTER
+          buttonID = "=";
+          break;
+
+        default:
+          key = String.fromCharCode(keyCode).toUpperCase();
+          if (key == "M")
+            {
+            // first key pressed, wait 1.5 seconds for the 2nd key press
+            // if no 2nd key press, then forget the 1st one after timeout
+            g_timer = window.setTimeout("g_timer = 0", 1500);
+            return;
+            }
+          buttonID = g_timer ? "M" + key : key;
+          break;
+        }
+      g_buttonObject = document.all(buttonID);
+      UpdateButton(true);
+      if (g_buttonObject)
+        g_buttonObject.click();
+      window.clearTimeout(g_timer);
+      g_timer = 0;
+      }
+
+    function ReadDigit(Digit)
+      {
+      if (!g_argReady)
+        {
+        transition();
+        g_register[g_focus] = Digit;
+        g_argReady = true;
+        g_decPoint = false;
+        }
+      else
+        {
+        if (g_register[g_focus].length == c_maxDigits)
+          return;
+        if (g_register[g_focus] == "0")
+          g_register[g_focus] = Digit;
+        else
+          g_register[g_focus] += Digit;
+        }
+      displayRegister(g_focus);
+      }
+
+    function ReadPoint()
+      {
+      if (!g_argReady)
+        {
+        transition();
+        g_register[g_focus] = "0";
+        g_argReady = true;
+        }
+
+      if (!g_decPoint)
+        {
+        g_register[g_focus] += g_decSeparator;
+        g_decPoint = true;
+        }
+
+      displayRegister(g_focus);
+      }
+
+    function ReadOp(OpCode)
+      {
+      switch (g_state)
+        {
+        case c_state2:
+        case c_state3:
+          evaluateExpression();
+
+        case c_state0:
+        case c_state1:
+        case c_state2a:
+          duplicateArgument();
+
+        case c_state1a:
+          g_state = c_state1a;
+          g_opCode = OpCode;
+          break;
+
+        default:
+          break;
+        }
+
+      ready();
+      }
+
+    function ReadEqual()
+      {
+      switch (g_state)
+        {
+        case c_state1a:
+        case c_state2:
+        case c_state2a:
+        case c_state3:
+          g_state = c_state2a;
+          evaluateExpression();
+          break;
+
+        default:
+          break;
+        }
+
+      ready();
+      }
+
+    function ReadClear(IsDisplayUpdateRequested)
+      {
+      g_register[0] = 0;
+      g_register[1] = 0;
+      g_focus = 0;
+      g_opCode = "";
+      g_state = c_state0;
+      if (IsDisplayUpdateRequested)
+        displayRegister(0);
+      ready();
+      }
+
+    function ReadClearEntry()
+      {
+      switch (g_state)
+        {
+        case c_state3:
+        case c_state2:
+          g_state = c_state1a;
+
+        case c_state1:
+          g_register[g_focus] = 0;
+          displayRegister(g_focus);
+          ready();
+          break;
+
+        default:
+          break;
+        }
+      }
+
+    function ReadSqrt()
+      {
+      parseRegister(g_focus);
+      g_register[g_focus] = Math.sqrt(g_register[g_focus]);
+      displayRegister(g_focus);
+      ready();
+
+      switch (g_state)
+        {
+        case c_state0:
+        case c_state1:
+        case c_state1a:
+        case c_state2a:
+          g_state = c_state1;
+          break;
+
+        case c_state2:
+        case c_state3:
+          g_state = c_state3;
+          break;
+
+        default:
+          break;
+        }
+      }
+
+    function ReadPercent()
+      {
+      if (g_state == c_state2)
+        {
+        parseRegister(1);
+        g_register[1] *= (g_register[0] / 100);
+        displayRegister(1);
+        ready();
+
+        g_state = c_state3;
+        }
+      }
+
+    function updateMemoryIndicator()
+      {
+      // turn indicator off for zeros only (on for NaNs)
+      Mem.className = (g_memory == 0) ? "mem0" : "mem1";
+      }
+
+    function ReadMemAdd()
+      {
+      parseRegister(g_focus);
+      g_memory += g_register[g_focus];
+      updateMemoryIndicator();
+      ready();
+      }
+
+    function ReadMemSub()
+      {
+      parseRegister(g_focus);
+      g_memory -= g_register[g_focus];
+      updateMemoryIndicator();
+      ready();
+      }
+
+    function ReadMemRecall()
+      {
+      transition();
+      g_register[g_focus] = g_memory;
+      displayRegister(g_focus);
+      ready();
+      }
+
+    function ReadMemClear()
+      {
+      g_memory = 0;
+      updateMemoryIndicator();
+      ready();
+      }
+
+    function transition()
+      {
+      if (g_state == c_state1a)
+        {
+        g_state = c_state2;
+        g_focus = 1;
+        }
+      else
+        {
+        g_state = c_state1;
+        g_focus = 0;
+        }
+      }
+
+    function evaluateExpression()
+      {
+      parseRegister(1);
+      eval("g_register[0]" + g_opCode + "= g_register[1]");
+      displayRegister(0);
+      }
+
+    function duplicateArgument()
+      {
+      parseRegister(0);
+      g_register[1] = g_register[0];
+      displayRegister(1);
+      }
+
+    function parseRegister(RegisterIndex)
+      {
+      if (typeof g_register[RegisterIndex] == "string")
+        g_register[RegisterIndex] = ParseDouble(g_register[RegisterIndex]);
+      }
+
+    function displayRegister(RegisterIndex)
+      {
+      if (typeof g_register[RegisterIndex] == "string")
+        {
+        // don't format user input, preserve "0.", "0.00", etc.
+        LCD.innerText = g_register[RegisterIndex];
+        }
+      else
+        {
+        adjustRegister(RegisterIndex);
+        LCD.innerText = getDisplayString(g_register[RegisterIndex]);
+        }
+      g_focus = RegisterIndex;
+      }
+
+    function adjustRegister(RegisterIndex)
+      {
+      regValue = g_register[RegisterIndex];
+
+      if (regValue > c_maxPosNum)
+        g_register[RegisterIndex] = Infinity;
+
+      if ((c_maxNegNum < regValue) && (regValue < c_minPosNum))
+        g_register[RegisterIndex] = 0;
+
+      if (regValue < c_minNegNum)
+        g_register[RegisterIndex] = -Infinity;
+      }
+
+    function ready()
+      {
+      g_argReady = false;
+      g_decPoint = false;
+      }
+
+    function getDisplayString(X)
+      {
+      if (isNaN(X))
+        return "Undefined";
+
+      if (!isFinite(X))
+        return X.toString();
+
+      numberOfDigitsBeforeDot = FormatFixedDigits(X, 0).length;
+      numberOfDigitsAfterDot = c_maxDigits - numberOfDigitsBeforeDot - 1;
+      hasFractionalPart = (numberOfDigitsAfterDot > 0);
+
+      displayString = FormatFixedDigits(X, hasFractionalPart ? numberOfDigitsAfterDot : 0);
+
+      if (hasFractionalPart)
+        {
+        // trim trailing zeros and decimal separator (when necessary)
+        while ("0" == displayString.charAt(displayString.length - 1))
+          displayString = displayString.slice(0, -1);
+        if (g_decSeparator == displayString.charAt(displayString.length - 1))
+          displayString = displayString.slice(0, -1);
+        }
+
+      return displayString;
+      }
+
+    function updateDecSeparator()
+      {
+      g_decSeparator = FormatFixedDigits(1, 1).charAt(1);
+      document.all(".").innerText = g_decSeparator;
+      }
+
+    function Initialize()
+      {
+      ReadClear(false);
+
+      GetCookie("g_register[0]");
+      GetCookie("g_register[1]");
+      GetCookie("g_memory");
+      GetCookie("g_focus");
+      GetCookie("g_argReady");
+      GetCookie("g_decPoint");
+      GetCookie("g_opCode");
+      GetCookie("g_state");
+
+      updateDecSeparator();
+      updateMemoryIndicator();
+      displayRegister(g_focus);
+      }
+
+    function Persist()
+      {
+      SetCookie("g_register[0]");
+      SetCookie("g_register[1]");
+      SetCookie("g_memory");
+      SetCookie("g_focus");
+      SetCookie("g_argReady");
+      SetCookie("g_decPoint");
+      SetCookie("g_opCode");
+      SetCookie("g_state");
+      }
+
+  </script>
+
+</html>

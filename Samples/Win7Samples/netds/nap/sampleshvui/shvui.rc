@@ -1,0 +1,86 @@
+#include "windows.h"
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+#include <ntverp.h>
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "SDK System Health Validator Configuration"
+#define VER_INTERNALNAME_STR        "shvcnfg.exe"
+#define VER_ORIGINALFILENAME_STR    "shvcnfg.exe"
+
+#include "common.ver"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE         "SDK System Health Validator"
+    IDS_CAPTION       "SDK System Health Validator"
+
+    IDS_CMD_EMBEDDED  "Embedding"
+    IDS_CMD_REGSERVER  "RegServer"
+    IDS_CMD_UNREGSERVER  "UnregServer"
+
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+
+
+IDD_SDKSHV_DIALOG DIALOGEX 0, 0, 251, 145
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "SDK SHV Sample"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "Use the settings below to define a SHV policy. Your selection defines the requirements for client computers connecting to your network.",IDC_STATIC_TITLE,15,15,218,26
+    GROUPBOX        "Configuration",IDC_STATIC_FW,16,50,217,31
+    CONTROL         "Validate SDK SHA sample",IDC_SDKSHV_FW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,24,62,167,10
+    DEFPUSHBUTTON   "OK",IDOK,57,113,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,111,113,50,14
+    PUSHBUTTON      "&Apply",IDAPPLY,167,113,50,14
+END
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SDKSHV_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 233
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 219
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDD_SDKSHV_ICON          ICON                    "SDKSHV.ico"

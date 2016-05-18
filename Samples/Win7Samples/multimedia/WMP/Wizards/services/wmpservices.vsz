@@ -1,0 +1,6 @@
+VSWIZARD 7.0
+Wizard=VsWizard.<VsWizardEngine version goes here>
+
+Param="WIZARD_NAME = wmpservices"
+Param="ABSOLUTE_PATH = <path to wmpservices directory goes here>"
+Param="FALLBACK_LCID = 1033"

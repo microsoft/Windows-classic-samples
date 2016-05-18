@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechListBoxApplication", "SpeechListBoxApplication\SpeechListBoxApplication.csproj", "{3BE55991-650C-41C2-89A0-7F355B6302F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechListBox", "SpeechListBox\SpeechListBox.csproj", "{2E9F6C4C-6327-458F-9489-060AD7C4AB58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7538D8E1-852D-4AED-8EA6-F4C9A4D54B2E}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BE55991-650C-41C2-89A0-7F355B6302F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE55991-650C-41C2-89A0-7F355B6302F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE55991-650C-41C2-89A0-7F355B6302F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE55991-650C-41C2-89A0-7F355B6302F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9F6C4C-6327-458F-9489-060AD7C4AB58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9F6C4C-6327-458F-9489-060AD7C4AB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9F6C4C-6327-458F-9489-060AD7C4AB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9F6C4C-6327-458F-9489-060AD7C4AB58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

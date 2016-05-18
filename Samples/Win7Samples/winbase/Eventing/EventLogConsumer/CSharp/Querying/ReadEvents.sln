@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadEvents", "ReadEvents.csproj", "{DCFBF225-ED81-4D9F-9062-3AEE9495DC2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCFBF225-ED81-4D9F-9062-3AEE9495DC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFBF225-ED81-4D9F-9062-3AEE9495DC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFBF225-ED81-4D9F-9062-3AEE9495DC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFBF225-ED81-4D9F-9062-3AEE9495DC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

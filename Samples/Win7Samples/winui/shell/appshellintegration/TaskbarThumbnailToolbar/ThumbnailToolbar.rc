@@ -1,0 +1,20 @@
+#include "resource.h"
+
+IDB_BUTTONIMAGES_96     BITMAP                  "buttons96.bmp"
+IDB_BUTTONIMAGES_120    BITMAP                  "buttons120.bmp"
+IDB_BUTTONIMAGES_144    BITMAP                  "buttons144.bmp"
+
+IDI_THUMBNAILTOOLBAR    ICON                    "ThumbnailToolbar.ico"
+
+IDC_THUMBNAILTOOLBAR MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "ThumbnailToolbar"
+END

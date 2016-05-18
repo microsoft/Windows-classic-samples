@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.IMAPI", "Interop.IMAPI.csproj", "{47CC75BB-AD6A-4596-9E55-8CD427A88BBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMAPI_Interop_Test", "..\IMAPI_Interop_Test\IMAPI_Interop_Test.csproj", "{815E322E-377D-47D2-9834-1EA513FC05CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47CC75BB-AD6A-4596-9E55-8CD427A88BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47CC75BB-AD6A-4596-9E55-8CD427A88BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47CC75BB-AD6A-4596-9E55-8CD427A88BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47CC75BB-AD6A-4596-9E55-8CD427A88BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815E322E-377D-47D2-9834-1EA513FC05CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815E322E-377D-47D2-9834-1EA513FC05CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815E322E-377D-47D2-9834-1EA513FC05CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815E322E-377D-47D2-9834-1EA513FC05CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,113 @@
+<html>
+  <!------------------------
+  COLLECTION2002.HTM
+
+  Collection 2002. 1999-2001
+
+  Version 1.10.006
+  ------------------------->
+
+  <head>
+    <title>Collection 2002</title>
+  </head>
+
+  <style>
+    a:link,
+    a:visited	{color: gray}
+    tr		{text-align: center}
+    td		{font: 8pt Verdana}
+  </style>
+
+  <body scroll=no>
+  <!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+    <center>
+    <table id=Field cellspacing=0 cellpadding=0>
+      <tr>
+        <td id=PanelLeft rowspan=7 align=left valign=center style=visibility:hidden>
+         <!--This column is a space aligner; put the longest word/component name in here-->
+          Minesweeper
+        </td>
+        <td style=padding-bottom:4px>
+          <img src=Logo2002.gif border=0>
+        </td>
+        <td id=PanelRight rowspan=7 align=left valign=center>
+          <a target=_self href=javascript:show(document.all.Calc)>Calculator</a>
+          <br>
+          <a target=_self href=javascript:show(document.all.Clnd)>Calendar</a>
+          <br>
+          <a target=_self href=javascript:show(document.all.Clck)>Clock</a>
+          <br>
+          <a target=_self href=javascript:show(document.all.Mine)>Minesweeper</a>
+          <br>
+          <a target=_self href=javascript:show(document.all.Puzz)>Puzzle</a>
+        </td>
+      </tr>
+
+      <tr id=Calc style=height:110px;display:none>
+        <td>
+          <iframe src=Calculator2002.htm frameborder=0 height=110 width=89 noresize></iframe>
+        </td>
+      </tr>
+      <tr id=Clnd style=height:110px;display:none>
+        <td>
+          <iframe src=Calendar2002.htm frameborder=0 height=110 width=89 noresize></iframe>
+        </td>
+      </tr>
+      <tr id=Clck style=height:110px>
+        <td>
+          <iframe src="Clock2002.htm" frameborder=0 height=110 width=89 noresize></iframe>
+        </td>
+      </tr>
+      <tr id=Mine style=height:110px;display:none>
+        <td>
+          <iframe src=Minesweeper2002.htm frameborder=0 height=109 width=87 noresize></iframe>
+        </td>
+      </tr>
+      <tr id=Puzz style=height:110px;display:none>
+        <td>
+          <iframe src=Puzzle2002.htm frameborder=0 height=109 width=87 noresize></iframe>
+        </td>
+      </tr>
+      <tr>
+        <td style=padding-top:5px>
+          <img style=cursor:hand onClick=install() src=AddDesktop.gif border=0>
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <script>
+
+    var g_object = document.all.Clck;
+
+    function show (object)
+      {
+      g_object.style.display = "none";
+      g_object = object;
+      g_object.style.display = "";
+      document.body.focus ();
+      }
+
+    function install ()
+      {
+      thisURL = location.href;
+      filePath = thisURL.substring (0, thisURL.lastIndexOf ("/") + 1);
+
+      with (g_object.all.tags("iframe").item(0))
+        {
+        fileName = src;
+        componentWidth = width;
+        componentHeight = height;
+        }
+
+      dx = screen.width  - componentWidth;
+      dy = screen.height - componentHeight;
+      x0 = Math.floor (dx * Math.random ());
+      y0 = Math.floor (dy * Math.random ());
+
+      window.external.AddDesktopComponent (filePath + fileName, "website", x0, y0, componentWidth, componentHeight);
+      }
+
+  </script>
+
+</html>

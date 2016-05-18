@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<EapHostConfig
+            xmlns="http://www.microsoft.com/provisioning/EapHostConfig"
+            xmlns:eapCommon="http://www.microsoft.com/provisioning/EapCommon"
+            xmlns:baseEap="http://www.microsoft.com/provisioning/BaseEapMethodConfig">
+  
+ <EapMethod>
+  <eapCommon:Type> 40 </eapCommon:Type>
+  <eapCommon:AuthorId> 311 </eapCommon:AuthorId>
+ </EapMethod>
+
+ <Config>
+	<EapType>40</EapType>
+	<ConfigData>seatac.bingo.com</ConfigData>
+ </Config>
+
+</EapHostConfig>

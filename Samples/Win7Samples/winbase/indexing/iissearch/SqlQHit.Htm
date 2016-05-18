@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
+<HTML>
+
+
+<HEAD>
+    <TITLE>Demo for OLE DB Provider for Indexing Service</TITLE>
+    <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+		<META NAME="DESCRIPTION" CONTENT="Sample query form for OLE DB Provider for Indexing Service">
+    <META NAME="AUTHOR"      CONTENT="OLE DB Test team">
+    <META NAME="KEYWORDS"    CONTENT="query, content, hit">
+    <META NAME="SUBJECT"     CONTENT="sample form">
+    <META NAME="MS.CATEGORY" CONTENT="Internet">
+    <META NAME="MS.LOCALE"   CONTENT="EN-US">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Windows-1252">
+</HEAD>
+
+<BODY background="is2bkgnd.gif">
+
+<TABLE>
+    <TR><TD><a href="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT border=0></a></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Sample SQL Based Search Form</H3></TD></TD></TR>
+    </TR>
+</TABLE>
+
+<FORM ACTION="SQLQHit.asp" METHOD="GET">
+<H3>Building an SQL Query</H3>
+
+<p>
+
+<TABLE width=500>
+<colgroup span=1 width=300 align=left>
+	<tr>
+		<td colspan=2 class=RecordTitle>
+				SELECT Clause
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+        Select the requested columns to build the<I> Select-list </I>from the list box.
+				Choose one or more columns from the list. To select multiple columns, use the CTRL key. 
+				To select a range of columns, use the SHIFT key. For example, you can choose <B>Filename, DocAuthor, Size, VPath</B>
+				The columns that appear in your Indexing Service query will be separated by commas as part of the query preparation process.
+		</td>
+	</tr>
+	<tr>
+		<td bgcolor=pink>				
+				<B>Note:</B> The * can only be used with a predefined view. To explicitly select 
+				properties, you must change <I>extended_webinfo</I> to a scope function, such as 
+				<I>Scope()</I>.
+			</td>
+			<td valign=top align=center>
+				<B>SELECT</B><br>
+        <SELECT NAME="CiColumns" MULTIPLE SIZE=8>
+					<OPTION selected>*
+					<OPTION>access
+					<OPTION>allocsize
+					<OPTION>attrib
+					<OPTION>Characterization
+					<OPTION>ClassId
+					<OPTION>create
+					<OPTION>DocAppName
+					<OPTION>DocAuthor
+					<OPTION>DocCharCount
+					<OPTION>DocComments
+					<OPTION>DocCreateDTM
+					<OPTION>DocEditTime
+					<OPTION>DocKeywords
+					<OPTION>DocLastAuthor
+					<OPTION>DocLastPrinted
+					<OPTION>DocLastSaveDTM
+					<OPTION>DocPageCount
+					<OPTION>DocRevNumber
+					<OPTION>DocSecurity
+					<OPTION>DocSubject
+					<OPTION>DocTemplate
+					<OPTION>DocTitle
+					<OPTION>DocWordCount
+					<OPTION>FileIndex
+					<OPTION>Filename
+					<OPTION>hitcount
+					<OPTION>path
+					<OPTION>rank
+					<OPTION>shortfilename
+					<OPTION>size
+					<OPTION>USN
+					<OPTION>Vpath
+					<OPTION>workid
+					<OPTION>write
+        </SELECT>
+			</td>
+	</tr>
+</table>
+
+<p>
+
+<TABLE width=500>
+<colgroup span=1 width=300 align=left>
+	<tr>
+		<td colspan=2 class=RecordTitle>
+				FROM Clause
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2>
+			The SCOPE() specification identifies the virtual roots or directories to perform 
+			the search. You can specify deep traversal (default) where all the subdirectories 
+			are searched, or shallow traversal where only the specified directory is searched. 
+		</td>
+	<tr>
+		<td bgcolor=pink>			
+			<b>Note:</b> You can specify predefined views of FILEINFO, FILEINFO_ABSTRACT, 
+			EXTENDED_FILEINFO, WEBINFO, EXTENDED_WEBINFO in the FROM clause.
+    </td>
+		<td>
+			<B>FROM</B><INPUT TYPE="TEXT" NAME="CiScope" SIZE="30" MAXLENGTH="200" VALUE="extended_webinfo">
+		</td>
+	</tr>
+</table>
+
+<p>
+
+<TABLE width=500>
+<colgroup span=1 width=300 align=left>
+	<tr>
+		<td colspan=2 class=RecordTitle>
+				WHERE Clause
+		</td>
+	</tr>
+	<tr>
+		<td>
+      The WHERE clause specifies the filter condition of your search.
+		</td>
+		<td>
+			<B>WHERE</B> <INPUT TYPE="TEXT" NAME="CiRestriction" SIZE="30" MAXLENGTH="255" VALUE="CONTAINS('index AND server')">
+		</td>
+	</tr>
+</table>
+
+<p>
+
+<TABLE width=500>
+<colgroup span=1 width=300 align=left>
+	<tr>
+		<td colspan=2 class=RecordTitle>
+				ORDER BY Clause
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+				The optional ORDER BY clause is used to specify the column(s) which you wish the result set to be ordered on. You can leave this field blank.
+		</td>
+		<td>
+			<B>ORDER BY</B> <INPUT TYPE="TEXT" NAME="CiOrderBy" SIZE="20" MAXLENGTH="50" VALUE="">
+		</td>
+	</tr>
+</table>
+
+<TABLE width=500>
+	<tr>
+		<td align=left><a href="ixtipsql.htm">SQL Syntax Tips</a></td>
+		<td align=center height=80>
+			<INPUT TYPE="SUBMIT" SIZE="0" MAXLENGTH="0" VALUE="Execute Query">
+		</td>
+	</tr>
+</table>
+
+  <INPUT TYPE="HIDDEN" NAME="CiMaxRecordsPerPage" VALUE="10">
+  <INPUT TYPE="HIDDEN" NAME="CiSort" VALUE="rank[d]">
+
+</FORM>
+
+<!-- BEGIN STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+<hr width=500 align=left>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/windows2000"><img src="win2k.gif" alt="Learn more about Microsoft Windows 2000!"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-1999 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+<!-- END STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+<p>
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,169 @@
+// ADOPriv.idl : IDL source for ADOPriv.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ADOPriv.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	interface IColumn;
+
+	interface IModInfo;
+
+	[
+		object,
+		uuid(D9824551-5964-11D1-8AE1-00C04FB90A5E),
+		dual,
+		helpstring("IParseInitFile Interface"),
+		pointer_default(unique)
+	]
+	interface IParseInitFile : IDispatch
+	{
+		[propget, id(1), helpstring("property ColumnCount")] HRESULT ColumnCount([out, retval] long *pVal);
+		[propget, id(2), helpstring("property RowCount")] HRESULT RowCount([out, retval] long *pVal);
+		[id(3), helpstring("method Init")] HRESULT Init([in] BSTR FileName, [out, retval] BOOL* pVal);
+		[id(4), helpstring("method GetNextLine")] HRESULT GetNextLine([in, out] LONG* plLength);
+		[id(5), helpstring("method FindSection")] HRESULT FindSection([in] BSTR Section, [out,retval] BOOL* pVal);
+		[id(6), helpstring("method FetchRow")] HRESULT FetchRow([in] LONG Row, [out, retval] BOOL* pVal);
+		[id(7), helpstring("method GetData")] HRESULT GetData([in] LONG Row, [in] LONG Column, [in, out] BSTR* Data, [out, retval] SHORT* pVal);
+		[id(8), helpstring("method GetQuery")] HRESULT GetQuery([in] LONG eQuery, [out, retval] BSTR* pVal);
+		[id(9), helpstring("method GetRowOffset")] HRESULT GetRowOffset([in] LONG Row, [out, retval] LONG* pVal);
+		[propputref, id(10), helpstring("property ModInfo")] HRESULT ModInfo([in] IModInfo* newVal);
+		[id(11), helpstring("method GetColumn")] HRESULT GetColumn([in] SHORT Index, [out, retval] IColumn** ppVal);
+	};
+
+	
+	[
+		object,
+		uuid(B3AD7BC2-57D7-11D1-8AE1-00C04FB90A5E),
+		dual,
+		helpstring("IModInfo Interface"),
+		pointer_default(unique)
+	]
+	interface IModInfo : IDispatch
+	{
+		[id(1), helpstring("method ParseInitString")] HRESULT ParseInitString([out, retval] VARIANT_BOOL* pfResult);
+		[id(2), helpstring("method ParseInitFile")] HRESULT ParseInitFile([out, retval] VARIANT_BOOL* pfResult);
+		[id(3), helpstring("method GetInitStringValue")] HRESULT GetInitStringValue([in] BSTR Keyword, [in, out] BSTR* Value, [out, retval] VARIANT_BOOL* pfResult);
+		[propget, id(4), helpstring("property TableName")] HRESULT TableName([out, retval] BSTR *pVal);
+		[propput, id(4), helpstring("property TableName")] HRESULT TableName([in] BSTR newVal);
+		[propget, id(5), helpstring("property DefaultQuery")] HRESULT DefaultQuery([out, retval] BSTR *pVal);
+		[propput, id(5), helpstring("property DefaultQuery")] HRESULT DefaultQuery([in] BSTR newVal);
+		[propget, id(6), helpstring("property ProviderLevel")] HRESULT ProviderLevel([out, retval] long *pVal);
+		[propget, id(7), helpstring("property FileName")] HRESULT FileName([out, retval] BSTR *pVal);
+		[propget, id(8), helpstring("property InitString")] HRESULT InitString([out, retval] BSTR *pVal);
+		[propput, id(8), helpstring("property InitString")] HRESULT InitString([in] BSTR newVal);
+		[propget, id(9), helpstring("property Insert")] HRESULT Insert([out, retval] long *pVal);
+		[propput, id(9), helpstring("property Insert")] HRESULT Insert([in] long newVal);
+		[id(10), helpstring("method IsStrictLeveling")] HRESULT IsStrictLeveling([out, retval] VARIANT_BOOL* pfResult);
+		[id(13), helpstring("method Init")] HRESULT Init([out, retval] BOOL* pVal);
+		[propget, id(14), helpstring("property ParseObject")] HRESULT ParseObject([out, retval] IParseInitFile* *pVal);
+	};
+
+	
+	[
+		object,
+		uuid(B3AD7BC5-57D7-11D1-8AE1-00C04FB90A5E),
+		dual,
+		helpstring("IColumn Interface"),
+		pointer_default(unique)
+	]
+	interface IColumn : IDispatch
+	{
+		[propget, id(1), helpstring("property ProviderTypeName")] HRESULT ProviderTypeName([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property ProviderTypeName")] HRESULT ProviderTypeName([in] BSTR newVal);
+		[propget, id(2), helpstring("property Suffix")] HRESULT Suffix([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("property Suffix")] HRESULT Suffix([in] BSTR newVal);
+		[propget, id(3), helpstring("property Prefix")] HRESULT Prefix([out, retval] BSTR *pVal);
+		[propput, id(3), helpstring("property Prefix")] HRESULT Prefix([in] BSTR newVal);
+		[propget, id(4), helpstring("property Name")] HRESULT Name([out, retval] BSTR *pVal);
+		[propput, id(4), helpstring("property Name")] HRESULT Name([in] BSTR newVal);
+		[propget, id(5), helpstring("property CreateParams")] HRESULT CreateParams([out, retval] BSTR *pVal);
+		[propput, id(5), helpstring("property CreateParams")] HRESULT CreateParams([in] BSTR newVal);
+		[propget, id(6), helpstring("property ColNum")] HRESULT ColNum([out, retval] long *pVal);
+		[propput, id(6), helpstring("property ColNum")] HRESULT ColNum([in] long newVal);
+		[propget, id(7), helpstring("property ProviderType")] HRESULT ProviderType([out, retval] short *pVal);
+		[propput, id(7), helpstring("property ProviderType")] HRESULT ProviderType([in] short newVal);
+		[propget, id(8), helpstring("property SubType")] HRESULT SubType([out, retval] short *pVal);
+		[propput, id(8), helpstring("property SubType")] HRESULT SubType([in] short newVal);
+		[propget, id(9), helpstring("property Precision")] HRESULT Precision([out, retval] long *pVal);
+		[propput, id(9), helpstring("property Precision")] HRESULT Precision([in] long newVal);
+		[propget, id(10), helpstring("property ColumnSize")] HRESULT ColumnSize([out, retval] long *pVal);
+		[propput, id(10), helpstring("property ColumnSize")] HRESULT ColumnSize([in] long newVal);
+		[propget, id(12), helpstring("property IsNullable")] HRESULT IsNullable([out, retval] BOOL *pVal);
+		[propput, id(12), helpstring("property IsNullable")] HRESULT IsNullable([in] BOOL newVal);
+		[propget, id(13), helpstring("property Unsigned")] HRESULT Unsigned([out, retval] BOOL *pVal);
+		[propput, id(13), helpstring("property Unsigned")] HRESULT Unsigned([in] BOOL newVal);
+		[propget, id(14), helpstring("property Scale")] HRESULT Scale([out, retval] short *pVal);
+		[propput, id(14), helpstring("property Scale")] HRESULT Scale([in] short newVal);
+		[propget, id(15), helpstring("property MinScale")] HRESULT MinScale([out, retval] short *pVal);
+		[propput, id(15), helpstring("property MinScale")] HRESULT MinScale([in] short newVal);
+		[propget, id(16), helpstring("property MaxScale")] HRESULT MaxScale([out, retval] short *pVal);
+		[propput, id(16), helpstring("property MaxScale")] HRESULT MaxScale([in] short newVal);
+		[propget, id(17), helpstring("property AutoInc")] HRESULT AutoInc([out, retval] BOOL *pVal);
+		[propput, id(17), helpstring("property AutoInc")] HRESULT AutoInc([in] BOOL newVal);
+		[propget, id(18), helpstring("property Unique")] HRESULT Unique([out, retval] BOOL *pVal);
+		[propput, id(18), helpstring("property Unique")] HRESULT Unique([in] BOOL newVal);
+		[propget, id(19), helpstring("property Updateable")] HRESULT Updateable([out, retval] BOOL *pVal);
+		[propput, id(19), helpstring("property Updateable")] HRESULT Updateable([in] BOOL newVal);
+		[propget, id(20), helpstring("property Searchable")] HRESULT Searchable([out, retval] long *pVal);
+		[propput, id(20), helpstring("property Searchable")] HRESULT Searchable([in] long newVal);
+		[propget, id(21), helpstring("property UseInSQL")] HRESULT UseInSQL([out, retval] BOOL *pVal);
+		[propput, id(21), helpstring("property UseInSQL")] HRESULT UseInSQL([in] BOOL newVal);
+		[propget, id(22), helpstring("property IsLong")] HRESULT IsLong([out, retval] BOOL *pVal);
+		[propput, id(22), helpstring("property IsLong")] HRESULT IsLong([in] BOOL newVal);
+		[propget, id(23), helpstring("property IsFixedLength")] HRESULT IsFixedLength([out, retval] BOOL *pVal);
+		[propput, id(23), helpstring("property IsFixedLength")] HRESULT IsFixedLength([in] BOOL newVal);
+		[propget, id(24), helpstring("property CaseSensitive")] HRESULT CaseSensitive([out, retval] BOOL *pVal);
+		[propput, id(24), helpstring("property CaseSensitive")] HRESULT CaseSensitive([in] BOOL newVal);
+		[propget, id(25), helpstring("property DefaultValue")] HRESULT DefaultValue([out, retval] VARIANT *pVal);
+		[propput, id(25), helpstring("property DefaultValue")] HRESULT DefaultValue([in] VARIANT newVal);
+		[propget, id(26), helpstring("property HasDefault")] HRESULT HasDefault([out, retval] BOOL *pVal);
+		[propput, id(26), helpstring("property HasDefault")] HRESULT HasDefault([in] BOOL newVal);
+	};
+	
+
+
+
+[
+	uuid(B3AD7BB5-57D7-11D1-8AE1-00C04FB90A5E),
+	version(1.0),
+	helpstring("ADOPriv 1.0 Type Library")
+]
+library ADOPriv
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	
+	[
+		uuid(B3AD7BC3-57D7-11D1-8AE1-00C04FB90A5E),
+		helpstring("ModInfo Class")
+	]
+	coclass ModInfo
+	{
+		[default] interface IModInfo;
+	};
+
+	
+	[
+		uuid(B3AD7BC6-57D7-11D1-8AE1-00C04FB90A5E),
+		helpstring("Column Class")
+	]
+	coclass Column
+	{
+		[default] interface IColumn;
+	};
+
+	
+	[
+		uuid(D9824552-5964-11D1-8AE1-00C04FB90A5E),
+		helpstring("ParseInitFile Class")
+	]
+	coclass ParseInitFile
+	{
+		[default] interface IParseInitFile;
+	};
+
+};

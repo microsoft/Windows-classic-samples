@@ -1,0 +1,102 @@
+[!if VISPLUGIN]
+visplugin\resource.h
+visplugin\StdAfx.cpp
+visplugin\StdAfx.h
+visplugin\dll.cpp
+visplugin\sample.cpp
+visplugin\sample.h
+visplugin\sample.rgs
+visplugin\sample.rc
+visplugin\sample.def
+visplugin\sample.idl
+[!if HASPROPERTYPAGE]
+common\CPropertyDialog.h
+[!endif]
+[!if LISTENTOEVENTS]
+common\events.cpp
+[!endif]
+[!endif]
+[!if UIPLUGIN]
+uiplugin\resource.h
+uiplugin\StdAfx.cpp
+uiplugin\StdAfx.h
+uiplugin\dll.cpp
+uiplugin\sample.cpp
+uiplugin\sample.h
+uiplugin\sample.rgs
+uiplugin\sample.rc
+uiplugin\sample.def
+[!if HASWINDOW]
+uiplugin\CPluginWindow.h
+[!endif]
+[!if HASPROPERTYPAGE]
+common\CPropertyDialog.h
+[!endif]
+[!if LISTENTOEVENTS]
+common\events.cpp
+[!endif]
+[!endif]
+
+
+
+
+[!if DSPPLUGIN]
+
+  dspplugin\resource.h
+  dspplugin\StdAfx.cpp
+  dspplugin\StdAfx.h
+  dspplugin\dll.cpp
+ 
+  [!if AUDIO]
+    dspplugin\sample.cpp
+    dspplugin\sample.h
+  [!endif]
+
+  [!if VIDEO]
+
+    [!if VS70 == 1]
+      |dspplugin\sample.jpg
+    [!else]
+      CopyOnly | dspplugin\sample.jpg
+    [!endif]
+
+    dspplugin\sample_video.cpp
+    dspplugin\sample_video.h   
+      
+  [!endif]
+
+  dspplugin\sample.rgs
+  dspplugin\sample.rc
+  dspplugin\sample.def
+  dspplugin\PropertyPage.cpp
+  dspplugin\PropertyPage.h
+  dspplugin\PropertyPage.rgs
+
+[!endif]
+
+
+
+
+
+
+[!if RENDERINGPLUGIN]
+renderingplugin\resource.h
+renderingplugin\StdAfx.cpp
+renderingplugin\StdAfx.h
+renderingplugin\dll.cpp
+renderingplugin\sample.cpp
+renderingplugin\sample.h
+renderingplugin\sample.rgs
+renderingplugin\sample.rc
+renderingplugin\sample.def
+
+[!if VS70 == 1]
+  |renderingplugin\sample.jpg
+[!else]
+  CopyOnly | renderingplugin\sample.jpg
+[!endif]
+
+renderingplugin\PropertyPage.cpp
+renderingplugin\PropertyPage.h
+renderingplugin\PropertyPage.rgs
+[!endif]

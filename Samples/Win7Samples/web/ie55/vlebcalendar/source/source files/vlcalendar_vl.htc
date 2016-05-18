@@ -1,0 +1,487 @@
+<PUBLIC:COMPONENT tagName=calendar >
+<public:defaults viewLinkContent />
+<public:property name=giDay />
+<public:property name=giMonth />
+<public:property name=giYear />
+<public:attach event=oncontentready onevent="rdy();" />
+
+</public:component>
+
+<STYLE TYPE="text/css"><!--
+
+.WholeCalendar_{background-color : lightgrey;
+               border           : 1px solid black;
+               cursor           : default;
+               width            : 100%;
+               height           : 100%;} 
+
+.Title_        {color            : #00009F; 
+                font-family      : Arial;    
+                font-size        : 10pt;     
+                font-weight      : bold;     
+                text-align       : center;   
+                height           : 1;
+                width            : 100%;
+                background-color : lightgrey;}
+
+
+.DateControls_ {text-align : right ;}
+
+
+.CalTable_{border : 1 solid black ;
+           width  : 100%          ;
+           height : 100%          ;}
+
+.DayTitle_{background-color    : lightgrey ;
+           color               : black     ; 
+           font-family         : Arial     ;  	 
+           font-size           : 8pt       ;	 
+           font-weight         : bold      ;	 
+           text-align          : center    ;	
+           border-width        : 1px       ;
+           border-style        : solid     ;
+           border-left-color   : white     ;
+           border-top-color    : white     ;
+           border-right-color  : black     ;
+           border-bottom-color : black     ;
+           width               : 14%       ;
+           height              : 1         ;}
+
+.OffDay_{background-color    : lightgrey ;
+         color               : #7F7F7F   ;
+         font-family         : Arial     ;
+         font-size           : 8pt       ;
+         font-weight         : normal    ;
+         text-align          : right     ;
+         vertical-align      : text-top  ;
+         border-width        : 1px       ;
+         border-style        : solid     ;
+         border-left-color   : white     ;
+         border-top-color    : white     ;
+         border-right-color  : black     ;
+         border-bottom-color : black     ;
+         width               : 14%       ;
+         cursor              : hand      ;}
+
+.Day_{background-color    : lightgrey ;	
+      color               : #00009F   ;
+      font-family         : Arial     ;
+      font-size           : 8pt       ;
+      font-weight         : normal    ;
+      text-align          : right     ;
+      vertical-align      : text-top  ;
+      border-width        : 1px       ;
+      border-style        : solid     ;
+      border-left-color   : white     ;
+      border-top-color    : white     ;
+      border-right-color  : black     ;
+      border-bottom-color : black     ;
+      width               : 14%       ;
+      cursor              : hand      ;}
+
+.DaySelected_{
+      background-color    : #7F7F7F  ;	
+      color               : yellow   ;	
+      font-family         : Arial    ;	
+      font-size           : 8pt      ;	
+      font-weight         : normal   ;	
+      text-align          : right    ; 	
+      vertical-align      : text-top ;	
+      border-width        : 1px      ;
+      border-style        : solid    ;
+      border-left-color   : black    ;
+      border-top-color    : black    ;
+      border-right-color  : #BFBFBF  ;
+      border-bottom-color : #BFBFBF  ;
+      width               : 14%      ;
+      cursor              : hand     ;}
+
+--></STYLE>
+<BODY id=b1>
+
+   <table id=rt border=0 CLASS=WholeCalendar_> 
+   <tr> 
+     <td class=Title_></td>  
+     <td class=DateControls_> 
+        <nobr> <select id=goMonthSelect></select>
+        <select id=goYearSelect></select> </nobr></td>      
+
+   </tr>              
+  <tr> <td colspan=3>   
+     <table class=CalTable_ cellspacing=0 border=0> 
+        <tr><td class=DayTitle_></td>
+            <td class=DayTitle_></td>
+            <td class=DayTitle_></td>
+            <td class=DayTitle_></td>
+            <td class=DayTitle_></td>
+            <td class=DayTitle_></td>
+            <td class=DayTitle_></td></tr>
+        <tr><td>bollox</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </table> 
+    </tr>      
+  </table> 
+
+
+<script language="javascript">
+
+//------------------------------------------------------------------------
+// Attach to element events
+//------------------------------------------------------------------------
+
+element.attachEvent("onclick", fnOnClick)
+//------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------
+// Create the arrays of days & months for different languages
+//------------------------------------------------------------------------
+var gaMonthNames = new Array(
+  new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'),
+  new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 
+            'August', 'September', 'October', 'November', 'December')
+  );
+
+var gaDayNames = new Array( 
+  new Array('S', 'M', 'T', 'W', 'T', 'F', 'S'),
+  new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
+  new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')
+  );
+
+var gaMonthDays = new Array( 
+   /* Jan */ 31,     /* Feb */ 29, /* Mar */ 31,     /* Apr */ 30, 
+   /* May */ 31,     /* Jun */ 30, /* Jul */ 31,     /* Aug */ 31, 
+   /* Sep */ 30,     /* Oct */ 31, /* Nov */ 30,     /* Dec */ 31 )
+
+//--------------------------------------
+//var giDay                                  // day of the month (1 to 31)
+//var giMonth                                // month of the year (1 to 12)
+//var giYear                                 // year (1900 to 2099)
+
+var goDayTitleRow        = null            // The table row containing days of the week
+var gaDayCell            = new Array()     // an array of the table cells for days
+
+var giMonthLength        = 1               // month length (0,1)
+var giDayLength          = 1               // day length (0 to 2)
+var giFirstDay           = 0               // first day of the week (0 to 6)
+
+var gsGridCellEffect     = 'raised'        // Grid cell effect
+var gsGridLinesColor     = 'black'         // Grid line color
+var gbShowDateSelectors  = true            // Show date selectors (0,1)
+var gbShowDays           = true            // Show the days of the week titles (0,1)
+var gbShowTitle          = true            // Show the title (0,1)
+var gbShowHorizontalGrid = true            // Show the horizontal grid (0,1)
+var gbShowVerticalGrid   = true            // Show the vertical grid (0,1)
+
+var giMinYear            = 1900            // Minimum year (1 is the lowest possible value)
+var giMaxYear            = 2099            // Maximum year 
+
+
+//--------------------------------------
+function rdy()
+{
+  // Grap date and check for leap year
+  fnIni()
+
+  // Link structure to calendar tag
+  fnCreateCalendarHTML()
+
+  // Fill in the days of the week
+  fnUpdateTitle()
+
+  // Fill in the days of the week
+  fnUpdateDayTitles()
+
+  // Build the month select control
+  fnBuildMonthSelect()
+
+  // Build the year select control
+  fnBuildYearSelect()
+
+  // Fill in the cells with the days of the month and set style values
+   fnFillInCells()
+}
+
+//------------------------------------------------------------------------
+
+function fnCheckLeapYear(iYear)
+{
+  gaMonthDays[1] = (((!(iYear % 4)) && (iYear % 100) ) || !(iYear % 400)) ? 29 : 28
+}
+//-------------------------
+
+function fnIni()
+{
+  if (giDay == null)
+  {
+	  var oDate = new Date()
+	  giDay = oDate.getDate()
+	  giMonth = oDate.getMonth() + 1
+	  giYear = oDate.getYear()
+ 
+ 	 // The JavaScript Date.getYear function returns a 2 digit date representation
+	  // for dates in the 1900's and a 4 digit date for 2000 and beyond.  
+	  if (giYear < 100) giYear += 1900  
+  }
+  fnCheckLeapYear(giYear)
+
+}
+//-------------------------
+
+function fnCreateCalendarHTML()
+{  
+  goDayTitleRow = rt.rows[1].cells[0].children[0].rows[0]
+ 
+  for (row=1; row < 7; row++)
+    for (cell=0; cell < 7; cell++)
+      gaDayCell[((row-1)*7) + cell] = rt.rows[1].cells[0].children[0].rows[row].cells[cell]
+
+  
+  //defaults.viewLink = document;
+  rt.attachEvent("onclick", fnOnClick);
+
+}
+
+//---------------------------
+
+// **********************************************************************
+//                       CALENDAR CONTROL FUNCTIONS
+// **********************************************************************
+function fnSetDate(iDay, iMonth, iYear)
+{
+
+  if (giYear != iYear)
+  {
+    fnCheckLeapYear(iYear)
+  }
+
+  if (iMonth < 1) iMonth = 1
+  if (iMonth > 12) iMonth = 12
+
+  if (iDay < 1) iDay = 1
+  if (iDay > gaMonthDays[giMonth - 1]) iDay = gaMonthDays[giMonth - 1]
+
+  if ((giDay == iDay) && (giMonth == iMonth) && (giYear == iYear))
+    return
+  else
+    bValueChange = true
+  
+  if (giDay != iDay) 
+  {
+    giDay = iDay
+  }
+
+  if ((giYear == iYear) && (giMonth == iMonth))
+  {
+    goCurrentDayCell.className = 'Day_' 
+    goCurrentDayCell = gaDayCell[giStartDayIndex + iDay - 1]
+    goCurrentDayCell.className = 'DaySelected_'
+    giDay = iDay
+  }
+  else 
+  {
+
+    if (giYear != iYear)
+    {
+      giYear = iYear
+      fnUpdateYearSelect()
+    }
+    
+    if (giMonth != iMonth) 
+    {
+      giMonth = iMonth
+      fnUpdateMonthSelect()
+    }
+ 
+    fnUpdateTitle()   
+    fnFillInCells()
+  }
+  
+}
+
+//-------------------------
+
+function fnUpdateTitle()
+{
+  var oTitleCell = rt.rows[0].cells[0]
+
+ if (gbShowTitle)
+    oTitleCell.innerHTML = gaMonthNames[giMonthLength][giMonth - 1] + " " + giYear
+  else 
+    oTitleCell.innerText = ' '
+  
+}
+//-------------------------
+
+function fnUpdateDayTitles()
+{
+  var iCell = 0
+
+  for (i=giFirstDay ; i < 7 ; i++)
+  {
+    goDayTitleRow.cells[iCell++].innerText = gaDayNames[giDayLength][i]
+  }
+ 
+  for (i=0; i < giFirstDay; i++)
+  {
+    goDayTitleRow.cells[iCell++].innerText = gaDayNames[giDayLength][i]
+  }
+}
+//----------------------
+
+function fnUpdateMonthSelect()
+{
+  goMonthSelect.options[ giMonth - 1 ].selected = true
+}
+//-----------------
+
+function fnBuildMonthSelect()
+{
+
+
+  for (i=0 ; i < 12; i++)
+  {
+    e = document.createElement("OPTION")
+    e.text = gaMonthNames[giMonthLength][i]
+    goMonthSelect.options.add(e)
+  }
+
+  goMonthSelect.options[ giMonth - 1 ].selected = true
+  goMonthSelect.attachEvent("onchange", fnMonthSelectOnChange)
+}  
+//------------------------------------------------------------------------
+
+function fnMonthSelectOnChange()
+{
+  iMonth = goMonthSelect.selectedIndex + 1
+  fnSetDate(giDay, iMonth, giYear)
+}
+//---------------------------------------------------------
+
+//------------------------------------------------------------------------
+
+function fnUpdateYearSelect()
+{
+  goYearSelect.options[ giYear - giMinYear ].selected = true
+}
+//--------------------------------
+
+function fnBuildYearSelect()
+{
+
+  for (i=giMinYear; i <= giMaxYear; i++)
+  {
+    e = document.createElement("OPTION")
+    e.text = i
+    goYearSelect.options.add(e)
+  }
+
+  goYearSelect.options[ giYear - giMinYear ].selected = true
+  goYearSelect.attachEvent("onchange", fnYearSelectOnChange)
+}
+//------------------------------------------------------------------------
+
+function fnYearSelectOnChange()
+{
+  iYear = goYearSelect.selectedIndex + giMinYear
+  fnSetDate(giDay, giMonth, iYear)
+}
+//----------------------------------------------------------------------
+
+function fnFillInCells()
+{
+  var iDayCell = 0
+  var iLastMonthIndex, iNextMonthIndex
+  var iLastMonthTotalDays
+  var iStartDay
+
+  fnCheckLeapYear(giYear)
+
+  iLastMonthDays = gaMonthDays[ ((giMonth - 1 == 0) ? 12 : giMonth - 1) - 1]
+  iNextMonthDays = gaMonthDays[ ((giMonth + 1 == 13) ? 1 : giMonth + 1) - 1]
+
+  iLastMonthYear = (giMonth == 1)  ? giYear - 1 : giYear
+  iLastMonth     = (giMonth == 1)  ? 12         : giMonth - 1 
+  iNextMonthYear = (giMonth == 12) ? giYear + 1 : giYear
+  iNextMonth     = (giMonth == 12) ? 1          : giMonth + 1 
+
+  var oDate = new Date(giYear, (giMonth - 1), 1)
+
+  iStartDay = oDate.getDay() - giFirstDay
+  if (iStartDay < 1) iStartDay += 7
+  iStartDay = iLastMonthDays - iStartDay + 1
+
+  for (i = iStartDay ; i <= iLastMonthDays  ; i++ , iDayCell++)
+  {
+     gaDayCell[iDayCell].innerText = i
+
+     if (gaDayCell[iDayCell].className != 'OffDay_' )
+     gaDayCell[iDayCell].className = 'OffDay_' 
+
+     gaDayCell[iDayCell].day = i
+     gaDayCell[iDayCell].month = iLastMonth
+     gaDayCell[iDayCell].year = iLastMonthYear
+  }
+
+  giStartDayIndex = iDayCell
+
+  for (i = 1 ; i <= gaMonthDays[giMonth - 1] ; i++, iDayCell++)
+  {
+     gaDayCell[iDayCell].innerText = i
+
+     if (giDay == i)
+     {
+       goCurrentDayCell = gaDayCell[iDayCell]
+       gaDayCell[iDayCell].className = 'DaySelected_' 
+     } 
+     else 
+     {
+       if (gaDayCell[iDayCell].className != 'Day_' )
+         gaDayCell[iDayCell].className = 'Day_' 
+     }
+
+     gaDayCell[iDayCell].day = i
+     gaDayCell[iDayCell].month = giMonth
+     gaDayCell[iDayCell].year = giYear
+  }
+
+  for (i = 1 ; iDayCell < 42 ; i++, iDayCell++)
+  {
+     gaDayCell[iDayCell].innerText = i
+     if (gaDayCell[iDayCell].className != 'OffDay_' )
+       gaDayCell[iDayCell].className = 'OffDay_' 
+
+     gaDayCell[iDayCell].day = i
+     gaDayCell[iDayCell].month = iNextMonth
+     gaDayCell[iDayCell].year = iNextMonthYear
+  }
+}
+// **********************************************************************
+//                            EVENT HANDLERS
+// **********************************************************************
+
+
+function fnOnClick()
+{
+  var e = window.event.srcElement
+
+  if (e.tagName == "TD") 
+  {
+    if (!e.day) return  
+    if ((e.year < giMinYear) || (e.year > giMaxYear)) return
+    fnSetDate(e.day, e.month, e.year)
+  }
+  
+}
+
+
+
+</script>
+
+</BODY>
+

@@ -1,0 +1,502 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Draft//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List href="UtilLib_files/filelist.xml">
+<title>WMI SDK Sample - utillib</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Michael Maston</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Zina Pozen</o:LastAuthor>
+  <o:Revision>10</o:Revision>
+  <o:TotalTime>423</o:TotalTime>
+  <o:Created>1999-01-26T02:11:00Z</o:Created>
+  <o:LastSaved>2002-05-03T21:18:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>314</o:Words>
+  <o:Characters>1790</o:Characters>
+  <o:Company>Microsoft</o:Company>
+  <o:Lines>14</o:Lines>
+  <o:Paragraphs>4</o:Paragraphs>
+  <o:CharactersWithSpaces>2100</o:CharactersWithSpaces>
+  <o:Version>10.3501</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-alt:"?? ??";
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+@font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:black;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+<meta name=MS-HAID content=VJsamples>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="2050"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width="100%"
+ style='width:100.0%;mso-cellspacing:1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-lastrow:yes'>
+  <td width=160 style='width:120.0pt;background:#330099;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:white'>&nbsp;<nobr><b>Windows Management Instrumentation SDK Sample</b></span><span
+  style='font-family:Verdana'> <o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><br>
+</span><strong><span style='font-size:13.5pt;font-family:Verdana;mso-bidi-font-family:
+"Courier New"'>Utillib</span></strong><span style='font-family:Verdana'><br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>The Utillib sample
+library is a collection of useful routines used by some of the samples
+applications and that can be used in general for building WMI applications.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Building the Utillib Library<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>The UtilLib sample can
+be built from the command line using NMAKE, or it can be built using Microsoft
+Visual C++.<span yes>&nbsp;&nbsp; </span><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>From the command line
+in the sample installation directory, type the following:<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.5in'><b><span style='font-family:
+Verdana'>NMAKE /f &quot;Makefile&quot;<o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>From Microsoft Visual
+C++: <o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.5in' list .5in l3 level1 lfo2><span
+style='font-family:Verdana'>1.<span Times New Roman></span><span
+style='font-size:7.0pt;font-family:Verdana'></span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+style='font-family:Verdana'>Select File + Open Workspace<o:p></o:p></span></p>
+
+<p class=MsoPlainText style='margin-left:.5in' list .5in l3 level1 lfo2><span
+style='font-family:Verdana'>2.<span Times New Roman></span><span
+style='font-size:7.0pt;font-family:Verdana'></span>&nbsp;&nbsp;&nbsp; </span><span
+style='font-family:Verdana'>Select the UtilLib.DSP file<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>General Functions Available in the Library</span><span
+style='font-family:Verdana'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>Function Name<o:p></o:p></span></b></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border:solid windowtext 2.25pt;
+  border-left:none;mso-border-left-alt:solid windowtext 2.25pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>Purpose<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 2.25pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>WbemErrorString<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 2.25pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Translates SCODE into an error
+  text string<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>PrintError<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Translates SCODE into an error
+  text string, formats and prints the error message<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>PrintErrorAndExit<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Translates SCODE into an error
+  text string, formats and prints the error message.<span
+  style='mso-spacerun:yes'>  </span>After printing message, exits the program.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>PrintErrorAndAsk<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Translates SCODE into an error
+  text string, formats and prints the error message.<span
+  style='mso-spacerun:yes'>  </span>After printing message, prompts user if
+  they wish to continue.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>TypeToString<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Takes a variant, returns a
+  pointer to a string that is the variant type<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>TypeToString<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Takes a VARTYPE, returns a
+  pointer to a string that is the variant type<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>TypeToString<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Takes a CIMTYPE, returns a
+  pointer to a string that is the variant type<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>ValueToString<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Takes a variant, returns a
+  string representation of that variant<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>cvt<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Converts Unicode to OEM for
+  console output<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>myWFPrintf<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Checks to see if outputting to
+  console and converts string to OEM if necessary.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>difftime<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Returns the elapsed time
+  between two _timeb structures<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes'>
+  <td width=131 valign=top style='width:98.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>bIsNT<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Boolean function that
+  determines whether this is an NT operating system.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;mso-bidi-font-size:10.0pt;
+font-family:Verdana'>Security Functions Available in the Library</span><span
+style='font-family:Verdana'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=162 valign=top style='width:121.8pt;border:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>Function Name<o:p></o:p></span></b></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border:solid windowtext 2.25pt;
+  border-left:none;mso-border-left-alt:solid windowtext 2.25pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Verdana'>Purpose<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=162 valign=top style='width:121.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext 2.25pt;mso-border-alt:
+  solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>InitializeSecurity<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext 2.25pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext 2.25pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Initialize DCOM security.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=162 valign=top style='width:121.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>ParseAuthorityUserArgs<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Examines the Authority and
+  User argument and determines the authentication type.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=162 valign=top style='width:121.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>GetAuthImp<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Gets the authentication and
+  impersonation levels for a current interface.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td width=162 valign=top style='width:121.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>SetInterfaceSecurity<o:p></o:p></span></p>
+  </td>
+  <td width=348 valign=top style='width:261.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='tab-stops:list .5in'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Verdana'>Set the identity to be used by
+  a connection.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:list .5in'><span style='font-family:Verdana'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

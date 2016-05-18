@@ -1,0 +1,498 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\VCExplore.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_LOGO                ICON    DISCARDABLE     "res\\COMAdmin.ico"
+IDI_APP_ICON            ICON    DISCARDABLE     "res\\AppIcon.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 176, 84
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About VCExplore"
+FONT 9, "Verdana"
+BEGIN
+    ICON            IDI_LOGO,IDC_APPLICATION_ICON,11,11,20,20,SS_NOTIFY
+    LTEXT           "Explore",IDC_APPLICATION_TITLE,40,11,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 1987 - 1999 Microsoft Corporation",
+                    IDC_APPLICATION_COPYRIGHT,40,41,119,8
+    DEFPUSHBUTTON   "OK",IDOK,62,63,50,14,WS_GROUP
+    LTEXT           "Version 1.0",IDC_APPLICATION_VERSION,40,26,119,8
+END
+
+IDD_VCEXPLORE DIALOGEX 0, 0, 354, 256
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "COM+ Admin SDK Sample (VC)"
+FONT 9, "Verdana"
+BEGIN
+    GROUPBOX        "Catalog Information",IDC_FRAME_CATALOG_INFO,7,21,130,70
+    LTEXT           "Computer Name:",IDC_LABEL_COMPUTER_NAME_DESC,11,34,122,
+                    11
+    CTEXT           "",IDC_LABEL_COMPUTER_NAME_VALUE,11,47,122,12,SS_SUNKEN | 
+                    WS_BORDER
+    LTEXT           "Collection Name:",IDC_LABEL_COLLECTION_NAME_DESC,11,62,
+                    122,11
+    CTEXT           "",IDC_LABEL_COLLECTION_NAME_VALUE,11,73,122,12,
+                    SS_SUNKEN | WS_BORDER
+    GROUPBOX        "Related Collections",IDC_FRAME_RELATED_COLLECTIONS,7,95,
+                    131,81
+    LISTBOX         IDC_LIST_RELATED_COLLECTIONS,10,107,124,64,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Previous Collections",IDC_FRAME_PREVIOUS_COLLECTIONS,7,
+                    179,131,70
+    LISTBOX         IDC_LIST_PARENT_COLLECTIONS,10,190,124,54,
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Objects && Property Information",
+                    IDC_FRAME_OBJECTS_AND_PROP_INFO,140,21,207,228
+    LTEXT           "Objects:",IDC_LABEL_OBJECTS_DESC,144,34,39,11
+    LTEXT           "Properties:",IDC_LABEL_PROPERTIES_DESC2,246,34,39,11
+    LISTBOX         IDC_LIST_OBJECTS,144,47,97,168,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_PROPERTIES,246,47,97,168,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Property Value:",IDC_LABEL_PROPERTY_VALUE_DESC,144,219,
+                    95,11
+    EDITTEXT        IDC_EDIT_PROPERTY_VALUE,144,231,137,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set",IDC_BUTTON_SET_PROPERTY,284,230,59,14
+END
+
+IDD_EXPORT_APPLICATION DIALOG DISCARDABLE  0, 0, 178, 169
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Export Application"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,148,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,101,148,50,14
+    GROUPBOX        "Export Client Only",IDC_FRAME_EXPORT_CLIENT_ONLY,7,7,
+                    164,75
+    CONTROL         "Do Not Export Users",IDC_RADIO_DO_NOT_EXPORT_USERS,
+                    "Button",BS_AUTORADIOBUTTON,13,17,131,12
+    CONTROL         "Export Users",IDC_RADIO_EXPORT_USERS,"Button",
+                    BS_AUTORADIOBUTTON,13,32,142,12
+    CONTROL         "Export Clients",IDC_RADIO_EXPORT_CLIENTS,"Button",
+                    BS_AUTORADIOBUTTON,13,47,146,12
+    CONTROL         "Overwrite Files",IDC_CHECK_OVERWRITE_FILES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,66,143,12
+    LTEXT           "Application ID:",IDC_LABEL_APPLICATION_ID,7,84,152,8
+    EDITTEXT        IDC_EDIT_APPLICATION_ID,7,97,145,12,ES_AUTOHSCROLL
+    LTEXT           "Export File Path and Name:",IDC_LABEL_EXPORT_PATH,7,115,
+                    144,8
+    EDITTEXT        IDC_EDIT_EXPORT_PATH,7,128,145,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_EXPORT_PATH_SEARCH,156,128,15,12
+END
+
+IDD_INSTALL_APPLICATION DIALOG DISCARDABLE  0, 0, 178, 264
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Install Application"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,26,243,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,98,243,50,14
+    GROUPBOX        "Install Options",IDC_FRAME_INSTALL_OPTIONS,7,7,164,166
+    CONTROL         "Install without Users",IDC_RADIO_INSTALL_WITHOUT_USERS,
+                    "Button",BS_AUTORADIOBUTTON,10,17,152,17
+    CONTROL         "Install with Users",IDC_RADIO_INSTALL_WITH_USERS,"Button",
+                    BS_AUTORADIOBUTTON,10,32,152,17
+    CONTROL         "Overwrite Existing Files",IDC_CHECK_OVERWRITE_FILES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,154,152,17
+    LTEXT           "Application File:",IDC_LABEL_APPLICATION_FILE,7,177,152,
+                    8
+    EDITTEXT        IDC_EDIT_APPLICATION_FILE,7,190,145,12,ES_AUTOHSCROLL
+    LTEXT           "Install Directory:",IDC_LABEL_INSTALL_DIRECTORY,7,208,
+                    144,8
+    EDITTEXT        IDC_EDIT_INSTALL_DIRECTORY,7,221,145,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_INSTALL_DIRECTORY_SEARCH,156,221,15,12
+    PUSHBUTTON      "...",IDC_BUTTON_APPLICATION_FILE_SEARCH,156,190,15,12
+    CONTROL         "Remote Server Install",IDC_CHECK_REMOTE_SERVER_INSTALL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,54,152,17
+    LTEXT           "Remote Server Name:",IDC_LABEL_REMOTE_SERVER_NAME,20,71,
+                    117,8
+    EDITTEXT        IDC_EDIT_REMOTE_SERVER_NAME,19,82,145,12,ES_AUTOHSCROLL
+    LTEXT           "User ID:",IDC_LABEL_UID,19,97,117,8
+    EDITTEXT        IDC_EDIT_UID,18,108,145,12,ES_AUTOHSCROLL
+    LTEXT           "Password:",IDC_LABEL_PWD,19,123,117,8
+    EDITTEXT        IDC_EDIT_PWD,18,134,145,12,ES_PASSWORD | ES_AUTOHSCROLL
+END
+
+IDD_APP_UTILITY DIALOG DISCARDABLE  0, 0, 181, 68
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Start/Stop App"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,21,47,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,103,47,50,14
+    LTEXT           "Application ID:",IDC_LABEL_APPLICATION_ID,10,13,140,10
+    EDITTEXT        IDC_EDIT_APPLICATION_ID_VALUE,10,28,145,12,
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_APPLICATON_ID_SEARCH,159,28,15,12
+END
+
+IDD_INSTALL_COMPONENT DIALOG DISCARDABLE  0, 0, 178, 150
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Install Component"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,23,129,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,103,129,50,14
+    LTEXT           "Application:",IDC_LABEL_APPLICATION,7,8,165,11
+    COMBOBOX        IDC_COMBO_APPLICATION,9,22,162,57,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Component:",IDC_LABEL_COMPONENT,9,39,152,8
+    EDITTEXT        IDC_EDIT_COMPONENT,9,51,145,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_COMPONENT_SEARCH,157,51,15,12
+    LTEXT           "Type Library (optional):",IDC_LABEL_TYPE_LIBRARY,9,67,
+                    152,8
+    EDITTEXT        IDC_EDIT_TYPE_LIBRARY,9,79,145,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_TYPE_LIBRARY,157,79,15,12
+    LTEXT           "Proxy/Stub DLL (optional):",IDC_LABEL_PROXY_STUB_DLL,9,
+                    95,152,8
+    EDITTEXT        IDC_EDIT_PROXY_STUB_DLL,9,107,145,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_PROXY_STUB_DLL,157,107,15,12
+END
+
+IDD_IMPORT_COMPONENT DIALOG DISCARDABLE  0, 0, 159, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Import Component"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,22,123,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,88,123,50,14
+    GROUPBOX        "Import By",IDC_FRAME_IMPORT_BY,7,7,146,51
+    CONTROL         "ProgID",IDC_RADIO_PROG_ID,"Button",BS_AUTORADIOBUTTON,
+                    11,18,121,14
+    CONTROL         "CLSID",IDC_RADIO_CLSID,"Button",BS_AUTORADIOBUTTON,11,
+                    35,121,14
+    LTEXT           "Application:",IDC_LABEL_APPLICATION,7,61,146,11
+    COMBOBOX        IDC_COMBO_APPLICATION,7,75,146,62,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Component:",IDC_LABEL_COMPONENT,7,92,142,8
+    EDITTEXT        IDC_EDIT_COMPONENT,7,104,146,12,ES_AUTOHSCROLL
+END
+
+IDD_CONNECT DIALOG DISCARDABLE  0, 0, 165, 92
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Connect"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,17,71,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,98,71,50,14
+    GROUPBOX        "Computer",IDC_STATIC,7,3,151,63,WS_GROUP
+    CONTROL         "This computer",IDC_RADIO_THIS_COMPUTER,"Button",
+                    BS_AUTORADIOBUTTON,10,14,121,14
+    CONTROL         "A remote computer:",IDC_RADIO_REMOTE_COMPUTER,"Button",
+                    BS_AUTORADIOBUTTON,10,33,121,14
+    EDITTEXT        IDC_EDIT_REMOTE_COMPUTER_NAME,20,47,134,13,
+                    ES_AUTOHSCROLL
+END
+
+IDD_UTILITIES DIALOG DISCARDABLE  0, 0, 160, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "COM+ Admin Utilities"
+FONT 9, "Verdana"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,19,74,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,82,74,50,14
+    GROUPBOX        "Router Options",IDC_FRAME_UTILITY_OPTIONS,7,7,146,62
+    CONTROL         "Start",IDC_RADIO_START,"Button",BS_AUTORADIOBUTTON,11,
+                    18,121,14
+    CONTROL         "Stop",IDC_RADIO_STOP,"Button",BS_AUTORADIOBUTTON,11,33,
+                    121,14
+    CONTROL         "Refresh",IDC_RADIO_REFRESH,"Button",BS_AUTORADIOBUTTON,
+                    11,48,121,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "VCExplore MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "VCExplore\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "VCExplore.EXE\0"
+            VALUE "ProductName", "VCExplore Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 169
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 77
+    END
+
+    IDD_VCEXPLORE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 347
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 249
+    END
+
+    IDD_EXPORT_APPLICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 171
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 162
+    END
+
+    IDD_INSTALL_APPLICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 171
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 257
+    END
+
+    IDD_APP_UTILITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 61
+    END
+
+    IDD_INSTALL_COMPONENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 172
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_IMPORT_COMPONENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 153
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 137
+    END
+
+    IDD_CONNECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 158
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 85
+    END
+
+    IDD_UTILITIES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 153
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR_MAIN TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_TBTN_CONNECT
+    SEPARATOR
+    BUTTON      ID_TBTN_REFRESH
+    SEPARATOR
+    BUTTON      ID_TBTN_NEW
+    BUTTON      ID_TBTN_SAVE
+    BUTTON      ID_TBTN_DELETE
+    SEPARATOR
+    BUTTON      ID_TBTN_START_APP
+    BUTTON      ID_TBTN_STOP_APP
+    BUTTON      ID_TBTN_INSTALL_APP
+    BUTTON      ID_TBTN_EXPORT_APP
+    SEPARATOR
+    BUTTON      ID_TBTN_INSTALL_COMPONENT
+    BUTTON      ID_TBTN_IMPORT_COMPONENT
+    SEPARATOR
+    BUTTON      ID_TBTN_UTILITY
+    SEPARATOR
+    BUTTON      ID_TBTN_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR_MAIN        BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About VCExplore..."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TBTN_CONNECT         "Connect\nConnect"
+    ID_TBTN_REFRESH         "Refresh\nRefresh"
+    ID_TBTN_NEW             "New\nNew"
+    ID_TBTN_SAVE            "Save\nSave"
+    ID_TBTN_DELETE          "Delete\nDelete"
+    ID_TBTN_START_APP       "Start App\nStart App"
+    ID_TBTN_STOP_APP        "Stop App\nStop App"
+    ID_TBTN_INSTALL_APP     "Install App\nInstall App"
+    ID_TBTN_EXPORT_APP      "Export App\nExport App"
+    ID_TBTN_INSTALL_COMPONENT "Install Component\nInstall Component"
+    ID_TBTN_IMPORT_COMPONENT "Import Component\nImport Component"
+    ID_TBTN_UTILITY         "Utility\nUtility"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TBTN_ABOUT           "About\nAbout"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\VCExplore.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

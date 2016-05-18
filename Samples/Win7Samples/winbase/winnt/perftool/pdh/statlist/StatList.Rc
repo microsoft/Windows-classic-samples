@@ -1,0 +1,231 @@
+/*
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Microsoft Developer Studio generated resource script.
+*/
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "statlist.h"
+#include "winver.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+STATLIST                ICON    DISCARDABLE     "STATLIST.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+STATLIST MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New",                        IDM_NEW, GRAYED
+        MENUITEM "&Open...",                    IDM_OPEN, GRAYED
+        MENUITEM "&Save",                       IDM_SAVE, GRAYED
+        MENUITEM "Save &As...",                 IDM_SAVEAS, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Configure"
+    BEGIN
+        MENUITEM "&Add New Counter...",         IDM_ADD_COUNTERS
+        MENUITEM "&Clear All Counters",         IDM_CLEAR_ALL
+    END
+    MENUITEM "&Get Data!",                      IDM_GET_DATA
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Overview",                   IDM_HELPTOPICS
+        MENUITEM SEPARATOR
+        MENUITEM "&About Statlist...",          IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+STATLIST ACCELERATORS MOVEABLE PURE
+BEGIN
+    VK_F1,          IDM_HELPTOPICS,         VIRTKEY
+    VK_F5,          IDM_GET_DATA,           VIRTKEY
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ABOUTBOX DIALOG DISCARDABLE  22, 17, 167, 74
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,132,2,32,14,WS_GROUP
+    ICON            "StatList",IDC_STATIC,3,2,18,20
+    LTEXT           "CompanyName",IDC_COMPANY,30,2,100,8
+    LTEXT           "FileDescription",IDC_FILEDESC,30,10,71,8
+    RTEXT           "ProductVersion",IDC_PRODVER,106,10,17,8
+    LTEXT           "LegalCopyright",IDC_COPYRIGHT,30,18,137,8
+    LTEXT           "OSVERSION",IDC_OSVERSION,46,34,118,8
+    LTEXT           "LegalTrademarks",IDC_TRADEMARK,3,49,162,18
+    LTEXT           "Running on:",IDC_LABEL,4,34,40,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,2,31,164,1
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,2,44,164,1
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 4,0,0,0
+ PRODUCTVERSION 4,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "Written by: Robert B. Watson\0"
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "PDH Counter Statistics Demonstration Application\0"
+            VALUE "FileVersion", "0.0\0"
+            VALUE "InternalName", "Statlist\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corp.\0"
+            VALUE "LegalTrademarks", "Microsoft(R) is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "\0"
+            VALUE "ProductName", "Statlist\0"
+            VALUE "ProductVersion", "4.0\0"
+        END
+        BLOCK "041104e4"
+        BEGIN
+            VALUE "Comments", "Written by: Robert B. Watson\0"
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "PDH Counter Statistics Demonstration Application\0"
+            VALUE "FileVersion", "0.0\0"
+            VALUE "InternalName", "\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corp.\0"
+            VALUE "LegalTrademarks", "Microsoft(R) is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "\0"
+            VALUE "ProductName", "Statlist\0"
+            VALUE "ProductVersion", "4.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252, 0x411, 1252
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""statlist.h""\r\n"
+    "#include ""winver.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_APP_TITLE           "Perf Counter Statistics Demo"
+    IDS_DISPLAYCHANGED      "Display Changed"
+    IDS_VER_INFO_LANG       "\\StringFileInfo\\040904E4\\"
+    IDS_VERSION_ERROR       "Error %lu"
+    IDS_NO_HELP             "Unable to activate help"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
+

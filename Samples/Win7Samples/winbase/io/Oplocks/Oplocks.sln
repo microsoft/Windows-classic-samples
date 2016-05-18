@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "W7OplocksVS", "Oplocks\Oplocks.vcproj", "{8515430C-3032-4D3D-BC72-71BEA830E32B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8515430C-3032-4D3D-BC72-71BEA830E32B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8515430C-3032-4D3D-BC72-71BEA830E32B}.Debug|Win32.Build.0 = Debug|Win32
+		{8515430C-3032-4D3D-BC72-71BEA830E32B}.Release|Win32.ActiveCfg = Release|Win32
+		{8515430C-3032-4D3D-BC72-71BEA830E32B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

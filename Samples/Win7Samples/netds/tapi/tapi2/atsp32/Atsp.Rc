@@ -1,0 +1,29 @@
+#include "windows.h"
+#include "resource.h"
+
+IDD_DIALOG1 DIALOG 6, 18, 176, 128
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "ATSP Configuration"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Installed lines:", 101, 4, 6, 54, 8
+    LISTBOX         IDC_DEVICES, 4, 16, 120, 30, WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Line properties", 103, 4,  46,  120, 76
+
+    LTEXT           "Name:", 113,           7,  64,  26,  8
+    EDITTEXT        IDC_NAME,               38, 62,  80,  12, ES_AUTOHSCROLL
+
+    LTEXT           "Port:", 104,           7,  81,  19,  8
+    LISTBOX         IDC_PORT,               38, 80,  44,  26, WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "Extra", 105,           7,  101, 25,  8
+    LTEXT           "settings:", 114,       7,  109, 30,  8
+    EDITTEXT        IDC_COMMANDS,           38, 104, 80,  12, ES_AUTOHSCROLL
+
+    PUSHBUTTON      "Add", IDC_ADD, 130, 16, 40, 14
+    PUSHBUTTON      "Remove", IDC_REMOVE, 130, 35, 40, 14
+    PUSHBUTTON      "OK", IDOK, 130, 55, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 130, 74, 40, 14
+END

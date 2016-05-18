@@ -1,0 +1,88 @@
+11:15 AM 5/3/99<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 3.0//EN" "html.dtd">
+<HTML>
+<!--
+    <%CiTemplate%>
+-->
+
+<HEAD>
+	<LINK REL=STYLESHEET HREF="is2admin.css" TYPE="text/css">
+	<TITLE>Indexing Service Administration</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#000066" VLINK="#808080" ALINK="#FF0000" TOPMARGIN=0>
+
+<TABLE>
+    <TR><TD><A HREF="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT border=0></a></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Administration - Index Statistics</H3></TD></TR>
+</TABLE>
+<p>
+<table width=500>
+	<colgroup width=160>
+	<colgroup width=80>
+	<colgroup width=10>
+	<colgroup width=230>
+	<colgroup width=40>
+	<tr><th align="left" colspan=5 class="RecordTitle">Cache Statistics</th></tr>
+	<tr><td># Active queries:</td><td align="right"><%CiAdminCacheActive%></td><td></td><td>% Hits:</td><td align="right"><%CiAdminCacheHits%></td></tr>
+	<tr><td># Cached queries:</td><td align="right"><%CiAdminCacheCount%></td><td></td><td>% Misses:</td><td align="right"><%CiAdminCacheMisses%></td></tr>
+	<tr><td># Pending queries:</td><td align="right"><%CiAdminCachePending%></td><td></td><td>Total queries:</td><td align="right"><%CiAdminCacheTotal%></td></tr>
+	<tr><td># Rejected queries:</td><td align="right"><%CiAdminCacheRejected%></td><td></td><td>Queries / minute:</td><td align="right"><%CiAdminCacheRate%></td></tr>
+</table>
+
+<table width=500>
+	<colgroup width=160>
+	<colgroup width=80>
+	<colgroup width=10>
+	<colgroup width=230>
+	<colgroup width=40>
+	<tr><th align="left" colspan=5 class="RecordTitle">Index Statistics</th></tr>
+	<tr><td>Total documents:</td>      <td align="right"><%CiAdminIndexCountTotal%></td><td></td><td># Documents filtered:</td> <td align="right"><%CiAdminIndexCountFiltered%></td></tr>
+    <tr><td>Total size (MB):</td>      <td align="right"><%CiAdminIndexSize%></td><td></td><td># Documents pending:</td>  <td align="right"><%CiAdminIndexCountToFilter%></td></tr>
+    <tr><td># Persistent Indexes:</td> <td align="right"><%CiAdminIndexCountPersIndex%></td><td></td><td># Documents changed:</td><td align="right"><%CiAdminIndexCountDeltas%></td></tr>
+    <tr><td># Wordlists:</td>          <td align="right"><%CiAdminIndexCountWordlists%></td><td></td><td># Directories to be scanned:</td><td align="right"><%CiAdminIndexCountPendingScans%></td></tr>
+    <tr><td># Unique keys:</td>        <td align="right"><%CiAdminIndexCountUnique%></td><td></td><td># Queries executed:</td><td align="right"><%CiAdminIndexCountQueries%></td></tr>
+</table>
+<br>
+<table width=500>
+	<tr>
+		<td class=RecordStats align=center valign=middle bgcolor=pink>
+			<%if CiAdminIndexCountToFilter eq 0%>
+			<p>All filtering is complete. Index is up to date.
+			<%else%>
+			<p>Filtering in-progress. Index is not up to date.
+			<%endif%>
+
+			<%if CiAdminIndexStateMasterMerge ne 0%>
+			<p><b>Master merge in progress.</b>  <%CiAdminIndexMergeProgress%>% complete.
+			<%endif%>
+
+			<%if CiAdminIndexStateShadowMerge ne 0%>
+			<p><b>Shadow merge in progress.</b>  <%CiAdminIndexMergeProgress%>% complete.
+			<%endif%>
+
+			<%if CiAdminIndexStateAnnealingMerge ne 0%>
+			<p><b>Annealing merge in progress.</b>	<%CiAdminIndexMergeProgress%>% complete.
+			<%endif%>
+
+			<%if CiAdminIndexStateScanning ne 0%>
+			<p><b>Directory scan in progress.</b>
+			<%endif%>
+
+			<%if CiAdminIndexStateRecovering ne 0%>
+			<p><b><font color=red>Index recovery in progress!</font></b>
+			<%endif%>
+
+			<%if CiAdminIndexStateScanRequired ne 0%>
+			<p><blink><b><font color=red>Re-scan Required!!!</font></b></blink>
+			<%endif%>
+		</td>
+		<td align=center>
+			<FORM ACTION="/iisadmin/isadmin/state.ida" METHOD="GET">
+				<INPUT TYPE="SUBMIT" VALUE="Refresh">
+			</FORM>
+		</td>
+	</tr>
+</table>
+
+</BODY>
+</HTML>

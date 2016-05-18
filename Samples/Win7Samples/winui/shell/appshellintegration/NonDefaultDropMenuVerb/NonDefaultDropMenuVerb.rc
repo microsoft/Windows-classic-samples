@@ -1,0 +1,22 @@
+#include "priv.h"
+
+STRINGTABLE 
+BEGIN
+    IDS_CHECKDROP           "Check H&DROP"
+    IDS_CHECKNETRESOURCES   "Check H&NRES"
+    IDS_MESSAGEBOXTITLE     "NonDefaultDropMenuVerb"
+    IDS_ERRORMESSAGEFS      "No file system object in the selection"
+    IDS_ERRORMESSAGENET     "No network objects in the selection"
+    IDS_MESSAGETEMPLATEFS   "The drop target is %s.\n\
+                            %d files/directories in HDROP\n\
+                            The path to the first object is\n\
+                            \t%s."
+    IDS_MESSAGETEMPLATENET  "%d network resource objects in HNRES\n\
+                            The attributes of the first object are\n\
+                            \tProvider      = %s\n\
+                            \tRemoteName    = %s\n\
+                            \tdwDisplayType = %x\n\
+                            \tdwType        = %x\n\
+                            \tdwUsage       = %x\n"
+    IDS_ERRORMESSAGENA      "N/A"
+END

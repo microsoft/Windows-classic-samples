@@ -1,0 +1,4 @@
+interface AsyncRPC
+{
+[async] AsyncFunc();
+}

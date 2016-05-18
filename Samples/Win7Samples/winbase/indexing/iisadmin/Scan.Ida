@@ -1,0 +1,6 @@
+[Admin]
+#CiCatalog=d:\
+CiTemplate=/iisadmin/isadmin/admin.htm
+CiAdminOperation=ScanRoots
+
+

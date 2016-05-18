@@ -1,0 +1,129 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+
+#define VER_FILEVERSION 2,00,3002,07
+#define VER_FILEVERSION_STR "2.00.3002.07\0"
+#define VER_PRODUCTVERSION 2,00,3002,07
+#define VER_PRODUCTVERSION_STR "2.00.3002.07\0"
+
+#define VER_FILEFLAGSMASK		(VS_FF_DEBUG | VS_FF_PRERELEASE)
+#ifdef DEBUG
+#define VER_FILEFLAGS			(VS_FF_DEBUG)
+#else
+#define VER_FILEFLAGS			(0)
+#endif
+
+#define VER_FILEOS				VOS_NT_WINDOWS32
+
+#define VER_COMPANYNAME_STR		"Microsoft Corporation\0"
+#define VER_PRODUCTNAME_STR		"Microsoft OLE DB\0"
+#define VER_LEGALCOPYRIGHT_STR	"Copyright \251 Microsoft Corporation 1994-1999\0"
+
+
+// Resource DLL Version Resource ID
+#define IDS_RESDLL_VER			1
+
+#define VER_FILENAME_STR		"PRSAMPLE.EXE\0"
+#define VER_NAME_STR			"PRSAMPLE\0"
+#define LANGUAGE_ANSI	"040904E4"	// String of 0x0409 and 1252
+#define LANGUAGE_TRANS	0x0409, 1252  // 0x0409 and 1252
+//	Localize: legal trademarks
+#define VER_LEGALTRADEMARKS_STR "Windows(TM) is a trademark of Microsoft Corporation.  Microsoft\256 is a registered trademark of Microsoft Corporation.\0"
+// Localize: file description
+#define VER_FILEDESC_STR	"OLE DB Programmer's Reference Sample\0"
+
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VER_FILEFLAGSMASK
+FILEFLAGS       VER_FILEFLAGS
+FILEOS          VER_FILEOS
+FILETYPE        VFT_DLL
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK LANGUAGE_ANSI
+	BEGIN
+	  VALUE "CompanyName",		VER_COMPANYNAME_STR
+	  VALUE "FileDescription",	VER_FILEDESC_STR
+	  VALUE "FileVersion",		VER_FILEVERSION_STR
+	  VALUE "InternalName",		VER_NAME_STR
+	  VALUE "LegalCopyright",	VER_LEGALCOPYRIGHT_STR
+	  VALUE "LegalTrademarks",	VER_LEGALTRADEMARKS_STR
+	  VALUE "OriginalFilename",	VER_FILENAME_STR
+	  VALUE "ProductName",		VER_PRODUCTNAME_STR
+	  VALUE "ProductVersion",	VER_PRODUCTVERSION_STR
+	END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation",		LANGUAGE_TRANS
+  END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,39 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>COM+ SDK: Simple DCOM Sample</title>
+<link rel="stylesheet" type="text/css" href="../../../docs/Styles.css">
+</head>
+
+<body>
+
+<h2>Simple DCOM Sample</h2>
+<hr>
+<p>DCOM is implemented only on Windows NT 4.0 and later versions. This sample
+will not work correctly on Windows 95 or on earlier versions of Windows NT.</p>
+<p>The SIMPLE sample demonstrates the minimum requirements to use a COM object,
+whether it is on the same machine or on a different machine. This sample
+consists of a client and a server portion.</p>
+<p>The server application, SSERVER.EXE, implements the CLSID_SimpleObject class
+as a LocalServer. Instances of the class supports a limited form of the IStream
+interface. Calls to Read and Write succeed, but they do nothing. Calls to other
+methods fail with E_NOTIMPL.</p>
+<p>The client application, SCLIENT.EXE, uses the CLSID_SimpleObject class
+implemented by the server.</p>
+<p>To compile ----------</p>
+<p>Build the sample using the NMAKE command.</p>
+<p>To run ------</p>
+<p>The run the sample, use the following steps.</p>
+<p>Merge the file sserver.reg from the target directory into the registry. - Run
+SSERVER. It should display the message &quot;Waiting...&quot;. - Run SCLIENT.
+Use no command-line arguments to instantiate the object on the current machine.
+Use the name of a remote machine (UNC or DNS) as an argument to instantiate the
+object on the remote machine. SCLIENT displays simple information about the
+calls it is making on the object.</p>
+
+</body>
+
+</html>

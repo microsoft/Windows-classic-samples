@@ -1,0 +1,22 @@
+HKCR
+{
+	COM.SpyContainer.1 = s 'SpyCon Class'
+	{
+		CLSID = s '{27EF6FD2-AF60-11D0-B188-00AA00BA3258}'
+	}
+	COM.SpyContainer = s 'SpyCon Class'
+	{
+		CurVer = s 'COM.SpyContainer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {27EF6FD2-AF60-11D0-B188-00AA00BA3258} = s 'SpyCon Class'
+		{
+			ProgID = s 'COM.SpyContainer.1'
+			VersionIndependentProgID = s 'COM.SpyContainer'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{CBFE2578-B030-11D0-B188-00AA00BA3258}'
+		}
+	}
+}

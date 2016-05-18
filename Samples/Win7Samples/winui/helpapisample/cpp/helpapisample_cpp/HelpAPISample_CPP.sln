@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelpAPISample_CPP", "HelpAPISample_CPP\HelpAPISample_CPP.vcproj", "{5DB91808-4FD2-45AA-BE62-4EBF419E8B6F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DB91808-4FD2-45AA-BE62-4EBF419E8B6F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5DB91808-4FD2-45AA-BE62-4EBF419E8B6F}.Debug|Win32.Build.0 = Debug|Win32
+		{5DB91808-4FD2-45AA-BE62-4EBF419E8B6F}.Release|Win32.ActiveCfg = Release|Win32
+		{5DB91808-4FD2-45AA-BE62-4EBF419E8B6F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+//
+// case.rc
+//
+// Resources.
+//
+
+#include "resource.h"
+
+
+IDI_CASE ICON case.ico

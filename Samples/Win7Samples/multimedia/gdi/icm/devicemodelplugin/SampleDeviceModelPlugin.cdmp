@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+Microsoft Corporation Technical Documentation License Agreement (Standard)
+
+READ THIS! THIS IS A LEGAL AGREEMENT BETWEEN MICROSOFT CORPORATION 
+("MICROSOFT") AND THE RECIPIENT OF THESE MATERIALS, WHETHER AN INDIVIDUAL OR AN 
+ENTITY ("YOU"). IF YOU HAVE ACCESSED THIS AGREEMENT IN THE PROCESS OF 
+DOWNLOADING MATERIALS ("MATERIALS") FROM A MICROSOFT WEB SITE, BY CLICKING "I 
+ACCEPT", DOWNLOADING, USING OR PROVIDING FEEDBACK ON THE MATERIALS, YOU AGREE 
+TO THESE TERMS. IF THIS AGREEMENT IS ATTACHED TO MATERIALS, BY ACCESSING, USING 
+OR PROVIDING FEEDBACK ON THE ATTACHED MATERIALS, YOU AGREE TO THESE TERMS.
+
+1. For good and valuable consideration, the receipt and sufficiency of which 
+are acknowledged, You and Microsoft agree as follows:
+
+(a) If You are an authorized representative of the corporation or other entity 
+designated below ("Company"), and such Company has executed a Microsoft 
+Corporation Non-Disclosure Agreement that is not limited to a specific subject 
+matter or event ("Microsoft NDA"), You represent that You have authority to act 
+on behalf of Company and agree that the Confidential Information, as defined in 
+the Microsoft NDA, is subject to the terms and conditions of the Microsoft NDA 
+and that Company will treat the Confidential Information accordingly; 
+
+(b) If You are an individual, and have executed a Microsoft NDA, You agree that 
+the Confidential Information, as defined in the Microsoft NDA, is subject to 
+the terms and conditions of the Microsoft NDA and that You will treat the 
+Confidential Information accordingly; or
+
+(c)If a Microsoft NDA has not been executed, You (if You are an individual), or 
+Company (if You are an authorized representative of Company), as applicable, 
+agrees: (a) to refrain from disclosing or distributing the Confidential 
+Information to any third party for five (5) years from the date of disclosure 
+of the Confidential Information by Microsoft to Company/You; (b) to refrain 
+from reproducing or summarizing the Confidential Information; and (c) to take 
+reasonable security precautions, at least as great as the precautions it takes 
+to protect its own confidential information, but no less than reasonable care, 
+to keep confidential the Confidential Information. You/Company, however, may 
+disclose Confidential Information in accordance with a judicial or other 
+governmental order, provided You/Company either (i) gives Microsoft reasonable 
+notice prior to such disclosure and to allow Microsoft a reasonable opportunity 
+to seek a protective order or equivalent, or (ii) obtains written assurance 
+from the applicable judicial or governmental entity that it will afford the 
+Confidential Information the highest level of protection afforded under 
+applicable law or regulation. Confidential Information shall not include any 
+information, however designated, that: (i) is or subsequently becomes publicly 
+available without Your/Company's breach of any obligation owed to Microsoft; 
+(ii) became known to You/Company prior to Microsoft's disclosure of such 
+information to You/Company pursuant to the terms of this Agreement; (iii) 
+became known to You/Company from a source other than Microsoft other than by 
+the breach of an obligation of confidentiality owed to Microsoft; or (iv) is 
+independently developed by You/Company. For purposes of this paragraph, 
+"Confidential Information" means nonpublic information that Microsoft 
+designates as being confidential or which, under the circumstances surrounding 
+disclosure ought to be treated as confidential by Recipient. "Confidential 
+Information" includes, without limitation, information in tangible or 
+intangible form relating to and/or including released or unreleased Microsoft 
+software or hardware products, the marketing or promotion of any Microsoft 
+product, Microsoft's business policies or practices, and information received 
+from others that Microsoft is obligated to treat as confidential.
+
+2. You may review these Materials only (a) as a reference to assist You in 
+planning and designing Your product, service or technology ("Product") to 
+interface with a Microsoft Product as described in these Materials; and (b) to 
+provide feedback on these Materials to Microsoft. All other rights are retained 
+by Microsoft; this agreement does not give You rights under any Microsoft 
+patents. You may not (i) duplicate any part of these Materials, (ii) remove 
+this agreement or any notices from these Materials, or (iii) give any part of 
+these Materials, or assign or otherwise provide Your rights under this 
+agreement, to anyone else. 
+
+3. These Materials may contain preliminary information or inaccuracies, and may 
+not correctly represent any associated Microsoft Product as commercially 
+released. All Materials are provided entirely "AS IS." To the extent permitted 
+by law, MICROSOFT MAKES NO WARRANTY OF ANY KIND, DISCLAIMS ALL EXPRESS, IMPLIED 
+AND STATUTORY WARRANTIES, AND ASSUMES NO LIABILITY TO YOU FOR ANY DAMAGES OF 
+ANY TYPE IN CONNECTION WITH THESE MATERIALS OR ANY INTELLECTUAL PROPERTY IN 
+THEM.
+
+4. If You are an entity and (a) merge into another entity or (b) a controlling 
+ownership interest in You changes, Your right to use these Materials 
+automatically terminates and You must destroy them. 
+
+5. You have no obligation to give Microsoft any suggestions, comments or other 
+feedback ("Feedback") relating to these Materials. However, any Feedback you 
+voluntarily provide may be used in Microsoft Products and related 
+specifications or other documentation (collectively, "Microsoft Offerings") 
+which in turn may be relied upon by other third parties to develop their own 
+Products. Accordingly, if You do give Microsoft Feedback on any version of 
+these Materials or the Microsoft Offerings to which they apply, You agree: (a) 
+Microsoft may freely use, reproduce, license, distribute, and otherwise 
+commercialize Your Feedback in any Microsoft Offering; (b) You also grant third 
+parties, without charge, only those patent rights necessary to enable other 
+Products to use or interface with any specific parts of a Microsoft Product 
+that incorporate Your Feedback; and (c) You will not give Microsoft any 
+Feedback (i) that You have reason to believe is subject to any patent, 
+copyright or other intellectual property claim or right of any third party; or 
+(ii) subject to license terms which seek to require any Microsoft Offering 
+incorporating or derived from such Feedback, or other Microsoft intellectual 
+property, to be licensed to or otherwise shared with any third party. 
+
+6. Microsoft has no obligation to maintain confidentiality of any Microsoft 
+Offering, but otherwise the confidentiality of Your Feedback, including Your 
+identity as the source of such Feedback, is governed by Your NDA. 
+
+7. This agreement is governed by the laws of the State of Washington. Any 
+dispute involving it must be brought in the federal or state superior courts 
+located in King County, Washington, and You waive any defenses allowing the 
+dispute to be litigated elsewhere. If there is litigation, the losing party 
+must pay the other party's reasonable attorneys' fees, costs and other 
+expenses. If any part of this agreement is unenforceable, it will be considered 
+modified to the extent necessary to make it enforceable, and the remainder 
+shall continue in effect. This agreement is the entire agreement between You 
+and Microsoft concerning these Materials; it may be changed only by a written 
+document signed by both You and Microsoft.
+-->
+<ColorDeviceModel
+	xmlns="http://schemas.microsoft.com/windows/2005/02/color/ColorDeviceModel"
+	xmlns:wcs="http://schemas.microsoft.com/windows/2005/02/color/WcsCommonProfileTypes"
+	xmlns:xs='http://www.w3.org/2001/XMLSchema-instance'>
+
+	<ProfileName> <wcs:Text xml:lang="en-US">SampleDeviceModelPlugin</wcs:Text></ProfileName> 
+	<Description> <wcs:Text xml:lang="en-US">Sample Plugin profile. Copyright (c) Microsoft Corporation. All rights reserved.</wcs:Text></Description> 
+	<Author> <wcs:Text xml:lang="en-US">Microsoft Corporation</wcs:Text></Author> 
+
+	<MeasurementConditions>
+		<ColorSpace>CIEXYZ</ColorSpace>
+		<WhitePointName>D65</WhitePointName>
+		<Geometry>0/45</Geometry>
+		<ApertureSize>10</ApertureSize>
+	</MeasurementConditions>
+	<SelfLuminous>true</SelfLuminous>
+	<MaxColorant>255</MaxColorant>
+	<MinColorant>0</MinColorant>	
+
+	<CRTDevice>
+		<MeasurementData TimeStamp="2005-02-09T22:00:00">
+			<WhitePrimary X="74.776" Y="77.496" Z="78.234" />
+			<RedPrimary X="38.450" Y="21.162" Z="2.085" />
+			<GreenPrimary X="24.013" Y="50.842" Z="9.223" />
+			<BluePrimary X="12.997" Y="6.434" Z="66.700" />
+			<BlackPrimary X="0.000" Y="0.000" Z="0.000" />
+			<GrayRamp>
+				<Sample Tag="Gray1">
+					<RGB R="8" G="8" B="8" />
+					<CIEXYZ X="0.000" Y="0.000" Z="0.000" />
+				</Sample>
+				<Sample Tag="Gray2">
+					<RGB R="16" G="16" B="16" />
+					<CIEXYZ X="0.628" Y="0.658" Z="0.699" />
+				</Sample>
+				<Sample Tag="Gray3">
+					<RGB R="32" G="32" B="32" />
+					<CIEXYZ X="1.409" Y="1.478" Z="1.503" />
+				</Sample>
+				<Sample Tag="Gray4">
+					<RGB R="64" G="64" B="64" />
+					<CIEXYZ X="4.351" Y="4.557" Z="4.542" />
+				</Sample>
+				<Sample Tag="Gray5">
+					<RGB R="128" G="128" B="128" />
+					<CIEXYZ X="16.989" Y="17.784" Z="17.565" />
+				</Sample>
+				<Sample Tag="Gray6">
+					<RGB R="192" G="192" B="192" />
+					<CIEXYZ X="40.453" Y="42.208" Z="41.847" />
+				</Sample>
+			</GrayRamp>
+			<RedRamp>
+				<Sample Tag="Red1">
+					<RGB R="15" G="0" B="0" />
+					<CIEXYZ X="0.437" Y="0.360" Z="0.291" />
+				</Sample>
+				<Sample Tag="Red2">
+					<RGB R="30" G="0" B="0" />
+					<CIEXYZ X="0.748" Y="0.515" Z="0.276" />
+				</Sample>
+				<Sample Tag="Red3">
+					<RGB R="45" G="0" B="0" />
+					<CIEXYZ X="1.274" Y="0.800" Z="0.289" />
+				</Sample>
+				<Sample Tag="Red4">
+					<RGB R="60" G="0" B="0" />
+					<CIEXYZ X="2.016" Y="1.203" Z="0.336" />
+				</Sample>
+				<Sample Tag="Red5">
+					<RGB R="75" G="0" B="0" />
+					<CIEXYZ X="3.009" Y="1.751" Z="0.380" />
+				</Sample>
+				<Sample Tag="Red6">
+					<RGB R="90" G="0" B="0" />
+					<CIEXYZ X="4.211" Y="2.402" Z="0.431" />
+				</Sample>
+				<Sample Tag="Red7">
+					<RGB R="105" G="0" B="0" />
+					<CIEXYZ X="5.718" Y="3.229" Z="0.520" />
+				</Sample>
+				<Sample Tag="Red8">
+					<RGB R="120" G="0" B="0" />
+					<CIEXYZ X="7.535" Y="4.224" Z="0.607" />
+				</Sample>
+				<Sample Tag="Red9">
+					<RGB R="135" G="0" B="0" />
+					<CIEXYZ X="9.600" Y="5.348" Z="0.731" />
+				</Sample>
+				<Sample Tag="Red10">
+					<RGB R="150" G="0" B="0" />
+					<CIEXYZ X="12.048" Y="6.684" Z="0.823" />
+				</Sample>
+				<Sample Tag="Red11">
+					<RGB R="165" G="0" B="0" />
+					<CIEXYZ X="14.723" Y="8.154" Z="0.923" />
+				</Sample>
+				<Sample Tag="Red12">
+					<RGB R="180" G="0" B="0" />
+					<CIEXYZ X="17.754" Y="9.822" Z="1.068" />
+				</Sample>
+				<Sample Tag="Red13">
+					<RGB R="195" G="0" B="0" />
+					<CIEXYZ X="21.247" Y="11.720" Z="1.252" />
+				</Sample>
+				<Sample Tag="Red14">
+					<RGB R="210" G="0" B="0" />
+					<CIEXYZ X="25.063" Y="13.810" Z="1.473" />
+				</Sample>
+				<Sample Tag="Red15">
+					<RGB R="225" G="0" B="0" />
+					<CIEXYZ X="28.941" Y="15.907" Z="1.636" />
+				</Sample>
+				<Sample Tag="Red16">
+					<RGB R="240" G="0" B="0" />
+					<CIEXYZ X="33.433" Y="18.374" Z="1.823" />
+				</Sample>
+			</RedRamp>
+			<GreenRamp>
+				<Sample Tag="Green1">
+					<RGB R="0" G="15" B="0" />
+					<CIEXYZ X="0.000" Y="0.000" Z="0.000" />
+				</Sample>
+				<Sample Tag="Green2">
+					<RGB R="0" G="30" B="0" />
+					<CIEXYZ X="0.555" Y="0.952" Z="0.359" />
+				</Sample>
+				<Sample Tag="Green3">
+					<RGB R="0" G="45" B="0" />
+					<CIEXYZ X="0.896" Y="1.679" Z="0.485" />
+				</Sample>
+				<Sample Tag="Green4">
+					<RGB R="0" G="60" B="0" />
+					<CIEXYZ X="1.384" Y="2.707" Z="0.670" />
+				</Sample>
+				<Sample Tag="Green5">
+					<RGB R="0" G="75" B="0" />
+					<CIEXYZ X="2.016" Y="4.046" Z="0.899" />
+				</Sample>
+				<Sample Tag="Green6">
+					<RGB R="0" G="90" B="0" />
+					<CIEXYZ X="2.795" Y="5.697" Z="1.178" />
+				</Sample>
+				<Sample Tag="Green7">
+					<RGB R="0" G="105" B="0" />
+					<CIEXYZ X="3.744" Y="7.712" Z="1.521" />
+				</Sample>
+				<Sample Tag="Green8">
+					<RGB R="0" G="120" B="0" />
+					<CIEXYZ X="4.883" Y="10.124" Z="1.942" />
+				</Sample>
+				<Sample Tag="Green9">
+					<RGB R="0" G="135" B="0" />
+					<CIEXYZ X="6.241" Y="12.998" Z="2.461" />
+				</Sample>
+				<Sample Tag="Green10">
+					<RGB R="0" G="150" B="0" />
+					<CIEXYZ X="7.718" Y="16.154" Z="2.993" />
+				</Sample>
+				<Sample Tag="Green11">
+					<RGB R="0" G="165" B="0" />
+					<CIEXYZ X="9.447" Y="19.830" Z="3.641" />
+				</Sample>
+				<Sample Tag="Green12">
+					<RGB R="0" G="180" B="0" />
+					<CIEXYZ X="11.307" Y="23.818" Z="4.355" />
+				</Sample>
+				<Sample Tag="Green13">
+					<RGB R="0" G="195" B="0" />
+					<CIEXYZ X="13.456" Y="28.374" Z="5.154" />
+				</Sample>
+				<Sample Tag="Green14">
+					<RGB R="0" G="210" B="0" />
+					<CIEXYZ X="15.778" Y="33.366" Z="6.061" />
+				</Sample>
+				<Sample Tag="Green15">
+					<RGB R="0" G="225" B="0" />
+					<CIEXYZ X="18.330" Y="38.817" Z="7.013" />
+				</Sample>
+				<Sample Tag="Green16">
+					<RGB R="0" G="240" B="0" />
+					<CIEXYZ X="20.969" Y="44.435" Z="8.042" />
+				</Sample>
+			</GreenRamp>
+			<BlueRamp>
+				<Sample Tag="Blue1">
+					<RGB R="0" G="0" B="15" />
+					<CIEXYZ X="0.000" Y="0.000" Z="0.000" />
+				</Sample>
+				<Sample Tag="Blue2">
+					<RGB R="0" G="0" B="30" />
+					<CIEXYZ X="0.393" Y="0.308" Z="1.225" />
+				</Sample>
+				<Sample Tag="Blue3">
+					<RGB R="0" G="0" B="45" />
+					<CIEXYZ X="0.573" Y="0.394" Z="2.172" />
+				</Sample>
+				<Sample Tag="Blue4">
+					<RGB R="0" G="0" B="60" />
+					<CIEXYZ X="0.824" Y="0.513" Z="3.491" />
+				</Sample>
+				<Sample Tag="Blue5">
+					<RGB R="0" G="0" B="75" />
+					<CIEXYZ X="1.150" Y="0.672" Z="5.199" />
+				</Sample>
+				<Sample Tag="Blue6">
+					<RGB R="0" G="0" B="90" />
+					<CIEXYZ X="1.559" Y="0.870" Z="7.320" />
+				</Sample>
+				<Sample Tag="Blue7">
+					<RGB R="0" G="0" B="105" />
+					<CIEXYZ X="2.051" Y="1.106" Z="9.904" />
+				</Sample>
+				<Sample Tag="Blue8">
+					<RGB R="0" G="0" B="120" />
+					<CIEXYZ X="2.646" Y="1.398" Z="13.006" />
+				</Sample>
+				<Sample Tag="Blue9">
+					<RGB R="0" G="0" B="135" />
+					<CIEXYZ X="3.346" Y="1.737" Z="16.660" />
+				</Sample>
+				<Sample Tag="Blue10">
+					<RGB R="0" G="0" B="150" />
+					<CIEXYZ X="4.147" Y="2.121" Z="20.820" />
+				</Sample>
+				<Sample Tag="Blue11">
+					<RGB R="0" G="0" B="165" />
+					<CIEXYZ X="5.055" Y="2.561" Z="25.553" />
+				</Sample>
+				<Sample Tag="Blue12">
+					<RGB R="0" G="0" B="180" />
+					<CIEXYZ X="6.081" Y="3.059" Z="30.896" />
+				</Sample>
+				<Sample Tag="Blue13">
+					<RGB R="0" G="0" B="195" />
+					<CIEXYZ X="7.231" Y="3.618" Z="36.880" />
+				</Sample>
+				<Sample Tag="Blue14">
+					<RGB R="0" G="0" B="210" />
+					<CIEXYZ X="8.455" Y="4.197" Z="43.306" />
+				</Sample>
+				<Sample Tag="Blue15">
+					<RGB R="0" G="0" B="225" />
+					<CIEXYZ X="9.861" Y="4.868" Z="50.705" />
+				</Sample>
+				<Sample Tag="Blue16">
+					<RGB R="0" G="0" B="240" />
+					<CIEXYZ X="11.373" Y="5.619" Z="58.426" />
+				</Sample>
+			</BlueRamp>
+		</MeasurementData>
+	</CRTDevice>
+	<PlugInDevice GUID="{48D2ACFF-1716-4262-9163-CC8ADB245D58}"
+		xmlns:testnamespace="http://foo.com/plugin">
+		<xs:annotation>	
+			<xs:documentation>
+				PlugIn sample profile
+			</xs:documentation>
+		</xs:annotation>
+		<testnamespace:MyPlugInData>
+			Plugin data goes here.
+		</testnamespace:MyPlugInData>
+	</PlugInDevice>
+</ColorDeviceModel>
+

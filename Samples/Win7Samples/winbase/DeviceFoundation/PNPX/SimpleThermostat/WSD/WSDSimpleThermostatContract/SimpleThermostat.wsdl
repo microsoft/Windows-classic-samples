@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.example.com/ncd/Thermostat"
+        targetNamespace="http://www.example.com/ncd/Thermostat"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <!-- ************************************************************ -->
+    <!-- The following messages section describes how the types are
+         assembled into messages.  These messages are referenced in
+         the operations listed in the portType section, below.
+     -->
+    <!-- ************************************************************ -->
+    <wsdl:message name="OneInt">
+        <wsdl:part name="temp" type="xsd:int" />
+    </wsdl:message>
+
+    <wsdl:message name="NoParameters">
+    </wsdl:message>
+
+    <!-- ************************************************************ -->
+    <!-- The portType section organizes messages into operations. -->
+    <!-- ************************************************************ -->
+    <wsdl:portType name="SimpleThermostat_WSD">
+
+        <wsdl:operation name="GetCurrentTemp">
+            <wsdl:input message="tns:NoParameters" />
+            <wsdl:output message="tns:OneInt" />
+        </wsdl:operation>
+       
+        <wsdl:operation name="GetDesiredTemp">
+            <wsdl:input message="tns:NoParameters" />
+            <wsdl:output message="tns:OneInt" />
+        </wsdl:operation>
+
+        <wsdl:operation name="SetDesiredTemp">
+            <wsdl:input message="tns:OneInt" />
+        </wsdl:operation>
+
+    </wsdl:portType>
+
+</wsdl:definitions>

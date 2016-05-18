@@ -1,0 +1,389 @@
+<HTML>
+<HEAD>
+<TITLE>Classified Ads Application</TITLE>
+<link rel="stylesheet" type="text/css" href="Styles.css">
+</HEAD>
+
+<BODY>
+<h3 align="left">Troubleshooting FAQ</h3>
+<p>This document outlines common problems and solutions for troubleshooting the
+COM+ SDK Samples.&nbsp; If your questions are not answered here send them to the
+<a href="mailto:comsdk@microsoft.com">COM+ SDK team</a></p>
+<p>The following categories are provided in this FAQ</p>
+<ul>
+  <li><a href="#IIS">IIS</a></li>
+  <li><a href="#COM+">COM+</a></li>
+  <li><a href="#MSMQ">MSMQ</a></li>
+  <li><a href="#Component Services">Component Services</a></li>
+  <li><a href="#Visual Basic Build Issues">Visual Basic Build Issues</a></li>
+  <li><a href="#&nbsp;Visual C++  Build Issues">Visual C++ Build Issues</a></li>
+</ul>
+<h4><a name="IIS">IIS</a> Issues</h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="IISBindings">Q</a>:</font></b></td>
+    <td width="96%">When I try to start my website I get a message saying
+      &quot;The service could not be started because it is not correctly
+      configured.&nbsp; Make sure that its server bindings do not conflict with
+      other sites running on the same machine.&quot;</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">IIS can have only one site bound to a given port as the
+      default website.&nbsp; There are various mechanisms for hosting multiple
+      websites on a single computer, but for the purposes of the sample
+      applications, it is best to stop the default website and then you will be
+      able to start the sample site. </td>
+  </tr>
+</table>
+<h4><a name="COM+">COM+</a> Issues</h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="CompSvcsRightClickMenu">Q</a>:</font></b></td>
+    <td width="96%">When I create a subscriber filter, no event notifications
+      are getting through</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%"> Filter expressions are not
+validated when you enter them in the subscription property sheet and no error is
+returned to the publisher if you have an invalid expression, invalid expressions
+simply fail to pass the filter.&nbsp; Refer to the table below for common
+      problems with event filters.</td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I try to send the message using Queued Components I get
+      error 70 &quot;Permission Denied&quot;</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">You must disable security on the COM+ application when
+      running MSMQ in workgroup mode.&nbsp;&nbsp;&nbsp; For more information see
+      <a href="http://msdn.microsoft.com/library/default.asp?URL=/library/psdk/cossdk/pgservices_queuedcomponents_9skz.htm" target="_top">Development
+      Constraints</a>.
+      <p>You change change the MSMQ mode (Workgroup or Directory Services) using
+      the <a href="../Tools/MSMQ%20Mode%20Tool/MSMQModeTool.exe">MSMQ Mode Tool</a>
+      (Sample code is included)</p>
+    </td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I try to use Queued Components nothing seems to work -
+      I get a lot of strange errors showing up in the Application Event log from
+      COM+</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">This can happen when your registry is cluttered with old
+      references to non existent DLL's with the same name.&nbsp; You may want to
+      download and run the <a href="http://support.microsoft.com/support/kb/articles/Q147/7/69.asp?RLD=30" target="_top">Regclean</a>
+      tool to correct this.
+    </td>
+  </tr>
+</table>
+
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I use Queued Components, my app appears to work
+      correctly but no messages end up in the queue.&nbsp; Then when I check the
+      event log I see error messages from COM+.&nbsp; How come it didn't report
+      an error to my application?</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">When calling a QC, a special recorder proxy is
+      created.&nbsp; All calls made to the interface are recorded by this proxy
+      until you release the interface.&nbsp; Once you release the interface, the
+      recorder attempts to create an MSMQ message with the recorded data.&nbsp;
+      If there is a failure in creating this message, there is no way to return
+      an error to your program at that point because you have no released the
+      interface.&nbsp; The only thing the recorder can do is write the error
+      message to the error log.
+    </td>
+  </tr>
+</table>
+
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I try to use Queued Components I get Run-time error
+      '-214368000 (80110600)';<br>
+      Only COM+ applications marked &quot;queued&quot; can be created using the
+      &quot;queue&quot; moniker.</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">This happens when you failed to mark the host application as
+      queued.&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I ran my application using QC no messages were placed
+      in the queue.&nbsp; When I checked the error log I see an error message
+      that says &quot;A cryptographic function failed&quot;.&nbsp; How do I fix
+      this?</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">You need to renew your internal certificate.&nbsp;&nbsp;
+      <p>Open the MSMQ applet in control panel and click on the security
+      tab.&nbsp; Then click on <b>Renew Internal Certificate...</b>
+    </td>
+  </tr>
+</table>
+&nbsp;&nbsp;&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I mark an application as Queued and click OK, I get a
+      Catalog Error
+      <blockquote>
+        <p>An error occurred while processing the last operation.<br>
+        Error code C00E0025<br>
+        The event log may contain additional troubleshooting information.</p>
+      </blockquote>
+      <p>The error log says&nbsp;</p>
+      <blockquote>
+        <p>The run-time environment has detected the absence of a critical
+        resource and has caused the process that hosted it to terminate.<br>
+        MQCreateQueue</p>
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">Error C00E0025 is MQ_ERROR_ACCESS_DENIED which means that
+      there was a security violation reported by MSMQ when COM+ attempted to
+      create message queues for the application.
+      <p>The most likely cause for this is that MSMQ is running in directory
+      services mode and the user account does not have permission to create a
+      public queue.&nbsp; There are two solutions, one is to grant the user
+      permissions, the other is to change MSMQ to workgroup mode using
+      the <a href="../Tools/MSMQ%20Mode%20Tool/MSMQModeTool.exe">MSMQ Mode Tool</a>
+      &nbsp;
+    </td>
+  </tr>
+</table>
+&nbsp;
+
+<h6>Filtering Problems and Resolutions</h6>
+<table border="1" width="100%">
+  <tr>
+    <td width="29%"><b>Possible Cause</b></td>
+    <td width="71%"><b>What to check for</b></td>
+  </tr>
+  <tr>
+    <td width="29%">Parameter name mismatch</td>
+    <td width="71%">The name of the parameter must match exactly (including
+      case)</td>
+  </tr>
+  <tr>
+    <td width="29%">Invalid operator</td>
+    <td width="71%">The expression did not use a supported operators (=, ==, !,
+      !=, ~, ~=, &lt;&gt;)</td>
+  </tr>
+  <tr>
+    <td width="29%">String parameter value not quoted</td>
+    <td width="71%">You must quote string parameter values</td>
+  </tr>
+  <tr>
+    <td width="29%">Invalid use of logical operators</td>
+    <td width="71%">When combining terms with a logical operator, you must
+      include the parameter name in both sides of the expression as in Message =
+      &quot;Hello World!&quot; OR Message = &quot;Hi World!&quot; instead of
+      Message = &quot;Hello World!&quot; OR &quot;Hi World!&quot;</td>
+  </tr>
+</table>
+
+<h4><a name="MSMQ">MSMQ</a> Issues</h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">How can I tell if MSMQ is installed or running?</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">You can check the Computer Management console.
+      <p>To determine if MSMQ is installed</p>
+      <ol>
+        <li>Start <b>Computer Management</b> from the Start menu under <b>Programs
+          / Administrative Tools / Computer Management.</b></li>
+        <li>Expand the <b>Services and Applications</b> node under <b>Computer
+          Management (local).</b></li>
+        <li>If <b>MSMQ</b> is installed you will see a node under <b>Services
+          and Applications.</b></li>
+      </ol>
+      <p>To determine is MSMQ is running</p>
+      <ol>
+        <li>Click on the <b>Services</b> node under <b>Services and
+          Applications.</b></li>
+        <li>Select <b>Message Queuing</b> in the list of services</li>
+        <li>If MSMQ is running, the toolbar will have the start button (&gt;)
+          grayed out and the stop button enabled.&nbsp; If it is not running the
+          start button will be enabled and the stop button will be disabled.</li>
+      </ol>
+    </td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">How do I install MSMQ?</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">To install MSMQ:
+      <ol>
+        <li>Start the <b>Add/Remove Programs</b> control panel applet.</li>
+        <li>Select <b>Add/Remove Windows</b> Components.</li>
+        <li>Check the box for <b>Message Queuing Services</b>.</li>
+        <li>Click Next.</li>
+        <li>For developer testing purposes you generally want to have a Message Queuing
+          Server rather than a dependent client.</li>
+      </ol>
+    </td>
+  </tr>
+</table>
+
+<h4><a name="Component Services">Component Services</a> Issues</h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="CompSvcsRightClickMenu">Q</a>:</font></b></td>
+    <td width="96%">When I right click on an item in the component services
+      explorer tree, the menu doesn't have the choice I want.&nbsp; I see a New
+      option but not the New / Component or New / Subscription etc.</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">The Microsoft Management Console (MMC) requires you to first
+      select a node by clicking on it (to set the context correctly) prior to
+      right clicking on it.&nbsp; If the context is not correct, you will get
+      the right click menu from whatever node is currently selected.</td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="CompSvcsRightClickMenu">Q</a>:</font></b></td>
+    <td width="96%">When I try to shut down&nbsp;my COM+ application it doesn't
+      shut down</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">There are certain conditions where the presence of the VB
+      IDE interferes with shutdown of the COM+ application.&nbsp; Exit VB and
+      then try to shut down the application, it should shut down normally.</td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="CompSvcsRightClickMenu">Q</a>:</font></b></td>
+    <td width="96%">When I start my VB application, the ball does not spin and
+      it looks like it is not running, though my code works as expected.</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">This is a known bug when security for your application is
+      disabled.</td>
+  </tr>
+</table>
+&nbsp;
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When I right click to shut down the application, it does not
+      shut down.</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">This can happen when VB is running on the same computer
+      because VB is holding a reference to the module.&nbsp; Close VB and then
+      try to shutdown the application.</td>
+  </tr>
+</table>
+<h4>&nbsp;<a name="Visual Basic Build Issues">Visual Basic Build Issues</a></h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4"><a name="VBBrokenRef">Q</a>:</font></b></td>
+    <td width="96%">When I try to compile the components I get a compile error
+      &quot;Can't find project or library&quot;</td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">When you see this error, Visual Basic is telling you that a
+      reference to another project is no longer valid or missing.&nbsp; VB will
+      highlight the class that it is trying to compile.&nbsp; The most likely
+      cause of this error with sample applications is that you did not build
+      them in the correct order.&nbsp;&nbsp; For more information see <a href="http://msdn.microsoft.com/library/default.asp?URL=/library/devprods/vs6/vbasic/vbenlr98/vamsgbrokenlibref.htm" target="_top">Can't
+      find project or library</a> on MSDN. </td>
+  </tr>
+</table>
+<h4><a name="&nbsp;Visual C++  Build Issues">&nbsp;Visual C++&nbsp; Build Issues</a></h4>
+<table border="1" width="100%">
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">Q:</font></b></td>
+    <td width="96%">When building the C++ components I get an error <b>LINK :
+      fatal error LNK1104: cannot open file &quot;comsvcs.lib&quot;</b></td>
+  </tr>
+  <tr>
+    <td width="4%">
+      <p align="center"><b><font size="4">A:</font></b></td>
+    <td width="96%">These samples require the latest release of the <a href="http://msdn.microsoft.com/downloads/sdks/platform/platform.asp" target="_top">Platform
+      SDK</a>.</td>
+  </tr>
+</table>
+&nbsp;<P>
+<FONT CLASS="SMALL" FACE="Verdana, Arial, Geneva, Helvetica, sans-serif" SIZE=1><A HREF="http://www.microsoft.com/info/cpyright.htm">&copy; 2000 Microsoft Corporation. All rights reserved. Terms of Use.</A>
+</FONT>
+&nbsp;<P>
+<!--MSFT COPYRIGHT-->
+
+</BODY>
+</HTML>

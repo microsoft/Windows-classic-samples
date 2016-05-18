@@ -1,0 +1,594 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\test.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MQApitst.ico"
+IDR_TESTTYPE            ICON    DISCARDABLE     "res\\testDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  59, 50
+BEGIN
+    BUTTON      ID_API_CREATE_QUEUE
+    BUTTON      ID_API_DELETE_QUEUE
+    BUTTON      ID_API_OPEN_QUEUE
+    BUTTON      ID_API_CLOSE_QUEUE
+    BUTTON      ID_API_SEND_MESSAGE
+    BUTTON      ID_API_RECEIVE_MESSAGE
+    BUTTON      ID_API_LOCATE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Api"
+    BEGIN
+        MENUITEM "MQ&CreateQueue",              ID_API_CREATE_QUEUE
+        MENUITEM "MQ&DeleteQueue",              ID_API_DELETE_QUEUE
+        MENUITEM "MQ&OpenQueue",                ID_API_OPEN_QUEUE
+        MENUITEM "MQC&loseQueue",               ID_API_CLOSE_QUEUE
+        MENUITEM "MQ&SendMessage",              ID_API_SEND_MESSAGE
+        MENUITEM "MQ&ReceiveMessage",           ID_API_RECEIVE_MESSAGE
+        MENUITEM "MQLoca&te",                   ID_API_LOCATE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About test...",              ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About test"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "test Version 1.1",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright © 1996",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,32,14,WS_GROUP
+END
+
+IDD_CREATE_QUEUE_DIALOG DIALOG DISCARDABLE  0, 0, 262, 101
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQCreateQueue"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_QUEUE_PATHNAME,118,15,130,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_QUEUE_LABEL,44,41,204,16,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,75,72,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,136,72,50,14
+    LTEXT           "PathName ( machine\\queue ):",IDC_STATIC,16,18,95,12
+    LTEXT           "Label:",IDC_STATIC,16,44,24,8
+END
+
+IDD_DELETE_QUEUE_DIALOG DIALOG DISCARDABLE  0, 0, 183, 120
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQDeleteQueue"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,28,99,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,106,99,50,14
+    COMBOBOX        IDC_DELETE_QUEUE_COMBO,34,28,115,64,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Queue",IDC_STATIC,36,14,69,10
+END
+
+IDD_OPEN_QUEUE_DIALOG DIALOG DISCARDABLE  0, 0, 192, 178
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQOpenQueue"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_PATHNAME_COMBO,64,17,104,70,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FORMATNAME_COMBO2,64,39,104,70,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "MQ_SEND_ACCESS",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,28,91,83,10
+    CONTROL         "MQ_RECEIVE_ACCESS",IDC_RADIO2,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,28,107,94,10
+    CONTROL         "MQ_PEEK_ACCESS",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,28,123,82,10
+    DEFPUSHBUTTON   "OK",IDOK,29,157,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,157,50,14
+    LTEXT           "PathName:",IDC_STATIC,20,19,36,8
+    LTEXT           "FormatName:",IDC_STATIC,17,40,42,12
+    GROUPBOX        "Access privilege",IDC_STATIC,19,76,144,70
+END
+
+IDD_CLOSE_QUEUE_DIALOG DIALOG DISCARDABLE  0, 0, 187, 97
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQCloseQueue"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO,47,41,87,49,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,36,76,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,104,76,50,14
+    LTEXT           "Please specify Path or Format Name:",IDC_STATIC,33,20,
+                    117,8
+END
+
+IDD_SEND_MESSAGE_DIALOG DIALOG DISCARDABLE  0, 0, 382, 269
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQSendMessage"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_TARGET_COMBO,65,13,97,65,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_ADMIN_COMBO,65,38,97,65,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_MESSAGE_PRIORITY,286,55,55,12,ES_AUTOHSCROLL
+    CONTROL         "MQMSG_DELIVERY_EXPRESS",IDC_DELIVERY_EXPRESS_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,231,
+                    100,121,10
+    CONTROL         "MQMSG_DELIVERY_RECOVERABLE",
+                    IDC_DELIVERY_RECOVERABLE_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,231,114,137,10
+    CONTROL         "MQMSG_ACKNOWLEDGMENT_NONE",IDC_ACK_NONE_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,12,77,148,10
+    CONTROL         "MQMSG_ACKNOWLEDGMENT_FULL_REACH_QUEUE",
+                    IDC_ACK_FULL_REACH_QUEUE_RADIO,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,12,88,195,10
+    CONTROL         "MQMSG_ACKNOWLEDGEMENT_FULL_RECEIVE",
+                    IDC_ACK_FULL_RECEIVE_RADIO,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,12,99,180,10
+    CONTROL         "MQMSG_ACKNOWLEDGEMENT_NACK_REACH_QUEUE",
+                    IDC_NACK_REACH_QUEUE_RADIO,"Button",BS_AUTORADIOBUTTON,
+                    12,110,206,11
+    CONTROL         "MQMSG_ACKNOWLEDGEMENT_NACK_RECEIVE",
+                    IDC_NACK_RECEIVE_RADIO,"Button",BS_AUTORADIOBUTTON,12,
+                    121,202,12
+    EDITTEXT        IDC_LABEL,48,198,291,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_BODY,48,216,291,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,134,244,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,244,50,14
+    LTEXT           "Target Queue:",IDC_STATIC,6,17,47,8
+    LTEXT           "Priority (0-7) :",IDC_STATIC,237,57,42,8
+    GROUPBOX        "Delivery",IDC_STATIC,225,80,150,67
+    LTEXT           "Time To Reach Queue (sec):",IDC_STATIC,188,18,95,8
+    GROUPBOX        "Message",IDC_STATIC,6,183,339,51
+    LTEXT           "Label :",IDC_STATIC,15,200,22,8
+    LTEXT           "Body :",IDC_STATIC,15,217,21,8
+    LTEXT           "Admin Queue:",IDC_STATIC,6,42,46,8
+    CONTROL         "Journal",IDC_JOURNAL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,239,164,64,10
+    CONTROL         "Dead-letter",IDC_DEAD_LETTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,307,164,64,10
+    CONTROL         "Authenticated",IDC_AUTHENTICATED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,164,64,10
+    LTEXT           "Time To Be Received (sec):",IDC_STATIC,189,39,90,11
+    EDITTEXT        IDC_TIME_TO_BE_RECEIVED,285,37,56,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TIME_TO_REACH_QUEUE,285,15,56,12,ES_AUTOHSCROLL
+    GROUPBOX        "Acknowledge",IDC_STATIC,6,59,216,88
+    CONTROL         "Encrypted",IDC_ENCRYPTED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,111,164,64,10
+    GROUPBOX        "Security",IDC_STATIC,6,151,215,31
+    GROUPBOX        "Logging",IDC_STATIC,225,151,150,31
+END
+
+IDD_RECEIVE_MESSAGE_DIALOG DIALOG DISCARDABLE  0, 0, 183, 126
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQReceiveMessage"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO,61,18,83,49,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_TIMEOUT,83,42,36,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,30,105,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,105,105,50,14
+    LTEXT           "Queue :",IDC_STATIC,19,22,26,8
+    LTEXT           "Timeout (msec):",IDC_STATIC,23,45,51,8
+    LTEXT           "Body Length (char):",IDC_STATIC,13,65,71,11
+    EDITTEXT        IDC_EDT_BODY_SIZE,83,62,66,14,ES_AUTOHSCROLL
+END
+
+IDD_WAIT_DIALOG DIALOG DISCARDABLE  0, 0, 183, 56
+STYLE DS_MODALFRAME | DS_CENTER | WS_CHILD | WS_CAPTION | WS_SYSMENU
+CAPTION "Waiting for a Message"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Waiting for a message to arrive from queue.",IDC_STATIC,
+                    22,23,142,8
+END
+
+IDD_LOCATE_DIALOG DIALOG DISCARDABLE  0, 0, 177, 84
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MQLocate"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_LOCATE_LABEL,49,23,96,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,26,63,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,100,63,50,14
+    LTEXT           "Label :",IDC_STATIC,17,29,22,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "TEST MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "TEST\0"
+            VALUE "LegalCopyright", "Copyright © 1996\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "TEST.EXE\0"
+            VALUE "ProductName", "TEST Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_CREATE_QUEUE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_DELETE_QUEUE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 113
+    END
+
+    IDD_OPEN_QUEUE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 185
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
+    END
+
+    IDD_CLOSE_QUEUE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 90
+    END
+
+    IDD_SEND_MESSAGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 375
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 258
+    END
+
+    IDD_RECEIVE_MESSAGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_WAIT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 49
+    END
+
+    IDD_LOCATE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 77
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "test\n\nTest\n\n\nTest.Document\nTest Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "test"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_API_CREATE_QUEUE     "Create a new queue at the DS.\nMQCreateQueue"
+    ID_API_DELETE_QUEUE     "Delete an existing queue form the DS.\nMQDeleteQueue"
+    ID_API_OPEN_QUEUE       "Open a queue.\nMQOpenQueue"
+    ID_API_CLOSE_QUEUE      "Close a queue.\nMQCLoseQueue"
+    ID_API_SEND_MESSAGE     "Send a message to a queue.\nMQSendMessage"
+    ID_API_RECEIVE_MESSAGE  "Receive a message from a queue.\nMQReceiveMessage"
+    ID_API_LOCATE           "Locate all queues on the DS.\nMQLocate"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\test.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

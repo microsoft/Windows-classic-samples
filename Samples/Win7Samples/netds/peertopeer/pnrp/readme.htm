@@ -1,0 +1,289 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<title>Peer Name Resolution Protocol Sample</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.75in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.LetteredList, li.LetteredList, div.LetteredList
+	{mso-style-name:"Lettered List";
+	margin-right:0in;
+	margin-left:.75in;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=EN-US>
+
+<div class=Section1>
+
+<h1><span style='font-family:"Arial","sans-serif"'>Peer Name Resolution
+Protocol Sample</span></h1>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>The Peer Name
+Resolution Protocol (PNRP) Sample Application demonstrates the use
+of a subset of the Peer-to-Peer APIs centered around the Peer Name Resolution
+Protocol.</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>While using this
+application, one caveat to keep in mind is that you cannot resolve a name that
+is registered within the same process.</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>Platforms supported</span></p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows Vista (except Starter Edition)</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows 7</p>
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Build: </span></p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In an SDK command shell, navigate to the directory containing this sample
+and run &quot;nmake&quot;; or</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Launch the .sln file in Visual Studio .NET </p>
+
+<p class=Bullets>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Run: </span></p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Type pnrp.exe (located in the Vista_DEBUG or WIN7_[ARCH]_DEBUG folder in the directory containing the sample)</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Follow the menu options.&nbsp; To get started, try executing the
+following scenarios:</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>1. Register an address</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Launch the PNRP application on a computer with global IPV6 connectivity.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select Option 1 to register a peer name.</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select to use default addresses and then to register in all clouds.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Optionally, enter some free text for the comment and payload.</p>
+
+<p class=LetteredList>e)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select “no” when prompted if this is to be a secured peer name</p>
+
+<p class=LetteredList>f)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Enter in a text string when prompted for the classifier.  e.g. "pnrpsampletest".</p>
+
+<p class=LetteredList>g)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>IMPORTANT: Leave the application running while completing the next
+scenarios.&nbsp; The names you registered will be deleted once the application
+is closed.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>2. Resolve an address
+using the PNRP sample</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>After running the above scenario and leaving the application running,
+launch a second instance of the PNRP application on the same computer.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select Option 2 to resolve a peer name</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select to resolve from all clouds.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select “no” when prompted for a
+synchronous resolve.</p>
+
+<p class=LetteredList>e)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Enter in the peer name to resolve.&nbsp; The peer name you should resolve
+is “0.&lt;the string registered in scenario 1&gt;”, e.g. "0.pnrpsampletest".  The “0.” is prefixed
+to the name because it was registered as an unsecured peer name.</p>
+
+<p class=LetteredList>f)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Since you registered in all clouds and also resolved in all clouds, 
+two resolution results returned - one for the global cloud and one
+for your link local cloud.  More than two results returns if your computer has more
+than one network connection, meaning that there is more than one link local
+cloud.&nbsp; Since you registered using default addresses, the link local cloud
+resolution returns your link-local IPv6 address while the global cloud
+resolution returns your global addresses, likely an IPv6 global address and
+also an IPv4 global address.</p>
+
+<p class=LetteredList>g)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Repeat the resolution scenario using a separate computer that is on the same IPv6
+subnet and then a computer connected elsewhere in the IPv6 Internet.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>3. View the DNS encoded name</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Launch the PNRP application on a computer with global IPV6 connectivity.</p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select the 'Show DNS encoded name' option.</p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Enter a Peer Name (for example, 0.pnrpsampletest, registered from Step 1).</p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Observe the DNS encoded name (for example, pnrpsampletest.pnrp.net).  The DNS encoded name allows PNRP names to be used in ANY application that calls GetAddrInfo to perform name resolution (and that is just about every application).  If the name is registered, try using the DNS encoded form of the name in ping or Internet Explorer.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>4. Resolve an address
+using ping</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Open a command prompt (on a Vista or Windows 7 computer)</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Type “ping &lt;the string registered in scenario 1&gt;.pnrp.net” (for example, "ping pnrpsampletest.pnrp.net").</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>"pnrp.net" is a reserved domain name in Windows Vista and Windows 7 and the lookup will
+be performed through PNRP rather than DNS.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>You should see that ping successfully resolves the IP address you
+registered and pings your computer</p>
+
+<p class=LetteredList>e)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>This works with any application that performs name resolution using GetAddressInfo (or any higher level 
+API that in turn uses GetAddressInfo).&nbsp; This effectively means almost any application!&nbsp; If you have 
+a web server running on the machine that registered the name open Internet Explorer and browse to the website 
+using the PNRP name rather than the DNS name!</p>
+
+<p>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

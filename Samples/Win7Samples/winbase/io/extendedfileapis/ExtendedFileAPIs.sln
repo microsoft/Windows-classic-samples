@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExtendedFileAPIs", "ExtendedFileAPIs.vcproj", "{E7B09A97-1B9D-4571-B710-ED9CF68EBB42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Win32 = Default|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7B09A97-1B9D-4571-B710-ED9CF68EBB42}.Default|Win32.ActiveCfg = Debug|Win32
+		{E7B09A97-1B9D-4571-B710-ED9CF68EBB42}.Default|Win32.Build.0 = Debug|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

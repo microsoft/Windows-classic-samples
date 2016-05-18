@@ -1,0 +1,19 @@
+//+---------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//  Copyright (C) Microsoft Corporation, 1994 - 2000.
+//
+//  File:       adsqry.rc
+//
+//  Contents:   Resources for Active Directory.
+//
+//  History:    31-Jul-96    t-danal    Created
+//
+//----------------------------------------------------------------------------
+#include <windows.h>
+#include <ntverp.h>
+#define VER_FILETYPE              VFT_APP
+#define VER_FILESUBTYPE           VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR   "Active Directory Query"
+#define VER_INTERNALNAME_STR      "dssrch"
+#include <common.ver>

@@ -1,0 +1,235 @@
+﻿<Window x:Class="Microsoft.Samples.Speech.Recognition.SpeechRecognition.SpeechRecognitionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="SpeechRecognition" Height="800" Width="700">
+  
+  <!-- Some nested grids to allow a splitter enabled layout-->
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="3*" MinHeight="300"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="2*" MinHeight="150"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    
+    <Grid Grid.Row="0" Grid.Column="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="3*" MinWidth="300"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="2*" MinWidth="150"/>
+      </Grid.ColumnDefinitions>
+      <TabControl Margin="5" Grid.Row="0" Grid.Column="0">
+
+        <!-- Info Tab -->
+        <TabItem Header="Info">
+          <Frame Source="Info.xaml"/>
+        </TabItem>
+
+        <!-- SpeechRecognizer Tab -->
+        <TabItem Header="SpeechRecognizer">
+          <StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="10">
+              Click the "Create" button to create a SpeechRecognizer object.
+              Don't forget to "Dispose" when you're done.
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="10">
+              <Button Name="_buttonCreateSR"
+                      Click="_buttonCreateSR_Click"
+                      Margin="0,0,10,0">
+                Create
+              </Button>
+              <Button Name="_buttonDisposeSR"
+                      Click="_buttonDispose_Click">
+                Dispose
+              </Button>
+              <Label Name="_labelEngineStateLabel" Margin="20,0,0,0">
+                Engine State:
+              </Label>
+              <Label Name="_labelEngineState">
+                N/A
+              </Label>
+            </StackPanel>
+            <GroupBox Name="_groupBoxRecognitionSR" Header="Recognition"
+                      Margin="5">
+              <StackPanel Margin="5">
+                <StackPanel Orientation="Horizontal">
+                  <Button Name="_buttonEnable"
+                          Click="_buttonEnable_Click">
+                    Enable
+                  </Button>
+                  <Button Name="_buttonDisable"
+                          Click="_buttonDisable_Click">
+                    Disable
+                  </Button>
+                </StackPanel>
+                <DockPanel Margin="0,10,0,0">
+                  <Button Name="_buttonEmulateSR" DockPanel.Dock="Right"
+                          Click="_buttonEmulate_Click">
+                    Emulate
+                  </Button>
+                  <TextBox Name="_textBoxEmulateSR"
+                           KeyDown="_textBoxEmulate_KeyDown"/>
+                </DockPanel>
+              </StackPanel>
+            </GroupBox>
+          </StackPanel>
+        </TabItem>
+
+        <!-- SpeechRecognitionEngine Tab -->
+        <TabItem Header="SpeechRecognitionEngine">
+          <StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="10">
+              First select the engine that you want to use, then click
+              "Create" to create a SpeechRecognitionEngine object.
+              Don't forget to "Dispose" when you're done.
+            </TextBlock>
+            <ComboBox Name="_comboBoxInstalledRecognizers" Margin="10"/>
+            <StackPanel Orientation="Horizontal" Margin="10,0,10,10">
+              <Button Name="_buttonCreateSRE"
+                      Click="_buttonCreateSRE_Click"
+                      Margin="0,0,10,0">
+                Create
+              </Button>
+              <Button Name="_buttonDisposeSRE"
+                      Click="_buttonDispose_Click">
+                Dispose
+              </Button>
+            </StackPanel>
+            <GroupBox Name="_groupBoxAudioInput" Header="Audio Input"
+                      Margin="5">
+              <StackPanel Margin="5">
+                <RadioButton Name="_radioButtonDefaultAudioDevice"
+                             Checked="_radioButtonDefaultAudioDevice_Checked">
+                  Default Audio Device
+                </RadioButton>
+                <RadioButton Name="_radioButtonWaveFile"
+                             Checked="_radioButtonWaveFile_Checked">
+                  Wave File
+                </RadioButton>
+                <DockPanel>
+                  <Button Name="_buttonWaveFile" DockPanel.Dock="Right"
+                          Click="_buttonWaveFile_Click">
+                    ...
+                  </Button>
+                  <TextBox Name="_textBoxWaveFile" IsReadOnly="True"/>
+                </DockPanel>
+              </StackPanel>
+            </GroupBox>
+            <GroupBox Name="_groupBoxRecognitionSRE" Header="Recognition"
+                      Margin="5">
+              <StackPanel Margin="5">
+                <RadioButton Name="_radioButtonAsynchronous"
+                             Checked="_radioButtonAsynchronous_Checked">
+                  Asynchronous
+                </RadioButton>
+                <RadioButton Name="_radioButtonSynchronous"
+                             Checked="_radioButtonSynchronous_Checked">
+                  Synchronous
+                </RadioButton>
+                <StackPanel Orientation="Horizontal">
+                  <Button Name="_buttonStart"
+                          Click="_buttonStart_Click">
+                    Start
+                  </Button>
+                  <Button Name="_buttonStop"
+                          Click="_buttonStop_Click">
+                    Stop
+                  </Button>
+                  <Button Name="_buttonCancel"
+                          Click="_buttonCancel_Click">
+                    Cancel
+                  </Button>
+                </StackPanel>
+                <DockPanel Margin="0,10,0,0">
+                  <Button Name="_buttonEmulateSRE" DockPanel.Dock="Right"
+                          Click="_buttonEmulate_Click">
+                    Emulate
+                  </Button>
+                  <TextBox Name="_textBoxEmulateSRE"
+                           KeyDown="_textBoxEmulate_KeyDown"/>
+                </DockPanel>
+              </StackPanel>
+            </GroupBox>
+          </StackPanel>
+        </TabItem>
+      </TabControl>
+
+      <GridSplitter HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                    Width="5" Grid.Row="0" Grid.Column="1"/>
+      
+      <!-- Grammars Group Box -->
+      <GroupBox Header="Grammars" Margin="5"
+                Grid.Row="0" Grid.Column="2">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+            <Button Name="_buttonAddSRGS"
+                    Click="_buttonAddSRGS_Click">
+              Add SRGS Grammar
+            </Button>
+            <Button Name="_buttonRemoveSRGS" IsEnabled="False"
+                    Click="_buttonRemoveSRGS_Click">
+              Remove
+            </Button>
+          </StackPanel>
+          <TreeView Name="_treeViewGrammars"/>
+        </DockPanel>
+      </GroupBox>
+    </Grid>
+
+    <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                  Height="5" Grid.Row="1" Grid.Column="0"/>
+    
+    <!-- Controls for displaying the status -->
+    <Grid Margin="5" Grid.Row="2" Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="2*" MinHeight="50"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="1*" MinHeight="50"/>
+      </Grid.RowDefinitions>
+      <GroupBox Header="Status"
+                Grid.Row="0" Grid.Column="0">
+        <RichTextBox Name="_richTextBoxStatus" IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto">
+          <FlowDocument Name="_flowDocumentStatus"/>
+        </RichTextBox>
+      </GroupBox>
+      <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    Height="5" Grid.Row="1" Grid.Column="0"/>
+      <Grid Grid.Row="2" Grid.Column="0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="2*" MinWidth="200"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="1*" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Recognition Result"
+                  Grid.Row="0" Grid.Column="0">
+          <RichTextBox Name="_richTextBoxResult" IsReadOnly="True"
+                       VerticalScrollBarVisibility="Auto">
+            <FlowDocument Name="_flowDocumentResult"/>
+          </RichTextBox>
+        </GroupBox>
+        <GridSplitter HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                      Width="5" Grid.Row="0" Grid.Column="1"/>
+        <GroupBox Header="Semantics"
+                  Grid.Row="0" Grid.Column="2">
+          <TreeView Name="_treeViewSemantics"/>
+        </GroupBox>
+      </Grid>
+    </Grid>
+
+    <DockPanel Margin="5" LastChildFill="False"
+               Grid.Row="3" Grid.Column="0">
+      <Button Name="_buttonRecognizedAudio"
+              Click="_buttonRecognizedAudio_Click"
+              DockPanel.Dock="Left">
+        Listen to the Recognized Audio
+      </Button>
+      <ProgressBar Name="_progressBarAudioLevel" Width="200"
+                   DockPanel.Dock="Right"/>
+      <Label DockPanel.Dock="Right">Audio Input Level:</Label>
+    </DockPanel>
+
+  </Grid>
+  
+</Window>

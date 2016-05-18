@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenProfile_exe", "exe\GenProfile.vcproj", "{98856DA6-C1B1-41EC-917C-A7A8A6890FB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C7AA77A5-3850-4967-BC46-7B16B3DD37E2} = {C7AA77A5-3850-4967-BC46-7B16B3DD37E2}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GenProfile_lib", "lib\GenProfile_lib.vcproj", "{C7AA77A5-3850-4967-BC46-7B16B3DD37E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98856DA6-C1B1-41EC-917C-A7A8A6890FB4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{98856DA6-C1B1-41EC-917C-A7A8A6890FB4}.Debug|Win32.Build.0 = Debug|Win32
+		{98856DA6-C1B1-41EC-917C-A7A8A6890FB4}.Release|Win32.ActiveCfg = Release|Win32
+		{98856DA6-C1B1-41EC-917C-A7A8A6890FB4}.Release|Win32.Build.0 = Release|Win32
+		{C7AA77A5-3850-4967-BC46-7B16B3DD37E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7AA77A5-3850-4967-BC46-7B16B3DD37E2}.Debug|Win32.Build.0 = Debug|Win32
+		{C7AA77A5-3850-4967-BC46-7B16B3DD37E2}.Release|Win32.ActiveCfg = Release|Win32
+		{C7AA77A5-3850-4967-BC46-7B16B3DD37E2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

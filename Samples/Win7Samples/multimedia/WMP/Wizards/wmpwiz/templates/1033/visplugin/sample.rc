@@ -1,0 +1,157 @@
+//Microsoft Developer Studio generated resource script.
+//
+//Copyright (c) Microsoft Corporation. All rights reserved.
+//
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+[!if VSNET]
+    "1 TYPELIB ""[!output root].tlb""\r\n"
+[!else]
+    "1 TYPELIB ""i[!output root].tlb""\r\n"
+[!endif]
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "[!output Safe_root]\0"
+            VALUE "FileDescription", "[!output Safe_root] Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "[!output Safe_root]\0"
+            VALUE "LegalCopyright", "Copyright \251 2001-2001\0"
+            VALUE "OriginalFilename", "[!output root].dll\0"
+            VALUE "ProductName", "[!output Safe_root] Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "OLESelfRegister", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_[!output SAFE_ROOT]           REGISTRY DISCARDABLE    "[!output root].rgs"
+
+[!if HASPROPERTYPAGE]
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPERTYDIALOG DIALOG DISCARDABLE  0, 0, 170, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "[!output root] Properties"
+FONT 9, "Segoe UI"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,109,51,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,49,51,50,14
+    LTEXT           "Text displayed in plugin window:",IDC_STATIC,8,8,137,8
+    EDITTEXT        IDC_MESSAGEEDIT,18,21,141,14,ES_AUTOHSCROLL
+END
+
+[!endif]
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "[!output root]"
+    IDS_EFFECTNAME          "[!output FRIENDLYNAME]"
+    IDS_BARSPRESETNAME      "[!output FRIENDLYNAME] Bars"
+    IDS_SCOPEPRESETNAME     "[!output FRIENDLYNAME] Wave"
+    IDS_DESCRIPTION         "[!output DESCRIPTION]"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+[!if VSNET]
+1 TYPELIB "[!output root].tlb"
+[!else]
+1 TYPELIB "i[!output root].tlb"
+[!endif]
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

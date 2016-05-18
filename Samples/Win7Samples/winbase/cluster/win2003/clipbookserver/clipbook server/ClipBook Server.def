@@ -1,0 +1,7 @@
+; ClipBook Server.def : Declares the module parameters for the DLL.
+
+LIBRARY      "CLIPBOOK SERVER"
+
+EXPORTS
+    ; Explicit exports can go here
+    Startup             PRIVATE

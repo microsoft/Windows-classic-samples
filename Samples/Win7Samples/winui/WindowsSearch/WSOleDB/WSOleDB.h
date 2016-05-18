@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <tchar.h>
+#include <windows.h>
+#include <searchapi.h>
+#include <iostream>
+#include <atlbase.h>
+#include <atldbcli.h>
+#include <strsafe.h>
+#include <propsys.h>
+#include <propkey.h>

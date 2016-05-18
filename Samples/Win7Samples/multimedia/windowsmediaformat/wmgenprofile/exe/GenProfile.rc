@@ -1,0 +1,353 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\GenProfile.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\GenProfile.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GENPROFILEEXE_DIALOG DIALOGEX 0, 0, 355, 210
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Profile Generator"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Profile Objects:",IDC_STATIC,7,25,108,134
+    PUSHBUTTON      "Add",IDC_BTNAddObject,10,139,50,18
+    PUSHBUTTON      "Delete",IDC_BTNDeleteObject,61,139,51,18
+    LISTBOX         IDC_LSTObjects,9,34,104,102,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Save Profile",IDC_BTNSaveProfile,7,168,107,34
+    GROUPBOX        "Streams in Mutex",IDC_FRAMutexStreams,130,7,27,51,NOT 
+                    WS_VISIBLE
+    LISTBOX         IDC_LSTMutexStreams,133,17,17,35,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | NOT WS_VISIBLE | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_TXTHELP,121,168,227,34,ES_MULTILINE | ES_READONLY
+    GROUPBOX        "Mutex Type",IDC_FRAMutexType,223,7,46,55,NOT WS_VISIBLE
+    CONTROL         "Bitrate",IDC_RBMutexTypeBitrate,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,228,17,38,11
+    CONTROL         "Language",IDC_RBMutexTypeLanguage,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,228,31,35,11
+    CONTROL         "Presentation",IDC_RBMutexTypePresentation,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,228,44,33,11
+    GROUPBOX        "Streams sharing bandwidth",IDC_FRABandwidthStreams,161,
+                    7,21,53,NOT WS_VISIBLE
+    LISTBOX         IDC_LSTSharingStreams,165,17,12,35,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | NOT WS_VISIBLE | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Streams",IDC_FRAStreamPrioritization,185,7,25,49,NOT 
+                    WS_VISIBLE
+    LISTBOX         IDC_LSTPrioritizationStreams,189,17,17,37,
+                    LBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Up",IDC_BTNPrioritizationUp,196,20,24,10,NOT WS_VISIBLE
+    PUSHBUTTON      "Down",IDC_BTNPrioritizationDown,193,32,27,12,NOT 
+                    WS_VISIBLE
+    LTEXT           "Shared Bitrate",IDC_LBLSharedBitrate,116,60,48,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_TXTSharedBitrate,165,58,17,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    GROUPBOX        "Mandatory Streams",IDC_FRAMandatoryStreams,271,7,24,51,
+                    NOT WS_VISIBLE
+    LISTBOX         IDC_LSTMandatoryStreams,275,18,15,36,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | NOT WS_VISIBLE | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Bitrate",IDC_LBLStreamBitrate,"Static",
+                    SS_LEFTNOWORDWRAP | NOT WS_VISIBLE | WS_GROUP,117,71,25,
+                    8
+    EDITTEXT        IDC_TXTStreamBitrate,141,70,20,13,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "Buffer Window",IDC_LBLStreamBufferWindow,115,85,52,8,
+                    NOT WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamBufferWindow,169,84,17,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "Codec",IDC_LBLStreamCodec,183,63,25,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_CBStreamCodec,217,62,17,79,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Stream Type",IDC_LBLStreamType,183,78,43,8,NOT 
+                    WS_VISIBLE
+    COMBOBOX        IDC_CBStreamType,231,76,16,87,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Format",IDC_LBLStreamFormat,117,96,27,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_CBStreamFormat,145,93,16,80,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Width",IDC_LBLStreamVideoWidth,262,67,17,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoWidth,288,66,28,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "Height",IDC_LBLStreamVideoHeight,261,81,23,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoHeight,290,81,25,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "FPS",IDC_LBLStreamVideoFPS,261,94,16,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoFPS,283,96,12,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "Secs/keyframe",IDC_LBLStreamVideoSecsPerKeyframe,259,
+                    110,28,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoSecondsPerKeyframe,293,110,20,12,
+                    ES_WANTRETURN | ES_NUMBER | NOT WS_VISIBLE
+    LTEXT           "Quality",IDC_LBLStreamVideoQuality,186,101,21,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoQuality,211,100,19,12,ES_NUMBER | NOT 
+                    WS_VISIBLE
+    CONTROL         "VBR:",IDC_CHKStreamVideoVBR,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,137,114,32,8
+    COMBOBOX        IDC_CBStreamVideoVBRMode,174,113,16,72,CBS_DROPDOWNLIST | 
+                    NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Max Bitrate",IDC_LBLStreamVideoMaxBitrate,244,124,38,8,
+                    NOT WS_VISIBLE
+    CONTROL         "Max Bufferwindow",IDC_CHKStreamVideoMaxBufferWindow,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,
+                    184,134,74,8
+    EDITTEXT        IDC_TXTStreamVideoMaxBufferWindow,263,133,13,12,
+                    ES_WANTRETURN | ES_NUMBER | NOT WS_VISIBLE
+    EDITTEXT        IDC_TXTStreamVideoMaxBitrate,283,125,15,12,ES_WANTRETURN | 
+                    ES_NUMBER | NOT WS_VISIBLE
+    CONTROL         "SMPTE Stream",IDC_CHKSMPTE,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,195,113,61,10
+    GROUPBOX        "Type",IDC_FRABandwidthType,296,7,36,49,NOT WS_VISIBLE
+    CONTROL         "Exclusive",IDC_RBBandwidthTypeExclusive,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,301,17,25,11
+    CONTROL         "Partial",IDC_RBBandwidthTypePartial,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,302,37,25,11
+    EDITTEXT        IDC_TXTStreamVideoVBRQuality,153,126,7,12,ES_NUMBER | 
+                    NOT WS_VISIBLE | WS_DISABLED
+    LTEXT           "VBR Quality",IDC_LBLStreamVideoVBRQuality,125,127,26,10,
+                    NOT WS_VISIBLE
+    LTEXT           "Buffer window",IDC_LBLBandwidthBufferWindow,300,97,26,8,
+                    NOT WS_VISIBLE
+    EDITTEXT        IDC_TXTBandwidthBufferWindow,323,94,12,13,ES_NUMBER | 
+                    NOT WS_VISIBLE
+    CONTROL         "Uncompressed",IDC_CHKUncompressed,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,321,66,27,
+                    8
+    COMBOBOX        IDC_CBPixelFormat,300,131,16,61,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Language",IDC_LBLLanguage,125,150,27,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_CBLanguage,167,150,16,61,CBS_DROPDOWNLIST | NOT 
+                    WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Profile Name",IDC_LBLProfileName,7,13,42,10
+    EDITTEXT        IDC_TXTProfileName,52,11,62,13,ES_AUTOHSCROLL | 
+                    ES_WANTRETURN
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "GenProfile MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "GenProfile\0"
+            VALUE "LegalCopyright", "Copyright (c) Microsoft Corporation.  All rights reserved.\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "GenProfile.EXE\0"
+            VALUE "ProductName", "GenProfile Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_GENPROFILEEXE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 348
+        TOPMARGIN, 7
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MNUAddObjectContext MENU DISCARDABLE 
+BEGIN
+    POPUP "AddObjectContext"
+    BEGIN
+        MENUITEM "Stream",                      IDM_AddStream
+        MENUITEM "Mutex",                       IDM_AddMutex
+        MENUITEM "Prioritization Object",       IDM_AddPrioritization
+        MENUITEM "Bandwidth Sharing Object",    IDM_AddBandwidthSharing
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_Fatal_error         "An unexpected error has occured, and GenProfile may be unstable.  Please restart this program."
+    IDS_Audio               "Audio"
+    IDS_Video               "Video"
+    IDS_Script              "Script"
+    IDS_Image               "Image"
+    IDS_Web                 "Web"
+    IDS_File                "File"
+    IDS_Stream_in_multiple_mutexes_error 
+                            "One or more of the streams are in another bitrate mutex.  A stream can only be in 1 bitrate mutex at a time.  The conflicting streams have been removed."
+    IDS_Stream_remove_from_mutexes 
+                            "Selected stream has been removed from any mutual exclusion objects."
+    IDS_Quality_based_VBR   "Quality"
+    IDS_Constrained_VBR     "Constrained"
+    IDS_Unconstrained_VBR   "Unconstrained"
+    IDS_No_IWMCodecInfo3_error 
+                            "Unable to create the IWMCodecInfo3 object. Please make sure that you have installed the correct version of the WMFSDK.  This program will now terminate."
+    IDS_Cant_create_profile_error 
+                            "There was a problem creating the profile.  The profile was not saved."
+    IDS_Profile_saved       "Profile saved successfully!"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_No_audio_formats_error 
+                            "There are no formats supported on any audio codec!"
+    IDS_No_video_formats_error 
+                            "There are no formats supported on any video codec!"
+    IDS_Multiple_stream_types_in_mutex_error 
+                            "One or more of the streams are not the same type.  All streams in the mutex should be the same type (audio, video, etc.).  Defaulting to streams that match the first selected stream."
+    IDS_Stream_directions   "Select the settings for the stream, first choosing the type of stream, then the codec, then the format settings (if applicable)"
+    IDS_String_load_error   "There was an error loading a string resource!"
+    IDS_Mutex_directions    "All highlighted streams are in the mutex.  Use the mouse/keyboard to select streams to put in the mutex."
+    IDS_Bandwidth_directions 
+                            "All highlighted streams are sharing bandwidth.  Use the mouse/keyboard to select / remove streams."
+    IDS_Prioritization_directions 
+                            "The streams at the top of the list have the highest prioritity.  Move a stream by selecting it and using the 'up' and 'down' buttons."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\GenProfile.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

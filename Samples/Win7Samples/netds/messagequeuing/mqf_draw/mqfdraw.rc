@@ -1,0 +1,243 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\disdraw.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\disdraw.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DISDRAW_DIALOG DIALOGEX 0, 0, 284, 294
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "disdraw"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_FRIEND,115,191,61,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FRIEND_COMPUTER,115,209,61,12,ES_AUTOHSCROLL | 
+                    NOT WS_VISIBLE
+    DEFPUSHBUTTON   "&Start Sending",IDC_BUTTON_ATTACH,119,267,57,20,
+                    WS_DISABLED
+    PUSHBUTTON      "Cancel",IDCANCEL,202,267,57,20
+    LTEXT           "Send drawings to queue:",IDC_STATIC_Q_LABEL,23,191,79,
+                    11
+    GROUPBOX        "Quality of Servise",IDC_STATIC_CHOOSE_MESSAGE,187,164,
+                    81,42,NOT WS_VISIBLE | WS_TABSTOP
+    CONTROL         "&Express",IDC_RADIO_EXPRESS,"Button",BS_AUTORADIOBUTTON | 
+                    NOT WS_VISIBLE | WS_GROUP,192,175,55,8
+    CONTROL         "&Recoverable",IDC_RADIO_RECOVERABLE,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,192,189,60,8
+    EDITTEXT        IDC_DRAWAREA_SCRIBLLE,7,7,264,149,ES_MULTILINE | 
+                    ES_WANTRETURN
+    LTEXT           "Send drawings to computer:",IDC_STATIC_C_LABEL,23,211,
+                    90,11,NOT WS_VISIBLE
+    PUSHBUTTON      "Add &Queue",IDC_BUTTON_ADDQUEUE,29,233,62,20
+    CONTROL         "P&ublic ",IDC_RADIO_PUBLICQUEUE,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE | WS_GROUP,199,193,
+                    53,10
+    CONTROL         "P&rivate ",IDC_RADIO_PRIVATEQUEUE,"Button",
+                    BS_AUTORADIOBUTTON | NOT WS_VISIBLE,199,212,55,10
+    GROUPBOX        "Select queue type",IDC_STATIC_CHOOSE_QUEUE,195,176,70,
+                    57,NOT WS_VISIBLE | WS_TABSTOP
+    GROUPBOX        "Add Queues",IDC_FRAME_FRIEND,13,168,255,91,WS_TABSTOP
+    LTEXT           "",IDC_CONNECTION,17,262,60,25
+END
+
+IDD_LOGIN DIALOG DISCARDABLE  0, 0, 237, 82
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "mqf_draw: Input Queue Name"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_LOGIN,7,62,223,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,189,7,41,14
+    PUSHBUTTON      "Cancel",IDCANCEL,189,24,41,14
+    LTEXT           "Enter the name of the local input queue for drawings:",
+                    IDC_STATIC,7,7,167,8
+END
+
+IDD_DS DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Connection mode"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Connect",IDOK,16,66,50,14
+    CONTROL         "Public queue ",IDC_RADIO_DS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,51,24,59,10
+    CONTROL         "Private queue ",IDC_RADIO_WORKGROUP,"Button",
+                    BS_AUTORADIOBUTTON,51,44,62,10
+    DEFPUSHBUTTON   "Cancel",IDCANCEL,99,66,50,14
+    GROUPBOX        "Select queue type",IDC_STATIC_DSFRAME,7,7,160,81
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "DISDRAW MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "DISDRAW\0"
+            VALUE "LegalCopyright", "Copyright © 1996\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "DISDRAW.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "DISDRAW Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DISDRAW_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 276
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 287
+    END
+
+    IDD_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 230
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_DS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\disdraw.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,15 @@
+
+LIBRARY      "tedutil"
+
+EXPORTS
+	DllGetClassObject       PRIVATE
+	DllCanUnloadNow         PRIVATE
+	DllRegisterServer		PRIVATE
+	DllUnregisterServer		PRIVATE
+        TEDCreateTopoViewer
+        TEDCreateTopoViewerWindow
+        TEDGetAttributeListLength
+        TEDGetAttributeName
+        TEDGetAttributeGUID
+        TEDGetAttributeType
+        TEDGetAttributeCategory

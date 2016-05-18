@@ -1,0 +1,52 @@
+//+--------------------------------------------------------------------------
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+// File:        certxsam.idl
+//
+// Contents:    IDL source for certxsam
+//
+//---------------------------------------------------------------------------
+
+import "wtypes.idl";
+import "certexit.idl";
+import "certmod.idl";
+
+
+//+--------------------------------------------------------------------------
+// certexit Type library
+//+--------------------------------------------------------------------------
+
+[
+    uuid(d29571d0-c2c8-11d2-b313-00c04f79dc72),
+    version(1.0),
+    helpstring("CertExitSample 1.0 Type Library")
+]
+
+library CERTEXITSAMPLELib
+{
+    importlib("stdole2.tlb");
+
+    [
+	uuid(d2075560-c2c8-11d2-b313-00c04f79dc72),
+	helpstring("CertExitSample Class")
+    ]
+    coclass CCertExitSample
+    {
+	[default] interface ICertExit;
+    };
+
+    [
+	uuid(d3099410-c2c8-11d2-b313-00c04f79dc72),
+	helpstring("CertManageExitModuleSample Class")
+    ]
+    coclass CCertManageExitModuleSample
+    {
+	[default] interface ICertManageModule;
+    };
+};

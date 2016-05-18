@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ *************************************************************************
+ *
+ * File: gadget.xml
+ *
+ * Description: 
+ * Manifest for the "HelloWorld" Desktop Gadget sample.
+ * 
+ * This file is part of the Microsoft Windows SDK Code Samples.
+ * 
+ * Copyright (C) Microsoft Corporation.  All rights reserved.
+ * 
+ * This source code is intended only as a supplement to Microsoft
+ * Development Tools and/or on-line documentation.  See these other
+ * materials for detailed information regarding Microsoft code samples.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ ************************************************************************
+-->
+<gadget>
+  <name>SDK Hello World</name>
+  <namespace>microsoft.windows</namespace>
+  <version>1.0.0.0</version>
+  <author name="Microsoft">
+    <info url="msdn.microsoft.com" text="Microsoft"/>
+    <logo src="images/logo.png" />
+  </author>
+  <copyright>&#169; Microsoft Corporation.</copyright>
+  <description>"HelloWorld" Desktop Gadget sample: Demonstrates a simple "Hello World!" gadget</description>
+  <icons>
+    <icon height="48" width="48" src="images/aerologo.png" />
+  </icons>
+  <hosts>
+    <host name="sidebar">
+      <base type="HTML" apiVersion="1.0.0" src="HelloWorld.html" />
+      <permissions>Full</permissions>
+      <platform minPlatformVersion="1.0" />
+      <defaultImage src="images/aerologo.png" />
+      <autoscaleDPI>true</autoscaleDPI>
+    </host>
+  </hosts>
+</gadget>

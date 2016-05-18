@@ -1,0 +1,26 @@
+HKCR
+{
+	tedutil.XMLDataLoader.1 = s 'TED XML Data loader Class'
+	{
+		CLSID = s '{01917079-8954-49a8-B9B8-3318728ADA25}'
+	}
+	tedutil.XMLDataLoader = s 'TED XML Data loader Class'
+	{
+		CLSID = s '{01917079-8954-49a8-B9B8-3318728ADA25}'
+		CurVer = s 'tedutil.XMLDataLoader.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {01917079-8954-49a8-B9B8-3318728ADA25} = s 'TED XML Data loader'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{64D3D369-B1E9-4aff-B1A4-8D8518E14A97}'
+			'Version' = s '1.0'
+		}
+	}
+}

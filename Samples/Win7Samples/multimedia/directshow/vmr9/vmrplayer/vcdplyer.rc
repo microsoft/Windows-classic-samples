@@ -1,0 +1,318 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "windows.h"
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_TOOLBAR             BITMAP  DISCARDABLE     "toolbar.bmp"
+IDR_VMR                 BITMAP  DISCARDABLE     "vmr.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open Primary Stream...",     IDM_FILE_OPEN
+        MENUITEM "Open &Second Stream...",      IDM_FILE_OPEN2, GRAYED
+        MENUITEM "&Close",                      IDM_FILE_CLOSE
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_FILE_EXIT
+    END
+    POPUP "&VMR Properties"
+    BEGIN
+        MENUITEM "Static App &Image...",        IDM_APP_IMAGE
+        MENUITEM "&Primary Stream...",          IDM_STREAM_A
+        MENUITEM "&Secondary Stream...",        IDM_STREAM_B
+        MENUITEM SEPARATOR
+        MENUITEM "&Capture Bitmap Image",       IDM_CAPTURE_IMAGE
+        MENUITEM "&Display Captured Image",     IDM_DISPLAY_CAPTURED_IMAGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About VMRPlayer9 Sample...", IDM_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_IMAGECTRL DIALOG DISCARDABLE  0, 0, 218, 177
+STYLE DS_MODALFRAME | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "App Image Control"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Slider1",IDC_XPOS_TRK,"msctls_trackbar32",TBS_TOP | 
+                    TBS_NOTICKS | WS_TABSTOP,48,24,155,15
+    CONTROL         "Slider2",IDC_YPOS_TRK,"msctls_trackbar32",TBS_TOP | 
+                    TBS_NOTICKS | WS_TABSTOP,48,44,155,15
+    CONTROL         "Slider1",IDC_XSIZE_TRK,"msctls_trackbar32",TBS_TOP | 
+                    TBS_NOTICKS | WS_TABSTOP,48,81,155,15
+    CONTROL         "Slider2",IDC_YSIZE_TRK,"msctls_trackbar32",TBS_TOP | 
+                    TBS_NOTICKS | WS_TABSTOP,48,101,155,15
+    CONTROL         "Slider2",IDC_ALPHA_TRK2,"msctls_trackbar32",TBS_TOP | 
+                    TBS_NOTICKS | WS_TABSTOP,48,133,155,15
+    CONTROL         "Display App Image",IDC_IMAGE_ENABLE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,157,72,10
+    DEFPUSHBUTTON   "Close",IDOK,161,154,50,14
+    LTEXT           "X = ",IDC_STATIC,10,24,14,8
+    LTEXT           "Y =",IDC_STATIC,11,43,13,8
+    GROUPBOX        "Position",IDC_STATIC,7,7,204,57
+    LTEXT           "0.000",IDC_XPOS,24,24,21,8
+    LTEXT           "0.000",IDC_YPOS,24,43,23,8
+    LTEXT           "X = ",IDC_STATIC,10,81,14,8
+    LTEXT           "Y =",IDC_STATIC,11,100,13,8
+    GROUPBOX        "Size",IDC_STATIC,7,64,204,57
+    LTEXT           "0.000",IDC_XSIZE,24,81,21,8
+    LTEXT           "0.000",IDC_YSIZE,25,100,23,8
+    GROUPBOX        "Alpha",IDC_STATIC,7,122,204,29
+    LTEXT           "A =",IDC_STATIC,11,132,13,8
+    LTEXT           "0.000",IDC_ALPHA,25,132,23,8
+END
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About VMRPlayer9"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "DirectShow VMRPlayer9 Sample",-1,40,10,131,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) Microsoft Corporation",-1,40,34,
+                    188,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+    LTEXT           "Version 9.0",-1,40,22,119,8,SS_NOPREFIX
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR ACCELERATORS DISCARDABLE 
+BEGIN
+    "S",            IDM_MOVIE_STOP,         VIRTKEY, CONTROL, NOINVERT
+    "P",            IDM_MOVIE_PLAY,         VIRTKEY, CONTROL, NOINVERT
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_IMAGECTRL, DIALOG
+    BEGIN
+        VERTGUIDE, 7
+        VERTGUIDE, 24
+        VERTGUIDE, 48
+        VERTGUIDE, 203
+        VERTGUIDE, 211
+        HORZGUIDE, 32
+        HORZGUIDE, 51
+        HORZGUIDE, 167
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TOOLBAR TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON40001
+    BUTTON      ID_BUTTON40002
+    BUTTON      ID_BUTTON40003
+    BUTTON      ID_BUTTON40004
+    BUTTON      ID_BUTTON40005
+    BUTTON      ID_BUTTON40006
+    BUTTON      ID_BUTTON40007
+    BUTTON      ID_BUTTON40008
+    BUTTON      ID_BUTTON40009
+    BUTTON      ID_BUTTON40010
+    BUTTON      ID_BUTTON40011
+    BUTTON      ID_BUTTON40012
+    BUTTON      ID_BUTTON40013
+    BUTTON      ID_BUTTON40014
+    BUTTON      ID_BUTTON40016
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "Microsoft\0"
+            VALUE "FileDescription", "VMR9 VMRPlayer Application\0"
+            VALUE "FileVersion", "9, 0, 0, 0\0"
+            VALUE "InternalName", "VMRPlayer9\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corporation\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "VMRPlayer9.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "DirectX 9 SDK\0"
+            VALUE "ProductVersion", "9, 0, 0, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_MOVIE_STOP          "Stop"
+    IDM_MOVIE_PLAY          "Play"
+    IDM_MOVIE_PREVTRACK     "Rewind to beginning"
+    IDM_MOVIE_PAUSE         "Pause"
+    IDM_MOVIE_SKIP_FORE     "Fast Forward"
+    IDM_MOVIE_SKIP_BACK     "Rewind"
+    IDM_MOVIE_STEP          "Step one frame"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_FILE_OPEN           "Open a new movie to play"
+    STR_FILE_OPEN2          "Open a second stream to alpha blend with the primary stream"
+    STR_FILE_CLOSE          "Close the movie"
+    STR_FILE_EXIT           "Quit DirectShow VMRPlayer9 Sample"
+    STR_HELP_ABOUT          "Display information about DirectShow VMRPlayer9 Sample"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_APP_IMAGE           "Modify static image properties"
+    STR_STREAM_A            "Modify primary image properties"
+    STR_STREAM_B            "Modify secondary image properties"
+    STR_CAPTURE_IMAGE       "Capture the current frame to disk"
+    STR_DISPLAY_CAPTURED_IMAGE "Display the most recent captured image"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_SYSMENU_RESTORE     "Restore the window to normal size"
+    STR_SYSMENU_MOVE        "Changes the window position"
+    STR_SYSMENU_MINIMIZE    "Reduce the window to an icon"
+    STR_SYSMENU_CLOSE       "Closes the window"
+    STR_SYSMENU_MAXIMIZE    "Enlarges the window to its maximum size"
+    STR_SYSMENU_TASK_LIST   "Opens the task list"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_FILE_FILTER         "All Movies#*.mpg;*.avi;*.asf;*.wmv;*.dat;*.mov#Windows Media Files (*.asf;*.wmv)#*.asf;*.wmv#Mpeg Files (*.mpg)#*.mpg#Video CD Files (*.dat)#*.dat#QuickTime Files (*.mov)#*.mov#All Files (*.*)#*.*#"
+    STR_APP_TITLE           "VMRPlayer9 Sample"
+    STR_APP_TITLE_LOADED    "VMRPlayer9 Sample - %s"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

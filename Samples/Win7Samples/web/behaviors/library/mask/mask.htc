@@ -1,0 +1,618 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         mask.htc
+//
+//  Description:  This behavior allows the web author to format user input
+//                into the correct date, monetary, phone number, or 
+//                percentage formats. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="preset"  />
+<PROPERTY NAME="realValue" />
+
+<EVENT    NAME="onerror"  ID="error"  />
+
+<ATTACH   EVENT="ondocumentready"  HANDLER="DoInit"       />
+<ATTACH   EVENT="onpropertychange" HANDLER="DoPropChange" />
+
+
+<script language="jscript">
+
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+
+realValue = "";                         // Property that tracks the value
+                                        //   entered by the user
+
+var zMonth = new Array                  // Array of months (for date mask)
+    ('January','February','March',
+     'April','May','June','July',
+     'August','September','October',
+     'November','December');
+
+
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Attaches the proper formatting and events, depending on
+//                  the type of tag the behavior is attached to.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+    var sTag = tagName.toLowerCase();
+
+    //
+    //  For these types of tags, call the FormatValue() function to format
+    //  the innerText
+    //
+    if (sTag == "span" || sTag == "div" || sTag == "a" || sTag == "p"
+        || sTag == "td" || sTag == "th" || sTag == "button"
+        || sTag.charAt(0) == "h") 
+    {
+        FormatValue();
+    }
+    //
+    //  For the INPUT tag, attach the InputBlur() and InputFocus() to
+    //  apply formatting to the value
+    //
+    else if (sTag == "input") 
+    {
+        attachEvent("onreadystatechange", InputBlur);
+        attachEvent("onfocus", InputFocus);
+        attachEvent("onblur", InputBlur);
+    }
+    
+    else ReturnError("Cannot format this tag with the Mask Behavior");
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    propertyName = window.event.propertyName;
+    
+    if (propertyName == "preset")
+    {
+        if (tagName.toLowerCase() == "input") InputBlur();
+        else FormatValue();
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatValue
+//
+//  Description:    Called by tags which have an innerText attribute (as versus
+//                  a value attribute).  Calls formatting functions, depending
+//                  on the preset property, and formats the innerText of the tag.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FormatValue()
+{
+    switch(preset)
+    {
+        case "shortdate"            :
+            innerText = MaskDate(innerText, "short");
+            break;
+            
+        case "mediumdate"           :
+            innerText = MaskDate(innerText, "medium");
+            break;
+            
+        case "longdate"             :
+            innerText = MaskDate(innerText, "long");
+            break;
+            
+        case "currency"             :
+            innerText = MaskMoney(innerText);
+            break;
+            
+        case "percent"              :
+            innerText = MaskPercent(innerText);
+            break;
+            
+        case "phone"                :
+            innerText = MaskPhone(innerText);
+            break;
+            
+        case "zip"                  :
+            innerText = MaskZip(innerText);
+            break;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       InputFocus
+//
+//  Description:    Called by tags which have a value attribute (as versus an
+//                  innerText attribute).  Replaces the formatted value of the 
+//                  tag with the actual value previously entered by the user
+//                  (before formatting was applied).
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function InputFocus() 
+{
+	value = realValue;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       InputBlur
+//
+//  Description:    Called by tags which have a value attribute (as versus an
+//                  innerText attribute).  Calls formatting functions, depending
+//                  on the preset property, and formats the value of the tag.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function InputBlur() 
+{
+    realValue = value;
+
+    switch(preset)
+    {
+        case "shortdate"            :
+            value = MaskDate(value, "short");
+            break;
+            
+        case "mediumdate"           :
+            value = MaskDate(value, "medium");
+            break;
+            
+        case "longdate"             :
+            value = MaskDate(value, "long");
+            break;
+            
+        case "currency"             :
+            value = MaskMoney(value);
+            break;
+            
+        case "percent"              :
+            value = MaskPercent(value);
+            break;
+            
+        case "phone"                :
+            value = MaskPhone(value);
+            break;
+            
+        case "zip"                  :
+            value = MaskZip(value);
+            break;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MaskDate
+//
+//  Description:    Takes the innerText or value of the tag (depending on the
+//                  type of tag), and formats it as either a short, medium, or
+//                  long date, depending on the preset property.
+//
+//  Arguments:      sValue - innerText or value of the tag
+//                  sType - the format the date should be parsed in; either
+//                      "short", "medium" or "long"
+//
+//  Returns:        "" (empty string) if sValue is an empty string
+//                  a formatted date, depending on the type (short, med, long)
+//
+//-----------------------------------------------------------------------------
+
+function MaskDate(sValue, sType)
+{
+    if (sValue.length == 0) return "";
+
+	var iDate = Date.parse(sValue);
+    var iToday = new Date();
+
+    //  If the date is not a valid date, Return an error
+	if (isNaN(iDate))
+	{
+	    iDate = Date.parse(sValue + "/" + iToday.getFullYear());
+	    if (isNaN(iDate))
+	    {
+		    ReturnError("Not a valid date");
+		    return "";
+        }
+	}
+	
+	iDate = new Date(iDate);
+	
+	//  Break the date into day, month, and year
+	var iDay = iDate.getDate();
+	var iMonth = iDate.getMonth();
+	var iYear = iDate.getFullYear();
+	
+	//  Apply formatting for short, medium, or long dates
+	switch(sType)
+	{
+        case "medium"               :
+            var sMonth = zMonth[iMonth].substring(0,3);
+            return iDay + "-" + sMonth + "-" + iYear;
+            break;
+            
+        case "long"                 :
+            var sMonth = zMonth[iMonth];
+            return sMonth + " " + iDay + ", " + iYear;
+            break;
+
+	    default                     :
+	        return iDate.toLocaleString().slice(0,10);
+	        break;
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MaskMoney
+//
+//  Description:    Takes the innerText or value of the tag (depending on the
+//                  type of tag), and formats it as US$ currency.
+//
+//  Arguments:      sValue - innerText or value of the tag
+//
+//  Returns:        "" (empty string) if sValue is an empty string
+//                  "$" + sValue - parsed and formatted currency       
+//
+//-----------------------------------------------------------------------------
+
+function MaskMoney(sValue) 
+{
+    if (sValue.length == 0) return "";
+
+    if (sValue.charAt(0) == "$")
+    {
+		sValue = sValue.substring(1,sValue.length);
+    }
+
+    //  Parse the value into a float number
+	var iValue = parseFloat(sValue);
+	iValue = (Math.round(iValue * 100)) / 100;
+	
+	//  If the value is not a number, return an error
+	if (isNaN(iValue))
+	{
+	    ReturnError("Not a valid amount");
+	    return "";
+    }
+    
+    //  Return the value to a string to apply formatting
+    sValue = iValue.toString();
+    
+    //
+    //  Fill in zeros (if necessary) to show two digits to the right 
+    //  of the decimal
+    //
+    if (sValue.indexOf(".") == -1)
+    {
+        sValue = sValue + ".00";
+    }
+    else
+    {
+        if (sValue.indexOf(".") == sValue.length - 1)
+        {
+            sValue = sValue + "00";
+        }
+        else if (sValue.indexOf(".") == sValue.length - 2)
+        {
+            sValue = sValue + "0";
+        }
+    }
+    
+    //  Add commas if necessary
+    if (sValue.indexOf(".") > 3)
+    {
+        sValue = sValue.substring(0,sValue.indexOf(".") - 3) + ","
+            + sValue.substring(sValue.indexOf(".") - 3,sValue.length);
+    }
+	
+	return "$" + sValue;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MaskPercent
+//
+//  Description:    Takes the innerText or value of the tag (depending on the
+//                  type of tag), and formats it as a percentage.
+//
+//  Arguments:      sValue - innerText or value of the tag
+//
+//  Returns:        "" (empty string) if sValue is an empty string
+//                  iValue + "%" - parsed and formatted percentage
+//
+//-----------------------------------------------------------------------------
+
+function MaskPercent(sValue)
+{
+    if (sValue.length == 0) return "";
+
+    if (sValue.charAt(0) == "%")
+    {
+		sValue = sValue.substring(1,sValue.length);
+    }
+
+    iValue = parseFloat(sValue);
+    
+    if (iValue < 1 && sValue.charAt(sValue.indexOf(".")-1) != "0")
+    {
+        iValue *= 100;
+    }
+    
+    //  If the value is not a number, return an error
+    if (isNaN(iValue))
+	{
+	    ReturnError("Not a valid amount");
+	    return "";
+    }
+    
+    return iValue + "%";
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MaskZip
+//
+//  Description:    Takes the innerText or value of the tag (depending on the
+//                  type of tag), and formats it as a 5 or 9 digit zip code.
+//
+//  Arguments:      sValue - innerText or value of the tag
+//
+//  Returns:        "" (empty string) if sValue is an empty string
+//                  sNewValue - parsed and formatted zip code     
+//
+//-----------------------------------------------------------------------------
+
+function MaskZip(sValue)
+{
+    var sNewValue = sValue;
+    var iLength = 5;
+    
+    //  Parse out applicable characters by calling ParseChar()
+    var zChar = new Array(' ', '-');
+    sNewValue = ParseChar(sNewValue, zChar);
+
+    //  If the value is not a number, return an error    
+    if (isNaN(parseInt(sNewValue)))
+	{
+	    ReturnError("Not a valid amount");
+	    return "";
+    }    
+    
+    //  Determine if this should be a 5 or 9 digit zip code
+    if (sNewValue.length == 0) return "";
+    else if (sNewValue.length < 5)
+    {
+        while (sNewValue.length < 5) sNewValue += "0";
+        ReturnError("Not a valid Zip Code");
+    }
+    else if (sNewValue.length < 9 && sNewValue.length > 5)
+    {
+        sNewValue = sNewValue.substring(0,5);
+        ReturnError("Not a valid Zip Code");
+    }
+    else if (sNewValue.length > 9)
+    {
+        sNewValue = sNewValue.substring(0,9);
+        ReturnError("Not a valid Zip Code");
+    }
+    
+    //  Apply formatting if necessary
+    if (sNewValue.length > 5)
+    {
+        sNewValue = sNewValue.substring(0,5) + "-" + sNewValue.substring(5,9);
+    }
+    
+    return sNewValue;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MaskPhone
+//
+//  Description:    Takes the innerText or value of the tag (depending on the
+//                  type of tag), and formats it as a 7 or 10 digit phone number.
+//
+//  Arguments:      sValue - innerText or value of the tag
+//
+//  Returns:        "" (empty string) if sValue is an empty string
+//                  sNewValue - parsed and formatted phone number
+//
+//-----------------------------------------------------------------------------
+
+function MaskPhone(sValue)
+{
+    var sNewValue = sValue;
+    var iLength = 7;
+    
+    //  Parse out applicable characters by calling ParseChar()
+    var zChar = new Array(' ', '(', ')', '-', '.');
+    sNewValue = ParseChar(sNewValue, zChar);
+ 
+    //  Determine if this is a 7 or 10 digit phone number
+    if (sNewValue.length == 7);
+    else if (sNewValue.length == 10) iLength = 10;
+    else if (sNewValue.length == 0) return "";
+    else if (sNewValue.length < 7)
+    {
+        while (sNewValue.length < 7) sNewValue += "0";
+        ReturnError("Not a valid phone number");
+    }
+    else if (sNewValue.length < 10)
+    {
+        sNewValue = sNewValue.substring(0,7);
+        ReturnError("Not a valid phone number");
+    }
+    else if (sNewValue.length > 10)
+    {
+        iLength = 10;
+        
+        if (sNewValue.charAt(0) == "1" && sNewValue.length == 11)
+        {
+            sNewValue = sNewValue.substring(1,11);
+        }
+        
+        else sNewValue = sNewValue.substring(0,10);
+        ReturnError("Not a valid phone number");
+    }
+    
+    //  Call FormatPhone() to apply formatting
+    sNewValue = FormatPhone(sNewValue,iLength);
+    
+    return sNewValue;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatPhone
+//
+//  Description:    Adds the proper formatting for a phone number (either 7 or
+//                  10 digits) to a string of numbers passed in.
+//
+//  Arguments:      sPhone - a 7 or 10 digit string of numbers
+//                  iLength - the desired phone number length
+//
+//  Returns:        sNewPhone - the formatted phone number
+//
+//-----------------------------------------------------------------------------
+
+function FormatPhone(sPhone, iLength)
+{
+    var sNewPhone = "";
+
+    if (iLength == 7)
+    {
+        sNewPhone = sPhone.substring(0,3) + "-" + sPhone.substring(3,7);
+    }
+    if (iLength == 10)
+    {
+        sNewPhone = "(" + sPhone.substring(0,3) + ") " + sPhone.substring(3,6)
+            + "-" + sPhone.substring(6,10);
+    }
+
+    return sNewPhone;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ParseChar
+//
+//  Description:    This function takes a string and parses out certain
+//                  characters.  The characters to be parsed out are passed in
+//                  as a string or as a array.
+//
+//  Arguments:      sStr - The string intended to be parsed
+//                  sChar - A string or array of characters to be parsed out
+//                      of sStr
+//
+//  Returns:        sNewStr - The rebuilt (parsed) string
+//
+//-----------------------------------------------------------------------------
+
+function ParseChar(sStr, sChar)
+{
+    //  If sChar is a string, create an array to hold it
+    if (sChar.length == null) 
+    {
+        zChar = new Array(sChar);
+    }
+    else zChar = sChar;
+    
+    //  Iterate through the array, removing each character from the string
+    for (i=0; i<zChar.length; i++)
+    {
+        sNewStr = "";
+    
+        var iStart = 0;
+        var iEnd = sStr.indexOf(sChar[i]);
+    
+        while (iEnd != -1)
+        {
+            sNewStr += sStr.substring(iStart, iEnd);
+            iStart = iEnd + 1;
+            iEnd = sStr.indexOf(sChar[i], iStart);
+        }
+        sNewStr += sStr.substring(sStr.lastIndexOf(sChar[i]) + 1, sStr.length);
+        
+        sStr = sNewStr;
+    }
+    
+    return sNewStr;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+</script>
+

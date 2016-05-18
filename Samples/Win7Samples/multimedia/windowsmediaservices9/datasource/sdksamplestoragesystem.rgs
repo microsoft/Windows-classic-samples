@@ -1,0 +1,59 @@
+HKCR
+{
+	SDKSampleStoragePlugin.SDKSampleStorageSystem.9 = s 'SDKSampleStorageSystem Class'
+	{
+		CLSID = s '{28DFD023-DC35-4786-B1A1-0FC6CB6A3846}'
+	}
+	SDKSampleStoragePlugin.SDKSampleStorageSystem = s 'SDKSampleStorageSystem Class'
+	{
+		CLSID = s '{28DFD023-DC35-4786-B1A1-0FC6CB6A3846}'
+		CurVer = s 'SDKSampleStoragePlugin.SDKSampleStorageSystem.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {28DFD023-DC35-4786-B1A1-0FC6CB6A3846} = s 'SDKSampleStorageSystem Class'
+		{
+			ProgID = s 'SDKSampleStoragePlugin.SDKSampleStorageSystem.9'
+			VersionIndependentProgID = s 'SDKSampleStoragePlugin.SDKSampleStorageSystem'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{46B14880-4DDC-4957-A4A4-F900D9F2033F}'
+            ForceRemove Properties
+            {
+                val Author = s 'Microsoft Corporation'
+                val Name = s 'WMS SDK Sample Data Source Plugin'
+                val Copyright = s 'Copyright (c) Microsoft Corporation.  All rights reserved.'
+		        val 'URL Prefix' = s 'sample://'
+                val 'URL Suffix' = s ''
+                val Description = s 'Sample Data Source Plugin to access playlist and media files that are stored on a FAT, FAT32, NTFS, or CIFS file system.'
+            }
+		}
+	}
+}
+
+HKLM 
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Windows Media'
+			{
+				NoRemove Server
+				{
+					NoRemove RegisteredPlugins
+					{
+                        NoRemove 'Data Source'
+                        {
+					        ForceRemove {28DFD023-DC35-4786-B1A1-0FC6CB6A3846} = s 'WMS SDK Sample Data Source Plugin'
+					    }
+					}
+				}
+			}
+		}
+	}
+}
+

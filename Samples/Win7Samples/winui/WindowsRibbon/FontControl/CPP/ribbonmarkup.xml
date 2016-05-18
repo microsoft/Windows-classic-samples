@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<Application xmlns='http://schemas.microsoft.com/windows/2009/Ribbon'>
+    <!-- Commands section -->
+    <Application.Commands>
+        <Command Name="cmdTab1"
+             Comment="These comments are optional and are inserted into the header file."
+             Symbol="IDR_CMD_TAB1" 
+             Id="10000" >
+            <Command.LabelTitle>
+                <String Id ="200">Home</String>
+            </Command.LabelTitle>
+        </Command>
+        <!-- Optional Symbol and Id properties are not defined for the following commands.
+        A Symbol same as the name of the command 
+        and a valid Id for this command will be automatically generated. -->
+        <Command Name="cmdGroup1">
+            <!-- This image is used for when the group shrinks into a "pop-up".  The other groups
+            in the markup don't display as pop-ups, so we don't specify an image for them.  -->
+            <Command.SmallImages>
+                <Image Id="201">res/Button_Image.bmp</Image>
+            </Command.SmallImages>
+        </Command>
+        <Command Name="cmdQat"/>
+        <Command Name="cmdFileMenu"/>
+        <Command Name="cmdMRUList">
+            <Command.LabelTitle>
+                <String Id ="202">MRU List</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdExit">
+            <Command.LabelTitle>
+                <String Id ="203">Exit Button</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id ="204">res/ExitL.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdFontControl" Symbol="IDC_CMD_FONTCONTROL">
+            <Command.Keytip>
+                <String Id = "205">F</String>
+            </Command.Keytip>
+        </Command>
+        <Command Name="MyContextualUI" Comment="ContextualUI with mini toolbar" Symbol="IDC_CMD_CONTEXTMAP"/>
+    </Application.Commands>
+    <Application.Views>
+        <Ribbon>
+            <Ribbon.ApplicationMenu>
+                <ApplicationMenu CommandName="cmdFileMenu">
+                    <ApplicationMenu.RecentItems>
+                        <RecentItems CommandName="cmdMRUList" MaxCount="1" />
+                    </ApplicationMenu.RecentItems>
+                    <MenuGroup Class="MajorItems">
+                        <Button CommandName="cmdExit" />
+                    </MenuGroup>
+                </ApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            <Ribbon.Tabs>
+                <Tab CommandName="cmdTab1">
+                    <Tab.ScalingPolicy>
+                        <ScalingPolicy>
+                            <ScalingPolicy.IdealSizes>
+                                <!-- This describes the maximum size of each group in the tab. -->
+                                <Scale Group="cmdGroup1" Size="Large" />
+                            </ScalingPolicy.IdealSizes>
+                            <!-- This describes the order and how the groups shrink when the window is
+                            resized. -->
+                            <Scale Group="cmdGroup1" Size="Popup" />
+                        </ScalingPolicy>
+                    </Tab.ScalingPolicy>
+                    <Group CommandName="cmdGroup1" SizeDefinition="OneFontControl">
+                        <FontControl CommandName="cmdFontControl" FontType="RichFont" />
+                    </Group>
+                </Tab>
+            </Ribbon.Tabs>
+            <Ribbon.QuickAccessToolbar>
+                <QuickAccessToolbar CommandName="cmdQat" />
+            </Ribbon.QuickAccessToolbar>
+        </Ribbon>
+        <ContextPopup>
+          <ContextPopup.MiniToolbars>
+            <MiniToolbar Name="myMiniToolbar">
+              <MenuGroup Class="StandardItems">
+                <FontControl CommandName="cmdFontControl"/>
+              </MenuGroup>
+            </MiniToolbar>
+          </ContextPopup.MiniToolbars>
+          <ContextPopup.ContextMaps>
+            <!-- We only want to show a mini toolbar in the context menu-->
+            <ContextMap CommandName="MyContextualUI" MiniToolbar="myMiniToolbar" />
+          </ContextPopup.ContextMaps>
+        </ContextPopup>
+    </Application.Views>
+</Application>

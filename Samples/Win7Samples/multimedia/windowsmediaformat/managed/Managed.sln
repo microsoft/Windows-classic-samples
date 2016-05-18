@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedMetadataEdit", "MetadataEdit\ManagedMetadataEdit.csproj", "{12B1E9C2-149F-48E6-AD20-4D5A412B49E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedWMFSDKWrapper", "WMFSDKWrapper\ManagedWMFSDKWrapper.csproj", "{655F362E-A35B-4143-80F0-312A6B9C57E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12B1E9C2-149F-48E6-AD20-4D5A412B49E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B1E9C2-149F-48E6-AD20-4D5A412B49E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B1E9C2-149F-48E6-AD20-4D5A412B49E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B1E9C2-149F-48E6-AD20-4D5A412B49E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655F362E-A35B-4143-80F0-312A6B9C57E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655F362E-A35B-4143-80F0-312A6B9C57E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655F362E-A35B-4143-80F0-312A6B9C57E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655F362E-A35B-4143-80F0-312A6B9C57E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

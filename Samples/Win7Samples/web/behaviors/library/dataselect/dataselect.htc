@@ -1,0 +1,297 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         dataselect.htc
+//
+//  Description:  This behavior allows web authors to create databound 
+//				  SELECT elements.  The OPTION elements are populated by
+//				  using a Tabular Data Control Object as the dataSrc.
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="datasrc"      />
+<PROPERTY NAME="datafldtext"  />
+<PROPERTY NAME="datafldvalue" />
+<PROPERTY NAME="value"		  />
+
+<METHOD   NAME="FillBox"	  />
+<METHOD   NAME="SetValue"	  />
+    
+<EVENT    NAME="ondatasetcomplete" ID="dataset" />
+<EVENT    NAME="onerror"		   ID="error"   />
+
+<ATTACH   EVENT="ondocumentready" HANDLER="DoInit" />
+
+
+<SCRIPT LANGUAGE="jscript">
+var sChange = "";		//Records script for onchange event set on page
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions, set variables, and attaches events to
+//                  initialize behavior
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+	// Gets the name of the TDC object on the page
+	var sData = dataSrc.substring(1,dataSrc.length);
+	
+	// If the dataFldValue property is not set, use the dataFldText property
+	if (dataFldValue == null) dataFldValue = dataFldText;
+	
+	// HTML to write to page
+	var sTab = '<TABLE ID="' + uniqueID + 'tab" '
+		+ 'STYLE="display:none" onreadystatechange="'
+		+ uniqueID + '.FillBox()" DATASRC="' + dataSrc + '"><TR>'
+		+ '<TD><SPAN DATAFLD="' + dataFldValue + '"></SPAN></TD>'
+		+ '<TD><SPAN DATAFLD="' + dataFldText + '"></SPAN></TD>'
+		+ '</TR></TABLE>';
+
+	// Write HTML to page
+	insertAdjacentHTML("AfterEnd", sTab);
+
+	OverrideOnchange();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FillBox
+//
+//  Description:    Called after the SELECT HTML is written to the page in
+//					DoInit() by the onreadystatechange event.  Uses the data
+//					from the TDC object to fill the OPTION tags of the SELECT
+//					element.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FillBox()
+{
+	var e = window.event.srcElement;
+
+	// If the SELECT element is done rendering on the page...
+	if (e.readyState == "complete" || e.readyState == 4)
+	{
+		// Loop through the data rows and create OPTION tags for each
+		for (i=0; i<e.rows.length; i++)
+		{
+			var oOpt = document.createElement("OPTION");
+			oOpt.value = e.rows(i).cells(0).children(0).innerText;
+			oOpt.text = e.rows(i).cells(1).children(0).innerText;
+		
+			// If this data value is the same as the VALUE property, select it.
+			if (value == e.rows(i).cells(0).children(0).innerText)
+			{
+				oOpt.selected = true;
+			}
+			
+			// Add element to the SELECT element
+			add(oOpt);
+		}
+		// Fire the ondatasetcomplete event from the HTC
+		dataset.fire();
+		
+		// Attach the onpropertychange event
+		attachEvent("onpropertychange", DoPropChange);
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       EmptyBox
+//
+//  Description:    This function is called when the dataSrc is changed.  It
+//					purges the OPTION elements in the SELECT element.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function EmptyBox()
+{
+	while (options.length > 0)
+	{
+		remove(options.item(0));
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetValue
+//
+//  Description:    Sets the value of the linked INPUT element (used in the
+//					FORM submit).
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetValue()
+{
+	value = options(selectedIndex).value;
+	
+	//
+	// Loop through OPTION elements until finding one with a value equal to
+	// that specified by the VALUE property.
+	//
+	for (i=0; i<options.length; i++)
+	{
+		if (options(i).value == value)
+		{
+			 options(i).selected = true;
+			 break;
+		}
+	}
+	
+	//
+	// Execute the script stored in the sChange variable.  This is the script
+	// that was originally saved when the onchange event was erased.
+	//
+	eval(sChange);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    if (propertyName.substring(0,5) == "style")
+    {
+    }
+    else
+    {
+        detachEvent("onpropertychange", DoPropChange);
+        switch(propertyName)
+        {
+			
+            case "dataFldValue"             :
+				EmptyBox();
+				var oTab = eval(uniqueID + "tab");
+				oTab.dataSrc = "";
+				oTab.rows(0).cells(0).children(0).dataFld = dataFldValue;
+				oTab.dataSrc = dataSrc;
+				break;
+
+            case "dataFldText"              :
+				EmptyBox();
+				var oTab = eval(uniqueID + "tab");
+				oTab.dataSrc = "";
+				oTab.rows(0).cells(1).children(0).dataFld = dataFldText;
+				oTab.dataSrc = dataSrc;
+				break;
+
+            case "dataSrc"                  :
+				EmptyBox();
+				var oTab = eval(uniqueID + "tab");
+				if (dataSrc.charAt(0) != "#") dataSrc = "#" + dataSrc;
+				oTab.dataSrc = dataSrc;
+				break;
+
+            case "value"                    :
+				SetValue();
+                break;
+
+			case "onchange"					:
+				OverrideOnchange();
+				break;
+
+            case "selectedIndex"            :
+                break;
+                
+            default                         :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+        
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       OverrideOnchange
+//
+//  Description:    Disallows the user from setting the onchange property.
+//					Instead, takes the script intended for the onchange event
+//					on the page and stores it in a variable to be executed
+//					from the HTC.  This approach is required due to the timing
+//					of the onchange event firing from the page - if the page is
+//					utilizing the event, it will get it first and the HTC will
+//					not have had a chance to change the value.
+//
+//  Arguments:      none
+//
+//  Returns:        false if the onchange event is equal to null
+//
+//-----------------------------------------------------------------------------
+
+
+function OverrideOnchange()
+{
+	if (onchange == null) return false;
+
+	// Get the current script for the onchange event (specified on the page)
+	sChange = getAttribute("onchange");
+	sChange = sChange.toString();
+	sChange = sChange.substring(23, sChange.length-2);
+	
+	// Set the onchange event to nothing
+	onchange = "";
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+</SCRIPT>

@@ -1,0 +1,8 @@
+LIBRARY mapname.dll
+
+EXPORTS
+   DllRegisterServer PRIVATE
+   DllUnregisterServer PRIVATE
+   RadiusExtensionInit PRIVATE
+   RadiusExtensionTerm PRIVATE
+   RadiusExtensionProcess2 PRIVATE

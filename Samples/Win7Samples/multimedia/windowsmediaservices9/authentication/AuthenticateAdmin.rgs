@@ -1,0 +1,25 @@
+HKCR
+{
+	Authenticate.AuthenticateAdmin.9 = s 'AuthenticateAdmin Class'
+	{
+		CLSID = s '{E0B7D97C-32AB-4540-952E-D5C3A8BA43A4}'
+	}
+	Authenticate.AuthenticateAdmin = s 'AuthenticateAdmin Class'
+	{
+		CLSID = s '{E0B7D97C-32AB-4540-952E-D5C3A8BA43A4}'
+		CurVer = s 'Authenticate.AuthenticateAdmin.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E0B7D97C-32AB-4540-952E-D5C3A8BA43A4} = s 'AuthenticateAdmin Class'
+		{
+			ProgID = s 'Authenticate.AuthenticateAdmin.9'
+			VersionIndependentProgID = s 'Authenticate.AuthenticateAdmin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{5D3BABFB-48A8-4BC8-B1E9-130D3F7491FC}'
+		}
+	}
+}

@@ -1,0 +1,21 @@
+<?wpl version="1.0"?><smil>
+	<properties>PAAAABwAAAAxU1BTpmpjKD2V0hG11gDAT9kY0AAAAAAcAAAAMVNQU+CFn/L5T2gQ
+q5EIACsns9kAAAAAAAAAAA==
+</properties><head>
+		<meta name="Generator" content="GuzTools -- 0.0.0.1"/>
+		<meta name="ItemCount" content="6"/>
+		<title>Sample2</title><properties>hQAAABwAAAAxU1BTpmpjKD2V0hG11gDAT9kY0AAAAAAtAAAAMVNQU5IERGSLTNER
+i3AIADaxGgMRAAAACQAAAAATAAAASwAAAAAAAAAcAAAAMVNQU+CFn/L5T2gQq5EI
+ACsns9kAAAAAHAAAADFTUFOQBERki0zREYtwCAA2sRoDAAAAAAAAAAA=
+</properties></head>
+	<body>
+		<seq>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/05%20Press%20Forward.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/06%20Grind.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/07%20Torture.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/08%20So%20Deadly.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/03%20Swampwater.wma"/>
+			<media src="file:///C:/Users/Chris/Desktop/Black%20Magic/04%20Pressure.wma"/>
+		</seq>
+	</body>
+</smil>

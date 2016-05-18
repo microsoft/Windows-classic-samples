@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\CLSID\{9e683e3f-9a8e-4109-b067-0cd924db653e}]
+@="Acquire Sample Plugin"
+
+[HKEY_CLASSES_ROOT\CLSID\{9e683e3f-9a8e-4109-b067-0cd924db653e}\InprocServer32]
+@="AcquireSamplePlugin.dll"
+"ThreadingModel"="Apartment"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Photo Acquisition\Plugins\{9e683e3f-9a8e-4109-b067-0cd924db653e}]
+"DisplayName"="@AcquireSamplePlugin.dll,-1"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Photo Acquisition\Plugins\{9e683e3f-9a8e-4109-b067-0cd924db653e}]
+"Enabled"=dword:1
+
+

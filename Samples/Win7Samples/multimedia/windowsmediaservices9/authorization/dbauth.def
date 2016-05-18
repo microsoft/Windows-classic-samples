@@ -1,0 +1,19 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows Media Technologies
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       DBAuth.def
+;
+;  Contents:
+;
+;--------------------------------------------------------------------------
+; DBAuth.def : Declares the module parameters.
+
+LIBRARY      "DBAuth.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer PRIVATE

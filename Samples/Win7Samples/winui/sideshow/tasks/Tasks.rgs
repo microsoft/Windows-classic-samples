@@ -1,0 +1,37 @@
+HKCR
+{
+        NoRemove AppID
+        {
+                '%APPID%' = s 'WindowsSideShowTasks'
+                'WindowsSideShowTasks.DLL'
+                {
+                        val AppID = s '%APPID%'
+                }
+        }
+}
+
+HKCU
+{
+    NoRemove Software
+    {
+        NoRemove Microsoft
+        {
+            NoRemove SideShow
+            {
+                NoRemove Gadgets
+                {
+                    ForceRemove {FB35ABAF-3C45-4198-9BC2-C79C065D33AC}
+                    {
+                        val 'OnlineOnly' = d '1'
+                        val 'CacheAlgorithm' = d '0'
+                        val 'FriendlyName' = s '@%MODULE%,-100'
+                        val 'Icon' = s '%MODULE%,-100'
+                        val 'PropertyPage' = s '{E363F045-E2F9-4C95-87A2-BF4721928740}'
+                        val 'Endpoints' = m '{A9A5353F-2D4B-47ce-93EE-759F3A7DDA4F}\0'
+                        val 'StartCommand' = s 'rundll32.exe "%MODULE%",StartTasks'
+                    }
+                }
+            }
+        }
+    }
+}

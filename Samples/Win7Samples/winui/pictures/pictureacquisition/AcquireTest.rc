@@ -1,0 +1,177 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winres.h>
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include <winres.h>\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TEST_DIALOG DIALOGEX 0, 0, 322, 185
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Photo Acquire Test Application"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "&Acquisition",IDC_ACQUISITION_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,7,7,308,10
+    CONTROL         "&Pass NULL hWndParent",IDC_ACQUIRE_USE_NULL_HWND,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,20,136,10
+    CONTROL         "&Suppress progress dialog",
+                    IDC_ACQUIRE_SUPPRESS_PROGRESS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,33,136,10
+    CONTROL         "Cus&tom filename template",
+                    IDC_ACQUIRE_USE_CUSTOM_TEMPLATE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,18,46,99,10
+    EDITTEXT        IDC_ACQUIRE_CUSTOM_TEMPLATE,29,59,275,14,ES_AUTOHSCROLL
+    CONTROL         "Device selection dialo&g",IDC_DEVSEL_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,7,80,308,10
+    CONTROL         "Include &WPD devices",IDC_DEVSEL_WPD_DEVICES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,93,136,10
+    CONTROL         "Include &mass-storage devices",IDC_DEVSEL_FS_DEVICES,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,93,136,10
+    CONTROL         "Include W&IA cameras",IDC_DEVSEL_WIA_CAMERAS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,106,136,10
+    CONTROL         "Incl&ude WIA scanners",IDC_DEVSEL_WIA_SCANNERS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,168,106,136,10
+    CONTROL         "Include STI D&evices",IDC_DEVSEL_STI_DEVICES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,18,118,136,10
+    CONTROL         "Include D&V devices",IDC_DEVSEL_DV_DEVICES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,168,119,136,10
+    CONTROL         "Include &offline devices",IDC_DEVSEL_SHOW_OFFLINE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,18,130,136,10
+    CONTROL         "&Control panel mode",IDC_DEVSEL_CPANEL_MODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,168,131,136,10
+    CONTROL         "Settings &dialog",IDC_SETTINGS_RADIO,"Button",
+                    BS_AUTORADIOBUTTON,7,147,308,10
+    DEFPUSHBUTTON   "OK",IDOK,211,164,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,265,164,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TEST_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 315
+        VERTGUIDE, 18
+        VERTGUIDE, 154
+        VERTGUIDE, 161
+        VERTGUIDE, 168
+        VERTGUIDE, 261
+        VERTGUIDE, 265
+        VERTGUIDE, 304
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 178
+        HORZGUIDE, 17
+        HORZGUIDE, 20
+        HORZGUIDE, 30
+        HORZGUIDE, 33
+        HORZGUIDE, 43
+        HORZGUIDE, 50
+        HORZGUIDE, 56
+        HORZGUIDE, 59
+        HORZGUIDE, 73
+        HORZGUIDE, 80
+        HORZGUIDE, 86
+        HORZGUIDE, 89
+        HORZGUIDE, 99
+        HORZGUIDE, 106
+        HORZGUIDE, 140
+        HORZGUIDE, 147
+        HORZGUIDE, 157
+        HORZGUIDE, 164
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APPLICATION_ICON    ICON                    "PhotoAcq.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APPLICATION_NAME    "Photo Acquire Test Applet"
+    IDS_SELECTION_CAPTION   "Sample Selection Dialog Caption"
+    IDS_SELECTION_SUBMIT_TEXT "Import"
+    IDS_HRESULT_ERROR_MESSAGE 
+                            "The error:\n\n0x%08x: %ws\noccurred in this expression:\n\n%ws\n\nPress OK to continue, or press Cancel to issue a debug break."
+    IDS_UNKNOWN_ERROR       "(Unknown error)\n"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

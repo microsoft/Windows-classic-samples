@@ -1,0 +1,66 @@
+HKCR
+{
+	WMSContextPlugin.ContextPlugin.9 = s 'ContextPlugin Class'
+	{
+		CLSID = s '{763A9745-3A49-4902-B957-027F0C625B78}'
+	}
+	WMSContextPlugin.ContextPlugin = s 'ContextPlugin Class'
+	{
+		CLSID = s '{763A9745-3A49-4902-B957-027F0C625B78}'
+		CurVer = s 'WMSContextPlugin.ContextPlugin.9'
+	}
+	NoRemove AppID
+	{
+		ForceRemove {763A9745-3A49-4902-B957-027F0C625B78} = s 'Context Plugin'
+		{
+		    val DllSurrogate = s ''
+		}
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {763A9745-3A49-4902-B957-027F0C625B78} = s 'ContextPlugin Class'
+		{
+		    val AppID = s '{763A9745-3A49-4902-B957-027F0C625B78}'
+			ProgID = s 'WMSContextPlugin.ContextPlugin.9'
+			VersionIndependentProgID = s 'WMSContextPlugin.ContextPlugin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{763A9744-3A49-4902-B957-027F0C625B78}'
+            ForceRemove Properties
+            {
+                val Author = s 'Microsoft Corporation'
+                val Name = s 'WMS SDK Sample Context Plugin'
+                val Copyright = s 'Copyright (c) Microsoft Corporation.  All rights reserved.'
+                val MMCMoniker = s 'CLSID:{2B8E10C4-4DFE-4e4f-9BCC-2F01F611244B}'
+                val ASPMoniker = s 'ContextSample.asp'
+                val UnsupportedLoadTypes = d '2'
+            }
+		}
+	}
+}
+
+
+HKLM 
+{
+	NoRemove SOFTWARE
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Windows Media'
+			{
+				NoRemove Server
+				{
+					NoRemove RegisteredPlugins
+					{
+                        NoRemove 'Event Notification and Authorization'
+                        {
+					        ForceRemove {763A9745-3A49-4902-B957-027F0C625B78} = s 'WMS SDK Sample Context Plugin'
+					    }
+					}
+				}
+			}
+		}
+	}
+}

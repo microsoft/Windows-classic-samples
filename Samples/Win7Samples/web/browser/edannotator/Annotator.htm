@@ -1,0 +1,71 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML>
+<HEAD>
+<TITLE>ATL 3.0 test page for object Annotator</TITLE>
+<STYLE TYPE="text/css">
+.button {
+    	background-color:#009999;
+	border:thin outset;
+	padding:3;
+	color:#ffffff;
+	font-weight:bold;
+}
+#editregion {
+	position:absolute;
+	top:150;
+	left:30;
+	width:400;
+	height:300;
+	overflow:auto;
+	border:ridge;
+	background-color:#ffffff;
+	padding:5;
+}
+</STYLE>
+<OBJECT ID="Annotator" CLASSID="CLSID:9790C4C2-7BFF-49C1-9439-068EE3B8DC22" CODEBASE="EDAnnotator.CAB"></OBJECT>
+
+</HEAD>
+
+<BODY ONLOAD="document.all.Annotator.AttachAnnotator(document)" BGCOLOR="#cc9999">
+
+<DIV STYLE="position:absolute;top:10;left:20;padding:10">
+<SPAN CLASS="button" UNSELECTABLE="on" STYLE="cursor:hand" ONCLICK="document.all.Annotator.ShowCommentGlyphs(true)">Show Comment Glyphs</SPAN>
+<BR><BR>
+<SPAN CLASS="button" UNSELECTABLE="on" STYLE="cursor:hand" ONCLICK="document.all.Annotator.ShowCommentGlyphs(false)">Hide Comment Glyphs</SPAN>
+<BR><BR>
+<SPAN CLASS="button" UNSELECTABLE="on" STYLE="cursor:hand" ONCLICK="document.all.Annotator.AddComment()">Add Comment</SPAN>
+</DIV>
+
+<DIV ID="editregion" CONTENTEDITABLE="true">
+<P>The Annotator page demonstrates an edit designer implementation
+that lets you add, remove, and modify comments in a Web page. Individual 
+comments are marked with custom glyphs, so it's easy to locate them. You might 
+use comments like this to keep track of ideas in a document in progress, make 
+notes for later markup changes, or explain parts of your text to other browsing 
+users without the need to include your explanation in the page text.</P>
+
+<P>Click the
+<!-- This comment uses left-bracket/exclamation-point tags. -->
+Show Comment Glyphs button above.</P>
+
+<P>Now you can see glyphs that mark the location of comments in the 
+content-editable region.
+Click any glyph to edit the comment it denotes.<COMMENT ID="pook">This comment 
+uses comment tags.</COMMENT> 
+When you click again anywhere in the page other than the comment edit 
+window, the revised comment will be saved and the comment edit window will 
+close.</P>
+
+<P>Add a comment to the page in the same way.  Click the Add Comment button, add 
+text to the comment edit window, and click outside the edit window to save and 
+close the comment.</P>
+<!-- This comment is located at the end of the content-editable region. -->
+</DIV>
+
+<DIV STYLE="position:absolute; left:10; top:470">
+<P><HR><FONT COLOR="black" FACE="ms sans serif" SIZE="1">&copy;<A HREF="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" TARGET="_top"> Microsoft Corporation.  All rights reserved.  Terms of use.</A></FONT>
+</DIV>
+<P>
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

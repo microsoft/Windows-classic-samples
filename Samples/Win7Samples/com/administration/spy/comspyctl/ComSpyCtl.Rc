@@ -1,0 +1,247 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""..\\..\\..\\common\\inc\\ComSpyCtl.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "ComSpyCtl Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "COMSPYCTL\0"
+            VALUE "LegalCopyright", "Copyright 1997\0"
+            VALUE "OriginalFilename", "COMSPYCTL.DLL\0"
+            VALUE "ProductName", "ComSpyCtl Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_COMSPY              REGISTRY DISCARDABLE    "ComSpy.rgs"
+IDR_COMSpy1             REGISTRY MOVEABLE PURE  "Comspy1.bin"
+IDR_COMSPYPROPPAGE      REGISTRY DISCARDABLE    "ComSpyPropPage.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_COMSPYPROPPAGE DIALOG DISCARDABLE  0, 0, 271, 105
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "Show &Grid Lines",IDC_SHOW_GRID_LINES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,156,24,68,10
+    LTEXT           "&Log File",IDC_STATIC,4,20,26,8
+    EDITTEXT        IDC_LOG_FILE,40,19,95,14,ES_AUTOHSCROLL
+    LTEXT           "&Column:",IDC_STATIC,4,40,26,8
+    COMBOBOX        IDC_COLUMN_NAMES,40,38,95,45,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Width",IDC_STATIC,4,56,20,8
+    EDITTEXT        IDC_WIDTH,40,55,95,14,ES_AUTOHSCROLL
+    CONTROL         "&Log To File",IDC_LOG_TO_FILE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,37,68,10
+    CONTROL         "&Show On Screen",IDC_SHOW_ON_SCREEN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,156,50,68,10
+    CONTROL         "&Audit to db",IDC_AUDIT_TO_DB,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,156,62,68,10
+END
+
+IDD_CONFIGUREEVENTSDLG DIALOGEX 3, 1, 302, 247
+STYLE WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Events"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Select Application or Process",IDC_STATIC,8,10,154,10,
+                    NOT WS_GROUP
+    LISTBOX         IDC_LIST_APPS,8,20,154,145,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_DISABLENOSCROLL | WS_VSCROLL
+    LTEXT           "Select Application or Process Events",IDC_STATIC,168,10,
+                    120,10,NOT WS_GROUP
+    CONTROL         "Custom1",IDC_LISTVIEWEVENTS,"SysListView32",LVS_LIST | 
+                    LVS_SORTASCENDING | LVS_ALIGNLEFT | WS_BORDER,168,20,124,
+                    145,WS_EX_STATICEDGE
+    PUSHBUTTON      "&Close",IDOK,123,226,51,17,NOT WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,2,2,297,221
+    LTEXT           "",IDC_STATIC_CURRENTAPP,12,200,149,10,NOT WS_GROUP
+    RTEXT           "",IDC_STATIC_TYPE,12,185,38,10,NOT WS_GROUP
+    CONTROL         "Select All Applications",IDC_CHECK_ALLAPPS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,8,170,110,10
+    CONTROL         "List1",IDC_LISTVIEWSYSEVENTS,"SysListView32",LVS_LIST | 
+                    LVS_SORTASCENDING | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,169,180,124,37
+    LTEXT           "Select System Events",IDC_STATIC,169,170,113,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MAIN                ICON    DISCARDABLE     "icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_SPYMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Spy"
+    BEGIN
+        MENUITEM "&Select Events...",           IDM_SELECT_APPLICATIONS
+        MENUITEM "Save To &File...",            ID_SAVE
+        MENUITEM "&Clear All Events",           ID_CLEAR
+        MENUITEM SEPARATOR
+        POPUP "&Options"
+        BEGIN
+            MENUITEM "&Log To File",                ID_LOG
+            MENUITEM "&Show On Screen",             ID_SHOW_ON_SCREEN
+            MENUITEM "&Choose Log File Name...",    ID_CHOOSE_LOG_FILE_NAME
+            MENUITEM "&Grid Lines",                 ID_OPTIONS_GRID_LINES
+            MENUITEM "&Choose Font...",             ID_CHOOSEFONT
+            MENUITEM "&Audit to db",                ID_AUDIT
+        END
+        POPUP "&Debug"
+        BEGIN
+            MENUITEM "<No Running Applications>",   ID_SPY_DEBUG_NORUNNINGAPPLICATIONS
+
+        END
+        POPUP "&Help"
+        BEGIN
+            MENUITEM "&About",                      IDM_ABOUT
+        END
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CONFIGUREEVENTSDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 299
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 243
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "COM SpyCtl"
+    IDS_TITLEComSpyPropPage "&COM Spy Settings"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "ComSpyCtl.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

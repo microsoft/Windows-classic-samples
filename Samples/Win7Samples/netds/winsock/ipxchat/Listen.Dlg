@@ -1,0 +1,12 @@
+LISTENBOX DIALOG 6, 18, 160, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Listen"
+BEGIN
+    EDITTEXT        LD_SOCKET, 41, 17, 53, 12, ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK", IDOK, 109, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 109, 25, 40, 15
+    LTEXT           "&Socket:", 101, 8, 19, 32, 9
+    LTEXT           "Enter Socket Number To Listen On", LD_STATUS, 5, 51, 
+                    151, 9
+    GROUPBOX        "", 104, 2, 44, 156, 19
+END

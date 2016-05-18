@@ -1,0 +1,4 @@
+[implicit_handle(handle_t hStarter)]
+interface cxhndl
+{
+}

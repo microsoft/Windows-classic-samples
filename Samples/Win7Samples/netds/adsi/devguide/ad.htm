@@ -1,0 +1,605 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Active Directory</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="2%">&nbsp;</td>
+    <td width="98%"><img border="0" src="ad.gif" width="442" height="62"></td>
+  </tr>
+  <tr>
+    <td width="2%"></td>
+    <td width="98%"><br>
+      <font face="Verdana"><small>For a start, please read the &quot;<a href="adadsi.htm">Easy
+      Access to Active Directory using ADSI</a>&quot; article.</small></font>
+      <p>
+      <font face="Verdana"><small>For the latest update on Active Directory®
+      programming, please visit: <a href="http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp">http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp<br>
+      <br>
+      </a>The primary purpose of this page is to give you a jump start on Active
+      Directory programming. For more detailed programming topics, please visit
+      the above link.&nbsp; For quick illustrations and better reading, the
+      samples are in Visual Basic®. For Visual C++® programmers, the Active
+      Directory Programmer's Guide provides plenty of C++ samples.</small></font>
+      </p>
+           <p><strong><font face="Verdana" color="#0080C0"><small>Requirements</small></font></strong></p>
+        <ul>
+          <li><small><font face="Verdana" size="2">You must have Windows</font></small><font face="Verdana"><small>®</small></font><small><font face="Verdana" size="2"> 2000
+            Active Directory Server running.</font></small></li>
+          <li><small><font face="Verdana" size="2">Your client </font></small><font face="Verdana" color="#000000" SIZE="2">can
+            use</font><small><font face="Verdana" size="2"> Windows             2000 or higher, or Windows NT 4.0, Windows 95/98 with              the DS Client.&nbsp;</font></small></li>
+        </ul>
+      <p><strong><font
+    face="Verdana" color="#0080C0"><small><a name="top"></a>How do I...</small></font></strong></p>
+      <ul><font face="Verdana" size="2">
+        <li><a href="#Browse">Browse Active Directory</a></li>
+      </font></ul>
+      <p><font face="Verdana" color="#0080C0"><strong><small>Bind</small></strong></font>
+      <ul><small><font face="Verdana">
+      <li><a href="#RootDSE">Get to RootDSE</a></li>
+      <li><a href="#BindDomain">Bind to a current domain</a></li>
+      <li><a href="#Credentials">Bind using alternate credentials</a></li>
+      <li><a href="#BindGC">Bind to the global catalog</a></li>
+      <li><a href="#SchemaCont">Bind to the Schema container</a></li>
+      <li><a href="#ConfigurationCont">Bind to the Configuration container</a></li>
+      <li><a href="#BindGUID">Bind with GUID</a></li>
+      <li><a href="#BindSID">Bind with SID</a></li>
+      <li><a href="#WhoAmI">Who am I?</a></li>
+    </font></small></ul>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Get/Modify
+    data</small></strong></font>
+    <ul><small><font face="Verdana">
+      <li><a href="#DomainMode">Get domain mode</a></li>
+      <li><a href="#GCAttr">List attributes that are replicated to the global catalog</a></li>
+      <li><a href="#IndexedAttr">List indexed attributes</a></li>
+      <li><a href="#UPN">Get UPN Suffixes</a></li>
+      <li><a href="#Canonical">Display the canonical name</a></li>
+      <li><a href="#createOU">Create an organizational unit</a></li>
+      <li><a href="#createUser">Create a user</a></li>
+      <li><a href="#createGroup">Create a group</a></li>
+      <li><a href="#delegateOU">Delegate an organizational unit</a></li>
+      <li><a href="#createComputer">Create a computer account</a></li>
+      <li><a href="#SubTree">Remove a subtree</a></li>
+      <li><a href="#ANR">Perform an ambiguous name resolution (ANR) search</a></li>
+      <li><a href="#ANRAttr">List attributes used in ANR</a></li>
+    </font></small></ul>
+      <p>&nbsp;</p>
+      <hr color="#0080C0">
+    <p><font face="Verdana" size="2" color="#0080C0"><b><a name="Browse"></a>Browsing Active
+    Directory</b></font></p>
+      <p><font face="Verdana" size="2">You can quickly browse the Active
+      Directory using the ADSVW.EXE shipped with the SDK.</font></p>
+      <p><font face="Verdana" size="2">If your client is Windows NT 4.0 or </font><small><font face="Verdana" size="2">Windows
+      95</font></small><font face="Verdana">/</font><small><font face="Verdana" size="2">Windows
+      9</font></small><font size="2" face="Verdana" color="#000000">8</font><font face="Verdana" size="2">, then
+      you'll need to know the server name or domain DNS name that hosts Active Directory.</font></p>
+        <ul>
+          <li><font face="Verdana" size="2">Run ADSVW.EXE.</font></li>
+          <li><font face="Verdana" size="2">Select<b> File</b> | <b> New</b>.</font></li>
+          <li><font face="Verdana" size="2">Type LDAP://yourServer.</font></li>
+          <li><font face="Verdana" size="2">You can specify alternate
+            credentials by checking <b> Use Open Object</b>, otherwise uncheck this
+            option.</font></li>
+        </ul>
+      <p><font face="Verdana" size="2">If your client is Windows 2000, and
+      you're authenticated by Active Directory, you do not need to specify the
+      server name.</font></p>
+      <p><font face="Verdana" size="2">Now you should be able to browse Active Directory.</font></p>
+      <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="RootDSE"></a>Getting to RootDSE</small></strong></font></p>
+    <p>
+    <font face="Verdana" size="2">The LDAP standard (RFC 2251) requires that all LDAP
+    directories maintain a special entry, called the Root DS Entry, or Root DSE. This entry
+    provides a set of standard operational attributes that the user can read to find out
+    fundamental characteristics of the directory and the server. The Root DSE can also provide
+    any number of vendor-specific attributes.</font></p>
+    <font size="2"><p><font face="Verdana">One of the standard operational attributes is
+    &quot;<b>defaultNamingContext</b>&quot;. This attribute contains the
+    distinguished name (DN) of
+    the root of the directory. In Windows 2000, this is the DN of the Domain container at
+    the root of the current tree. By reading the <b> defaultNamingContext</b> attribute from the Root
+    DSE, you can discover what domain you are logged in to at run time.</font></p>
+    <p><font face="Verdana">ADSI provides a special mechanism for binding to the root DSE:
+    using the ADSpath &quot;<b>LDAP://RootDSE</b>&quot;.</font></p>
+    <p><font face="Verdana">VB: set myObj = GetObject(&quot;LDAP://RootDSE&quot;)</font></p>
+    <p><font face="Verdana">VC: hr = AdsGetObject(L&quot;LDAP://RootDSE&quot;, IID_IADs,(void
+    **)&amp;pDSObj);</font></p>
+    <p><font face="Verdana">Write a program that reads the <b> defaultNamingContext</b> attribute from
+    the Root DSE to discover what domain you are logged into.<br>
+    <br>
+    Source code can be found in <a href="../samples/activedir/rootdse/VC">\\samples\ActiveDir\RootDSE\VC</a>
+    </font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p></font><font face="Verdana" color="#0080C0"><strong><small><a name="Credentials"></a>Binding with
+    an Alternate Credential</small><br>
+    </strong></font></p>
+    <p><font face="Verdana" size="2">ADSI binds to the directory using the
+    credentials of the currently logged-in user. Sometimes you need to bind to a particular
+    directory service using specific credentials, or using credentials that are
+    different from those of the
+    logged-in user.</font></p>
+    <font size="2"><p><font face="Verdana">ADSI provides an interface and method to provide
+    this functionality. The namespace object supports the <b> IADsOpenDSObject</b> interface, which
+    has a single method, <b>OpenDSObject</b>. <b> OpenDSObject</b> takes as arguments the ADSpath of the
+    object or subtree to bind to, the username, the password, and the authentication method.</font></p>
+    <p><font face="Verdana">To obtain the <b> IADsOpenDSObject</b> interface, perform a default bind
+    to &quot;LDAP:&quot;.</font></p>
+    <p><font face="Verdana">VB: set dso = Getobject(&quot;LDAP:&quot;)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; set myObj = dso.OpenDSObject( adsPath,
+    userName, password, ADS_SECURE_AUTHENTICATION)&nbsp;</font></p>
+    <p><font face="Verdana">VC: hr =
+    AdsGetObject(TEXT(&quot;LDAP:&quot;),IID_IADsOpenDSObject,(void **)&amp;pDSObj);</font></p>
+    <p><font face="Verdana">HRESULT OpenDsObject(LPTSTR Path, LPTSTR User,lpszPAssword,LONG
+    Auth,Idispatch** ppDispatch)</font></p>
+    <p><font face="Verdana">Use ADS_SECURE_AUTHENTICATION for secured
+    authentication (NTLM or Kerberos).</font></p>
+    <p><font face="Verdana">Write a program that discovers the current domain, then
+    bind to
+    it with explicit credentials.</font></font></p>
+      <p><font face="Verdana" size="2">Source code can be found in&nbsp; <a href="../samples/activedir/rootdse/VC">\\samples\ActiveDir\RootDSE\VC</a>.</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p><font face="Verdana" color="#0080C0"><small><strong>&nbsp;</strong></small></font></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="BindDomain"></a>Binding to a
+    Current Domain</small></strong></font></p>
+    <p><font face="Verdana" size="2">You can bind to the current Active Directory
+    domain using the entry found in the RootDSE. Domain information is shared
+    only in that domain.</font></p>
+    <p style="margin-bottom: 10"><font face="Verdana" size="2">Example:<br>
+    Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)<br>
+    Get domain = GetObject(&quot;LDAP://&quot; &amp;
+    rootDSE.Get(&quot;defaultNamingContext&quot;) )</font></p>
+      <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="SchemaCont"></a>Binding to
+    the Schema Container</small></strong></font></p>
+    <p><font face="Verdana" size="2">You can bind to the Active Directory Schema
+    container using the entry found in the RootDSE. Schema information is shared
+    across the forest.<br>
+    <br>
+    Example:<br>
+    Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)<br>
+    Get schemaCont = GetObject(&quot;LDAP://&quot; &amp;
+    rootDSE.Get(&quot;schemaNamingContext&quot;) )</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>
+    <a name="ConfigurationCont"></a>
+    Binding to the Configuration Container</small></strong></font></p>
+    <p><font face="Verdana" size="2">You can bind the Active Directory
+    Configuration Container using the entry found in the RootDSE. Data in the
+    configuration partition is replicated across forest.<br>
+    <br>
+    Example:<br>
+    Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)<br>
+    Get schemaCont = GetObject(&quot;LDAP://&quot; &amp;
+    rootDSE.Get(&quot;configurationNamingContext&quot;) )</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="WhoAmI"></a>Who am I?</small></strong></font></p>
+      <p><font face="Verdana" size="2"><font color="#FF0000">NOTE: You must have
+      a computer that runs Windows 2000 in order to execute this sample.</font><br>
+    Win32 has always provided APIs that return the name of the current user and computer. In
+    Windows 2000, the user and computer are represented by objects stored in Active
+    Directory. Two new Win32 APIs are provided that return the distinguished name for the
+    logged-on user and computer: <b> GetUserNameEx</b> and <b> GetComputerObjectName</b> (another new API,
+      <b>GetComputerNameEx</b>, returns the DNS name of the computer).</font></p>
+    <font size="2">
+    <blockquote>
+      <p><font face="Verdana">Long GetUserNameEx(long Nameform, LPTSTR buf, ULONG
+    * buflen);</font></p>
+    <p><font face="Verdana">Long GetComputerObjectName(long Nameform, LPTSTR buf, ULONG *
+    buflen);</font></p>
+    </blockquote>
+    </font>
+    <p><font face="Verdana" size="2">The version of ADSI that is shipped with Windows 2000 also provides a new interface,
+    <b>IADsADSystemInfo</b>, which allows you to do this same task.</font><small><font face="Verdana" color="#0080C0"><strong>&nbsp;</strong></font></small></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="BindGUID"></a>Binding with GUID</small><br>
+    </strong></font><font face="Verdana" color="#000000"><br>
+    <font size="2">Binding to an object GUID has many advantages.</font></font><font size="2" face="Verdana" color="#000000">
+    An object's GUID is unique and never changes, even when the object is renamed
+    or moved.</font></p>
+    <p><font size="2" face="Verdana" color="#000000">Example:</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana" color="#000000">
+    Set obj = GetObject(&quot;LDAP://&lt;GUID=08d0d12b43edd21196fc0080c7a2dc6b&gt;&quot;)</font></p>
+    </blockquote>
+    <p><font size="2" face="Verdana" color="#000000">or&nbsp;</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana" color="#000000">Set obj = GetObject(&quot;GC://&lt;GUID=08d0d12b43edd21196fc0080c7a2dc6b&gt;&quot;)
+    'for a forest-wide search</font></p>
+    </blockquote>
+    <p><font face="Verdana" color="#000000">
+    <small>For a Visual C++ sample, click <a href="../samples/activedir/guidbind/VC/Main.Cpp">here</a></small></font><font face="Verdana" size="2">.</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="BindSID"></a>Binding with SID</small></strong></font></p>
+    <p><font size="2" face="Verdana" color="#000000">Every security principal
+    object (such as users, groups, computers) has a SID. You can bind to that
+    object based on the SID.</font></p>
+    <p><font size="2" face="Verdana" color="#000000">Example:</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana" color="#000000">
+    Set obj = GetObject(&quot;LDAP://&lt;SID=010500000000000515000000dcf4dc3b16c0ea32dbeb0c50f5010000>&quot;)</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="BindGC"></a>Binding to Global
+    Catalog</small></strong></font></p>
+    <p><font size="2" face="Verdana">You can bind to the global catalog using GC: as
+    the provider.</font></p>
+    <p><font size="2" face="Verdana">To bind to the GC with a forest scope, you need
+    to know a server name, or a domain DNS name in a forest. Optionally, you can
+    manually enumerate the GC.</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana">Set gc = GetObject(&quot;GC://dc01&quot;) 'Using the server name</font></p>
+    <p><font size="2" face="Verdana">Set gc = GetObject(&quot;GC://adomain.com&quot;)
+    'Using a domain name</font></p>
+    </blockquote>
+    <p><font size="2" face="Verdana">----OR---- enumerate manually</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana">Set gcRoot = GetObject(&quot;GC:&quot;)</font></p>
+    <p><font size="2" face="Verdana">For each gc in gcRoot 'There would be only one container on this root</font></p>
+    <p><font size="2" face="Verdana">
+    Next</font></p>
+    <p><font size="2" face="Verdana">'Now at this point, you can use the 'gc'
+    variable to search in a forest scope.</font></p>
+    </blockquote>
+    <p><font size="2" face="Verdana">To bind to the GC with a tree scope, you need
+    to know the tree's distinguished name:</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana">Set gc = GetObject(&quot;GC://DC=FirstDomain,
+    DC=COM&quot;)</font></p>
+    </blockquote>
+    <p><font size="2" face="Verdana">To bind to GC with a domain scope, you need
+    to know the domain's distinguished name:</font></p>
+    <blockquote>
+    <p><font size="2" face="Verdana">Set gc = GetObject(&quot;GC://DC=myDomain,
+    DC=FirstDomain, DC=COM&quot;)<br>
+    </font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    &nbsp;
+    <p>
+    <font face="Verdana" color="#0080C0"><strong><small><a name="DomainMode"></a>Getting
+    the Domain Mode</small></strong></font>
+    </p>
+    <p><font face="Verdana" size="2">Active Directory can operate in two modes.
+    Native mode where all domain controllers are Windows 2000 servers, or mixed
+    mode, where the backup domain controllers can be a mix of Windows NT 4.0 servers and
+    Windows 2000 servers. The administrator must explicitly upgrade the domain
+    mode. To find out the current domain mode, use the following code snippet:</font></p>
+    <blockquote>
+    <p><font face="Verdana" size="2">Set rootDSE = GetObject("LDAP://RootDSE")<br>
+    Set domain = GetObject("LDAP://" &amp; rootDSE.Get("defaultNamingContext"))<br>
+    mode = domain.Get("nTMixedDomain")<br>
+    If (mode = 1) Then<br>
+    &nbsp;&nbsp; Debug.Print "Mixed Mode"<br>
+    Else<br>
+    &nbsp;&nbsp; Debug.Print "Native Mode"<br>
+    End If</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="GCAttr"></a>Listing
+    Attributes that
+    are Replicated to GC</small></strong></font></p>
+    <p><font face="Verdana" size="2">Only selected attributes are replicated to
+    a GC. To find out which ones are replicated, search from the Schema container, then use either ADO or
+    <b>
+    IDirectorySearch</b> (for C++) with the following LDAP filter:</font></p>
+    <blockquote>
+    <p><font face="Verdana" size="2">(&amp;(objectCategory=attributeSchema)(isMemberOfPartialAttributeSet=TRUE))</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="IndexedAttr"></a>Listing
+    Indexed Attributes</small></strong></font></p>
+    <p><font face="Verdana" size="2">An indexed attribute is useful for quick
+    searches. To find out all indexed attributes, you can bind to the Schema
+    container using either ADO or <b> IDirectorySearch</b> (for C++) with the following
+    LDAP filter.</font></p>
+    <blockquote>
+    <p><font face="Verdana" size="2">(&amp;(objectCategory=attributeSchema)(searchFlags:1.2.840.113556.1.4.803:=1))</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">The indexed attribute is the attribute with
+    the 0x00000001 bit set.</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="UPN"></a>Getting
+    UPN Suffixes</small></strong></font></p>
+    <p><font face="Verdana" size="2">You can optionally choose UPN suffixes for
+    your company. This list will appear on the Administrator Tool when
+    composing a User Principal Name during user creation.</font></p>
+    <blockquote>
+      <p><font face="Verdana" size="2">Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)<br>
+      Set partCont = GetObject(&quot;LDAP://CN=Partitions,&quot; &amp;
+      rootDSE.Get(&quot;configurationNamingContext&quot;))<br>
+    <br>
+      suffixes = partCont.GetEx(&quot;UPNSuffixes&quot;)<br>
+      For Each upnSuffix In suffixes<br>
+      &nbsp;&nbsp; Debug.Print upnSuffix<br>
+      Next</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="Canonical"></a>Displaying
+    the Canonical Name</small></strong></font></p>
+    <p><font face="Verdana" size="2">It's recommended that you display a canonical
+    name to the user instead of a distinguished name. A canonical name (or
+    friendly name) is in the form of&nbsp; dnsDomainName/objectPath. For
+    example, if the DN is CN=JSmith, OU=Marketing, OU=DSys, DC=ArcadiaBay,
+    DC=Com, then its canonical name is arcadiayBay.com/dsys/marketing/jsmith.</font></p>
+  <p><font face="Verdana" size="2">Active Directory supports an operational
+  attribute that returns a canonized name. The attribute name is 'canonicalName'.
+  To obtain an operational attribute, you can either use <b> IDirectoryObject</b>/<b>IDirectorySearch</b>
+  (for VC++), or <b> IADs::GetInfo</b> (for VB and VC++).
+  </font></p>
+    <p style="margin-bottom: 0"><font face="Verdana" size="2">Example:</font></p>
+    <p style="margin-top: 0; margin-bottom: 0">&nbsp;</p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" size="2">Set o =
+    GetObject(&quot;LDAP://CN=James Smith,OU=Marketing,OU=DSys,DC=ArcadiaBay,DC=com&quot;)<br>
+  o.GetInfoEx Array("canonicalName"), 0<br>
+  Debug.Print o.Get(&quot;canonicalName&quot;)&nbsp; 'It should print as
+    arcadiabay.com/DSys/Marketing/James Smith</font></p>
+    </blockquote>
+  <p><font face="Verdana" size="2">For Windows 2000, another option is to use <b>IADsNameTranslate</b>.</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="createOU"></a>Creating an
+    Organizational Unit</small></strong></font></p>
+<p><font face="Verdana" size="2">To create an organizational unit, you need to
+know the parent container's distinguished name.&nbsp;</font></p>
+    <blockquote>
+<p><font face="Verdana" size="2">Set parentCont = GetObject(&quot;LDAP://OU=DSys,DC=ArcadiaBay,DC=com&quot;)<br>
+Set ou = parentCont.Create("organizationalUnit", "OU=Marketing")<br>
+ou.Description = "Distributed System Marketing"<br>
+ou.SetInfo</font></p>
+    </blockquote>
+<p><font face="Verdana" size="2">To create an organizational unit in a current
+domain, you can use the following code:</font></p>
+    <blockquote>
+<p><font face="Verdana" size="2">Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)<br>
+Set dom = GetObject(&quot;LDAP://&quot; &amp; dom.Get(&quot;defaultNamingContext&quot;))<br>
+Set ou = dom.Create(&quot;organizationalUnit", "OU=Marketing")<br>
+ou.Description = "Distributed System Marketing"<br>
+ou.SetInfo</font></p>
+    </blockquote>
+<p><font face="Verdana" size="2">Go to <a href="#top">top</a></font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="createUser"></a>Creating a
+    User</small></strong></font></p>
+<p><font face="Verdana" size="2">A user normally lives in an organizational
+unit. To create a user, you'll need to supply the organizational unit and
+down-level user name, at the minimum.</font></p>
+    <blockquote>
+<p><font face="Verdana" size="2">Set ou = GetObject("LDAP://OU=Marketing,OU=DSys,DC=adsidev,DC=nttest,DC=microsoft,DC=com")<br>
+Set usr = ou.Create("user", "CN=James Smith")</font></p>
+<p><font face="Verdana" size="2">
+'---- Mandatory attributes----<br>
+usr.Put "samAccountName", "jsmith"</font></p>
+<p><font face="Verdana" size="2">
+'---- Optional attributes, you may skip this----<br>
+usr.Put "sn", "Smith"<br>
+usr.Put &quot;givenName&quot;, &quot;James&quot;<br>
+usr.Put "userPrincipalName", "jsmith@arcadiaybay.com"<br>
+usr.Put &quot;telephoneNumber&quot;, &quot;(555) 555 0111&quot;<br>
+usr.Put "title", "Marketing Administrator Dept"<br>
+usr.SetInfo<br>
+<br>
+'--Now that the user is created, reset the user's password and<br>
+'--enable its account.<br>
+<br>
+usr.SetPassword "secret***!"<br>
+usr.AccountDisabled = False<br>
+usr.SetInfo</font></p>
+    </blockquote>
+<p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="createGroup"></a>Creating a
+    Group</small></strong></font></p>
+    <p><font face="Verdana" size="2">You can create a group or distribution list
+  in Active Directory. Group can be either a domain local, global, or
+  universal group. For more information about group, please follow the <a href="http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp">Active
+  Directory Programmer's Guide</a>.</font></p>
+    <blockquote>
+    <p style="margin-bottom: 0"><font face="Verdana" size="2">Set ou = GetObject(&quot;LDAP://OU=DSys,DC=ArcadiaBay,DC=com&quot;)<br>
+    Set grp = ou.Create("group", "CN=Distributed System Admin")<br>
+    <br>
+    '----Creating a domain local group----</font></p>
+    <p style="margin-top: 0"><font face="Verdana" size="2">grp.Put "groupType", ADS_GROUP_TYPE_LOCAL_GROUP Or ADS_GROUP_TYPE_SECURITY_ENABLED<br>
+    grp.Put "samAccountName", "DSysAdmin"<br>
+    grp.SetInfo<br>
+    </font></p>
+    <p style="margin-bottom: 0"><font face="Verdana" size="2">'----Adding a user to a group----</font></p>
+    <p style="margin-top: 0"><font face="Verdana" size="2">grp.Add ("LDAP://CN=James Smith,OU=Marketing,OU=DSys,DC=ArcadiaBay,DC=com&quot;)</font></p>
+    </blockquote>
+<p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+<p>&nbsp;</p>
+<p><font face="Verdana" color="#0080C0"><strong><small><a name="delegateOU"></a>Delegating an
+Organizational Unit</small></strong></font></p>
+  <p><font face="Verdana" size="2">Now that you have set up an organizational
+  unit and created a user, you can delegate this organizational unit to the user. In
+  our scenario, we will delegate the Marketing organizational unit to James Smith, so
+  that he can create and delete users.&nbsp;</font></p>
+  <p><font face="Verdana" size="2">
+  We will need to retrieve the security descriptor of that organizational unit
+  and set the appropriate permission for James Smith.</font></p>
+    <blockquote>
+  <p><font face="Verdana" size="2"><br>
+  Set ou = GetObject("LDAP://OU=Marketing, OU=DSys,DC=ArcadiaBay,DC=com")<br>
+  Set sec = ou.Get("ntSecurityDescriptor")<br>
+  Set acl = sec.DiscretionaryAcl<br>
+  <br>
+  Set ace = CreateObject(&quot;AccessControlEntry&quot;) 'Or you can use Set ace = new ADsAccessControlEntry<br>
+  <br>
+  ace.AceType = ADS_ACETYPE_ACCESS_ALLOWED_OBJECT 'Allow to<br>
+  ace.AccessMask = ADS_RIGHT_DS_CREATE_CHILD Or ADS_RIGHT_DS_DELETE_CHILD
+  'Create and delete user<br>
+  ace.ObjectType = "{BF967ABA-0DE6-11D0-A285-00AA003049E2}" 'User's GUID (schemaIDGuid)<br>
+  ace.AceFlags = ADS_ACEFLAG_INHERIT_ACE 'Prop down the ace<br>
+  ace.Flags = ADS_FLAG_OBJECT_TYPE_PRESENT 'Tells what objectType is filled<br>
+  ace.Trustee = &quot;ARCADIABAY\Jsmith&quot; 'Who is the beneficiary of this ace<br>
+  acl.AddAce ace<br>
+  <br>
+  sec.DiscretionaryAcl = acl<br>
+  ou.Put "ntSecurityDescriptor", Array(sec)<br>
+  ou.SetInfo 'Commit to Active Directory<br>
+  <br>
+  Set ace = Nothing<br>
+  Set acl&nbsp; = Nothing<br>
+  Set sec = Nothing</font></p>
+    </blockquote>
+  <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="SubTree"></a>Removing a
+    Subtree</small></strong></font></p>
+    <p><font face="Verdana" size="2">Use <b> IADsDeleteOps</b> to delete a subtree of
+    Active Directory objects.</font></p>
+    <blockquote>
+    <p><font face="Verdana" size="2">Set ou = GetObject(&quot;LDAP://OU=Marketing,DC=ArcadiaBay,DC=com&quot;)<br>
+    ou.DeleteObject (0)
+    </font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="ANR"></a>Ambiguous
+    Name Resolution (ANR) Searching</small></strong></font></p>
+    <p><font size="2" face="Verdana">The LDAP filter for ANR searching is (anr=yourSearch).
+    For example (anr=John).</font></p>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="ANRAttr"></a>Listing
+    All Attributes Used in ANR Searches</small></strong></font></p>
+    <p><font size="2" face="Verdana">Bind to the Schema container and ADO or <b>IDirectoryobject</b>
+    to perform a search. All attributes that have the 0x00000004 bit set on
+    the <b> attributeSchema</b> object are included in the ANR query evaluations.</font></p>
+    <blockquote>
+    <p><font face="Verdana" size="2">(&amp;(objectCategory=attributeSchema)(searchFlags:1.2.840.113556.1.4.803:=4))</font></p>
+    </blockquote>
+    <p><font face="Verdana" size="2">Go to <a href="#top">top</a>.</font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="createComputer"></a>Creating a
+    Computer Account</small></strong></font></p>
+    <p><font face="Verdana" color="#000000" size="2">'----CONSTANTS----</font></p>
+    <font SIZE="2">
+    <blockquote>
+      <p><font face="Verdana" color="#000000" size="2">Const
+    UF_WORKSTATION_TRUST_ACCOUNT = &amp;H1000<br>
+    Const UF_ACCOUNTDISABLE = &amp;H2<br>
+    Const UF_PASSWD_NOTREQD = &amp;H20<br>
+    Const ADS_GUID_COMPUTRS_CONTAINER = &quot;aa312825768811d1aded00c04fd8d5cd&quot;<br>
+    Const ADS_ACETYPE_ACCESS_ALLOWED = 0<br>
+    Const ADS_ACEFLAG_INHERIT_ACE = 2&nbsp;</font></p>
+    </blockquote>
+    <p></font><font face="Verdana" color="#000000" size="2">'----PARAMETERS ----</font><font SIZE="2"></p>
+    <blockquote>
+    <p></font><font face="Verdana" color="#000000" size="2">lFlag =
+    UF_WORKSTATION_TRUST_ACCOUNT Or UF_ACCOUNTDISABLE Or UF_PASSWD_NOTREQD<br>
+    sComputer = &quot;myMachine&quot;<br>
+    sUserOrGroup = &quot;MYDOMAIN\MyGroup&quot; 'Who can join this computer.</font><font
+    SIZE="2"></p>
+    </blockquote>
+    <p></font><font face="Verdana" color="#000000" size="2">'----BUILD WELL-KNOWN GUID ADSPATH FOR COMPUTER
+    CONTAINER----</font><font SIZE="2"></p>
+    <blockquote>
+    <p></font><font face="Verdana" color="#000000" size="2">Set rootDSE =
+    GetObject(&quot;LDAP://RootDSE&quot;)<br>
+    sPath = &quot;LDAP://&lt;WKGUID=&quot; &amp; ADS_GUID_COMPUTRS_CONTAINER<br>
+    sPath = sPath + &quot;,&quot;<br>
+    sPath = sPath + rootDSE.Get(&quot;defaultNamingContext&quot;)<br>
+    sPath = sPath + &quot;&gt;&quot;</font><font SIZE="2"></p>
+    <p></font><font face="Verdana" color="#000000" size="2">Set compCont = GetObject(sPath)</font><font
+    SIZE="2"></p>
+    <p></font><font face="Verdana" color="#000000" size="2">'Bind again to get the correct
+    ADsPath<br>
+    sPath = &quot;LDAP://&quot; &amp; compCont.Get(&quot;distinguishedName&quot;)<br>
+    Set compCont = GetObject(sPath)</font><font SIZE="2"></p>
+    </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----CREATE A COMPUTER OBJECT----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">Set comp = compCont.Create(&quot;computer&quot;, &quot;CN=&quot; &amp; sComputer)<br>
+    comp.Put &quot;samAccountName&quot;, sComputer + &quot;$&quot;<br>
+    comp.Put &quot;userAccountControl&quot;, lFlag<br>
+    comp.SetInfo</font><font SIZE="2"></p>
+      </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----SET INITIAL
+    PASSWORD----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">sPwd = sComputer&nbsp;<br>
+    sPwd = StrConv(sPwd, vbLowerCase)<br>
+    comp.SetPassword sPwd</font><font SIZE="2"></p>
+      </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----SET
+    SECURITY----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">
+    Set sd = comp.Get(&quot;ntSecurityDescriptor&quot;)<br>
+    Set dacl = sd.DiscretionaryAcl</font><font SIZE="2"></p>
+      </blockquote>
+    <p style="word-spacing: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----SET ACE---</font><font SIZE="2"><font
+    face="Verdana" color="#000000">-</font></font></p>
+    <blockquote>
+    <p style="word-spacing: 0; margin-top: 0; margin-bottom: 0"><font SIZE="2"><font face="Verdana" color="#000000" size="2">Set ace =
+    CreateObject(&quot;AccessControlEntry&quot;)<br>
+    ace.AccessMask = -1 'Full Permission (Allowed)<br>
+    ace.AceType = ADS_ACETYPE_ACCESS_ALLOWED<br>
+    ace.Trustee = sUserOrGroup</font></p>
+      </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----ACL----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">dacl.AddAce ace<br>
+    sd.DiscretionaryAcl = dacl</font><font SIZE="2"></p>
+      </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----SD----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">
+    comp.Put &quot;ntSecurityDescriptor&quot;, Array(sd)<br>
+    comp.SetInfo</font><font SIZE="2"></p>
+      </blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"></font><font face="Verdana" color="#000000" size="2">'----ENABLE THE ACCOUNT----</font></p>
+    <blockquote>
+    <p style="margin-top: 0; margin-bottom: 0"><font face="Verdana" color="#000000" size="2">
+    comp.AccountDisabled = False<br>
+    comp.SetInfo</font><font SIZE="2"></p>
+      </blockquote>
+    </font><p><font face="Verdana" size="2">Go to <a href="#top">top</a></font><p>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

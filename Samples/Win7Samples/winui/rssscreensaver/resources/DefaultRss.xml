@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0">
+	<channel>
+		<title>RSS Feed Not Available</title>
+		<link>http://msdn.microsoft.com/vcsharp/rss.xml</link>
+		<description>The RSS feed could not be loaded.</description>
+		<language>en-us</language>
+		<ttl>1440</ttl>
+		<item>
+			<title>You may not be subscribed to any feeds. </title>
+			<description>If you are want to subscribe to a feed run Microsoft Internet Explorer and subscribe to a picture feed.</description>
+			<link>http://msdn.microsoft.com/vcsharp/rss.xml</link>
+			<enclosure url="res:SSaverBackground.jpg" type="image/jpg"/>
+		</item>
+		<item>
+			<title>Try downloading RSS feeds.</title>
+			<description>You may need to refresh your feed subscriptions to download feed contents including picture enclosures.</description>
+			<link>http://msdn.microsoft.com/vcsharp/rss.xml</link>
+			<enclosure url="res:SSaverBackground2.jpg" type="image/jpg"/>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,411 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""windows.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALER DIALOG PRELOAD DISCARDABLE  50, 50, 194, 168
+STYLE DS_3DLOOK | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "Phone Dialer"
+MENU IDM_MENU
+CLASS "DialerClass"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDD_DRECTSEPARATOR,"Static",SS_ETCHEDHORZ | 
+                    WS_DISABLED,0,0,194,1
+    LTEXT           "&Number to dial:",IDD_DNUMTODIAL,7,7,90,10
+    COMBOBOX        IDD_DCOMBO,7,21,90,104,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    DEFPUSHBUTTON   "&Dial",IDD_DDIAL,7,38,90,14,WS_DISABLED | WS_GROUP
+    CONTROL         "\n1",IDD_DBUTTON1,"Button",BS_OWNERDRAW,14,62,23,20
+    CONTROL         "ABC\n2",IDD_DBUTTON2,"Button",BS_OWNERDRAW,40,62,23,20
+    CONTROL         "DEF\n3",IDD_DBUTTON3,"Button",BS_OWNERDRAW,66,62,23,20
+    CONTROL         "GHI\n4",IDD_DBUTTON4,"Button",BS_OWNERDRAW,14,86,23,20
+    CONTROL         "JKL\n5",IDD_DBUTTON5,"Button",BS_OWNERDRAW,40,86,23,20
+    CONTROL         "MNO\n6",IDD_DBUTTON6,"Button",BS_OWNERDRAW,66,86,23,20
+    CONTROL         "PQRS\n7",IDD_DBUTTON7,"Button",BS_OWNERDRAW,14,110,23,
+                    20
+    CONTROL         "TUV\n8",IDD_DBUTTON8,"Button",BS_OWNERDRAW,40,110,23,20
+    CONTROL         "WXYZ\n9",IDD_DBUTTON9,"Button",BS_OWNERDRAW,66,110,23,
+                    20
+    CONTROL         "\n*",IDD_DBUTTONSTAR,"Button",BS_OWNERDRAW,14,134,23,20
+    CONTROL         "\n0",IDD_DBUTTON0,"Button",BS_OWNERDRAW,40,134,23,20
+    CONTROL         "\n#",IDD_DBUTTONPOUND,"Button",BS_OWNERDRAW,66,134,23,
+                    20
+    GROUPBOX        "Speed dial",IDD_DSPEEDDIALGRP,103,7,84,154
+    LTEXT           "&1",IDD_DSPEEDDIALTEXT1,109,24,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL1,117,21,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&2",IDD_DSPEEDDIALTEXT2,109,41,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL2,117,38,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&3",IDD_DSPEEDDIALTEXT3,109,58,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL3,117,55,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&4",IDD_DSPEEDDIALTEXT4,109,75,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL4,117,72,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&5",IDD_DSPEEDDIALTEXT5,109,92,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL5,117,89,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&6",IDD_DSPEEDDIALTEXT6,109,109,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL6,117,106,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&7",IDD_DSPEEDDIALTEXT7,109,126,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL7,117,123,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "&8",IDD_DSPEEDDIALTEXT8,109,143,7,10
+    PUSHBUTTON      "",IDD_DSPEEDDIAL8,117,140,63,14,BS_LEFT | WS_GROUP
+END
+
+IDD_SD1 DIALOG DISCARDABLE  12, 29, 165, 173
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Speed Dial"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Choose a button from the group below.",
+                    IDD_SD1TEXTCHOOSE,7,7,140,10
+    LTEXT           "1",IDD_SD1SPEEDDIALTEXT1,7,27,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL1,16,24,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "2",IDD_SD1SPEEDDIALTEXT2,7,44,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL2,16,41,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "3",IDD_SD1SPEEDDIALTEXT3,7,61,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL3,16,58,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "4",IDD_SD1SPEEDDIALTEXT4,7,78,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL4,16,75,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "5",IDD_SD1SPEEDDIALTEXT5,86,27,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL5,95,24,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "6",IDD_SD1SPEEDDIALTEXT6,86,44,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL6,95,41,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "7",IDD_SD1SPEEDDIALTEXT7,86,61,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL7,95,58,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "8",IDD_SD1SPEEDDIALTEXT8,86,78,8,10
+    PUSHBUTTON      "",IDD_SD1SPEEDDIAL8,95,75,63,14,BS_LEFT | WS_GROUP
+    LTEXT           "",IDD_SD1RECTSEPARATOR,7,96,151,8,WS_DISABLED | NOT 
+                    WS_GROUP
+    LTEXT           "Enter a name and number for the selected button.",
+                    IDD_SD1TEXTENTER,7,104,160,10
+    LTEXT           "&Name:",IDD_SD1TEXTNAME,16,119,29,10
+    EDITTEXT        IDD_SD1EDITNAME,16,130,63,14,ES_AUTOHSCROLL
+    LTEXT           "N&umber to dial:",IDD_SD1TEXTNUMBER,95,119,53,10
+    EDITTEXT        IDD_SD1EDITNUMBER,95,130,63,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Save",IDOK,55,152,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,108,152,50,14
+END
+
+IDD_SD2 DIALOG DISCARDABLE  12, 29, 158, 91
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Program Speed Dial"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter a name and number to save on this button.",
+                    IDD_SD2TEXTENTER,7,7,85,21
+    DEFPUSHBUTTON   "&Save",IDOK,98,7,53,14,WS_GROUP
+    PUSHBUTTON      "Save and &Dial",IDD_SD2SAVEANDDIAL,98,24,53,14,
+                    WS_DISABLED | WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,98,41,53,14
+    LTEXT           "&Name:",IDD_SD2TEXTNAME,7,30,29,10
+    EDITTEXT        IDD_SD2EDITNAME,7,41,63,14,ES_AUTOHSCROLL
+    LTEXT           "N&umber to dial:",IDD_SD2TEXTNUMBER,7,59,53,10
+    EDITTEXT        IDD_SD2EDITNUMBER,7,70,63,14,ES_AUTOHSCROLL
+END
+
+IDD_CONNECTUSING DIALOG PRELOAD DISCARDABLE  50, 50, 260, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Connect Using"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "&Line:",IDD_CUTEXTLINE,7,16,79,10,NOT WS_GROUP
+    COMBOBOX        IDD_CULISTLINE,7,27,173,97,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "&Address:",IDD_CUTEXTADDRESS,7,43,79,10,NOT WS_GROUP
+    COMBOBOX        IDD_CULISTADDRESS,7,53,173,82,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Use Phone Dialer to handle &voice call requests from other programs",
+                    IDD_CUSIMPLETAPICHKBOX,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,72,230,10
+    PUSHBUTTON      "Line &Properties...",IDD_CUPROPERTIES,190,26,63,14
+    DEFPUSHBUTTON   "OK",IDOK,146,84,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,203,84,50,14,WS_GROUP
+END
+
+IDD_ABOUT DIALOG DISCARDABLE  22, 38, 227, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About Phone Dialer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDI_DIALER,IDD_AICON,10,5,20,20
+    LTEXT           "",IDD_ATEXTTITLE,38,5,127,10,SS_NOPREFIX | NOT WS_GROUP
+    LTEXT           "Copyright © 1993 - 2000  Microsoft.  All Rights Reserved.",
+                    IDD_ATEXTCOPYRIGHT,38,35,179,20,SS_NOPREFIX | NOT 
+                    WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,177,5,40,14
+END
+
+IDD_INUSE DIALOG DISCARDABLE  22, 38, 199, 81
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Line In Use"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,36,58,53,16
+    ICON            IDI_LINEBUSY,IDD_IUICON,10,5,18,20
+    LTEXT           "The selected line or address is in use by another program or device on the line. Your call can not be placed at this time.",
+                    IDD_IUTEXT1,45,5,144,27,SS_NOPREFIX | NOT WS_GROUP
+    LTEXT           "Try your call again later.",IDD_IUTEXT2,45,40,114,12,
+                    SS_NOPREFIX | NOT WS_GROUP
+END
+
+IDD_CALLFAILED DIALOG DISCARDABLE  22, 38, 199, 73
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Call Failed"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,72,50,53,16
+    ICON            IDI_LINEBUSY,IDD_IUICON,10,5,18,20
+    LTEXT           "",IDD_CFTEXT,45,5,144,40,SS_NOPREFIX | NOT WS_GROUP
+END
+
+IDD_DIALING DIALOG DISCARDABLE  0, 0, 172, 62
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Dialing"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "&Hang Up",IDCANCEL,9,37,50,14
+    RTEXT           "Currently dialing:",IDD_DGNUMBER,9,9,52,9
+    LTEXT           "",IDD_DGNUMBERTEXT,63,9,100,9
+    LTEXT           "",IDD_DGNAMETEXT,63,23,100,9
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDM_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t\tCtrl+X",                IDM_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               IDM_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              IDM_EDIT_PASTE
+        MENUITEM "&Delete\tDel",                IDM_EDIT_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "&Speed Dial...",              IDM_EDIT_SPEEDDIAL
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&Connect Using...",           IDM_CONNECTUSING
+        MENUITEM "&Dialing Properties...",      IDM_LOCATION
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About Phone Dialer",         IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_DIALER              ICON    DISCARDABLE     "DIALER.ICO"
+IDI_LINEBUSY            ICON    DISCARDABLE     "LINEBUSY.ICO"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDA_DIALER ACCELERATORS DISCARDABLE 
+BEGIN
+    "1",            IDD_DSPEEDDIAL1,        VIRTKEY, ALT, NOINVERT
+    "2",            IDD_DSPEEDDIAL2,        VIRTKEY, ALT, NOINVERT
+    "3",            IDD_DSPEEDDIAL3,        VIRTKEY, ALT, NOINVERT
+    "4",            IDD_DSPEEDDIAL4,        VIRTKEY, ALT, NOINVERT
+    "5",            IDD_DSPEEDDIAL5,        VIRTKEY, ALT, NOINVERT
+    "6",            IDD_DSPEEDDIAL6,        VIRTKEY, ALT, NOINVERT
+    "7",            IDD_DSPEEDDIAL7,        VIRTKEY, ALT, NOINVERT
+    "8",            IDD_DSPEEDDIAL8,        VIRTKEY, ALT, NOINVERT
+    "C",            IDM_EDIT_COPY,          VIRTKEY, CONTROL, NOINVERT
+    "D",            IDD_DDIAL,              VIRTKEY, ALT, NOINVERT
+    "N",            IDM_ACCEL_NUMTODIAL,    VIRTKEY, ALT, NOINVERT
+    "V",            IDM_EDIT_PASTE,         VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      IDM_EDIT_PASTE,         VIRTKEY, SHIFT, NOINVERT
+    "X",            IDM_EDIT_CUT,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 4,0,1259,1
+ PRODUCTVERSION 4,0,1259,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Microsoft® Windows(TM) Phone Dialer\0"
+            VALUE "FileVersion", "4.00\0"
+            VALUE "InternalName", "Phone Dialer\0"
+            VALUE "LegalCopyright", "Copyright © Microsoft Corporation 1996 - 2000.  All Rights Reserved.\0"
+            VALUE "OriginalFilename", "dialer.exe\0"
+            VALUE "ProductName", "Microsoft(R) Windows NT(TM) Operating System\0"
+            VALUE "ProductVersion", "4.00\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszAppName             "Dialer"
+    ikszAppFriendlyName     "Phone Dialer"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszErrDefault          "An internal error occurred in Phone Dialer.\nQuit and restart Phone Dialer."
+    ikszErrOOM              "There was not enough memory to continue.\nQuit one or more programs, and then try again."
+    ikszErrTAPI             "Windows Telephony was unable to complete an operation requested by Phone Dialer.\nQuit and restart Phone Dialer."
+    ikszErrNoVoiceLine      "Phone Dialer was unable to find a telephone device or modem to use to dial voice calls.\nIn Control Panel, double-click the Modems icon to install a modem, or install another telephone device to use for dialing calls."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszWarningTapiReInit   "Phone Dialer cannot successfully start.\nQuit all other telephony programs, and then try again."
+    ikszErrLineClose        "Your call was cancelled because the Telephony device driver closed the line."
+    ikszDisconnectedNoDialTone 
+                            "A dial tone was not detected. Please check your telephone cable connections, and be sure the line is not in use by someone else."
+    ikszErrInvalidCountryRegionCode 
+                            "The country code you entered is invalid.\nPlease check the phone number again."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszErrLineInitBadIniFile 
+                            "Configuration information relating to Telephony services appears to be corrupt.\nPlease check the configuration of telephone devices in the control panel."
+    ikszErrLineInitNoDriver "One of the components of the Telephony device driver is missing.\nUse the Control Panel to set up the driver properly."
+    ikszErrLineInitNoDevice "The selected device has been removed from your computer. Please select a different device for dialing."
+    ikszErrNoMultipleInstance 
+                            "You have two copies of the same Telephony driver installed.\nUse the Control Panel to remove one of the copies."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszErrInvalAddress     "The specified phone number either contains invalid characters, or is incorrectly formatted.\nClick on the number box with the right mouse button to see more information."
+    ikszErrLineInitWrongDrivers 
+                            "One or more telephone device drivers are incompatible with TAPI.DLL.\nInstall an updated version."
+    ikszErrAddrBlocked      "The specified phone number cannot be dialed on the selected line device because it is blocked at the telephone switch."
+    ikszErrBillingRejected  "The billing information specified as part of the phone number has been rejected.\nCheck to make sure you've entered it correctly, and then try again."
+    ikszErrResUnavail       "Another program is using the selected Telephony device.\nTry again after the other program completes."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszDisconnectedReject  "The call was rejected by the called party."
+    ikszDisconnectedBusy    "The called number is busy."
+    ikszDisconnectedNoAnswer "There was no answer."
+    ikszDisconnectedCantDo  "The call cannot be completed as dialed."
+    ikszDisconnectedNetwork "The call failed due to network congestion."
+    ikszDisconnectedIncompatible 
+                            "Equipment at the called number is incompatible with your equipment."
+    ikszErrInvalCallState   "The Telephony device driver is unable to respond to your request at this time."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ikszWarningTitle        "Warning"
+    ikszWarningFor911       "Using your current location and calling card selection, dialing this number could result in a emergency services call to 911.  Are you sure you want to dial this call ?"
+    ikszWarningNewDefault   "Your preferred device selection is not available.  A new device has been selected by default.  If you wish to change the selection use the 'Connect Using' option under the 'Tools' menu"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,23 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+; This help project requires hc 3.1
+[OPTIONS]
+HCW=0
+;HCW=0
+;HLP=statlist.HLP
+;ERRORLOG=statlist.ERR
+LCID=0x409 0x0 0x0 ;English (United States)
+REPORT=Yes
+TITLE=PDH Counter Statistics Demo Application Help
+BUILD=RELEASE
+;HLP=.\Statlist.hlp
+
+[FILES]
+statlist.RTF
+
+[BUILDTAGS]
+DEBUG
+RELEASE
+
+[CONFIG]
+BrowseButtons()

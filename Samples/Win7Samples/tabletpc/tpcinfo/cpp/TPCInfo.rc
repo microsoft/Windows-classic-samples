@@ -1,0 +1,122 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winresrc.h>
+#define IDC_STATIC      (-1)
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define VER_FILETYPE                VFT_APP\r\n"
+    "#define VER_FILEDESCRIPTION_STR     ""Microsoft Tablet PC Platform Info Sample Application""\r\n"
+    "#define VER_INTERNALNAME_STR        ""TPCInfo""\r\n"
+    "#define VER_ORIGINALFILENAME_STR    ""TPCInfo.exe""\r\n"
+    "#include ""tpcver.ver""\r\n"
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 237
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 159
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG DIALOG DISCARDABLE  200, 200, 244, 166
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft Tablet PC Platform Info"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,5,135,233,1
+    DEFPUSHBUTTON   "Close",IDCLOSE,95,145,50,14
+    RTEXT           "Tablet PC Components:",IDC_STATIC,5,10,105,8
+    RTEXT           "Default Handwriting Recognizer:",IDC_STATIC,5,50,105,10
+    RTEXT           "Default Speech Recognizer:",IDC_STATIC,5,70,105,10
+    RTEXT           "Installed Controls:",IDC_STATIC,5,90,105,10
+    LTEXT           "",IDC_TABLETPC,115,10,120,8
+    LTEXT           "None",IDC_HWR_NAME,115,50,125,10
+    LTEXT           "None",IDC_SPR_NAME,115,70,125,10
+    LTEXT           "None",IDC_CTL1_NAME,115,90,125,9
+    LTEXT           "",IDC_HWR_VENDOR,115,58,125,11
+    LTEXT           "",IDC_SPR_VENDOR,115,79,125,10
+    LTEXT           "",IDC_CTL1_VER,115,98,125,9
+    LTEXT           "",IDC_CTL2_NAME,115,112,125,9
+    LTEXT           "",IDC_CTL2_VER,115,120,125,9
+    RTEXT           "Text Services Framework:",IDC_STATIC,5,30,105,8
+    LTEXT           "None",IDC_TSF,115,30,120,8
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define VER_FILETYPE                VFT_APP
+#define VER_FILEDESCRIPTION_STR     "Microsoft Tablet PC Platform Info Sample Application"
+#define VER_INTERNALNAME_STR        "TPCInfo"
+#define VER_ORIGINALFILENAME_STR    "TPCInfo.exe"
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

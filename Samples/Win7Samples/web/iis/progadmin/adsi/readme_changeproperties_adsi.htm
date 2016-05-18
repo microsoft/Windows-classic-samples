@@ -1,0 +1,160 @@
+<head>
+<title>IIS Samples - Change Properties Using ADSI</title>
+</head>
+<body>
+
+<a name="top"></a>
+<p>
+<h2>IIS Samples - Change Properties Using ADSI</h2>
+<a name="IIS_changeprops_adsi"></a>
+
+
+<p>This sample scripts uses Active Directory Services Interface (ADSI) provider for IIS to change 
+properties in the IIS metabase. The properties and 
+computers on which you want to change them are listed in a tab-delimited text file that you create. 
+There is a matching Windows Management Instrumentation (WMI) version of this sample.</p>
+
+<p><font color="blue"><b>Important</b></font> &nbsp; These samples are provided for educational purposes only. They are not 
+intended to be used in a production environment, have not been tested in a production 
+environment, and Microsoft does not provide technical support for them.
+
+<p>
+	&nbsp;</p>
+  <p>
+	<a href="#ovr">Sample Overview</a><br>
+	<a href="#req">Requirements</a><br>
+	<a href="#loc">Location of the Source Code</a><br>
+	<a href="#bld">Build and Install the Sample</a><br>
+	<a href="#run">Run the Sample</a><br>
+	<a href="#out">Sample Output</a><br>
+	<a href="#hlp">Helpdesk</a></p>
+  <p>
+	&nbsp;</p>
+  <h4><a name="ovr"></a>Sample Overview</h4>
+  <p>ADSI can be used to access most resource on your computer, including IIS resources. IIS comes 
+  installed with an ADSI provider that allows you to configure your metabase from script files and 
+  compiled code.</p>
+  <p>When running this sample, the folowing conditions must be met:</p>
+  <ul>
+<li>The property must exist at the level you specify in the file.</li>
+<li>Not all properties propogate to child nodes. ConnectionTimeout does, ServerComment does not.</li>
+<li>The property value must be of a string, boolean, or integer data type.</li>
+<li>The file must be in ANSI format.</li>
+<li>Each line in the file corresponds to one property change. A quick way to create the file that has 
+repeated text is to use Excel where the first column is the machine name, the second column is the 
+metabase path, the third column is the property name, the fourth column is the value you want set, 
+and the fifth column is the node type. Then, copy all the fields and paste into Notepad. Each line 
+is automatically tab-delimited.</li>
+<li>The user of the script must be an administrator on all of the machines that are listed in the file. 
+If the user account is not an administrator on all of the machines, but there is an account that 
+is an administrator on all of the machines, alter the call to ConnectServer in this script to add
+ a user name and password, or any other parameters like Locale ID.</li>
+</ul>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="req"></a>Requirements</h4>
+  <p>This sample requires the installation of the following software to
+  function properly:</p>
+  <ul>
+    <li>Windows XP Professional with IIS 5.1 installed or Windows XP Server with 
+    IIS 6.0 installed.</li>
+  </ul>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="loc"></a>Location of the Source Code</h4>
+  <p>IIS samples are included in the IIS Software Developer Kit (SDK). 
+  You can download the IIS SDK from 
+  <a href="http://go.microsoft.com/fwlink/?LinkId=7298">Platform SDK Update</a>. 
+  You can view the SDK at <a href="http://go.microsoft.com/fwlink/?LinkId=1694">MSDN Online</a>. 
+  In the table of contents at MSDN Online, click <b>Web Development</b>, <b>Server Technologies</b>, 
+  <b>Internet Information Services (IIS)</b>, <b>SDK Documentation</b>, 
+  <b>Internet Information Services</b>, <b>Samples</b>.</p>
+  <p>The following source code files are required for this sample:</p>
+  <table border="1">
+    <tr>
+      <th>File</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>ChangeProperties_ADSI.js</td>
+      <td>A JScript file containing the sample code.</td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="bld"></a>Build and Install the Sample</h4>
+  <p>Nothing is required to build this sample.</p>
+  <p>&nbsp;</p>
+  <p>To install this sample, the following steps must be performed:</p>
+  <ol>
+  <li>Copy the ChangeProperties_ADSI.js file to a physical folder on your computer. For example, 
+  create a folder called <code>C:\Samples</code> and copy the files to that folder.</li>
+  <li>Use Windows Explorer to set restricted access control on the sample .dll file in its physical folder. 
+  For more information, click <b>Start</b>, <b>Help and Support</b>, and search for <b>Access Control</b>. 
+  ADSI scripts can only be called by Administrators, but always restrict access to your script files to be 
+  extra secure.</li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="run"></a>Run the Sample</h4>
+  <p>In order to run this sample, follow the instructions listed below:</p>
+  <ol>
+    <li>Open a command line window by clicking <b>Start</b>, <b>Run</b>, type <code>cmd</code> 
+	in the text box, and click <b>OK</b>.</li>
+	<li>Change directories until you are in the same one that contains your sample script. For example, if 
+	you saved your sample script in <code>C:\Samples</code>, type the following in the command window:
+	<pre>cd C:\Samples</pre></li>
+	<li>Type the following to see instructions on using this script:
+	<pre>Cscript /nologo ChangeProperties_WMI.js</pre></li>
+	<li>Using Notepad, create your tab-delimited text file containing the names of the computers on 
+	which you want to change properties, and the properties you want to change. Save your file in the same 
+	folder as your sample script in order to protect it with the same access control that you set on the 
+	folder. The following is the syntax for each line in the file:
+	<pre>&lt;machine name&gt;          &lt;metabase path&gt;         &lt;property name&gt;         &lt;value&gt;</pre>
+	The following is an example of a tab-delimited text file that this sample can use:
+	<pre>Server1         w3svc   ConnectionTimeout       999
+Server2         w3svc/1         ServerComment   My Default Server
+Server2         w3svc/1/root    Path    c:\webroot
+Server1         msftpsvc        ConnectionTimeout       999</pre></li>
+<li>To use the file you created above, you need to pass the name of the file to the script. For example, 
+if you named your file <code>C:\Samples\MyChanges.txt</code>, you would use the following command in the command window:
+<pre>Cscript /nologo ChangeProperties_ADSI.js C:\Samples\MyChanges.txt</pre></li>
+  </ol>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="out"></a>Sample Output</h4>
+  <p>The following example of output is displayed for each successful change after you perform step 5 
+  from <b>Run the Sample</b>.</p>
+  <pre>Success: Server2 w3svc/ConnectionTimeout, 900 -> 999</pre>
+  <p>Errors like the following are also displayed:</p>
+  <pre>*** Error: setting property, line 1 ***
+-2146828218 - Permission denied
+ConnectionTimeout can not be set at w3svc.</pre>
+  <font size="2"><a href="#top">to top</a></font>
+  <p>&nbsp;</p>
+  <h4><a name="hlp"></a>Help Desk</h4>
+  <p>If here you do not find answers to your questions, visit the 
+  <a href="http://go.microsoft.com/fwlink/?linkid=1782">Microsoft Help and Support</a> 
+  Web site.</p>
+  <table border="1">
+    <tr>
+      <th>Problem</th>
+      <th>Possible Solution</th>
+    </tr>
+    <tr>
+      <td>Permission denied errors</td>
+      <td>Only administrators can run ADSI scripts. 
+To keep security risks low, log on to your computer using an account that is not in the 
+Administrators group, and then use the <b>Run As</b> 
+command to run your script or executable as an 
+administrator. From the command prompt, type <code>runas /user: <i>administrative_accountname</i> 
+"<i>script_name</i>"</code>.</p></td>
+    </tr>
+  </table><br>
+  <font size="2"><a href="#top">to top</a></font>
+
+<hr class="iis" size="1">
+<p align="center"><i>© 1997-2002 Microsoft Corporation. All rights reserved.</i></p>
+
+</body>
+</html>

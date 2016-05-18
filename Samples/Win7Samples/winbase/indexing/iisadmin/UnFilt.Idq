@@ -1,0 +1,49 @@
+[Names]
+Unfiltered (DBTYPE_BOOL) = 49691c90-7e17-101a-a91c-08002b2ecda9 7
+
+# This is the query file for the unfiltered document query
+#
+
+[Query]
+
+# The CiCatalog variable must point to where the catalog (index) files
+# are stored on your system.  You will probably have to change this
+# value.  If this value is not specified, a default value is read from
+# the registry from:
+# HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ContentIndex\IsapiDefaultCatalogDirectory
+
+# CiCatalog=d:\
+
+# These are the columns that are referenced in the .htx files
+# when formatting output for each hit.
+
+CiColumns=vpath, path, write
+
+# The CiRestriction is the query -- all files not filtered
+
+CiRestriction=@unfiltered=TRUE
+
+# Display CiMaxRecordsPerPage hits on each page of output
+
+CiMaxRecordsPerPage=100
+
+# CiScope is the directory (virtual or real) under which results are
+# returned.  If a file matches the query but is not in a directory beneath
+# CiScope, it is not returned in the result set.
+# A scope of \ means all hits matching the query are returned.
+
+CiScope=/
+
+# This is the .htx file to use for formatting the results of the query.
+
+CiTemplate=/iisadmin/isadmin/unfilt.htx
+
+# Setting CiForceUseCi to true means that the index is assumed to be
+# up to date, so queries that might otherwise force a walk of the
+# directory structure (find files older than X), will instead use
+# the index and run more quickly.  Of course, that means that the results
+# might miss files that match the query.
+
+CiForceUseCi=true
+
+

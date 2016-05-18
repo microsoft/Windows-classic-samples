@@ -1,0 +1,65 @@
+HKCR
+{
+	DBAuth.DBAuthPlugin.9 = s 'DBAuthPlugin Class'
+	{
+		CLSID = s '{BC8F17A9-B5EB-47F0-9612-34725C6CFA32}'
+	}
+	DBAuth.DBAuthPlugin = s 'DBAuthPlugin Class'
+	{
+		CLSID = s '{BC8F17A9-B5EB-47F0-9612-34725C6CFA32}'
+		CurVer = s 'DBAuth.DBAuthPlugin.9'
+	}
+	NoRemove AppID
+	{
+		ForceRemove {BC8F17A9-B5EB-47F0-9612-34725C6CFA32} = s 'DB Authorizer'
+		{
+		    val DllSurrogate = s ''
+		}
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {BC8F17A9-B5EB-47F0-9612-34725C6CFA32} = s 'DBAuthPlugin Class'
+		{
+		    val AppID = s '{BC8F17A9-B5EB-47F0-9612-34725C6CFA32}'
+			ProgID = s 'DBAuth.DBAuthPlugin.9'
+			VersionIndependentProgID = s 'DBAuth.DBAuthPlugin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{0BC95C01-9658-49B5-ACA3-CBEA79B0DAE6}'
+            ForceRemove Properties
+            {
+                val Author = s 'Microsoft Corporation'
+                val Name = s 'WMS SDK Sample Authorization Plugin'
+                val Copyright = s 'Copyright 2002 Microsoft Corporation. All rights reserved.'
+                val SubCategory = s 'Authorize'
+            }
+		}
+	}
+}
+
+HKLM 
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Windows Media'
+			{
+				NoRemove Server
+				{
+					NoRemove RegisteredPlugins
+					{
+                        NoRemove 'Event Notification and Authorization'
+                        {
+					        ForceRemove {BC8F17A9-B5EB-47F0-9612-34725C6CFA32} = s 'WMS SDK Sample Authorization Plugin'
+					        {
+					        }
+					    }
+					}
+				}
+			}
+		}
+	}
+}

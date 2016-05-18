@@ -1,0 +1,7 @@
+; File Share Sample.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FILE SHARE SAMPLE"
+
+EXPORTS
+    ; Explicit exports can go here
+    Startup             PRIVATE

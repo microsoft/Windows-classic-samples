@@ -1,0 +1,31 @@
+<!--
+    This propdesc file contains the descriptions of Explorer Data Provider custom properties.
+    To register/unregister, use the PropertySchema SDK sample, or http://www.codeplex.com/prop.
+    You can also run regsvr32 ExplorerDataProvider.dll from an elevated cmd prompt with
+    this propdesc file in the same directory as the DLL.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns="http://schemas.microsoft.com/windows/2006/propertydescription"
+        schemaVersion="1.0" >
+    <propertyDescriptionList publisher="Microsoft" product="Windows">
+        <propertyDescription name="Microsoft.SDKSample.AreaSize" formatID="{CE8B09DD-B2D6-4751-A207-4FFDD1A0F65C}" propID="3">
+            <description>The Size of the area of the shape.</description>
+            <searchInfo inInvertedIndex="false" isColumn="false" />
+            <typeInfo canStackBy="true" type="String"/>
+            <labelInfo label="Area"/>
+        </propertyDescription>
+        <propertyDescription name="Microsoft.SDKSample.NumberOfSides" formatID="{DADD3288-0380-4dd3-A5C4-CD7AE2A099F0}" propID="3">
+            <description>Number of sides is the shape.</description>
+            <searchInfo inInvertedIndex="false" isColumn="false" />
+            <typeInfo canStackBy="true" type="Int32"/>
+            <labelInfo label="Number of Sides"/>
+        </propertyDescription>
+        <propertyDescription name="Microsoft.SDKSample.DirectoryLevel" formatID="{581CF603-2925-4acf-BB5A-3D3EB39EACD3}" propID="3">
+            <description>Number of directory levels to this item.</description>
+            <searchInfo inInvertedIndex="false" isColumn="false" />
+            <typeInfo canStackBy="false" type="Int32"/>
+            <labelInfo label="Directory Level"/>
+        </propertyDescription>
+    </propertyDescriptionList>
+</schema>
+    

@@ -1,0 +1,132 @@
+//==========================================================================;
+//
+//  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+//  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+//  PURPOSE.
+//
+//  Copyright (c)  Microsoft Corporation.  All Rights Reserved.
+//
+//==========================================================================;
+//
+//Microsoft Visual C++ generated resource script.
+//
+
+#include <winresrc.h>
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+#include <commctrl.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SYNTHPROP1 DIALOG DISCARDABLE  0, 0, 316, 98
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Generic1",IDC_FREQTRACKBAR,"msctls_trackbar32",
+                    WS_TABSTOP | WS_CHILD | TBS_AUTOTICKS | TBS_VERT | TBS_RIGHT | TBS_ENABLESELRANGE,65,15,15,55
+    GROUPBOX        "Frequency",IDC_FREQUENCYGROUP,57,5,39,85,WS_GROUP
+    GROUPBOX        "Waveform",IDC_WAVEFORMGROUP,4,4,50,85,WS_GROUP
+    CONTROL         "&Sine",IDC_WAVESINE,"Button",BS_AUTORADIOBUTTON,8,20,40,
+                    10
+    CONTROL         "Squar&e",IDC_WAVESQUARE,"Button",BS_AUTORADIOBUTTON,8,
+                    35,41,10
+    CONTROL         "Sa&wtooth",IDC_WAVESAWTOOTH,"Button",BS_AUTORADIOBUTTON,
+                    8,50,44,10
+    CONTROL         "Swee&p",IDC_WAVESWEEP,"Button",BS_AUTORADIOBUTTON,
+                    8,65,41,10
+    GROUPBOX        "Channels",IDC_CHANNELSGROUP,145,5,75,25,WS_GROUP
+    CONTROL         "&1",IDC_CHANNELS1,"Button",BS_AUTORADIOBUTTON,147,15,20,
+                    10
+    CONTROL         "&2",IDC_CHANNELS2,"Button",BS_AUTORADIOBUTTON,171,15,20,
+                    10
+    GROUPBOX        "Bits per sample",IDC_BITSPERSAMPLEGROUP,145,36,75,24,
+                    WS_GROUP
+    CONTROL         "&8",IDC_BITSPERSAMPLE8,"Button",BS_AUTORADIOBUTTON,147,
+                    45,20,10
+    CONTROL         "1&6",IDC_BITSPERSAMPLE16,"Button",BS_AUTORADIOBUTTON,
+                    171,45,20,10
+    GROUPBOX        "Sampling frequency",IDC_SAMPLINGFREQUENCYGROUP,145,65,
+                    75,25,WS_GROUP
+    CONTROL         "&11",IDC_SAMPLINGFREQ11,"Button",BS_AUTORADIOBUTTON,147,
+                    75,20,10
+    CONTROL         "&22",IDC_SAMPLINGFREQ22,"Button",BS_AUTORADIOBUTTON,172,
+                    75,20,10
+    CONTROL         "&44",IDC_SAMPLINGFREQ44,"Button",BS_AUTORADIOBUTTON,196,
+                    75,20,10
+    CONTROL         "Generic1",IDC_AMPLITUDETRACKBAR,"msctls_trackbar32",
+                    WS_TABSTOP | 0x3a,110,15,20,55
+    GROUPBOX        "Amplitude",IDC_AMPLITUDEGROUP,100,5,40,85,WS_GROUP
+    EDITTEXT        IDC_FREQUENCYTEXT,60,70,30,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_AMPLITUDETEXT,105,70,30,15,ES_AUTOHSCROLL
+    GROUPBOX        "Output Format",IDC_OUTPUTFORMAT,226,5,81,85,WS_GROUP
+    CONTROL         "PCM",IDC_OF_PCM,"Button",BS_AUTORADIOBUTTON,231,15,66,
+                    11
+    CONTROL         "Microsoft ADPCM",IDC_OF_MSADPCM,"Button",
+                    BS_AUTORADIOBUTTON,231,28,71,11
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_SYNTHPROPNAME,    "Synthesizer"
+END
+
+//
+// Version
+//
+
+#define VERSION_RES_BIN_NAME        "Synth.ax\0"
+#define VERSION_RES_BIN_DESCRIPTION "Audio Generator Source (Sample)\0"
+
+#define AMOVIE_SELF_REGISTER
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

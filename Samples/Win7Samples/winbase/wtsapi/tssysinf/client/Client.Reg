@@ -1,0 +1,5 @@
+REGEDIT4
+
+[HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default\AddIns\tssysinfo]
+"Name" = "d:\\release\\nt\\dump\\sysinf_c.dll"
+

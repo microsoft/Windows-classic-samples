@@ -1,0 +1,35 @@
+#include "winres.h"
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    RULE_NAME_STRING_ID     "Allow inbound TCP traffic to application EdgeTraversalOptions.exe"
+    RULE_GROUP_STRING_ID    "EdgeTraversalOptions Sample Application"
+    RULE_DESCRIPTION_STRING_ID 
+                            "Allow EdgeTraversalOptions.exe to receive inbound traffic for TCP protocol from remote machines located within your network as well as from the Internet (i.e from outside of your Edge device like Firewall or NAT)"
+    GROUP_DESCRIPTION_STRING_ID 
+                            "Allow traffic to EdgeTraversalOptions Sample Application"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+

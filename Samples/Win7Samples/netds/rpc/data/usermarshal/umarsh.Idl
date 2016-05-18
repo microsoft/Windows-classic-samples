@@ -1,0 +1,28 @@
+[ uuid(56BF67C0-6503-1068-BF67-00DD010FBF25),
+  version(1.0),
+  pointer_default(unique)
+]
+interface umarsh
+{
+
+const short STRING_SIZE = 100;
+
+typedef char       CHAR_STRING[STRING_SIZE];
+typedef wchar_t    WCHAR_STRING[STRING_SIZE];
+
+// note that the client and server side need different header files,
+// since the user_marshal ACF attribute changes the application's
+// signatures for the next two functions
+
+// client side functions defined with ASCII for both functions
+// server side functions defined with UNICODE for both functions
+
+// this function uses UNICODE on the wire (converted by client stub)
+void ModifyMyWString([in] handle_t h1,[in, out] WCHAR_STRING *pStr);
+
+// this function uses ASCII on the wire (converted by server stub)
+void ModifyMyString([in] handle_t h1,[in, out] CHAR_STRING * pStr );
+
+void Shutdown([in] handle_t h1);
+
+}

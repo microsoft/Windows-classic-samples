@@ -1,0 +1,6 @@
+//
+// Type Libraries are included so that VB can reference the dll directly.
+// It may be necessary to use the full path to these files in order to compile and link this sample.
+//
+1 TypeLib "simpdata.tlb"
+2 TypeLib "msdatsrc.tlb"

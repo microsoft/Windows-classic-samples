@@ -1,0 +1,120 @@
+//==========================================================================;
+//
+//  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+//  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+//  PURPOSE.
+//
+//  Copyright (c)  Microsoft Corporation.  All Rights Reserved.
+//
+//==========================================================================;
+
+//
+//Microsoft Visual C++ generated resource script.
+//
+
+#include <winresrc.h>
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+//#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SCOPEDIALOG DIALOGEX 0, 0, 304, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Oscilloscope"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Generic1",IDC_L_GAIN,"msctls_trackbar32",TBS_VERT |
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,8,22,12,50
+    CTEXT           "G",IDC_L_GAIN_TEXT,6,73,16,10,SS_SUNKEN
+    CONTROL         "Generic1",IDC_L_OFFSET,"msctls_trackbar32",TBS_VERT |
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,26,22,12,50
+    CONTROL         "",IDC_SCOPEWINDOW,"Static",SS_BLACKRECT,44,4,208,156
+    CONTROL         "Generic1",IDC_R_GAIN,"msctls_trackbar32",TBS_VERT |
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,8,98,12,50
+    CTEXT           "G",IDC_R_GAIN_TEXT,6,150,16,10,SS_SUNKEN
+    CONTROL         "Generic1",IDC_R_OFFSET,"msctls_trackbar32",TBS_VERT |
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,26,97,12,50
+    CTEXT           "EndTime",IDC_TS_LAST,258,168,42,10,SS_SUNKEN
+    CONTROL         "Generic2",IDC_TB_SCROLL,"msctls_trackbar32",TBS_BOTH |
+                    TBS_NOTICKS | TBS_ENABLESELRANGE | WS_TABSTOP,44,162,210,
+                    16
+    CONTROL         "&Freeze",IDC_FREEZE,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,260,12,37,10
+    GROUPBOX        "Left",IDC_STATIC,2,14,40,72,BS_CENTER
+    GROUPBOX        "Right",IDC_STATIC,2,88,40,76,BS_CENTER
+    CONTROL         "Generic1",IDC_TIMEBASE,"msctls_trackbar32",TBS_VERT |
+                    TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,272,34,17,40
+    GROUPBOX        "Timebase",IDC_STATIC,254,2,50,88,BS_CENTER
+    CTEXT           "Time/Div",IDC_TIMEBASE_TEXT,256,76,46,10,SS_SUNKEN
+    CTEXT           "O",IDC_L_OFFSET_TEXT,22,73,16,10,SS_SUNKEN
+    CTEXT           "O",IDC_R_OFFSET_TEXT,22,150,16,10,SS_SUNKEN
+    CONTROL         "&Trigger",IDC_TRIGGER,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,260,22,39,10
+    CTEXT           "StartTime",IDC_TS_START,2,168,38,10,SS_SUNKEN
+    CTEXT           "",IDC_TS_DELTA,258,150,42,10
+    CTEXT           "",IDC_FORMAT,258,104,44,10
+    CTEXT           "",IDC_BUFSIZE,260,128,40,10
+    CTEXT           "Gain Offset",IDC_STATIC,0,4,42,10,SS_SUNKEN,
+                    WS_EX_TRANSPARENT
+    GROUPBOX        "Format",IDC_STATIC,254,96,50,20,BS_CENTER
+    GROUPBOX        "Buffer Size",IDC_STATIC,254,120,50,20,BS_CENTER
+    GROUPBOX        "Delta",IDC_STATIC,254,142,50,20,BS_CENTER
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,87 @@
+<HTML xmlns:mpc>
+<HEAD>
+<TITLE>Behavior Library: Mpc</TITLE>
+
+<STYLE>
+    @media all
+    {
+	    mpc\:container {
+	                    behavior:url(mpc.htc);
+	                    }
+   
+	    mpc\:page {
+	                    behavior:url(mpc.htc);
+	                    }
+    }
+     H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+    P               {
+                    font: 10pt verdana;
+                    }
+	A:link { color:#003399; text-decoration:none; }
+	A:visited { color:#6699CC; text-decoration:none; }
+	A:hover { text-decoration:underline; }
+</STYLE>
+
+<SCRIPT LANGUAGE="JavaScript">
+function TabOrientation()
+{
+	if(oMPC.style.tdTabOrientation == "top")oMPC.style.tdTabOrientation = "bottom" ;
+	else oMPC.style.tdTabOrientation = "top"
+}
+function Height()
+{
+	alert(parseInt(heightBox.value));
+	oMPC.style.height = parseInt(heightBox.value);
+}
+function Width()
+{
+	oMPC.style.width = parseInt(widthBox.value);
+}
+function BackColor()
+{
+	oMPC.style.backgroundColor = BackColorBox.value;
+}
+function Color()
+{
+	oMPC.style.color = ColorBox.value;
+}
+
+</SCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" ONLOAD="oMPC.style.visibility='visible'">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H1>MPC</H1>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+
+<P>Use the Mpc Behavior to group information on a page.</P>
+
+<BR><BR>
+
+<DIV STYLE="height:250">
+  <mpc:container ID="oMPC" STYLE="width:400; height:250; visibility:hidden">
+    <mpc:page ID="tab1" TABTITLE="This is a title" TABTEXT="Table"><br><br><table BORDER="1" ALIGN="CENTER" STYLE="font:10pt Verdana; width:300; height:79; color:black"><tr><td VALIGN="MIDDLE" ALIGN="CENTER"><b>This is a table</b></td></tr><tr><td>Item One</td></tr><tr><td>Item Two</td></tr><tr><td>Item Three</td></tr></table><br><br></mpc:page>
+    <mpc:page TABTITLE="This is a title, also" TABTEXT="Some Text"><div STYLE="padding:12px; font:10pt Comic MS Sans; font-style:italic">This is some sample text...</div></mpc:page>
+    <mpc:page ID="tab3" TABTITLE="Title" TABTEXT="Controls"><div STYLE="padding:12px; font:bold 10pt Verdana; color:black"><span STYLE="width:100%; text-align:center">A Control Panel</span><table ALIGN="CENTER" STYLE="font:normal 10pt Verdana"><tr><td>Radio Button</td><td><input TYPE="RADIO" id="RADIO1" name="RADIO1"></td></tr><tr><td>Checkbox</td><td><input TYPE="CHECKBOX" CHECKED id="CHECKBOX1" name="CHECKBOX1"></td></tr><tr><td>Input Box</td><td><input TYPE="TEXT" id="TEXT1" name="TEXT1"></td></tr></table></div></mpc:page>
+    <mpc:page TABTITLE="Title" TABTEXT="Image"><img STYLE="position:absolute; top:50; left:50; width:100; height:60" SRC="flag.gif" WIDTH="171" HEIGHT="80"></mpc:page>
+  </mpc:container>
+</DIV>
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

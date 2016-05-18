@@ -1,0 +1,106 @@
+<wsdl:definitions 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:tns="http://example.org" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    targetNamespace="http://example.org">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://example.org" elementFormDefault="qualified">
+            <xsd:element name="PurchaseOrderType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="quantity" type="xsd:int"/>
+                        <xsd:element name="productName" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="OrderConfirmationType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:unsignedInt"/>
+                        <xsd:element name="expectedShipDate" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetOrderStatusType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:unsignedInt"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="GetOrderStatusResponseType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:unsignedInt"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="OrderNotFoundFaultType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="orderID" type="xsd:unsignedInt"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="PurchaseOrder">
+        <wsdl:part name="parameters" element="tns:PurchaseOrderType"/>
+    </wsdl:message>
+    <wsdl:message name="OrderConfirmation">
+        <wsdl:part name="parameters" element="tns:OrderConfirmationType"/>
+    </wsdl:message>
+    <wsdl:message name="GetOrderStatus">
+        <wsdl:part name="parameters" element="tns:GetOrderStatusType"/>
+    </wsdl:message>
+    <wsdl:message name="GetOrderStatusResponse">
+        <wsdl:part name="parameters" element="tns:GetOrderStatusResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="OrderNotFoundFault">
+        <wsdl:part name="parameters" element="tns:OrderNotFoundFaultType"/>
+    </wsdl:message>
+    <wsdl:portType name="IPurchaseOrder">
+        <wsdl:operation name="Order">
+            <wsdl:input message="tns:PurchaseOrder" wsaw:Action="http://example.org/purchaseorder"/>
+            <wsdl:output message="tns:OrderConfirmation" wsaw:Action="http://example.org/orderconfirmation"/>
+        </wsdl:operation>
+        <wsdl:operation name="OrderStatus">
+            <wsdl:input message="tns:GetOrderStatus" wsaw:Action="http://example.org/getorderstatus"/>
+            <wsdl:output message="tns:GetOrderStatusResponse" wsaw:Action="http://example.org/getorderstatusresponse"/>
+            <wsdl:fault name="OrderNotFound" message="tns:OrderNotFoundFault" wsaw:Action="http://example.org/ordernotfound"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PurchaseOrderBinding" type="tns:IPurchaseOrder">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Order">
+            <soap:operation soapAction="http://example.org/purchaseorder" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="OrderStatus">
+            <soap:operation soapAction="http://example.org/getorderstatus" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="OrderNotFound">
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PurchaseOrderService">
+        <wsdl:port name="IPurchaseOrder" binding="tns:PurchaseOrderBinding">
+            <soap:address location="http://example.org/IPurchaseOrder"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

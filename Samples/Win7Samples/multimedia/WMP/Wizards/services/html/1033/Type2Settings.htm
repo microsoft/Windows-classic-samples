@@ -1,0 +1,150 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+
+<HTML DIR="LTR">
+
+<HEAD>
+  <TITLE>Type 2 Online Store Plug-in Wizard</TITLE>
+  <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</HEAD>
+
+
+<BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        
+  <DIV id="logo" style="POSITION: absolute">
+    <IMG src="..\..\Images\logo.png">
+  </DIV>
+
+  <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            
+    <P>
+      <FONT face="Arial" size="4">
+        Windows Media Player Type 2 Online Store Plug-in
+      </FONT>
+    </P>
+
+    <SPAN CLASS="itemText">
+    <FONT face="Arial" size="2"> 
+ 
+    Choose the friendly name, content distributor ID, and remove URL for your online store:
+    
+    <BR><BR>
+
+    <SPAN CLASS="itemText" ID="Span1" title="Friendly name">
+      <LABEL FOR="FRIENDLYNAME" ID="Label1">
+        Friendly <u>N</u>ame:
+      </LABEL> 
+    </SPAN>
+
+    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Friendly name" 
+            id="FRIENDLYNAME" TABINDEX="1" ACCESSKEY="N" title="Friendly name">
+
+    <BR><BR>
+					
+    <SPAN CLASS="itemText" ID="Span2" title="Content distributor">
+      <LABEL FOR="CONTENTDISTRIBUTOR" ID="Label2">
+        Content <u>D</u>istributor:
+      </LABEL> 
+    </SPAN>
+
+    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Content distributor" 
+            id="CONTENTDISTRIBUTOR" TABINDEX="2" ACCESSKEY="D" title="Content distributor">
+					
+    <BR><BR>
+
+    <SPAN CLASS="itemText" ID="Span3" title="Remove URL">
+      <LABEL FOR="REMOVEURL" ID="Label3">
+        Remove <u>U</u>RL:
+      </LABEL> </SPAN>
+
+    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Remove URL" 
+            id="REMOVEURL" TABINDEX="3" ACCESSKEY="U" title="Remove URL">
+
+    </FONT>
+    </SPAN>
+
+  </DIV>
+					 
+
+  <DIV style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 308px; HEIGHT: 2px">
+    <hr>
+  </DIV>
+
+  <DIV style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 320px; HEIGHT: 28px">
+
+     <TABLE id="Table1" height="28" cellSpacing="0" cellPadding="0" border="0">
+       <TR>
+
+          <TD vAlign="middle" width="75" height="24">
+            <BUTTON class="BUTTONS" id="FinishBtn" style="WIDTH: 80px; 
+                    HEIGHT: 24px" accessKey="F" onclick="OnFinish(document);"
+		    tabIndex="3" type="button"><U>F</U>inish
+            </BUTTON>
+          </TD>
+
+          <TD vAlign="middle" width="4" height="24">
+            &nbsp;
+          </TD>
+								
+          <TD vAlign="middle" width="75" height="24">
+            <BUTTON class="BUTTONS" id="CancelBtn" style="WIDTH: 80px; 
+                    HEIGHT: 24px" accessKey="C" 
+                    onclick="window.external.Finish(document, 'cancel');"
+                    tabIndex="4" type="button"><U>C</U>ancel
+            </BUTTON>
+          </TD>
+
+        </TR>
+      </TABLE>
+  </DIV>
+					
+</BODY>
+
+</HTML>
+
+
+
+<SCRIPT LANGUAGE="JSCRIPT">
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+   setDirection();
+
+   var strGuid = window.external.CreateGuid();
+   var strVal = window.external.FormatGuid(strGuid, 0);
+   window.external.AddSymbol("CLASSID", strVal);
+  
+   strVal = window.external.FormatGuid(strGuid, 1);
+   window.external.AddSymbol("DEFINEGUID", strVal);
+
+   strGuid = window.external.CreateGuid();
+   strVal = window.external.FormatGuid(strGuid, 0);
+   window.external.AddSymbol("SUBSCRIPTIONOBJECTGUID", strVal);
+
+   window.external.Load(document);	
+}
+
+
+function OnFinish(obj)
+{
+   OnWizFinish(obj);
+}
+
+</SCRIPT>
+
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+
+<SCRIPT>
+   var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+   strPath += "VCWizards/";
+   strPath += window.external.GetHostLocale();
+   var strScriptPath = strPath + "/Script.js";
+   var strCommonPath = strPath + "/Common.js";
+   document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+   document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

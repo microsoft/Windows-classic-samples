@@ -1,0 +1,27 @@
+HKCR
+{
+	FsrmTextReader.TextTokenizer.1 = s 'TextTokenizer Class'
+	{
+		CLSID = s '{32AD5F48-C746-44A3-93FC-FEBF03079110}'
+	}
+	FsrmTextReader.TextTokenizer = s 'TextTokenizer Class'
+	{
+		CLSID = s '{32AD5F48-C746-44A3-93FC-FEBF03079110}'
+		CurVer = s 'FsrmTextReader.TextTokenizer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {32AD5F48-C746-44A3-93FC-FEBF03079110} = s 'TextTokenizer Class'
+		{
+			ProgID = s 'FsrmTextReader.TextTokenizer.1'
+			VersionIndependentProgID = s 'FsrmTextReader.TextTokenizer'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{064FDE65-FFC7-459B-B4F1-6B9E35D8CA55}'
+		}
+	}
+}

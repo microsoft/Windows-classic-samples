@@ -1,0 +1,81 @@
+<View>
+    <Name>process</Name>
+    <ViewSelectedBy>
+	<TypeName>System.Diagnostics.Process</TypeName>
+	<TypeName>Deserialized.System.Diagnostics.Process</TypeName>
+    </ViewSelectedBy>
+    <TableControl>
+	<TableHeaders>
+	    <TableColumnHeader>
+		<Label>Handles</Label>
+		<Width>7</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Label>NPM(K)</Label>
+		<Width>7</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Label>PM(K)</Label>
+		<Width>8</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Label>WS(K)</Label>
+		<Width>10</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Label>VM(M)</Label>
+		<Width>5</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Label>CPU(s)</Label>
+		<Width>8</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader>
+		<Width>6</Width>
+		<Alignment>right</Alignment>
+	    </TableColumnHeader>
+	    <TableColumnHeader />
+	</TableHeaders>
+	<TableRowEntries>
+	    <TableRowEntry>
+		<TableColumnItems>
+		    <TableColumnItem>
+			<PropertyName>HandleCount</PropertyName>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<ScriptBlock>[int]($_.NonpagedSystemMemorySize / 1024)</ScriptBlock>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<ScriptBlock>[int]($_.PagedMemorySize / 1024)</ScriptBlock>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<ScriptBlock>[int]($_.WorkingSet / 1024)</ScriptBlock>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<ScriptBlock>[int]($_.VirtualMemorySize / 1048576)</ScriptBlock>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<ScriptBlock>
+				if ($_.CPU -ne $()) 
+				{ 
+					$_.CPU.ToString("N") 
+				}
+		       </ScriptBlock>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<PropertyName>Id</PropertyName>
+		    </TableColumnItem>
+		    <TableColumnItem>
+			<PropertyName>ProcessName</PropertyName>
+		    </TableColumnItem>
+		</TableColumnItems>
+	    </TableRowEntry>
+	</TableRowEntries>
+    </TableControl>
+</View>

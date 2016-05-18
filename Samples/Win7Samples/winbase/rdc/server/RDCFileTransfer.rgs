@@ -1,0 +1,26 @@
+HKCR
+{
+	RdcSdkTestServer.RDCFileTransfer.1 = s 'RDCFileTransfer Class'
+	{
+		CLSID = s '{94F0E32B-BB68-466B-888E-BD180222D0FA}'
+	}
+	RdcSdkTestServer.RDCFileTransfer = s 'RDCFileTransfer Class'
+	{
+		CLSID = s '{94F0E32B-BB68-466B-888E-BD180222D0FA}'
+		CurVer = s 'RdcSdkTestServer.RDCFileTransfer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {94F0E32B-BB68-466B-888E-BD180222D0FA} = s 'RDCFileTransfer Class'
+		{
+			ProgID = s 'RdcSdkTestServer.RDCFileTransfer.1'
+			VersionIndependentProgID = s 'RdcSdkTestServer.RDCFileTransfer'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{1E5480BA-8639-4215-80C2-22F7A11B852C}'
+		}
+	}
+}

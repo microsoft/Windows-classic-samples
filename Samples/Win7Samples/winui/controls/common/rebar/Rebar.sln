@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReBar", "Rebar.vcproj", "{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Debug|Itanium = Debug|Itanium
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+		Release|Itanium = Release|Itanium
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|Win32.Build.0 = Debug|Win32
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|x64.ActiveCfg = Debug|x64
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|x64.Build.1 = Debug|x64
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|Itanium.ActiveCfg = Debug|Itanium
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Debug|Itanium.Build.2 = Debug|Itanium
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|Win32.ActiveCfg = Release|Win32
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|Win32.Build.0 = Release|Win32
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|x64.ActiveCfg = Release|x64
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|x64.Build.1 = Release|x64
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|Itanium.ActiveCfg = Release|Itanium
+		{1C66F2D8-5D3D-49A9-A2DB-84E639C352C8}.Release|Itanium.Build.2 = Release|Itanium
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

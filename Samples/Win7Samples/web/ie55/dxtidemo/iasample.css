@@ -1,0 +1,16 @@
+BODY {
+	FONT-FAMILY: Verdana, Arial, Helvetica, MS Sans Serif; FONT-SIZE: 80%; MARGIN-LEFT: 0pt; MARGIN-TOP: 0pt
+}
+PRE {
+	BACKGROUND: #ffffff; FONT-FAMILY: Courier New; FONT-SIZE: 130%; MARGIN-BOTTOM: 1em; MARGIN-LEFT: 0pt; MARGIN-TOP: 1em; PADDING-BOTTOM: 5pt; PADDING-LEFT: 5pt; PADDING-RIGHT: 5pt; PADDING-TOP: 5pt
+}
+TD {
+	FONT-SIZE: 75%
+}
+
+.desctext {
+    font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-weight: normal; color: #FFFFFF; line-height: normal; letter-spacing: 0.03em
+}
+
+.deschead { font-family: Arial, Helvetica, sans-serif; font-size: 12pt; font-weight: bold; color: #FFFFFF
+}

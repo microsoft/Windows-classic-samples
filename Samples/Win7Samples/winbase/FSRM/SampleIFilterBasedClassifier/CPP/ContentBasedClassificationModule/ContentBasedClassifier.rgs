@@ -1,0 +1,27 @@
+HKCR
+{
+	ContentBasedClassificationModu.Conten.1 = s 'ContentBasedClassifier Class'
+	{
+		CLSID = s '{7853D011-8F9D-4831-BA8A-E5EE99B7CC65}'
+	}
+	ContentBasedClassificationModu.ContentB = s 'ContentBasedClassifier Class'
+	{
+		CLSID = s '{7853D011-8F9D-4831-BA8A-E5EE99B7CC65}'
+		CurVer = s 'ContentBasedClassificationModu.Conten.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7853D011-8F9D-4831-BA8A-E5EE99B7CC65} = s 'ContentBasedClassifier Class'
+		{
+			ProgID = s 'ContentBasedClassificationModu.Conten.1'
+			VersionIndependentProgID = s 'ContentBasedClassificationModu.ContentB'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8AA0E007-2194-4D77-9465-C3FB69161364}'
+		}
+	}
+}

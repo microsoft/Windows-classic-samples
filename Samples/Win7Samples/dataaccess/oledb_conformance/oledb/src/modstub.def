@@ -1,0 +1,11 @@
+; modstub.def : Declares the module parameters for the DLL.
+
+
+
+EXPORTS
+    ; Explicit exports can go here
+	DllGetClassObject       PRIVATE
+	DllCanUnloadNow       	PRIVATE
+;	GetTestModuleInfo 		@3	
+	DllRegisterServer		PRIVATE
+	DllUnregisterServer	PRIVATE

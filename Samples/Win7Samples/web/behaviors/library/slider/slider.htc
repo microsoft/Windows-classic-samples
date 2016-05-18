@@ -1,0 +1,1043 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         slider.htc
+//
+//  Description:  This behavior allows users to select a value using a 
+//                "slider". 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="min"          />
+<PROPERTY NAME="max"          />
+<PROPERTY NAME="tickInterval" />
+<PROPERTY NAME="tickNumber"   />
+<PROPERTY NAME="value"        />
+<PROPERTY NAME="name"         />
+<PROPERTY NAME="title"        />
+<PROPERTY NAME="dynamic"      />
+    
+<EVENT    NAME="onchange"   ID="change" />
+<EVENT    NAME="onerror"    ID="error"  />
+    
+<ATTACH   EVENT="ondocumentready" HANDLER="DoInit"        />
+<ATTACH   EVENT="onmousedown"     HANDLER="DoMouseDown"   />
+<ATTACH   EVENT="onmouseup"       HANDLER="DoMouseUp"     />
+<ATTACH   EVENT="onselectstart"   HANDLER="DoSelectStart" />
+
+    
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+
+var StyleInfo;                      // Variable representing the stylesheet
+
+var StyleRules = new Array();       // Array to track the individual stylesheet
+
+var bIsForm = false;                // Tracks whether the element is in a form
+
+var Orient;                         // Direction of the slider
+
+var iTempValue;                     // Tracks value changes in the slider
+                                    //    before they are applied to the actual
+                                    //    value
+                                    
+var iBoundFirst;                    // Tracks the min position as a pixel
+
+var iBoundLast;                     // Tracks the max position as a pixel
+
+var iTickSpace;                     // Tracks the space between pixels 
+
+var bMouseDown;                     // Tracks the status of the mouse button
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions, set variables, and attaches events to
+//                  initialize behavior
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+    IsForm();
+    SetDefaults();
+    CreateStyleSheet();
+    Format();
+    CalcTicks();
+
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+    //  Custom CSS Property Defaults
+    CustomDefault('sl--orientation', 'slOrientation', 'horizontal');
+    CustomDefault('sl--snap',        'slSnap',         true);
+    CustomDefault('sl--tick-color',  'slTickColor',   'black');
+    CustomDefault('sl--tick-style',  'slTickStyle',   'bottomRight');
+    CustomDefault('sl--bar-color',   'slBarColor',    'menu');
+
+    //  Set global variable to track orientation
+    Orient = (style.slOrientation == "vertical" ? "Ver" : "Hor" );
+
+    //  CSS Property Defaults   
+    NormalDefault('position',         'static',		  'relative');
+    NormalDefault('backgroundColor',  'transparent',  'menu');
+
+    NormalDefault('width', 'auto',
+            (Orient == 'Ver' ? '50px' : '200px'));
+    NormalDefault('height', 'auto', 
+            (Orient == 'Ver' ? '200px' : '50px'));
+    
+    //  Attribute | Property Defaults
+    if (dynamic == null)              dynamic     = false;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       Format
+//
+//  Description:    Adds HTML and CSS formatting (via the BehaviorStyleSheet)
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function Format()
+{
+    if (Orient == "Hor")
+    {
+        className = "HorArea_" + uniqueID;
+        
+        if (style.slTickStyle == "topLeft") sSliderSrc = "slTop.gif";
+        else sSliderSrc = "slBottom.gif";
+    
+        innerHTML = '<div id="bar_' + uniqueID + '" CLASS="HorBar_' 
+            + uniqueID + '"></div><img id="slider_' + uniqueID + '" '
+            + 'SRC="' + sSliderSrc + '" CLASS="HorSlider_' + uniqueID + '">';
+    }
+    else
+    {
+        className = "VerArea_" + uniqueID;
+        
+        if (style.slTickStyle == "topLeft") sSliderSrc = "slLeft.gif";
+        else sSliderSrc = "slRight.gif";
+    
+        innerHTML  = '<div id="bar_' + uniqueID + '" CLASS="VerBar_'
+            + uniqueID + '"></div><img id="slider_' + uniqueID + '" '
+            + 'SRC="' + sSliderSrc + '" CLASS="VerSlider_' + uniqueID + '">';
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CreateStyleSheet
+//
+//  Description:    Adds necessary styles for the slider piece, tick marks,
+//                  bar, and slider area to the BehaviorStyleSheet (which is
+//                  added if it doesn't already exist.  Each style is assigned
+//                  a position in the StyleRules array for easy access later.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function CreateStyleSheet()
+{
+    //  If it's not already created, create a style sheet.
+    if (! element.document.body.BehaviorStyleSheet)
+    {
+        element.document.body.BehaviorStyleSheet = element.document.createStyleSheet()
+    }
+    StyleInfo = element.document.body.BehaviorStyleSheet
+
+    //  Horizontal Slider StyleSheet Rules
+    StyleInfo.addRule(   '.HorArea_' + uniqueID,
+          'position: ' + style.position + '; '
+        + 'height: ' + style.height + '; '
+        + 'width: ' + style.width + '; '
+        + 'background-color: ' + style.backgroundColor
+    );
+
+    StyleRules['HorArea'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+
+    StyleInfo.addRule(   '.HorBar_' + uniqueID,
+          'width: 95%; '
+        + 'position: relative; '
+        + 'height: 3px; '
+        + 'font: 0px; '
+        + 'left: 2.5%; '
+        + 'background-color: ' + style.slBarColor + '; '
+        + 'border: 1px inset white; '
+    );
+
+    StyleRules['HorBar'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    StyleRules['HorBar'].setAttribute("top", (style.slTickStyle == 'topLeft' ? '62%' : '32%'));
+
+    StyleInfo.addRule(   '.HorSlider_' + uniqueID,
+          'position: absolute; '
+        + 'top: 10px; '
+    );
+
+    StyleRules['HorSlider'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+
+    StyleInfo.addRule(   '.HorTick_' + uniqueID,
+          'position: absolute; '
+        + 'width: 5px; '
+        + 'color: ' + style.slTickColor + '; '
+        + 'cursor: hand; '
+        + 'margin: 0px; '
+        + 'padding: 0px; '
+        + 'font: bold 3pt'
+    );
+
+    StyleRules['HorTick'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    StyleRules['HorTick'].setAttribute("visibility", (style.slTickStyle == 'none' ? 'hidden' : 'visible'));
+
+
+    //  Vertical Slider StyleSheet Rules
+    StyleInfo.addRule(   '.VerArea_' + uniqueID,
+          'position: ' + style.position + '; '
+        + 'height: ' + style.height + '; '
+        + 'width: ' + style.width + '; '
+        + 'background-color: ' + style.backgroundColor
+    );
+
+    StyleRules['VerArea'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+
+    StyleInfo.addRule(   '.VerBar_' + uniqueID,
+          'position: relative; '
+        + 'height: 95%; '
+        + 'top: 2.5%; '
+        + 'width: 4px; '
+        + 'background-color: ' + style.slBarColor + '; '
+        + 'border: 1px inset white'
+    );
+
+    StyleRules['VerBar'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    StyleRules['VerBar'].setAttribute("left", (style.slTickStyle == 'topLeft' ? '60%' : '32%'));
+
+    StyleInfo.addRule(   '.VerSlider_' + uniqueID,
+          'position: absolute'
+    );
+    
+    StyleRules['VerSlider'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    
+    StyleInfo.addRule(   '.VerTick_' + uniqueID,
+          'position: absolute; '
+        + 'height: 5px; '
+        + 'color: ' + style.slTickColor + '; '
+        + 'cursor: hand; '
+        + 'margin: 0px; '
+        + 'padding: 0px; '
+        + 'font: bold 16px'
+    );
+    
+    StyleRules['VerTick'] = StyleInfo.rules[StyleInfo.rules.length-1].style;
+    StyleRules['VerTick'].setAttribute("visibility", (style.slTickStyle == 'none' ? 'hidden' : 'visible'));
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    //
+    //  Handle CSS property changes by calling necessary functions, setting
+    //  variables, and/or setting styles
+    //
+    if (propertyName.substring(0,5) == "style")
+    {
+        switch (propertyName)
+        {
+            case "style.slOrientation"      :
+                ReturnError("Property is Read Only"); 
+                break;
+                    
+            case "style.slTickStyle"        :
+                ReturnError("Property is Read Only");
+                break;
+                    
+            case "style.slTickColor"        :
+                StyleRules[Orient + 'Tick'].color = style.slTickColor;
+                break;
+                
+            case "style.slBarColor"         :
+                StyleRules[Orient + 'Bar'].backgroundColor = style.slBarColor;
+                break;
+                    
+            case "style.width"              :
+                StyleRules[Orient + 'Area'].width = style.width;
+                CalcTicks();
+                break;
+                    
+            case "style.height"             :
+                StyleRules[Orient + 'Area'].height = style.height;
+                CalcTicks();
+                break;
+                    
+            case "style.padding"            :
+                StyleRules[Orient + 'Area'].padding = style.padding;
+                CalcTicks();
+                break;
+                    
+            case "style.backgroundColor"    :
+                StyleRules[Orient + 'Area'].backgroundColor = style.backgroundColor;
+                break;
+                
+            case "style.margin"             :
+                break;
+                
+            case "style.slSnap"             :
+                break;
+        }
+    }
+    else
+    {
+        //
+        //  Detach the onpropertychange event to prevent it from firing while
+        //  the changes are handled
+        //
+        detachEvent("onpropertychange", DoPropChange);
+        
+        switch(propertyName)
+        {
+            case "name"                     :
+                if (bIsForm) window.document.all['inp_' + uniqueID].name = name;
+                break;
+        
+            case "value"                    :
+                if (bMouseDown) break;
+                if (bIsForm) window.document.all['inp_' + uniqueID].value = value;
+                SetSlider();
+                break;
+            
+            case "min"                      :
+                CalcTicks(propertyName);
+                break;
+                
+            case "max"                      :
+                CalcTicks(propertyName);
+                break;
+
+            case "tickInterval"             :
+                CalcTicks(propertyName);
+                break;
+
+            case "tickNumber"               :
+                CalcTicks(propertyName);
+                break;
+                
+            case "dynamic"                  :
+                break;
+                
+            case "title"                    :
+                break;
+                
+            default                         :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+        
+        //  Re-attach the onpropertychange event
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       IsForm
+//
+//  Description:    Walks up the parentElements of the element until it finds
+//                  either a FORM object or the BODY object.  If it's inside
+//                  of a form, a hidden INPUT object is added.  Value changes
+//                  in the slider are duplicated in the INPUT.  Thus, when
+//                  the form is submitted, effectively the slider NAME/VALUE
+//                  pair is included as well.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function IsForm()
+{
+    var oFormCheck = element;
+
+    //
+    //  Climb from the element through its parentElement's until finding
+    //  either the BODY tag or a FORM tag
+    //
+    while (oFormCheck.tagName.toLowerCase() != "body")
+    {
+        if (oFormCheck.tagName.toLowerCase() == "form" && name != null)
+        {
+            //  Set variable
+            bIsForm = true;
+        
+            //  Insert hidden INPUT into form
+            sInputHTML = '<INPUT TYPE="hidden" ID="inp_' + uniqueID + '" '
+                + 'NAME="' + name + '" VALUE="' + value + '">';
+            oFormCheck.insertAdjacentHTML ("BeforeEnd", sInputHTML);
+            
+            break;
+        }
+        else oFormCheck = oFormCheck.parentElement;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DeleteTicks
+//
+//  Description:    Remove the existing tick marks by renaming them and
+//                  making them invisible.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DeleteTicks()
+{
+    for (i=0; i<element.children.length; i++)
+    {
+        if (element.children(i).id.substring(0,4) == "tick") 
+        {
+            element.children(i).id = "deletedTick";
+            element.children(i).style.visibility = "hidden";
+        }
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CalcTicks
+//
+//  Description:    In conjuction with TickFormula(), determine the desired
+//                  position of the tick marks, based on four properties:
+//                  min, max, tickInterval, and tickNumber.
+//
+//  Arguments:      sAttribute - the specific property that has changed
+//                      (null at design time)
+//
+//  Returns:        true once the formula is set
+//                  false if the max is set lower than the min
+//                  false if the tickInterval is set to negative
+//
+//+----------------------------------------------------------------------------
+
+function CalcTicks(sAttribute)
+{
+    //  If tick marks already exist, delete them
+    if (element.children['tick0_' + uniqueID] != null) DeleteTicks();
+
+    //  Get Properties and Parse Accordingly
+    if (min != null)           min          = parseFloat(min);
+    if (max != null)           max          = parseFloat(max);
+    if (tickInterval != null)  tickInterval = parseFloat(tickInterval);
+    if (tickNumber != null)    tickNumber   = parseFloat(tickNumber);
+
+    //  Return if max is less than min or tickInterval is negative
+    if ((max <= min && max != null && min != null)
+        || (tickInterval <= 0 && tickInterval != null))
+    {
+        ReturnError("MAX cannot have a value less than MIN");
+        return false;
+    }
+
+    //  Check if the formula works without setting defaults
+    if (TickFormula(sAttribute)) 
+    {
+        CreateTicks();
+        return true;
+    }
+
+    //  Set the min default, then try again
+    if (min == null)
+    {
+        min = 1;
+        if (TickFormula())
+        {
+            CreateTicks();
+            return true;
+        }
+    }
+
+    //  Set the max default, then try again
+    if (max == null)
+    {
+        max = min + 9;
+        if (TickFormula())
+        {
+            CreateTicks();
+            return true;
+        }
+    }
+
+    //  Set the tickInterval, should work this time (with 3 defaults set)
+    tickInterval = 1;
+    if (TickFormula())
+    {
+        CreateTicks();
+        return true;
+    }
+
+    //  If it doesn't work, fire an error    
+    ReturnError("Can't determine Ticks");
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       TickFormula
+//
+//  Description:    In conjunction with the CalcTicks() function, determine 
+//                  the desired position of the tick marks, based on four 
+//                  properties: min, max, tickInterval, and tickNumber.
+//
+//  Arguments:      sAttribute - the specific property that has changed
+//                      (null at design time)
+//
+//  Returns:        true once the formula is set
+//
+//+----------------------------------------------------------------------------
+
+function TickFormula(sAttribute)
+{
+    if ((min != null && max != null && tickInterval != null)
+        && sAttribute != "tickNumber")
+    {
+        tickNumber = (max - min)/tickInterval + 1;
+        return true;
+    }
+    
+    else if ((min != null && max != null && tickNumber != null)
+        && sAttribute != "tickInterval")
+    {
+        tickInterval = (max - min)/(tickNumber - 1);
+        return true;
+    }
+    
+    else if ((min != null && tickInterval != null && tickNumber != null)
+        && sAttribute != "max")
+    {
+        max = min + ((tickNumber - 1) * tickInterval);
+        return true;
+    }
+    
+    else if ((max != null && tickInterval != null && tickNumber != null)
+        && sAttribute != "min")
+    {
+        min = max - ((tickNumber - 1) * tickInterval);
+        return true;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CreateTicks
+//
+//  Description:    Add the tick marks to the page.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function CreateTicks()
+{
+    var sTickHTML, sTickChar, sTickClass;
+
+    //  Set class and character based on the style.slOrientation property    
+    if (Orient == "Ver") 
+    {
+        sTickChar = "-";
+        sTickClass = "Ver";
+    }
+    else 
+    {
+        sTickChar = "|";
+        sTickClass = "Hor";
+    }
+    
+    for (i=0; i<tickNumber; i++)
+    {
+        //  Write tick to page
+        sTickTitle = 'TITLE="' + ((i * tickInterval) + min) + '"';
+        sTickHTML = '<span id="tick' + i + "_" + uniqueID + '" ' 
+            + 'CLASS="' + sTickClass + 'Tick_' + uniqueID + '" '
+            + sTickTitle + ' '
+            + '>' + sTickChar + '</span>';
+        insertAdjacentHTML("BeforeEnd", sTickHTML);
+    }
+    
+    //  Call function to place ticks
+    SetTicks();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetTicks
+//
+//  Description:    Based on the settings of min, max, tickInterval, and
+//                  tickNumber, place the tick marks on the slider.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function SetTicks()
+{
+    var iBarLength, iBarStart;
+    var oTick, iTickStart, iTickPos;
+    var iTickSize = 5;
+
+    //
+    //  Based on the style.slOrientation property, determine the length of the
+    //  bar and it's starting pixel position
+    //
+    if (Orient == "Hor") 
+    {
+        iBarLength = element.children['bar_' + uniqueID].offsetWidth;
+        iBarStart = element.children['bar_' + uniqueID].offsetLeft;
+    }
+    else 
+    {
+        iBarLength = element.children['bar_' + uniqueID].offsetHeight;
+        iBarStart = element.children['bar_' + uniqueID].offsetTop;
+    }
+
+    //  Determine the amount of space that should be between each tick mark.    
+    iTickSpace = ((.98 * iBarLength) - (iTickSize * tickNumber))/(tickNumber - 1);
+    iTickSpace = (iTickSpace > 0 ? Math.floor(iTickSpace) : Math.ceil(iTickSpace));
+    iTickSpace += iTickSize;
+
+    //  Determine where the first tick should be placed    
+    iTickPos = (iBarLength - (iTickSpace * (tickNumber - 1)))/2;
+    iTickPos = (iTickPos > 0 ? Math.floor(iTickPos) : Math.ceil(iTickPos));
+    iTickPos += iBarStart;
+    iTickStart = iTickPos;
+
+    //  Set the global iBoundFirst and iBoundLast variables
+    iBoundFirst = iTickStart - 4;
+    iBoundLast = iTickStart + ((tickNumber - 1) * iTickSpace) - 4;
+  
+    var oBar = element.children['bar_' + uniqueID];
+    
+    //
+    //  Write ticks to page based on the orientation and tickStyle of the
+    //  element.  
+    //
+    for (i=0; i<tickNumber; i++)
+    {
+        oTick = element.children["tick" + i + "_" + uniqueID];
+        
+        if (Orient == "Ver") 
+        {
+            oTick.style.top = iTickPos - 10;
+            
+            if (style.slTickStyle == "topLeft")
+            {
+                oTick.style.left = oBar.offsetLeft - 14;
+            }
+            else oTick.style.left = oBar.offsetLeft + 14;
+        }
+        else
+        {
+            oTick.style.left = iTickPos;
+            
+            if (style.slTickStyle == "topLeft")
+            {
+                oTick.style.top = oBar.offsetTop - 14;
+            }
+            else oTick.style.top = oBar.offsetTop + 14;
+        }
+        
+        iTickPos += iTickSpace
+    }
+
+    //  Call function to position the slider    
+    SetSlider();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetSlider
+//
+//  Description:    Based on the positions of the tick marks and the value
+//                  of the element, place the slider
+//
+//  Arguments:      none
+//
+//  Returns:        false if the max is set lower than the min
+//                  false if the tickInterval is set to negative
+//
+//+----------------------------------------------------------------------------
+
+function SetSlider()
+{
+    if ((max <= min && max != null && min != null)
+        || (tickInterval <= 0 && tickInterval != null))
+    {
+        return false;
+    }
+
+    var oSlider = element.children['slider_' + uniqueID];
+    var oBar = element.children['bar_' + uniqueID];
+    var oFirstTickVal = eval(element.children['tick0_' + uniqueID].title);
+    
+    if (value == null || value < min)
+    {
+        value = oFirstTickVal;
+    }
+    
+    if (Orient == "Ver")
+    {
+        oSlider.style.top = iBoundFirst 
+            + (((value - oFirstTickVal)/tickInterval)* iTickSpace);
+
+        if (style.slTickStyle == "topLeft")
+        {        
+            oSlider.style.left = oBar.offsetLeft - 9; 
+        }
+        else oSlider.style.left = oBar.offsetLeft - 7; 
+    }
+    
+    else 
+    {
+        oSlider.style.left = iBoundFirst 
+            + (((value - oFirstTickVal)/tickInterval)* iTickSpace);
+        
+        if (style.slTickStyle == "topLeft")
+        {
+            oSlider.style.top = oBar.offsetTop - 9; 
+        }
+        else oSlider.style.top = oBar.offsetTop - 7; 
+    }
+    
+    DoMouseUp();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseDown
+//
+//  Description:    If the mousedown occurs on the slider piece, initiate
+//                  movement of the slider.
+//
+//  Arguments:      none
+//
+//  Returns:        false if the srcElement is not the slider piece.
+//
+//+----------------------------------------------------------------------------
+
+function DoMouseDown()
+{
+    bMouseDown = true;
+    var oSlider = element.children['slider_' + uniqueID];
+
+    if (window.event.srcElement.id != oSlider.id) return false;
+    
+    //  Capture the mouse and start tracking the onmousemove event
+    oSlider.setCapture();
+	oSlider.attachEvent ("onmousemove", DoMouseMove);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseMove
+//
+//  Description:    Move the slider piece within the boundaries of the slider
+//                  bar.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DoMouseMove()
+{
+    //  Move the slider within the bounds of the bar
+	if (Orient == "Hor") 
+	{
+	    var iNewX = window.event.x - 4;
+	    if (!element.contains(window.event.srcElement)) 
+	        iNewX -= offsetLeft + window.document.body.scrollLeft;
+	    if (iNewX > iBoundLast) iNewX = iBoundLast;
+	    if (iNewX < iBoundFirst) iNewX = iBoundFirst;
+
+        element.children['slider_' + uniqueID].style.left = iNewX;
+        
+        iTempValue = iNewX;
+	}
+	else if (Orient == "Ver")
+	{
+	    var iNewY = window.event.y - 4;
+	    if (!element.contains(window.event.srcElement)) 
+	        iNewY -= offsetTop - window.document.body.scrollTop;
+	    if (iNewY > iBoundLast) iNewY = iBoundLast;
+	    if (iNewY < iBoundFirst) iNewY = iBoundFirst; 
+
+        element.children['slider_' + uniqueID].style.top = iNewY;
+        
+        iTempValue = iNewY;
+	}
+    
+    // If the dynamic property is true, repeatedly call the DoChange() function
+    if (dynamic == "true" || dynamic == true) DoChange();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseUp
+//
+//  Description:    On the mouseup, release the slider piece.  If the slSnap
+//                  property is true, place the slider at one of the tick marks.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DoMouseUp()
+{
+    bMouseDown = false;
+
+    var oSlider = element.children['slider_' + uniqueID];
+
+    if (style.slSnap != false && style.slSnap != "false")
+    {
+        var iCurrPos, iDiff, iNewPos;
+    
+        if (Orient == "Ver") iCurrPos = oSlider.style.posTop;
+        else iCurrPos = oSlider.style.posLeft;
+
+        //  Find the closest tick mark to snap to        
+        iCurrPos = (iCurrPos - iBoundFirst)/iTickSpace;
+        iDiff = (iCurrPos - Math.floor(iCurrPos)) * iTickSpace;
+        iNewPos = (Math.floor(iCurrPos) * iTickSpace) + iBoundFirst;
+        if (iDiff > iTickSpace/2) iNewPos += iTickSpace;
+        
+        //  Set the tracking variable to the value of the tick mark 
+        iTempValue = iNewPos;
+
+        //  Set the position of the slider piece to the tick mark
+        if (Orient == "Ver") oSlider.style.top = iNewPos;
+        else oSlider.style.left = iNewPos;
+    }
+
+    //  Stop tracking the onmousemove event and release the mouse
+	oSlider.detachEvent ("onmousemove", DoMouseMove);
+	oSlider.releaseCapture();
+
+    //  Call the DoChange() function to set the value of the element
+    DoChange();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoChange
+//
+//  Description:    Change the value of the slider, based on its position on
+//                  on the bar.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DoChange()
+{
+    //
+    //  Iterate through the tick mark's to determine which tick the slider
+    //  is on (in the case of snapable = true) or closest to (in the case
+    //  of snapable = false).  Base the value of the slider on that tick mark
+    //
+    for (i=0; i<tickNumber; i++)
+    {
+        var oTick = element.children["tick" + i + "_" + uniqueID];
+
+        if  (!bMouseDown 
+            && ((Orient == "Hor" && oTick.style.posLeft == iTempValue + 4)
+            || (Orient == "Ver" && oTick.style.posTop == iTempValue + 4)))
+        {
+            value = parseFloat(oTick.title);
+            break;
+        }
+
+        else if ((Orient == "Hor" && oTick.style.posLeft > iTempValue + 4)
+            || (Orient == "Ver" && oTick.style.posTop > iTempValue + 4))
+        {
+            value = ((iTempValue/(iBoundLast-iBoundFirst))*(max-min)) + min;
+            break;
+        }
+    }
+
+    //  Set the value of the element    
+    element.children['slider_' + uniqueID].title = value;
+
+    //  Fire the change event
+    change.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSelectStart
+//
+//  Description:    Cancels the onselectstart event to prevent user from
+//                  selecting text in the slider.
+//
+//  Arguments:      none
+//
+//  Returns:        false (returnValue)
+//
+//+----------------------------------------------------------------------------
+
+function DoSelectStart()
+{
+    window.event.returnValue = false;
+    window.event.cancelBubble = true;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+</SCRIPT>

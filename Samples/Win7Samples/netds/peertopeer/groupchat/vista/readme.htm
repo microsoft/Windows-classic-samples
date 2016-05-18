@@ -1,0 +1,228 @@
+<html>
+<title>Group Chat (Vista) Sample</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.75in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.LetteredList, li.LetteredList, div.LetteredList
+	{mso-style-name:"Lettered List";
+	margin-right:0in;
+	margin-left:.75in;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+<body bgcolor="#FFFFFF">
+
+<font face="Arial">
+
+<H1>Group Chat (Vista, Windows 7) Sample</H1>
+
+<p></b>The Group Chat (Vista, Windows 7) Sample Application demonstrates how to create a chat 
+application based on the Peer-to-Peer Grouping and Identity Manager API.&nbsp; 
+It shows a secure multiparty chat application into which you can authenticate people using a password or certificates.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>Platforms supported</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows Vista (except Starter Edition)</p>
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows 7</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+To Build: 
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In a SDK command shell navigate to the directory containing this sample and run "nmake"; or<p>
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Launch the .sln file in Visual Studio .NET</p>
+
+<p class=MsoNormal>&nbsp;</p>
+ 
+To Run: 
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Type groupchat.exe (located in the Vista_DEBUG or WIN7_[ARCH]_DEBUG folder in the directory containing the sample)</p>
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Just use the UI!  When using the certificate model the following steps must be followed:</p>
+<ol>
+<ol>
+<li><p><b>Creating a Peer Identity for each user</b><br>
+In the Group Chat application, a user can generate an identity by 
+selecting the &quot;Create…&quot; option on the &quot;Identity&quot; menu.&nbsp; The resulting 
+dialog box prompts the user for the friendly name (in this case, the &quot;chat name&quot;) 
+that will be associated with the new identity<span style="font-size: 12.0pt">.&nbsp; 
+Before a group can be created, an identity associated with the group creator 
+needs to be created.</span></p>
+<li><p><b>Creating a group that will host the chat participants</b><br>
+<span style="font-size: 12.0pt">When the group owner has an identity, a group is 
+created by selecting the &quot;Create…&quot; option on the &quot;Group&quot; menu. The resulting 
+dialog prompts the user for the identity of the group creator, as well as the 
+name of the group to be created.  The newly created graph will be associated with the chosen identity.&nbsp;
+</span></p>
+<li><p><b>Creating participants’ identity information files for invitations</b><i><br>
+</i>Once the chat group has been created, chat members can solicit the group 
+owner for invitations to join the group. An invitation consists of an XML data 
+string derived from a unique identity (as created in step 1).&nbsp; An 
+invitation is thus exclusively bound to a particular identity.&nbsp; The group 
+owner uses the Peer-to-Peer Grouping API to generate an invitation from an 
+identity and then returns this invitation to the user requesting permission to 
+join the group.</p>
+<p>Users that wish to join the chat group create user identities the same way 
+that the group owner identity is created, using the &quot;Create…&quot; option on 
+&quot;Identity&quot; menu. The &quot;Identity&quot; menu also allows the user to save this identity 
+information to a file.&nbsp; This file is then sent out of band of the 
+Peer-to-Peer infrastructure to the group owner, who creates the corresponding 
+invitation.</p>
+<li><p><b>Creating the invitations to join the group to chat</b><i><br>
+</i>Once the group owner receives a file containing a user’s identity 
+information, they can create a file containing an invitation to join the group 
+using the "Create Invitation…" item on the "Group" menu. Selecting this option 
+opens the Create Invitation dialog and prompts the user to specify the 
+location of the identity information (.idt) file, as well as the destination of 
+the invitation information (.inv) file.&nbsp; The invitation file is then sent 
+out of band of the Peer-to-Peer infrastructure to the requesting individual.</p>
+<p>It is important to note that invitations created with the Group Chat 
+application demonstrate how to create invitations for the &quot;Member&quot; role.&nbsp; A 
+group participant with a member role cannot issue invitations.&nbsp; Only 
+participants with &quot;Admin&quot; credentials can create invitations.</p>
+<li><p><b>Joining the Chat Group</b><span style="font-size: 12.0pt"><br>
+In order to join the chat group, a user needs to have a predefined identity as 
+well as the invitation file that corresponds to that identity.&nbsp; If these 
+two requirements are satisfied, the &quot;Join…&quot; option on the &quot;Group&quot; menu can be 
+used to join the group. Selecting this option opens the Join Group dialog, which 
+requires the user to select his identity and location of the invitation 
+(.inv) file. Pressing the &quot;OK&quot; button initiates the join process.&nbsp; If this 
+is successful, the chat application will connect to the group and the chat user will be 
+online<b>.</b></span></p>
+<li><p><b>Whispering to other members<br>
+</b>To carry on a private conversation with another member, simply double-click 
+that member in the 'Chat Members' list.&nbsp; The "Whisper" dialog will allow 
+the user to send a private message to the selected member.</p>
+</ol>
+</ol>
+
+<br>
+Troubleshooting Tips: 
+<ol>
+<li><p> Do not run groupchat.exe in an elevated command shell </p>
+<li><p> The GroupChat sample uses the following ports: TCP port 3587 (used by p2p networking), UDP port 3540 (PNRP traffic: name registration), UDP port 1900 (SSDP protocol). Make sure that these ports are added to the advanced firewall inbound and outbound rules. 
+For example run the following in an elevated CMD shell to enable inbound TCP port number 3587 <br>
+<i>netsh advfirewall firewall add rule dir=in name="GroupChat SDK TCP 3587" localip=any remoteip=any localport=3587 remoteport=any protocol=tcp action=allow enable=yes </i>
+</p>
+
+<li> <p> To test that the Peer Name Resolution Protocol works refer to the MSDN P2P Blog for the <a href=http://blogs.msdn.com/p2p/archive/2007/07/24/pnrp-debugging-guide-part-1.aspx>PNRP Debugging Guide Part 1</a> </p>
+
+</ol>
+
+</body>
+</html>

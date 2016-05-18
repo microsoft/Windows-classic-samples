@@ -1,0 +1,7 @@
+LIBRARY    "SampleStore"
+
+EXPORTS
+    DllRegisterServer      PRIVATE
+    DllUnregisterServer    PRIVATE
+    DllCanUnloadNow        PRIVATE
+    I_CertDllOpenSampleStoreProvW

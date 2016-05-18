@@ -1,0 +1,26 @@
+HKCR
+{
+	Authenticate.AuthenticateContext.9 = s 'AuthenticateContext Class'
+	{
+		CLSID = s '{216A00A7-1C9F-4550-97C0-63A21F632CFB}'
+	}
+	Authenticate.AuthenticateContext = s 'AuthenticateContext Class'
+	{
+		CLSID = s '{216A00A7-1C9F-4550-97C0-63A21F632CFB}'
+		CurVer = s 'Authenticate.AuthenticateContext.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {216A00A7-1C9F-4550-97C0-63A21F632CFB} = s 'AuthenticateContext Class'
+		{
+			ProgID = s 'Authenticate.AuthenticateContext.9'
+			VersionIndependentProgID = s 'Authenticate.AuthenticateContext'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{5D3BABFB-48A8-4BC8-B1E9-130D3F7491FC}'
+		}
+	}
+}
+

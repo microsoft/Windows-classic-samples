@@ -1,0 +1,307 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<html xmlns:t ="urn:schemas-microsoft-com:time" >
+<?IMPORT namespace="t" implementation="#default#time2">
+<head>
+<style>
+   .time { behavior: url(#default#time2) }
+</style>
+<script>
+function changeTrans(trans) 
+{  
+    if (event.srcElement.id == "oSelectType") 
+        oTran.type = trans;
+    else if (event.srcElement.id == "oSelectSubType")
+        oTran.subType = trans;
+    else if (event.srcElement.id == "oSelectDur")
+        oTran.dur = trans;
+    else if (event.srcElement.id == "oSelectFrom")
+        oTran.from = trans;
+    else if (event.srcElement.id == "oSelectTo")
+            oTran.to = trans;
+    else if (event.srcElement.id == "oSelectMode")
+        oTran.mode = trans;
+    else if (event.srcElement.id == "oSelectCalcMode")
+        oTran.calcMode = trans;
+    else if (event.srcElement.id == "oSelectValues")
+        if (trans == "null"){
+            oTran.values = null;
+            oValues.innerText = "";
+        }
+        else{
+            oTran.values = trans;
+            oValues.innerHTML = "VALUES=&quot;" + "<SPAN CLASS='attrib'>" + event.srcElement.value +"</SPAN>&quot;";
+        }
+    else if (event.srcElement.id == "oSelectRepeatCount")
+        oTran.repeatCount = trans;
+}
+</script>
+<!-- Style below for formatting attributes of displayed source code. -->
+<!-- Title must be the the value of the desired transition type attribute. Whatever is in the title is used in the sample "type" attribute.  -->
+<title>pushWipe</title>
+<LINK REL="stylesheet" HREF="dxfiltran.css" TYPE="text/css"/>
+<!-- Script that handles changing the rendered transitions on the images and the tabs. -->
+<script	src="fillDXfiltran.js"></script>
+</head>
+
+<body onload="tabToggle(description_tab); displayToggle(description);" style="background:#336699">
+
+<!--'Filtered' Content  -->
+<div style="position:absolute; top: 30; left:415; background:white; height:330px; border:2px solid #6699cc; border-top:2px solid black; border-left:2px solid black; width:265px; padding:5px;  overflow:hidden;">
+
+<!-- This is the active content -->
+
+
+<DIV ID="oDiv" CLASS="time basic">
+<t:transitionFilter 
+	id="oTran"
+	begin="oDiv.begin" 
+	dur="1"
+	/>
+<br><SPAN STYLE="color:gold" ID="oPresent1"></SPAN><BR>Transition Type</DIV> 
+<BUTTON onclick="oDiv.beginElement();" style="position:absolute; top:275; left:10; width:240px">Play Transition</BUTTON>
+</DIV>
+
+
+
+
+
+
+
+<!--'Filtered' Content  -->
+
+<div class="bar" style="height:370px">
+<div style="position:absolute; top:10; left:10; width:100%">
+<div id="description_tab" class="tab" style="left:5;" 
+onclick="tabToggle(description_tab); displayToggle(description); oPanel.style.width='400'; panState=0; expbtn.innerText='Expand View'">
+Description</div>
+
+<div id="control_tab" class="tab" style="left:95;" 
+onclick="tabToggle(control_tab); displayToggle(controls); oPanel.style.width='400'; panState=0; expbtn.innerText='Expand View'">
+Controls</div>
+
+<div id="source_tab" class="tab" style="left:185;" 
+onclick="tabToggle(source_tab); displayToggle(source)">
+Source code</div>
+
+
+
+
+<div id="oPanel" class="controlpanel" >
+<div id="description" class="cpcontent">
+
+<div id="oDescription" style="padding:5px" >
+<BR>
+<SPAN CLASS="specialI"><SPAN ID="oPresent3"></SPAN>&nbsp;Transition Type</SPAN>
+
+<div class="descHints"
+<b><b>How to use this sample:</b></b>
+<br>
+
+Click the <b class="descHilite">Controls</b> 
+button above to manipulate the individual attributes and properties of the filter. 
+
+<br>
+<br>Click the <b class="descHilite">
+Source Code</b> button above to display the code that runs the display area.. 
+</div>
+</div>
+</div>
+
+<!--                        Controls                                                                              -->
+
+<div id="controls" class="cpcontent">
+<div id="oControls" >
+<div class="controlTitle">
+Filter properties and attributes:</div>
+<div style="padding:10px; padding-top:0px;">
+
+<SPAN id=controlContainer >
+<TABLE STYLE="CELLPADDING="0">
+<TR>
+<TD STYLE="width:150"><B>SUBTYPE:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectSubType" onchange="oSubType.innerText = oSelectSubType.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SECLECTED VALUE="fromLeft" >fromLeft</OPTION>
+</SELECT>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>DUR:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectDur" onchange="oDur.innerText = oSelectDur.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="1">1</OPTION>
+<OPTION VALUE="2">2</OPTION>
+<OPTION VALUE="3">3</OPTION>
+<OPTION VALUE="4">4</OPTION>
+<OPTION VALUE="5">5</OPTION>
+</SELECT>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>FROM:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectFrom" onchange="oFrom.innerText = oSelectFrom.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="0.0">0.0</OPTION>
+<OPTION VALUE="0.2">0.2</OPTION>
+<OPTION VALUE="0.4">0.4</OPTION>
+<OPTION VALUE="0.6">0.6</OPTION>
+<OPTION VALUE="0.8">0.8</OPTION>
+<OPTION VALUE="1.0">1.0</OPTION>
+</SELECT>
+<span style="font-size:larger;color:red;font-weight:bold;">*</span>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>TO:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectTo" onchange="oTo.innerText = oSelectTo.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="1.0">1.0</OPTION>
+<OPTION VALUE="0.8">0.8</OPTION>
+<OPTION VALUE="0.6">0.6</OPTION>
+<OPTION VALUE="0.4">0.4</OPTION>
+<OPTION VALUE="0.2">0.2</OPTION>
+</SELECT>
+<span style="font-size:larger;color:red;font-weight:bold;">*</span>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>MODE:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectMode" onchange="oMode.innerText = oSelectMode.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="in">in</OPTION>
+<OPTION VALUE="out">out</OPTION>
+</SELECT>
+</TD>
+</TR>
+<BR>
+
+
+<TR>
+<TD STYLE="width:150"><B>CALCMODE:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectCalcMode" onchange="oCalcMode.innerText = oSelectCalcMode.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="linear">linear</OPTION>
+<OPTION VALUE="discrete">discrete</OPTION>
+</SELECT>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>VALUES:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectValues" onchange="var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="null">null</OPTION>
+<OPTION VALUE="0.2;0.4;0.6;0.8;1.0">0.2;0.4;0.6;0.8;1.0</OPTION>
+<OPTION VALUE="0.6;0.8;0.84;0.88;1.0">0.6;0.8;0.84;0.88;1.0</OPTION>
+<OPTION VALUE="0.0;0.2">0.0;0.2</OPTION>
+</SELECT>
+</TD>
+</TR>
+<TR>
+<TD STYLE="width:150"><B>REPEATCOUNT:</B></TD>
+<TD STYLE="width:100">
+<SELECT ID="oSelectRepeatCount" onchange="oRepeatCount.innerText = oSelectRepeatCount.value;var val = this.options[this.selectedIndex].value; if (val!='') {changeTrans(val);oDiv.beginElement();}">
+<OPTION SELECTED VALUE="1">1</OPTION>
+<OPTION VALUE="2">2</OPTION>
+<OPTION VALUE="4">4</OPTION>
+</SELECT>
+</TD>
+</TR>
+
+</TABLE>
+<BR>
+<span style="color:red">*</span>&nbsp;Attribute ignored if the VALUES attribute is specified
+<!-- The attributes below may or may not be applicable to a given transition type. The variables below determine if a given attribute will be an option for a given page. A value of "true" will allow the attribute to be a viable choice. Otherwise no HTML that corresponds to the attribute will not be displayed.  -->
+
+
+
+<BR/>
+</SPAN>
+</div>
+</div>
+</div>
+
+
+<div id="source" class="cpcontent">
+
+
+
+<button id="expbtn" style="width:100%; padding:0px; margin-bottom:5px;" onclick="panelExp(); if(this.innerText=='Expand View'){this.innerText='Collapse View'} else{this.innerText='Expand View'}" >Expand View</button>
+
+
+<pre id="oCodeCopy" style="overflow:auto;  height:265px; width:100%; border:1px solid #cccccc; padding:5px; font-family:courier new;">
+
+&lt;HTML xmlns:t = 'urn:schemas-microsoft-com:time'&gt;
+&lt;HEAD&gt;
+&lt;STYLE&gt;
+   .time { behavior: url(#default#time2) }
+   .looks {border: 4px solid black; width:250;height:250; filter:progid:DXImageTransform.Microsoft.Gradient(); color:white;font-size:28; font-family:trebuceht; font-weight:bold; text-align:center}
+&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;?import namespace = t urn = 'urn:schemas-microsoft-com:time' implementation = '#default#time2' /&gt;
+&lt;DIV ID="oDiv" CLASS="time looks"&gt;
+<SPAN ID="oPresent2"></SPAN>&lt;BR&gt;
+Transition Type 
+&lt;t:transitionFilter 
+TYPE="<SPAN CLASS="staticAttrib" ID="oType"></SPAN>"
+BEGIN="<SPAN CLASS="staticAttrib" ID="oBegin">oDiv.begin</SPAN>"
+SUBTYPE="<SPAN CLASS="attrib" ID="oSubType"></SPAN>"
+DUR="<SPAN CLASS="attrib" ID="oDur"></SPAN>"
+MODE="<SPAN CLASS="attrib" ID="oMode"></SPAN>"
+FROM="<SPAN CLASS="attrib" ID="oFrom"></SPAN>" 
+TO="<SPAN CLASS="attrib" ID="oTo"></SPAN>"
+CALCMODE="<SPAN CLASS="attrib" ID="oCalcMode"></SPAN>"
+REPEATCOUNT="<SPAN CLASS="attrib" ID="oRepeatCount"></SPAN>"
+<SPAN  ID="oValues"></SPAN>
+/&gt;
+&lt;/DIV&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+<!-- The script below insures that only the attributes that are applicable to the transition type will be displayed in the displayed source code. -->
+</pre>
+<!-- This script makes the displayed source code have all the default values for all applicable attributes and runs the proper sample in the IFRAME when the document first loads. -->
+<SCRIPT>
+oPresent1.innerText = document.title
+oPresent2.innerText = document.title
+oPresent3.innerText = document.title
+oType.innerText = document.title;
+oTran.type = document.title;
+oSubType.innerText = oSelectSubType.value;
+oTran.subType = oSelectSubType.value;
+oDur.innerText = oSelectDur.value;
+oTran.dur = oSelectDur.value;
+oMode.innerText = oSelectMode.value;
+oTran.mode = oSelectMode.value;
+oFrom.innerText = oSelectFrom.value;
+oTran.from = oSelectFrom.value;
+oTran.to = oSelectTo.value;
+oTo.innerText = oSelectTo.value;
+oCalcMode.innerText = oSelectCalcMode.value;
+oTran.calcMode = oSelectCalcMode.value;
+oRepeatCount.innerText = oSelectRepeatCount.value;
+oTran.repeatCount = oSelectRepeatCount.value;
+
+</SCRIPT>
+
+<button style="width:100%; padding:2px; margin-top:0px;" onclick="copy2Clipboard()" >
+Copy Code to Clipboard</button>
+
+
+</div>
+</div>
+</span>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+<div class="bar" style="color:white; padding:5px;"><A href="http://www.microsoft.com/misc/info/cpyright.htm" target=_top>
+2001 Microsoft Corporation. All rights reserved. Terms of use.</A></div>
+</body>
+</html>
+

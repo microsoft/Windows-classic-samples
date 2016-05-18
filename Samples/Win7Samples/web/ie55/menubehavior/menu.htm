@@ -1,0 +1,77 @@
+<HTML XMLNS:myMenu>
+<?IMPORT namespace="myMenu" implementation="menu.htc" />
+
+<HEAD>
+<SCRIPT>
+function doFunction(){
+    // Retrieve the result from the event object created in menu.htc.
+    var x = event.result;
+    // Switch the result value.
+    switch(x){
+        case "Downloads":
+            document.all.oFrame.src = "http://msdn.microsoft.com/isapi/gomscom.asp?target=/downloads/";
+            break;
+        case "Product_Catalog":
+            document.all.oFrame.src = "http://msdn.microsoft.com/isapi/gomscom.asp?target=/catalog/default.asp?subid=22";
+            break;
+        case "Accessibility":
+            document.all.oFrame.src = "http://msdn.microsoft.com/isapi/gomscom.asp?target=/enable/"; 
+            break;
+        case "KB":
+            document.all.oFrame.src = "http://support.microsoft.com/search/"; 
+            break;
+        case "Search":
+            document.all.oFrame.src = "http://msdn.microsoft.com/isapi/gosearch.asp?target=/us/default.asp"; 
+            break;
+        case "Web_Search":
+            document.all.oFrame.src = "http://search.msn.com/"; 
+            break;
+        case "Home":
+            document.all.oFrame.src = "http://msdn.microsoft.com/isapi/gomscom.asp?target=/"; 
+            break;
+        case "MSN_Home":
+            document.all.oFrame.src = "http://www.msn.com/"; 
+            break;
+        default:
+            // Do nothing.
+            break; 
+    }
+}
+</SCRIPT>
+</HEAD>
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<BODY style="font-family:verdana; font-size:70%">
+<h1 STYLE="color:#3366CC; font-size:16pt; font-weight:bold; font-family:verdana,arial; ">Menu Behavior</h1>
+<P>This sample demonstrates that an <b>IFRAME</b>'s <b>SRC</b> attribute can be driven by a menu item that you click.
+<BR>
+To choose a menu item,  click on any of the four top-level menu items and then click on one of its children.</P>
+
+<div style="padding:10px; background:#ffffff; border:1px outset #cccccc; width:500px;">
+<myMenu:menu id="All_Products" onsubmenu_click="doFunction()" >All Products
+	<myMenu:menu id="Downloads">Downloads</myMenu:menu>
+	<myMenu:menu id="Product_Catalog">MS Product Catalog</myMenu:menu>
+	<myMenu:menu id="Accessibility">Microsoft Accessibility</myMenu:menu>
+</myMenu:menu>
+<myMenu:menu id="Support" onsubmenu_click="doFunction()">Support
+	<myMenu:menu id="KB">Knowledge Base</myMenu:menu>
+</myMenu:menu>
+<myMenu:menu id="Search" onsubmenu_click="doFunction()">Search
+	<myMenu:menu id="Search">microsoft.com Search</myMenu:menu>
+	<myMenu:menu id="Web_Search">MSN Web Search</myMenu:menu>
+</myMenu:menu>
+<myMenu:menu id="microsoft.com Guide" onsubmenu_click="doFunction()">microsoft.com Guide
+	<myMenu:menu id="Home">microsoft.com Home</myMenu:menu>
+	<myMenu:menu id="MSN_Home">MSN Home</myMenu:menu>
+</myMenu:menu>
+<Iframe id="oFrame" src="http://www.microsoft.com" width="100%" height="350px" style="border: 1px solid black;"></iframe>
+</div>
+<p >To view the source code, right-click this page and choose View Source from the shortcut menu that appears.</p>
+<!-- Copyright -->
+<A class="copyright" HREF="/isapi/gomscom.asp?TARGET=/misc/cpyright.htm" TARGET="_top"> 
+© 2001 Microsoft Corporation. All rights reserved. Terms of use.
+</A>
+</body>
+</html>

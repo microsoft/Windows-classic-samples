@@ -1,0 +1,12 @@
+
+EXPORTS
+
+  ; These are the required exports by the DLL. RAS is expecting these.
+  RasCustomDial PRIVATE
+  RasCustomHangUp PRIVATE
+  RasCustomEntryDlg PRIVATE
+  RasCustomDialDlg PRIVATE
+
+  ; This one is optional per the header file
+  RasCustomDeleteEntryNotify PRIVATE
+

@@ -1,0 +1,19 @@
+// i[!output root].idl : IDL source for [!output root].dll
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+// This file will be processed by the MIDL tool to
+// produce the marshalling code for the I[!output Safe_root] interface.
+
+import "oaidl.idl";
+import "ocidl.idl";
+    [
+        object,
+        uuid([!output INTERFACEID]),
+        helpstring("I[!output Safe_root] Interface")        
+    ]
+    interface I[!output Safe_root] : IUnknown
+    {
+        HRESULT get_scale([out] double *pVal);
+        HRESULT put_scale([in] double newVal);
+    }

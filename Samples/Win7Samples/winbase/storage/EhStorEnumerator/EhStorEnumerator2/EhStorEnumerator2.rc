@@ -1,0 +1,252 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EHSTORENUMERATOR_DIALOG DIALOGEX 0, 0, 429, 204
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Enhanced Storage Sample"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_DEVLIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,415,170
+    LTEXT           "Right click on the portable device for actions menu",IDC_STATIC,7,187,322,10,SS_CENTERIMAGE
+    PUSHBUTTON      "Refresh",IDC_REFRESH,365,183,57,14
+END
+
+IDD_PWDSILO_INFO DIALOGEX 0, 0, 316, 121
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Password silo information"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,259,100,50,14
+    RTEXT           "Silo Friendly Name:",IDC_STATIC,7,7,103,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_FRIENDLY_NAME,119,7,190,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Admin Hint:",IDC_STATIC,7,25,103,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_ADMIN_HINT,119,25,190,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "User Name:",IDC_STATIC,7,44,103,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_USER_NAME,119,44,190,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "User Password Hint:",IDC_STATIC,7,62,103,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_USER_HINT,119,62,190,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Authentication State:",IDC_STATIC,7,80,103,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_AUTHN_STATE,119,80,190,12,ES_AUTOHSCROLL | ES_READONLY
+END
+
+IDD_PWD_ITMS DIALOGEX 0, 0, 320, 49
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Init to Manufacturer State"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_DEVICE_SID,80,7,233,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,205,28,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,263,28,50,14
+    RTEXT           "Security Identifier:",IDC_STATIC,7,7,68,12,SS_CENTERIMAGE
+END
+
+IDD_SET_PASSWORD DIALOGEX 0, 0, 316, 135
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set/Change Password"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "&Administrator",IDC_INDICATOR_ADMIN,"Button",BS_AUTORADIOBUTTON | WS_GROUP,16,98,66,11
+    CONTROL         "&User",IDC_INDICATOR_USER,"Button",BS_AUTORADIOBUTTON,16,111,37,11
+    EDITTEXT        IDC_ODL_PASSWORD,110,7,199,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NEW_PASSWORD,110,27,199,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD_HINT,110,46,199,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEVICE_SID,110,65,199,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,205,114,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,259,114,50,14
+    GROUPBOX        "Password Indicator",IDC_INDICATOR,7,84,95,44
+    RTEXT           "Old Password:",IDC_STATIC,16,7,86,13,SS_CENTERIMAGE
+    RTEXT           "New Password:",IDC_STATIC,16,27,86,13,SS_CENTERIMAGE
+    RTEXT           "Password Hint:",IDC_STATIC,16,46,86,13,SS_CENTERIMAGE
+    RTEXT           "Security Identifier:",IDC_STATIC,16,65,86,13,SS_CENTERIMAGE
+END
+
+IDD_CERT_SILO_INFO DIALOGEX 0, 0, 316, 298
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Certificate Silo Information"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,259,277,50,14
+    RTEXT           "Silo Friendly Name:",IDC_STATIC,7,7,94,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_FRIENDLY_NAME,105,7,204,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Silo GUID:",IDC_STATIC,7,25,94,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_SILO_GUID,105,25,204,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Certificates count:",IDC_STATIC,7,43,94,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_CERT_COUNT,105,43,204,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Authentication state:",IDC_STATIC,7,61,94,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_AUTHN_STATE,105,61,204,12,ES_AUTOHSCROLL | ES_READONLY
+    LISTBOX         IDC_HASH_ALGS,105,80,204,54,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Hash Algorithms:",IDC_STATIC,7,80,94,12,SS_CENTERIMAGE
+    LISTBOX         IDC_SIGNING_ALGS,105,140,204,54,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Signing Algorithms:",IDC_STATIC,7,140,94,12,SS_CENTERIMAGE
+    LISTBOX         IDC_ASYMM_KEY,105,200,204,54,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Asymmetric Key:",IDC_STATIC,7,200,94,12,SS_CENTERIMAGE
+END
+
+IDD_CERTIFICATES DIALOGEX 0, 0, 554, 215
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Certificates"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,497,194,50,14
+    CONTROL         "",IDC_CERT_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,20,540,168
+    PUSHBUTTON      "Add to &Device",IDC_ADD_TO_DEVICE,7,194,73,14
+    CONTROL         "",IDC_CERTTAB,"SysTabControl32",WS_TABSTOP,7,7,540,13
+    PUSHBUTTON      "Delete",IDC_DELETE,91,194,50,14
+END
+
+IDD_SET_CERTIFICATE DIALOGEX 0, 0, 352, 114
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Certificate"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,233,93,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,295,93,50,14
+    RTEXT           "Device:",IDC_STATIC,7,7,68,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_DEVICE_ID,82,7,263,12,ES_AUTOHSCROLL | ES_READONLY
+    RTEXT           "Certificate type:",IDC_STATIC,7,25,68,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_CERT_TYPE,82,25,111,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Index:",IDC_STATIC,209,25,68,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_CERT_INDEX,283,25,62,66,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Validation Policy:",IDC_STATIC,7,43,68,11,SS_CENTERIMAGE
+    COMBOBOX        IDC_VALIDATION_POLICY,82,43,111,62,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Signer Index:",IDC_STATIC,209,43,68,11,SS_CENTERIMAGE
+    COMBOBOX        IDC_CERT_SIGNER_INDEX,283,43,62,66,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Certificate Subject:",IDC_STATIC,7,76,68,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_CERT_SUBJECT,82,76,263,12,ES_AUTOHSCROLL | ES_READONLY
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_EHSTORENUMERATOR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 309
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 176
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_POPUPMENU MENU 
+BEGIN
+    POPUP "Password"
+    BEGIN
+        MENUITEM "Password SILO",               ID_PASSWORD_PASSWORDSILO, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Query information",           ID_PASSWORD_QUERYINFORMATION
+        MENUITEM "Set/Change Password",         ID_PASSWORD_SET
+        MENUITEM "Init To Manufacturer State",  ID_PASSWORD_INITTOMANUFACTURERSTATE
+    END
+    POPUP "Certificate"
+    BEGIN
+        MENUITEM "Certificate SILO",            ID_CERTIFICATE_CERTIFICATESILO, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Query Information",           ID_CERTIFICATE_QUERYINFORMATION
+        MENUITEM "Host Authentication",         ID_CERTIFICATE_HOSTAUTHENTICATION
+        MENUITEM "Device Authentication",       ID_CERTIFICATE_DEVICEAUTHENTICATION
+        MENUITEM "UnAuthentication",            ID_CERTIFICATE_UNAUTHENTICATION
+        MENUITEM "Certificates",                ID_CERTIFICATE_CERTIFICATES
+        MENUITEM "Init To Manufacturer State",  ID_CERTIFICATE_INITTOMANUFACTURERSTATE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDC_EHSTORENUMERATOR2   "EHSTORENUMERATOR2"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

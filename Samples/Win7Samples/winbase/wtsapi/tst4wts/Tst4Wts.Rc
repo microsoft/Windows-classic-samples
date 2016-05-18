@@ -1,0 +1,28 @@
+//-----------------------------------------------------------------------------
+// This is a part of the Microsoft Source Code Samples.
+// Copyright 1995 - 2000, Citrix Systems Inc.
+// Copyright (c) 1997 - 2000  Microsoft Corporation
+// All rights reserved.
+//
+// This source code is only intended as a supplement to
+// Microsoft Development Tools and/or WinHelp documentation.
+// See these sources for detailed information regarding the
+// Microsoft samples programs.
+//-----------------------------------------------------------------------------
+#include <windows.h>
+#include <winver.h>
+#include <ntverp.h>
+
+#define	VER_FILETYPE	VFT_DLL
+#define	VER_FILESUBTYPE	VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows Terminal Server Detection Program"
+#ifdef UNICODE
+#define VER_INTERNALNAME_STR        "tstwtsu.exe"
+#define VER_ORIGINALFILENAME_STR    "tstwtsu.exe"
+#else
+#define VER_INTERNALNAME_STR        "tstwts.exe"
+#define VER_ORIGINALFILENAME_STR    "tstwts.exe"
+#endif
+
+#include <common.ver>
+

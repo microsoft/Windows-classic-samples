@@ -1,0 +1,582 @@
+/******************************************************************************/
+/*DEFAULT STYLES FOR ALL SECTIONS**********************************************/
+/******************************************************************************/
+body						  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+								color: buttontext;
+								background-color: buttonface;
+							    margin-top: 0px;
+		  		 			    margin-left: 0px;
+							    margin-right: 0px;
+							    margin-bottom: 0px;
+								overflow: visible; }
+
+a:link						  { color: captiontext;
+				  				text-decoration: none; }
+								
+a:visited					  { color: captiontext;
+				  				text-decoration: none; }
+								
+a:active					  { color: captiontext;
+				  				text-decoration: none; }
+								
+a:hover						  { color: captiontext;
+				  				text-decoration: underline; }
+								
+table						  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext;
+								width: 100%; }
+								
+table.one					  { table-layout: fixed;
+								height: 100%;
+								width: 100%; }
+
+
+/*DEFAULT STYLES FOR THE 'INTRODUCTION' TABLE**********************************/
+/******************************************************************************/
+
+table.two					  { table-layout: fixed;
+								height: 79px;
+								width: 100%;
+								background-color: window; }
+								
+td.image					  { text-align: right; }
+						
+td.rule						  { background-color: window; }
+
+h1.head						  { font-weight: bold;
+				 			    font-size: 10pt;
+				 			    color: windowtext;
+							    margin-top: -3px; }
+
+p.subhead					  { color: windowtext;
+							    margin-top: -12px;
+								margin-left: 10px; }
+
+img.smallest			  	  { background-color: activecaption;
+							    z-index: 1; }
+
+img.small				  	  { z-index: 1; }
+
+/*DEFAULT STYLES FOR THE 'NAVIGATION' TABLE************************************/
+/******************************************************************************/
+
+table.three					  { table-layout: fixed;
+								height: 100%;
+								width: 178px; }
+
+td.three					  { background-attachment: fixed;
+								background-repeat: no-repeat;
+								background-position: bottom left;
+								background-color: activecaption; }
+								
+td.dottedline				  { background: url(Images/DottedHori.gif) repeat; }
+
+table.linktextselected		  { font-weight: bold;
+						 	    width: 157px;
+								height: 30px;
+								position: relative;
+							    left: 10px;
+							    z-index: 2; }
+
+table.linktextselectedindent  { font-weight: bold;
+						 	    width: 148px;
+								height: 30px;
+								position: relative;
+							    left: 18px;
+							    z-index: 2; }
+
+table.linktext				  { width: 157px;
+								height: 30px;
+								position: relative;
+							    left: 10px;
+						 	    z-index: 2; }
+
+table.linktextindent		  { width: 148px;
+								height: 30px;
+								position: relative;
+							    left: 18px;
+							    z-index: 2; }
+
+div.linkselected			  { background-color: buttonface;
+						 	    height: 30px;
+							    width: 166px;
+								position: relative;
+							    left: 0px;
+							    right: 0px;
+							    z-index: 1; }
+
+div.link					  { height: 30px;
+							    width: 166px;
+							    position: relative;
+							    left: 0px;
+							    right: 0px;
+							    z-index: 1; }
+
+div.vertline				  { background: url(Images/DottedVert.gif) repeat;
+								height: 125%;
+						 	    width: 1px;
+								position: relative;
+								top: -12px;
+							    left: -1px; }
+				  
+span.vertline1				  { background: url(Images/DottedVert.gif) repeat;
+								height: 100%;
+						 	    width: 1px;
+								position: absolute;
+							    top: 0px;
+				 			    left: -1px;
+							    bottom: 0px;
+							    z-index: 2; }
+				  
+span.horiline1				  { height: 30px;
+							    width: 166px;
+								position: absolute;
+							    top: -1px;
+							    left: -1px;
+							    bottom: -1px;
+							    z-index: 2; }
+								
+span.activelink				  { color: captiontext;
+							    text-decoration: none;
+							    cursor: hand; }
+								
+span.activelink2			  { color: captiontext;
+							    text-decoration: underline;
+							    cursor: hand; }
+								
+span.inactivelink			  { color: buttonface;
+							    text-decoration: none;
+							    cursor: default; }
+
+
+/*DEFAULT STYLES FOR THE ALL BUTTONS AND THE 'BUTTONS' TABLE*******************/
+/******************************************************************************/
+
+button						  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+								height: 23px;
+								cursor: hand; }
+
+.buttons				  	  { width: 75px; }
+
+/*DEFAULT STYLES FOR THE 'CONTENT' TABLE***************************************/
+/******************************************************************************/
+
+table.content			 	  { table-layout: fixed;
+								height: 100%;
+								width: 422px; }
+
+table.content1			 	  { table-layout: fixed;
+								height: 100%;
+								width: 398px; }
+
+table.content2			 	  { table-layout: fixed;
+								height: 100%;
+								width: 193px; }
+				  
+ol							  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext;
+								margin-top: -1px;
+								margin-bottom: 16px; }
+				  
+ul							  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext;
+								margin-top: -1px;
+								margin-bottom: 16px; }
+
+li							  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext;
+								position: relative;
+								left: -15px;
+								margin-bottom: 1px; }
+								
+span.itemtext				  { position: relative;
+								top: -3px; }
+								
+span.itemtextindent			  { position: relative;
+								left: 17px;
+								top: -3px; }
+								
+span.itemtextindentA		  { position: relative;
+								left: 25px;
+								top: -3px; }
+								
+span.itemtextindent1		  { position: relative;
+								left: 8px;
+								top: -3px; }
+								
+span.sidebtnhidden			  { width: 100%;
+								margin-top: 3px;
+								margin-bottom: 0px; }
+								
+div.itemtextradioB			  { position: relative;
+								top: -19px;
+								left: 25px;
+								margin-bottom: -25px; }
+								
+div.itemtextradioindentA	  { position: relative;
+								top: -17px;
+								left: 30px;
+								margin-bottom: -25px; }
+								
+div.itemtextradioindentB	  { position: relative;
+								top: -19px;
+								left: 42px;
+								margin-bottom: -25px; }
+								
+div.itemtextcheckboxA		  { position: relative;
+								top: -17px;
+								left: 17px;
+								margin-bottom: -23px; }
+								
+div.itemtextcheckboxB		  { position: relative;
+								top: -18px;
+								left: 25px;
+								margin-bottom: -25px; }
+								
+div.itemtextcheckboxindentB	  { position: relative;
+								top: -16px;
+								left: 42px;
+								margin-bottom: -25px; }
+									
+div.inlineA					  {	position: relative;
+								top: 4px;
+								width: 100%;
+								height:1px;
+								border-top: solid buttonshadow 1px; }
+									
+div.inlineB					  {	position: relative;
+								top: -9px;
+								margin-bottom: -20px;
+								width: 100%;
+								height:1px; 
+								border-top: solid threedhighlight 1px; }
+								
+input						  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext; }
+
+.radio						  { position: relative;
+								top: -2px;
+								left: 4px; }
+							
+.radioIndentA				  { margin-top: -2px;
+								margin-left: 9px; }
+							
+.radioIndent				  { margin-top: -2px;
+								margin-left: 17px; }
+
+.checkboxA					  { position: relative;
+								top: -2px;
+								left: 4px; }
+
+.checkbox					  { position: relative;
+								top: -1px;
+								margin-left: -4px;
+								z-index: 2; }
+							
+.checkboxIndent				  { margin-top: -1px;
+								margin-left: 21px; }
+								
+.comment					  { width: 566px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+.comment2					  { width: 391px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+/****THIS IS THE STANDARD INPUT BOX********************************************/
+input.sidebtn				  { width: 173px;
+								position: relative;
+								top: 5px;
+								left: 8px; }
+								
+/****THIS IS AN INPUT BOX INDENTED UNDER A CHECKBOX SECTION*******************/
+input.sidebtnIndent			  { width: 163px;
+								position: relative;
+								top: 5px;
+								left: 18px;
+								bottom: 6px; }
+								
+/****THIS INPUT BOX HAS IS INDENTED UNDER A HEADING AND RULE SECTION***********/
+input.sidebtnB				  { width: 164px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+/****THIS INPUT BOX HAS A "..." BUTTON BESIDE IT*******************************/
+input.sidebtn2				  { width: 149px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+/****THIS INPUT BOX HAS A "..." BUTTON BESIDE IT AND IT'S UNDER A CHECKBOX*****/
+input.sidebtn2Indent		  { width: 139px;
+								position: relative;
+								top: 5px;
+								left: 18px;
+								bottom: 6px; }
+								
+input.sidebtn21				  { width: 141px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+input.sidebtn2Long			  { width: 253px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+input.sidebtn2A				  { width: 140px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+input.sidebtn2B				  { width: 156px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+select						  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext; }
+
+/****THIS IS THE STANDARD SELECTION BOX****************************************/
+select.sidebtn				  { width: 173px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+
+/****THIS IS THE STANDARD SELECTION BOX****************************************/
+span.sidebtn				  { position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+
+/****THIS IS THE STANDARD SELECTION BOX****************************************/
+span.itemtextspecial		  { position: relative;
+								top: -20px;
+								left: 16px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+
+/****THIS IS THE STANDARD SELECTION BOX****************************************/
+span.sidebtnspecial			  { position: relative;
+								top: -2px;
+								left: 54px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+
+/****THIS SELECTION BOX IS INDENTED UNDER A HEADING AND RULE SECTION***********/
+select.sidebtnB				  { width: 164px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+/****THIS SELECTION BOX IS BELOW AND ASSOCIATED WITH A CHECKBOX****************/
+select.sidebtn2				  { width: 164px;
+								position: relative;
+								top: 13px;
+								left: 17px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+/****THIS SELECTION BOX IS BELOW AND ASSOCIATED WITH A CHECKBOX AND HEADING****/
+select.sidebtn2A			  { width: 156px;
+								position: relative;
+								top: 13px;
+								left: 25px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+/****THIS SELECTION BOX IS BELOW AND ASSOCIATED WITH A CHECKBOX AND HEADING****/
+select.sidebtn2ALong		  { width: 277px;
+								position: relative;
+								top: 6px;
+								left: 25px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+select.sidebtn2B			  { width: 156px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+/****THIS SELECTION BOX HAS "..." BUTTONS BESIDE THEM**************************/
+select.sidebtn2C			  { width: 149px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+select.sidebtn2CLong		  { width: 253px;
+								position: relative;
+								top: 5px;
+								left: 8px;
+								bottom: 6px; }
+								
+select.sidebtn3				  { width: 150px;
+								position: relative;
+								top: 6px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+								
+/****THIS SELECTION BOX IS FOR HORIZONTAL ADD/REMOVE SECTIONS******************/
+select.sidebtn4Long			  { width: 574px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								bottom: 0px;
+								margin-bottom: -3px; }
+
+object.itemtext				  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext;
+								width: 173px;
+								height: 19px;
+								position: relative;
+								top: 6px;
+								left: 8px;
+								margin-bottom: 2px; }
+
+.dropdowncombo				  { font-family: Tahoma, Verdana, Arial, Sans Serif;
+							    font-weight: normal;
+				 			    font-size: 8pt;
+							    color: buttontext; }
+				  
+/****THIS DEFINES A STANDARD BUTTON IN THE CONTENT SECTION*********************/
+.buttonclass			 	  { margin-top: 2px;
+								margin-left: 8px;
+								margin-bottom: -6px;
+								padding: 2px; }
+				  
+/****THIS DEFINES ADD/REMOVE BUTTONS IN THE CONTENT SECTION********************/
+.buttonclass2			 	  { margin-top: 8px;
+								margin-left: 8px;
+							    z-index: 1;
+								cursor: hand; }
+				  
+/****THIS DEFINES A "..." BUTTON IN THE CONTENT SECTION************************/
+.buttonclass3			 	  { height: 19px;
+								width: 20px;
+								position: relative;
+								top: 2px; }
+				  
+/****THIS DEFINES A "..." BUTTON IN THE CONTENT SECTION AND UNDER A CHECKBOX***/
+.buttonclass3Indent		 	  { height: 19px;
+								width: 20px;
+								position: relative;
+								top: 2px;
+								left: 10px; }
+								
+.buttonclass31			 	  { height: 19px;
+								width: 20px;
+								position: relative;
+								top: 2px;
+								left:8px; }
+				  
+.buttonclass3A			 	  { height: 19px;
+								width: 20px;
+								position: relative;
+								top: 5px; }
+								
+/****THIS DEFINES A ">>" BUTTON IN THE CONTENT SECTION************************/
+.buttonclass4			 	  { margin-bottom: 4px;
+								width: 75px;
+								height: 23px; }
+								
+/****THIS DEFINES ADD/REMOVE BUTTONS HORIZONTALLY IN THE CONTENT SECTION******/
+.buttonclass5			 	  { margin-left: 4px; }
+								
+/****THIS DEFINES FIRST ADD/REMOVE BUTTONS HORIZONTALLY IN CONTENT SECTION****/
+.buttonclass5A			 	  { margin-left: 8px; }
+								
+/****THIS SETS THE LEFT MARGIN FOR THE REMOVE BUTTON***************************/
+#removebtn				 	  { margin-left: 4px; }
+
+
+								
+/****THIS SETS THE LEFT MARGIN FOR INDENTED SECTION UNDER CHECKBOXES***********/
+label.indent				  { margin-left: 18px; }
+
+/****THIS SETS THE LEFT MARGIN FOR INDENTED SECTION UNDER CHECKBOXES***********/
+label.indent2				  { margin-left: 26px; }
+								
+								
+/****THESE ARE CUSTOM SPACING ELEMENTS*****************************************/
+p.spacer					  { margin-bottom: -28px; }
+								
+p.elementspacer				  { margin-bottom: -12px; }
+								
+p.elementspacer2			  { margin-bottom: -19px; }
+								
+p.elementspacer3			  { margin-bottom: -3px; }
+								
+p.elementspacer4			  { margin-bottom: 7px; }
+								
+p.elementspacer5			  { margin-bottom: 5px; }
+								
+p.elementspacer6			  { margin-bottom: -24px; }
+								
+p.elementspacer7			  { margin-bottom: -11px; }
+								
+p.elementspacer8			  { margin-bottom: -14px; }
+								
+p.elementspacer9			  { margin-bottom: -7px; }
+								
+p.elementspacer10			  { margin-bottom: 6px; }
+								
+p.elementspacer11			  { margin-bottom: 22px; }
+								
+p.elementspacer12			  { margin-bottom: -17px; }
+								
+p.elementspacer13			  { margin-bottom: -23px; }
+								
+p.elementspacer14			  { margin-bottom: -25px; }
+
+
+/*CUSTOM STYLES FOR THE 'CONTENT' FRAME****************************************/
+/******************************************************************************/
+
+
+	/*MFCAppWiz - Generated Classes.htm****************************************/
+	/**************************************************************************/
+	#CLASS_NAMES			  { width: 391px; }
+	
+	#PARAMETER_LIST_SPAN	  { position: relative;
+								top: 46px; }
+	
+	#PARAMETER_LIST			  { margin-top: -1px; }

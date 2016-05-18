@@ -1,0 +1,13 @@
+[ uuid (6238dc00-af17-11cd-b799-00aa003cd575),
+  version(1.0),
+  pointer_default(unique)
+]
+interface dynept
+{
+
+void HelloProc([in] handle_t h1,
+			   [in, string] unsigned char * pszString);
+
+void Shutdown([in] handle_t h1);
+
+}

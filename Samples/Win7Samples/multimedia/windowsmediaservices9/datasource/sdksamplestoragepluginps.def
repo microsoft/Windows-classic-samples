@@ -1,0 +1,21 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows Media Technologies
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       SDKSampleStoragePluginPS.def
+;
+;  Contents:
+;
+;--------------------------------------------------------------------------
+
+LIBRARY      "SDKSampleStoragePluginPS"
+
+DESCRIPTION  'Proxy/Stub DLL'
+
+EXPORTS
+	DllGetClassObject       PRIVATE
+	DllCanUnloadNow         PRIVATE
+	GetProxyDllInfo         PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

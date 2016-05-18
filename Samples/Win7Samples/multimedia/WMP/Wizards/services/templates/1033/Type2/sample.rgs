@@ -1,0 +1,34 @@
+HKCR
+{
+    NoRemove CLSID
+    {
+        ForceRemove {[!output CLASSID]} = s '[!output Safe_root] Class'
+        {
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+        }
+    }
+}
+HKLM
+{
+    NoRemove Software
+    {
+        NoRemove Microsoft
+        {
+            NoRemove MediaPlayer
+            {
+                NoRemove Subscriptions
+                {
+                     ForceRemove [!output CONTENTDISTRIBUTOR]
+                     {
+                        val FriendlyName = s '[!output FRIENDLYNAME]'
+                        val SubscriptionObjectGuid = s '{[!output CLASSID]}'
+                        val RemoveURL = s '[!output REMOVEURL]'
+                    }
+                }
+            }
+        }
+    }
+}

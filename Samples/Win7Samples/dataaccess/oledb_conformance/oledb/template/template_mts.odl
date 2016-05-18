@@ -1,0 +1,51 @@
+//+-------------------------------------------------------------------------
+//
+//  File:       Template_MTS.odl
+//
+//	Contents:	CThisTestModule CoClass, interface definition
+//
+//	History:	September 23 1999, created
+//
+//--------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------
+//the libid for this type library
+//
+import "ModuleCore.idl";
+
+[
+	// this are the attibutes of the type library
+	uuid(51C52B51-722A-11d3-8AA2-00105A174FB9),	// Type Library's CLSID
+	helpstring("Session Pooling Test Module."),
+	version(1.0)
+]
+
+library Template_MTS
+{
+	importlib("stdole.tlb");
+
+	// Define the CoType (i.e. coclass) for the test module, 
+	[
+			// CLSID of the test module
+			uuid(51C52B53-722A-11d3-8AA2-00105A174FB9), // the same as CLSID_TESTMODULE
+			helpstring("Template test module"),
+	]
+	coclass CThisTestModule
+	{
+		interface ITestModule;
+	}
+}
+
+cpp_quote("")
+cpp_quote("")
+cpp_quote("#if _MSC_VER < 1100 || !defined(__cplusplus)")
+cpp_quote("")
+cpp_quote("DEFINE_GUID(CLSID_TESTMODULE, 0x51c52b53, 0x722a, 0x11d3, 0x8a, 0xa2, 0x0, 0x10, 0x5a, 0x17, 0x4f, 0xb9);")
+cpp_quote("")
+cpp_quote("#else")
+cpp_quote("")
+cpp_quote("#define CLSID_TESTMODULE	__uuidof(CThisTestModule)")
+cpp_quote("")
+cpp_quote("#endif")
+cpp_quote("")
+cpp_quote("")

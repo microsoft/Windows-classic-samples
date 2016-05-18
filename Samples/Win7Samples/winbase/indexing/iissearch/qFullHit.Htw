@@ -1,0 +1,80 @@
+<HTML>
+
+<!--
+    This is the formatting page for webhits full highlighting.
+    This file defines how the page header, highlighting, and
+    footer will appear.
+
+    It has been assumed that CiUserParam3 will be set to point to the
+    query form to issue new queries.
+-->
+
+<HEAD>
+    <!-- The title lists the Restriction -->
+
+        <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+    <TITLE> <%CiRestriction%> in <%CIURL%> </TITLE>
+
+</HEAD>
+
+<!-- #CiTag-1 is generated as a link to the previous hit for the first hit -->
+
+<a NAME="CiTag-1"> </a>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" TOPMARGIN=0>
+
+<TABLE>
+    <TR><TD><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Sample Full Hit Highlighting Form</H3></TD></TD></TR>
+    </TR>
+</TABLE>
+
+<!-- Print a header that displays the cirestriction and document vpath -->
+
+<p>Query <b><i><%CiRestriction%></i></b> against document <a href="<%CIURL%>"><%CiUrl%></a>
+
+<p>You can navigate between the hits using the <b>"&lt;&lt;"</b> and <b>"&gt;&gt;"</b> tags around a hit.
+Clicking "&lt;&lt;" takes you to the previous hit, clicking "&gt;&gt;" takes you to the next hit.
+
+<!-- #CiTag0 is the tag of the first hit in the document -->
+<p><a href="#CiTag0"> Click to go to the first hit in the document.</a>
+
+<!-- CiUserParam3 should contain the query form link -->
+
+<p align="right"><A HREF="<%CiUserParam3%>"> New Query </A>
+
+<HR>
+
+<!-- The highlighted summaries are printed here -->
+<table><tr><td>
+<%begindetail%>
+<%enddetail%>
+</td></tr></table>
+
+<!-- BEGIN STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+<hr width=500 align=left>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/windows.NetServer"><img src="win2k.gif" alt="Learn more about Microsoft Windows"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-2002 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/Info/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+<!-- END STANDARD MICROSOFT FOOTER FOR QUERY PAGES -->
+
+</BODY>
+</HTML>

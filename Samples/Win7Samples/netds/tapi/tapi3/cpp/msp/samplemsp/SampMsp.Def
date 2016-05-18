@@ -1,0 +1,12 @@
+;
+; Copyright (C) 1999  Microsoft Corporation.  All Rights Reserved.
+;
+; sampmsp.def : Declares the module parameters.
+
+LIBRARY      "sampmsp.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE

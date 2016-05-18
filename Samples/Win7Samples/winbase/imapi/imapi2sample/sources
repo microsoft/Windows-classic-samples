@@ -1,0 +1,61 @@
+TARGETNAME=imapi2sample
+TARGETTYPE=PROGRAM
+TARGET_DESTINATION=storage
+
+# put this back in once WPP cross-dependency fixed (see pch.h)         
+#         -scan:$(SDK_INC_PATH)\imapi2.h       \
+
+# ------------------------------------------------------------------------------
+# ATL Options
+USE_STATIC_ATL=1
+ATL_VER=70
+
+# Specify ATL libraries for static linking, to reduce dependencies for binary
+!if $(FREEBUILD)
+ADDITIONAL_ATL_LIBS = $(SDK_LIB_PATH)\atls.lib
+!else
+ADDITIONAL_ATL_LIBS = $(SDK_LIB_PATH)\atlsd.lib
+!endif
+
+# USE_STL=1  # enable STL headers and libraries
+NO_NTDLL=1   # if linked with ntdll.lib,
+             # _vsnwprintf is imported from ntdll.dll
+             # at run-time. This prevents loading on W2K. 
+             
+
+C_DEFINES=$(C_DEFINES) $(ATL_C_DEFINES)
+# ------------------------------------------------------------------------------
+
+
+
+TARGETLIBS = \
+        $(SDK_LIB_PATH)\user32.lib         \
+        $(SDK_LIB_PATH)\uuid.lib           \
+        $(SDK_LIB_PATH)\ole32.lib          \
+        $(SDK_LIB_PATH)\shlwapi.lib        \
+        $(DRIVERS_LIB_PATH)\imapi2uuid.lib \
+        $(SDK_LIB_PATH)\oleaut32.lib       
+
+INCLUDES=\
+	$(OBJ_PATH)\..\IDL\$O;     \
+        $(DDK_INC_PATH);           \
+        $(SDKTOOLS_INC_PATH);            
+       
+
+SOURCES=\
+        consoleUtil.cpp              \
+        AudioEvent.cpp               \
+        DataWriter2Event.cpp         \
+        DiscMaster2Event.cpp         \
+	Erase.cpp                    \
+        Erase2Event.cpp              \
+        RawWriter2Event.cpp          \
+        util.cpp                     \
+        imapi2sample.cpp             \
+        imapi2sample.rc
+
+UMTYPE=console
+UMENTRY=wmain
+
+USE_MSVCRT=1
+

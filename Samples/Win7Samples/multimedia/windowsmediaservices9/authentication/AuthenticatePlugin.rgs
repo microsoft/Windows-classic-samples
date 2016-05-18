@@ -1,0 +1,56 @@
+HKCR
+{
+	Authenticate.AuthenticatePlugin.9 = s 'AuthenticatePlugin Class'
+	{
+		CLSID = s '{394D8DC7-5F9D-4B42-95F1-1B35F4FE968C}'
+	}
+	Authenticate.AuthenticatePlugin = s 'AuthenticatePlugin Class'
+	{
+		CLSID = s '{394D8DC7-5F9D-4B42-95F1-1B35F4FE968C}'
+		CurVer = s 'Authenticate.AuthenticatePlugin.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {394D8DC7-5F9D-4B42-95F1-1B35F4FE968C} = s 'AuthenticatePlugin Class'
+		{
+			ProgID = s 'Authenticate.AuthenticatePlugin.9'
+			VersionIndependentProgID = s 'Authenticate.AuthenticatePlugin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{5D3BABFB-48A8-4BC8-B1E9-130D3F7491FC}'
+            ForceRemove Properties
+            {
+                val Author = s 'Microsoft Corporation'
+                val Name = s 'WMS SDK Sample Authentication Plugin'
+                val Copyright = s 'Copyright 2002 Microsoft Corporation. All rights reserved.'
+            }
+		}
+	}
+}
+
+HKLM 
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Windows Media'
+			{
+				NoRemove Server
+				{
+					NoRemove RegisteredPlugins
+					{
+                        NoRemove Authentication
+                        {
+					        ForceRemove {394D8DC7-5F9D-4B42-95F1-1B35F4FE968C} = s 'WMS SDK Sample Authentication Plugin'
+					        {
+					        }
+					    }
+					}
+				}
+			}
+		}
+	}
+}

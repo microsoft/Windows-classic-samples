@@ -1,0 +1,34 @@
+HKCR
+{
+	SdkShaInfo.ComponentInfo.1 = s 'ComponentInfo Class'
+	{
+		CLSID = s '{E19DDEC2-3FBE-4C3B-9317-679760C13AAE}'
+	}
+	SdkShaInfo.ComponentInfo = s 'ComponentInfo Class'
+	{
+		CLSID = s '{E19DDEC2-3FBE-4C3B-9317-679760C13AAE}'
+		CurVer = s 'SdkShaInfo.ComponentInfo.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E19DDEC2-3FBE-4C3B-9317-679760C13AAE} = s 'ComponentInfo Class'
+		{
+		    val AppID = s '{71EB2D90-9A3F-4e5b-99A5-5A03E18F0F92}'
+			ProgID = s 'SdkShaInfo.ComponentInfo.1'
+			VersionIndependentProgID = s 'SdkShaInfo.ComponentInfo'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{74CCF207-06E3-4424-9D72-6F43A8D02FB7}'
+		}
+	}
+	NoRemove AppID
+	{
+	    ForceRemove {71EB2D90-9A3F-4e5b-99A5-5A03E18F0F92} = s 'ComponentInfo Class'
+	    {
+	        val DllSurrogate = s ''
+	    }	
+	}
+}

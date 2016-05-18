@@ -1,0 +1,485 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Development Platforms</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="Microsoft Theme" content="none">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="2%"></td>
+    <td width="98%"><map name="FPMap1">
+      <area href="http://msdn.microsoft.com/vstudio/?RLD=191" shape="rect" coords="7, 5, 52, 52" ALT="http://msdn.microsoft.com/vstudio/?RLD=191">
+      <area href="http://msdn.microsoft.com/vbasic/?RLD=25" shape="rect" coords="53, 8, 98, 52" ALT = "http://msdn.microsoft.com/vbasic/?RLD=25">
+      <area href="http://msdn.microsoft.com/visualc/?RLD=194" shape="rect" coords="102, 6, 136, 53" ALT = "http://msdn.microsoft.com/visualc/?RLD=194">
+      <area href="http://msdn.microsoft.com/scripting/default.htm?/scripting/start.htm" shape="rect" coords="139, 6, 193, 53" ALT = "http://msdn.microsoft.com/scripting/default.htm?/scripting/start.htm"></map>
+      <img src="dev.gif" alt="dev.gif (9935 bytes)" width="220" height="105" border="0" usemap="#FPMap1">
+      <p>&nbsp;</p>
+    </td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+  <tr>
+    <td width="2%"></td>
+    <td width="98%"><a name="top"></a><font face="Verdana"><small>You can access ADSI from
+    many different development platforms such as Microsoft® Visual Basic®,
+      Scripting, Visual C++®, and any other language that is compatible with
+      Automation. Your mission is the easy part - picking the development
+    platform that is best suited for you and your projects.&nbsp; To learn more, follow these links:</small></font>
+      <ul>
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#script">Microsoft Scripting Technologies</a></small></font></strong></li>
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#vb">Microsoft Visual Basic</a></small></font></strong></li>
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#vc">Microsoft Visual C++</a></small></font></strong></li>
+      <li><strong><font face="Verdana" color="#0080C0"><small><a href="#asp">Active Server Page</a></small></font></strong></li>
+      </ul>
+    <p>&nbsp;</p>
+    <p><a name="script"></a><font face="Verdana" color="#0080C0"><strong><small>Microsoft
+    Scripting Technologies</small></strong></font></p>
+    <p><font face="Verdana"><small>Before you start, make sure you download and install the
+    scripting components from&nbsp; <a href="http://www.microsoft.com/management/wshobj.htm">http://www.microsoft.com/management/wshobj.htm</a>.
+    If your operating system is Windows® 2000, the scripting components are already ready to be
+    used. For more information on scripting, visit </small><a
+    href="http://msdn.microsoft.com/scripting"><font SIZE="2">http://msdn.microsoft.com/scripting</font></a></font>.</p>
+    <p><font size="2" face="Verdana">Scripting technology is ideal for
+    administrators
+    creating batch scripts for frequently used tasks.</font></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>A simple VBScript sample: Enumerating
+    ADSI objects in a computer</small></strong></font></p>
+      <font size="2" face="Verdana">Before we start, you must either have a machine
+      that runs Windows NT® or be logged on to
+          a domain. If your machine runs Windows 95/Windows 98, you must have a
+      Windows NT machine that you can connect to.<br>
+          </font>
+    <blockquote>
+      <ol>
+        <li><font size="2" face="Verdana">Create a new text file using Notepad
+          or your favorite text editor.<br>
+          </font></li>
+        <li><font size="2" face="Verdana">Write the following line:<br>
+          <br>
+          '----------------------------------------------------------<br>
+          '--- This script enumerates ADSI objects in a computer <br>
+          '---------------------------------------------------------<br>
+          Dim machineName<br>
+          <br>
+          machineName = &quot;mymachine&quot;<br>
+          <br>
+          Set comp = GetObject(&quot;WinNT://&quot; &amp; machineName &amp; &quot;,computer&quot; )<br>
+          <br>
+          For each obj in comp<br>
+          &nbsp;&nbsp; wscript.echo obj.Name<br>
+          Next<br>
+          </font></li>
+        <li><font size="2" face="Verdana">Save it as first.vbs. <br>
+          </font></li>
+        <li><font size="2" face="Verdana">At the command prompt, type <b>cscript first.vbs</b>
+          for a command line or <b>first.vbs</b> for windows scripting. You should see the
+          result.<br>
+          </font></li>
+        <li><font size="2" face="Verdana">If you want to see objects in the domain, replace
+          the above two lines with:<br>
+          <br>
+          domainName = &quot;myDomain&quot;<br>
+          <br>
+          Set dom = GetObject(&quot;WinNT://&quot; &amp; myDomain&nbsp; )<br>
+          </font></li>
+      </ol>
+    </blockquote>
+      <font size="2" face="Verdana">You can find the source code <a href="../samples/start/first/vbs">here</a>.<br>
+          <br>
+          </font>
+    <p><font face="Verdana" color="#0080C0"><strong><small>What's Next?</small></strong></font></p>
+    <blockquote>
+      <ul>
+        <li><font face="Verdana"><small>To find out more about Scripting, see <a
+          href="http://msdn.microsoft.com/scripting/">http://msdn.microsoft.com/scripting/</a></small>.<br>
+          </font></li>
+        <li><font face="Verdana"><small>Once you decide which ADSI provider (WinNT, LDAP - for Active
+          Directory, Exchange, Site Server, NDS, NWCOMPAT) you would like to
+          use, use the links found on the banner at the top of this page to find
+          out information about that provider.</small><br>
+          </font></li>
+        <li><font size="2" face="Verdana">You can also browse the <a href="samples.htm#vbs">VBScript samples.</a></font></li>
+      </ul>
+    </blockquote>
+    <p><font size="2" face="Verdana"><br>
+    <a href="#top">Back to top</a></font></p>
+    <p>&nbsp;</p>
+    <p><a name="vb"></a><font face="Verdana" color="#0080C0"><strong><small>Microsoft Visual Basic</small></strong></font></p>
+    <p><font size="2" face="Verdana">Microsoft Visual Basic is ideal for developing
+    applications or prototypes. </font></p>
+    <p><font size="2" face="Verdana">To set up Visual Basic Project, follow this easy
+    step-by-step instruction:</font></p>
+      <blockquote>
+        <ol>
+        <li><font size="2" face="Verdana">Launch Visual Basic.<br>
+          </font></li>
+        <li><font size="2" face="Verdana">Select the type of project you would like
+          to create.<br>
+          </font></li>
+        <li><font size="2" face="Verdana">Select <b> Project</b> | <b> References</b>.<br>
+          </font></li>
+        <li><font size="2" face="Verdana">Make sure to check the <b>Active DS type Library</b>
+          as shown below. If you don't need early COM object binding, this process is not necessary.<br>
+          </font></li>
+        </ol>
+        <blockquote>
+          <p><img src="vbref.jpg" alt="vbref.jpg (54455 bytes)" width="449" height="357">
+        </blockquote>
+        <ol start="5">
+          <li><small><font face="Verdana">Now you're ready to start ADSI programming.</font></small></li>
+        </ol>
+      </blockquote>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>A simple Visual Basic sample: Modifying
+    FullName and Description on a user</small></strong></font>
+      <blockquote>
+        <ol>
+      <li><font size="2" face="Verdana">Before we start, you must log on to a
+        Windows NT domain. You must
+        also have permission to modify a Windows NT 4.0 directory database. Administrator,
+        by default, has
+        this privilege.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Follow steps above to create a standard executable VB project.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Double-click the Form.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">On<b> Form_Load</b>, type:<br>
+        <br>
+        '------------------------------------------------------------<br>
+        ' This program is used to set FullName and Description in a user<br>
+        '------------------------------------------------------------<br>
+        Dim usr As IADsUser<br>
+        <br>
+        dom = &quot;YOURDOMAIN&quot; 'Replace with your domain<br>
+        <br>
+        '----Binding to a user object<br>
+        '----Note the ',user' is optional. It's used for performance<br>
+        Set usr = GetObject(&quot;WinNT://&quot; &amp; dom &amp; &quot;/Administrator&quot;)<br>
+        <br>
+        usr.FullName = &quot;James Smith&quot;<br>
+        usr.Description = &quot;Administrator for &quot; &amp; dom<br>
+        usr.SetInfo 'Commit the changes to DS<br>
+        <br>
+        </font></li>
+      <li><font size="2" face="Verdana">Press F8, to step through the program line by line.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Once you finish, use usrmgr.exe to view,
+        if the FullName
+        and Description are changed.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">You can find the source code under <a href="../samples/start/First/vb">/samples/start/First/First.vbp</a>.<br>
+        <br>
+        </font></li>
+        </ol>
+      </blockquote>
+    <p><font face="Verdana" color="#0080C0"><strong><small>What's Next?</small></strong></font></p>
+      <blockquote>
+      <ul>
+        <li><font face="Verdana"><small>To find out more about Visual Basic
+          programming, visit <a
+          href="http://msdn.microsoft.com/vbasic/">http://msdn.microsoft.com/vbasic/</a>.</small><br>
+          </font></li>
+        <li><font face="Verdana"><small>Once you decide which ADSI provider (WinNT, LDAP - for Active
+          Directory, Exchange, Site Server, NDS, NWCOMPAT) you would like to
+          use, use the links
+          found on the banner at the top of this page to find out more
+          information about that provider.</small><br>
+          </font></li>
+        <li><font size="2" face="Verdana">You can also browse the <a href="samples.htm#vb">Visual Basic samples</a>.</font></li>
+      </ul>
+      </blockquote>
+    <p><a href="#top"><font size="2" face="Verdana">Back to top</font></a></p>
+    <p>&nbsp;</p>
+    <p><a name="vc"></a><font face="Verdana" color="#0080C0"><strong><small>Microsoft Visual C++</small></strong></font></p>
+    <p><font size="2" face="Verdana">Microsoft Visual C++ is ideal for developing
+    commercial applications.</font></p>
+    <p><font size="2" face="Verdana">Here are step-by-step instructions for
+    setting up your Visual C++
+    environment.</font>
+      <blockquote>
+        <ol>
+      <li><font size="2" face="Verdana">You must install the ADSI SDK. You can
+        find the ADSI SDK
+        download link from <a href="http://www.microsoft.com/adsi">http://www.microsoft.com/adsi</a>.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Optionally, you can install the MSDN Build Environment. To
+        subscribe to MSDN, go to </font><font face="Verdana"><a
+        href="http://msdn.microsoft.com/developer"><small>http://msdn.microsoft.com/developer</small></a><small>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Make sure you point to the include and library directory.
+        Select <b> Tools</b> | <b>Options</b>. Click on the <b> Directory</b> tab, and specify the path.</small><br>
+        <br>
+        <img src="vcref.jpg" alt="vcref.jpg (42120 bytes)" width="417" height="319"><br>
+        </font></li>
+      <li><font face="Verdana"><small>In your project, be sure to include &quot;activeds.h&quot;.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>In your project, be sure to include <strong>activeds.lib</strong>
+        and <strong>adsiid.lib</strong>.</small> <strong><br>
+        </strong></font></li>
+      <li><font face="Verdana"><small>Now you are ready to start ADSI programming.</small></font></li>
+        </ol>
+      </blockquote>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>A simple Visual C++ sample: Creating a
+    user in a domain</small></strong></font>
+      <blockquote>
+        <ol>
+      <li><font size="2" face="Verdana">Before we start, you must log on to a
+        Windows NT domain. You must
+        also have permission to modify the Windows NT 4.0 directory database. Administrator,
+        by default, has
+        this privilege.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Follow the steps above to set up your project.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Create a standalone EXE project. It can be either
+        an MFC, ATL, or Console Application.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Type the following code:<br>
+        <br>
+        #include &quot;stdafx.h&quot;<br>
+        #include &quot;activeds.h&quot;<br>
+        <br>
+        int main(int argc, char* argv[])<br>
+        {<br>
+        &nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+        &nbsp;&nbsp;&nbsp; IADsContainer *pCont;<br>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp; // You must initialize COM before calling any ADSI
+        functions or interfaces.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://YOURDOMAIN&quot;, IID_IADsContainer,
+        (void**) &amp;pCont );<br>
+        &nbsp;&nbsp;&nbsp; <br>
+        &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+        &nbsp;&nbsp;&nbsp; {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
+        &nbsp;&nbsp;&nbsp; }<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; //----------------------------<br>
+        &nbsp;&nbsp;&nbsp; // Creating a user<br>
+        &nbsp;&nbsp;&nbsp; //-----------------------------<br>
+        &nbsp;&nbsp;&nbsp; IDispatch *pDisp=NULL;<br>
+        &nbsp;&nbsp;&nbsp; IADs *pUser;<br>
+        &nbsp;&nbsp;&nbsp; hr = pCont-&gt;Create( L&quot;user&quot;, L&quot;jsmith&quot;,
+        &amp;pDisp );<br>
+        &nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+        &nbsp;&nbsp;&nbsp; <br>
+        &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+        &nbsp;&nbsp;&nbsp; {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
+        &nbsp;&nbsp;&nbsp; }<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; hr = pDisp-&gt;QueryInterface( IID_IADs, (void**) &amp;pUser );<br>
+        &nbsp;&nbsp;&nbsp; pDisp-&gt;Release();<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+        &nbsp;&nbsp;&nbsp; {&nbsp;&nbsp;&nbsp; <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
+        &nbsp;&nbsp;&nbsp; }<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; // Commit creation to the directory.<br>
+        &nbsp;&nbsp;&nbsp; pUser-&gt;SetInfo();<br>
+        <br>
+        &nbsp;&nbsp;&nbsp; // Release the object.<br>
+        &nbsp;&nbsp;&nbsp; pUser-&gt;Release();<br>
+        &nbsp;&nbsp;&nbsp; <br>
+        <br>
+        &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+        <br>
+        }<br>
+        </font></li>
+      <li><font size="2" face="Verdana">Go to <b> User Manager</b> (or the Active Directory Management Snap-in
+        for Windows 2000) and verify if the user is created.<br>
+        </font></li>
+      <li><font size="2" face="Verdana">You can find the source code in /samples/first.</font></li>
+        </ol>
+      </blockquote>
+      <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>What's Next?</small></strong></font></p>
+      <blockquote>
+      <ul>
+        <li><font face="Verdana"><small>To find out more about VC programming,
+          see <a href="http://msdn.microsoft.com/visualc/">http://msdn.microsoft.com/visualc/</a>.</small><br>
+          </font></li>
+        <li><font face="Verdana"><small>Once you decide which ADSI provider (WinNT, LDAP - for Active
+          Directory, Exchange, Site Server, NDS, NWCOMPAT) you would like to
+          use, use the links
+          found on the banner at the top of this page to find out more
+          information about that provider.</small><br>
+          </font></li>
+        <li><font size="2" face="Verdana">You can also browse <a href="samples.htm#cpp"> Visual C++ samples</a>.</font></li>
+      </ul>
+      </blockquote>
+    <p><a href="#top"><font size="2" face="Verdana">Back to top</font></a></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana"><small><a name="asp"></a><font color="#0080C0"><strong>Active
+    Server Pages</strong></font></small></font></p>
+      <blockquote>
+        <ol>
+        <li><font face="Verdana"><small>Install IIS.</small><br>
+          </font></li>
+        <li><font face="Verdana"><small>Set the IIS Authentication mechanism (Anonymous, Basic or
+          NTLM). If you choose anonymous, your security context will be mapped to
+          IUSR_MACHINE
+          account. If you select NTLM, the security context will change, depending on
+          which user logs on to your web site.<br>
+          </small>
+          </font></li>
+        </ol>
+        <p><font face="Verdana"><small>ASP code starts with '&lt;%' and ends with '%&gt;'.</small></font></p>
+    <p><font face="Verdana"><small>Now you're ready to program.</small>
+    </font></p>
+      </blockquote>
+    <p>&nbsp;</p>
+      <p><font face="Verdana" color="#0080C0"><strong><small>A simple ASP sample:
+      Enumerating an object in a computer</small></strong></font>
+      <blockquote>
+    <p><font face="Verdana"><small>In this exercise, we will create a simple page
+    that can accept a
+    computer name and enumerate an object in that computer (source code can be found in
+    <a href="../samples/ASP/First">\samples\ASP\First</a>)</small></font></p>
+        <ol>
+        <li><font face="Verdana"><small>Create a new page which accept a computer, user name and
+          password</small>.<small>  For example, default.htm.</small> <br>
+          </font></li>
+        <li><font face="Verdana"><small>It's much easier to use Microsoft FrontPage to create an
+          ASP or HTML path.</small> <small>Type the following lines:</small></font></li>
+        </ol>
+        <blockquote>
+      <p><font face="Verdana"><small>&lt;form method=&quot;POST&quot;
+      action=&quot;enum.asp&quot;&gt;</small></font></p>
+      <p><font face="Verdana"><small>&lt;p&gt;Connect to:&lt;input type=&quot;text&quot;
+      name=&quot;Computer&quot; size=&quot;20&quot;&gt;&lt;/p&gt;</small></font></p>
+      <p><font face="Verdana"><small>&lt;p&gt;User Name:&lt;input type=&quot;text&quot;
+      name=&quot;username&quot; size=&quot;20&quot;&gt;&lt;/p&gt;</small></font></p>
+      <p><font face="Verdana"><small>&lt;p&gt;Password:&lt;input type=&quot;password&quot;
+      name=&quot;password&quot; size=&quot;20&quot;&gt;&lt;/p&gt;</small></font></p>
+      <p><small><font face="Verdana">&lt;/form&gt;</font></small></p>
+          <p><font color="#000000" face="Verdana" size="2">Now, you're ready to accept the computer
+          name and start enumerating using ADSI.&nbsp;</font></p>
+        </blockquote>
+        <ol start="3">
+          <li><font color="#000000" face="Verdana" size="2"> Create a new ASP page called, enum.asp</font></li>
+        </ol>
+        <blockquote>
+      <p><small><font face="Verdana">&lt;%</font></small></p>
+      <p><font face="Verdana"><small>'----Get the inputs----<br>
+      compName = Request.Form(&quot;computer&quot;)<br>
+      usrName&nbsp;&nbsp;&nbsp; = Request.Form(&quot;userName&quot;)<br>
+      password&nbsp;&nbsp; = Request.Form(&quot;password&quot;)<br>
+      </small>
+      </font></p>
+      <p><font face="Verdana"><small>'----Binds----<br>
+      adsPath = &quot;WinNT://&quot; &amp; compName &amp; &quot;,computer&quot;<br>
+      Set dso = GetObject(&quot;WinNT:&quot;)<br>
+      Set comp = dso.OpenDSObject(adsPath, userName, password,&nbsp;</small></font></p>
+      <p><font face="Verdana"><small>%&gt;</small></font></p>
+      <p><font face="Verdana"><small>'----Enumerate----<br>
+      &lt;%for each obj in comp %&gt;</small></font>
+      <p><font face="Verdana"><small><br>
+      &lt;tr&gt;</small></font>
+      <p><font face="Verdana"><small><br>
+      &lt;td width=&quot;35%&quot;&gt;&lt;small&gt;&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;</small></font>
+      <p><font face="Verdana"><small>&lt;%Response.Write
+      obj.Name%&gt;</small></font>
+      <p><font face="Verdana"><small>&lt;/font&gt;&lt;/small&gt;&lt;/td&gt;</small></font>
+      <p><font face="Verdana"><small><br>
+      &lt;td width=&quot;65%&quot;&gt;&lt;small&gt;&lt;font
+      face=&quot;Verdana&quot;&gt;&amp;nbsp;</small></font>
+      <p><font face="Verdana"><small>&lt;%Response.Write
+      obj.Class%&gt;</small></font>
+      <p><font face="Verdana"><small>&lt;/font&gt;&lt;/small&gt;&lt;/td&gt;</small></font>
+      <p><font face="Verdana"><small><br>
+      &lt;/tr&gt;</small></font>
+      <p><font face="Verdana"><small><br>
+      &lt;% next %&gt;</small></font>
+        </blockquote>
+      </blockquote>
+      <font face="Verdana"><small>This is what the page looks like when you execute the ASP.</small> </font>
+      <p><small><font face="Verdana"><strong><font color="#0080C0">Computer Name</font></strong>:
+      TownCenter</font></small></p>
+      <p><font face="Verdana"><small>Contains the following objects:</small></font></p>
+      <table border="1" width="27%" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="60%"><small><font face="Verdana">&nbsp;Administrator</font></small></td>
+          <td width="40%"><small><font face="Verdana">&nbsp;User</font></small></td>
+        </tr>
+        <tr>
+          <td width="60%"><font face="Verdana"><small>&nbsp;jamessmi</small></font></td>
+          <td width="40%"><small><font face="Verdana">&nbsp;User</font></small></td>
+        </tr>
+        <tr>
+          <td width="60%"><small><font face="Verdana">&nbsp;Guest</font></small></td>
+          <td width="40%"><small><font face="Verdana">&nbsp;User</font></small></td>
+        </tr>
+        <tr>
+          <td width="60%"><small><font face="Verdana">&nbsp;IUSR_ADSI</font></small></td>
+          <td width="40%"><small><font face="Verdana">&nbsp;User</font></small></td>
+        </tr>
+      </table>
+    <p>&nbsp;</p>
+    <p><font color="#0080C0" face="Verdana"><strong><small>What's Next?</small></strong></font></p>
+    <blockquote>
+      <ul>
+        <li><font face="Verdana"><small>Once you decide which ADSI provider (WinNT, LDAP - for Active
+          Directory, Exchange, Site Server, NDS, NWCOMPAT) you would like to
+          use, use the links
+          found on the banner at the top of this page to find out more
+          information about that provider.</small><br>
+          </font></li>
+        <li><font size="2" face="Verdana">You can also browse <a href="samples.htm#asp"> ASP samples</a>.</font></li>
+      </ul>
+    </blockquote>
+    <p>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="2%"></td>
+    <td width="98%"></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font SIZE="2">&nbsp;</p>
+
+<p></font>&nbsp;</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

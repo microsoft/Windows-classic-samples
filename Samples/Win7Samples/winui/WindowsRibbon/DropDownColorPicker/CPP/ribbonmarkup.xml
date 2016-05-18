@@ -1,0 +1,112 @@
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<Application xmlns="http://schemas.microsoft.com/windows/2009/Ribbon">
+  <!--Application Commands-->
+  <Application.Commands>
+    <!--The Tab-->
+    <Command Name="TabHome" Symbol="cmdTabHome">
+      <Command.LabelTitle>
+        <String Id="200">Home</String>
+      </Command.LabelTitle>
+    </Command>
+    <!--The Group-->
+    <Command Name="GroupDefaultDDCP" Symbol="GroupDefaultDDCP">
+      <Command.LabelTitle>
+        <String Id="210">Default Colors</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="GroupCustomDDCP" Symbol="GroupCustomDDCP">
+      <Command.LabelTitle>
+        <String Id="220">Customized Colors</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="GroupColorGrid" Symbol="GroupColorGrid">
+      <Command.LabelTitle>
+        <String Id="230">Grid</String>
+      </Command.LabelTitle>
+    </Command>
+    <!--The DropDownColorPicker-->
+    <Command Name="IDR_CMD_THEMEDDCP" Symbol="IDR_CMD_THEMEDDCP">
+      <Command.LabelTitle>
+        <String Id="240">Theme</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="241">res/DDCP.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="IDR_CMD_HIGHLIGHTDDCP" Symbol="IDR_CMD_HIGHLIGHTDDCP">
+      <Command.LabelTitle>
+        <String Id="250">Highlight</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="251">res/DDCP.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="IDR_CMD_STANDARDDDCP" Symbol="IDR_CMD_STANDARDDDCP">
+      <Command.LabelTitle>
+        <String Id="260">Standard</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="261">res/DDCP.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <!--The Buttons-->
+    <Command Name="IDR_CMD_UPDATE" Symbol="IDR_CMD_UPDATE">
+      <Command.LabelTitle>
+        <String Id="270">Update Colors</String>
+      </Command.LabelTitle>
+      <Command.TooltipTitle>
+        <String Id="271">Update Colors</String>
+      </Command.TooltipTitle>
+      <Command.TooltipDescription>
+        <String Id="272">Update color chips in customized standard DDCP with the colors in grid</String>
+      </Command.TooltipDescription>
+      <Command.LargeImages>
+        <Image Id="273" Source="res/Update.bmp"/>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="IDR_CMD_CLEAR" Symbol="IDR_CMD_CLEAR">
+      <Command.LabelTitle>
+        <String Id="280">Clear Colors</String>
+      </Command.LabelTitle>
+      <Command.TooltipTitle>
+        <String Id="281">Clear Colors</String>
+      </Command.TooltipTitle>
+      <Command.TooltipDescription>
+        <String Id="282">Clear all colors in grid</String>
+      </Command.TooltipDescription>
+      <Command.LargeImages>
+        <Image Id="283" Source="res/Delete.bmp"/>
+      </Command.LargeImages>
+    </Command>
+   </Application.Commands>
+  
+  <!--Application Views-->
+  <Application.Views>
+    <Ribbon>
+      <Ribbon.Tabs>
+        <Tab CommandName="TabHome">
+          <Group CommandName="GroupDefaultDDCP" SizeDefinition="TwoButtons">
+            <DropDownColorPicker ColorTemplate="ThemeColors" CommandName="IDR_CMD_THEMEDDCP" />
+            <DropDownColorPicker ColorTemplate="HighlightColors" CommandName="IDR_CMD_HIGHLIGHTDDCP" />
+          </Group>
+          <Group CommandName="GroupCustomDDCP" SizeDefinition="TwoButtons">            
+            <DropDownColorPicker ColorTemplate="StandardColors"  ChipSize="Large" IsAutomaticColorButtonVisible="true" IsNoColorButtonVisible="true" Columns="4" StandardColorGridRows="4" CommandName="IDR_CMD_STANDARDDDCP" />
+            <Button CommandName="IDR_CMD_UPDATE"/>
+          </Group>
+          <Group CommandName="GroupColorGrid" SizeDefinition="OneButton">
+            <Button CommandName="IDR_CMD_CLEAR"/>
+          </Group>          
+        </Tab>
+      </Ribbon.Tabs>      
+    </Ribbon>
+  </Application.Views>
+
+</Application>

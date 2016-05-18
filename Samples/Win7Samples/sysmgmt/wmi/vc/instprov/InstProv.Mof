@@ -1,0 +1,51 @@
+// **************************************************************************
+
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+//
+// File:  instprov.mof
+//
+// Description:
+//
+// History:
+//
+// **************************************************************************
+
+/////////////////////////////////////////////////////////////////////
+// Declare an instance of the __Win32Provider so as to "register" the
+// sample provider
+
+
+instance of __Win32Provider as $P
+{
+    Name        = "InstProvSamp" ;
+    ClsId   = "{22CB8761-914A-11cf-B705-00AA0062CBB7}" ;
+} ;    
+
+instance of __InstanceProviderRegistration
+{
+    Provider = $P;
+    SupportsPut = FALSE;
+    SupportsGet = TRUE;
+    SupportsDelete = FALSE;
+    SupportsEnumeration = TRUE;
+};
+
+
+/////////////////////////////////////////////////////////////////////
+//
+// Declare a class whose dynamic instances are provided by the 
+// sample provider.
+
+[dynamic, provider("InstProvSamp"), 
+ClassContext("whatever!")]
+class InstProvSamp
+{
+    [key]
+       String MyKey="HELLO";
+
+    [PropertyContext("Name")]
+       uint32 MyValue;
+
+};
+
+

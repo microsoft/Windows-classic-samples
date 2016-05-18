@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<GRAMMAR LANGID="407">
+
+
+    <DEFINE>
+      <ID NAME="PID_CmdMenu" VAL="1"/>
+<!-- missing     <ID NAME="PID_CmdSysMenu" VAL="2"/> --> 
+      <ID NAME="PID_CmdMenuFile" VAL="100"/>
+        <ID NAME="PID_CmdNew" VAL="101"/>
+        <ID NAME="PID_CmdOpen" VAL="102"/>
+        <ID NAME="PID_CmdSave" VAL="103"/>
+        <ID NAME="PID_CmdSaveAs" VAL="104"/>
+        <ID NAME="PID_CmdExit" VAL="105"/>
+
+      <ID NAME="PID_CmdMenuEdit" VAL="200"/>
+        <ID NAME="PID_CmdCut" VAL="201"/>
+        <ID NAME="PID_CmdCopy" VAL="202"/>
+        <ID NAME="PID_CmdPaste" VAL="203"/>
+
+      <ID NAME="PID_CmdMenuVoice" VAL="300"/>
+        <ID NAME="PID_CmdDictationMode" VAL="301"/>
+        <ID NAME="PID_CmdCommandMode" VAL="302"/>
+        <ID NAME="PID_CmdMicrophone" VAL="303"/>
+        <ID NAME="PID_CmdPlayback" VAL="304"/>
+        <ID NAME="PID_CmdAddDeleteWords" VAL="305"/>
+        <ID NAME="PID_CmdSelectWholeWords" VAL="306"/>
+        <ID NAME="PID_CmdSharedRecoEngine" VAL="307"/>
+        <ID NAME="PID_CmdVoiceTraining" VAL="310"/>
+        <ID NAME="PID_CmdMicrophoneSetup" VAL="311"/>
+      <ID NAME="PID_CmdMenuHelp" VAL="500"/>
+        <ID NAME="PID_CmdAbout" VAL="501"/>
+      <ID NAME="PID_CmdEscape" VAL="903"/>
+
+      <ID NAME="PID_CmdNavigationVertical" VAL="1000"/>
+        <ID NAME="PID_CmdDirection" VAL="1100"/>
+          <ID NAME="PID_CmdUp" VAL="1001"/>
+          <ID NAME="PID_CmdDown" VAL="1002"/>
+
+        <ID NAME="PID_CmdUnits" VAL="1200"/>
+          <ID NAME="PID_CmdPage" VAL="1201"/>
+          <ID NAME="PID_CmdLine" VAL="1202"/>
+          <ID NAME="PID_CmdParagraph" VAL="1203"/>
+
+        <ID NAME="PID_CmdNumber" VAL="1300"/>
+		  <ID NAME="PID_Ones" VAL="1301"/>
+		  <ID NAME="PID_Tens" VAL="1302"/>
+
+      <ID NAME="PID_CmdNavigationOther" VAL="2000"/>
+        <ID NAME="PID_CmdScrollHome" VAL="2001"/>
+        <ID NAME="PID_CmdScrollEnd" VAL="2002"/>
+        <ID NAME="PID_CmdLineEnd" VAL="2003"/>
+        <ID NAME="PID_CmdLineHome" VAL="2004"/>
+        <ID NAME="PID_CmdCharacterLeft" VAL="2005"/>
+        <ID NAME="PID_CmdCharacterRight" VAL="2006"/>
+        <ID NAME="PID_CmdWordLeft" VAL="2007"/>
+        <ID NAME="PID_CmdWordRight" VAL="2008"/>
+
+    </DEFINE>
+
+    <RULE NAME="PID_CmdNavigationVertical" ID="PID_CmdNavigationVertical" TOPLEVEL="ACTIVE" EXPORT="1">
+      <L>
+        <P>
+          <L>
+            <P>rollen</P>
+            <P>bewegen</P>
+          </L>
+          <O>
+            <L PROPNAME="PID_CmdDirection" PROPID="PID_CmdDirection">
+              <P VAL="PID_CmdUp">hoch</P>
+	      <P VAL="PID_CmdUp">zurück</P>
+              <P VAL="PID_CmdDown">runter</P>
+              <P VAL="PID_CmdDown">vorwärts</P>
+            </L>
+          </O>
+		  <O>
+			  <RULEREF NAME="PID_CmdNumber" PROPNAME="PID_CmdNumber" PROPID="PID_CmdNumber"/>
+		  </O>
+          <O>
+            <L PROPNAME="PID_CmdUnits" PROPID="PID_CmdUnits">
+              <P VAL="PID_CmdPage">Seite</P>
+              <P VAL="PID_CmdPage">Seiten</P>
+              <P VAL="PID_CmdLine">Zeile</P>
+              <P VAL="PID_CmdLine">Zeilen</P>
+              <P VAL="PID_CmdParagraph">Paragraf</P>
+              <P VAL="PID_CmdParagraph">Paragrafen</P>
+            </L>
+          </O>
+          <O>
+            <L PROPNAME="PID_CmdDirection" PROPID="PID_CmdDirection">
+	      <P VAL="PID_CmdUp">hoch</P>
+	      <P VAL="PID_CmdUp">zurück</P>
+              <P VAL="PID_CmdDown">runter</P>
+              <P VAL="PID_CmdDown">vorwärts</P>
+            </L>
+          </O>
+        </P>
+     
+        <P>
+          <L PROPNAME="PID_CmdUnits" PROPID="PID_CmdUnits">
+            <P VAL="PID_CmdPage">Seite</P>
+            <P VAL="PID_CmdLine">Zeile</P>
+            <P VAL="PID_CmdParagraph">Paragraf</P>
+          </L>
+          <L PROPNAME="PID_CmdDirection" PROPID="PID_CmdDirection">
+              <P VAL="PID_CmdUp">hoch</P>
+	      <P VAL="PID_CmdUp">zurück</P>
+              <P VAL="PID_CmdDown">runter</P>
+              <P VAL="PID_CmdDown">vorwärts</P>
+          </L>
+        </P>
+      </L>
+    </RULE>
+	
+	<RULE NAME="PID_CmdNumber" ID="PID_CmdNumber" TOPLEVEL="INACTIVE" EXPORT="1">
+		<L>
+			<P>
+				<RULEREF NAME="onesfrag"/>
+			</P>
+			<P>
+				<P>
+					<RULEREF NAME="tens"/>
+				</P>
+				<O>
+					<RULEREF NAME="ones"/>
+				</O>
+			</P>
+		</L>
+	</RULE>
+
+
+    <RULE NAME="PID_CmdNavigationOther" ID="PID_CmdNavigationOther" TOPLEVEL="ACTIVE" EXPORT="1">
+      <L PROPNAME="PID_CmdNavigationOther" PROPID="PID_CmdNavigationOther">
+        <P VAL="PID_CmdScrollHome">Zur Startseite gehen</P>
+	<P VAL="PID_CmdScrollHome">zurückskrollen</P>
+	<P VAL="PID_CmdScrollHome">Zur Startseite rollen</P>
+        <P VAL="PID_CmdScrollEnd">vorrollen</P>
+        <P VAL="PID_CmdScrollEnd">vorscrollen</P>
+        <P VAL="PID_CmdScrollEnd">Zum Ende gehen</P>
+        <P VAL="PID_CmdScrollEnd">Zum Ende rollen</P>
+        <P VAL="PID_CmdCharacterLeft">Nach Links bewegen</P>
+        <P VAL="PID_CmdCharacterLeft">Nach Links rollen</P>
+        <P VAL="PID_CmdCharacterRight">Nach Rechts bewegen</P>
+        <P VAL="PID_CmdCharacterRight">Nach Rechts rollen</P>
+        <P VAL="PID_CmdWordLeft">Wort nach links</P>
+        <P VAL="PID_CmdWordRight">Wort nach rechts</P>
+        <P VAL="PID_CmdLineEnd">Zeilenende</P>
+        <P VAL="PID_CmdLineHome">Zeilenanfang</P>
+        <P VAL="PID_CmdLineHome">Zeilenbeginn</P>
+      </L>
+    </RULE>
+
+
+    <RULE NAME="PID_CmdMenu" ID="PID_CmdMenu" TOPLEVEL="ACTIVE">
+      <L PROPNAME="PID_CmdMenu" PROPID="PID_CmdMenu">
+        <P VAL="PID_CmdMenuFile">Datei</P>
+        <P VAL="PID_CmdNew">Neu</P>
+        <P VAL="PID_CmdOpen">Öffen</P>
+        <P VAL="PID_CmdSave">Speichern</P>
+        <P VAL="PID_CmdSaveAs">Speicher unter</P>
+        <P VAL="PID_CmdExit">Beenden</P>
+        <P VAL="PID_CmdMenuEdit">Bearbeiten</P>
+        <P VAL="PID_CmdCut">Ausschneiden</P>
+        <P VAL="PID_CmdCopy">Kopieren</P>
+        <P VAL="PID_CmdPaste">Einfügen</P>
+
+        <P VAL="PID_CmdMenuVoice">Stimme</P>
+        <P VAL="PID_CmdDictationMode">Auf Diktieren warten</P>
+        <P VAL="PID_CmdDictationMode">Diktieren beginnen</P>
+        <P VAL="PID_CmdDictationMode">Diktierbeginn</P>
+        <P VAL="PID_CmdDictationMode">Ende ?des Befehlsmodus</P>
+        <P VAL="PID_CmdCommandMode">Auf Befehl warten</P>
+        <P VAL="PID_CmdCommandMode">Auf Befehle warten</P>
+        <P VAL="PID_CmdCommandMode">Diktieren beenden</P>
+        <P VAL="PID_CmdCommandMode">Diktierende</P>
+        <P VAL="PID_CmdMicrophone">Mikrofon ausschalten</P>
+        <P VAL="PID_CmdMicrophone">Mikrofon einschalten</P>
+        <P VAL="PID_CmdMicrophone">Grammatiken aktiv</P>
+        <P VAL="PID_CmdMicrophone">Grammatiken inaktiv</P>
+        <P VAL="PID_CmdMicrophone">Grammatiken aktivieren</P>
+        <P VAL="PID_CmdMicrophone">Grammatiken deaktivieren</P>
+        <P VAL="PID_CmdPlayback">Abspielen</P>
+        <P VAL="PID_CmdPlayback">Wiedergabe</P>
+        <P VAL="PID_CmdAddDeleteWords">Wort hinzufügen und löschen</P>
+        <P VAL="PID_CmdSelectWholeWords">Ganzes Wort auswählen</P>
+        <P VAL="PID_CmdSelectWholeWords">Ganze Wörter auswählen</P>
+        <P VAL="PID_CmdSharedRecoEngine">Gemeinsam genutzte Engine</P>
+        <P VAL="PID_CmdVoiceTraining">Sprachtraining</P>
+        <P VAL="PID_CmdMicrophoneSetup">Microfoneinstellungen</P>
+        <P VAL="PID_CmdMenuHelp">Hilfe</P>
+        <P VAL="PID_CmdAbout">Über</P>
+        <P VAL="PID_CmdEscape">Abbrechen</P>
+      </L>
+    </RULE>
+
+<!-- Internal number rules -->
+	<RULE NAME="tens">
+		<L PROPNAME="PID_Tens" PROPID="PID_Tens">
+			<P VAL="20">zwanzig</P>
+			<P VAL="30">dreißig</P>
+			<P VAL="40">vierzig</P>
+			<P VAL="50">fünfzig</P>
+			<P VAL="60">sechzig</P>
+			<P VAL="70">siebzig</P>
+			<P VAL="80">achtzig</P>
+			<P VAL="90">neunzig</P>
+		</L>
+	</RULE>
+
+	<RULE NAME="ones">
+		<L PROPNAME="PID_Ones" PROPID="PID_Ones">
+			<P VAL="1">eine</P>
+			<P VAL="2">zwei</P>
+			<P VAL="3">drei</P>
+			<P VAL="4">vier</P>
+			<P VAL="5">fünf</P>
+			<P VAL="6">sechs</P>
+			<P VAL="7">sieben</P>
+			<P VAL="8">acht</P>
+			<P VAL="9">neun</P>
+		</L>
+	</RULE>
+
+	<RULE NAME="onesfrag">
+		<L>
+			<P>
+				<RULEREF NAME="ones"/>
+			</P>
+			<L PROPNAME="PID_Ones" PROPID="PID_Ones">
+				<P VAL="0">null</P>
+				<P VAL="10">zehn</P>
+				<P VAL="11">elf</P>
+				<P VAL="12">zwölf</P>
+				<P VAL="13">dreizehn</P>
+				<P VAL="14">vierzehn</P>
+				<P VAL="15">fünfzehn</P>
+				<P VAL="16">sechszehn</P>
+				<P VAL="17">siebzehn</P>
+				<P VAL="18">achtzehn</P>
+				<P VAL="19">neunzehn</P>
+			</L>
+		</L>
+	</RULE>
+
+
+</GRAMMAR>

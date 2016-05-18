@@ -1,0 +1,83 @@
+/*++
+
+Copyright (c) 2005 Microsoft Corporation
+
+RDC SDK Test Server Sample Code
+
+--*/
+
+// RdcSdkTestServer.idl : IDL source for RdcSdkTestServer
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (RdcSdkTestServer.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "msrdc.idl";
+
+typedef struct
+{
+    ULONGLONG m_FileSize;
+    ULONG     m_SignatureDepth;
+} RdcFileTransferInfo;
+
+typedef struct
+{
+    ULONG m_HandleValue;
+} RdcFileHandle;
+
+[
+	object,
+	uuid(1178F6B7-ABC4-4326-9154-DDE5CDE9DCB3),
+	helpstring("IRdcFileTransfer Interface - used to remotely generate and retrieve signatures"),
+	pointer_default(unique)
+]
+interface IRdcFileTransfer : IUnknown{
+    [helpstring("method RdcOpenFile - opens the file and prepares to generate signatures")] HRESULT RdcOpenFile(
+        [in] LPCWSTR fileName,
+        [in, out] RdcFileTransferInfo * fileInfo,
+        [out] RdcFileHandle * fileHandle,
+        [in] BOOL deleteSigs,
+        [in] ULONG horizonSize1,
+        [in] ULONG horizonSizeN,
+        [in] ULONG hashWindowSize1,
+        [in] ULONG hashWindowSizeN);
+
+    [helpstring("method ReadData - reads file and signature data. Waits for signature generation if necessary")] HRESULT ReadData(
+        [in] RdcFileHandle * fileHandle,
+        [in] ULONG signatureLevel,
+        [in] ULONGLONG fileOffset,
+        [in, range(0, 262144)] ULONG bytesToRead,
+        [out] ULONG *bytesActuallyRead,
+        [out, size_is(bytesToRead), length_is(*bytesActuallyRead)] BYTE * data);
+
+    [helpstring("method GetFileSize")] HRESULT GetFileSize(
+        [in] RdcFileHandle * fileHandle,
+        [in] ULONG signatureLevel,
+        [out] ULONGLONG * fileSize);
+
+    [helpstring("method GetSimilarityData")] HRESULT GetSimilarityData(
+        [out] SimilarityData * similarityData);
+
+    [helpstring("method Close")] HRESULT Close(
+        [in,out] RdcFileHandle * fileHandle);
+
+};
+[
+	uuid(1E5480BA-8639-4215-80C2-22F7A11B852C),
+	version(1.0),
+	helpstring("RdcSdkTestServer 1.0 Type Library")
+]
+library RdcSdkTestServerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(94F0E32B-BB68-466B-888E-BD180222D0FA),
+		helpstring("RdcFileTransfer Class")
+	]
+	coclass RdcFileTransfer
+	{
+		[default] interface IRdcFileTransfer;
+	};
+};

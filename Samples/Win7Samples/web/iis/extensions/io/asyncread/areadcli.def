@@ -1,0 +1,8 @@
+LIBRARY           AREADCLI
+
+;DESCRIPTION       'Asynchronous ReadClient dll'
+
+EXPORTS
+    GetExtensionVersion
+    HttpExtensionProc
+    TerminateExtension

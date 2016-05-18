@@ -1,0 +1,71 @@
+TallMenu MENU
+BEGIN
+    POPUP "&Sample"
+    BEGIN
+
+        /*
+         *  Here follows a really stupid-looking 50-element menu.
+         */
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+        MENUITEM "Blah blah", -1
+
+    END
+END

@@ -1,0 +1,12 @@
+LIBRARY SampProv
+HEAPSIZE 10240,4096 
+EXPORTS 
+; EntryName [=InternalName] [@Ordinal] [NONAME] [CONSTANT]
+; This is the entry point that DllMainCRTStartup calls
+DllMain @12 
+; Standard OLE exports
+DllGetClassObject PRIVATE
+DllCanUnloadNow  PRIVATE
+; For self-registration.
+DllRegisterServer PRIVATE
+DllUnregisterServer PRIVATE

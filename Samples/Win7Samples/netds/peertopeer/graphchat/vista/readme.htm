@@ -1,0 +1,292 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<title>GraphChat (Vista) Sample</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.75in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+p.LetteredList, li.LetteredList, div.LetteredList
+	{mso-style-name:"Lettered List";
+	margin-right:0in;
+	margin-left:.75in;
+	text-indent:-.25in;
+	font-size:12.0pt;
+	font-family:"Arial","sans-serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=EN-US>
+
+<div class=Section1>
+
+<h1><span style='font-family:"Arial","sans-serif"'>GraphChat (Vista, Windows 7) Sample</span></h1>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>The GraphChat
+Sample Application demonstrates the use of a subset of the Peer-to-Peer APIs
+centered around Graphing, People Near Me and Application Invite. It shows a
+multiparty chat application built using Graphing.</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>Platforms supported</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows Vista (except Starter Edition)</p>
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Windows 7</p>
+
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Build: </span></p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>In a SDK command shell, navigate to the directory containing this sample
+and run &quot;nmake&quot;; or</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Launch the .sln file in Visual Studio .NET</p>
+
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Run: </span></p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Type graphchat.exe (located in the Vista_DEBUG or WIN7_[ARCH]_DEBUG folder in the directory containing the sample)</p>
+
+<p class=Bullets><span style='font-family:Symbol'>·</span><span
+style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Just use the UI! To get started, try executing the following scenarios:</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>1. Create a graph</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Launch the GraphChat application.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>If this is the first time signing in to People Near Me, a dialog will
+display.&nbsp; Enter a display name and select the default option to Allow
+invitations from Anyone (a user can later modify these settings from
+Control Panel\Network and Internet\People Near Me ).</span></p>
+
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Select “Graph", then "New Graph" from the menu to create a new graph.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Type in free text strings for GraphName and CreatorId.  Select "Local" scope
+for the graph.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>2. Connect to an existing
+graph</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Launch several more instances of the GraphChat application, either on the
+same computer or on other computers connected to the same IPv6 subnet.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>On these additional instances, Select “Graph" then "Open Graph” from the menu. 
+Enter in the GraphName used before and a unique MyPeerId for each instance.</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span>As each application connects, notice the Graph Events and Graph Neighbors of each node display in their recpective
+panes of teh UI.  When only a few nodes exist,
+the graph will be fully connected, with everyone connected to everyone else. 
+If more nodes are added, notice that the graph is not fully
+connected but forms a mesh where no one node is overburdened with a large
+number of connections.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Type in a message at a few of the nodes and see it flood to all of the
+other nodes.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>3. Synchronizing with a
+graph after recovering connectivity.</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Start with the graph established in the scenarios above, with at least a
+few different computers connected to the graph and a few nodes running on each
+computer.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Interrupt the network connectivity on one computer (for example, disconnect the
+network cable).</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>The graph is now split.  Enter a few messages on various nodes.  All
+the nodes running on the isolated computer share the messages between each other
+and all the nodes on the remaining connected computers also share their
+messages.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Reestablish the network connectivity of the isolated computer.  After network connectivity is restored, the 
+graph will reconnect to the mesh and synchronize the
+messages generated while in the split state.</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>4. Recovering after all
+neighbors disconnect.</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Start with the graph established in the scenarios above.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>The Node ID of each node is displayed toward the right of the bottom
+status bar in the UI.  The “Graph Neighbors” list box shows the neighbors to which a given
+node is connected.</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Locate and disconnect from the mesh all the neighbors to which a particular node is connected.  Within a short period of time the isolated node will use PNRP to discover remaining
+nodes and reconnect to the graph.</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>If messages were generated before the reconnection occurred, either on the
+disconnected node or on other nodes, the graph will now synchronize those
+messages to all nodes.<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span></p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>5. Send an Invitation to
+join Graph Chat</span></b></p>
+
+<p class=LetteredList>a)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Start with the graph established in the scenarios above.</p>
+
+<p class=LetteredList>b)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>On a separate computer, open GraphChat at least once and then close it
+completely.  Opening GraphChat causes it to register as a Collaboration
+application.  This is a common task that a production application would perform.
+This computer will be the “target” of the invite.</p>
+
+<p class=LetteredList>c)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>Ensure that the target computer is signed in to PNM and set the option to Allow invitations from Anyone 
+(Control Panel\Network and Internet\People Near Me)</p>
+
+<p class=LetteredList>d)<span style='font-size:7.0pt;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;
+</span>From a computer connected to the same IPv6 subnet, select “Graph" then "Invite
+someone nearby” from the menu.</p>
+
+<p class=LetteredList>e) From the list of PNM endpoints on your subnet, select the
+endpoint of interest and send an invite.</p>
+
+<p class=LetteredList>f) On the target computer, view and accept the invite.  The GraphChat sample will launch and
+automatically connect to the graph to which it was invited.  The
+name of the graph is sent in the Invite as application specific data, which is then
+used by GraphChat when it launches.</p>
+
+<p>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

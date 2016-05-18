@@ -1,0 +1,208 @@
+<HTML>
+
+<!--
+    <%CiTemplate%>
+
+    This is the formatting page for query results.  This file defines
+    how the result page header, rows, and footer will appear.
+-->
+
+<HEAD>
+    <!-- The title lists the documents found on this page-->
+
+        <LINK REL=STYLESHEET HREF="is2style.css" TYPE="text/css">
+
+    <TITLE><%CiRestriction%> - documents <%CiFirstRecordNumber%> to <%CiLastRecordNumber%></TITLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#000066" VLINK="#808080" ALINK="#FF0000" TOPMARGIN=0>
+
+<TABLE>
+    <TR>
+        <TD><a href="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" border=0></a></TD>
+    </TR>
+    <TR>
+        <TD ALIGN=RIGHT VALIGN=MIDDLE><h3>High Performance Search Results</h3></TD>
+    </TR>
+</TABLE>
+
+<!-- Print a header that lists the query and the number of hits -->
+
+<H3>
+    <%if CiLastRecordNumber eq 0%>
+      No documents matched the query "<%CiRestriction%>".
+    <%else%>
+      Documents <%CiFirstRecordNumber%> to <%CiLastRecordNumber%> matching the query
+      "<%CiRestriction%>".
+    <%endif%>
+</H3>
+
+
+<HR width=500 align=left>
+
+<!--
+    The begindetail/enddetail section describes how each row of output
+    is be formatted.  The sample below prints:
+
+        - record number
+        - document title (if one exists) or virtual path of the file
+        - the abstract for the file
+        - the url for the file
+        - the file's size and last write time
+        - an HREF to the file for the hit highlighter.
+          The parameters the hit highlighter include the CiQueryFile and
+          CiTemplateFile. The CiQueryFile is not really needed as long as
+          you don't have any custom properties. However, if you add custom
+          properties, make sure the .idq file you use for queries is same
+          as the one specified for CiQueryFile. The CiTemplateFile is used
+          by webhits to format the output text.
+-->
+
+<table border=0 width=500>
+<%begindetail%>
+
+        <tr class="RecordTitle">
+                <td align="right" valign="top" class="RecordTitle" style="background-color:#FFFFFF;">
+                        <%CiCurrentRecordNumber%>.
+                </td>
+                <td><b class="RecordTitle">
+                        <%if DocTitle isempty%>
+                                <a href="javascript:NAF('http://<%server_name%><%vpath%>','<%CiRestriction%>')" class="RecordTitle"><%filename%></a>
+                        <%else%>
+                                <a href="javascript:NAF('http://<%server_name%><%vpath%>','<%CiRestriction%>')" class="RecordTitle"><%DocTitle%></a>
+                <%endif%>
+                </b></td>
+        </tr>
+        <tr>
+                <td></td>
+                <td>
+                        <b><i>Abstract:  </i></b><%characterization%>
+        </td>
+        </tr>
+        <tr>
+                <td></td>
+                <td class="RecordStats">
+            <%if size eq ""%>(size and time unknown)<%else%>(<%size%> bytes - <%write%> GMT)<%endif%>
+                </td>
+        </tr>
+        <tr><td><p>&nbsp;<br></td></tr>
+<%enddetail%>
+</table>
+
+<P>
+
+    <HR width=500 align=left>
+
+<!--
+    URL to get to the next page of results.  Users can use the browser 'back'
+    button to move backwards.
+-->
+
+<table border=0 width=500>
+        <tr>
+                <td align=left>
+                        <%if CiContainsLastRecord eq 0%>
+                        <!-- Define a "next" URL if this isn't the last page -->
+
+
+                        <A HREF="fastq.idq?CiBookMark=<%CiBookMark%>&CiBookmarkSkipCount=<%EscapeRAW CiMaxRecordsPerPage%>&CiRestriction=<%EscapeURL CiRestriction%>&CiScope=<%CiScope%>&HTMLQueryForm=<%EscapeURL HTMLQueryForm%>&FastDir=<%EscapeURL FastDir%>">
+                        More documents about <B><%CiRestriction%></B>...</A>
+
+                        <%endif%>
+                </td>
+                <td align=right>
+                        <!--
+                         Query.htm set HTMLQueryForm as the name of the page to return to
+                         for a new query.
+                        -->
+
+                        <A HREF="<%HTMLQueryForm%>">New query</A>
+                </td>
+        </tr>
+</table>
+
+<P><BR>
+
+<!--
+     If the index is out of date (for example, if it's still being created
+     or updated after changes to files in an indexed directory) let the
+     user know.
+-->
+
+<%if CiOutOfDate eq 0%>
+    <P>
+    <I><B>The index is up-to-date.</B></I><BR>
+<%endif%>
+
+<!--
+    If the query was not executed because it needed to enumerate to
+    resolve the query instead of using the index, but CiForceUseCi
+    was TRUE, let the user know
+-->
+
+<%if CiQueryIncomplete ne 0%>
+    <P>
+    <I><B>The query is too expensive to complete.</B></I><BR>
+<%endif%>
+
+<!--
+    If the query took too long to execute (for example, if too much work
+    was required to resolve the query), let the user know
+-->
+
+<%if CiQueryTimedOut ne 0%>
+    <P>
+    <I><B>The query took too long to complete.</B></I><BR>
+<%endif%>
+
+
+<!-- Output a page number and count of pages -->
+
+<P class=RecordStats align=center>Page <%CiCurrentPageNumber%>
+
+<hr width=500 align=left>
+<p>
+<table border="0" cellpadding="0" cellspacing="0" width="500">
+    <tr>
+        <!-- IIS GIF -->
+       <td>
+            <a href="http://www.microsoft.com/Windows.NetServer"><img src="win2k.gif" alt="Learn more about Microsoft Windows"  border="0"></a>
+        </td>
+
+        <!-- Microsoft Legal Info -->
+        <td align=center>
+            <font style="font:arial; font-size: 8pt"> &copy;1997-2002 Microsoft Corporation. All rights reserved.<br></font>
+            <a href="http://www.microsoft.com/misc/Info/cpyright.htm"><font style="font:arial; font-size: 6pt">Legal Notices.</font></a>
+       </td>
+
+        <!-- Best with IE GIF -->
+        <td align=right>
+            <a href="http://www.microsoft.com/ie"><img src="IE.GIF" alt="Download Internet Explorer!"  border="0"></a>
+        </td>
+    </tr>
+</table>
+
+</BODY>
+
+<SCRIPT>
+function msieversion()
+{
+    var ua   = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE");
+    if (msie>0)
+        return parseInt(ua.substring(msie+5, ua.indexOf(".", msie)));
+    else
+        return 0;
+}
+
+function NAF(szUrl, szQuery)
+{
+    if (msieversion() >= 5)
+        window.external.NavigateAndFind(szUrl, szQuery, "_main");
+    else
+        window.navigate(szUrl, target="_main");
+}
+</SCRIPT>
+
+</HTML>

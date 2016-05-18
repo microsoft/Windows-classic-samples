@@ -1,0 +1,23 @@
+HKCR
+{
+	ADOPriv.ModInfo.1 = s 'ModInfo Class'
+	{
+		CLSID = s '{B3AD7BC3-57D7-11D1-8AE1-00C04FB90A5E}'
+	}
+	ADOPriv.ModInfo = s 'ModInfo Class'
+	{
+		CLSID = s '{B3AD7BC3-57D7-11D1-8AE1-00C04FB90A5E}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B3AD7BC3-57D7-11D1-8AE1-00C04FB90A5E} = s 'ModInfo Class'
+		{
+			ProgID = s 'ADOPriv.ModInfo.1'
+			VersionIndependentProgID = s 'ADOPriv.ModInfo'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

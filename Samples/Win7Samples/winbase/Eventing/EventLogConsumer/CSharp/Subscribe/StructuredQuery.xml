@@ -1,0 +1,6 @@
+<QueryList>
+  <Query Id="1" >
+	<Select Path="System" >*/System/Level &lt; 4</Select>
+	<Select Path="Application" >*/System/Level &gt; 3</Select>
+  </Query>
+</QueryList>

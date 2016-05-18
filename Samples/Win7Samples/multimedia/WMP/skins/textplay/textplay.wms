@@ -1,0 +1,134 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<THEME>
+	<VIEW
+		height = "175"
+		width = "300"
+	>
+
+		<TEXT 
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			disabledForegroundColor = "#CCCCCC"
+			justification = "Center"
+			value = "Play"
+			cursor = "hand"
+			enabled = "wmpenabled:player.controls.play"
+			onClick = "JScript: player.controls.play();"
+		/>
+		
+		<TEXT
+			top = "50"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			disabledForegroundColor = "#CCCCCC"
+			justification = "Center"
+			value = "Stop"
+			cursor = "hand"
+			enabled = "wmpenabled:player.controls.stop"
+			onClick = "JScript: player.controls.stop();"
+		/>
+
+		<TEXT
+			top = "100"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "Close"
+			cursor = "hand"
+			onClick = "JScript: view.close();"
+		/>
+
+		<TEXT
+			top = "100"
+			left = "120"
+			width = "200"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "Playlist"
+			toolTip = "toggle playlist"
+			cursor = "hand"
+			onClick = "JScript: if (view.height==175) {view.height='375'} else {view.height='175'};"
+		/>
+
+		<TEXT
+			top = "10"
+			left = "120"
+			width = "200"
+			fontSize = "20"
+			fontStyle = "Underline"
+			justification = "Center"
+			value = "Volume"
+		/>
+
+		<TEXT
+			top = "40"
+			left = "120"
+			width = "200"
+			fontSize = "40"
+			justification = "Center"
+			value = "wmpprop:player.settings.volume"
+		/>
+
+		<TEXT
+			top = "45"
+			left = "142"
+			width = "40"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "-"
+			cursor = "hand"
+			toolTip = "decrease volume"
+			onClick = "player.settings.volume = player.settings.volume - 5"
+		/>
+
+		<TEXT
+			top = "45"
+			left = "260"
+			width = "40"	
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "+"
+			cursor = "hand"
+			toolTip = "increase volume"
+			onClick = "player.settings.volume = player.settings.volume + 5"
+		/>
+
+		<TEXT
+			top = "155"
+			width = "300"
+			height = "30"
+			fontFace = "System"
+			backgroundColor = "blue"
+			foregroundColor = "white"
+			justification = "Center"
+			scrolling = "true"			
+			scrollingAmount = "1"
+			scrollingDelay = "50"
+			value = "wmpprop:player.status"
+		/>
+
+		<PLAYLIST
+			top = "175"
+			width = "300"
+			height = "200"
+			backgroundColor = "black"
+			foregroundColor = "white"
+			itemPlayingColor = "blue"
+			itemPlayingBackgroundColor = "white"
+			columns = "name=Title;artist=Artist"
+		/>
+
+	</VIEW>
+</THEME>

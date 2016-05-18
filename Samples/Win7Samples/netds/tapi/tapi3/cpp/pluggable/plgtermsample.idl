@@ -1,0 +1,44 @@
+//
+// Copyright (c) 1998-2001  Microsoft Corporation
+//
+
+cpp_quote("/* Copyright (c) 1998-2001  Microsoft Corporation  */")
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XXX.tlb) and marshalling code.
+
+
+#ifndef __PLG_TERMSAMPLE_IDL__
+#define __PLG_TERMSAMPLE_IDL__
+
+
+import "Objsafe.idl";
+import "msp.idl";     // for MSP_HANDLE
+
+
+[
+    uuid(490BF91E-A979-49EF-8E9D-C794F58E7253),
+    version(1.0),
+    helpstring("TAPI3 Pluggable Terminal Sample 1.0 Type Library")
+]
+
+library PLGTRMSMPLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(9488FBA9-FFD2-413B-ADA1-85646C1488D0), //CLSID_PlgTermSample
+        helpstring("TAPI 3.0 PlgTermSample Class")
+    ]
+
+	coclass PlgTermSample
+	{
+		[default] interface ITTerminal;
+		interface IObjectSafety;
+		interface ITPluggableTerminalEventSinkRegistration;
+	};
+
+};
+
+#endif // __PLG_TERMSAMPLE_IDL__

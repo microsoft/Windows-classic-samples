@@ -1,0 +1,87 @@
+<HTML xmlns:move>
+<HEAD>
+
+<TITLE>Behavior Library: Movable</TITLE>
+
+<STYLE>
+    @media all
+    {
+	    move\:piece     { 
+	                    behavior: url(movable.htc);
+	                    cursor: move;
+	                    color: white;
+	                    background: black;
+	                    font: bold 10pt verdana;
+	                    mv--boundary:100 350 300 10
+	                    }
+    }
+    
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+                
+    P               {
+                    font: 10pt verdana;
+                    color:navy
+                    }
+                    
+    .bound          {
+                    position: absolute;
+                    top: 140;
+                    left: 10;
+                    width: 340;
+                    height: 200;
+                    background: ffffdd
+                    }
+	A:link { color:#003399; text-decoration:none; }
+	A:visited { color:#6699CC; text-decoration:none; }
+	A:hover { text-decoration:underline; }
+
+</STYLE>
+
+</HEAD>
+
+<BODY bgcolor="#ffffff" text="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>Moveable Pieces</H2>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+
+<P>Click and drag the pieces inside the bound region.</P>
+
+<DIV CLASS="bound"></DIV>
+
+<move:piece>
+    &nbsp;&nbsp;Move Anywhere&nbsp;&nbsp;
+</move:piece>
+
+<BR><BR>
+
+<move:piece direction="vertical">
+    &nbsp;&nbsp;Vertical&nbsp;&nbsp;
+</move:piece>
+
+<BR><BR>
+
+<move:piece direction="horizontal">
+    &nbsp;&nbsp;Horizontal&nbsp;&nbsp;
+</move:piece>
+
+<P>&nbsp;
+<P>&nbsp;
+<P>&nbsp;
+<P>&nbsp;
+<P>&nbsp;
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>

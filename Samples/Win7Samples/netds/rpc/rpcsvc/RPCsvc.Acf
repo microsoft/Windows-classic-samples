@@ -1,0 +1,62 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (C) 1995  Microsoft Corporation.  All Rights Reserved.
+//
+//  MODULE:   rpcsvc.acf
+//
+//  PURPOSE:  .ACF file for rpcsvc .idl.  This controls the
+//            aspects of the interface which do not affect
+//            the wire. (error handling, memory allocation, etc)
+//
+//
+
+#ifdef SERVER
+
+//
+// On the server side of your application using the fast RpcSmAllocate
+// is recommended in server's which do many allocations.
+// Although it may be used on the client, this requires more work
+// and has little performance impact.
+//
+#define ENABLE_ALLOC ,enable_allocate
+#else
+#define ENABLE_ALLOC /* client */
+#endif
+
+interface RpcServiceSample
+{
+
+    // The [comm_status] and [fault_status] attributes cause the stubs
+    // to return any errors in an error_status_t parameter or return
+    // value.  Otherwise, any communication errors will get raised as
+    // an exception.  This has no performance affect, but it keeps the
+    // client code cleaner.
+    
+    [comm_status, fault_status] Ping();
+
+    [comm_status, fault_status] BufferIn1();
+    [comm_status, fault_status] BufferIn2();
+    [comm_status, fault_status] BufferIn3();
+
+    [comm_status, fault_status] BufferOut1();
+    [comm_status, fault_status] BufferOut2();
+    [comm_status, fault_status] BufferOut3();
+    [comm_status, fault_status] BufferOut4();
+
+    [comm_status, fault_status] StructsIn1();
+    [comm_status, fault_status] StructsIn2();
+    [comm_status, fault_status] StructsIn3();
+
+    [comm_status, fault_status] ListIn();
+    [comm_status, fault_status] ListOut1();
+    [comm_status, fault_status ENABLE_ALLOC] ListOut2();
+
+    [comm_status, fault_status] UnionCall1();
+    [comm_status, fault_status] UnionCall2();
+
+    [comm_status, fault_status] CheckSecurity();
+}
+

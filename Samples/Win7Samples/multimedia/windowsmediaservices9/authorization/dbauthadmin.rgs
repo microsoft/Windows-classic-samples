@@ -1,0 +1,25 @@
+HKCR
+{
+	DBAuth.DBAuthAdmin.9 = s 'DBAuthAdmin Class'
+	{
+		CLSID = s '{13DDFC98-C330-4E1E-A722-624C7E507985}'
+	}
+	DBAuth.DBAuthAdmin = s 'DBAuthAdmin Class'
+	{
+		CLSID = s '{13DDFC98-C330-4E1E-A722-624C7E507985}'
+		CurVer = s 'DBAuth.DBAuthAdmin.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {13DDFC98-C330-4E1E-A722-624C7E507985} = s 'DBAuthAdmin Class'
+		{
+			ProgID = s 'DBAuth.DBAuthAdmin.9'
+			VersionIndependentProgID = s 'DBAuth.DBAuthAdmin'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{0BC95C01-9658-49B5-ACA3-CBEA79B0DAE6}'
+		}
+	}
+}

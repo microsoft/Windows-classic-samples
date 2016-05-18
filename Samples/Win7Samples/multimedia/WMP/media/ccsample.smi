@@ -1,0 +1,42 @@
+<SAMI>
+<HEAD>
+    <Title>Close Captioning Sample</Title>
+
+    <STYLE TYPE="text/css">
+        <!--
+            P {margin-top:3pt; margin-left:5pt; font-size: 10pt;
+               font-family: tahoma, sans-serif; font-weight: normal;
+               color: white;}
+            .ENUSCC {Name:'English Captions'; lang: en-US; SAMIType:CC;}
+        -->
+    </Style>
+</HEAD>
+
+<BODY>
+	<SYNC Start=1000>
+		<P Class=ENUSCC>Great reason to visit Seattle, brought to you by two out-of-staters.
+	<SYNC Start=4000>
+		<P Class=ENUSCC>So you know, there's lots of great reasons to come visit Seattle.
+	<SYNC Start=7000>
+		<P Class=ENUSCC>That's right, I came here because of the coffee.
+	<SYNC Start=9000>
+		<P Class=ENUSCC>Yah, everyone knows the coffee.
+	<SYNC Start=12000>
+		<P Class=ENUSCC>And I heard about the drivers.
+	<SYNC Start=14000>
+		<P Class=ENUSCC>Well, you know, but then it rains...and it's bad, it's bad.
+	<SYNC Start=19000>
+		<P Class=ENUSCC>But the traffic in general is...
+	<SYNC Start=21000>
+		<P Class=ENUSCC>Terrible.
+	<SYNC Start=23000>
+		<P Class=ENUSCC>OK, yah, yah.  But, the weather!
+	<SYNC Start=26500>
+		<P Class=ENUSCC>It doesn't rain all the time...yes, it does.
+	<SYNC Start=30000>
+		<P Class=ENUSCC>Yah.  Nevermind.
+    <SYNC Start=34000>
+        <P Class=ENUSCC>End of Stream.
+</BODY>
+</SAMI>
+

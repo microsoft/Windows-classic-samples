@@ -1,0 +1,9 @@
+; GraphObj.def : Declares the module parameters.
+
+LIBRARY      "GraphObj.DLL"
+
+EXPORTS
+	DllCanUnloadNow      PRIVATE
+	DllGetClassObject    PRIVATE
+	DllRegisterServer    PRIVATE
+	DllUnregisterServer	 PRIVATE

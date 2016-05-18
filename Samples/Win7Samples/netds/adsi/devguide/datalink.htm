@@ -1,0 +1,108 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Data Link</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><img src="banner.gif" alt="banner.gif (5982 bytes)" width="250" height="60"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><img src="mslogo.gif" alt="mslogo.gif (666 bytes)" width="112" height="40"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19">
+      <area href="../default.htm" coords="13, 1, 65, 20" shape="rect"></map><img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="40">
+  <tr>
+    <td width="2%" height="19"></td>
+    <td width="98%" height="19"><hr color="#0080C0">
+    </td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21"><img src="datalink.gif" alt="datalink.gif (2333 bytes)" width="180" height="47"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21" valign="top"><small><font face="Verdana">Data Link is an
+    exciting technology included in the Visual Studio and Office 2000. It allows you to build
+    ADO Connections and Commands interactively. Using this technology and ADSI, you will be
+    able to build a quick form or report interacting with Active Directory </font></small><p><font face="Verdana" color="#0080C0"><strong><small>Requirements</small></strong></font><ul>
+      <li><font face="Verdana"><small>Visual Basic® 6.0 or higher (<a href="http://msdn.microsoft.com/vbasic">http://msdn.microsoft.com/vbasic</a>)</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Windows® 2000 Active Directory™ (<a href="http://www.microsoft.com/windows">http://www.microsoft.com/windows</a>)</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>ADSI (<a href="http://www.microsoft.com/adsi">http://www.microsoft.com/adsi</a>)</small></font></li>
+    </ul>
+    <p>&nbsp;</p>
+    <p><strong><font face="Verdana" color="#0080C0"><small>Step-by-Step
+    Instructions</small></font></strong></p>
+    <p><font face="Verdana" color="#FF0000"><small>Creating an Active Directory quick report</small></font>
+      <ol>
+      <li><font face="Verdana"><small>Install Visual Basic and Active Directory.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>When asked for the project type, select <b>Data Project</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>On <b> Data Project</b>, double-click <b> Data
+        Environment1</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>On the <b> Data Environment</b> window,
+        right click on <b> Connection
+        Object</b> and select <b> Properties</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Select <b>OLE DB Provider for Microsoft Directory
+        Services</b>, and click <b> Next</b> button.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Select <b>Use NT Integrated Environment</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>On the <b> Data Environment</b> window again, right click to select
+        <b>Add Command</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Check the SQL Statement, and type the
+        following (see figure below as an example):<br>
+        <br>
+        SELECT Name from
+        'LDAP://DC=windows2000,DC=nttest,DC=microsoft,DC=com'<br>
+        WHERE objectClass='user' AND objectCategory='Person'&nbsp;<br>
+        <br>
+        <b>Note:</b> you should replace the domain
+        name with your own domain.</small> <br>
+        <br>
+        <img src="command.jpg" alt="command.jpg (39929 bytes)" width="401" height="338"></font><br>
+      </li>
+      <li><font face="Verdana"><small>Double-click <b>Data Report1</b> from the <b> Project</b>
+        window.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>Drag and drop the <b>Command1</b> object on
+        <b> Data Environment</b> to the <b>Detail </b> section in <b> Data Report</b>.<br>
+        </small></font></li>
+      <li><font face="Verdana"><small>On <b> DataReport1</b></small> <b> </b> <small><b>Properties</b>, make
+        DataSource=DataEnvironment1 and DataMember=Command1.</small> <br>
+        </font></li>
+      <li><font face="Verdana"><small>Right-click on <b> Data Project</b>, and select
+        <b>DataProject
+        Properties</b>.</small><br>
+        </font></li>
+      <li><font face="Verdana"><small>On the <b>DataProject Properties Dialog - Startup
+        Object</b>, select &quot;Data Report1&quot;<br>
+        </small></font>
+      <li><font face="Verdana"><small>Run, you should see the Report with data
+        obtained from Active Directory</small></font>
+     
+      <p>&nbsp;</p>
+      <p>&nbsp;

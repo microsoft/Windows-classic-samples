@@ -1,0 +1,27 @@
+HKCR
+{
+	FsrmSampleClassificationModule.FsrmSa.1 = s 'FsrmSampleClassifier Class'
+	{
+		CLSID = s '{0F5F3806-2DAD-4050-9D30-50C35FB7ED0E}'
+	}
+	FsrmSampleClassificationModule.FsrmSamp = s 'FsrmSampleClassifier Class'
+	{
+		CLSID = s '{0F5F3806-2DAD-4050-9D30-50C35FB7ED0E}'
+		CurVer = s 'FsrmSampleClassificationModule.FsrmSa.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {0F5F3806-2DAD-4050-9D30-50C35FB7ED0E} = s 'FsrmSampleClassifier Class'
+		{
+			ProgID = s 'FsrmSampleClassificationModule.FsrmSa.1'
+			VersionIndependentProgID = s 'FsrmSampleClassificationModule.FsrmSamp'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{13D6AF99-B3EC-4DA9-9DDC-ACE21B4ADE8F}'
+		}
+	}
+}

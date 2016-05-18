@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MakeVoice", "MakeVoice\MakeVoice.vcproj", "{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{214761EA-9911-4031-AC43-92CC12536E17} = {214761EA-9911-4031-AC43-92CC12536E17}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleTtsEngine", "SampleTtsEngine\SampleTtsEngine.vcproj", "{214761EA-9911-4031-AC43-92CC12536E17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{810C11C0-038E-4CEA-84E8-B65AF9DCB646}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.txt = Readme.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Debug|Win32.Build.0 = Debug|Win32
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Debug|x64.ActiveCfg = Debug|x64
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Debug|x64.Build.0 = Debug|x64
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Release|Win32.ActiveCfg = Release|Win32
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Release|Win32.Build.0 = Release|Win32
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Release|x64.ActiveCfg = Release|x64
+		{E2B7E58F-08D1-401B-85B8-E20E7BF5117E}.Release|x64.Build.0 = Release|x64
+		{214761EA-9911-4031-AC43-92CC12536E17}.Debug|Win32.ActiveCfg = Debug|Win32
+		{214761EA-9911-4031-AC43-92CC12536E17}.Debug|Win32.Build.0 = Debug|Win32
+		{214761EA-9911-4031-AC43-92CC12536E17}.Debug|x64.ActiveCfg = Debug|x64
+		{214761EA-9911-4031-AC43-92CC12536E17}.Debug|x64.Build.0 = Debug|x64
+		{214761EA-9911-4031-AC43-92CC12536E17}.Release|Win32.ActiveCfg = Release|Win32
+		{214761EA-9911-4031-AC43-92CC12536E17}.Release|Win32.Build.0 = Release|Win32
+		{214761EA-9911-4031-AC43-92CC12536E17}.Release|x64.ActiveCfg = Release|x64
+		{214761EA-9911-4031-AC43-92CC12536E17}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

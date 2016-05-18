@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AdventureSearch", "..\OpenSearch\", "{435007E4-6ADD-4C21-8A68-F9E3323D8935}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/OpenSearch"
+		Debug.AspNetCompiler.PhysicalPath = "..\OpenSearch\"
+		Debug.AspNetCompiler.TargetPath = "..\OpenSearch-Compiled\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/OpenSearch"
+		Release.AspNetCompiler.PhysicalPath = "..\OpenSearch\"
+		Release.AspNetCompiler.TargetPath = "..\OpenSearch-Compiled\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63000"
+		VWDDynamicPort = "false"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{435007E4-6ADD-4C21-8A68-F9E3323D8935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435007E4-6ADD-4C21-8A68-F9E3323D8935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

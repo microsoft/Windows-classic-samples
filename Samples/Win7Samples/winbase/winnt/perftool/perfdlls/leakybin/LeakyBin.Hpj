@@ -1,0 +1,24 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+; This help project requires hc 3.1
+[OPTIONS]
+HCW=0
+;HCW=0
+;HLP=Leakybin.HLP
+;ERRORLOG=leakybin.ERR
+LCID=0x409 0x0 0x0 ;English (United States)
+REPORT=Yes
+CONTENTS=Overview
+TITLE=LeakyBin Application Help
+BUILD=RELEASE
+;HLP=.\Leakybin.hlp
+
+[FILES]
+leakybin.RTF
+
+[BUILDTAGS]
+DEBUG
+RELEASE
+
+[CONFIG]
+BrowseButtons()

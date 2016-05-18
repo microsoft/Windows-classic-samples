@@ -1,0 +1,47 @@
+#*************************************************************#
+#**                                                         **#
+#**                 Microsoft RPC Examples                  **#
+#**                    xmit Application                     **#
+#**          Copyright(c) Microsoft Corp. 1992-1995         **#
+#**                                                         **#
+#*************************************************************#
+
+cc= cl
+cflags= -c -AL -Gsw -Oas -Zpe -Zi -D_CRTAPI1=
+linker= link
+lflags= /CO /NOD
+
+.c.obj:
+   $(cc) $(cflags) $<
+
+all : xmitc
+
+idl : xmit.h
+
+# Make the client side application xmitc
+xmitc : xmitc.exe
+xmitc.exe : xmitc.obj xmitu.obj xmit_c.obj
+    $(linker) $(lflags) xmitc xmitu xmit_c ,,,\
+    llibce rpc rpcndr;
+
+# Update the object files if necessary
+
+xmitc.obj : xmitc.c xmit.h
+
+xmitu.obj : xmitu.c xmit.h
+
+xmit_c.obj : xmit_c.c xmit.h
+
+xmit.h xmit_c.c : xmit.idl xmit.acf
+    midl -env dos -oldnames -no_cpp xmit.idl
+
+# Clean up everything
+cleanall : clean
+    -del xmitc.exe
+
+# Clean up everything but the .EXEs
+clean :
+    -del *.obj
+    -del *.map
+    -del xmit_c.c
+    -del xmit.h

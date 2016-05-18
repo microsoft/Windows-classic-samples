@@ -1,0 +1,1 @@
+This sample shows you how to make use of MOD_NOREPEAT to stop the user-defined 'b'+ ALT hotkey from generating multiple hotkey notifications. Visual Studio 2008 and Windows 7 SDK required.

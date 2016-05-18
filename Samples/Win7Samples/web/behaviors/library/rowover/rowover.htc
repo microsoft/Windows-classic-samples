@@ -1,0 +1,609 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         rowover.htc
+//
+//  Description:  This behavior adds striping, hovering and other useful
+//                features to regular and data-bound table rows. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="selectable" />
+<PROPERTY NAME="striped"    />
+
+<METHOD   NAME="Format"     />
+<METHOD   NAME="reset"      />
+
+<EVENT    NAME="onrowover"   ID="rowover"  />
+<EVENT    NAME="onrowout"    ID="rowout"   />
+<EVENT    NAME="onrowclick"  ID="rowclick" />
+<EVENT    NAME="onerror"     ID="error"    />
+
+<ATTACH   EVENT="onreadystatechange" HANDLER="DoInit"     />
+<ATTACH   EVENT="onmouseout"         HANDLER="LeaveTable" />
+<ATTACH   EVENT="onselectstart"      HANDLER="DoSelectStart" />
+
+
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global variables
+//
+//-----------------------------------------------------------------------------
+
+var oCurrRow;               //Tracks current mouseover row
+
+var oSelectRow;             //Tracks currently selected row
+
+var sSelectBack;            //Tracks previous backgroundColor of selected row
+
+var sSelectClr;             //Tracks previous color of selected row
+
+var sDefaultBack;           //Tracks previous backgroundColor of mouseover row
+
+var sDefaultClr;            //Tracks previous color of mouseover row
+
+var sUndoBack;				//Tracks backgroundColor for unselecting selected row
+
+var sUndoClr;				//Tracks color for unselecting selected row
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions to initialize behavior
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+    SetDefaults();
+    Format();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+    //  Custom CSS Property Defaults
+	CustomDefault('ro--hover-background',   'roHoverBackground',    'navy');
+	CustomDefault('ro--hover-color',        'roHoverColor',         'white');
+	CustomDefault('ro--selected-background','roSelectedBackground', 'navy');
+	CustomDefault('ro--selected-color',     'roSelectedColor',      'white');
+	CustomDefault('ro--shade-background',   'roShadeBackground',    '#dddddd');
+	CustomDefault('ro--light-background',   'roLightBackground',    'white');
+
+    //  CSS Property Defaults
+    NormalDefault('cursor',  'auto',  'default');
+
+    //  Attribute | Property Defaults
+    if (selectable  == null)    selectable  = false;
+    if (striped     == null)    striped     = false;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       Format
+//
+//  Description:    Calls the Stripes() function to format as necessary and
+//                  attaches appropriate events.  These events are not attached
+//                  in the <EVENT> section so that they do not fire during
+//                  the initialization process.  If the table is not yet ready,
+//                  this function loops until it is.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function Format()
+{
+    //  If the table's readyState is not complete, wait
+	if (readyState != "complete" && readyState != 4)
+	{
+	    window.setTimeout(uniqueID + ".Format()", 50);
+	}
+
+    //  If the table's readyState is complete, attachEvents and apply formatting
+    else 
+    {
+        Stripes(eval(striped));
+        	
+        attachEvent("onmouseover",      DoMouseOver);
+        attachEvent("onmouseout",       DoMouseOut);
+        attachEvent("onclick",          DoClick);
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    //
+    //  Handle CSS property changes by calling necessary functions, setting
+    //  variables, and/or setting styles
+    //
+    if (propertyName.substring(0,5) == "style")
+    {
+        switch (propertyName)
+        {
+            case "style.roHoverBackground"    :
+                break;
+
+            case "style.roHoverColor"         :
+                break;
+
+            case "style.roSelectedBackground" :
+                if (oSelectRow != null)
+                {
+                    ColorCells(oSelectRow, style.roSelectedColor, 
+                        style.roSelectedBackground);
+                }
+                break;                
+
+            case "style.roSelectedColor"      :
+                if (oSelectRow != null)
+                {
+                    ColorCells(oSelectRow, style.roSelectedColor, 
+                        style.roSelectedBackground);
+                }
+                break;
+
+            case "style.roShadeBackground"    :
+                Stripes(eval(striped));
+                break;
+
+            case "style.roLightBackground"    :
+                Stripes(eval(striped));
+                break;                                                
+
+            case "style.cursor"               :
+                break;                                                
+        }
+    }
+    else
+    {
+        //
+        //  Detach the onpropertychange event to prevent it from firing while
+        //  the changes are handled
+        //
+        detachEvent("onpropertychange", DoPropChange);
+        
+        switch(propertyName)
+        {
+            case "striped"                   :
+                Stripes(eval(striped));
+                break;
+
+            case "selectable"                :
+                if (!eval(selectable))
+                {
+                    ColorCells(oSelectRow, sSelectClr, sSelectBack);   
+                }
+                break;
+                
+            default                          :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+
+        //  Re-attach the onpropertychange event        
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       reset
+//
+//  Description:    Resets the current row and selected row to null (including
+//                  returning the backgroundColor and color of the selected
+//                  row to their original color.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+    
+function reset()
+{
+    oCurrRow = null;
+    
+    //  If there is a row currently selected, unselect it.
+    if (oSelectRow != null)
+    {
+        ColorCells(oSelectRow, sUndoClr, sUndoBack);   
+    }
+    	
+	sDefaultBack = sUndoBack;
+	sDefaultClr = sUndoClr;
+    
+    oSelectRow = null;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       Stripes
+//
+//  Description:    Formats the background color of the table rows according
+//                  to the Striped property and applicable CSS properties.
+//
+//  Arguments:      bColor - if true, add color; if false, remove color
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function Stripes(bColor)
+{
+    //
+    //  Iterate through the rows of the table, alternately applying the shade
+    //  and light colors
+    //
+    for (j=1; j<rows.length; j++)
+    {
+        if (rows(j) == oSelectRow && eval(selectable)) continue;
+    
+        if (rows(j).parentElement.tagName.toLowerCase() != "tbody") continue;
+    
+        if (rows(j).rowIndex%2) 
+        {
+            var sColShade = (bColor ? style.roShadeBackground : "transparent");
+            ColorCells(rows(j), null, sColShade);
+        }
+        else
+        {
+            var sColLight = (bColor ? style.roLightBackground : "transparent");
+            ColorCells(rows(j), null, sColLight);
+        }
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       LeaveTable
+//
+//  Description:    Attached to the mouseover event for the table.  If the user
+//                  leaves the table, the current mouseover row is set to null,
+//                  so that when they return, that row can be highlighted.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function LeaveTable()
+{
+    if (window.event.toElement == element.parentElement) oCurrRow = null;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       GetRow
+//
+//  Description:    This function takes the element passed to it and determines
+//                  if it is a row or the child of a row in the TBODY section
+//                  of the table.
+//
+//  Arguments:      oElem - element to check
+//
+//  Returns:        false if the element is not a row or child element in the
+//                      TBODY section of the table
+//                  true if the element is a row or child element in the TBODY
+//                      section of the table
+//
+//-----------------------------------------------------------------------------
+
+function GetRow(oElem)
+{
+	while (oElem)
+	{
+		if (oElem.tagName.toLowerCase() == "tr"
+		    && oElem.parentElement.tagName.toLowerCase() == "tbody") 
+		    return oElem;
+		if (oElem.tagName.toLowerCase() == "table") return false;
+		oElem = oElem.parentElement;
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ColorCells
+//
+//  Description:    Applies a backgroundColor and color to the row.
+//
+//  Arguments:      oRow - row to apply the styles to
+//                  sClor - color to apply to row
+//                  sBack - backgroundColor to apply to row
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ColorCells(oRow, sClr, sBack)
+{
+	if (oRow == false) return false;
+	
+    if (sClr != null) oRow.style.color = sClr;
+	if (sBack != null) oRow.style.backgroundColor = sBack;
+
+    //
+    //  Iterate through the cells of the sourceRow and apply the color and
+    //  background color
+    //	
+	for (i=0; i<oRow.cells.length; i++)
+	{
+		if (sClr != null) 
+		{
+		    oRow.cells(i).style.color = sClr;
+		}
+		if (sBack != null)
+		{
+		    oRow.cells(i).style.backgroundColor = sBack;
+		}
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOver
+//
+//  Description:    Handle the mouseover event for the row.  First, find the
+//                  row of the srcElement, then make sure it's not the
+//                  current mouseover row.  Next, "bookmark" the backgroundColor
+//                  and color of the cells of the row so they can be returned
+//                  later.  Call the ColorCells() function to apply the
+//                  appropriate styles, then fire the onrowover event.  
+//
+//  Arguments:      none
+//
+//  Returns:        true if this is the current mouseover row
+//                  true if this is not a row or child of a row in the TBODY
+//                      section of the table.
+//                  nothing if the mouseover is applied
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseOver()
+{
+    //
+    //  Find the row of the srcElement and make sure it's not the row that's
+    //  currently highlighted
+    //
+	if (!(oRow = GetRow(window.event.srcElement))) return true;
+	if (oRow == oCurrRow) return true;
+    oCurrRow = oRow;
+
+    //  Set the variables to record the current background and color of the row    
+	sDefaultBack = oRow.currentStyle.backgroundColor;
+	sDefaultClr = oRow.currentStyle.color;
+
+    //  Apply the formatting to the row
+	ColorCells(oRow, style.roHoverColor, style.roHoverBackground);
+
+    //  Fire the rowover event with the srcRow property
+    var oEvent = createEventObject();
+    oEvent.setAttribute("srcRow", oRow);
+	rowover.fire(oEvent);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOut
+//
+//  Description:    Undoes what the DoMouseOver() function did.  Get the row,
+//                  return the styles to the ones "bookmarked" in the mouseover
+//                  function, and fire the event.
+//
+//  Arguments:      none
+//
+//  Returns:        true if this is the current mouseover row
+//                  true if this is not a row or child of a row in the TBODY
+//                      section of the table.
+//                  nothing if the mouseover is applied 
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseOut()
+{
+    //
+    //  Find the row of the srcElement and make sure it's not the row that's
+    //  currently highlighted
+    //
+	if (oCurrRow != null && oCurrRow.contains(window.event.toElement)) return true;
+	if (!(oRow = GetRow(window.event.srcElement))) return true;
+	
+	//  If this row is selected, leave the selected formatting on leaving
+	if (oRow == oSelectRow && eval(selectable))
+	{
+	    ColorCells(oRow, style.roSelectedColor, style.roSelectedBackground);
+	}
+	
+	//  Else, reapply the previous styles of this row
+	else
+	{
+	    ColorCells(oRow, sDefaultClr, sDefaultBack);
+    }
+
+    //  Fire the rowout event with the srcRow property
+    var oEvent = createEventObject();
+    oEvent.setAttribute("srcRow", oRow);
+	rowout.fire(oEvent);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoClick 
+//
+//  Description:    If the selectable property is true, this function gets the
+//                  row that was clicked, "bookmarks" the styles (for undoing
+//                  them later), calls the ColorCells() function to apply the
+//                  appropriate styles, and fires the onrowclick event
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoClick()
+{
+    if (!eval(selectable)) return true;
+
+    //  Get the row
+    var oRow = GetRow(window.event.srcElement);
+    
+    //  Remove formatting from any currently selected rows
+    if (oSelectRow != null)
+    {
+        ColorCells(oSelectRow, sSelectClr, sSelectBack);
+    }
+
+    //  Set the variables to record the current background and color of the row    
+    sSelectBack = sDefaultBack;
+	sSelectClr = sDefaultClr;
+    
+    if (oSelectRow == oRow)
+    {
+		Reset();
+		return;
+	}
+	
+	sUndoBack = sDefaultBack;
+	sUndoClr = sDefaultClr;
+	    
+    oSelectRow = oRow;
+
+    //  Apply the formatting to the row
+    ColorCells(oSelectRow, style.roSelectedColor, style.roSelectedBackground);
+    
+    //  Fire rowclick event with the srcRow property
+    var oEvent = createEventObject();
+    oEvent.setAttribute("srcRow", oRow);
+	rowclick.fire(oEvent);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+
+</SCRIPT>

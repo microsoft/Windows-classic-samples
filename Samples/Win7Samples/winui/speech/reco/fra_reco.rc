@@ -1,0 +1,8 @@
+LANGUAGE 0xc, SUBLANG_NEUTRAL
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SRGRAMMAR
+//
+
+IDR_SOL_CFG             SRGRAMMAR DISCARDABLE   "fra_cardinals.cfg"

@@ -1,0 +1,239 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP                 ICON                    "GraphChat.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Clear Text\t Ctrl+E",        IDM_CLEARTEXT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\t Ctrl+Q",              IDM_EXIT
+    END
+    POPUP "&Graph"
+    BEGIN
+        MENUITEM "&New Graph... \t Ctrl+N",     IDM_NEWGRAPH
+        MENUITEM "&Open Graph... \t Ctrl+O",    IDM_OPENGRAPH
+        MENUITEM SEPARATOR
+        MENUITEM "&Disconnect \t Ctrl+D",       IDM_DISCONNECT, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "I&nvite someone nearby...",   IDM_GRAPH_INVITESOMEONENEARBY, GRAYED
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_ACCEL ACCELERATORS 
+BEGIN
+    "/",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "?",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "D",            IDM_DISCONNECT,         VIRTKEY, CONTROL, NOINVERT
+    "Q",            IDM_EXIT,               VIRTKEY, CONTROL, NOINVERT
+    "N",            IDM_NEWGRAPH,           VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_OPENGRAPH,          VIRTKEY, CONTROL, NOINVERT
+    "E",            IDM_CLEARTEXT,          VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 22, 17, 256, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "About GraphChat"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,204,18,50,14
+    ICON            IDI_APP,IDC_MYICON,15,16,21,20
+    LTEXT           "GraphChat Version 1.1 (Vista Build)",IDC_STATIC,45,22,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (c) Microsoft Corporation.  All rights reserved.",IDC_STATIC,15,38,189,8
+END
+
+IDD_NEWGRAPH DIALOGEX 0, 0, 177, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create New Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDT_GRAPHNAME,56,7,114,14,ES_AUTOHSCROLL
+    LTEXT           "&CreatorId:",IDC_STATIC,7,28,36,9
+    EDITTEXT        IDC_EDT_CREATORID,56,25,114,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,31,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,96,66,50,14
+    LTEXT           "&GraphName:",IDC_STATIC,7,10,41,8
+    LTEXT           "&Scope:",IDC_STATIC,7,47,34,10
+    CONTROL         "Global",IDC_RADIO_GLOBAL_SCOPE,"Button",BS_AUTORADIOBUTTON,56,46,41,10
+    CONTROL         "Local",IDC_RADIO_LOCAL_SCOPE,"Button",BS_AUTORADIOBUTTON,103,47,45,8
+END
+
+IDD_OPENGRAPH DIALOGEX 0, 0, 176, 89
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Graph"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&GraphName:",IDC_STATIC,7,9,44,9
+    EDITTEXT        IDC_EDT_GRAPHID,59,7,110,14,ES_AUTOHSCROLL
+    LTEXT           "&MyPeerId:",IDC_STATIC,7,28,41,9
+    EDITTEXT        IDC_EDT_PEERID,59,26,110,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,30,68,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,96,68,50,14
+    LTEXT           "Scope:",IDC_STATIC,7,47,23,8
+    CONTROL         "Global",IDC_RADIO_GLOBAL_SCOPE,"Button",BS_AUTORADIOBUTTON,60,46,35,10
+    CONTROL         "Local",IDC_RADIO_LOCAL_SCOPE,"Button",BS_AUTORADIOBUTTON,114,46,32,10
+END
+
+IDD_WHISPER DIALOGEX 0, 0, 310, 46
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Whisper"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDT_WHISPER,16,15,211,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Send",IDOK,253,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,253,25,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        RIGHTMARGIN, 254
+    END
+
+    IDD_NEWGRAPH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        VERTGUIDE, 56
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 81
+        HORZGUIDE, 51
+        HORZGUIDE, 73
+    END
+
+    IDD_OPENGRAPH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 169
+        VERTGUIDE, 60
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
+        HORZGUIDE, 51
+        HORZGUIDE, 83
+    END
+
+    IDD_WHISPER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 303
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Graph Chat Sample Application (Vista Build)"
+    IDS_APP_CLASS           "GRAPHCHAT"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

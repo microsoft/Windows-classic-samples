@@ -1,0 +1,4714 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+#include "res\RowsetViewer.rc2"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_ROWSETVIEWER MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Full &Connect...\tCtrl+F",    IDM_FULLCONNECT
+        MENUITEM "Full &Disconnect\tCtrl+D",    IDM_FULLDISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "Root &Binder",                IDM_CREATE_ROOTBINDER
+        MENUITEM "Root &Enumerator",            IDM_CREATE_ROOTENUMERATOR
+        MENUITEM "&Service Components",         IDM_CREATE_SERVICECOMPONENTS
+        MENUITEM "Data &Links",                 IDM_CREATE_DATALINKS
+        MENUITEM SEPARATOR
+        POPUP "&Recent Configurations"
+        BEGIN
+            MENUITEM "Recent Configurations",       IDM_RECENTCONFIG1
+        END
+        POPUP "Recent &Files"
+        BEGIN
+            MENUITEM "Recent Files",                IDM_RECENTFILE1
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&DataSource"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_DATASOURCE_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface...",          IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IDBCreate&Session"
+        BEGIN
+            MENUITEM "&CreateSession...",           IDM_IDBCREATESESSION_CREATESESSION
+
+        END
+        POPUP "IDB&Properties"
+        BEGIN
+            MENUITEM "&GetProperties...",           IDM_IDBPROPERTIES_GETPROPERTIES
+
+            MENUITEM "GetProperty&Info...",         IDM_IDBPROPERTIES_GETPROPERTYINFO
+
+            MENUITEM "&SetProperties...",           IDM_IDBPROPERTIES_SETPROPERTIES
+
+        END
+        POPUP "IPersis&t"
+        BEGIN
+            MENUITEM "&GetClassID",                 IDM_IPERSIST_GETCLASSID
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&ConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint...",     IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDB&AsynchStatus"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "IDBDataSourceAdmin"
+        BEGIN
+            MENUITEM "&CreateDataSource",           IDM_IDATASOURCEADMIN_CREATEDATASOURCE
+
+            MENUITEM "&DestroyDataSource",          IDM_IDATASOURCEADMIN_DESTROYDATASOURCE
+
+            MENUITEM "&GetCreationProperties",      IDM_IDATASOURCEADMIN_GETCREATIONPROPERTIES
+
+            MENUITEM "&ModifyDataSource",           IDM_IDATASOURCEADMIN_MODIFYDATASOURCE
+
+        END
+        POPUP "IDBI&nfo"
+        BEGIN
+            MENUITEM "Get&Keywords",                IDM_IDBINFO_GETKEYWORDS
+            MENUITEM "&GetLiteralInfo...",          IDM_IDBINFO_GETLITERALINFO
+
+        END
+        POPUP "IPersistFi&le"
+        BEGIN
+            MENUITEM "&IsDirty",                    IDM_IPERSISTFILE_ISDIRTY
+            MENUITEM "&Load",                       IDM_IPERSISTFILE_LOAD
+            MENUITEM "&Save",                       IDM_IPERSISTFILE_SAVE
+            MENUITEM "Save&Completed",              IDM_IPERSISTFILE_SAVECOMPLETED
+
+            MENUITEM "&GetCurFile",                 IDM_IPERSISTFILE_GETCURFILE
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IGetPool"
+        BEGIN
+            MENUITEM "Get&Pool",                    IDM_IGETPOOL_GETPOOL
+            MENUITEM "GetPool&State",               IDM_IGETPOOL_GETPOOLSTATE
+
+        END
+        POPUP "IServicePro&vider"
+        BEGIN
+            MENUITEM "&QueryService",               IDM_ISERVICEPROVIDER
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "&Session"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_SESSION_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&GetDataSource"
+        BEGIN
+            MENUITEM "&GetDataSource",              IDM_GETDATASOURCE
+        END
+        POPUP "I&OpenRowset"
+        BEGIN
+            MENUITEM "&OpenRowset\tCtrl+O",         IDM_OPENROWSET
+        END
+        POPUP "ISession&Properties"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_ISESSIONPROPERTIES_GETPROPERTIES
+
+            MENUITEM "&SetProperties",              IDM_ISESSIONPROPERTIES_SETPROPERTIES
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&CreateCommand"
+        BEGIN
+            MENUITEM "&CreateCommand",              IDM_IDBCREATECOMMAND_CREATECOMMAND
+
+        END
+        POPUP "IDBSc&hemaRowset"
+        BEGIN
+            MENUITEM "&GetRowset...\tCtrl+S",       IDM_GETSCHEMAROWSET
+            MENUITEM "Get&Schemas...",              IDM_GETSCHEMAS, GRAYED
+        END
+        POPUP "II&ndexDefinition"
+        BEGIN
+            MENUITEM "&CreateIndex",                IDM_INDEX_CREATEINDEX
+            MENUITEM "&DropIndex",                  IDM_INDEX_DROPINDEX
+        END
+        POPUP "IAlterIndex"
+        BEGIN
+            MENUITEM "&AlterIndex",                 IDM_INDEX_ALTERINDEX
+        END
+        POPUP "I&AlterTable"
+        BEGIN
+            MENUITEM "Alter&Table",                 IDM_TABLE_ALTERTABLE
+            MENUITEM "Alter&Column",                IDM_TABLE_ALTERCOLUMN
+        END
+        POPUP "ITableDefinition"
+        BEGIN
+            MENUITEM "&AddColumn",                  IDM_TABLE_ADDCOLUMN
+            MENUITEM "&CreateTable",                IDM_TABLE_CREATETABLE
+            MENUITEM "&DropColumn",                 IDM_TABLE_DROPCOLUMN
+            MENUITEM "Drop&Table",                  IDM_TABLE_DROPTABLE
+        END
+        POPUP "ITableDefinition&WithConstraints"
+        BEGIN
+            MENUITEM "&AddConstraint",              IDM_TABLE_ADDCONSTRAINT
+            MENUITEM "&CreateTableWithConstraint",  IDM_TABLE_CREATETABLEWITHCONSTRAINTS
+            , GRAYED
+            MENUITEM "&DropConstraint",             IDM_TABLE_DROPCONSTRAINT
+        END
+        POPUP "I&Transaction"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_ITRANSACTION_ABORT
+            MENUITEM "&Commit",                     IDM_ITRANSACTION_COMMIT
+            MENUITEM "&GetTransactionInfo",         IDM_ITRANSACTION_GETTRANSACTIONINFO
+
+        END
+        POPUP "ITransaction&Local"
+        BEGIN
+            POPUP "I&Transaction"
+            BEGIN
+                MENUITEM "&Abort",                      IDM_ITRANSACTION_ABORT
+
+                MENUITEM "&Commit",                     IDM_ITRANSACTION_COMMIT
+
+                MENUITEM "&GetTransactionInfo",         IDM_ITRANSACTION_GETTRANSACTIONINFO
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&OptionsObject",           IDM_ITRANSACTIONLOCAL_GETOPTIONSOBJECT
+
+            MENUITEM "&StartTransaction",           IDM_ITRANSACTIONLOCAL_STARTTRANSACTION
+
+        END
+        POPUP "ITransactionObject"
+        BEGIN
+            MENUITEM "&GetTransactionObject",       IDM_ITRANSACTIONOBJECT_GETTRANSACTIONOBJECT
+
+        END
+        POPUP "ITransaction&Join"
+        BEGIN
+            MENUITEM "&GetOptionsObject",           IDM_ITRANSACTIONJOIN_GETOPTIONSOBJECT
+
+            MENUITEM "&JoinTransaction",            IDM_ITRANSACTIONJOIN_JOINTRANSACTION
+
+            MENUITEM SEPARATOR
+            MENUITEM "&TransactionDispenser::BeginTransaction", 
+                                                    IDM_ITRANSACTIONDISPENSOR_BEGINTRANSACTION
+
+            MENUITEM "&Release Transaction",        IDM_ITRANSACTIONJOIN_RELEASETRANSACTION
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&BindResource"
+        BEGIN
+            MENUITEM "&Bind",                       IDM_IBINDRESOURCE_BIND
+        END
+        POPUP "ICreateRow"
+        BEGIN
+            MENUITEM "&CreateRow",                  IDM_ICREATEROW_CREATEROW
+        END
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDBAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "&Command"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_COMMAND_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Accessor"
+        BEGIN
+            MENUITEM "&AddRefAccessor",             IDM_IACCESSOR_ADDREFACCESSOR
+
+            MENUITEM "&CreateAccessor",             IDM_IACCESSOR_CREATEACCESSOR
+
+            MENUITEM "&GetBindings",                IDM_IACCESSOR_GETBINDINGS
+
+            MENUITEM "&ReleaseAccessor",            IDM_IACCESSOR_RELEASEACCESSOR
+
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+            , GRAYED
+        END
+        POPUP "I&Command"
+        BEGIN
+            MENUITEM "&Cancel",                     IDM_COMMAND_CANCEL
+            MENUITEM "&Execute\tCtrl+E",            IDM_EXECUTE
+            MENUITEM "&GetDBSession",               IDM_COMMAND_GETDBSESSION
+        END
+        POPUP "ICommand&Properties"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_COMMAND_GETPROPERTIES
+
+            MENUITEM "&SetProperties",              IDM_COMMAND_SETPROPERTIES
+
+        END
+        POPUP "ICommand&Text"
+        BEGIN
+            POPUP "I&Command"
+            BEGIN
+                MENUITEM "&Cancel",                     IDM_COMMAND_CANCEL
+                MENUITEM "&Execute",                    IDM_COMMANDTEXT_EXECUTE
+
+                MENUITEM "&GetDBSession",               IDM_COMMAND_GETDBSESSION
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&GetCommandText",             IDM_GETCOMMANDTEXT
+            MENUITEM "&SetCommandText",             IDM_SETCOMMANDTEXT
+        END
+        POPUP "IConvertT&ype"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ICommand&Stream"
+        BEGIN
+            MENUITEM "&GetCommandStream",           IDM_GETCOMMANDSTREAM
+            MENUITEM "&SetCommandStream",           IDM_SETCOMMANDSTREAM
+        END
+        POPUP "IColu&mnsRowset"
+        BEGIN
+            MENUITEM "Get&AvailableColumns",        IDM_ICOLUMNSROWSET_GETAVAILABLECOLUMNS
+            , GRAYED
+            MENUITEM "&GetColumnsRowset",           IDM_ICOLUMNSROWSET_GETCOLUMNSROWSET
+
+        END
+        POPUP "IC&ommandPrepare"
+        BEGIN
+            MENUITEM "&Prepare",                    IDM_COMMANDPREPARE
+            MENUITEM "&UnPrepare",                  IDM_COMMANDUNPREPARE
+        END
+        POPUP "ICommandPersist"
+        BEGIN
+            MENUITEM "&DeleteCommand",              IDM_COMMANDPERSIST_DELETECOMMAND
+
+            MENUITEM "&GetCurrentCommand",          IDM_COMMANDPERSIST_GETCURRENTCOMMAND
+
+            MENUITEM "&LoadCommand",                IDM_COMMANDPERSIST_LOADCOMMAND
+
+            MENUITEM "&SaveCommand",                IDM_COMMANDPERSIST_SAVECOMMAND
+
+        END
+        POPUP "ICommand&WithParameters"
+        BEGIN
+            MENUITEM "&GetParameterInfo",           IDM_GETPARAMETERINFO
+            MENUITEM "&MapParameterNames",          IDM_MAPPARAMETERNAMES
+            MENUITEM "&SetParameterInfo",           IDM_SETPARAMETERINFO
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "ID&BAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "C&lear Command",              IDM_COMMAND_CLEARCOMMAND
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "&Rowset"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ROWSET_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Accessor"
+        BEGIN
+            MENUITEM "&AddRefAccessor",             IDM_IACCESSOR_ADDREFACCESSOR
+
+            MENUITEM "&CreateAccessor",             IDM_IACCESSOR_CREATEACCESSOR
+
+            MENUITEM "&GetBindings",                IDM_IACCESSOR_GETBINDINGS
+
+            MENUITEM "&ReleaseAccessor",            IDM_IACCESSOR_RELEASEACCESSOR
+
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+            , GRAYED
+        END
+        POPUP "IConvert&Type"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        POPUP "IR&owset"
+        BEGIN
+            MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+            MENUITEM "&GetData",                    IDM_GETDATA
+            MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+            MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+            MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+            MENUITEM SEPARATOR
+            MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+        END
+        POPUP "IRo&wsetInfo"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_IROWSET_GETPROPERTIES
+
+            MENUITEM "Get&ReferencedRowset",        IDM_GETREFERENCEDROWSET
+            MENUITEM "Get&Specification",           IDM_GETSPECIFICATION
+        END
+        MENUITEM SEPARATOR
+        POPUP "IChapteredRowset", GRAYED
+        BEGIN
+            MENUITEM "&AddRefChapter",              IDM_CHAPTERED_ADDREFCHAPTER
+
+            MENUITEM "&ReleaseChapter",             IDM_CHAPTERED_RELEASECHAPTER
+
+        END
+        POPUP "IRowset&View", GRAYED
+        BEGIN
+            MENUITEM "&CreateView",                 IDM_IROWSETVIEW_CREATEVIEW
+
+            MENUITEM "&GetView",                    IDM_IROWSETVIEW_GETVIEW
+        END
+        POPUP "ICo&lumnsRowset"
+        BEGIN
+            MENUITEM "Get&AvailableColumns",        IDM_ICOLUMNSROWSET_GETAVAILABLECOLUMNS
+            , GRAYED
+            MENUITEM "&GetColumnsRowset",           IDM_ICOLUMNSROWSET_GETCOLUMNSROWSET
+
+        END
+        POPUP "IRowset&Change"
+        BEGIN
+            MENUITEM "&DeleteRows",                 IDM_DELETEROWS
+            MENUITEM "&InsertRow",                  IDM_INSERTROW
+            MENUITEM "&SetData",                    IDM_SETDATA
+        END
+        POPUP "IRowset&Find"
+        BEGIN
+            MENUITEM "Find&NextRow",                IDM_IROWSETFIND_FINDNEXTROW
+
+        END
+        POPUP "IRowsetIde&ntity"
+        BEGIN
+            MENUITEM "Is&SameRow",                  IDM_IROWSETINDENTITY_ISSAMEROW
+
+        END
+        POPUP "IRowsetLocate"
+        BEGIN
+            POPUP "I&Rowset"
+            BEGIN
+                MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                MENUITEM "&GetData",                    IDM_IROWSETLOCATE_GETDATA
+
+                MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+                MENUITEM SEPARATOR
+                MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Compare",                    IDM_IROWSETLOCATE_COMPARE
+
+            MENUITEM "GetRows&At",                  IDM_IROWSETLOCATE_GETROWSAT
+            , GRAYED
+            MENUITEM "GetRowsBy&Bookmark",          IDM_IROWSETLOCATE_GETROWSBYBOOKMARK
+
+            MENUITEM "&Hash",                       IDM_IROWSETLOCATE_HASH
+        END
+        POPUP "IRowset&Bookmark"
+        BEGIN
+            POPUP "I&Rowset"
+            BEGIN
+                MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                MENUITEM "&GetData",                    IDM_IROWSETLOCATE_GETDATA
+
+                MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+                MENUITEM SEPARATOR
+                MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&PositionOnBookmark",         IDM_IROWSETBOOKMARK_POSITIONONBOOKMARK
+
+        END
+        POPUP "IRowsetRes&ynch"
+        BEGIN
+            MENUITEM "&GetVisibleData",             IDM_GETVISIBLEDATA
+            MENUITEM "&ResynchRows",                IDM_RESYNCHROWS
+        END
+        POPUP "IRowsetRefres&h"
+        BEGIN
+            MENUITEM "&GetLastVisibleData",         IDM_GETLASTVISIBLEDATA
+            MENUITEM "&RefreshVisibleData",         IDM_REFRESHVISIBLEDATA
+        END
+        POPUP "IRowsetScroll"
+        BEGIN
+            POPUP "IRowsetLocate"
+            BEGIN
+                POPUP "I&Rowset"
+                BEGIN
+                    MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                    MENUITEM "&GetData",                    IDM_IROWSETSCROLL_GETDATA
+
+                    MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                    MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                    MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+
+                    MENUITEM SEPARATOR
+                    MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+
+                END
+                MENUITEM SEPARATOR
+                MENUITEM "&Compare",                    IDM_IROWSETLOCATE_COMPARE
+
+                MENUITEM "GetRows&At",                  IDM_IROWSETLOCATE_GETROWSAT
+                , GRAYED
+                MENUITEM "GetRowsBy&Bookmark",          IDM_IROWSETLOCATE_GETROWSBYBOOKMARK
+
+                MENUITEM "&Hash",                       IDM_IROWSETLOCATE_HASH
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&ApproximatePosition",     IDM_IROWSETSCROLL_GETAPPROXIMATEPOSITION
+
+            MENUITEM "GetRowsAt&Ratio",             IDM_IROWSETSCROLL_GETROWSATRATIO
+            , GRAYED
+        END
+        POPUP "IRowsetU&pdate"
+        BEGIN
+            POPUP "IRowset&Change"
+            BEGIN
+                MENUITEM "&DeleteRows",                 IDM_DELETEROWS
+                MENUITEM "&InsertRow",                  IDM_INSERTROW
+                MENUITEM "&SetData",                    IDM_SETDATA
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&OriginalData",            IDM_GETORIGINALDATA
+            , GRAYED
+            MENUITEM "Get&PendingRows",             IDM_GETPENDINGROWS
+            , GRAYED
+            MENUITEM "Get&RowStatus",               IDM_GETROWSTATUS, GRAYED
+            MENUITEM "U&ndo",                       IDM_UNDO
+            MENUITEM "&Update",                     IDM_UPDATE
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDBAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IGetRow"
+        BEGIN
+            MENUITEM "Get&RowFromHROW",             IDM_GETROWFROMHROW
+            MENUITEM "Get&URLFromHROW",             IDM_GETURLFROMHROW
+        END
+        MENUITEM SEPARATOR
+        POPUP "Services"
+        BEGIN
+            MENUITEM "Cursor Engine",               IDM_IROWSET_CURSORENGINE
+            MENUITEM "&RowPosition",                IDM_CREATE_ROWPOSITION
+            POPUP "MSPersist"
+            BEGIN
+                MENUITEM "&Save Rowset",                IDM_MSPERSIST_ROWSET_SAVE
+
+                MENUITEM "Load Rowset",                 IDM_MSPERSIST_ROWSET_LOAD
+
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "R&ow"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ROW_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IR&ow"
+        BEGIN
+            MENUITEM "&GetColumns",                 IDM_IROW_GETCOLUMNS
+            MENUITEM "Get&SourceRowset",            IDM_IROW_GETSOURCEROWSET
+            MENUITEM "&Open",                       IDM_IROW_OPEN
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+
+        END
+        POPUP "IConvert&Type"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        POPUP "I&GetSession"
+        BEGIN
+            MENUITEM "&GetSession...",              IDM_IGETSESSION_GETSESSION
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IColumnsInfo&2"
+        BEGIN
+            POPUP "IColumns&Info"
+            BEGIN
+                MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+                MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&RestrictedColumnInfo",    IDM_ICOLUMNSINFO2_GETRESTRICTEDCOLUMNINFO
+
+        END
+        POPUP "ICreateRow"
+        BEGIN
+            MENUITEM "&CreateRow",                  IDM_ICREATEROW_CREATEROW
+        END
+        POPUP "ID&BCreateCommand"
+        BEGIN
+            MENUITEM "&CreateCommand",              IDM_IDBCREATECOMMAND_CREATECOMMAND
+
+        END
+        POPUP "IDBI&nitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IRow&Change"
+        BEGIN
+            MENUITEM "&SetColumns",                 IDM_IROW_SETCOLUMNS
+        END
+        POPUP "IRow&SchemaChange"
+        BEGIN
+            POPUP "IRow&Change"
+            BEGIN
+                MENUITEM "&SetColumns",                 IDM_IROW_SETCOLUMNS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&DeleteColumns",              IDM_IROW_DELETECOLUMNS
+            MENUITEM "&AddColumns",                 IDM_IROW_ADDCOLUMNS
+        END
+        POPUP "ISco&pedOperations"
+        BEGIN
+            POPUP "I&BindResource"
+            BEGIN
+                MENUITEM "&Bind",                       IDM_IBINDRESOURCE_BIND
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Copy",                       IDM_ISCOPEDOPERATIONS_COPY
+
+            MENUITEM "&Delete",                     IDM_ISCOPEDOPERATIONS_DELETE
+
+            MENUITEM "&Move",                       IDM_ISCOPEDOPERATIONS_MOVE
+
+            MENUITEM "&OpenRowset",                 IDM_ISCOPEDOPERATIONS_OPENROWSET
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+            MENUITEM SEPARATOR
+            POPUP "I&ConnectionPoint"
+            BEGIN
+                MENUITEM "GetConnection&Interface",     IDM_ICONNECTIONPOINT_GETCONNECTIONINTERFACE
+
+                MENUITEM "Get&ConnectionPointContainer", 
+                                                        IDM_ICONNECTIONPOINT_GETCONNECTIONPOINTCONTAINER
+
+                MENUITEM "&Advise",                     IDM_ICONNECTIONPOINT_ADVISE
+
+                MENUITEM "&Unadvise",                   IDM_ICONNECTIONPOINT_UNADVISE
+
+                MENUITEM "&EnumConnections",            IDM_ICONNECTIONPOINT_ENUMCONNECTIONS
+
+            END
+        END
+        POPUP "IDB&AsynchStatus"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "&Error"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ERROR_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IError&Info"
+        BEGIN
+            MENUITEM "Get&Description",             IDM_ERRORINFO_GETDESCRIPTION
+
+            MENUITEM "Get&GUID",                    IDM_ERRORINFO_GETGUID
+            , GRAYED
+            MENUITEM "GetHelp&Context",             IDM_ERRORINFO_GETHELPCONTEXT
+            , GRAYED
+            MENUITEM "GetHelp&File",                IDM_ERRORINFO_GETHELPFILE
+            , GRAYED
+            MENUITEM "Get&Source",                  IDM_ERRORINFO_GETSOURCE
+            , GRAYED
+        END
+        POPUP "I&ErrorRecords"
+        BEGIN
+            MENUITEM "&AddErrorRecord",             IDM_ERRORRECORDS_ADDERRORRECORD
+            , GRAYED
+            MENUITEM "Get&BasicErrorInfo",          IDM_ERRORRECORDS_GETBASICERRORINFO
+            , GRAYED
+            MENUITEM "Get&CustomErrorObject",       IDM_ERRORRECORDS_GETCUSTOMERROROBJECT
+            , GRAYED
+            MENUITEM "Get&ErrorInfo",               IDM_ERRORRECORDS_GETERRORINFO
+            , GRAYED
+            MENUITEM "GetError&Parameters",         IDM_ERRORRECORDS_GETERRORPARAMETERS
+            , GRAYED
+            MENUITEM "Get&RecordCount",             IDM_ERRORRECORDS_GETRECORDCOUNT
+
+        END
+        POPUP "IS&QLErrorInfo", GRAYED
+        BEGIN
+            MENUITEM "Get&SQLInfo",                 IDM_SQLERRORINFO_GETSQLINFO
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&GetErrorInfo",               IDM_GETERRORINFO
+        MENUITEM "&SetErrorInfo",               IDM_SETERRORINFO
+        MENUITEM "Display All Errors",          IDM_DISPLAYERRORINFO
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&Options...",                 IDM_OPTIONS
+        MENUITEM "&Trace Window",               IDM_TRACEWINDOW
+        MENUITEM "O&bjects Window",             IDM_OBJECTSWINDOW
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "Cl&ose",                      IDM_CLOSEWINDOW
+        MENUITEM "Close &All",                  IDM_CLOSEALL
+        MENUITEM SEPARATOR
+        MENUITEM "&Next Window",                IDM_NEXTWINDOW
+        MENUITEM "&Previous Window",            IDM_PREVWINDOW
+        MENUITEM SEPARATOR
+        MENUITEM "&Cascade",                    IDM_CASCADE
+        MENUITEM "Tile &Horizontally",          IDM_TILEHORIZONTAL
+        MENUITEM "&Tile Verically",             IDM_TILEVERTICAL
+        MENUITEM SEPARATOR
+        MENUITEM "Arrange &Icons",              IDM_ARRANGEICONS
+        MENUITEM "A&uto Position",              IDM_AUTOPOSITION
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Help",                       IDM_HELP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&About RowsetViewer...",      IDM_ABOUT
+    END
+END
+
+IDM_ROWSETMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Rowset"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ROWSET_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Accessor"
+        BEGIN
+            MENUITEM "&AddRefAccessor",             IDM_IACCESSOR_ADDREFACCESSOR
+
+            MENUITEM "&CreateAccessor",             IDM_IACCESSOR_CREATEACCESSOR
+
+            MENUITEM "&GetBindings",                IDM_IACCESSOR_GETBINDINGS
+
+            MENUITEM "&ReleaseAccessor",            IDM_IACCESSOR_RELEASEACCESSOR
+
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+            , GRAYED
+        END
+        POPUP "IConvert&Type"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        POPUP "IR&owset"
+        BEGIN
+            MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+            MENUITEM "&GetData",                    IDM_GETDATA
+            MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+            MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+            MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+            MENUITEM SEPARATOR
+            MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+        END
+        POPUP "IRo&wsetInfo"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_IROWSET_GETPROPERTIES
+
+            MENUITEM "Get&ReferencedRowset",        IDM_GETREFERENCEDROWSET
+            MENUITEM "Get&Specification",           IDM_GETSPECIFICATION
+        END
+        MENUITEM SEPARATOR
+        POPUP "IChapteredRowset", GRAYED
+        BEGIN
+            MENUITEM "&AddRefChapter",              IDM_CHAPTERED_ADDREFCHAPTER
+
+            MENUITEM "&ReleaseChapter",             IDM_CHAPTERED_RELEASECHAPTER
+
+        END
+        POPUP "IRowset&View", GRAYED
+        BEGIN
+            MENUITEM "&CreateView",                 IDM_IROWSETVIEW_CREATEVIEW
+
+            MENUITEM "&GetView",                    IDM_IROWSETVIEW_GETVIEW
+        END
+        POPUP "ICo&lumnsRowset"
+        BEGIN
+            MENUITEM "Get&AvailableColumns",        IDM_ICOLUMNSROWSET_GETAVAILABLECOLUMNS
+            , GRAYED
+            MENUITEM "&GetColumnsRowset",           IDM_ICOLUMNSROWSET_GETCOLUMNSROWSET
+
+        END
+        POPUP "IRowset&Change"
+        BEGIN
+            MENUITEM "&DeleteRows",                 IDM_DELETEROWS
+            MENUITEM "&InsertRow",                  IDM_INSERTROW
+            MENUITEM "&SetData",                    IDM_SETDATA
+        END
+        POPUP "IRowset&Find"
+        BEGIN
+            MENUITEM "Find&NextRow",                IDM_IROWSETFIND_FINDNEXTROW
+
+        END
+        POPUP "IRowsetIde&ntity"
+        BEGIN
+            MENUITEM "Is&SameRow",                  IDM_IROWSETINDENTITY_ISSAMEROW
+
+        END
+        POPUP "IRowsetLocate"
+        BEGIN
+            POPUP "I&Rowset"
+            BEGIN
+                MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                MENUITEM "&GetData",                    IDM_IROWSETLOCATE_GETDATA
+
+                MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+                MENUITEM SEPARATOR
+                MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Compare",                    IDM_IROWSETLOCATE_COMPARE
+
+            MENUITEM "GetRows&At",                  IDM_IROWSETLOCATE_GETROWSAT
+            , GRAYED
+            MENUITEM "GetRowsBy&Bookmark",          IDM_IROWSETLOCATE_GETROWSBYBOOKMARK
+
+            MENUITEM "&Hash",                       IDM_IROWSETLOCATE_HASH
+        END
+        POPUP "IRowset&Bookmark"
+        BEGIN
+            POPUP "I&Rowset"
+            BEGIN
+                MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                MENUITEM "&GetData",                    IDM_IROWSETLOCATE_GETDATA
+
+                MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+                MENUITEM SEPARATOR
+                MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&PositionOnBookmark",         IDM_IROWSETBOOKMARK_POSITIONONBOOKMARK
+
+        END
+        POPUP "IRowsetRes&ynch"
+        BEGIN
+            MENUITEM "&GetVisibleData",             IDM_GETVISIBLEDATA
+            MENUITEM "&ResynchRows",                IDM_RESYNCHROWS
+        END
+        POPUP "IRowsetRefres&h"
+        BEGIN
+            MENUITEM "&GetLastVisibleData",         IDM_GETLASTVISIBLEDATA
+            MENUITEM "&RefreshVisibleData",         IDM_REFRESHVISIBLEDATA
+        END
+        POPUP "IRowsetScroll"
+        BEGIN
+            POPUP "IRowsetLocate"
+            BEGIN
+                POPUP "I&Rowset"
+                BEGIN
+                    MENUITEM "&AddRefRows",                 IDM_ADDREFROWS
+                    MENUITEM "&GetData",                    IDM_IROWSETSCROLL_GETDATA
+
+                    MENUITEM "Get&NextRows...\tCtrl+G",     IDM_GETNEXTROWS
+                    MENUITEM "&ReleaseRows",                IDM_RELEASEROWS
+                    MENUITEM "Restart&Position",            IDM_RESTARTPOSITION
+
+                    MENUITEM SEPARATOR
+                    MENUITEM "Release All Rows",            IDM_RELEASEALLROWS
+
+                END
+                MENUITEM SEPARATOR
+                MENUITEM "&Compare",                    IDM_IROWSETLOCATE_COMPARE
+
+                MENUITEM "GetRows&At",                  IDM_IROWSETLOCATE_GETROWSAT
+                , GRAYED
+                MENUITEM "GetRowsBy&Bookmark",          IDM_IROWSETLOCATE_GETROWSBYBOOKMARK
+
+                MENUITEM "&Hash",                       IDM_IROWSETLOCATE_HASH
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&ApproximatePosition",     IDM_IROWSETSCROLL_GETAPPROXIMATEPOSITION
+
+            MENUITEM "GetRowsAt&Ratio",             IDM_IROWSETSCROLL_GETROWSATRATIO
+            , GRAYED
+        END
+        POPUP "IRowsetU&pdate"
+        BEGIN
+            POPUP "IRowset&Change"
+            BEGIN
+                MENUITEM "&DeleteRows",                 IDM_DELETEROWS
+                MENUITEM "&InsertRow",                  IDM_INSERTROW
+                MENUITEM "&SetData",                    IDM_SETDATA
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&OriginalData",            IDM_GETORIGINALDATA
+            , GRAYED
+            MENUITEM "Get&PendingRows",             IDM_GETPENDINGROWS
+            , GRAYED
+            MENUITEM "Get&RowStatus",               IDM_GETROWSTATUS, GRAYED
+            MENUITEM "U&ndo",                       IDM_UNDO
+            MENUITEM "&Update",                     IDM_UPDATE
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDBAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IGetRow"
+        BEGIN
+            MENUITEM "Get&RowFromHROW",             IDM_GETROWFROMHROW
+            MENUITEM "Get&URLFromHROW",             IDM_GETURLFROMHROW
+        END
+        MENUITEM SEPARATOR
+        POPUP "Services"
+        BEGIN
+            MENUITEM "Cursor Engine",               IDM_IROWSET_CURSORENGINE
+            MENUITEM "&RowPosition",                IDM_CREATE_ROWPOSITION
+            POPUP "MSPersist"
+            BEGIN
+                MENUITEM "&Save Rowset",                IDM_MSPERSIST_ROWSET_SAVE
+
+                MENUITEM "Load Rowset",                 IDM_MSPERSIST_ROWSET_LOAD
+
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_EDITMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Edit"
+    BEGIN
+        MENUITEM "Cu&t",                        IDM_CUTEDITWINDOW
+        MENUITEM "&Copy",                       IDM_COPYEDITWINDOW
+        MENUITEM "P&aste",                      IDM_PASTEEDITWINDOW
+        MENUITEM "Clea&r Window",               IDM_CLEAREDITWINDOW
+        MENUITEM SEPARATOR
+        MENUITEM "&OpenRowset...\tCtrl+O",      IDM_OPENROWSET
+        MENUITEM "&Execute...\tCtrl+E",         IDM_EXECUTE
+        MENUITEM SEPARATOR
+        MENUITEM "Provider &QuickInfo",         IDM_PROVIDERINFO
+        MENUITEM "&File Browse...",             IDM_BROWSE_TABLENAME
+    END
+END
+
+IDM_NOTIFYMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Notify"
+    BEGIN
+        MENUITEM "&Copy",                       IDM_COPYNOTIFYWINDOW
+        MENUITEM "Clea&r Window",               IDM_CLEARNOTIFYWINDOW
+        MENUITEM SEPARATOR
+        POPUP "&Notifications"
+        BEGIN
+            MENUITEM "S_OK",                        IDM_NOTIFY_S_OK
+            MENUITEM "S_FALSE",                     IDM_NOTIFY_S_FALSE
+            MENUITEM "DB_S_UNWANTEDREASON",         IDM_NOTIFY_S_UNWANTEDREASON
+
+            MENUITEM "DB_S_UNWANTEDPHASE",          IDM_NOTIFY_S_UNWANTEDPHASE
+
+            MENUITEM "E_FAIL",                      IDM_NOTIFY_E_FAIL
+        END
+    END
+END
+
+IDM_CHANGESTATUS MENU DISCARDABLE 
+BEGIN
+    POPUP "Status"
+    BEGIN
+        MENUITEM "DBSTATUS_S_OK",               IDM_DBSTATUS_S_OK
+        MENUITEM "DBSTATUS_S_ISNULL",           IDM_DBSTATUS_S_ISNULL
+        MENUITEM "DBSTATUS_S_DEFAULT",          IDM_DBSTATUS_S_DEFAULT
+        MENUITEM "DBSTATUS_S_IGNORE",           IDM_DBSTATUS_S_IGNORE
+    END
+END
+
+IDM_TREESCHEMA MENU DISCARDABLE 
+BEGIN
+    POPUP "TreeView"
+    BEGIN
+        MENUITEM "&Copy Text",                  IDM_COPYTEXT
+        MENUITEM SEPARATOR
+        MENUITEM "&OpenRowset...",              IDM_OPENROWSET
+    END
+END
+
+IDM_BROWSE_OPTION MENU DISCARDABLE 
+BEGIN
+    POPUP "BrowseConnect"
+    BEGIN
+        MENUITEM "&File...",                    IDM_BROWSE_FILE
+        MENUITEM "&Enumerator...",              IDM_BROWSE_ENUM
+    END
+END
+
+IDM_CHANGEVALUE MENU DISCARDABLE 
+BEGIN
+    POPUP "ChangeValue"
+    BEGIN
+        MENUITEM "Hexadecimal",                 IDM_DISPLAY_HEX
+    END
+END
+
+IDM_DATASOURCEMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&DataSource"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_DATASOURCE_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface...",          IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IDBCreate&Session"
+        BEGIN
+            MENUITEM "&CreateSession...",           IDM_IDBCREATESESSION_CREATESESSION
+
+        END
+        POPUP "IDB&Properties"
+        BEGIN
+            MENUITEM "&GetProperties...",           IDM_IDBPROPERTIES_GETPROPERTIES
+
+            MENUITEM "GetProperty&Info...",         IDM_IDBPROPERTIES_GETPROPERTYINFO
+
+            MENUITEM "&SetProperties...",           IDM_IDBPROPERTIES_SETPROPERTIES
+
+        END
+        POPUP "IPersis&t"
+        BEGIN
+            MENUITEM "&GetClassID",                 IDM_IPERSIST_GETCLASSID
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&ConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint...",     IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDB&AsynchStatus"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "IDBDataSourceAdmin"
+        BEGIN
+            MENUITEM "&CreateDataSource",           IDM_IDATASOURCEADMIN_CREATEDATASOURCE
+
+            MENUITEM "&DestroyDataSource",          IDM_IDATASOURCEADMIN_DESTROYDATASOURCE
+
+            MENUITEM "&GetCreationProperties",      IDM_IDATASOURCEADMIN_GETCREATIONPROPERTIES
+
+            MENUITEM "&ModifyDataSource",           IDM_IDATASOURCEADMIN_MODIFYDATASOURCE
+
+        END
+        POPUP "IDBI&nfo"
+        BEGIN
+            MENUITEM "Get&Keywords",                IDM_IDBINFO_GETKEYWORDS
+            MENUITEM "&GetLiteralInfo...",          IDM_IDBINFO_GETLITERALINFO
+
+        END
+        POPUP "IPersistFi&le"
+        BEGIN
+            MENUITEM "&IsDirty",                    IDM_IPERSISTFILE_ISDIRTY
+            MENUITEM "&Load",                       IDM_IPERSISTFILE_LOAD
+            MENUITEM "&Save",                       IDM_IPERSISTFILE_SAVE
+            MENUITEM "Save&Completed",              IDM_IPERSISTFILE_SAVECOMPLETED
+
+            MENUITEM "&GetCurFile",                 IDM_IPERSISTFILE_GETCURFILE
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IGetPool"
+        BEGIN
+            MENUITEM "Get&Pool",                    IDM_IGETPOOL_GETPOOL
+            MENUITEM "GetPool&State",               IDM_IGETPOOL_GETPOOLSTATE
+
+        END
+        POPUP "IServicePro&vider"
+        BEGIN
+            MENUITEM "&QueryService",               IDM_ISERVICEPROVIDER
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_SESSIONMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Session"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_SESSION_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&GetDataSource"
+        BEGIN
+            MENUITEM "&GetDataSource",              IDM_GETDATASOURCE
+        END
+        POPUP "I&OpenRowset"
+        BEGIN
+            MENUITEM "&OpenRowset\tCtrl+O",         IDM_OPENROWSET
+        END
+        POPUP "ISession&Properties"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_ISESSIONPROPERTIES_GETPROPERTIES
+
+            MENUITEM "&SetProperties",              IDM_ISESSIONPROPERTIES_SETPROPERTIES
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&CreateCommand"
+        BEGIN
+            MENUITEM "&CreateCommand",              IDM_IDBCREATECOMMAND_CREATECOMMAND
+
+        END
+        POPUP "IDBSc&hemaRowset"
+        BEGIN
+            MENUITEM "&GetRowset...\tCtrl+S",       IDM_GETSCHEMAROWSET
+            MENUITEM "Get&Schemas...",              IDM_GETSCHEMAS, GRAYED
+        END
+        POPUP "II&ndexDefinition"
+        BEGIN
+            MENUITEM "&CreateIndex",                IDM_INDEX_CREATEINDEX
+            MENUITEM "&DropIndex",                  IDM_INDEX_DROPINDEX
+        END
+        POPUP "IAlterIndex"
+        BEGIN
+            MENUITEM "&AlterIndex",                 IDM_INDEX_ALTERINDEX
+        END
+        POPUP "I&AlterTable"
+        BEGIN
+            MENUITEM "Alter&Table",                 IDM_TABLE_ALTERTABLE
+            MENUITEM "Alter&Column",                IDM_TABLE_ALTERCOLUMN
+        END
+        POPUP "ITableDefinition"
+        BEGIN
+            MENUITEM "&AddColumn",                  IDM_TABLE_ADDCOLUMN
+            MENUITEM "&CreateTable",                IDM_TABLE_CREATETABLE
+            MENUITEM "&DropColumn",                 IDM_TABLE_DROPCOLUMN
+            MENUITEM "Drop&Table",                  IDM_TABLE_DROPTABLE
+        END
+        POPUP "ITableDefinition&WithConstraints"
+        BEGIN
+            MENUITEM "&AddConstraint",              IDM_TABLE_ADDCONSTRAINT
+            MENUITEM "&CreateTableWithConstraint",  IDM_TABLE_CREATETABLEWITHCONSTRAINTS
+            , GRAYED
+            MENUITEM "&DropConstraint",             IDM_TABLE_DROPCONSTRAINT
+        END
+        POPUP "I&Transaction"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_ITRANSACTION_ABORT
+            MENUITEM "&Commit",                     IDM_ITRANSACTION_COMMIT
+            MENUITEM "&GetTransactionInfo",         IDM_ITRANSACTION_GETTRANSACTIONINFO
+
+        END
+        POPUP "ITransaction&Local"
+        BEGIN
+            POPUP "I&Transaction"
+            BEGIN
+                MENUITEM "&Abort",                      IDM_ITRANSACTION_ABORT
+
+                MENUITEM "&Commit",                     IDM_ITRANSACTION_COMMIT
+
+                MENUITEM "&GetTransactionInfo",         IDM_ITRANSACTION_GETTRANSACTIONINFO
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&OptionsObject",           IDM_ITRANSACTIONLOCAL_GETOPTIONSOBJECT
+
+            MENUITEM "&StartTransaction",           IDM_ITRANSACTIONLOCAL_STARTTRANSACTION
+
+        END
+        POPUP "ITransactionObject"
+        BEGIN
+            MENUITEM "&GetTransactionObject",       IDM_ITRANSACTIONOBJECT_GETTRANSACTIONOBJECT
+
+        END
+        POPUP "ITransaction&Join"
+        BEGIN
+            MENUITEM "&GetOptionsObject",           IDM_ITRANSACTIONJOIN_GETOPTIONSOBJECT
+
+            MENUITEM "&JoinTransaction",            IDM_ITRANSACTIONJOIN_JOINTRANSACTION
+
+            MENUITEM SEPARATOR
+            MENUITEM "&TransactionDispenser::BeginTransaction", 
+                                                    IDM_ITRANSACTIONDISPENSOR_BEGINTRANSACTION
+
+            MENUITEM "&Release Transaction",        IDM_ITRANSACTIONJOIN_RELEASETRANSACTION
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&BindResource"
+        BEGIN
+            MENUITEM "&Bind",                       IDM_IBINDRESOURCE_BIND
+        END
+        POPUP "ICreateRow"
+        BEGIN
+            MENUITEM "&CreateRow",                  IDM_ICREATEROW_CREATEROW
+        END
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDBAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_COMMANDMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Command"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_COMMAND_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Accessor"
+        BEGIN
+            MENUITEM "&AddRefAccessor",             IDM_IACCESSOR_ADDREFACCESSOR
+
+            MENUITEM "&CreateAccessor",             IDM_IACCESSOR_CREATEACCESSOR
+
+            MENUITEM "&GetBindings",                IDM_IACCESSOR_GETBINDINGS
+
+            MENUITEM "&ReleaseAccessor",            IDM_IACCESSOR_RELEASEACCESSOR
+
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+            , GRAYED
+        END
+        POPUP "I&Command"
+        BEGIN
+            MENUITEM "&Cancel",                     IDM_COMMAND_CANCEL
+            MENUITEM "&Execute\tCtrl+E",            IDM_EXECUTE
+            MENUITEM "&GetDBSession",               IDM_COMMAND_GETDBSESSION
+        END
+        POPUP "ICommand&Properties"
+        BEGIN
+            MENUITEM "&GetProperties",              IDM_COMMAND_GETPROPERTIES
+
+            MENUITEM "&SetProperties",              IDM_COMMAND_SETPROPERTIES
+
+        END
+        POPUP "ICommand&Text"
+        BEGIN
+            POPUP "I&Command"
+            BEGIN
+                MENUITEM "&Cancel",                     IDM_COMMAND_CANCEL
+                MENUITEM "&Execute",                    IDM_COMMANDTEXT_EXECUTE
+
+                MENUITEM "&GetDBSession",               IDM_COMMAND_GETDBSESSION
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&GetCommandText",             IDM_GETCOMMANDTEXT
+            MENUITEM "&SetCommandText",             IDM_SETCOMMANDTEXT
+        END
+        POPUP "IConvertT&ype"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ICommand&Stream"
+        BEGIN
+            MENUITEM "&GetCommandStream",           IDM_GETCOMMANDSTREAM
+            MENUITEM "&SetCommandStream",           IDM_SETCOMMANDSTREAM
+        END
+        POPUP "IColu&mnsRowset"
+        BEGIN
+            MENUITEM "Get&AvailableColumns",        IDM_ICOLUMNSROWSET_GETAVAILABLECOLUMNS
+            , GRAYED
+            MENUITEM "&GetColumnsRowset",           IDM_ICOLUMNSROWSET_GETCOLUMNSROWSET
+
+        END
+        POPUP "IC&ommandPrepare"
+        BEGIN
+            MENUITEM "&Prepare",                    IDM_COMMANDPREPARE
+            MENUITEM "&UnPrepare",                  IDM_COMMANDUNPREPARE
+        END
+        POPUP "ICommandPersist"
+        BEGIN
+            MENUITEM "&DeleteCommand",              IDM_COMMANDPERSIST_DELETECOMMAND
+
+            MENUITEM "&GetCurrentCommand",          IDM_COMMANDPERSIST_GETCURRENTCOMMAND
+
+            MENUITEM "&LoadCommand",                IDM_COMMANDPERSIST_LOADCOMMAND
+
+            MENUITEM "&SaveCommand",                IDM_COMMANDPERSIST_SAVECOMMAND
+
+        END
+        POPUP "ICommand&WithParameters"
+        BEGIN
+            MENUITEM "&GetParameterInfo",           IDM_GETPARAMETERINFO
+            MENUITEM "&MapParameterNames",          IDM_MAPPARAMETERNAMES
+            MENUITEM "&SetParameterInfo",           IDM_SETPARAMETERINFO
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "ID&BAsynch&Status"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "C&lear Command",              IDM_COMMAND_CLEARCOMMAND
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_ERRORMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Error"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ERROR_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IError&Info"
+        BEGIN
+            MENUITEM "Get&Description",             IDM_ERRORINFO_GETDESCRIPTION
+
+            MENUITEM "Get&GUID",                    IDM_ERRORINFO_GETGUID
+            , GRAYED
+            MENUITEM "GetHelp&Context",             IDM_ERRORINFO_GETHELPCONTEXT
+            , GRAYED
+            MENUITEM "GetHelp&File",                IDM_ERRORINFO_GETHELPFILE
+            , GRAYED
+            MENUITEM "Get&Source",                  IDM_ERRORINFO_GETSOURCE
+            , GRAYED
+        END
+        POPUP "I&ErrorRecords"
+        BEGIN
+            MENUITEM "&AddErrorRecord",             IDM_ERRORRECORDS_ADDERRORRECORD
+            , GRAYED
+            MENUITEM "Get&BasicErrorInfo",          IDM_ERRORRECORDS_GETBASICERRORINFO
+            , GRAYED
+            MENUITEM "Get&CustomErrorObject",       IDM_ERRORRECORDS_GETCUSTOMERROROBJECT
+
+            MENUITEM "Get&ErrorInfo",               IDM_ERRORRECORDS_GETERRORINFO
+
+            MENUITEM "GetError&Parameters",         IDM_ERRORRECORDS_GETERRORPARAMETERS
+            , GRAYED
+            MENUITEM "Get&RecordCount",             IDM_ERRORRECORDS_GETRECORDCOUNT
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_ROWPOSITIONMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "IRow&Position"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ROWPOS_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Initialize",                 IDM_IROWPOS_INITIALIZE
+        MENUITEM "GetR&owset",                  IDM_IROWPOS_GETROWSET
+        MENUITEM "&ClearRowPosition",           IDM_IROWPOS_CLEARROWPOSITION
+        MENUITEM "&GetRowPosition",             IDM_IROWPOS_GETROWPOSITION
+        MENUITEM "&SetRowPosition",             IDM_IROWPOS_SETROWPOSITION
+        MENUITEM SEPARATOR
+        POPUP "IConnection&PointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_DATASETMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "D&ataset"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_DATASET_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Accessor"
+        BEGIN
+            MENUITEM "&AddRefAccessor",             IDM_IACCESSOR_ADDREFACCESSOR
+
+            MENUITEM "&CreateAccessor",             IDM_IACCESSOR_CREATEACCESSOR
+
+            MENUITEM "&GetBindings",                IDM_IACCESSOR_GETBINDINGS
+
+            MENUITEM "&ReleaseAccessor",            IDM_IACCESSOR_RELEASEACCESSOR
+
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+            , GRAYED
+        END
+        POPUP "IConvert&Type"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        POPUP "IMD&Dataset"
+        BEGIN
+            MENUITEM "Get&AxisInfo",                IDM_DATASET_GETAXISINFO
+            MENUITEM "GetAxis&Rowset",              IDM_DATASET_GETAXISROWSET
+
+            MENUITEM "GetCell&Data",                IDM_DATASET_GETCELLDATA
+            MENUITEM "&FreeAxisInfo",               IDM_DATASET_FREEAXISINFO
+            MENUITEM "Get&Specification",           IDM_DATASET_GETSPECIFICATION
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IMD&Find"
+        BEGIN
+            MENUITEM "Find&Cell",                   IDM_IMDFIND_FINDCELL
+            MENUITEM "Find&Tupel",                  IDM_IMDFIND_FINDTUPEL
+        END
+        POPUP "IMDRangeR&owset"
+        BEGIN
+            MENUITEM "&GetRangeRowset",             IDM_IMDRANGEROWSET_GETRANGEROWSET
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_TRANSACTIONMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Trans"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_TRANSACTION_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&Transaction"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_ITRANSACTION_ABORT
+            MENUITEM "&Commit",                     IDM_ITRANSACTION_COMMIT
+            MENUITEM "&GetTransactionInfo",         IDM_ITRANSACTION_GETTRANSACTIONINFO
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&ConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_ENUMERATORMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "E&num"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ENUMERATOR_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IParse&DisplayName", GRAYED
+        BEGIN
+            MENUITEM "ParseDisplayName",            IDM_PARSEDISPLAYNAME
+        END
+        POPUP "I&SourcesRowset"
+        BEGIN
+            MENUITEM "&GetSourcesRowset",           IDM_ISOURCESROWSET_GETSOURCESROWSET
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IDB&Properties"
+        BEGIN
+            MENUITEM "&GetProperties...",           IDM_IDBPROPERTIES_GETPROPERTIES
+
+            MENUITEM "GetProperty&Info...",         IDM_IDBPROPERTIES_GETPROPERTYINFO
+
+            MENUITEM "&SetProperties...",           IDM_IDBPROPERTIES_SETPROPERTIES
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_BINDERMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Binder"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_BINDER_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&BindResource"
+        BEGIN
+            MENUITEM "&Bind",                       IDM_IBINDRESOURCE_BIND
+        END
+        POPUP "I&CreateRow"
+        BEGIN
+            MENUITEM "&CreateRow",                  IDM_ICREATEROW_CREATEROW
+        END
+        POPUP "IDB&Properties"
+        BEGIN
+            MENUITEM "&GetProperties...",           IDM_IDBPROPERTIES_GETPROPERTIES
+
+            MENUITEM "GetProperty&Info...",         IDM_IDBPROPERTIES_GETPROPERTYINFO
+
+            MENUITEM "&SetProperties...",           IDM_IDBPROPERTIES_SETPROPERTIES
+
+        END
+        POPUP "I&DBBinderProperties"
+        BEGIN
+            POPUP "IDB&Properties"
+            BEGIN
+                MENUITEM "&GetProperties...",           IDM_IDBPROPERTIES_GETPROPERTIES
+
+                MENUITEM "GetProperty&Info...",         IDM_IDBPROPERTIES_GETPROPERTYINFO
+
+                MENUITEM "&SetProperties...",           IDM_IDBPROPERTIES_SETPROPERTIES
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Reset",                      IDM_IDBBINDERPROPERTIES_RESET
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IRe&gisterProvider"
+        BEGIN
+            MENUITEM "&GetURLMapping",              IDM_IREGISTERPROVIDER_GETURLMAPPING
+
+            MENUITEM "&SetURLMapping",              IDM_IREGISTERPROVIDER_SETURLMAPPING
+
+            MENUITEM "&UnregisterProvider",         IDM_IREGISTERPROVIDER_UNREGISTERPROVIDER
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_MULTIPLERESULTSMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "I&MultipleResults"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_MULTIPLERESULTS_ADDREF
+
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&MultipleResults"
+        BEGIN
+            MENUITEM "&GetResult",                  IDM_IMULTIPLERESULTS_GETRESULT
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_STREAMMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Stream"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_STREAM_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ISequentialStream"
+        BEGIN
+            MENUITEM "&Read",                       IDM_ISEQSTREAM_READ
+            MENUITEM "&Write",                      IDM_ISEQSTREAM_WRITE
+        END
+        POPUP "IStream"
+        BEGIN
+            POPUP "ISequentialStream"
+            BEGIN
+                MENUITEM "&Read",                       IDM_ISTREAM_READ
+                MENUITEM "&Write",                      IDM_ISTREAM_WRITE
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Seek",                       IDM_ISTREAM_SEEK
+            MENUITEM "SetSize",                     IDM_ISTREAM_SETSIZE
+            MENUITEM "CopyTo",                      IDM_ISTREAM_COPYTO
+            MENUITEM "Commit",                      IDM_ISTREAM_COMMIT
+            MENUITEM "Revert",                      IDM_ISTREAM_REVERT
+            MENUITEM "Stat",                        IDM_ISTREAM_STAT
+            MENUITEM "Clone",                       IDM_ISTREAM_CLONE
+        END
+        POPUP "ILockBytes"
+        BEGIN
+            MENUITEM "&ReadAt",                     IDM_ILOCKBYTES_READAT
+            MENUITEM "&WriteAt",                    IDM_ILOCKBYTES_WRITE
+            MENUITEM "Flush",                       IDM_ILOCKBYTES_FLUSH
+            MENUITEM "SetSize",                     IDM_ILOCKBYTES_SETSIZE
+            MENUITEM "LockRegion",                  IDM_ILOCKBYTES_LOCKREGION
+
+            MENUITEM "UnlockRegion",                IDM_ILOCKBYTES_UNLOCKREGION
+
+            MENUITEM "Stat",                        IDM_ILOCKBYTES_STAT
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnection&PointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+        END
+        POPUP "IDB&AsynchStatus"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "IDB&Initialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_SERVICECOMPMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Service Components"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_SERVICECOMP_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IData&Initialize"
+        BEGIN
+            MENUITEM "&CreateDBInstance",           IDM_IDATAINITIALIZE_CREATEDBINSTANCE
+
+            MENUITEM "CreateDBInstance&Ex",         IDM_IDATAINITIALIZE_CREATEDBINSTANCEEX
+
+            MENUITEM "Get&DataSource...",           IDM_IDATAINITIALIZE_GETDATASOURCE
+
+            POPUP "&GetInitializationString"
+            BEGIN
+                MENUITEM "Password &Included",          IDM_IDATAINITIALIZE_GETINITIALIZATIONSTRING
+
+                MENUITEM "Password &Excluded",          IDM_IDATAINITIALIZE_GETINITIALIZATIONSTRING_NOPASSWORD
+
+            END
+            MENUITEM "&LoadStringFromStorage...",   IDM_IDATAINITIALIZE_LOADSTRINGFROMSTORAGE
+
+            MENUITEM "&WriteStringToStorage...",    IDM_IDATAINITIALIZE_WRITESTRINGTOSTORAGE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Create&FileMoniker",          IDM_CREATEFILEMONIKER
+        END
+        MENUITEM SEPARATOR
+        POPUP "IPoolMngrInfo"
+        BEGIN
+            MENUITEM "&EnumPools",                  IDM_POOLMNGR_ENUMPOOLS
+            MENUITEM SEPARATOR
+            MENUITEM "&Refresh",                    IDM_POOLMNGR_REFRESH
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_UNKNOWNMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Unknown"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_UNKNOWN_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_ROWMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "R&ow"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_ROW_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IR&ow"
+        BEGIN
+            MENUITEM "&GetColumns",                 IDM_IROW_GETCOLUMNS
+            MENUITEM "Get&SourceRowset",            IDM_IROW_GETSOURCEROWSET
+            MENUITEM "&Open",                       IDM_IROW_OPEN
+        END
+        POPUP "IColumns&Info"
+        BEGIN
+            MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+            MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+
+        END
+        POPUP "IConvert&Type"
+        BEGIN
+            MENUITEM "&CanConvert...",              IDM_ICONVERTTYPE_CANCONVERT
+
+        END
+        POPUP "I&GetSession"
+        BEGIN
+            MENUITEM "&GetSession...",              IDM_IGETSESSION_GETSESSION
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IColumnsInfo&2"
+        BEGIN
+            POPUP "IColumns&Info"
+            BEGIN
+                MENUITEM "&GetColumnInfo",              IDM_ICOLUMNSINFO_GETCOLUMNINFO
+
+                MENUITEM "&MapColumnIDs",               IDM_ICOLUMNSINFO_MAPCOLUMNIDS
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "Get&RestrictedColumnInfo",    IDM_ICOLUMNSINFO2_GETRESTRICTEDCOLUMNINFO
+
+        END
+        POPUP "ICreateRow"
+        BEGIN
+            MENUITEM "&CreateRow",                  IDM_ICREATEROW_CREATEROW
+        END
+        POPUP "ID&BCreateCommand"
+        BEGIN
+            MENUITEM "&CreateCommand",              IDM_IDBCREATECOMMAND_CREATECOMMAND
+
+        END
+        POPUP "IDBI&nitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        POPUP "IRow&Change"
+        BEGIN
+            MENUITEM "&SetColumns",                 IDM_IROW_SETCOLUMNS
+        END
+        POPUP "IRow&SchemaChange"
+        BEGIN
+            POPUP "IRow&Change"
+            BEGIN
+                MENUITEM "&SetColumns",                 IDM_IROW_SETCOLUMNS
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&DeleteColumns",              IDM_IROW_DELETECOLUMNS
+            MENUITEM "&AddColumns",                 IDM_IROW_ADDCOLUMNS
+        END
+        POPUP "ISco&pedOperations"
+        BEGIN
+            POPUP "I&BindResource"
+            BEGIN
+                MENUITEM "&Bind",                       IDM_IBINDRESOURCE_BIND
+
+            END
+            MENUITEM SEPARATOR
+            MENUITEM "&Copy",                       IDM_ISCOPEDOPERATIONS_COPY
+
+            MENUITEM "&Delete",                     IDM_ISCOPEDOPERATIONS_DELETE
+
+            MENUITEM "&Move",                       IDM_ISCOPEDOPERATIONS_MOVE
+
+            MENUITEM "&OpenRowset",                 IDM_ISCOPEDOPERATIONS_OPENROWSET
+
+        END
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        POPUP "IConnectionPointContainer"
+        BEGIN
+            MENUITEM "&EnumConnectionPoints",       IDM_ICPC_ENUMCONNECTIONPOINTS
+            , GRAYED
+            MENUITEM "&FindConnectionPoint",        IDM_ICPC_FINDCONNECTIONPOINT
+
+            MENUITEM SEPARATOR
+            POPUP "I&ConnectionPoint"
+            BEGIN
+                MENUITEM "GetConnection&Interface",     IDM_ICONNECTIONPOINT_GETCONNECTIONINTERFACE
+
+                MENUITEM "Get&ConnectionPointContainer", 
+                                                        IDM_ICONNECTIONPOINT_GETCONNECTIONPOINTCONTAINER
+
+                MENUITEM "&Advise",                     IDM_ICONNECTIONPOINT_ADVISE
+
+                MENUITEM "&Unadvise",                   IDM_ICONNECTIONPOINT_UNADVISE
+
+                MENUITEM "&EnumConnections",            IDM_ICONNECTIONPOINT_ENUMCONNECTIONS
+
+            END
+        END
+        POPUP "IDB&AsynchStatus"
+        BEGIN
+            MENUITEM "&Abort",                      IDM_IDBASYNCHSTATUS_ABORT
+
+            MENUITEM "&GetStatus",                  IDM_IDBASYNCHSTATUS_GETSTATUS
+
+        END
+        POPUP "I&DBInitialize"
+        BEGIN
+            MENUITEM "&Initialize",                 IDM_IDBINITIALIZE_INITIALIZE
+
+            MENUITEM "&Uninitialize",               IDM_IDBINITIALIZE_UNINITIALIZE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_POOLMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Pool"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_POOLINFO_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IPoolInfo"
+        BEGIN
+            MENUITEM "SetPoolTimeOut",              IDM_IPOOLINFO_SETPOOLTIMEOUT
+
+            MENUITEM "GetPoolTimeOut",              IDM_IPOOLINFO_GETPOOLTIMEOUT
+
+            MENUITEM "SetRetryTimeOut",             IDM_IPOOLINFO_SETRETRYTIMEOUT
+
+            MENUITEM "GetRetryTimeOut",             IDM_IPOOLINFO_GETRETRYTIMEOUT
+
+            MENUITEM "Get&Count",                   IDM_IPOOLINFO_GETCOUNT
+            MENUITEM "GetPoolID",                   IDM_IPOOLINFO_GETPOOLID
+            MENUITEM "GetProtoType",                IDM_IPOOLINFO_GETPROTOTYPE
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Re&fresh",                    IDM_IPOOLINFO_REFRESH
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_TRANSACTIONOPTIONSMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "TransactionOptions"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_TRANSACTIONOPTIONS_ADDREF
+
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ITransaction&Options"
+        BEGIN
+            MENUITEM "&GetOptions",                 IDM_ITRANSACTIONOPTIONS_GETOPTIONS
+
+            MENUITEM "&SetOptions",                 IDM_ITRANSACTIONOPTIONS_SETOPTIONS
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "ISupport&ErrorInfo"
+        BEGIN
+            MENUITEM "&InterfaceSupportsErrorInfo", IDM_ISUPPORTERRORINFO
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_CONNECTIONPOINTMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "ConnectionPoint"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_CONNECTIONPOINT_ADDREF
+
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "I&ConnectionPoint"
+        BEGIN
+            MENUITEM "GetConnection&Interface...",  IDM_ICONNECTIONPOINT_GETCONNECTIONINTERFACE
+
+            MENUITEM "Get&ConnectionPointContainer", 
+                                                    IDM_ICONNECTIONPOINT_GETCONNECTIONPOINTCONTAINER
+
+            MENUITEM "&Advise",                     IDM_ICONNECTIONPOINT_ADVISE
+
+            MENUITEM "&Unadvise",                   IDM_ICONNECTIONPOINT_UNADVISE
+
+            MENUITEM "&EnumConnections",            IDM_ICONNECTIONPOINT_ENUMCONNECTIONS
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_DATALINKSMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Data Links"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_DATALINKS_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IDB&PromptInitialize"
+        BEGIN
+            MENUITEM "Prompt&DataSource...",        IDM_IDBPROMPTINITIALIZE_PROMPTDATASOURCE
+
+            MENUITEM "Prompt&FileName...",          IDM_IDBPROMPTINITIALIZE_PROMPTFILENAME
+
+            POPUP "&Advanced"
+            BEGIN
+                MENUITEM "Prompt&DataSource...",        IDM_IDBPROMPTINITIALIZE_PROMPTDATASOURCE_ADVANCED
+
+                MENUITEM "Prompt&FileName...",          IDM_IDBPROMPTINITIALIZE_PROMPTFILENAME_ADVANCED
+
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+IDM_CUSTOMERRORMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "Custom Error Object"
+    BEGIN
+        POPUP "I&Unknown"
+        BEGIN
+            MENUITEM "&AddRef",                     IDM_CUSTOMERROR_ADDREF
+            MENUITEM "&Release",                    IDM_IUNKNOWN_RELEASE
+            MENUITEM "&QueryInterface",             IDM_IUNKNOWN_QUERYINTERFACE
+
+            MENUITEM SEPARATOR
+            MENUITEM "A&utoQI",                     IDM_IUNKNOWN_AUTOQI
+            MENUITEM "Release &Children",           IDM_IUNKNOWN_RELEASECHILDREN
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "IS&QLErrorInfo"
+        BEGIN
+            MENUITEM "Get&SQLInfo",                 IDM_SQLERRORINFO_GETSQLINFO
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Release Object",             IDM_IUNKNOWN_RELEASEALL
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ROWSETVIEWER ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "B",            IDM_CREATE_ROOTBINDER,  VIRTKEY, CONTROL, NOINVERT
+    "F",            IDM_FULLCONNECT,        VIRTKEY, CONTROL, NOINVERT
+    "D",            IDM_FULLDISCONNECT,     VIRTKEY, CONTROL, NOINVERT
+    "E",            IDM_EXECUTE,            VIRTKEY, CONTROL, NOINVERT
+    "G",            IDM_GETNEXTROWS,        VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_OPENROWSET,         VIRTKEY, CONTROL, NOINVERT
+    "S",            IDM_GETSCHEMAROWSET,    VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOG DISCARDABLE  15, 10, 174, 120
+STYLE DS_SYSMODAL | DS_MODALFRAME | DS_3DLOOK | WS_CAPTION | WS_SYSMENU
+CAPTION "About RowsetViewer"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "",IDT_FILEDESC,5,6,165,29,SS_SUNKEN | NOT WS_GROUP
+    ICON            IDR_ROWSETVIEWER,IDI_ABOUTICON,79,40,20,20
+    CTEXT           "RowsetViewer allows you to easily manipulate OLE DB DataSources, Sessions, Commands, Rowsets, Rows, Streams, as well as many other OLE DB defined objects and interfaces.",
+                    IDT_FILEDESC,5,60,165,35,SS_SUNKEN | NOT WS_GROUP
+    PUSHBUTTON      "OK",IDOK,65,100,45,14
+END
+
+IDD_FULLCONNECT_PROVIDER DIALOG DISCARDABLE  25, 25, 299, 179
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Full Connect"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Connection",IDC_STATIC,10,5,230,45
+    LTEXT           "Saved &Config:",IDT_STATIC,20,15,50,13,SS_CENTERIMAGE
+    COMBOBOX        IDC_CONFIG,70,15,160,135,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Provider:",IDT_STATIC2,20,30,50,12,SS_CENTERIMAGE
+    CONTROL         "",IDC_PROVIDER,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP,70,30,160,130
+    GROUPBOX        "Source",IDC_STATIC,10,55,230,45
+    LTEXT           "&Location:",IDC_STATIC,20,65,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_LOCATION,70,65,150,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_BROWSE_LOCATION,220,65,9,12,BS_CENTER | 
+                    BS_VCENTER
+    LTEXT           "&DataSource:",IDC_STATIC,20,80,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_DATASOURCE,70,80,150,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_BROWSE_DATASOURCE,220,80,9,12
+    GROUPBOX        "Login",IDC_STATIC,10,110,230,60
+    LTEXT           "&UserID:",IDC_STATIC,20,120,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_USERID,70,120,160,12,ES_AUTOHSCROLL
+    LTEXT           "Pass&word:",IDC_STATIC,20,135,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_PASSWORD,70,135,160,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Promp&t",IDC_STATIC,20,150,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_PROMPT,70,150,160,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Save",IDB_CONFIG_SAVE,245,10,50,14
+    PUSHBUTTON      "&Remove",IDB_CONFIG_REMOVE,245,25,50,14
+    CONTROL         "&Auto Save",IDB_AUTOSAVE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,245,40,50,10
+END
+
+IDD_ROWCHANGE DIALOGEX 0, 0, 334, 195
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_CAPTION | WS_SYSMENU
+CAPTION "Detailed Row Information"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDL_NAMES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,5,5,170,144,WS_EX_RIGHT
+    CONTROL         "List2",IDL_VALUES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    WS_BORDER | WS_TABSTOP,175,5,155,144
+    DEFPUSHBUTTON   "&Clear All",IDB_CLEARALL,5,175,45,14
+    CTEXT           "Detailed Row Info, Status, Length, Value, SubType...",
+                    IDT_HELPMSG,55,175,180,15,SS_CENTERIMAGE | SS_SUNKEN
+    DEFPUSHBUTTON   "OK",IDOK,240,175,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,285,175,45,14
+END
+
+IDD_SCHEMAROWSET DIALOG DISCARDABLE  0, 0, 279, 185
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDBSchemaRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    COMBOBOX        IDC_SCHEMAS,5,10,270,140,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION1,5,40,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION1,105,40,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION1,160,40,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION2,5,55,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION2,105,55,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION2,160,55,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION3,5,70,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION3,105,70,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION3,160,70,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION4,5,85,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION4,105,85,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION4,160,85,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION5,5,100,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION5,105,100,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION5,160,100,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION6,5,115,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION6,105,115,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION6,160,115,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDT_RESTRICTION7,5,130,100,12,SS_SUNKEN
+    COMBOBOX        IDC_RESTRICTION7,105,130,55,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDE_RESTRICTION7,160,130,115,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,150,80,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,5,160,50,14
+    CONTROL         "Use Restrictions",IDB_USERESTRICTIONS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,85,150,100,10
+    CONTROL         "Only Supported Schemas",IDB_SHOWSUPPORTED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,85,160,100,10
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,200,150,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,200,160,74,10
+END
+
+IDD_SETPROPERTIES DIALOG DISCARDABLE  0, 0, 369, 250
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Properties"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "",IDE_PROPEDIT_NAME,5,10,360,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_PROPEDIT_OPTIONS,5,25,120,90,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_PROPEDIT_TYPE,125,25,80,90,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_PROPEDIT_VALUE,205,25,160,90,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List1",IDL_PROPERTY,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,5,45,360,170
+    PUSHBUTTON      "&Clear All",IDB_CLEARALL,5,220,50,14
+    CTEXT           "PropSet:",IDC_STATIC,60,220,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_PROPSET,110,220,160,70,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Include all OLE DB Defined Properties",
+                    IDB_ADDDEFINEDPROPS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,60,235,210,10
+    DEFPUSHBUTTON   "OK",IDOK,275,220,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,320,220,45,14
+END
+
+IDD_TRANSACTION_START DIALOG DISCARDABLE  0, 0, 273, 49
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransactionLocal::StartTransaction"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "ISOLEVEL",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_ISOLEVEL,80,5,180,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,160,30,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,210,30,50,14
+END
+
+IDD_CANCONVERT DIALOG DISCARDABLE  0, 0, 279, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "CanConvert"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "FromType",IDC_STATIC,5,10,45,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "ToType",IDC_STATIC,5,25,45,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_FROMTYPE,50,10,95,110,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TOTYPE,50,25,95,110,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "BYREF",IDB_FROM_BYREF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,10,39,10
+    CONTROL         "BYREF",IDB_TO_BYREF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,150,25,39,10
+    CONTROL         "ARRAY",IDB_FROM_ARRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,190,10,40,10
+    CONTROL         "ARRAY",IDB_TO_ARRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,190,25,40,10
+    CONTROL         "VECTOR",IDB_FROM_VECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,230,10,44,10
+    CONTROL         "VECTOR",IDB_TO_VECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,230,25,44,10
+    CTEXT           "Result",IDC_STATIC,5,95,45,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LTEXT           "",IDT_RESULT,50,95,120,12,SS_CENTERIMAGE | SS_SUNKEN
+    DEFPUSHBUTTON   "Convert",IDOK,175,95,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,225,95,50,14
+    LISTBOX         IDL_CONVFLAGS,5,40,165,50,LBS_MULTIPLESEL | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+IDD_GETAXISINFO DIALOGEX 0, 0, 227, 160
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IMDDataset::GetAxisInfo"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CTEXT           "i&Axis",IDC_STATIC,7,5,73,12,SS_CENTERIMAGE | SS_SUNKEN
+    COMBOBOX        IDCOMBO_AXIS,80,5,140,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP,
+                    WS_EX_RIGHT
+    CTEXT           "cDimensions",IDC_STATIC,7,20,73,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "",IDC_DIMENSIONS,80,20,140,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "cCoordinates",IDC_STATIC,7,35,73,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "",IDC_COORDINATES,80,35,140,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "List1",IDL_AXISINFO,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,5,55,215,80
+    DEFPUSHBUTTON   "OK",IDOK,120,140,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,140,50,14
+END
+
+IDD_INTERFACE DIALOG DISCARDABLE  0, 0, 189, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Interface"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,74,10
+    DEFPUSHBUTTON   "OK",IDOK,85,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,45,50,14
+END
+
+IDD_TRANSACTION_SETOPTIONS DIALOG DISCARDABLE  0, 0, 194, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransactionOptions::SetOptions"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "ulTimeout",IDT_STATIC,5,5,65,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CTEXT           "szDescription",IDT_STATIC2,5,20,65,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TIMEOUT,70,5,120,12,ES_AUTOHSCROLL
+    EDITTEXT        IDE_DESCRIPTION,70,20,120,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,45,50,14
+END
+
+IDD_OPTIONS_ROWSET DIALOG DISCARDABLE  0, 0, 234, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "General",IDC_STATIC,5,5,110,75
+    CONTROL         "Set Default Properties",IDB_SETDEFAULTPROPS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,95,10
+    CONTROL         "Always Release Rows",IDB_ALWAYSRELEASEROWS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,25,95,10
+    GROUPBOX        "Data",IDC_STATIC,5,85,110,55
+    CONTROL         "Hexadecimal",IDB_DISPLAY_HEXADECIMAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,100,10
+    CONTROL         "MSDADC Only",IDB_MSDADC_ONLY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,105,100,10
+    GROUPBOX        "Fetching",IDC_STATIC,120,5,110,75
+    CONTROL         "Fetch a few rows initially",IDB_DEFAULTFETCH,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,125,15,100,10
+    CONTROL         "User Specified",IDB_ROWSTOFETCH,"Button",
+                    BS_AUTORADIOBUTTON,125,25,65,10
+    EDITTEXT        IDE_ROWSTOFETCH,190,25,35,12,ES_AUTOHSCROLL
+    CONTROL         "Obtain Data always",IDB_FETCHDATA,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,125,45,100,10
+    GROUPBOX        "Columns",IDC_STATIC,120,85,110,55
+    CONTROL         "Display Hidden Columns",IDB_HIDDENCOLUMNS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,125,95,100,10
+END
+
+IDD_FULLCONNECT_PROPERTIES DIALOG DISCARDABLE  0, 0, 299, 179
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Connection",IDC_STATIC,10,5,230,60
+    LTEXT           "Prov&String",IDC_STATIC,20,15,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_PROVSTRING,70,15,150,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_BROWSE_PROVSTRING,220,15,9,12,BS_CENTER | 
+                    BS_VCENTER
+    LTEXT           "Catalog:",IDC_STATIC,20,30,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_CATALOG,70,30,160,105,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Locale:",IDC_STATIC,20,45,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_LOCALE,70,45,160,65,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Options",IDC_STATIC,10,70,230,45
+    LTEXT           "Asynch:",IDC_STATIC,20,80,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_ASYNCH,70,80,160,55,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Timeout:",IDC_STATIC,20,95,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_TIMEOUT,70,95,160,12,ES_AUTOHSCROLL
+    GROUPBOX        "Permissions",IDC_STATIC,10,120,230,50
+    LTEXT           "Mode:",IDC_STATIC,20,130,50,12,SS_CENTERIMAGE
+    LISTBOX         IDL_MODE,70,130,160,35,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Advanced...",IDB_MOREPROPERTIES,245,10,50,14
+    PUSHBUTTON      "&Defaults",IDB_DEFAULTS,245,30,50,14
+END
+
+IDD_FULLCONNECT_SECURITY DIALOG DISCARDABLE  0, 0, 299, 170
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Connection",IDC_STATIC,10,5,230,45
+    LTEXT           "Protection:",IDC_STATIC,20,15,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_PROTECTION,70,15,160,105,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Impersonation:",IDC_STATIC,20,30,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_IMPERSONATE,70,30,160,85,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Authenication Usage",IDC_STATIC,10,55,230,60
+    CONTROL         "Mask Password",IDB_MASKPASSWORD,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,20,70,105,10
+    CONTROL         "Encrypt Password",IDB_ENCRYPTPASSWORD,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,20,80,105,8
+    CONTROL         "Cache Sensitive Info",IDB_CACHEINFO,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,20,100,120,10
+    CONTROL         "Persist Sensitive Info",IDB_PERSISTINFO,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,130,70,104,10
+    CONTROL         "Persist in Encrypted form",IDB_ENCRYPTINFO,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,130,80,105,10
+    GROUPBOX        "Services",IDC_STATIC,10,120,230,40
+    LTEXT           "Integrated:",IDC_STATIC,20,135,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_INTEGRATED,70,135,150,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_BROWSE_INTEGRATED,220,135,9,12,BS_CENTER | 
+                    BS_VCENTER
+END
+
+IDD_PROVIDERINFO DIALOG DISCARDABLE  0, 0, 284, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Provider Information"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Provider",IDC_STATIC,10,5,265,65
+    LTEXT           "Name:",IDC_STATIC,20,20,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_PROVIDERFILENAME,65,20,200,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LTEXT           "Description:",IDC_STATIC,20,35,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_PROVIDERDESC,65,35,200,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LTEXT           "Version:",IDC_STATIC,20,50,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_PROVIDERVERSION,65,50,200,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    GROUPBOX        "Source",IDC_STATIC,10,80,265,80
+    LTEXT           "DBMS:",IDC_STATIC,20,95,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_DBMS,65,95,200,12,SS_CENTERIMAGE | SS_SUNKEN
+    LTEXT           "DataSource:",IDC_STATIC,20,110,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_DATASOURCE,65,110,140,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LTEXT           "",IDT_READONLY,205,110,60,12,SS_CENTERIMAGE | SS_SUNKEN
+    LTEXT           "Catalog:",IDC_STATIC,20,125,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_CATALOG,65,125,200,12,SS_CENTERIMAGE | SS_SUNKEN
+    LTEXT           "Model:",IDC_STATIC,20,140,45,12,SS_CENTERIMAGE
+    LTEXT           "",IDT_THREADMODEL,65,140,200,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    DEFPUSHBUTTON   "OK",IDOK,225,170,50,14
+END
+
+IDD_SCHEMATREEVIEW DIALOGEX 0, 0, 279, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    CONTROL         "Tree1",IDC_TREEVIEW,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | 
+                    TVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,5,5,215,150,
+                    WS_EX_CLIENTEDGE
+    LTEXT           "",IDT_COLUMNNAME,5,158,215,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    PUSHBUTTON      "Create &Tree",IDB_DISPLAYTREE,225,5,50,14
+    PUSHBUTTON      "&Copy Text",IDM_COPYTEXT,225,30,50,14
+    PUSHBUTTON      "&OpenRowset...",IDM_OPENROWSET,225,45,50,14
+END
+
+IDD_BROWSE_ENUM DIALOG DISCARDABLE  0, 0, 209, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Browse Enumerator"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    COMBOBOX        IDC_PROVIDER,5,5,145,72,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List1",IDL_LISTVIEW,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    WS_BORDER | WS_TABSTOP,5,30,145,100
+    DEFPUSHBUTTON   "&Connect",IDB_CONNECT,155,5,50,14
+    PUSHBUTTON      "OK",IDOK,155,30,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,45,50,14
+END
+
+IDD_OPTIONS_NOTIFICATIONS DIALOG DISCARDABLE  0, 0, 234, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Notifications"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Display",IDC_STATIC,5,5,105,65
+    CONTROL         "OLE DB Method Calls",IDB_DISPLAY_OLEDB,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,95,10
+    CONTROL         "Prompt for Vetos",IDB_DISPLAY_PROMPTVETO,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,25,95,10
+    GROUPBOX        "IUnknown",IDC_STATIC,5,75,105,65
+    CONTROL         "AddRef",IDB_DISPLAY_ADDREF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,85,95,10
+    CONTROL         "Release",IDB_DISPLAY_RELEASE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,95,95,10
+    CONTROL         "QueryInterface",IDB_DISPLAY_QI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,105,95,10
+    GROUPBOX        "Trace Provider",IDC_STATIC,115,5,115,65
+    CONTROL         "Use &Trace Provider",IDB_USE_TRACEPROVIDER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,120,15,90,10
+    GROUPBOX        "Notifications",IDC_STATIC,115,75,115,65
+    CONTROL         "IDBAsynchNotify",IDB_DISPLAY_IDBASYNCHNOTIFY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,120,85,95,10
+    CONTROL         "IDBRowsetNotify",IDB_DISPLAY_IROWSETNOTIFY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,120,95,95,10
+    CONTROL         "IRowPositionChange",IDB_DISPLAY_IROWPOSITIONCHANGE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,105,95,10
+END
+
+IDD_OPTIONS_ERRORS DIALOG DISCARDABLE  0, 0, 234, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Errors"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "ErrorInfo",IDC_STATIC,5,5,85,65,WS_GROUP
+    CONTROL         "Display Always",IDB_ERRORINFO_ALWAYS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,10,15,75,10
+    CONTROL         "Display Failures",IDB_ERRORINFO_FAILURE,"Button",
+                    BS_AUTORADIOBUTTON,10,25,75,10
+    CONTROL         "Display Never",IDB_ERRORINFO_NEVER,"Button",
+                    BS_AUTORADIOBUTTON,10,35,75,10
+    GROUPBOX        "RefCounts",IDC_STATIC,5,75,85,65
+    CONTROL         "Show Leaks",IDB_REFCOUNT_FAILURE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,90,75,10
+    GROUPBOX        "hResults",IDC_STATIC,95,5,135,65,WS_GROUP
+    CONTROL         "Display Always",IDB_HRESULT_ALWAYS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,100,15,115,10
+    CONTROL         "Display Failures (if no ErrorInfo)",
+                    IDB_HRESULT_NOERRORINFO,"Button",BS_AUTORADIOBUTTON,100,
+                    25,115,10
+    CONTROL         "Display Failures",IDB_HRESULT_FAILURE,"Button",
+                    BS_AUTORADIOBUTTON,100,35,115,10
+    CONTROL         "Display Never",IDB_HRESULT_NEVER,"Button",
+                    BS_AUTORADIOBUTTON,100,45,115,10
+    GROUPBOX        "IMallocSpy",IDC_STATIC,95,75,135,65
+    CONTROL         "Show Leaks",IDB_IMALLOC_SPY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,100,90,75,10
+    CONTROL         "Show Allocations",IDB_IMALLOC_ALLOCS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,100,100,75,10
+    CONTROL         "Break on AllocID",IDB_BREAKID,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,100,115,75,10
+    EDITTEXT        IDE_BREAKID,175,115,35,12,ES_AUTOHSCROLL
+END
+
+IDD_GETLISTVIEW DIALOG DISCARDABLE  0, 0, 334, 200
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IAccessor::GetBindings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "List1",IDL_NAMES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,5,5,105,170
+    CONTROL         "List1",IDL_VALUES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,110,5,220,170
+    CTEXT           "Displays the rgBindings from the Accessor",IDT_HELPMSG,
+                    5,180,270,14,SS_CENTERIMAGE | SS_SUNKEN
+    DEFPUSHBUTTON   "OK",IDOK,280,180,50,14
+END
+
+IDD_SETPARAMETERINFO DIALOG DISCARDABLE  0, 0, 224, 190
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommandWithParameters::SetParameterInfo"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Parameter",IDC_STATIC,5,5,215,80
+    LTEXT           "Ordinal:",IDC_STATIC,15,15,55,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_ORDINAL,70,15,140,12,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,15,30,55,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_NAME,70,30,140,105,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Flags:",IDC_STATIC,15,45,55,12,SS_CENTERIMAGE
+    LISTBOX         IDL_FLAGS,70,45,140,35,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Type Info",IDC_STATIC,5,90,215,75
+    LTEXT           "Type:",IDC_STATIC,15,100,55,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_TYPE,70,100,140,115,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Size:",IDC_STATIC,15,115,55,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_SIZE,70,115,140,12,ES_AUTOHSCROLL
+    LTEXT           "Precision:",IDC_STATIC,15,130,55,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_PRECISION,70,130,140,12,ES_AUTOHSCROLL
+    LTEXT           "Scale:",IDC_STATIC,15,145,55,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_SCALE,70,145,140,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&Reset All",IDB_RESET,5,170,50,14
+    DEFPUSHBUTTON   "OK",IDOK,120,170,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,170,50,14
+END
+
+IDD_PARAMEXECUTE DIALOG DISCARDABLE  0, 0, 364, 169
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommandWithParameters::Execute"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "Tab1",IDP_TABS,"SysTabControl32",WS_GROUP | WS_TABSTOP,
+                    5,5,300,160
+    DEFPUSHBUTTON   "OK",IDOK,310,5,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,310,20,50,14
+    PUSHBUTTON      "&Add Param",IDB_ADD,310,90,50,14
+    PUSHBUTTON      "&Del Param",IDB_DELETE,310,105,50,14
+    PUSHBUTTON      "Add Set",IDB_ADDSET,310,135,50,14
+    PUSHBUTTON      "Del Set",IDB_DELETESET,310,150,50,14
+END
+
+IDD_OPTIONS_COMMAND DIALOG DISCARDABLE  0, 0, 234, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "General",IDC_STATIC,5,5,120,35
+    CONTROL         "Release Open Objects",IDB_RELEASE_OPENOBJECTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,110,10
+    CONTROL         "Display Rows Affected",IDB_DISPLAY_ROWSAFFECTED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,25,110,10
+END
+
+IDD_OPENROWSET DIALOG DISCARDABLE  0, 0, 199, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IOpenRowset::OpenRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "",IDE_TABLEID,"RICHEDIT",ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_BORDER | WS_TABSTOP,60,5,130,12
+    CTEXT           "IndexID:",IDT_STATIC2,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "",IDE_INDEXID,"RICHEDIT",ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_BORDER | WS_TABSTOP,60,20,130,12
+    CTEXT           "REFIID",IDT_STATIC3,10,35,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,35,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,60,85,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,10,95,50,14
+    DEFPUSHBUTTON   "OK",IDOK,90,95,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,95,50,14
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,60,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,70,74,10
+END
+
+IDD_GETCOLUMNSROWSET DIALOG DISCARDABLE  0, 0, 197, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IColumnsRowset::GetColumnsRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Display Optional Columns",IDB_USEOPTCOLUMNS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,100,10
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,40,100,10
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,30,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,40,74,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,10,70,50,14
+    DEFPUSHBUTTON   "OK",IDOK,90,70,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,70,50,14
+END
+
+IDD_GETSOURCESROWSET DIALOG DISCARDABLE  0, 0, 197, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ISourcesRowset::GetSourcesRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,30,85,10
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,30,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,115,40,74,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,10,75,50,14
+    DEFPUSHBUTTON   "OK",IDOK,90,75,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,75,50,14
+END
+
+IDD_EXECUTE DIALOG DISCARDABLE  0, 0, 190, 114
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommand::Execute"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Cmd Text",IDT_STATIC4,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "",IDE_COMMANDTEXT,"RICHEDIT",ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_BORDER | WS_TABSTOP,55,5,130,12
+    CTEXT           "REFIID",IDT_STATIC3,5,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,20,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,40,78,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,78,10
+    CONTROL         "&Use Parameters",IDB_USEPARAMS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,60,80,10
+    CONTROL         "SetCommandText",IDB_SETCOMMANDTEXT,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,85,40,100,10
+    CONTROL         "SetCommandStream",IDB_SETCOMMANDSTREAM,"Button",
+                    BS_AUTORADIOBUTTON,85,50,100,10
+    CONTROL         "None",IDB_SETCOMMANDNONE,"Button",BS_AUTORADIOBUTTON,85,
+                    60,100,10
+    PUSHBUTTON      "Para&ms...",IDB_SETPARAMS,5,80,50,14
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,5,95,50,14
+    DEFPUSHBUTTON   "OK",IDOK,85,95,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,95,50,14
+END
+
+IDD_DROPINDEX DIALOG DISCARDABLE  0, 0, 199, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IIndexDefinition::DropIndex"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "IndexID:",IDT_STATIC2,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_INDEXID,60,20,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,55,50,14
+END
+
+IDD_DROPTABLE DIALOG DISCARDABLE  0, 0, 199, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITableDefinition::DropTable"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,55,50,14
+END
+
+IDD_FINDNEXTROW DIALOG DISCARDABLE  0, 0, 284, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IRowsetFind::FindNextRow"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Column",IDT_STATIC3,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_COLUMN,60,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Compare:",IDT_STATIC5,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_COMPAREOP,60,20,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "CASESENSITIVE",IDB_CASESENSITIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,200,20,69,10
+    CONTROL         "CASEINSENSITIVE",IDB_CASEINSENSITIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,200,30,76,10
+    CTEXT           "#Rows:",IDT_STATIC4,10,35,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COUNT,60,35,130,12,ES_AUTOHSCROLL
+    CTEXT           "Value:",IDT_STATIC2,10,60,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_VALUE,60,60,130,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,80,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,80,50,14
+END
+
+IDD_SETCOMMANDTEXT DIALOG DISCARDABLE  0, 0, 234, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommandText::SetCommandText"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Cmd Text",IDT_STATIC4,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COMMANDTEXT,60,5,165,12,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_VSCROLL
+    CTEXT           "Dialect:",IDT_STATIC6,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_DIALECT,60,20,165,75,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,125,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,175,45,50,14
+    CONTROL         "Release Open Objects",IDB_RELEASE_OPENOBJECTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,50,110,10
+END
+
+IDD_CREATEACCESSOR DIALOG DISCARDABLE  0, 0, 369, 200
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IAccessor::CreateAccessor"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "List1",IDL_COLUMNS,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,5,5,360,170
+    PUSHBUTTON      "&Clear All",IDB_CLEARALL,5,180,50,14
+    DEFPUSHBUTTON   "OK",IDOK,265,180,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,315,180,50,14
+END
+
+IDD_DATAINIT_GETDATASOURCE DIALOG DISCARDABLE  0, 0, 254, 97
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDataInitialize::GetDataSource"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "InitString",IDT_STATIC6,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    CONTROL         "",IDE_INITSTRING,"RICHEDIT",ES_AUTOHSCROLL | WS_BORDER | 
+                    WS_TABSTOP,55,5,185,12
+    PUSHBUTTON      "&...",IDB_BROWSE_PROVIDER,240,5,9,12,BS_CENTER | 
+                    BS_VCENTER
+    CTEXT           "REFIID",IDT_STATIC3,5,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,20,195,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,40,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,74,10
+    CONTROL         "Use Existing Datasource",IDB_EXISTING_DSO,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,60,90,10
+    PUSHBUTTON      "&Options...",IDB_OPTIONS,5,75,50,14
+    DEFPUSHBUTTON   "OK",IDOK,150,75,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,200,75,50,14
+END
+
+IDD_FULLCONNECT_OPTIONS DIALOG DISCARDABLE  0, 0, 274, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "CLSCTX Options",IDC_STATIC,10,5,130,85
+    CONTROL         "CLSCTX_INPROC_SERVER",IDB_INPROC_SERVER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,15,115,10
+    CONTROL         "CLSCTX_LOCAL_SERVER",IDB_LOCAL_SERVER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,25,115,10
+    CONTROL         "CLSCTX_INPROC_HANDLER",IDB_INPROC_HANDLER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,35,115,10
+    CONTROL         "CLSCTX_REMOTE_SERVER",IDB_REMOTE_SERVER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,55,115,10
+    LTEXT           "Server:",IDC_STATIC,15,65,35,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_REMOTESERVER,50,65,70,12,ES_AUTOHSCROLL
+    GROUPBOX        "Other",IDC_STATIC,10,95,130,30
+    CONTROL         "Use ServiceComponents",IDB_USESERVICECOMP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,105,115,10
+    GROUPBOX        "Init Options",IDC_STATIC,150,5,115,55
+    CONTROL         "SetProperties",IDB_INIT_SETPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,155,15,75,10
+    CONTROL         "Initialize",IDB_INIT_INITIALIZE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,155,25,75,10
+    GROUPBOX        "Interface",IDC_STATIC,150,70,115,55
+    CONTROL         "QI Mandatory Interfaces",IDB_QI_MANDATORY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,155,80,105,10
+    CONTROL         "QI Optional Interfaces",IDB_QI_OPTIONAL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,155,90,105,10
+END
+
+IDD_DATASOURCEADMIN_CREATEDATASOURCE DIALOG DISCARDABLE  0, 0, 190, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDBDataSourceAdmin::CreateDataSource"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,40,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,74,10
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,60,85,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,5,75,50,14
+    DEFPUSHBUTTON   "OK",IDOK,85,75,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,75,50,14
+END
+
+IDD_TRANSACTION_JOIN DIALOG DISCARDABLE  0, 0, 270, 64
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransactionJoin::JoinTransaction"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "ISOLEVEL",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_ISOLEVEL,80,5,180,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Transaction",IDC_STATIC,5,20,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TRANSACTION,80,20,180,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,160,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,210,45,50,14
+END
+
+IDD_TRANSACTION_COMMIT DIALOG DISCARDABLE  0, 0, 227, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransaction::Commit"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "fRetaining",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_RETAINING,80,5,140,130,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "XACTTC",IDC_STATIC,5,20,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_XACTTC,80,20,140,108,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Transaction",IDC_STATIC,5,35,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TRANSACTION,80,35,140,78,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,115,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,165,60,50,14
+END
+
+IDD_TRANSACTION_ABORT DIALOG DISCARDABLE  0, 0, 224, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransaction::Abort"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "fRetaining",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_RETAINING,80,5,140,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "fAsynch",IDC_STATIC,5,20,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_ASYNCH,80,20,140,45,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Transaction",IDC_STATIC,5,35,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TRANSACTION,80,35,140,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,120,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,60,50,14
+END
+
+IDD_TRANSACTION_GETINFO DIALOG DISCARDABLE  0, 0, 227, 44
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITransaction::GetTransactionInfo"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Transaction",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TRANSACTION,80,5,140,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,120,25,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,25,50,14
+END
+
+IDD_TRANSACTION_RELEASE DIALOG DISCARDABLE  0, 0, 227, 44
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Release Transaction"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Transaction",IDC_STATIC,5,5,75,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TRANSACTION,80,5,140,60,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,120,25,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,25,50,14
+END
+
+IDD_GETNEXTROWS DIALOG DISCARDABLE  0, 0, 154, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IRowset::GetNextRows"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "lOffset:",IDT_STATIC,10,10,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_OFFSET,60,10,75,12,ES_CENTER
+    CONTROL         "Spin1",IDC_SPIN_OFFSET,"msctls_updown32",UDS_ARROWKEYS,
+                    135,10,8,12
+    CTEXT           "cRows:",IDT_STATIC2,10,25,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COUNT,60,25,75,12,ES_CENTER
+    CONTROL         "Spin1",IDC_SPIN_COUNT,"msctls_updown32",UDS_ARROWKEYS,
+                    135,25,8,12
+    DEFPUSHBUTTON   "OK",IDOK,45,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,95,55,50,14
+END
+
+IDD_ROW_OPEN DIALOG DISCARDABLE  0, 0, 214, 89
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IRow::Open"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Column:",IDC_STATIC,15,5,55,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_COLUMNS,70,5,135,110,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Object Type:",IDC_STATIC,15,20,55,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_OBJECTTYPE,70,20,135,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Interface",IDC_STATIC,15,35,55,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_INTERFACE,70,35,135,80,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,65,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,75,74,10
+    DEFPUSHBUTTON   "Open",IDOK,105,70,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,70,50,14
+END
+
+IDD_BINDRESOURCE DIALOG DISCARDABLE  0, 0, 234, 140
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IBindResource::Bind"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "URL:",IDC_STATIC,5,5,65,12,SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_URL,70,5,160,12,ES_AUTOHSCROLL
+    CTEXT           "Object Type:",IDC_STATIC,5,20,65,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_OBJECTTYPE,70,20,160,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "REFIID",IDC_STATIC,5,35,65,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,70,35,160,80,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "BindFlags",IDC_STATIC,5,50,65,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_BINDFLAGS,70,50,160,60,NOT LBS_NOTIFY | 
+                    LBS_MULTIPLESEL | LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,95,65,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,105,65,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,5,120,50,14
+    DEFPUSHBUTTON   "Bind",IDOK,130,120,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,180,120,50,14
+END
+
+IDD_DROPCOLUMN DIALOG DISCARDABLE  0, 0, 199, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITableDefinition::DropColumn"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "ColumnID:",IDT_STATIC2,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COLUMNID,60,20,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,55,50,14
+END
+
+IDD_ADDCOLUMN DIALOG DISCARDABLE  0, 0, 209, 175
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITableDefinition::AddColumn"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,10,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,68,10,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "ColumnID:",IDT_STATIC2,10,27,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COLUMNID,68,27,130,12,ES_AUTOHSCROLL
+    CTEXT           "pwszTypeName:",IDT_STATIC3,10,44,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TYPENAME,68,44,130,150,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "wType:",IDT_STATIC4,10,61,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TYPE,68,61,130,150,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "ColumnSize:",IDT_STATIC6,10,78,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_SIZE,68,78,130,12,ES_AUTOHSCROLL
+    CTEXT           "Precision:",IDT_STATIC7,10,95,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_PRECISION,68,95,130,12,ES_AUTOHSCROLL
+    CTEXT           "Scale:",IDT_STATIC8,10,112,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_SCALE,68,112,130,12,ES_AUTOHSCROLL
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,134,85,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,10,151,50,14
+    DEFPUSHBUTTON   "OK",IDOK,90,151,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,151,50,14
+END
+
+IDD_CREATETABLE DIALOG DISCARDABLE  0, 0, 389, 300
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITableDefinition::CreateTable"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "TableID:",IDC_STATIC,10,5,32,12
+    EDITTEXT        IDE_TABLEID,45,5,175,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "",IDE_COLNAME,10,20,370,12,SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_COLUMNID,10,40,95,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_TYPENAME,105,40,90,90,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_DATATYPE,195,40,85,90,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDE_SIZE,280,40,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDE_PRECISION,305,40,40,12,ES_AUTOHSCROLL
+    EDITTEXT        IDE_SCALE,345,40,35,12,ES_AUTOHSCROLL
+    CONTROL         "List1",IDL_COLUMNDESC,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,10,60,370,170
+    GROUPBOX        "Column",IDC_STATIC,10,235,80,60
+    PUSHBUTTON      "&Add",IDB_ADD,15,245,45,14
+    PUSHBUTTON      "&Delete",IDB_DELETE,15,260,45,14
+    PUSHBUTTON      "&P&roperties...",IDB_COLPROP,15,275,45,14
+    GROUPBOX        "Rowset",IDC_STATIC,95,235,190,60
+    CTEXT           "REFIID",IDT_STATIC3,100,245,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,150,245,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Properties...",IDB_ROWSETPROPERTIES,100,270,45,14
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,150,270,70,10
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,220,270,50,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,220,280,50,10
+    PUSHBUTTON      "OK",IDOK,290,280,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,335,280,45,14
+END
+
+IDD_CREATEINDEX DIALOG DISCARDABLE  0, 0, 247, 295
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IIndexDefinition::CreateIndex"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "TableID:",IDC_STATIC,10,5,32,12
+    EDITTEXT        IDE_TABLEID,45,5,190,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    LTEXT           "IndexID:",IDC_STATIC,10,20,32,12
+    EDITTEXT        IDE_INDEXID,45,20,190,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "",IDE_COLNAME,10,40,225,12,SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_COLUMNID,10,60,140,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_ORDER,150,60,85,90,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "List1",IDL_INDEXCOLUMNDESC,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,10,80,225,170
+    CONTROL         "Use Index Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,257,85,10
+    PUSHBUTTON      "&Properties...",IDB_INDEXPROPERTIES,180,255,55,14
+    PUSHBUTTON      "&Add",IDB_ADD,10,275,45,14
+    PUSHBUTTON      "&Delete",IDB_DELETE,55,275,45,14
+    PUSHBUTTON      "OK",IDOK,145,275,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,190,275,45,14
+END
+
+IDD_PROMPTDATASOURCE DIALOG DISCARDABLE  0, 0, 237, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDBPromptInitialize::PromptDataSource"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,5,170,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "FileName",IDC_STATIC,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_OPTIONS,60,20,170,40,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Type Filter",IDC_STATIC,10,65,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_TYPEFILTER,60,65,170,25,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Prov Filter",IDC_STATIC,10,95,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_PROVIDERFILTER,60,95,170,45,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,145,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,155,74,10
+    CONTROL         "Use Existing Datasource",IDB_EXISTING_DSO,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,165,90,10
+    DEFPUSHBUTTON   "OK",IDOK,130,160,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,180,160,50,14
+END
+
+IDD_OPTIONS_ACCESSOR DIALOG DISCARDABLE  0, 0, 234, 144
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Accessor"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Binding Type",IDC_STATIC,5,5,120,75,WS_GROUP
+    COMBOBOX        IDC_BINDINGTYPE,10,15,105,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "DBTYPE_BYREF",IDB_TO_BYREF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,30,105,10
+    CONTROL         "DBTYPE_ARRAY",IDB_TO_ARRAY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,40,105,10
+    CONTROL         "DBTYPE_VECTOR",IDB_TO_VECTOR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,50,105,10
+    CONTROL         "PROVIDEROWNED",IDB_OWNED_PROVIDER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,65,105,10
+    GROUPBOX        "BLOB Binding Type",IDC_STATIC,5,85,120,55,WS_GROUP
+    CONTROL         "Inline",IDB_BLOB_INLINE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,95,105,10
+    CONTROL         "ISequentialStream",IDB_BLOB_ISEQSTREAM,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,10,105,105,10
+    CONTROL         "IStream",IDB_BLOB_ISTREAM,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,10,115,105,10
+    CONTROL         "ILockBytes",IDB_BLOB_ILOCKBYTES,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,10,125,105,10
+    GROUPBOX        "Accessor",IDC_STATIC,130,5,100,75
+    CONTROL         "STATUS",IDB_BIND_STATUS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,135,15,80,10
+    CONTROL         "LENGTH",IDB_BIND_LENGTH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,135,25,80,10
+    CONTROL         "VALUE",IDB_BIND_VALUE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,135,35,80,10
+    LTEXT           "Max Length:",IDC_STATIC,135,65,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_MAXLENGTH,185,65,40,12,ES_AUTOHSCROLL
+    GROUPBOX        "Other",IDC_STATIC,130,85,100,55,WS_GROUP
+    CONTROL         "Bind Bookmark",IDB_BIND_BOOKMARK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,135,95,90,10
+END
+
+IDD_ISCO_DELETE DIALOG DISCARDABLE  0, 0, 237, 236
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IScopedOperations::Delete"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Delete Flags",IDC_STATIC,10,5,55,8
+    LISTBOX         IDC_ISCO_FLAGS,10,20,215,35,LBS_SORT | LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "URLs",IDC_STATIC,10,65,215,135
+    EDITTEXT        IDE_URL,20,80,195,12,ES_AUTOHSCROLL
+    LISTBOX         IDC_URLs,20,105,135,85,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Add",IDB_ADD,170,105,45,14
+    PUSHBUTTON      "&Remove",IDB_DELETE,170,175,45,14
+    PUSHBUTTON      "OK",IDOK,135,215,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,180,215,45,14
+END
+
+IDD_ISCO_COPY DIALOG DISCARDABLE  0, 0, 247, 271
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IScopedOperations::Copy"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Operation flags",IDC_STATIC,10,5,60,12
+    LISTBOX         IDC_ISCO_FLAGS,10,20,230,45,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "URLs",IDC_STATIC,10,75,230,170
+    LTEXT           "Source:",IDC_STATIC,15,90,26,8
+    EDITTEXT        IDE_ISCO_SOURCE,61,85,165,12,ES_AUTOHSCROLL
+    LTEXT           "Destination",IDC_STATIC,15,107,36,8
+    EDITTEXT        IDE_ISCO_DESTINATION,61,105,165,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Add",IDB_ADD,15,125,45,14
+    PUSHBUTTON      "&Remove",IDB_DELETE,180,125,45,14
+    CONTROL         "List1",IDL_URLs,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_AUTOARRANGE | 
+                    WS_BORDER | WS_TABSTOP,15,145,210,95
+    PUSHBUTTON      "OK",IDOK,150,250,45,14
+    PUSHBUTTON      "Cancel",IDCANCEL,195,250,45,14
+END
+
+IDD_GETREFERENCEDROWSET DIALOG DISCARDABLE  0, 0, 199, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IRowsetInfo::GetReferencedRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,20,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,90,75,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,75,50,14
+    CTEXT           "Column",IDT_STATIC5,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_COLUMN,60,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_URLMAPPING DIALOG DISCARDABLE  0, 0, 224, 85
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IRegisterProvider::SetURLMapping"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "URL:",IDT_STATIC3,10,10,50,12,SS_CENTERIMAGE
+    EDITTEXT        IDE_URL,60,10,160,12,ES_AUTOHSCROLL
+    LTEXT           "&Provider:",IDT_STATIC2,10,25,50,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_PROVIDER,60,25,160,170,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_BORDER | WS_VSCROLL | 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,120,65,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,65,50,14
+END
+
+IDD_PROMPTFILENAME DIALOG DISCARDABLE  0, 0, 239, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IDBPromptInitialize::PromptFileName"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Directory",IDC_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_DIRECTORY,60,5,160,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_DIRECTORY,220,5,9,12,BS_CENTER | BS_VCENTER
+    CTEXT           "FileName",IDC_STATIC,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_FILENAME,60,20,160,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_FILENAME,220,20,9,12,BS_CENTER | BS_VCENTER
+    CTEXT           "Options",IDC_STATIC,10,40,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_OPTIONS,60,40,170,40,LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,130,95,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,180,95,50,14
+END
+
+IDD_AGGREGATION DIALOG DISCARDABLE  0, 0, 189, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Aggregation"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,40,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,74,10
+    DEFPUSHBUTTON   "OK",IDOK,85,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,45,50,14
+END
+
+IDD_SETVALUE DIALOG DISCARDABLE  0, 0, 189, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDE_VALUE,60,5,125,12,ES_CENTER | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,85,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,45,50,14
+END
+
+IDD_SIMPLE_LISTBOX DIALOGEX 0, 0, 70, 90
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDL_VALUES,0,0,70,90,LBS_NOINTEGRALHEIGHT | NOT 
+                    WS_BORDER | WS_VSCROLL | WS_TABSTOP,WS_EX_STATICEDGE
+END
+
+IDD_COMMANDPERSIST DIALOG DISCARDABLE  0, 0, 189, 115
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommandPersist::SaveCommand"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "CommandID:",IDT_STATIC,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COMMANDID,55,5,130,12,ES_AUTOHSCROLL
+    CTEXT           "dwFlags",IDC_STATIC,5,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDL_FLAGS,55,20,130,60,NOT LBS_NOTIFY | LBS_MULTIPLESEL | 
+                    LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,85,95,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,95,50,14
+END
+
+IDD_MSPERSIST DIALOG DISCARDABLE  0, 0, 239, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MSPersist - Load Rowset from a file"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "FileName",IDT_STATIC4,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_FILENAME,60,5,165,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDB_FILENAME,225,5,9,12,BS_CENTER | BS_VCENTER
+    CTEXT           "REFIID",IDT_STATIC3,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,60,20,175,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,45,85,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,15,85,50,14
+    GROUPBOX        "File Format",IDC_STATIC,130,40,105,35
+    CONTROL         "XML",IDB_XML,"Button",BS_AUTORADIOBUTTON | WS_GROUP,135,
+                    50,95,10
+    CONTROL         "ADTG",IDB_ADTG,"Button",BS_AUTORADIOBUTTON,135,60,95,10
+    DEFPUSHBUTTON   "OK",IDOK,130,85,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,185,85,50,14
+    CONTROL         "Use Cursor Engine",IDB_CURSORENGINE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,55,85,10
+END
+
+IDD_ERRORRECORDS DIALOG DISCARDABLE  0, 0, 189, 65
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IErrorRecords::GetErrorInfo"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "ulRecord",IDT_STATIC3,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_RECORD,55,5,130,150,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "lcid",IDT_STATIC5,5,20,50,12,SS_CENTERIMAGE | SS_SUNKEN
+    COMBOBOX        IDC_LCID,55,20,130,150,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,74,10
+    DEFPUSHBUTTON   "OK",IDOK,85,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,45,50,14
+END
+
+IDD_STREAM_VIEWER DIALOG DISCARDABLE  0, 0, 259, 179
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ISequentialStream::Read"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "",IDE_VALUE,"RICHEDIT",ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP,5,5,250,105
+    CTEXT           "lOffset",IDT_STATIC3,5,115,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_OFFSET,55,115,90,12,ES_CENTER | ES_AUTOHSCROLL
+    CTEXT           "cBytes",IDT_STATIC5,5,130,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COUNT,55,130,90,12,ES_CENTER | ES_AUTOHSCROLL
+    CTEXT           "Type",IDT_STATIC4,5,145,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_BINDINGTYPE,55,145,95,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Edit Box",IDB_XML_EDITBOX,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,160,115,95,10
+    CONTROL         "IE XML Browser",IDB_XML_BROWSER,"Button",
+                    BS_AUTORADIOBUTTON,160,125,95,10
+    CONTROL         "DOM Tree",IDB_XML_DOM,"Button",BS_AUTORADIOBUTTON,160,
+                    135,95,10
+    PUSHBUTTON      "&Read",IDOK,155,160,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,160,50,14
+    CONTROL         "Spin1",IDC_SPIN_OFFSET,"msctls_updown32",UDS_ARROWKEYS,
+                    145,115,7,12
+    CONTROL         "Spin1",IDC_SPIN_COUNT,"msctls_updown32",UDS_ARROWKEYS,
+                    145,130,7,12
+END
+
+IDD_GETAXISROWSET DIALOG DISCARDABLE  0, 0, 189, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IMDDataset::GetAxisRowset"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "i&Axis",IDC_STATIC,5,5,50,12,SS_CENTERIMAGE | SS_SUNKEN
+    COMBOBOX        IDCOMBO_AXIS,55,5,130,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | WS_BORDER | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "REFIID",IDT_STATIC3,5,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,20,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,45,100,10
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,45,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,55,74,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,5,85,50,14
+    DEFPUSHBUTTON   "OK",IDOK,85,85,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,85,50,14
+END
+
+IDD_ADDCONSTRAINTDESC DIALOG DISCARDABLE  0, 0, 209, 308
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Define constraint"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Base Table:",IDT_STATIC,10,10,64,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,74,10,128,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "Constraint Name:",IDT_STATIC11,10,28,64,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_CONSNAME,74,27,128,12,ES_AUTOHSCROLL
+    CTEXT           "Constraint Type:",IDT_STATIC2,10,48,64,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    COMBOBOX        IDC_CONSTYPE,74,48,128,100,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Deferrability:",IDT_STATIC3,10,67,64,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    LISTBOX         IDC_DEFERRABILITY,74,67,128,19,LBS_SORT | 
+                    LBS_MULTIPLESEL | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Constraint Text:",IDT_STATIC4,10,89,64,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_CONSTEXT,74,89,128,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    GROUPBOX        "Column List",IDC_STATIC,10,106,192,51
+    LISTBOX         IDC_COLLIST,17,116,88,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDE_COLNAME,112,116,83,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add",IDB_ADDCOL,111,137,42,14
+    PUSHBUTTON      "Del",IDB_DELCOL,153,137,42,14
+    CTEXT           "Referenced Table:",IDT_STATIC5,10,163,64,12,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    EDITTEXT        IDE_REFERENCEDTABLE,74,163,128,12,ES_MULTILINE
+    GROUPBOX        "Foreign Key Column List",IDC_STATIC,10,181,192,51
+    LISTBOX         IDC_FKCOLLIST,17,191,88,35,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDE_FKCOLNAME,112,191,83,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add",IDB_ADDFKCOL,111,212,42,14
+    PUSHBUTTON      "Del",IDB_DELFKCOL,153,212,42,14
+    CTEXT           "Match Type:",IDT_STATIC6,10,237,64,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_MATCHTYPE,74,237,128,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Update Rule:",IDT_STATIC9,10,253,64,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_UPDATERULE,74,253,128,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Delete Rule:",IDT_STATIC10,10,269,64,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_DELETERULE,74,269,128,100,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,109,287,42,14
+    PUSHBUTTON      "Cancel",IDCANCEL,151,287,42,14
+END
+
+IDD_DROPCONSTRAINT DIALOG DISCARDABLE  0, 0, 199, 75
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ITableDefinitionWithCosntraints::DropConstraint"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "Constraint ID:",IDT_STATIC2,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_CONSTRAINTID,60,20,130,12,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_VSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,90,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,55,50,14
+END
+
+IDD_ALTERINDEX DIALOG DISCARDABLE  0, 0, 199, 142
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IAlterIndex::AlterIndex"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "IndexID:",IDT_STATIC2,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_INDEXID,60,20,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    GROUPBOX        "Update index info",IDC_STATIC,10,42,180,70
+    CONTROL         "&Change Index ID",IDC_ChangeIndexID,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,53,68,12
+    CTEXT           "New IndexID:",IDT_STATIC3,19,71,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_NewIndexID,71,71,112,12,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_VSCROLL
+    CONTROL         "&Use Index Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,92,87,12
+    PUSHBUTTON      "&Properties...",IDB_INDEXPROPERTIES,133,91,50,12
+    DEFPUSHBUTTON   "OK",IDOK,90,119,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,119,50,14
+END
+
+IDD_ALTERTABLE DIALOG DISCARDABLE  0, 0, 199, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IAlterTable::AlterTable"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,60,5,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "New TableID:",IDT_STATIC3,10,24,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_NewTableID,60,24,130,12,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_VSCROLL
+    CONTROL         "&Use Table Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,45,87,12
+    PUSHBUTTON      "&Properties...",IDB_TABLEPROPERTIES,140,44,50,12
+    DEFPUSHBUTTON   "OK",IDOK,90,72,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,72,50,14
+END
+
+IDD_ALTERCOLUMN DIALOG DISCARDABLE  0, 0, 209, 247
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IAlterTable::AlterColumn"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TableID:",IDT_STATIC,10,10,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_TABLEID,68,10,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    CTEXT           "ColumnID:",IDT_STATIC9,10,27,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COLUMN,68,27,130,12,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    WS_VSCROLL
+    LTEXT           "ColumnDesc Flags:",IDC_STATIC,10,47,78,12
+    LISTBOX         IDL_CDFLAGS,10,60,188,38,LBS_SORT | LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "New ColumnID:",IDT_STATIC2,10,106,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COLUMNID,68,106,130,12,ES_AUTOHSCROLL
+    CTEXT           "pwszTypeName:",IDT_STATIC3,10,123,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TYPENAME,68,123,130,150,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "wType:",IDT_STATIC4,10,140,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_TYPE,68,140,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "ColumnSize:",IDT_STATIC6,10,157,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_SIZE,68,157,130,12,ES_AUTOHSCROLL
+    CTEXT           "Precision:",IDT_STATIC7,10,174,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_PRECISION,68,174,130,12,ES_AUTOHSCROLL
+    CTEXT           "Scale:",IDT_STATIC8,10,191,57,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_SCALE,68,191,130,12,ES_AUTOHSCROLL
+    CONTROL         "Use Properties",IDB_USEPROPERTIES,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,213,85,10
+    PUSHBUTTON      "&Properties...",IDB_SETPROPERTIES,10,230,50,14
+    DEFPUSHBUTTON   "OK",IDOK,90,230,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,140,230,50,14
+END
+
+IDD_SETCOMMANDSTREAM DIALOG DISCARDABLE  0, 0, 234, 84
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ICommandStream::SetCommandStream"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Cmd Stream",IDT_STATIC4,10,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    EDITTEXT        IDE_COMMANDTEXT,60,5,165,12,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | WS_VSCROLL
+    CTEXT           "Dialect:",IDT_STATIC6,10,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_DIALECT,60,20,165,75,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "REFIID",IDC_STATIC,10,35,49,12,SS_SUNKEN
+    COMBOBOX        IDC_REFIID,60,35,165,126,CBS_DROPDOWN | CBS_AUTOHSCROLL | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Unicode Stream - BOM",IDB_UNICODE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,60,110,10
+    CONTROL         "Release Open Objects",IDB_RELEASE_OPENOBJECTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,70,110,10
+    DEFPUSHBUTTON   "OK",IDOK,125,65,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,175,65,50,14
+END
+
+IDD_MULTIPLERESULTS DIALOG DISCARDABLE  0, 0, 189, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "IMultipleResults::GetResult"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "REFIID",IDT_STATIC3,5,5,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_INTERFACE,55,5,130,150,CBS_DROPDOWNLIST | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "lResultFlag",IDT_STATIC5,5,20,50,12,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    COMBOBOX        IDC_RESERVED,55,20,130,150,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "A&ggregation",IDB_AGGREGATION,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,50,75,10
+    CONTROL         "ppIUnknown",IDB_OUTPUT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,60,74,10
+    DEFPUSHBUTTON   "OK",IDOK,85,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,55,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_ROWSETVIEWER        ICON    DISCARDABLE     "res\\RowsetViewer.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TOOLBAR             BITMAP  DISCARDABLE     "res\\Toolbar.bmp"
+IDB_STATE               BITMAP  DISCARDABLE     "res\\menu.bmp"
+IDB_IMAGE               BITMAP  DISCARDABLE     "res\\readonly.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_SCHEMAROWSET DLGINIT
+BEGIN
+    IDC_RESTRICTION1, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION2, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION3, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION4, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION5, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION6, 0x403, 1, 0
+"\000" 
+    IDC_RESTRICTION7, 0x403, 1, 0
+"\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_STREAM_VIEWER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 219
+    END
+
+    IDD_ADDCONSTRAINTDESC, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 306
+    END
+
+    IDD_MULTIPLERESULTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 67
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDBINITIALIZE_INITIALIZE "Initialize"
+    IDM_IDBINITIALIZE_UNINITIALIZE "UnInitialize"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDBCREATESESSION_CREATESESSION "CreateSession - create a new Session"
+    IDM_EXIT                "Exit"
+    IDM_TILEVERTICAL        "Tile child windows vertically"
+    IDM_CLOSEWINDOW         "Close the active child window"
+    IDM_NEXTWINDOW          "Activate the next child  window"
+    IDM_PREVWINDOW          "Activate the previous child window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_RESTARTPOSITION     "RestartPosition"
+    IDM_DELETEROWS          "DeleteRows - delete the selected row"
+    IDM_INSERTROW           "InsertRow - insert a new row"
+    IDM_SETDATA             "SetData - modify the selected row"
+    IDM_GETORIGINALDATA     "GetOriginalData"
+    IDM_GETPENDINGROWS      "GetPendingRows"
+    IDM_GETROWSTATUS        "GetRowStatus"
+    IDM_UNDO                "Undo - undo buffered changes"
+    IDM_UPDATE              "Update - update buffered changes"
+    IDM_GETSCHEMAS          "GetSchemas - get supported schemas"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_REFRESH             "Refresh Rowset"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_OPENROWSET          "OpenRowset - create a rowset from the specified tablename"
+    IDM_IDBCREATECOMMAND_CREATECOMMAND 
+                            "CreateCommand - create a command object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_CLEARNOTIFYWINDOW   "Clear Notification Window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ISOURCESROWSET_GETSOURCESROWSET 
+                            "GetSourcesRowset - create rowset from the enumerator"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_EXECUTE             "Execute"
+    IDM_COMMAND_GETDBSESSION "GetDBSession"
+    IDM_SETCOMMANDTEXT      "SetCommandText - set the selected command text"
+    IDM_GETCOMMANDTEXT      "GetCommandText - obtain the command text"
+    IDM_DATASET_GETNEXTAXISROW 
+                            "GetNextAxisRow - get the next row in the axis rowset."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IACCESSOR_GETBINDINGS "GetBindings"
+    IDM_IACCESSOR_CREATEACCESSOR "CreateAccessor"
+    IDM_IACCESSOR_ADDREFACCESSOR "AddRefAccessor"
+    IDM_IACCESSOR_RELEASEACCESSOR "ReleaseAccessor"
+    IDM_GETPARAMETERINFO    "GetParameterInfo"
+    IDM_MAPPARAMETERNAMES   "MapParameterNames"
+    IDM_SETPARAMETERINFO    "SetParameterInfo"
+    IDM_COMMAND_CANCEL      "Cancel"
+    IDM_DATASOURCE_ADDREF   "AddRef"
+    IDM_IUNKNOWN_QUERYINTERFACE "QueryInterface"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ARRANGEICONS        "Arrange all child window icons"
+    IDM_CLOSEALL            "Close all active child windows"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_CASCADE             "Cascade all windows"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_TILEHORIZONTAL      "Tile child windows horizontally"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ABOUT               "About"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ICOLUMNSROWSET_GETAVAILABLECOLUMNS 
+                            "GetAvailableColumns - get optional meta data columns"
+    IDM_ICOLUMNSROWSET_GETCOLUMNSROWSET 
+                            "GetColumnsRowset - meta data about each column in the rowset"
+    IDM_INVALID             "GetProperties on existing command object"
+    IDM_ERRORRECORDS        "IErrorRecords - displays all ErrorRecords"
+    IDM_DISPLAYALLERRORS    "Display ErrorInfo even on successful calls"
+    IDM_IDBPROPERTIES_GETPROPERTYINFO "GetPropertyInfo"
+    IDM_IDBPROPERTIES_GETPROPERTIES "GetProperties"
+    IDM_ISESSIONPROPERTIES_GETPROPERTIES 
+                            "GetProperties - returns properties on the session object"
+    IDM_ISESSIONPROPERTIES_SETPROPERTIES 
+                            "SetProperties - set properties on the session object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ADDREFROWS          "AddRefRows - addref the selected row"
+    IDM_GETDATA             "GetData - retrieve data for the selected row"
+    IDM_GETNEXTROWS         "GetNextRows - move the next fetch position"
+    IDM_RELEASEROWS         "ReleaseRows - release the selected row"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IPERSISTFILE_SAVECOMPLETED "SaveCompleted"
+    IDM_IPERSISTFILE_GETCURFILE "GetCurFile"
+    IDM_DATASET_GETAXISINFO "GetAxisInfo"
+    IDM_DATASET_GETAXISROWSET "GetAxisRowset"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWPOS_CLEARROWPOSITION "ClearRowPosition"
+    IDM_IROWPOS_SETROWPOSITION "SetRowPosition"
+    IDM_IROWPOS_GETROWPOSITION "GetRowPosition"
+    IDM_IROWPOS_INITIALIZE  "Initialize"
+    IDM_IROWPOS_GETROWSET   "GetRowset"
+    IDM_OPTIONS             "Change options"
+    IDM_IROWSET_GETPROPERTIES 
+                            "GetProperties - returns properties on the rowset object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_GETREFERENCEDROWSET "GetReferencedRowset"
+    IDM_GETSPECIFICATION    "GetSpecification - return the object that created the rowset"
+    IDM_COMMAND_GETPROPERTIES 
+                            "GetProperties - returns properties on the command object"
+    IDM_IDBPROPERTIES_SETPROPERTIES "SetProperties"
+    IDM_GETSCHEMAROWSET     "GetSchemaRowset"
+    IDM_COMMANDPREPARE      "Prepare - validates and optimizes the current command"
+    IDM_COMMANDUNPREPARE    "UnPrepare - discards the current command execution plan"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_COMMAND_SETPROPERTIES 
+                            "SetProperties - set properties on the command object"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ICOLUMNSINFO_GETCOLUMNINFO 
+                            "GetColumnInfo - return metadata for all columns"
+    IDM_ICOLUMNSINFO_MAPCOLUMNIDS "MapColumnIDs"
+    IDM_CLEAREDITWINDOW     "Clear"
+    IDM_RELEASEALLROWS      "ReleaseRows - release all selected rows"
+    IDM_ICONVERTTYPE_CANCONVERT "CanConvert"
+    IDM_GETVISIBLEDATA      "GetVisibleData"
+    IDM_RESYNCHROWS         "ResynchRows"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_INDEX_DROPINDEX     "DropIndex"
+    IDM_IDBINFO_GETKEYWORDS "GetKeywords - return a list of provider specific keywords"
+    IDM_IDBINFO_GETLITERALINFO 
+                            "GetLiteralInfo - return info about literals in commands and other methods"
+    IDM_IPERSISTFILE_ISDIRTY "IsDirty"
+    IDM_IPERSISTFILE_LOAD   "Load"
+    IDM_IPERSISTFILE_SAVE   "Save"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ITRANSACTIONOBJECT_GETTRANSACTIONOBJECT "GetTransactionObject"
+    IDM_ISUPPORTERRORINFO   "InterfaceSupportsErrorInfo"
+    IDM_IPERSIST_GETCLASSID "GetClassID"
+    IDM_GETDATASOURCE       "GetDataSource"
+    IDM_TABLE_ADDCOLUMN     "AddColumn"
+    IDM_TABLE_CREATETABLE   "CreateTable"
+    IDM_TABLE_DROPCOLUMN    "DropColumn"
+    IDM_TABLE_DROPTABLE     "DropTable"
+    IDM_INDEX_CREATEINDEX   "CreateIndex"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_CREATE_DATALINKS    "Create the Data Links Object"
+    IDM_IDBPROMPTINITIALIZE_PROMPTDATASOURCE_ADVANCED 
+                            "PromptDataSource - Uses ServiceComponents to prompt for a DataSource"
+    IDM_IDBPROMPTINITIALIZE_PROMPTFILENAME_ADVANCED "PromptFileName"
+    IDM_CREATE_ROWPOSITION  "Create the RowPosition Object"
+    IDM_CUSTOMERROR_ADDREF  "AddRef"
+    IDM_IMDFIND_FINDCELL    "FindCell"
+    IDM_IMDFIND_FINDTUPEL   "FindTupel"
+    IDM_IMDRANGEROWSET_GETRANGEROWSET "GetRangeRowset"
+    IDM_DATASET_GETSPECIFICATION "GetSpecification"
+    IDM_TABLE_ADDCONSTRAINT "AddConstraint"
+    IDM_TABLE_CREATETABLEWITHCONSTRAINTS "CreateTableWithConstraint"
+    IDM_TABLE_DROPCONSTRAINT "DropConstraint"
+    IDM_INDEX_ALTERINDEX    "Alter Index"
+    IDM_TABLE_ALTERTABLE    "Alter Table"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_TABLE_ALTERCOLUMN   "Alter Column"
+    IDM_GETCOMMANDSTREAM    "GetCommandStream - Get the command stream"
+    IDM_SETCOMMANDSTREAM    "SetCommandStream - Set the command stream"
+    IDM_IUNKNOWN_RELEASECHILDREN "Release object and all children"
+    IDM_IROWSETBOOKMARK_POSITIONONBOOKMARK "PositionOnBookmark"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWSETNOTIFY_S_UNWANTEDPHASE "Listener returns DB_S_UNWANTEDPHASE"
+    IDM_IROWSETNOTIFY_S_UNWANTEDREASON "Listener returns DB_S_UNWANTEDREASON"
+    IDM_IROWPOSITION_S_UNWANTEDPHASE "Listener returns DB_S_UNWANTEDPHASE"
+    IDM_IROWPOSITION_S_UNWANTEDREASON "Listener returns DB_S_UNWANTEDREASON"
+    IDM_FULLDISCONNECT      "Full Disconnect"
+    IDM_FULLCONNECT         "Full Connect"
+    IDM_COMMAND_CLEARCOMMAND 
+                            "Clear Command - creates a new command object with no default properties"
+    IDM_IUNKNOWN_RELEASEALL "Release all interfaces"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWSETNOTIFY_S_OK  "Listener returns S_OK "
+    IDM_IROWSETNOTIFY_S_FALSE "Listener returns S_FALSE"
+    IDM_IROWSETNOTIFY_E_FAIL "Listener returns E_FAIL"
+    IDM_IROWPOSITION_S_OK   "Listener returns S_OK "
+    IDM_IROWPOSITION_S_FALSE "Listener returns S_FALSE"
+    IDM_IROWPOSITION_E_FAIL "Listener returns E_FAIL"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDBASYNCHNOTIFY_S_OK "Listener returns S_OK "
+    IDM_IDBASYNCHNOTIFY_S_FALSE "Listener returns S_FALSE "
+    IDM_IDBASYNCHNOTIFY_S_UNWANTEDPHASE "Listener returns DB_S_UNWANTEDPHASE"
+    IDM_IDBASYNCHNOTIFY_S_UNWANTEDREASON 
+                            "Listener returns DB_S_UNWANTEDREASON"
+    IDM_IDBASYNCHNOTIFY_E_FAIL "Listener returns E_FAIL"
+    IDM_IDBASYNCHSTATUS_ABORT 
+                            "Abort - stops an asynchronously executing operation"
+    IDM_IDBASYNCHSTATUS_GETSTATUS 
+                            "GetStatus - returns the status of an asynchronously executing operation"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_DATASET_GETCELLDATA "GetCellData - get the cell data for the dataset."
+    IDM_IUNKNOWN_RELEASE    "Release"
+    IDM_DATASET_FREEAXISINFO 
+                            "FreeAxisInfo - free the axis info previously fetched."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_DBSTATUS_S_OK       "DBSTATUS_S_OK"
+    IDM_DBSTATUS_S_ISNULL   "DBSTATUS_S_ISNULL"
+    IDM_DBSTATUS_S_DEFAULT  "DBSTATUS_S_DEFAULT"
+    IDM_ITRANSACTIONLOCAL_GETOPTIONSOBJECT "GetOptionsObject"
+    IDM_ITRANSACTIONJOIN_GETOPTIONSOBJECT "GetOptionsObject"
+    IDM_ITRANSACTIONJOIN_JOINTRANSACTION "JoinTransaction"
+    IDM_ITRANSACTION_GETTRANSACTIONINFO "GetTransactionInfo"
+    IDM_ITRANSACTIONOPTIONS_GETOPTIONS "GetOptions"
+    IDM_ITRANSACTIONOPTIONS_SETOPTIONS "SetOptions"
+    IDM_ITRANSACTIONLOCAL_STARTTRANSACTION "StartTransaction"
+    IDM_PROVIDERINFO        "Provider QuickInfo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_BROWSE_TABLENAME    "Browse for a file"
+    IDM_COPYTEXT            "Copy text"
+    IDM_DISPLAY_HEX         "Display Hexadecimal"
+    IDM_ACCESSOR_ADDREF     "AddRefAccessor"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_SESSION_ADDREF      "AddRef"
+    IDM_COMMAND_ADDREF      "AddRef"
+    IDM_ROWSET_ADDREF       "AddRef"
+    IDM_TRANSACTION_ADDREF  "AddRef"
+    IDM_ENUMERATOR_ADDREF   "AddRef"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ERROR_ADDREF        "AddRef"
+    IDM_ROWPOS_ADDREF       "AddRef"
+    IDM_GETERRORINFO        "GetErrorInfo "
+    IDM_SETERRORINFO        "SetErrorInfo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ERRORINFO_GETDESCRIPTION 
+                            "GetDescription - Get the description of the error"
+    IDM_ERRORINFO_GETGUID   "GetGuid - Returns the GUID of the interface that defined the error"
+    IDM_ERRORINFO_GETHELPCONTEXT 
+                            "GetHelpContext - Returns the Help context ID for the error"
+    IDM_ERRORINFO_GETHELPFILE 
+                            "GetHelpFile - Returns  the path of the Help file that describes the error"
+    IDM_ERRORINFO_GETSOURCE "GetSource - Returns the name of the component that generated the error"
+    IDM_ERRORRECORDS_ADDERRORRECORD 
+                            "AddErrorRecord - Adds a recrod to an OLE DB error object"
+    IDM_ERRORRECORDS_GETBASICERRORINFO 
+                            "GetBasicErrorInfo - Returns basic information about the error"
+    IDM_ERRORRECORDS_GETCUSTOMERROROBJECT 
+                            "GetCustomErrorObject - Returns a pointer to an interface on the custom error object"
+    IDM_ERRORRECORDS_GETERRORINFO 
+                            "GetErrorInfo - Returns an IErrorInfo interface pointer"
+    IDM_ERRORRECORDS_GETERRORPARAMETERS 
+                            "GetErrorParameters - Returns the error parameters"
+    IDM_ERRORRECORDS_GETRECORDCOUNT 
+                            "GetRecordCount - Returns the count of records in the OLE DB error object"
+    IDM_SQLERRORINFO_GETSQLINFO 
+                            "GetSQLInfo - Returns the SQLSTATE and native error code"
+    IDM_PARSEDISPLAYNAME    "ParseDisplayName"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWSETLOCATE_COMPARE "Compare - compare two bookmarks"
+    IDM_IROWSETLOCATE_GETROWSBYBOOKMARK 
+                            "GetRowsByBookmark - retrieves rows that match the specified bookmarks"
+    IDM_IROWSETLOCATE_GETROWSAT 
+                            "GetRowsAt - retrieves rows, starting with the row specified by an offset from a bookmark"
+    IDM_IROWSETLOCATE_HASH  "Hash - Returns hash values for the specified bookmarks"
+    IDM_IROWSETINDENTITY_ISSAMEROW 
+                            "IsSameRow - Compares two row handles to see if they refer to the same row instance"
+    IDM_IROWSETSCROLL_GETAPPROXIMATEPOSITION 
+                            "GetApproximatePosition - Gets the approximate position of a row corresponding to a specified bookmark"
+    IDM_IROWSETSCROLL_GETROWSATRATIO 
+                            "GetRowsAtRatio - retrieves rows starting from a fractional position in the rowset"
+    IDM_IROWSETFIND_FINDNEXTROW "FindNextRow"
+    IDM_CHAPTERED_ADDREFCHAPTER "AddRefChapter"
+    IDM_CHAPTERED_RELEASECHAPTER "ReleaseChapter"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_DISPLAYERRORINFO    "Display all ErrorInfo objects"
+    IDM_ICPC_FINDCONNECTIONPOINT 
+                            "FindConnectionPoint - find a particular connection point"
+    IDM_ICPC_ENUMCONNECTIONPOINTS 
+                            "EnumConnectionPoints - enumerate available connection points"
+    IDM_ICONNECTIONPOINT_GETCONNECTIONINTERFACE "GetConnectionInterface"
+    IDM_ICONNECTIONPOINT_GETCONNECTIONPOINTCONTAINER 
+                            "GetConnectionPointContainer"
+    IDM_ICONNECTIONPOINT_ADVISE "Advise"
+    IDM_ICONNECTIONPOINT_UNADVISE "Unadvise"
+    IDM_ICONNECTIONPOINT_ENUMCONNECTIONS "EnumConnections"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IMULTIPLERESULTS_GETRESULT 
+                            "GetResult - returns the next in a series of multiple results from the provider"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWSETVIEW_CREATEVIEW "CreateView"
+    IDM_IROWSETVIEW_GETVIEW "GetView"
+    IDM_MULTIPLERESULTS_ADDREF "AddRef"
+    IDM_ITRANSACTION_ABORT  "Abort - abort the Transaction"
+    IDM_ITRANSACTION_COMMIT "Commit - commit the Transaction"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDATAINITIALIZE_CREATEDBINSTANCE "CreateDBInstance"
+    IDM_IDATAINITIALIZE_CREATEDBINSTANCEEX "CreateDBInstanceEx"
+    IDM_IDATAINITIALIZE_GETDATASOURCE "GetDataSource"
+    IDM_IDATAINITIALIZE_GETINITIALIZATIONSTRING 
+                            "GetInitializationString - with password"
+    IDM_IDATAINITIALIZE_LOADSTRINGFROMSTORAGE "LoadStringFromStorage"
+    IDM_IDBPROMPTINITIALIZE_PROMPTFILENAME "PromptFileName"
+    IDM_IDATAINITIALIZE_WRITESTRINGTOSTORAGE "WriteStringToStorage"
+    IDM_COPYEDITWINDOW      "Copies the selection to the Clipboard"
+    IDM_CUTEDITWINDOW       "Cuts the selection and moves it to the Clipboard"
+    IDM_PASTEEDITWINDOW     "Inserts the clipboard contents as the insertion point"
+    IDM_COPYNOTIFYWINDOW    "Copies the selection to the Clipboard"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDBPROMPTINITIALIZE_PROMPTDATASOURCE 
+                            "PromptDataSource - Uses ServiceComponents to prompt for a DataSource"
+    IDM_IDATASOURCEADMIN_CREATEDATASOURCE "CreateDataSource"
+    IDM_IDATASOURCEADMIN_GETCREATIONPROPERTIES "GetCreationProperties"
+    IDM_IDATASOURCEADMIN_MODIFYDATASOURCE "ModifyDataSource"
+    IDM_IDATASOURCEADMIN_DESTROYDATASOURCE "DestroyDataSource"
+    IDM_ITRANSACTIONDISPENSOR_BEGINTRANSACTION "BeginTransaction"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IDATAINITIALIZE_GETINITIALIZATIONSTRING_NOPASSWORD 
+                            "GetInitializationString - no password"
+    IDM_GETROWFROMHROW      "GetRowFromHROW - returns a row object from the selected row"
+    IDM_GETURLFROMHROW      "GetURLFromHROW - returns a URL to bind to the selected row"
+    IDM_ROW_ADDREF          "AddRef"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ICOLUMNSINFO2_GETRESTRICTEDCOLUMNINFO "GetRestrictedColumnInfo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROW_GETCOLUMNS     "GetColumns"
+    IDM_IROW_GETSOURCEROWSET "GetSourceRowset"
+    IDM_IROW_OPEN           "Open"
+    IDM_IGETSESSION_GETSESSION "GetSession"
+    IDM_IROW_SETCOLUMNS     "SetColumns"
+    IDM_IROW_DELETECOLUMNS  "DeleteColumns"
+    IDM_IROW_ADDCOLUMNS     "AddColumns"
+    IDM_ISCOPEDOPERATIONS_COPY "Copy"
+    IDM_ISCOPEDOPERATIONS_DELETE "Delete"
+    IDM_ISCOPEDOPERATIONS_MOVE "Move"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ISCOPEDOPERATIONS_OPENROWSET "OpenRowset"
+    IDM_IBINDRESOURCE_BIND  "Bind"
+    IDM_ICREATEROW_CREATEROW "CreateRow"
+    IDM_IDBBINDERPROPERTIES_RESET "Reset"
+    IDM_IREGISTERPROVIDER_GETURLMAPPING "GetURLMapping"
+    IDM_IREGISTERPROVIDER_SETURLMAPPING "SetURLMapping"
+    IDM_IREGISTERPROVIDER_UNREGISTERPROVIDER "UnregisterProvider"
+    IDM_BINDER_ADDREF       "AddRef"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_NOTIFY_S_OK         "Listener returns S_OK"
+    IDM_NOTIFY_S_FALSE      "Listener returns S_FALSE"
+    IDM_NOTIFY_S_UNWANTEDREASON "Listener returns DB_S_UNWANTEDREASON"
+    IDM_NOTIFY_S_UNWANTEDPHASE "Listener returns DB_S_UNWANTEDPHASE"
+    IDM_NOTIFY_E_FAIL       "Listener returns E_FAIL"
+    IDM_MSPERSIST_ROWSET_SAVE "Save the current rowset to a file"
+    IDM_MSPERSIST_ROWSET_LOAD "Load a rowset from a file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IROWSET_CURSORENGINE "Invoke the Cursor Engine on the current rowset"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_CREATE_ROOTBINDER   "Create the Root Binder Object"
+    IDM_GETLASTVISIBLEDATA  "GetLastVisibleData"
+    IDM_REFRESHVISIBLEDATA  "RefreshVisibleData"
+    IDM_IROWSETLOCATE_GETDATA "GetData - retrieve data for the selected row"
+    IDM_IROWSETSCROLL_GETDATA "GetData - retrieve data for the selected row"
+    IDM_COMMANDTEXT_EXECUTE "Execute"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_TRACEWINDOW         "Activates the Trace Window"
+    IDM_OBJECTSWINDOW       "Activates the Objects Window"
+    IDM_STREAM_ADDREF       "AddRef"
+    IDM_ISERVICEPROVIDER    "QueryService"
+    IDM_UNKNOWN_ADDREF      "AddRef"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ISEQSTREAM_READ     "Read"
+    IDM_ISEQSTREAM_WRITE    "Write"
+    IDM_ISTREAM_SEEK        "Seek"
+    IDM_ISTREAM_SETSIZE     "SetSize"
+    IDM_ISTREAM_COPYTO      "CopyTo"
+    IDM_ISTREAM_COMMIT      "Commit"
+    IDM_ISTREAM_REVERT      "Revert"
+    IDM_ISTREAM_LOCKREGION  "LockRegion"
+    IDM_ISTREAM_UNLOCKREGION "UnlockRegion"
+    IDM_ISTREAM_STAT        "Stat"
+    IDM_ISTREAM_CLONE       "Clone"
+    IDM_ILOCKBYTES_READAT   "ReadAt"
+    IDM_ILOCKBYTES_WRITE    "WriteAt"
+    IDM_ILOCKBYTES_FLUSH    "Flush"
+    IDM_ILOCKBYTES_SETSIZE  "SetSize"
+    IDM_ILOCKBYTES_LOCKREGION "LockRegion"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_ILOCKBYTES_UNLOCKREGION "UnlockRegion"
+    IDM_ILOCKBYTES_STAT     "Stat"
+    IDM_ISTREAM_READ        "Read"
+    IDM_ISTREAM_WRITE       "Write"
+    IDM_IUNKNOWN_AUTOQI     "Obtain all interfaces"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_DATASET_ADDREF      "AddRef"
+    IDM_SERVICECOMP_ADDREF  "AddRef"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_POOLMNGR_ENUMPOOLS  "EnumPools"
+    IDM_POOLINFO_ADDREF     "AddRef"
+    IDM_POOLMNGR_REFRESH    "Refresh"
+    IDM_IPOOLINFO_GETCOUNT  "GetCount"
+    IDM_IPOOLINFO_SETRETRYTIMEOUT "GetPoolTimeOut"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_IPOOLINFO_SETPOOLTIMEOUT "SetPoolTimeOut"
+    IDM_IPOOLINFO_GETPOOLTIMEOUT "SetPoolTimeOut"
+    IDM_IPOOLINFO_GETRETRYTIMEOUT "GetPoolTimeOut"
+    IDM_IPOOLINFO_GETPOOLID "GetPoolID"
+    IDM_IPOOLINFO_GETPROTOTYPE "GetProtoType"
+    IDM_IPOOLINFO_REFRESH   "Refresh"
+    IDM_IGETPOOL_GETPOOL    "GetPool"
+    IDM_IGETPOOL_GETPOOLSTATE "GetPoolState"
+    IDM_AUTOPOSITION        "Auto Position Windows"
+    IDM_CREATEFILEMONIKER   "CreateFileMoniker"
+    IDM_COMMANDPERSIST_DELETECOMMAND "DeleteCommand"
+    IDM_COMMANDPERSIST_GETCURRENTCOMMAND "GetCurrentCommand"
+    IDM_COMMANDPERSIST_LOADCOMMAND "LoadCommand"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_COMMANDPERSIST_SAVECOMMAND "SaveCommand"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_TRANSACTIONOPTIONS_ADDREF "AddRef"
+    IDM_RELEASE_JOINEDTRANSACTION "Release Joined Transaction"
+    IDM_ITRANSACTIONJOIN_RELEASETRANSACTION "Release Transaction"
+    IDM_CONNECTIONPOINT_ADDREF "AddRef"
+    IDM_CREATE_SERVICECOMPONENTS "Create the Service Component Object"
+    IDM_CREATE_ROOTENUMERATOR "Create the Root Enumerator Object"
+    IDM_DATALINKS_ADDREF    "AddRef"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+<head>
+<title>Indexing Service: Installing Indexing Service</title>
+
+<script language="JavaScript">
+	version = navigator.appVersion
+    if (version.substring(0,1) == "2") {document.writeln('<link rel="stylesheet" disable="true" type="text/css" href="/iishelp/common/cocss.css">')} else
+ 		document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">')
+//></script>
+
+<META NAME="DESCRIPTION" CONTENT="Gives basic tips for building effective queries">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<p><font size=6><strong>Tips for Searching</strong></font></p>
+
+<!--Chaptoc-->
+<p align=left></p>
+
+<hr>
+<p align=left>At its simplest, a query can be just a word or a phrase. But with the tips on this page, you can expand the focus of your query to give you more complete results. These tips will get you started with basic query language and acquaint you with the full power of Indexing Service. </p>
+
+<ul>
+<li><p align=left>Look for words with the same prefix. For example, in your query form type <strong>key*</strong> to find <em>key</em>, <em>keying</em>, <em>keyhole</em>, <em>keyboard</em>, and so on. </p></li>
+<li><p align=left>Search for all forms of a word. For example, in the form type <strong>sink**</strong> to find <em>sink</em>, <em>sinking</em>, <em>sank</em>, and <em>sunk</em>. </p></li>
+<li><p align=left>Search with the keyword <strong>NEAR, </strong>rather than <strong>AND</strong>, for words close to each other. For example, both of these queries, <strong>system and manager</strong> and <strong>system near manager</strong>, look for the words <em>system</em> and <em>manager</em> on the same page. But with <strong>NEAR</strong>, the returned pages are ranked in order of proximity: The closer together the words are, the higher the rank of that page. </p></li>
+<li><p align=left>Refine your queries with the <strong>AND NOT</strong> keywords to exclude certain text from your search. For example, if you want to find all instances of <em>surfing</em> but not <em>the Net</em>, write the following query: </p>
+<p align=left><font face="courier"><code>surfing AND NOT the Net</code></font> </p></li>
+<li>Add the <strong>OR</strong> keyword to find all instances of either one word or another, for example:<p><font face="courier"><code>Abbott OR Costello</font></code> </p>
+<p>This query finds all pages that mention Abbott or Costello or both. </p></li>
+<li><p align=left>Put quotation marks around keywords if you want Indexing Service to take them literally. For instance, if you type the following query:<br>
+<br>
+
+<font face="courier"><code>&quot;system near manager&quot;<br>
+</code></font><br>
+
+Indexing Service will literally look for the complete phrase <em>system near manager</em>. But if you type the same query without the quotation marks:<br>
+<br>
+
+<font face="courier"><code>system near manager<br>
+</code></font><br>
+
+Indexing Service searches all documents for the words <em>system</em> and <em>manager</em>. </p></li>
+
+<li><p align=left><a name="FreeTextQueries">Use Free Text Queries</a> if you want to enter queries using natural language. Indexing Service will examine your query, extract nouns and noun phrases and construct a query for you. With free text queries you can enter any text you want, from a proper question, to a string of words and phrases, without worrying about the query language. For example, if you type in the following query:<br>
+<br>
+
+<font face="courier"><code>&quot;How do I use the Indexing Service administration snap-in?&quot;<br>
+</code></font><br>
+
+Indexing Service will create a query for you automatically and begin the search. Note that when you're using free text queries, the regular query language features are disabled and keywords such as <strong>AND</strong>, <strong>OR</strong>, and <strong>NEAR</strong> are interpreted as normal words.</p></li>
+</ul>
+
+<p align=left>These hints will get you started, but&#160;for more complex queries and more examples, see the <a href="ixqlang.htm">Query Language</a> page.</p>
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2002 by Microsoft Corporation. All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

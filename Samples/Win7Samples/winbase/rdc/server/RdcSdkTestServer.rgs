@@ -1,0 +1,15 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'RdcSdkTestServer'
+        '%APPID%'
+        {
+            val DllSurrogate = s ''
+        }
+		'RdcSdkTestServer.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

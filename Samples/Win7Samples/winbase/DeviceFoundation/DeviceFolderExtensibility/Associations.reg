@@ -1,0 +1,38 @@
+Windows Registry Editor Version 5.00
+
+;
+; Associate the sample property page with the mouse interface. This will make the property page
+; load for all devices that expose the mouse interface.
+;
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\shellex\PropertySheetHandlers\{f8ee49d1-02e4-472f-b55d-d3fc30f70de6}]
+@="Device Property Page"
+
+;
+; Associate the sample context menu handler with the mouse interface. This registration
+; also requests that the context menu item is the default item. This means it will be the action
+; perfomed when the device is double clicked on in the Devices and Printers Folder. This will make
+; the sample context menu item appear as the default item for all devices and expose the mouse interface. 
+;
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Shell\ContextMenu.Sample]
+@="Device Context Menu Sample Item"
+
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Shell\ContextMenu.Sample]
+"CommandStateSync"=""
+
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Shell\ContextMenu.Sample]
+"DefaultAppliesTo"=""
+
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Shell\ContextMenu.Sample]
+"ExplorerCommandHandler"="{a05d3c0d-590b-49e5-92d7-053917a218b6}"
+
+;
+; Associate the sample context menu handler with the mouse interface for the COMMAND BAR. This uses the same
+; context menu object as for the context menu, but results in the item being shown on the command bar. As
+; explained in the readme.htm, only use command bar items for items that will be frequently used by the
+; customer. Don't put all items on the command bar as there is limited real-estate.  
+;
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Commands\Shell\ContextMenu.Sample]
+@="Device Context Menu Sample Item"
+
+[HKEY_CLASSES_ROOT\DeviceDisplayObject\InterfaceClass\{378DE44C-56EF-11D1-BC8C-00A0C91405DD}\Commands\Shell\ContextMenu.Sample]
+"ExplorerCommandHandler"="{a05d3c0d-590b-49e5-92d7-053917a218b6}"

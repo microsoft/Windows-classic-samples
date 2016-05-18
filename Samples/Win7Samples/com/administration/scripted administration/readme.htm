@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<title>COMADMIN.VBS</title>
+<link rel="stylesheet" type="text/css" href="../../docs/Styles.css">
+<style>
+A:link {color: Olive}
+A:visited {color: 336666}
+A:hover {background:Olive; color: White}
+
+UL { list-style-image:"url('../images/BLACKARROW.GIF')"}
+
+</style>
+</head>
+
+<body>
+
+<h2>Scripted Administration</h2>
+
+<hr>
+<h4>Overview</h4>
+<p>This sample provides a command line interface to the COM+ Administration Interfaces.  To use it, simply run it through a windows 
+scripting host.  Simply supply arguments to the command line to have it get or set properties
+available in the Administration Interfaces.  For a full listing of the arguments available, run it with the /? option.
+</p>
+<p>
+An example command line that will read the Changeable property from the System Application would look like:
+<p><font face="Courier New"><b>
+wscript comadmin.vbs /get /localhost /application "System Application" /property "Changeable"</b></font>
+<p>
+To view the argument options, open the script comadmin.vbs in notepad or your
+favorite editor.
+
+<h4>Project Files</h4>
+<table border="0" width="75%">
+  <tr>
+    <td width="26%"><strong>Filename</strong></td>
+    <td width="74%"><strong>Description</strong></td>
+  </tr>
+  <tr>
+    <td width="26%"><a href="COMAdmin.vbs">COMAdmin.vbs</a></td>
+    <td width="74%">This script is the sample.  It can be opened as a text document to see how to interact with COM+ Administration Interfaces
+via a script.</td>
+  </tr>
+ </table>
+
+
+<h4>Build Notes</h4>
+<p>This sample does not require any building.  It does require you to have access to a scripting host.</p>
+<h4>Remarks</h4>
+<p>For more examples of using the COM+ Administration Interfaces see the Explore project
+(<a href="../Explore.VB/readme.htm">VB</a> or <a href="../Explore.VC/readme.htm">VC++</a>)</p>
+
+
+
+<p>For more information see <a href="http://msdn.microsoft.com/library/default.asp?URL=/library/psdk/cossdk/adreftoplevel_6o4l.htm">COM+
+Administration Reference</a><a href="http://msdn.microsoft.com/library/default.asp?URL=/library/psdk/cossdk/pgservices_events_2y9f.htm" target="_top">
+</a>on MSDN</p>
+
+
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<xml version="1.0">
+	<xs:schema id="xml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+		<xs:element name="xml" msdata:IsDataSet="true" msdata:EnforceConstraints="False">
+			<xs:complexType>
+				<xs:choice maxOccurs="1">
+					<xs:element name="FormData">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Image" type="xs:string" minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="FieldInfo">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Name" type="xs:string" minOccurs="0" />
+								<xs:element name="Left" type="xs:int" minOccurs="0" />
+								<xs:element name="Top" type="xs:int" minOccurs="0" />
+								<xs:element name="Right" type="xs:int" minOccurs="0" />
+								<xs:element name="Bottom" type="xs:int" minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+		</xs:element>
+	</xs:schema>
+	<FormData>
+		<Image>formdata.png</Image>
+	</FormData>
+	<FieldInfo>
+		<Name>first name</Name>
+		<Left>88</Left>
+		<Top>65</Top>
+		<Right>332</Right>
+		<Bottom>94</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>last name</Name>
+		<Left>338</Left>
+		<Top>68</Top>
+		<Right>446</Right>
+		<Bottom>97</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>spouse first</Name>
+		<Left>91</Left>
+		<Top>98</Top>
+		<Right>338</Right>
+		<Bottom>127</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>spouse last</Name>
+		<Left>343</Left>
+		<Top>97</Top>
+		<Right>448</Right>
+		<Bottom>127</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>address</Name>
+		<Left>89</Left>
+		<Top>127</Top>
+		<Right>391</Right>
+		<Bottom>159</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>apt</Name>
+		<Left>394</Left>
+		<Top>129</Top>
+		<Right>448</Right>
+		<Bottom>159</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>citystatezip</Name>
+		<Left>87</Left>
+		<Top>159</Top>
+		<Right>441</Right>
+		<Bottom>189</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>soc num</Name>
+		<Left>464</Left>
+		<Top>80</Top>
+		<Right>700</Right>
+		<Bottom>116</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>spouse soc num</Name>
+		<Left>464</Left>
+		<Top>139</Top>
+		<Right>696</Right>
+		<Bottom>175</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Pres Camp Yes</Name>
+		<Left>478</Left>
+		<Top>190</Top>
+		<Right>527</Right>
+		<Bottom>211</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Pres Camp No</Name>
+		<Left>537</Left>
+		<Top>189</Top>
+		<Right>590</Right>
+		<Bottom>211</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Spouse Pres Camp Yes</Name>
+		<Left>602</Left>
+		<Top>193</Top>
+		<Right>621</Right>
+		<Bottom>210</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Spouse Pres Camp No</Name>
+		<Left>659</Left>
+		<Top>197</Top>
+		<Right>676</Right>
+		<Bottom>210</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 1 : Wages Salary Tips</Name>
+		<Left>486</Left>
+		<Top>232</Top>
+		<Right>704</Right>
+		<Bottom>271</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 2: Taxable Interest</Name>
+		<Left>486</Left>
+		<Top>276</Top>
+		<Right>704</Right>
+		<Bottom>316</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 3: Unemployment</Name>
+		<Left>486</Left>
+		<Top>317</Top>
+		<Right>704</Right>
+		<Bottom>357</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 4: Adjusted Gross Income</Name>
+		<Left>486</Left>
+		<Top>359</Top>
+		<Right>704</Right>
+		<Bottom>399</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 5 Yes: Dependent?</Name>
+		<Left>117</Left>
+		<Top>423</Top>
+		<Right>155</Right>
+		<Bottom>452</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 5 No: Dependent?</Name>
+		<Left>254</Left>
+		<Top>423</Top>
+		<Right>298</Right>
+		<Bottom>453</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 5: Standard Deduction</Name>
+		<Left>486</Left>
+		<Top>402</Top>
+		<Right>704</Right>
+		<Bottom>442</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 6: Taxable Income</Name>
+		<Left>486</Left>
+		<Top>445</Top>
+		<Right>704</Right>
+		<Bottom>485</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line7: Withheld</Name>
+		<Left>486</Left>
+		<Top>486</Top>
+		<Right>704</Right>
+		<Bottom>526</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 8a EIC Type</Name>
+		<Left>119</Left>
+		<Top>539</Top>
+		<Right>319</Right>
+		<Bottom>582</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 8a EIC Amt</Name>
+		<Left>320</Left>
+		<Top>538</Top>
+		<Right>434</Right>
+		<Bottom>579</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 8a: EIC</Name>
+		<Left>486</Left>
+		<Top>528</Top>
+		<Right>704</Right>
+		<Bottom>568</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 9: Total Pmts</Name>
+		<Left>486</Left>
+		<Top>573</Top>
+		<Right>704</Right>
+		<Bottom>613</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 10: Tax</Name>
+		<Left>486</Left>
+		<Top>616</Top>
+		<Right>704</Right>
+		<Bottom>656</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 11a: Refund</Name>
+		<Left>486</Left>
+		<Top>657</Top>
+		<Right>704</Right>
+		<Bottom>697</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 11b: Routing No</Name>
+		<Left>486</Left>
+		<Top>699</Top>
+		<Right>704</Right>
+		<Bottom>739</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 11c Checking</Name>
+		<Left>486</Left>
+		<Top>742</Top>
+		<Right>704</Right>
+		<Bottom>782</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 11c Savings</Name>
+		<Left>486</Left>
+		<Top>742</Top>
+		<Right>704</Right>
+		<Bottom>782</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 11d: Acct #</Name>
+		<Left>486</Left>
+		<Top>742</Top>
+		<Right>704</Right>
+		<Bottom>782</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Line 12: Amt Owed</Name>
+		<Left>486</Left>
+		<Top>780</Top>
+		<Right>704</Right>
+		<Bottom>820</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Signature</Name>
+		<Left>92</Left>
+		<Top>853</Top>
+		<Right>268</Right>
+		<Bottom>893</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Date</Name>
+		<Left>92</Left>
+		<Top>891</Top>
+		<Right>163</Right>
+		<Bottom>924</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Occupation</Name>
+		<Left>166</Left>
+		<Top>891</Top>
+		<Right>268</Right>
+		<Bottom>924</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Spouse Signature</Name>
+		<Left>277</Left>
+		<Top>853</Top>
+		<Right>452</Right>
+		<Bottom>893</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Spouse Date</Name>
+		<Left>277</Left>
+		<Top>891</Top>
+		<Right>341</Right>
+		<Bottom>924</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Spouse Occupation</Name>
+		<Left>341</Left>
+		<Top>891</Top>
+		<Right>452</Right>
+		<Bottom>924</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Discuss W/ Preparer: Yes</Name>
+		<Left>420</Left>
+		<Top>924</Top>
+		<Right>450</Right>
+		<Bottom>949</Bottom>
+	</FieldInfo>
+	<FieldInfo>
+		<Name>Discuss W/ Preparer: No</Name>
+		<Left>475</Left>
+		<Top>918</Top>
+		<Right>506</Right>
+		<Bottom>950</Bottom>
+	</FieldInfo>
+</xml>

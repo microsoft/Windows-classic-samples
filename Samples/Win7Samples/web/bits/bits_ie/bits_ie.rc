@@ -1,0 +1,223 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winresrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG DIALOG DISCARDABLE  0, 0, 228, 166
+STYLE DS_MODALFRAME | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "BITS DOWNLOAD"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "&Finish",IDC_FINISH,5,145,50,14
+    PUSHBUTTON      "&Cancel",IDC_CANCEL,60,145,50,14
+    PUSHBUTTON      "&Resume",IDC_RESUME,115,145,50,14
+    PUSHBUTTON      "&Suspend",IDC_SUSPEND,170,145,50,14
+    LTEXT           "Status:",IDC_STATUSTXT,5,25,70,8,SS_CENTERIMAGE | NOT 
+                    WS_GROUP
+    LTEXT           "Creation Time: ",IDC_CREATIONTIMETXT,5,35,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    CONTROL         "Progress1",IDC_PROGRESSBAR,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,5,15,215,10
+    LTEXT           "Modification Time: ",IDC_MODIFICATONTIMETXT,5,45,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Completion Time: ",IDC_COMPLETIONTIMETXT,5,56,70,8,
+                    SS_CENTERIMAGE | WS_DISABLED | NOT WS_GROUP
+    LTEXT           "Estimated Time Left: ",IDC_ESTIMATEDTIMETXT,5,75,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Transfer rate:",IDC_TRANSFERRATETXT,5,85,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "Priority:",IDC_PRIORITYTXT,5,130,75,8,SS_CENTERIMAGE | 
+                    NOT WS_GROUP
+    LTEXT           "Error message:",IDC_ERRORMSGTXT,5,95,70,8,
+                    SS_CENTERIMAGE | WS_DISABLED | NOT WS_GROUP
+    LTEXT           "EXAMPLE STATUS",IDC_STATUS,80,25,140,8,NOT WS_VISIBLE | 
+                    NOT WS_GROUP
+    LTEXT           "EXAMPLE CREATION TIME",IDC_STARTTIME,80,35,140,8,NOT 
+                    WS_VISIBLE
+    LTEXT           "EXAMPLE MODIFICATION TIME",IDC_MODIFICATIONTIME,80,45,
+                    140,8,NOT WS_VISIBLE
+    LTEXT           "EXAMPLE COMPLETION TIME",IDC_COMPLETIONTIME,80,55,140,8,
+                    NOT WS_VISIBLE
+    LTEXT           "EXAMPLE ESTIMATED TIME",IDC_ESTIMATEDTIME,80,75,140,10,
+                    NOT WS_VISIBLE
+    LTEXT           "EXAMPLE TRANSFER RATE",IDC_TRANSFERRATE,80,85,140,8,NOT 
+                    WS_VISIBLE
+    COMBOBOX        IDC_PRIORITY,80,130,140,35,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_GROUP | WS_TABSTOP
+    LTEXT           "EXAMPLE DISPLAYNAME",IDC_DISPLAYNAME,5,5,215,8,NOT 
+                    WS_VISIBLE | NOT WS_GROUP
+    EDITTEXT        IDC_ERRORMSG,5,105,215,25,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    LTEXT           "Progress: ",IDC_PROGRESSINFOTXT,5,65,70,8,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    LTEXT           "EXAMPLE ESTIMATED TIME",IDC_PROGRESSINFO,80,65,140,10,
+                    NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 221
+        TOPMARGIN, 9
+        BOTTOMMARGIN, 159
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DIALOG DLGINIT
+BEGIN
+    IDC_PRIORITY, 0x403, 11, 0
+0x6f46, 0x6572, 0x7267, 0x756f, 0x646e, "\000" 
+    IDC_PRIORITY, 0x403, 5, 0
+0x6948, 0x6867, "\000" 
+    IDC_PRIORITY, 0x403, 7, 0
+0x6f4e, 0x6d72, 0x6c61, "\000" 
+    IDC_PRIORITY, 0x403, 4, 0
+0x6f4c, 0x0077, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON    DISCARDABLE     "bits_ie.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_LONGPROGRESS        "%I64u bytes out of %I64u bytes"
+    IDS_ERROR               "Error"
+    IDS_SHORTPROGRESS       "%I64u bytes"
+    IDS_QUEUED              "Queued"
+    IDS_CONNECTING          "Connecting"
+    IDS_TRANSFERRING        "Transferring"
+    IDS_SUSPENDED           "Suspended"
+    IDS_FATALERROR          "Fatal Error"
+    IDS_TRANSIENTERROR      "Transient Error"
+    IDS_TRANSFERRED         "Transferred"
+    IDS_ACKNOWLEDGED        "Acknowledged"
+    IDS_CANCELLED           "Cancelled"
+    IDS_UNKNOWN             "Unknown"
+    IDS_DAYSFORMAT          "%I64u days"
+    IDS_HOURSFORMAT         "%I64u Hours"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MINUTESFORMAT       "%I64u Minutes"
+    IDS_SECONDSFORMAT       "%I64u Seconds"
+    IDS_FOREGROUND          "Foreground"
+    IDS_HIGH                "High"
+    IDS_NORMAL              "Normal"
+    IDS_LOW                 "Low"
+    IDS_ERRORBOXTITLE       "Background Download"
+    IDS_FILEDLGTITLE        "Choose the download destination."
+    IDS_CANCELCAPTION       "Cancel Confirmation"
+    IDS_CANCELTEXT          "Do you wish to cancel the background download?   All downloaded data will be lost?"
+    IDS_NOHTTPORHTTPS       "An HTTP or HTTPS URL is required."
+    IDS_ALLFILES            "All Files"
+    IDS_STARTUPLINK         "BITS Background Download"
+    IDS_CLOSECAPTION        "Close Confirmation"
+    IDS_CLOSETEXT           "Do you wish to exit? The job will be canceled."
+    IDS_ALREADYFINISHED     "The download has transferred or reached an error, either cancel or finish it before exiting."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ALREADYFINISHEDCAPTION "Download finished"
+    IDS_GIGAFORMAT          "%.2f GB/S"
+    IDS_MEGAFORMAT          "%.2f MB/S"
+    IDS_KILOFORMAT          "%.2f KB/S"
+    IDS_BYTEFORMAT          "%.2f B/S"
+    IDS_DISPLAYERRORCODE    "Unknown error: 0x%x"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

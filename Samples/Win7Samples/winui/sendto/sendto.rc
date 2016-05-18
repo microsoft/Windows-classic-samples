@@ -1,0 +1,60 @@
+/*****************************************************************************
+ *
+ *  SendTo.rc
+ *
+ *  Copyright (c) 1997 Microsoft Corporation.  All rights reserved.
+ *
+ *       This source code is only intended as a supplement to
+ *       Microsoft Development Tools, q.v. for detailed
+ *       information regarding the Microsoft samples programs.
+ *
+ *  Abstract:
+ *
+ *      Resources for the Send To sample.
+ *
+ *****************************************************************************/
+
+#include "Sendto.h"
+
+SendToMenu MENUEX
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open", IDM_OPEN
+        POPUP "Se&nd To", IDM_SENDTOPOPUP
+        BEGIN
+            MENUITEM "(none)", IDM_SENDTOFIRST, , MFS_GRAYED
+        END
+    END
+END
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION                         1, 0, 0, 0
+PRODUCTVERSION                      1, 0, 0, 0
+FILEFLAGSMASK                       VS_FFI_FILEFLAGSMASK
+FILEFLAGS                           0
+FILEOS                              VOS_DOS_WINDOWS32
+FILETYPE                            VFT_APP
+FILESUBTYPE                         VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",        "Microsoft Corporation\0"
+            VALUE "FileDescription",    "Sendto Sample\0"
+            VALUE "FileVersion",        "1.0\0"
+            VALUE "InternalName",       "SENDTO.EXE"
+            VALUE "LegalCopyright",     "Copyright \251 Microsoft Corp. 1997\0"
+            VALUE "OriginalFilename",   "SENDTO.EXE"
+            VALUE "ProductName",        "Microsoft Win32 SDK\0"
+            VALUE "ProductVersion",     "1.0\0"
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+
+END

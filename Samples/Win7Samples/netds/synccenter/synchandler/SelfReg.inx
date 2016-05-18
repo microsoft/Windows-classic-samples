@@ -1,0 +1,69 @@
+[Version]
+Signature="$CHICAGO$"
+
+[RegDll]
+AddReg=AddReg
+DelReg=ObsoleteReg
+
+[UnregDll]
+DelReg=DeleteReg
+
+[AddReg]
+;*** Handler collection registration
+HKLM,%PATH_SyncMgr%\HandlerCollections\%CLSID_MyDeviceHandlerCollection%,,,"%DESC_HandlerCollection%"
+HKLM,"%PATH_SyncMgr%\HandlerCollections\%CLSID_MyDeviceHandlerCollection%\DefaultIcon",,%REGEXSZ%,"%_SYS_MOD_PATH%,-50"
+
+HKCR,"CLSID\%CLSID_MyDeviceHandlerCollection%",,,"%DESC_HandlerCollection_COM%"
+HKCR,"CLSID\%CLSID_MyDeviceHandlerCollection%\InProcServer32",,%REGEXSZ%,%_SYS_MOD_PATH%
+HKCR,"CLSID\%CLSID_MyDeviceHandlerCollection%\InProcServer32",ThreadingModel,,Apartment
+
+;*** Sync handler registration
+HKCR,"CLSID\%CLSID_MyDeviceSyncHandler%",,,"%DESC_SyncHandler_COM%"
+HKCR,"CLSID\%CLSID_MyDeviceSyncHandler%\InProcServer32",,%REGEXSZ%,%_SYS_MOD_PATH%
+HKCR,"CLSID\%CLSID_MyDeviceSyncHandler%\InProcServer32",ThreadingModel,,Apartment
+
+;*** Context menu extension registration
+HKCR,"CLSID\%CLSID_MyDeviceContextMenu%",,,"%DESC_ContextMenuHandler_COM%"
+HKCR,"CLSID\%CLSID_MyDeviceContextMenu%\InProcServer32",,%REGEXSZ%,%_SYS_MOD_PATH%
+HKCR,"CLSID\%CLSID_MyDeviceContextMenu%\InProcServer32",ThreadingModel,,Apartment
+
+; Allow the context menu extension to set the default menu item.
+HKCR,"CLSID\%CLSID_MyDeviceContextMenu%\ShellEx\MayChangeDefaultMenu"
+
+; Allow extension to be loaded by the Shell.
+HKLM,"%PATH_ShellExtApproved%","%CLSID_MyDeviceContextMenu%",,"%DESC_ContextMenuHandler_COM%"
+
+; Register context menu extension with handler collection.
+HKLM,"%PATH_SyncMgr%\HandlerCollections\%CLSID_MyDeviceHandlerCollection%\ShellEx\ContextMenuHandlers\MySampleDeviceMenu",,,"%CLSID_MyDeviceContextMenu%"
+HKLM,"%PATH_SyncMgr%\HandlerCollections\%CLSID_MyDeviceHandlerCollection%\SyncItemDefaults\ShellEx\ContextMenuHandlers\MySampleDeviceMenu",,,"%CLSID_MyDeviceContextMenu%"
+
+;*** Partnership registration
+HKCU,"%PATH_SampleDevice%\Partnerships\1",DisplayName,,"Joe's PDA"
+
+[ObsoleteReg]
+
+[DeleteReg]
+HKLM,%PATH_SyncMgr%\HandlerCollections\%CLSID_MyDeviceHandlerCollection%
+HKLM,"%PATH_ShellExtApproved%","%CLSID_MyDeviceContextMenu%"
+HKCR,"CLSID\%CLSID_MyDeviceHandlerCollection%"
+HKCR,"CLSID\%CLSID_MyDeviceSyncHandler%"
+HKCR,"CLSID\%CLSID_MyDeviceContextMenu%"
+HKCU,%PATH_SampleDevice%
+
+[Strings]
+REGDW                       = 0x00010001
+REGEXSZ                     = 0x00020000
+
+CLSID_MyDeviceHandlerCollection     = "{29670321-0BA3-4dc5-B4C7-0F7FDB1EA68C}"
+CLSID_MyDeviceSyncHandler           = "{CE789B61-EC8A-499f-9977-2BA2593EEC60}"
+CLSID_MyDeviceContextMenu           = "{7ED0B13B-38D8-4fd6-AD69-1182AE920E6E}"
+
+PATH_SyncMgr                = "Software\Microsoft\Windows\CurrentVersion\SyncMgr"
+PATH_SampleDevice           = "Software\Microsoft\Sample Device"
+PATH_ShellExtApproved       = "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved"
+
+;Localizable Strings
+DESC_HandlerCollection      = "My Sample Device Handler Collection"
+DESC_HandlerCollection_COM  = "My Sample Device Sync Manager Handler Collection"
+DESC_SyncHandler_COM        = "My Sample Device Sync Manager Handler"
+DESC_ContextMenuHandler_COM = "My Sample Device Sync Handler Context Menu Handler"

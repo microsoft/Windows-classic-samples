@@ -1,0 +1,30 @@
+STRINGTABLE
+BEGIN
+    1 "Geometric Waves Managed"
+    2 "Geometric Waves Managed" // {Locked} means don't localize
+    3 "This counter set displays a Triangle and a Square wave"
+    5 "Triangle Wave"
+    6 "Triangle Wave" // {Locked} means don't localize
+    7 "This counter displays triangle wave"
+    9 "Square Wave"
+    10 "Square Wave" // {Locked} means don't localize
+    11 "This counter displays Square Wave"
+    13 "Trigonometric Waves Managed"
+    14 "Trigonometric Waves Managed" // {Locked} means don't localize
+    15 "This counter set displays a sine, cosine and a constant wave"
+    17 "Sine Wave"
+    18 "Sine Wave" // {Locked} means don't localize
+    19 "This counter displays Sine Wave"
+    21 "Cosine Wave"
+    22 "Cosine Wave" // {Locked} means don't localize
+    23 "This counter displays Cosine Wave"
+    25 "Constant Value"
+    26 "Constant Value" // {Locked} means don't localize
+    27 "This counter displays Constant Value"
+    29 "Constant Number"
+    30 "Constant Number" // {Locked} means don't localize
+    31 "This counter stores a constant value that does not display"
+    33 "Raw Fraction"
+    34 "Raw Fraction" // {Locked} means don't localize
+    35 "RawFraction ; Takes counter with ID = 4 as base counter"
+END

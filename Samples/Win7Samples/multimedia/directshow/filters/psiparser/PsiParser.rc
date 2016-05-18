@@ -1,0 +1,150 @@
+//------------------------------------------------------------------------------
+// File: PsiParser.rc
+//
+// Desc: DirectShow sample code - Resource file for PsiParser filter
+//
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------------------------
+
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROGDIALOG DIALOG DISCARDABLE  0, 0, 253, 214
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "List3",IDC_PROGLIST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,9,34,234,51
+    PUSHBUTTON      "View Program",IDC_VIEWBUTTON,106,198,50,14
+    LTEXT           "Transport Stream ID:",IDC_StreamIdText,9,9,66,8
+    EDITTEXT        IDC_StreamIdEDIT,86,6,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "PAT Version Number:",IDC_PatVersionTEXT,130,9,69,8
+    EDITTEXT        IDC_PatVersionEDIT,202,6,40,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "Refresh",IDC_REFRESHBUTTON,9,198,50,14
+    PUSHBUTTON      "Stop Viewing",IDC_STOPBUTTON,193,198,50,14
+    LTEXT           "Elementary Streams of the Selected Program:",
+                    IDC_ES_TEXT,8,92,143,8
+    CONTROL         "List1",IDC_ES_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,9,102,234,72
+    LTEXT           "Programs Contained in the Transport Stream:",
+                    IDC_PROG_TEXT,9,23,142,8
+    LTEXT           "Audio PID:",IDC_AUDIO_PID,51,182,35,8
+    LTEXT           "Video PID:",IDC_VIDEO_PID,135,182,35,8
+    EDITTEXT        IDC_EDIT_AUDIO,86,179,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_VIDEO,169,179,40,14,ES_AUTOHSCROLL
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    //"#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+#define VERSION_RES_BIN_NAME         "PSIParser.dll\0"
+#define VERSION_RES_BIN_DESCRIPTION  "PSIParser Filter (Sample)\0"
+
+#define AMOVIE_SELF_REGISTER
+
+//#include <activex.rcv>
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String table
+//
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_TITLE,    "Programs"
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROGDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        RIGHTMARGIN, 243
+        VERTGUIDE, 9
+        BOTTOMMARGIN, 212
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

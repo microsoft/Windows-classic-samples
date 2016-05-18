@@ -1,0 +1,23 @@
+TARGETNAME=microsoft.storage.imapi
+TARGETTYPE=DYNLINK
+TARGET_DESTINATION=storage\interop\imapi
+
+URT_VER=2.0
+MANAGED_CODE=1
+COM_VISIBLE=1
+
+#ASSEMBLY_IDENTITY_PUBLIC_KEY_NAME=windows
+USE_ASMETA=1
+
+PASS0_PUBLISH = \
+ {$(TARGETNAME).asmmeta=$(DRIVERS_TST_REF_PATH)\$(TARGETNAME).asmmeta}
+
+SOURCES=IMAPIv2.cs   \
+        IMAPIv2FS.cs \
+        IMAPIv2RAW.CS\
+        IMAPIv2_Ex.cs
+ 
+REFERENCES=$(CLR_REF_PATH)\System.metadata_dll; \
+           $(CLR_REF_PATH)\CustomMarshalers.metadata_dll;
+
+

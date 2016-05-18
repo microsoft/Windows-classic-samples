@@ -1,0 +1,8 @@
+LANGUAGE 0xa, SUBLANG_NEUTRAL
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SRGRAMMAR
+//
+
+IDR_SOL_CFG             SRGRAMMAR DISCARDABLE   "esp_dates.cfg"

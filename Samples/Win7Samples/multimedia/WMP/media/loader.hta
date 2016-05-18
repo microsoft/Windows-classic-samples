@@ -1,0 +1,106 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+	<TITLE>Windows Media Player SDK</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1 align = "center">Windows Media Player SDK</H1>
+
+<p align="center"><font color="#000000" size="5" face="Arial">
+
+Add Sample Digital Media Files to the Library
+
+</font></p>
+
+<OBJECT ID="Player" height="0" width="0"
+	 CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">
+</OBJECT>
+<P>The Windows Media Player SDK provides a set of samples that demonstrate some of the technologies documented in the SDK. These samples rely on a small
+set of media files to be added to your Windows Media Player library in order for the samples to function correctly.
+<BR>
+<P>Click <B>Add Media</B> to load the Windows Media Player SDK sample digital media files into the library.
+<BR>
+This Web page adds eight sample digital media files.
+<BR><BR>
+<STRONG>Note: It might take several seconds to perform this operation.</STRONG>
+<BR><BR>
+
+<DIV align="left">
+    <INPUT TYPE="BUTTON" NAME="btnAdd" VALUE="Add Media" OnClick="LoadMedia()">
+</DIV>
+<P>
+<BR><BR>
+
+<DIV ID=MLS></DIV>
+<SCRIPT SRC = 'loader.js'></SCRIPT>
+<SCRIPT language = "JScript">
+
+// Global variables.
+var defaultPath;
+var counter = 0;
+
+// These are the files to add.
+var fileName = new Array();
+   fileName[0] = "laure.wma";
+   fileName[1] = "house.wma";
+   fileName[2] = "jeanne.wma";
+   fileName[3] = "mellow.wma";
+   fileName[4] = "smooth.wmv";
+   fileName[5] = "glass.wmv";
+   fileName[6] = "seattle.wmv";
+   fileName[7] = "multilang.wma";
+
+// This is the number of files to add.
+var numFiles = 8;
+
+function LoadMedia()
+{
+    
+     var ws = new ActiveXObject("WScript.Shell"); 
+         
+     MLS.innerHTML = "<STRONG><FONT color = RED>Watch here for status...</STRONG><BR><BR></FONT>";
+         
+     defaultPath = ws.CurrentDirectory + "\\";        
+
+     MLS.innerHTML = "<STRONG><FONT color = RED>Accessing Media Library...</STRONG><BR><BR></FONT>";
+     setTimeout("addMedia()", 100);
+}
+
+function addMedia()
+{
+	var fullPath = defaultPath + fileName[counter];
+	var retMedia;
+
+	try
+	{
+		retMedia = Player.mediaCollection.add(fullPath);
+	}
+	catch(e)
+	{
+		MLS.innerHTML += fileName[counter];
+		MLS.innerHTML += " was <B>not</B> added.<BR>";
+	}
+
+	if (retMedia)
+	{ 
+		MLS.innerHTML += fileName[counter];
+		MLS.innerHTML += " was added.<BR>";
+
+	}
+    
+	if( ++counter < numFiles)
+	{
+		setTimeout("addMedia()", 100);
+	}
+	else
+	{
+		MLS.innerHTML += "<BR>Done";
+	}
+}
+
+</SCRIPT>
+
+</BODY>
+</HTML>

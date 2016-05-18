@@ -1,0 +1,1329 @@
+<!-- 
+
+--------------------------------------------------------------------------
+
+  Copyright (C) 1998-1999 Microsoft Corporation. All rights reserved.
+
+--------------------------------------------------------------------------
+
+
+    Conference management operations 
+    
+    This HTM page allows you to perform the following:
+		1. Create/delete IP Multicast conferences
+		2. Directly modify properties of an IP Conference (using the SDP blob editor)
+		
+    Covered areas:
+			1. REND usage (general topics)
+			2. REND usage for IP Multicast conference management
+			2. MADCAP usage
+							
+-->  
+
+<TITLE>IP Multicast Conference Management </TITLE>
+<HTML>
+<HEAD>
+<META name=VI60_defaultClientScript content=VBScript>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+</HEAD>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+
+    var ua = navigator.userAgent;
+    var an = navigator.appName;
+
+    // Is it IE?
+    bMSIE = (ua.indexOf("MSIE")>=1);
+    if (! bMSIE)
+    {
+     alert("You need to use IE to run this page");
+     window.close;
+    }
+//-->
+</SCRIPT>
+
+
+<SCRIPT ID=clientEventHandlersVBS LANGUAGE=vbscript>
+'These constants from rend.h
+Const DT_ILS = 2
+Const OT_CONFERENCE = 1
+ 
+'Interfaces IDs for casting (from rend.h, sdpblb.h) 
+Const IID_String_ITDirectoryObjectConference= "{F1029E5D-CB5B-11D0-8D59-00C04FD91AC0}"
+Const IID_String_ITConferenceBlob= "{C259D7AA-C8AB-11D0-8D58-00C04FD91AC0}"
+Const IID_String_ITSDP = "{9B2719D8-B696-11D0-A489-00C04FD91AC0}"
+Const IID_String_ITConnection = "{8fa381d4-c8c2-11d0-8d58-00c04fd91ac0}"
+' Declaration of global variables
+
+'set on TRUE whenever an error occurs during processing
+DIM sblnErrorTrapped
+sblnErrorTrapped = FALSE
+
+'Show or not Codec fields
+'Used just for enabling/disabling correspondent piece of code
+DIM blnShowCodecs
+blnShowCodecs = TRUE
+
+
+'Store object ITDirectory to speed up processing
+DIM pITDirectory  
+
+'Store  objects used for SDP editing
+DIm pITConferenceBlob
+Dim pDirectoryObject
+
+'Current address type(Published ILs or ILS entered by user( 2,3)
+DIM sCurrentAddressType
+sCurrentAddressType  = 3
+
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'******************************************************************** 
+' Initialize list of default directories
+
+Sub window_onload
+On Error Resume Next
+Dim oOption
+oOption = Empty
+
+'Disable buttons that are active just if we are connected to server
+ 
+ SelectPublished.style.background = "gray"
+ ILSServer.style.background = "white"
+ 
+ call disable_operations(True) 
+
+ window.status = "Enumerate default directories..."
+
+ 'Enumerate default directories
+ 'Most time-consuming stage of processing
+ For Each dirs in REND.DefaultDirectories
+ 
+   'We look only for published ILS servers
+   if dirs.DirectoryType = DT_ILS Then
+	    Set  oOption = document.createElement("OPTION") 
+		oOption.text  =  Lcase( dirs.DisplayName)
+        oOption.value = dirs.DisplayName
+        SelectPublished.add(oOption)  
+   End If 
+   
+ Next   
+ 
+ if Not ISEmpty(oOption) Then 
+   SelectPublished.options(0).selected = True   
+ End If
+   
+ window.status = "Done."
+ 
+End Sub
+
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub disable_operations(state)
+On Error Resume Next
+  ButtRefr.disabled = state
+  ButtProp.disabled = state
+  ButtAdd.disabled = state
+  ButtDel.disabled = state
+End Sub
+
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'Check if conference is selected in list of conferences
+Function check_conference
+On Error Resume Next
+
+check_conference = True
+
+if direct.value = "" or IsEmpty(direct.value) Then
+  MsgBox "You have not selected a conference from the list",0,"Operations"
+  check_conference = False
+End if
+
+End Function  
+  
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+' Connect to ILS server.
+' Issue bind
+' 
+Sub ConnectServer(dir_name, dir_type)
+' Perform Connect and Bind operations on user request.
+' Populate list of currently available conferences
+On Error Resume Next
+
+Dim dObject
+
+call disable_operations(True)
+
+'Remove all conference announcements from list
+For i = 0 to direct.options.length
+      direct.remove(0)
+Next    
+
+Err.Clear
+  
+  'REND is ITRendezvous
+  Set pITDirectory = REND.CreateDirectory(dir_type,dir_name)
+  Call CheckError("ConnServ:REND.CreateDirectory")   
+  
+  'Connect to the ILS server
+  pITDirectory.connect false
+   
+  if not (Err.number = 0 ) Then
+   MsgBox "Selected server is not responding",0,"Server connect"
+   Exit Sub
+  End if  
+
+' If user prefers this, issue bind for given server
+  Dim uname
+  Dim pwd
+  Dim dom
+
+  uname = textuser.value
+  pwd = textpwd.value
+  dom = textdom.value
+  if not (IsEmpty(uname) or uname = "" ) Then
+     pITDirectory.bind dom,uname, pwd, false 
+     if not Err.number = 0 Then
+       MsgBox "You are not authorized to bind: check username and password",0,"Server connect"   
+       Exit Sub
+     End if  
+  Else
+     'NULL,NULL,NULL bind: issue bind with default user cred.
+     pITDirectory.Bind  "","","",15 
+     if not Err.number = 0 Then
+       Err.Clear
+       'You are not authorized, but don't worry: you'll still be able to see public conferences
+     End if  
+  End if  
+
+'Fill list with information of available CONFERENCES
+call populate_list()
+
+call disable_operations(false)
+
+End Sub
+
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'Enumerate directories on current server.
+Sub populate_list 
+' Populate list of conferences
+On Error Resume Next
+Dim oOption
+
+'Remove all entries from list
+For i = 0 to direct.options.length
+    direct.remove(0)
+Next    
+
+'Indirect Collection usage: get list of all available conferences  
+For Each pITDirectoryObject in pITDirectory.DirectoryObjects(1,"*")
+  Set  oOption = document.createElement("OPTION") 
+  oOption.text  = pITDirectoryObject.name
+  oOption.value = pITDirectoryObject.name
+  direct.add(oOption)  
+Next
+
+if Err.number = &H1C3 Then
+  Err.Clear
+  MsgBox "Server is probably down.",0,"Refresh"
+  disable_operations(True) 
+Else 
+  ' It is possible that  no conferences are published.
+  Err.Clear
+End If
+
+End Sub
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub Add_new
+  ' User pressed "add New conference"
+  'Show input fields for him
+  call visible_all("visible",True)
+End Sub
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'Simplest error processing
+Sub CheckError(place)
+If not Err.number = 0 Then
+  MsgBox "An error 0x"& HEx(Err.number) & "("&Err.description&") occured at " & place,0,"Conference management"  
+  Err.Clear
+  sblnErrorTrapped = True
+End If
+End Sub 
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'Supplementary subroutine to change VALUE of checkboxes
+Sub  togglechk()
+'Toggle state of checkbox
+ if (window.event.srcElement.value = "off") Then 
+   window.event.srcElement.value ="on"
+ else
+   window.event.srcElement.value ="off"
+ End IF  
+End Sub
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub Cancel_new
+' User pressed "Cancel New conference creation"
+  'Hide all input fields
+  call visible_all("hidden",False)
+  call visible_advanced("hidden")
+  ButtAdv.value="Adv.Options"
+End Sub
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub show_adv_fields
+if ButtAdv.value="Adv.Options" Then 
+ ButtAdv.value="Hide Options"
+ visible_advanced("visible")
+Else
+ ButtAdv.value="Adv.Options"
+ visible_advanced("hidden")
+End If
+End Sub 
+ 
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub visible_advanced(visib) 
+On Error Resume Next
+
+'Currently unused 
+if 1= 3 Then
+  mcastGeneraltext.style.visibility = visib
+  mcastGeneral.style.visibility = visib
+  mcastGeneral.value =""
+  TTLGeneraltext.style.visibility = visib
+  TTLGeneral.style.visibility = visib
+  TTLGeneral.value = ""
+End If
+
+mcastVideotext.style.visibility = visib
+mcastVideo.style.visibility = visib
+TTLVideotext.style.visibility = visib
+TTLVideo.style.visibility = visib
+TTLVideo.value = ""
+mcastVideo.value =""
+
+StpVideotext.style.visibility = visib
+StpVideo.style.visibility = visib
+StpVideo.value = ""
+
+StpAudiotext.style.visibility = visib
+StpAudio.style.visibility = visib
+StpAudio.value = ""
+
+selVideoCodec.style.visibility = visib
+selVideoCodec.options(0).selected = True
+
+selAudioCodec.style.visibility = visib
+selAudioCodec.options(0).selected = True
+
+mcastAudiotext.style.visibility = visib
+mcastAudio.style.visibility = visib
+TTLAudiotext.style.visibility = visib
+TTLAudio.style.visibility = visib
+TTLAudio.value = ""
+mcastAudio.value =""
+
+
+if blnShowCodecs Then
+  CodecVideotext.style.visibility = visib
+  CodecAudiotext.style.visibility = visib
+
+  if visib = "hidden" Then
+    selVideoCodec.style.Left = "-1200px"
+    selAudioCodec.style.Left = "-1200px"
+  Else
+    selVideoCodec.style.Left = "340px"
+    selAudioCodec.style.Left = "340px"
+  End If
+End If
+End Sub
+  
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub visible_all(visib, enab)
+'Toggle visibility of input elements
+On Error Resume Next
+
+confprop.style.visibility = visib
+nameconf.style.visibility = visib
+confname.style.visibility = visib
+descconf.style.visibility = visib
+descname.style.visibility = visib
+starttext.style.visibility = visib
+startfrom.style.visibility = visib
+endtext.style.visibility = visib
+endat.style.visibility = visib
+ButtCancel.style.visibility = visib 
+ButtCre.style.visibility = visib
+ButtAdv.style.visibility = visib
+
+confname.value=""
+descname.value=""
+startfrom.value=Now()
+'Standard timeframe: 1/2 hour
+endat.value=DateAdd("s",30*60,Now())
+ButtAdd.disabled = enab
+ButtDel.disabled = enab
+ButtProp.disabled = enab
+End Sub
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'********************************************************************
+Sub Delete_conf
+On Error Resume Next
+' Destroy current conference
+Dim dirname 
+DIM is_deleted
+is_deleted = False
+
+'Check that user has selected a conference
+if Not check_conference() Then
+	Exit Sub
+End if 'Conference is selected
+
+  'Conference to delete
+  dirname = direct.value
+  
+  For Each pITDirectoryObject in pITDirectory.DirectoryObjects(OT_CONFERENCE,dirname)
+  
+    If ( pITDirectoryObject.name = dirname) Then
+    
+      DIM pITConference
+      Set pITConference = _
+       MAPPER.QueryDispatchInterface(IID_String_ITDirectoryObjectConference,pITDirectoryObject)
+
+	  Call CheckError("DeleteConf:query for ITConference")   
+      
+     'Note: Current implementation of MADCAP does not allow the multicast address to be released here.
+     
+      pITDirectory.DeleteDirectoryObject(pITDirectoryObject) 
+    
+      if Err.number = 70 Then    
+         MsgBox "Access is denied. You don't have permissions to delete the conference",0,"Delete conference"
+         Err.Clear
+         Exit Sub
+      Else  
+         If not Err.number = 0 Then
+             MsgBox "Could not delete conference: error 0x" & Hex(Err.number),0,"Delete conference"
+             Err.Clear
+             Exit Sub
+         Else
+             MsgBox "The conference is deleted. Note: multicast address is not released.",0,"Conference Management"         
+         End If         
+      End IF
+            
+      is_deleted = True
+    End if      
+ Next
+
+ 
+if Err.number = &H1C3 Then
+  Err.Clear
+  MsgBox "Server is probably down.",0,"Refresh"
+  disable_operations(True) 
+Else  
+ if not Err.number = 0 Then
+   MsgBox "Unable to contact server: error 0x" & Hex(Err.number)
+   Err.clear
+   call disable_operations(True)
+ End If 
+End If
+
+
+If Not is_deleted then
+   MsgBox "Nothing to delete: conference does not exist",0,"Conference Management" 'Maybe somebody already have deleted this conference 
+End If
+
+call populate_list()
+ 
+End Sub
+  
+
+'********************************************************************
+'********************************************************************
+'********************************************************************
+'Actual processing code for conference creation
+Sub Create_new
+'Creation of the new conference. 
+On Error resume Next
+
+sblnErrorTrapped = False
+
+
+' Check dates
+ st = CDate(startfrom.value)
+ en = CDate(endat.value)
+
+if confname.value = "" Then
+  MsgBox "Conference name cannot be empty",0,"Conference Creation"
+  Exit Sub
+End If  
+
+'Check for conference existance
+
+DIM pITDO
+For Each pITDO in pITDirectory.DirectoryObjects(OT_CONFERENCE,confname.value)
+ If ( pITDO.name = confname.value) Then
+
+  MsgBox "Conference with given name already exists",0,"Conference Creation"
+  Set pITDO = Nothing 
+  Exit Sub
+ End If
+Next	
+
+' Owner Name; note: the default name is an empty string ""
+DIM uname
+uname = ""
+
+if not textuser.value = "" Then
+  uname = textuser.value
+End IF
+
+if IsEmpty(st) or IsEmpty(en)  Then
+  MsgBox "Check Start and End time."
+  Exit Sub
+End if
+ 
+DIm newc
+DIM confer
+Dim confdescr
+
+namec = confname.value
+confdescr = descname.value
+
+'Create new ITDirectoryObject
+Set newc = REND.CreateDirectoryObject(OT_CONFERENCE,namec)
+
+Call CheckError("Create_new:REND.CreateDirectoryObject")   
+
+
+'Obtain ITDirectoryObjectConference interface
+Set confer = MAPPER.QueryDispatchInterface(IID_String_ITDirectoryObjectConference, newc)
+Call CheckError("Create_new:query for ITDirectoryObjectConference")   
+
+confer.StartTime = st
+
+confer.StopTime = en
+
+confer.Originator  =  uname
+Call CheckError("Create_new:set properties")   
+
+confer.description = confdescr
+Call CheckError("Create_new:set description")   
+
+
+' Obtain multicast address ( if required)
+DIM sMadcapAddr
+
+'get scopes. Use first available scope, if no success, try next one
+Dim curr_scope
+Dim address
+Dim iScope
+
+is_obtained = false
+
+For Each curr_scope in MADCAP.Scopes
+
+   'Try to get address from this scope
+   Set address = MADCAP.RequestAddress(curr_scope,st,en,1)
+   ' If we have an error, try next scope
+   if Err.number = 0 Then
+      is_obtained = True
+      Exit For
+   Else
+     Err.Clear
+   End if
+   
+Next
+
+Call CheckError("Create_new:enumerating scopes in MADCAP")   
+
+if not is_obtained Then
+ MsgBox "Unable to get multicast address from any scope"
+ Exit Sub
+End IF
+
+
+'silly method to extract 1st address for a collection
+
+For Each sMadcapAddr in address.Addresses
+ Exit For
+Next
+
+Call CheckError("Create_new:enumerating addresses from lease info")   
+     
+
+
+' Now deal with conference Blob
+
+'Obtain ITConferenceBlob interface
+DIM pITConferenceBlob
+Set pITConferenceBlob = _
+MAPPER.QueryDispatchInterface(IID_String_ITConferenceBlob, confer)
+
+Call CheckError("Create_new:query for ITConferenceBlob")   
+
+'Obtain ITSDP
+DIM pITSDP
+Set pITSDP = _
+	MAPPER.QueryDispatchInterface(IID_String_ITSDP,pITConferenceBlob)
+Call CheckError("Create_new:query for ITSDP")   
+
+
+'Now deal with SDP
+pITSDP.Name = namec
+Call CheckError("Create_new:setup SDP name")   
+
+pITSDP.Description = confdescr
+PITSDP.Originator = uname
+
+
+'set address to ITConnection
+DIM pITConnection
+Set pITConnection = _
+	MAPPER.QueryDispatchInterface(IID_String_ITConnection,pITSDP)
+Call CheckError("Create_new:query for ITConnection")   
+
+
+'TTL by default is 10
+DIM intTTL
+if TTLGeneral.value = "" Then
+  intTTL = 10
+Else
+  intTTL = Cstr( TTLGeneral.value)
+End If
+   
+'Set address and TTL
+pITConnection.SetAddressInfo sMadcapAddr,1,intTTL
+Call CheckError("Create_new:ITConnection.SetAddressInfo")   
+
+
+'Get ITMediaCollection
+DIM pITMediaCollection
+
+Set pITMediaCollection = pITSDP.MediaCollection
+
+Call CheckError("Create_new:ITSDP.MediaCollection")   
+
+
+
+'Fill out audio and video parameters.
+'Note: if user does not specify audio video parameters, both (audio+video) will be set by default.
+DIM pITMedia
+DIM intMediaCount
+intMediaCount = pITMediaCollection.Count
+Call CheckError("Create_new:ITMediaCollection.Count")   
+
+For i = 1 to intMediaCount
+ Set pITMedia = pITMediaCollection.Item(i)
+ Call CheckError("Create_new:ITMediaCollection.Item")
+  
+ 'Setup start port information
+ 
+ if pITMedia.MediaName="audio" Then
+   if not StPAudio.value = "" Then
+     pITMedia.SetPOrtInfo CInt(StPAudio.value),1
+     Call CheckError("Create_new:ITMedia.StartPort")
+   End If
+
+  if not mcastAudio.value = "" Then
+
+   'query for ITConnection
+   Set pITConnection = _
+    MAPPER.QueryDispatchInterface(IID_String_ITConnection,_
+       pITMedia)
+   Call CheckError("Create_new:query ITMEdia for ITConnection")   
+
+   if TTLAudio.value = "" Then
+     intTTL = 10
+   Else
+     intTTL = Cstr( TTLAudio.value)
+   End If
+     
+   pITConnection.SetAddressInfo mcastAudio.value,1,intTTL
+   Call CheckError("Create_new:ITConnection.SetAddressInfo for Audio")   
+
+  End If
+   
+ Else
+   if pITMedia.MediaName="video" Then
+     if not StPVideo.value = "" Then
+       pITMedia.SetPortInfo CInt(StPVideo.value),1
+       Call CheckError("Create_new:ITMedia.StartPort")
+     End If
+
+
+   'query for ITConnection
+   Set pITConnection = _
+   MAPPER.QueryDispatchInterface(IID_String_ITConnection,_
+    pITMedia)
+   Call CheckError("Create_new:query ITMEdia for ITConnection")   
+
+   if TTLVideo.value = "" Then
+     intTTL = 10
+   Else
+     intTTL = Cstr( TTLVideo.value)
+   End If
+
+   if mcastVideo.value = "" Then
+       strVideoAddress = sMadcapAddr
+   Else
+       strVideoAddress = mcastVideo.value
+   End If
+
+   pITConnection.SetAddressInfo strVideoAddress,1,intTTL
+     
+   Call CheckError("Create_new:ITConnection.SetAddressInfo for Video")   
+
+
+ End IF  
+End If
+      
+Next
+
+Set pITMedia = Nothing        
+
+'Get ITTimeCollection
+DIM pITTimeCollection
+
+Set pITTimeCollection = pITSDP.TimeCollection
+
+Call CheckError("Create_new:ITSDP.TImeCollection")   
+
+'Now let's add our own "time" values; we need to override default setting
+
+For i = 1 to pITTimeCollection.Count
+  pITTimeCollection.Delete(i)
+  Call CheckError("Create_new:delete TimeCollection")   
+Next  
+Call CheckError("Create_new:cycle for TimeCollection")   
+
+
+Set pITTime = pITTimeCollection.Create(1)
+Call CheckError("Create_new:Create TimeCollection")   
+
+
+pITTime.StartTime = st 
+pITTime.StopTime  = en
+
+Call CheckError("Create_new:set TimeCollection")   
+
+'Check for Codecs wrap-around
+' ( In Vbscript it's impossible now to to use SAFEARRAY-s of BSTR-s,
+' so we have some workaround...
+if blnShowCodecs Then
+	CheckCodecs	confer
+End If	
+
+' And finally create conference!
+pITDirectory.AddDirectoryObject(confer)
+Call CheckError("Create_new:.AddDirectoryObject")   
+
+if not sblnErrorTrapped Then
+  'Refresh conference list and hide input fields
+  call populate_list()
+  call visible_all("hidden",False)
+  call visible_advanced("hidden")
+  ButtAdv.value="Adv.Options"
+Else
+  'In case of errors, try to delete this conference 
+	For Each pITDO in pITDirectory.DirectoryObjects(OT_CONFERENCE,confname.value)
+	    If ( pITDO.name = confname.value) Then
+		 pITDirectory.DeleteDirectoryObject(pITDO)
+		 Exit For
+            End If 
+	Next	
+End If  
+
+End Sub
+'******************************************************************
+'******************************************************************
+'******************************************************************
+Sub CheckCodecs(pDirectoryObject)
+'This section is a workaround for a VBScript issue: 
+'VBScript does not currently support SAFEARRAY-s of BSTR-s
+On Error resume Next
+  if (Not selAudioCodec.value = "") or (Not selVideoCodec.value = "")  Then
+	'get SDP blob
+	 'Obtain ITDirectoryObjectConference  
+	Dim pITDirectoryObjectConference
+	Set pITDirectoryObjectConference =	_
+		MAPPER.QueryDispatchInterface(_
+		IID_String_ITDirectoryObjectConference,pDirectoryObject)
+ 
+	call CheckError("CheckCodecs:query pDirectoryObject for pITDirectoryObjectConference")
+
+	  'Obtain ITConferenceBlob
+	Set pITConferenceBlob	= _
+		MAPPER.QueryDispatchInterface(IID_String_ITConferenceBlob,_
+		pITDirectoryObjectConference)
+	call CheckError("CheckCodecs:query for pITConferenceBlob")
+
+	Dim sBlob
+	sBlob	=  pITConferenceBlob.ConferenceBlob
+	call CheckError("CheckCodecs:get blob from pITConferenceBlob")
+
+	If Not selAudioCodec.value = "" Then
+		ChangeCodec	sBlob,"audio",selAudioCodec.value
+	End if
+
+	If Not selVideoCodec.value = "" Then
+		ChangeCodec	sBlob,"video",selVideoCodec.value
+	End if
+
+    DIM char_set
+    char_set = pITConferenceBlob.CharacterSet
+
+	pITConferenceBlob.SetConferenceBlob char_set,sBlob 
+		
+  End If	
+End Sub
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' This is a parser for textual SDP blob representation
+Sub ChangeCodec( strBlob, strType, strFormat)
+
+On Error resume Next
+'Find index in strBlob
+DIm ind1
+DIM ind2
+DIM i
+ ind1 = Instr(strBlob,"m="&strType)
+ 
+ if ind1 > 0 Then
+	'Find last space BEFORE newline
+	ind2 = 0
+	i = ind1 + 1
+	do while (Not Asc(Mid(strBlob,i,1)) = 10)
+	  if Mid(strBlob,i,1) = " " Then
+		ind2 = i 
+      End If
+      i = i + 1
+    Loop
+    
+    if ind2 > 0 then 
+      'Change blob value
+      strBlob = Left(strBlob, ind2) + strFormat + Mid(strBlob,i)
+    End if
+  End if
+ End Sub 
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Radio button change processing
+Sub change_type
+
+sCurrentAddressType = CInt(window.event.srcElement.value )
+ 
+Select Case  sCurrentAddressType
+	
+  Case 2:
+	SelectPublished.style.background = "white"
+	ILSServer.style.background = "gray"
+	SelectPublished.focus
+  Case 3:
+	SelectPublished.style.background = "gray"
+	ILSServer.style.background = "white"
+	ILSServer.focus
+ End Select  
+      
+End Sub 
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' User click in area that should simulate radio button change
+Sub change_type2(AddressType)
+
+sCurrentAddressType = AddressType
+ 
+Select Case  sCurrentAddressType
+	
+  Case 2:
+	SelectPublished.style.background = "white"
+	ILSServer.style.background = "gray"
+	SelectPublished.focus
+	
+	for i = 1 to document.all.length
+	  if  document.all(i).id = "radioAddressType" Then
+	     document.all(i).checked = True
+	     i = document.all.length + 100
+	  End if   
+	Next  
+  Case 3:
+	SelectPublished.style.background = "gray"
+	ILSServer.style.background = "white"
+
+	for i = 1 to document.all.length
+	  if  document.all(i).id = "radioAddressType" Then
+	     document.all(i+1).checked = True
+	     i = document.all.length + 100
+	  End if   
+	Next  
+
+	ILSServer.focus
+
+ End Select  
+      
+End Sub 
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+
+Sub ConnectDirectory
+On Error Resume Next 
+Select Case  sCurrentAddressType
+  Case 2:
+		Call ConnectServer(SelectPublished.value,DT_ILS)
+  Case 3:
+		If ILSServer.value = "" Then
+			MsgBox "You need to enter a name for the server",0,"Connect"
+			Exit Sub
+		End If
+		Call ConnectServer(ILSServer.value,DT_ILS)
+ End Select  
+      
+End Sub 
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+
+Sub Show_SDP
+On Error Resume Next
+DIM is_found
+'Check that user has selected a conference
+if check_conference() Then
+
+ 'Obtain conference information
+ For Each curdir in pITDirectory.DirectoryObjects(OT_CONFERENCE,direct.value)
+       If ( curdir.name = direct.value) Then
+	is_found = true
+   	Set pDirectoryObject = curdir       
+       End If
+ Next
+
+if Err.number = &H1C3 Then
+  Err.Clear
+  MsgBox "Server is probably down.",0,"Refresh"
+  disable_operations(True) 
+  Exit Sub
+Else  
+ if not Err.number = 0 Then
+  MsgBox "Unable to contact server: error 0x" & Hex(Err.number)
+  Err.clear
+  call disable_operations(True)
+  Exit Sub
+ End If 
+End If
+ 
+ if not is_found then
+   MsgBox "Sorry, this directory does not exist",0,"Conference properties"
+   Exit Sub
+ End if
+
+ 'Obtain ITDirectoryObjectConference  
+ Dim pITDirectoryObjectConference
+ Set pITDirectoryObjectConference = _
+ MAPPER.QueryDispatchInterface(_
+  IID_String_ITDirectoryObjectConference,pDirectoryObject)
+ 
+ call CheckError("Show_Sdp:query pDirectoryObject for pITDirectoryObjectConference")
+
+ ' Put properties into form
+
+  'Obtain ITConferenceBlob
+  Set pITConferenceBlob = _
+	MAPPER.QueryDispatchInterface(IID_String_ITConferenceBlob,_
+	pITDirectoryObjectConference)
+  call CheckError("Show_Sdp:query for pITConferenceBlob")
+
+  Dim sBlob
+  sBlob =  pITConferenceBlob.ConferenceBlob
+  call CheckError("Show_Sdp:get blob from  pITConferenceBlob")
+
+if Err.number = 0 Then
+  tConferenceBlob.innerText = sBlob
+Else
+  Err.Clear
+End IF    
+
+  'Show div content
+  
+  sdpblob.style.visibility = "visible"
+  ButtDel.disabled = True
+  ButtAdd.disabled = True
+
+End If
+End Sub
+'******************************************************************
+'******************************************************************
+'******************************************************************
+Sub cancel_sdp
+  sdpblob.style.visibility = "hidden"
+  Set pITConferenceBlob = Nothing
+  Set pDirectoryObject = Nothing
+  ButtDel.disabled = False
+  ButtAdd.disabled = False
+  ButtProp.focus
+End Sub
+  
+'******************************************************************
+'******************************************************************
+'******************************************************************
+Sub save_sdp
+On Error Resume Next
+
+sblnErrorTrapped = False
+
+DIM i
+DIM strBlob
+'Delete CR\LF string end in tConferenceBlob.innerText 
+i = 1
+strBlob = tConferenceBlob.innerText
+DO While  1=1
+if Asc(Mid(strBlob,i,1)) = 13 Then
+   strBlob =  Left(strBlob,i-1) & _
+   Mid(strBlob,i+1,Len(strBlob)  )
+ Else
+  i = i + 1
+ End if
+ 
+  if i > Len(strBlob) Then
+    Exit Do
+  End if   
+
+Loop
+'Add tailing LF
+
+strblob = strblob+chr(10)
+
+DIM char_set
+char_set = pITConferenceBlob.CharacterSet
+
+call CheckError("save_properties: pITConferenceBlob.CharacterSet")
+
+pITConferenceBlob.SetConferenceBlob char_set,strBlob 
+
+if not Err.number = 0 Then
+
+ If not Err.number = &HA007040D Then
+  MsgBox "You put something wrong inside the Blob section. Error 0x" & Hex(Err.number) &"(" & Err.description & ")" ,0, "SDP update"
+  sblnErrorTrapped  = True
+  Err.Clear
+ Else
+  MsgBox "You put something wrong inside the Blob section. Partially updated only." ,0, "SDP update"  
+  sblnErrorTrapped  = True
+  Err.Clear 
+ End If 
+End if
+
+if not sblnErrorTrapped Then
+
+pITDirectory.ModifyDirectoryObject(pDirectoryObject)
+
+if not Err.number = 0 Then
+  MsgBox "Update failed:"&Err.description&",#" & Hex(Err.number),0,"Update of SDP data"
+  Err.Clear
+Else
+  MsgBox "Conference is updated. Note: MADCAP Lease Info is not updated by this operation!"
+  call cancel_sdp()  
+End if
+
+End If
+    
+End Sub
+</SCRIPT>
+
+<BODY>
+
+<Div style="">
+<p style="position:absolute;top:0px;align:left;left:20px;Font-Size:23px;Color:Blue">
+IP Multicast conference management
+</p>
+
+<p style="position:absolute;top:42px;left:20px;Font-Size:13px;Color:Black">
+Choose directory to connect
+</p>
+
+<DIV id=divRadioGroup 
+style="BORDER-BOTTOM: Gray 1px solid; BORDER-LEFT: gray 1px solid; BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; HEIGHT: 100px; LEFT: 20px; POSITION: absolute; TOP: 62px; WIDTH: 330px">
+
+<INPUT id=radioAddressType name=radioAddressType onclick="change_type()"
+style="HEIGHT: 20px; POSITION: absolute; TOP: 20px;LEFT:10px" 
+type=radio value="2" title="ILS server published in NTDS:"  >
+
+<INPUT id=radioAddressType name=radioAddressType onclick="change_type()"
+style="HEIGHT: 20px; POSITION: absolute; TOP: 55px;LEFT:10px" 
+type=radio value="3" title="ILS server :" checked>
+<FOnt style"font-size:12px">
+
+<p onclick="change_type2(2)" style="HEIGHT: 20px; FONT-SIZE: 12px;POSITION: absolute; TOP: 20px;LEFT:40px">
+Published ILS Server
+</p>
+<p onclick="change_type2(3)" style="HEIGHT: 20px;FONT-SIZE: 12px; POSITION: absolute; TOP: 55px;LEFT:40px">
+ILS Server
+</p>
+</font>
+<SELECT  onclick="change_type2(2)" id=SelectPublished name=SelectPublished 
+style="background:gray;FONT-SIZE: 12px;z-index:10; HEIGHT: 30px; LEFT: 160px; POSITION: absolute; TOP: 20px; WIDTH: 160px">
+</SELECT> 
+
+<INPUT id=ILSServer onclick="change_type2(3)"
+style="background:gray;LEFT: 160px;FONT-SIZE: 12px; height:20px;POSITION: absolute; TOP: 55px; WIDTH: 160px"  >
+
+</Div>
+
+<div style="height:30px;position:absolute;top:30px;left:370px;Font-Size:13px;Color:Black;width:200px">
+If you want to connect as current user leave this section empty
+</div>
+
+<DIV
+style="BORDER-BOTTOM: Gray 1px solid; BORDER-LEFT: gray 1px solid; BORDER-RIGHT: gray 1px solid; BORDER-TOP: gray 1px solid; HEIGHT: 100px; LEFT: 370px; POSITION: absolute; TOP: 62px; WIDTH: 200px">
+
+<p style= "FONT-SIZE: 12px; LEFT: 10px; POSITION: absolute; TOP: 15px; WIDTH: 70px">
+Domain </p>
+<p style= "FONT-SIZE: 12px; LEFT: 10px; POSITION: absolute; TOP: 40px; WIDTH: 70px">User </p>
+<p style= "FONT-SIZE: 12px; LEFT: 10px; POSITION: absolute; TOP: 65px; WIDTH: 70px">Password </p>
+<INPUT id=textdom style="FONT-SIZE: 12px;LEFT: 70px; POSITION: absolute; TOP: 15px; WIDTH: 110px" > 
+<INPUT id=textuser style="LEFT: 70px; FONT-SIZE: 12px;POSITION: absolute; TOP: 40px; WIDTH: 110px" > 
+<INPUT id=textpwd type="password" style="LEFT: 70px; FONT-SIZE: 12px;POSITION: absolute; TOP: 65px; WIDTH: 110px" > 
+</div>
+
+<INPUT id=ButtConn 
+type=button name="Connect it!" 
+style="LEFT:  20px; POSITION: absolute; TOP: 170px; WIDTH: 330px" title="Connect it!" value="Connect it!" onclick="ConnectDirectory()"> 
+
+<hr  SIZE="1" style="COLOR: blue; LEFT: 0px; POSITION: absolute; TOP: 200px">
+
+
+
+<p style="FONT-SIZE: 13px; POSITION: absolute;  TOP: 215px; WIDTH: 330px;left:20px;"> 
+Published conferences</p>
+<SELECT size=2 id=direct name=direct 
+style="FONT-SIZE: 12px;z-index:10; HEIGHT: 170px; LEFT: 20px; POSITION: absolute; TOP: 230px; WIDTH: 330px">
+
+</SELECT> 
+
+
+<div style="position:absolute;top:400px;width:330px;left:20px">
+
+<INPUT id=ButtRefr
+type=button name="Refresh" 
+style="LEFT:  0px; POSITION: absolute; TOP: 0px; WIDTH: 80px" title="Refresh list" value="Refresh" onclick="populate_list()"> 
+
+<INPUT id=ButtProp 
+type=button name="Properties"  disabled
+style="LEFT:  83px; POSITION: absolute; TOP: 0px; WIDTH: 80px" title="SDP Blob editor" value="SDP Blob" onclick="show_sdp()"> 
+
+<INPUT id=ButtDel 
+type=button name="Delete" disabled
+style="LEFT:  166px; POSITION: absolute; TOP: 0px; WIDTH: 80px" title="Delete current conference" value="Delete" onclick="delete_conf()"> 
+<INPUT id=ButtAdd 
+type=button name="Add" disabled
+style="LEFT:  249px; POSITION: absolute; TOP: 0px; WIDTH: 80px" title="Add new conference" value="Add New" onclick="add_new()"> 
+
+<hr  SIZE="2" style="COLOR: blue; LEFT: 0px; POSITION: absolute; TOP: 28px">
+</div>
+
+<div id=confprop style="visibility:hidden;LEFT: 370; POSITION: absolute; TOP: 70px; WIDTH: 220px">
+<p style="FONT-SIZE: 14px;color:blue; POSITION: absolute;  TOP: 150px; WIDTH: 330px;left:0px;"> 
+Conference properties
+
+</p>
+<p style="FONT-SIZE: 12px;POSITION: absolute;  TOP: 170px; WIDTH: 330px;left:0px;"> 
+Blank fields will be set to default values
+</p>
+
+<p id=nameconf style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 200px; VISIBILITY: hidden; WIDTH: 140px">
+Conference 
+</p>
+<INPUT id=confname style="LEFT: 80px; POSITION: absolute; TOP: 194px; VISIBILITY: hidden; WIDTH: 140px">
+<p id=descconf style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 230px; VISIBILITY: hidden; WIDTH: 140px">
+Description 
+</p>
+<INPUT id=descname style="LEFT: 80px; POSITION: absolute; TOP: 224px; VISIBILITY: hidden; WIDTH: 140px">
+<p id=starttext style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 262px; VISIBILITY: hidden; WIDTH: 140px">
+Start from 
+</p>
+<INPUT id=startfrom style="LEFT: 80px; POSITION: absolute; TOP: 255px; VISIBILITY: hidden; WIDTH: 140px">
+<p id=endtext style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 290px; VISIBILITY: hidden; WIDTH: 140px">
+End at 
+</p>
+<INPUT id=endat style="LEFT: 80px; POSITION: absolute; TOP: 285px; VISIBILITY: hidden; WIDTH: 140px">
+
+<p id=mcastVideotext style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 320px; VISIBILITY: hidden; WIDTH: 140px">
+Video address
+</p>
+<INPUT id=mcastVideo style="LEFT: 80px; POSITION: absolute; TOP: 315px; VISIBILITY: hidden; WIDTH: 100px">
+
+<p id=TTLVideotext style="FONT-SIZE: 12px; LEFT: 188px; POSITION: absolute; TOP: 320px; VISIBILITY: hidden; WIDTH: 140px">
+TTL
+</p>
+<INPUT id=TTLVideo style="LEFT: 214px; POSITION: absolute; TOP: 315px; VISIBILITY: hidden; WIDTH: 20px">
+
+<p id=StpVideotext style="FONT-SIZE: 12px; LEFT: 239px; POSITION: absolute; TOP: 320px; VISIBILITY: hidden; WIDTH: 140px">
+Port
+</p>
+<INPUT id=StpVideo style="LEFT: 263px; POSITION: absolute; TOP: 315px; VISIBILITY: hidden; WIDTH: 40px">
+
+<p id=CodecVideotext style="FONT-SIZE: 12px; LEFT: 307px; POSITION: absolute; TOP: 320px; VISIBILITY: hidden; WIDTH: 140px">
+Codec
+</p>
+
+<SELECT id=selVideoCodec
+ style="z-index:-100;left:-1200px;top:315px;visibility:hidden;position:absolute;height:30px;width:70px;FONT-SIZE:12px;COLOR:black"> 
+<OPTION VALUE="" SELECTED>
+<OPTION VALUE="31" >H.261 
+<OPTION VALUE="34" >H.263 
+</SELECT> 
+
+
+<p id=mcastAudioText style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 140px">
+Audio address
+</p>
+
+<INPUT id=mcastAudio style="LEFT: 80px; POSITION: absolute; TOP: 345px; VISIBILITY: hidden; WIDTH: 100px">
+
+<p id=TTLAudiotext style="FONT-SIZE: 12px; LEFT: 188px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 140px">
+TTL
+</p>
+<INPUT id=TTLAudio style="LEFT: 214px; POSITION: absolute; TOP: 345px; VISIBILITY: hidden; WIDTH: 20px">
+
+<p id=StpAudiotext style="FONT-SIZE: 12px; LEFT: 239px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 140px">
+Port
+</p>
+<INPUT id=StpAudio style="LEFT: 263px; POSITION: absolute; TOP: 345px; VISIBILITY: hidden; WIDTH: 40px">
+
+<p id=CodecAudiotext style="FONT-SIZE: 12px; LEFT: 307px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 140px">
+Codec
+</p>
+
+<SELECT id=selAudioCodec
+ style="z-index:-100;left:-1200px;top:345px;visibility:hidden;position:absolute;height:30px;width:70px;FONT-SIZE:12px;COLOR:black"> 
+<OPTION VALUE="" SELECTED>
+<OPTION VALUE="0" >G.711U 
+<OPTION VALUE="2" >G.721 
+<OPTION VALUE="3" >GSM 06.10
+<OPTION VALUE="4" >G.723
+<OPTION VALUE="8" >G.711A
+
+</SELECT> 
+
+<p id=mcastGeneralText style="FONT-SIZE: 12px; LEFT: 0px; POSITION: absolute; TOP: 355px; VISIBILITY: hidden; WIDTH: 140px">
+MCast Common
+</p>
+
+<INPUT id=mcastGeneral style="LEFT: 80px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 100px">
+
+<p id=TTLGeneraltext style="FONT-SIZE: 12px; LEFT: 185px; POSITION: absolute; TOP: 355px; VISIBILITY: hidden; WIDTH: 140px">
+TTL
+</p>
+<INPUT id=TTLGeneral style="LEFT: 210px; POSITION: absolute; TOP: 350px; VISIBILITY: hidden; WIDTH: 20px">
+
+<INPUT id=ButtCre 
+type=button name="Create" 
+style="LEFT:  225px; POSITION: absolute; TOP: 192px; VISIBILITY: hidden; WIDTH: 110px" 
+title="Create" value="Create" onclick="create_new()"> 
+
+
+<INPUT id=ButtCancel 
+type=button name="Cancel" 
+style="LEFT:  225px; POSITION: absolute; TOP: 220px; VISIBILITY: hidden; WIDTH: 110px" 
+title="Cancel" value="Cancel" onclick="cancel_new()"> 
+
+<INPUT id=ButtAdv 
+type=button name="Advanced" 
+style="LEFT:  225px; POSITION: absolute; TOP: 248px; VISIBILITY: hidden; WIDTH: 110px" 
+title="Advanced Properties" value="Adv.Options" onclick="show_adv_fields()"> 
+
+
+</div>
+
+<div id=sdpblob style="LEFT: 370; visibility:hidden;POSITION: absolute; TOP: 215px; WIDTH: 220px">
+<p style="FONT-SIZE: 13px; POSITION: absolute;  TOP: 0px; WIDTH: 330px;left:0px;"> 
+SDP blob editor</p>
+<TEXTAREA id=tConferenceBlob name=tConferenceBlob 
+style="HEIGHT: 170px; LEFT: 0px; POSITION: absolute; TOP: 15px; WIDTH: 270px"></TEXTAREA> 
+<INPUT id=ButtCanEdit 
+type=button name="Cancel" 
+style="LEFT:  20px; POSITION: absolute; TOP: 190px;WIDTH: 110px" 
+title="Cancel" value="Cancel" onclick="cancel_sdp()"> 
+<INPUT id=ButtSave 
+type=button name="Save" 
+style="LEFT:  140px; POSITION: absolute; TOP: 190px;  WIDTH: 110px" 
+title="Save" value="Save" onclick="save_sdp()"> 
+
+</div>
+
+
+<p style="position:absolute;top:465px;align:left;left:20px;Font-Size:12px;Color:black">
+This page allows to you to:
+</p>
+<UL style="position:absolute;top:480px;align:left;left:20px;Font-Size:12px;Color:black">
+  <LI> Obtain list of IP Multicast conferences published on the given ILS server
+  <LI> Create new  IP Multicast conferences
+  <LI> Delete IP Multicast conferences
+  <LI> Directly edit properties of existing conferences 
+ </OL>
+
+</div>
+
+</BODY>
+
+<!-- Listed objects : TAPI(tapi3.h),  ITRendezvous(rend.h), DispatchMapper(tapi3.h),
+    MADCAP (mdhcp.h) --> 
+<OBJECT classid=clsid:21D6D48E-A88B-11D0-83DD-00AA003CCABD 
+id=TAPIOBJ></OBJECT>
+<OBJECT classid=clsid:F1029E5B-CB5B-11D0-8D59-00C04FD91AC0 
+id=REND></OBJECT>
+
+<OBJECT classid=clsid:E9225296-C759-11d1-A02B-00C04FB6809F
+id=MAPPER></OBJECT>
+
+<OBJECT classid=clsid:DF0DAEF2-A289-11D1-8697-006008B0E5D2
+id=MADCAP></OBJECT>
+
+
+</HTML>
+

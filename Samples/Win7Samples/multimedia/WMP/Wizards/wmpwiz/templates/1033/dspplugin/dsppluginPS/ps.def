@@ -1,0 +1,9 @@
+; [!output root]PS.def : Declares the module parameters.
+
+LIBRARY    [!output ROOT]PS
+
+EXPORTS
+DllRegisterServer PRIVATE
+DllUnregisterServer PRIVATE
+DllCanUnloadNow PRIVATE
+DllGetClassObject PRIVATE

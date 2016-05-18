@@ -1,0 +1,5 @@
+[Admin]
+#CiCatalog=d:\
+CiTemplate=/iisadmin/isadmin/state.htx
+CiAdminOperation=GetState
+

@@ -1,0 +1,39 @@
+// **************************************************************************
+
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+//
+// File:  Methprov.mof
+//
+// Description:
+//
+// History:
+//
+// **************************************************************************
+
+/////////////////////////////////////////////////////////////////////
+// Register the provider.
+
+#PRAGMA AUTORECOVER
+instance of __Win32Provider as $P
+{
+    Name    = "MethProv" ;
+    ClsId   = "{E30EC6A0-23CF-11d1-8FDE-0000F804AA5C}" ;
+};    
+
+instance of __MethodProviderRegistration
+{
+    Provider = $P;
+};
+
+
+/////////////////////////////////////////////////////////////////////
+//
+// Declare a class whose methods are executed by the sample provider.
+
+[dynamic: ToInstance, provider("MethProv")]class MethProvSamp      
+{                                                                  
+     [implemented, static]                                         
+        uint32 Echo([IN]string sInArg="default", [out] string sOutArg);      
+};                                                                 
+
+

@@ -1,0 +1,64 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+</HEAD>
+<BODY>
+<OBJECT ID="Player1" height="0" width="0"
+  CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">
+  <PARAM NAME="autoStart" VALUE="true">
+</OBJECT>
+<INPUT TYPE="BUTTON" NAME="BtnPlay" VALUE="Play" OnClick="StartMeUp()">
+<INPUT TYPE="BUTTON" NAME="BtnStop" VALUE="Stop" OnClick="ShutMeDown()">
+<BR>
+<BR>
+<H2><font id="MyFont">Script commands embedded in a media file</font></H2>
+<p>Values for custom script type named "CustomScript":
+<B><SPAN id="MyText">
+</SPAN></B>
+<p>The heading will switch to specific colors defined by the custom script value.<SCRIPT>
+<!--
+
+function StartMeUp ()
+{
+	Player1.currentPlaylist = Player1.mediaCollection.getByName('house');
+}
+
+function ShutMeDown ()
+{
+    Player1.controls.stop();
+}
+
+-->
+</SCRIPT>
+
+<SCRIPT for="Player1" event="scriptCommand(Type, Param)" LANGUAGE="JScript">
+<!--
+
+  var MyValue = 0;
+
+  switch (Param) {
+
+  	case "script1":
+		MyValue = "red";
+		break;
+	case "script2":
+		MyValue = "green";
+		break;
+	case "script3":
+		MyValue = "blue";
+		break;
+	default:
+		MyValue = "black";
+	}
+  MyFont.color = MyValue;
+  MyText.innerHTML = Param + " = " + MyValue;
+
+
+-->
+</Script>
+
+
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,41 @@
+// **************************************************************************
+
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+//
+// File:  classprov.mof
+//
+// Description:
+//
+// History:
+//
+// **************************************************************************
+
+/////////////////////////////////////////////////////////////////////
+// Declare an instance of the __Win32Provider so as to "register" the
+// sample provider
+
+#PRAGMA AUTORECOVER
+instance of __Win32Provider as $P
+{
+    Name        = "ClassProvSamp" ;
+    ClsId   = "{22CB8799-914A-11cf-B705-00AA0062CBB7}" ;
+} ;    
+
+instance of __ClassProviderRegistration
+{
+    Provider = $P;
+    SupportsPut = TRUE;
+    SupportsGet = TRUE;
+    SupportsDelete = TRUE;
+    SupportsEnumeration = TRUE;
+};
+instance of __InstanceProviderRegistration
+{
+    Provider = $P;
+    SupportsPut = TRUE;
+    SupportsGet = TRUE;
+    SupportsDelete = TRUE;
+    SupportsEnumeration = TRUE;
+};
+
+

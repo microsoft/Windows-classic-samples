@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Devices and Printers Folder Extensibility Sample</title>
+  <style type="text/css">
+    .style1
+    {
+      font-family: Calibri;
+    }
+    .style2
+    {
+      color: #FF0000;
+      font-weight: bold;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body style="font-family: Calibri">
+  <p>
+    <span style="font-size: 18pt; color: #0000cc; font-family: Calibri"><strong>Devices
+      and Printers Folder Extensibility Sample</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">Last Updated: March 2009</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Demonstrates</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">This sample demonstrates how to create 
+    property pages and context menu handlers for devices in the Devices and Printers 
+    Folder. The sample solution contains two projects: a context menu project and a 
+    property page project. Each builds into its own DLL. If a client wants to 
+    implement a context menu and property page, then they could both just be built into 
+    the same DLL and share the same class factory.</span></p>
+  <p>
+    To accommodate the sample being built and tried without modification, the 
+    context menu handler binds to the mouse interface by default (done in 
+    Associations.reg).&nbsp; In real scenarios it is recommended to bind 
+    against Hardware Ids if possible instead of interfaces.&nbsp; Please see the 
+    &quot;Devices and Printers Folder - Extensibility Guide&quot; document on
+    <a href="http://www.microsoft.com/whdc">http://www.microsoft.com/whdc</a> for 
+    complete guidance. </p>
+  <p>
+    <b>Context Menu</b></p>
+  <p style="margin-left: 40px">
+        The main purpose of this project is to show how to create a context menu handler 
+    for a device that launches a custom application contextually.<i> </i>
+        <span class="style2">Important:</span><i> This project shows how to implement a 
+        dynamic context menu handler which won&#39;t always be needed. If the requirement is 
+        just to launch an application statically (without context) you can just 
+        associate a static context menu handler with the device. See the &quot;Devices and 
+        Printers Folder - Extensibility Guide&quot; document for more information.&nbsp; </i>This project 
+    demonstrates how contextual information can be collected from the device 
+        in Devices and Printers and then use that information to launch an application.&nbsp; </p>
+  <p>
+    <b>Command Bar</b></p>
+  <p style="margin-left: 40px">
+    The object created in the context menu project also supports being used for the 
+    Command Bar. This sample shows how entries can be added to the Command Bar (in 
+    the Associations.reg file). Please note that Command Bar items should be used 
+    sparingly as there is limited UI real-estate for these. Only put context menu 
+    items on the Command Bar that are going to be frequently used by customers.</p>
+  <p>
+    <b>Property Page </b>
+  </p>
+  <p style="margin-left: 40px">
+    The main purpose of this project is to show how to create a property page for a 
+    device with relevant contextual information about the device clicked on in 
+    Devices and Printers.</p>
+  <p>
+    <span style="font-family: Calibri"><b>Features used in the Windows platform</b>:
+      Devices and Printers, Shell Extensibility Model, and SetupAPI.</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Prerequisites</strong></span></p>
+  <ul>
+    <li><span style="font-family: Calibri">This sample requires Windows 7 or later to
+      run.</span></li>
+    <li class="style1">Visual Studio 2008 is needed to edit the Solution and Projects.</li>
+    <li class="style1">Sample supports x86 and x64.</li>
+  </ul>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Languages</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">C++/COM</span></p>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Folders
+      and Files</strong></span></p>
+  <ol style="list-style-position: outside; list-style-type: none;">
+    <li><span style="font-family: Calibri"><strong>\ </strong></span></li>
+    <ol style="list-style-type: none;">
+      <li><span style="font-family: Calibri"><strong>readme.htm </strong>- This file. </span>
+      </li>
+      <li><span style="font-family: Calibri"><strong>DeviceFolderExtensibility.sln</strong>
+        - Visual Studio 2008 solution file. This solution file encapsulates all the projects
+        for this sample. Each folder under the root defines a project and contains a Visual
+        Studio project file. </span></li>
+      <li><span style="font-family: Calibri"><strong>Associations.reg</strong> - File used
+        to associate the property page COM object with the mouse interface for Devices and
+        Printers. Note this file really just exists for convenience in getting the sample
+        up and running. In real scenarios, the association would likely be performed by
+        a driver installation package (via an INF file), or a software installation package
+        that this object ships with.&nbsp; Also, please note the actual registration of
+        the COM object itself in Windows is done through DllRegisterServer in dllmain.cpp.</span></li>
+    </ol>
+    <li><span style="font-family: Calibri"><strong>&nbsp;</strong></span></li>
+    <li><span style="font-family: Calibri"><strong>&nbsp;</strong></span></li>
+    <li><span style="font-family: Calibri"><strong>DeviceContextMenu\ </strong></span>
+    </li>
+    <ol style="list-style-type: none;">
+      <li><span style="font-family: Calibri"><strong>CDeviceContextMenu.h</strong> - Declaration
+        of the CDeviceContextMenu class. </span></li>
+      <li><span style="font-family: Calibri"><strong>CDeviceContextMenuFactory.h</strong>
+        - Declaration of the CDeviceContextMenuFactory class. </span></li>
+      <li><b>common.h</b> - Common header for all files in the project.</li>
+      <li><b>resource.h</b> - Resource declarations for resources contained in 
+        DeviceContextMenu.rc</li>
+      <li><b>DeviceContextMenu.rc</b> - Contains all the resources and layout for the device
+        context menu. </li>
+      <li><span style="font-family: Calibri"><strong>CDeviceContextMenu.cpp</strong> -
+        Implements the CDeviceContextMenu class which includes the implementations of the
+        standard interfaces to add property pages to the Devices and Printers property sheet: 
+        IInitializeCommand and IExplorerCommand. </span></li>
+      <li><span style="font-family: Calibri"><strong>CDeviceContextMenuFactory.cpp</strong>
+        - Implements the CDeviceContextMenuFactory class which is used to create CDeviceContextMenu
+        objects. </span></li>
+      <li><b>DeviceContextMenu</b><span style="font-family: Calibri"><strong>.def</strong>
+        - Defines the exports for the dll. </span></li>
+      <li><span style="font-family: Calibri"><strong>DeviceContextMenu.idl</strong> - Defines
+        the type library and CoClass for the DeviceContextMenu object. </span></li>
+      <li><b>dllmain.cpp</b> - Implements the DLL export and related functions.<br />
+        <br />
+        <br />
+      </li>
+    </ol>
+    <li><span style="font-family: Calibri"><strong>DevicePropertyPage\ </strong></span>
+    </li>
+    <ol style="list-style-type: none;">
+      <li><span style="font-family: Calibri"><strong>CDevicePropertyPage.h</strong> - Declaration
+        of the CDevicePropertyPage class. </span></li>
+      <li><span style="font-family: Calibri"><strong>CDevicePropertyPageFactory.h</strong>
+        - Declaration of the CDevicePropertyPageFactory class. </span></li>
+      <li><b>common.h</b> - Common header for all files in the project.</li>
+      <li><b>resource.h</b> - Resource declarations for resources contained in DevicePropertyPage.rc</li>
+      <li><b>DevicePropertyPage.rc</b> - Contains all the resources and layout for the device
+        property page. </li>
+      <li><span style="font-family: Calibri"><strong>CDevicePropertyPage.cpp</strong> -
+        Implements the CDevicePropertyPage class which includes the implementations of the
+        required interfaces to add property pages to the Devices and Printers property sheet:
+        IShellExt and IShellPropertySheetExt. </span></li>
+      <li><span style="font-family: Calibri"><strong>CDevicePropertyPageFactory.cpp</strong>
+        - Implements the CDevicePropertyPageFactory class which is used to create CDevicePropertyPage
+        objects. </span></li>
+      <li><b>DevicePropertyPage</b><span style="font-family: Calibri"><strong>.def</strong>
+        - Defines the exports for the dll. </span></li>
+      <li><span style="font-family: Calibri"><strong>DevicePropertyPage.idl</strong> - Defines
+        the type library and CoClass for the DevicePropertyPage object. </span></li>
+      <li><b>dllmain.cpp</b> - Implements the DLL export and related functions.</li>
+    </ol>
+    </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Building
+      the Sample (using Visual Studio)</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Open DeviceFolderExtensibility.sln in Visual
+      Studio. </span></li>
+    <li><span style="font-family: Calibri">In the Build menu, select <strong>Build Solution</strong>.
+      The application will be built in the default \Debug or \Release directory. To build
+      debug and release for both x86 and x64, perform a Batch Build, or use
+      the Configuration Manager to build each one.</span></li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Building
+      the Sample (from SDK build environment)</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Open the SDK command shell. </span></li>
+    <li><span style="font-family: Calibri">Navigate to the sample folder where DeviceFolderExtensibility.sln
+      is located. </span></li>
+    <li><span style="font-family: Calibri">Type <strong>vcbuild DeviceFolderExtensibility.sln</strong>.
+      The application will be built in the default \Debug or \Release directory. </span>
+    </li>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Running
+      the Sample</strong></span></p>
+  <p>
+    <span style="font-family: Calibri">All files can be used from the binplaced location
+      from the build (typically \debug or \release).</span></p>
+  <ol>
+    <li><span class="style1">Register the COM objects in Windows and associate them with
+      the mouse interface.</span><ol style="list-style-type: lower-alpha;">
+        <li>Run <b>Regsvr32 DeviceContextMenu.dll</b>.</li>
+        <li>Run <b>Regsvr32 DevicePropertyPage.dll</b>.</li>
+        <li>Import <b>Associations.reg</b> into the registry.<br />
+&nbsp;<br />
+        </li>
+      </ol>
+    </li>
+    <li><span style="font-family: Calibri">Run Devices and Printers. </span>
+      <ol style="list-style-type: lower-alpha;">
+        <li><span style="font-family: Calibri">Open Devices and Printers by clicking <strong>
+          Start Menu </strong>-&gt; <strong>Devices and Printers</strong>.. </span></li>
+        <li>Because both sample objects bind to the mouse interface, the new context menu 
+          and property page should be available on all mice in Devices and Printers. (<i><b>Note</b>: if the PC has a legacy PS/2 mouse it won&#39;t
+            be shown separately and will be grouped with the PC icon in Devices and Printers.
+            In this case, simply load the PC&#39;s property page to see the sample</i>).</li>
+      </ol>
+    </li>
+    <ol style="list-style-type: lower-alpha;">
+      <li>Find the mouse icon and right click on it. The new context menu entry should be
+          seen as &quot;<b>Sample Item</b>&quot; and it should be the default (text
+          is in bold lettering).</li>
+      <li>Just highlight the mouse item now and notice the Command Bar in Devices and 
+        Printers also shows the &quot;<b>Sample Item</b>&quot; entry as well. This happens because 
+        the context menu handler object (based on IExplorerCommand as this sample is) 
+        can support the Command Bar in addition to the context menu. A few simple 
+        registry entries enables this Command Bar functionality with the object.</li>
+      <li><span style="font-family: Calibri">Now go to <b>Properties</b> on the mouse icon.
+        </span></li>
+      <li><span style="font-family: Calibri">When the property sheet loads, it should contain
+          the sample property page titled &quot;<b>Sample Page</b>&quot;.</li>
+    </ol>
+  </ol>
+  <p>
+    &nbsp;</p>
+  <p>
+    <span style="font-size: 14pt; color: #0000cc; font-family: Calibri"><strong>Removing
+      the Sample</strong></span></p>
+  <ol>
+    <li><span style="font-family: Calibri">Run <b>Regsvr32 -u</b> <b>DevicePropertyPage.dll</strong></b>.</span></li>
+    <li>Run <b>Regsvr32</b> <b>-u</b> <b>DeviceContextMenu.dll</b>.</li>
+    <li><span style="font-family: Calibri">Use <b>Regedit</b> to remove the entries added
+      by <b>Associations.reg</b>. </span></li>
+  </ol>
+  <p>
+    &nbsp;&nbsp;</p>
+</body>
+</html>

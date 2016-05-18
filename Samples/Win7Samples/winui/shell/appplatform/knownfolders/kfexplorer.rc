@@ -1,0 +1,10 @@
+#include "resource.h"
+#include <windows.h>
+
+IDI_KFSAMPLE_ICON 	  ICON                    "handler_24bit.ico"
+
+STRINGTABLE 
+BEGIN
+    IDS_KFSAMPLE_TOOLTIP	"KnownFolders offer handy tooltips!"
+    IDS_KFSAMPLE_LOCALIZEDNAME	"This is my Sample KnownFolder!"
+END

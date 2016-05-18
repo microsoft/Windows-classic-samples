@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="SimpleThermostatDriver"
+	ProjectGUID="{391C3579-D995-4AD9-84D9-3E05F4F50AAD}"
+	RootNamespace="SimpleThermostatDriver"
+	TargetFrameworkVersion="131072"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+		<Platform
+			Name="x64"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)"
+			IntermediateDirectory="$(ConfigurationName)\$(PlatformName)"
+			ConfigurationType="10"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="if not exist &quot;$(OutDir)&quot; md &quot;$(OutDir)&quot;&#x0D;&#x0A;copy /y SimpleThermostat.inf &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+				Outputs="always.run"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Build the driver package"
+				CommandLine="if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; copy /y &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)"
+			IntermediateDirectory="$(ConfigurationName)\$(PlatformName)"
+			ConfigurationType="10"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="if not exist &quot;$(OutDir)&quot; md &quot;$(OutDir)&quot;&#x0D;&#x0A;copy /y SimpleThermostat.inf &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+				Outputs="always.run"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Build the driver package"
+				CommandLine="if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; copy /y &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)"
+			IntermediateDirectory="$(ConfigurationName)\$(PlatformName)"
+			ConfigurationType="10"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="if not exist &quot;$(OutDir)&quot; md &quot;$(OutDir)&quot;&#x0D;&#x0A;copy /y SimpleThermostat.inf &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+				Outputs="always.run"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Build the driver package"
+				CommandLine="if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; copy /y &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)\$(PlatformName)"
+			IntermediateDirectory="$(ConfigurationName)\$(PlatformName)"
+			ConfigurationType="10"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="if not exist &quot;$(OutDir)&quot; md &quot;$(OutDir)&quot;&#x0D;&#x0A;copy /y SimpleThermostat.inf &quot;$(OutDir)&quot;&#x0D;&#x0A;"
+				Outputs="always.run"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Build the driver package"
+				CommandLine="if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if not exist &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot; md &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; copy /y &quot;$(SolutionDir)SimpleThermostatDriver\SimpleThermostat.inf&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\Win32\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x86&quot;&#x0D;&#x0A;if exist &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; copy /y &quot;$(SolutionDir)$(ConfigurationName)\x64\SimpleThermostatProxy.dll&quot; &quot;$(SolutionDir)$(ConfigurationName)\DriverPackage\x64&quot;&#x0D;&#x0A;"
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+		</Filter>
+		<File
+			RelativePath=".\SimpleThermostat.inf"
+			>
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

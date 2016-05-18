@@ -1,0 +1,23 @@
+# Microsoft Developer Studio Generated Dependency File, included by Snd.mak
+
+.\main.cpp : \
+	"..\..\..\..\..\include\basetsd.h"\
+	"..\..\..\..\..\include\guiddef.h"\
+	"..\..\..\..\..\include\propidl.h"\
+	"..\..\..\..\..\include\tvout.h"\
+	"..\..\..\..\..\include\winefs.h"\
+	"..\..\..\..\..\lib\mqoa.tlb"\
+	"..\graphobj\graphobj_i.c"\
+	"..\queuedef.h"\
+	".\stdafx.h"\
+	
+
+.\stdafx.cpp : \
+	"..\..\..\..\..\include\basetsd.h"\
+	"..\..\..\..\..\include\guiddef.h"\
+	"..\..\..\..\..\include\propidl.h"\
+	"..\..\..\..\..\include\tvout.h"\
+	"..\..\..\..\..\include\winefs.h"\
+	"..\graphobj\graphobj_i.c"\
+	".\stdafx.h"\
+	

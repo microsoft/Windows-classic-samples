@@ -1,0 +1,151 @@
+<!--    Copyright (c) Microsoft Corporation.  All rights reserved.     -->
+
+<!----------------------------------------------------------------------->
+<!--                            detection.htm                          -->
+<!-- Purpose:                                                          -->
+<!--   detection.htm is a sample web page that demonstrates how to     -->
+<!--   detect the Windows Media Player capabilities of the local       -->
+<!--   system.                                                         -->
+<!--                                                                   -->
+<!--   The sample performs the following actions:                      -->
+<!--                                                                   -->
+<!--          1. Detects Windows Media Player version available.       -->
+<!--                                                                   -->
+<!--          2. Determines web browser (IE, Netscape 7.1) version.    -->
+<!--                                                                   -->
+<!--          3. Directs the browser to one of the following pages     -->
+<!--             based on the conditons found in steps 1 and 2:        -->
+<!--                                                                   -->
+<!--             a) IEWMPobj.htm - Web page that demonstrates using    -->
+<!--                Windows Media Player v7-v9+ within Internet        -->
+<!--                Explorer.                                          -->
+<!--                                                                   -->
+<!--             b) IEWMP64.htm - Web page that demonstrates using     -->
+<!--                Windows Media Player v6.4 via Internet Explorer.   -->
+<!--                                                                   -->
+<!--             c) NS71obj.htm - Web page that demonstrates using     -->
+<!--                Windows Media Player v7-v9+ within Netscape 7.1.   -->
+<!--                                                                   -->
+<!--             d) wmpdownload.htm Web page to prompt the user to get -->
+<!--                the latest Windows Media Player.                   -->
+<!--                
+<!--   Each of the pages listed above performs the same function by    -->
+<!--   placing Windows Media Player on the page, handling events from  -->
+<!--   the control and accessing version specific properties.          -->
+<!--                                                                   -->
+<!-----------------------------------------------------------------------> 
+
+<html>
+<head>
+<title>Windows Media Player Detection Sample</title>
+<link rel="stylesheet" href="basic.css" type="text/css">
+<script language="JavaScript" src="PlayerDetection.js"></script>
+</head>
+
+
+<!------------------------------------------------------------> 
+<!-- START Windows Media Player Detection Code              -->
+<!--                                                        -->
+<!-- The code below attempts to embed the older 6.x control -->
+<!-- and the newer v7-v9+ control in the page.              -->
+<!--                                                        -->
+<!-- The code then uses VBSCRIPT and JAVASCRIPT to access   -->
+<!-- the control objects, if available, and interrogate     -->
+<!-- them where necessary to determine the Media Player     -->
+<!-- version information.                                   -->
+<!--                                                        -->
+<!-- Once at the END of the player detection code below the -->
+<!-- following variables will be set:                       -->
+<!--                                                        -->
+<!--    fHasWMP - True if either WMP v6.4 or v7.0+ detected -->
+<!--              else False.                               -->
+<!--                                                        -->
+<!--  fHasWMP64 - True if WMP v6.4 detected, else False.    -->
+<!--                                                        -->
+<!--   fHasWMP7 - True if WMP v7.0+ detected, else False.   -->
+<!--                                                        -->
+<!--     WMPVer - String stating the Media Player version   -->
+<!--              detected (e.g "6.4", "7.xx", "8.xx",      -->
+<!--              "9.xx", and so forth)                     -->
+<!------------------------------------------------------------> 
+<OBJECT classid=CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95  codebase="../../#Version=6,4,5,715" height=1 id=WMP64 width=1 VIEWASTEXT></OBJECT>
+<OBJECT classid=CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6  codebase="../../#Version=7,0,0,1954" height=1 id=WMP7 width=1 VIEWASTEXT></OBJECT>
+<SCRIPT language="VBScript">
+<!--
+    On error resume next
+    fHasWMP64 = (WMP64.FileName="")  ' WMP64 was create above via OBJECT tag else this returns False.
+    fHasWMP7 = (WMP7.URL = "")       ' WMP7 or later was create above via OBJECT tag else this returns False.  
+//-->
+</SCRIPT>
+<SCRIPT language="JavaScript">
+<!--
+    fHasWMP=true;   // Will set to false below if not found
+    if( fHasWMP7 ) WMPVer=WMP7.versionInfo; // Has 7.0+ (8.x, 9.x)
+    else if( fHasWMP64 ) WMPVer="6.4";
+    else 
+    {
+       WMPVer="unknown";
+       fHasWMP=false;
+    }   
+//-->
+</SCRIPT>
+<!---------------------------------------------->
+<!-- END Windows Media Player Detection Code  -->
+<!---------------------------------------------->
+
+
+<!------------------------------------------------------------------------>
+<!-- START of detection.htm BODY                                        -->
+<!--                                                                    -->
+<!-- The body of the sample page is empty as this page is only visited  -->
+<!-- briefly while the script code below is executed and then the       -->
+<!-- scenario specific page is loaded.                                  -->
+<!------------------------------------------------------------------------> 
+<body LANGUAGE="javascript" topmargin=0 leftmargin=0>
+<img border=0 src=wmt-title.jpg width="250" height="60">
+<table>
+    <tr><th>Windows Media Player Detection Sample</th><tr>
+</table>            
+</body>
+<!----------------------------->
+<!-- END of detection.htm BODY  -->
+<!----------------------------->            
+
+
+<!------------------------------------------------------------------->
+<!-- START of detection.htm Script                                 -->
+<!--                                                               -->
+<!-- The code below will get OS, Browser and Media Player version  -->
+<!-- information, then load a specific page depending on the       -->
+<!-- scenario it encounters.                                       -->       
+<!------------------------------------------------------------------->          
+<script language="javascript"> 
+    var br = GetBrowser();        // Returns either "IE" or "Netscape"
+    var pm = GetPlayerMajorVer(); // Returns Windows Media Player major version #
+    var pn = GetPlayerMinorVer(); // Returns Windows Media Player minor version #
+
+    // Case 1: Netscape 7.1
+    if(br=="Netscape" && window.GeckoActiveXObject)
+    {
+        window.location="NS71obj.htm"; 
+    }   
+    // Case 2: IE and WMP 7 or greater detected.        
+    else if (br=="IE" && pm>=7)
+    {
+        window.location="IEWMPobj.htm"; 
+    }    
+    // Case 3: IE and WMP 6.4 detected.     
+    else if (br=="IE" && pm==6 && pn==4)
+    {
+        window.location="IEWMP64.htm"; 
+    }       
+    // Default Case:  Redirect to WMP download page. 
+    else    
+    {
+        window.location="wmpdownload.htm"; 
+    }        
+</script>
+<!------------------------------->
+<!-- END of detection.htm Script  -->
+<!------------------------------->          
+</html>

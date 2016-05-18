@@ -1,0 +1,108 @@
+////////////////////////////////////////////////////////////////////////////////////
+// For Documentation about the behavior read the Readme.txt file for this sample.
+//
+//
+
+///////////////////////////////////////////////////////////////////////////////////
+// Public declarations for the behavior
+//	Method : relocate() - should be used to re-calculate position of content when
+//			Primary documents size changes or when page view changes. (Used for onresize
+//			and onscroll events on the BODY of the Primary Document.
+//	Properties:
+//		bannerfromTop - Top position of the content inside behavior.
+//		bannerfromRight - Position from Right of the content inside behavior.
+//
+///////////////////////////////////////////////////////////////////////////////////
+
+<public:component tagName=adbanner lightweight=true>
+
+	<public:attach event="oncontentready" onevent="Initialize()" />
+	<public:method name=relocate />
+	<public:property name=bannerfromRight />
+	<public:property name=bannerfromTop value=0 />
+
+</public:component>
+<script language="JScript">
+
+////////////////////////////////////////////////////////////////////////////////////
+//		Public Variable Definitions
+//			rightOffSet - Internal variable for bannerfromRight
+//			topOffSet - Internal variable for bannerfromTop
+//			childElem - Object for the collection of all the Behavior elements children.
+//			maxWidth  -	Maximum Element Width. Used to determine the default width of the
+//							content if bannerfromTop.
+//			childWidth - Temporary variable to store child element width.
+////////////////////////////////////////////////////////////////////////////////////
+
+var rightOffSet = 0;
+var topOffSet = 0;
+var childElem = null;
+var maxWidth = 0;
+var childWidth = 0;
+
+////////////////////////////////////////////////////////////////////////////////////
+//		Function 	: Initialize
+//		Executed	: Executes when oncontentready fires on the HTC document.
+//		Usage		: Oncontentready is used to set initial values and styles once
+//				  the content of the HTC is parsed.
+//
+//				  Depending of whether the default values of bannerfromTop &
+//				  bannerfromRight being specified on the behavior, default values
+//				  or specified values are converted to Integer values.
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+function Initialize()
+{
+
+	// bannerfromRight not specified go through the child elements and obtain
+	// the maximum width and set bannerfromRight.
+	if(bannerfromRight == null)
+	{
+
+		childElem = element.children;			// Collection of the behavior children.
+
+		// Get maximum width;
+		for(var i = 0; i < childElem.length; i++)
+		{
+			childWidth = parseInt(childElem[i].currentStyle.width);
+
+			if(maxWidth < childWidth)
+				maxWidth = childWidth;
+		}
+		rightOffSet = maxWidth;
+	}
+	else  // bannerfromRight specified use the specified value.
+	{
+		rightOffSet = parseInt(bannerfromRight);
+	}
+
+	topOffSet = parseInt(bannerfromTop);			// Due to default value being set on the bannerfromTop specified
+																						// we don't have to do a null check.
+
+	// Set styles on behavior.
+	element.style.position = 'absolute';
+	element.style.backgroundColor = 'transparent';
+
+	// Call function to position child elements.
+	relocate()
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+//		Function 	: relocate
+//		Executed	: Initialize, onresize & onscroll.
+//		Usage		: This function does the main work as to positioning the child
+//				  elements. This is done using the Primary Documents clientWidth
+//				  & scrollTop values and the bannerfromRight & bannerfromTop values.
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+
+function relocate()
+{
+	element.style.left = element.document.body.clientWidth - rightOffSet;
+	element.style.top = element.document.body.scrollTop + topOffSet;
+}
+
+</script>

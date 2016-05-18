@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<?xml:stylesheet type="text/xsl" href="toc.xsl"?>
+<!-- COMSDK.XML -->
+<TOPICLIST TYPE="COM+ SDK">
+	<TOPICS TYPE="Administration">
+		<TOPICS TYPE="Explore" URL="Administration/Explore/Readme.htm">
+			<TOPIC>
+				<TITLE>Visual C++</TITLE>
+				<URL>../Administration/Explore.vc/Readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Visual Basic</TITLE>
+				<URL>../Administration/Explore.vb/Readme.htm</URL>
+			</TOPIC>
+		</TOPICS>
+		<TOPIC>
+			<TITLE>COM Spy</TITLE>
+			<URL>../Administration/Spy/Readme.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>Transacted Administration</TITLE>
+			<URL>../Administration/TransactAdmin/TransactAdmin.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>Scripted Administration</TITLE>
+			<URL>../Administration/Scripted Administration/readme.htm</URL>
+		</TOPIC>
+	</TOPICS>
+	<TOPICS TYPE="Fundamentals">
+		<TOPIC>
+			<TITLE>IMallocSpy</TITLE>
+			<URL>../Fundamentals/CMallSpy/readme.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>Custom Surrogate</TITLE>
+			<URL>../Fundamentals/CustomSurrogate/readme.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>Call As</TITLE>
+			<URL>../Fundamentals/Object/Callas/readme.htm</URL>
+		</TOPIC>
+		<TOPICS TYPE="Active Document">
+			<TOPIC>
+				<TITLE>Doc File Viewer</TITLE>
+				<URL>../Fundamentals/ActiveDocument/dfv</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Document Server</TITLE>
+				<URL>../Fundamentals/ActiveDocument/doserver/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Framer (Container)</TITLE>
+				<URL>../Fundamentals/ActiveDocument/Framer/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Range</TITLE>
+				<URL>../Fundamentals/ActiveDocument/Range/readme.htm</URL>
+			</TOPIC>
+		</TOPICS>
+		<TOPICS TYPE="Async">
+			<TOPIC>
+				<TITLE>Async Server</TITLE>
+				<URL>../Async/Async.htm</URL>
+			</TOPIC>
+		</TOPICS>
+		<TOPICS TYPE="DCOM">
+			<TOPIC>
+				<TITLE>Call Cancel</TITLE>
+				<URL>../Fundamentals/DCOM/Cancel/cancel.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Performance</TITLE>
+				<URL>../Fundamentals/DCOM/comperf/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Permissions</TITLE>
+				<URL>../Fundamentals/DCOM/dcomperm/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Impersonation</TITLE>
+				<URL>../Fundamentals/DCOM/oleimp/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Secure</TITLE>
+				<URL>../Fundamentals/DCOM/secure/readme.htm</URL>
+			</TOPIC>
+			<TOPIC>
+				<TITLE>Simple</TITLE>
+				<URL>../Fundamentals/DCOM/simple/readme.htm</URL>
+			</TOPIC>
+		</TOPICS>
+	</TOPICS>
+	<TOPICS TYPE="Services">
+		<TOPICS TYPE="Events">
+			<TOPIC>
+				<TITLE>Hello Events</TITLE>
+				<URL>../Services/Events/Hello Events/Hello Events.htm</URL>
+			</TOPIC>
+		</TOPICS>
+		<TOPICS TYPE="Queued Components">
+			<TOPIC>
+				<TITLE>Hello Queued Components</TITLE>
+				<URL>../Services/Queued_Components/Hello Queued Components/readme.htm</URL>
+			</TOPIC>
+		</TOPICS>
+	</TOPICS>
+	<TOPICS TYPE="Help">
+		<TOPIC>
+			<TITLE>Build Environment</TITLE>
+			<URL>buildenv.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>64-bit Build Notes</TITLE>
+			<URL>64bit_Notes.htm</URL>
+		</TOPIC>
+		<TOPIC>
+			<TITLE>FAQ</TITLE>
+			<URL>troubleshooting.htm</URL>
+		</TOPIC>
+	</TOPICS>
+	<TOPICS TYPE="Tools">
+		<TOPIC>
+			<TITLE>FIXVBPRef</TITLE>
+			<URL>FixVBPRef.htm</URL>
+		</TOPIC>
+	</TOPICS>
+</TOPICLIST>

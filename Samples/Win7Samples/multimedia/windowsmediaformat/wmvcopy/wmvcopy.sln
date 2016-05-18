@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wmvcopy", "wmvcopy.vcproj", "{F804E9BD-CD7C-4D95-B13C-0D5A9B119F1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F804E9BD-CD7C-4D95-B13C-0D5A9B119F1E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F804E9BD-CD7C-4D95-B13C-0D5A9B119F1E}.Debug|Win32.Build.0 = Debug|Win32
+		{F804E9BD-CD7C-4D95-B13C-0D5A9B119F1E}.Release|Win32.ActiveCfg = Release|Win32
+		{F804E9BD-CD7C-4D95-B13C-0D5A9B119F1E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

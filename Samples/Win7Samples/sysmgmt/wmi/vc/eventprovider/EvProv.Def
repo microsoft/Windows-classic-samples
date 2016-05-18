@@ -1,0 +1,20 @@
+; **************************************************************************
+;
+; Copyright (c)  Microsoft Corporation.
+;
+; File:  EVPROV-ALPHA.DEF
+;
+; Description:
+;        Sample event provider - definitions file for Alpha
+;
+; History:
+;
+; **************************************************************************
+
+LIBRARY			EVPROV.DLL
+;DESCRIPTION		'Sample Event Provider - Copyright (c)  Microsoft Corp.'
+EXPORTS
+    DllGetClassObject 	PRIVATE
+    DllCanUnloadNow   	PRIVATE
+    DllRegisterServer	PRIVATE
+    DllUnregisterServer	PRIVATE

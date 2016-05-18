@@ -1,0 +1,14 @@
+[ uuid (906B0CE0-C70B-1067-B317-00DD010662DA),
+  version(1.0),
+  pointer_default(unique),
+
+]
+interface hello
+{
+
+void HelloProc([in] handle_t h1,
+			   [in, string] unsigned char * pszString);
+
+void Shutdown([in] handle_t h1);
+
+}

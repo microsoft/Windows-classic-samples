@@ -1,0 +1,83 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>New Page 1</title>
+<link rel="stylesheet" type="text/css" href="Styles.css">
+</head>
+
+<body>
+
+<h2>64 Bit&nbsp; Build Notes</h2>
+<hr>
+<p>Building Visual Studio workspaces and makefiles that work equally well for 32
+bit x86 and&nbsp; 64 bit IA64 architectures is not an easy task.&nbsp; This
+document outlines some lessons learned in this process.</p>
+<h4>Output Directories</h4>
+<p>Visual Studio by default wants to create different configurations in
+different directories such as Release or Debug.&nbsp; For the purposes of
+simplicity with the sample applications we choose to place the output in a Bin
+directory.&nbsp; It is also important to keep all object files and other
+compiler generated files separated into x86 and IA64 versions.</p>
+<p>For example a project directory tree might look like</p>
+<p>Project<br>
+&nbsp;&nbsp;&nbsp; Bin<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x86<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IA64<br>
+&nbsp;&nbsp;&nbsp; ps_Win32 - IDL Generated Proxy Stub files for Win32<br>
+&nbsp;&nbsp;&nbsp; ps_Win64 - IDL Generated Proxy Stub files for Win64<br>
+&nbsp;&nbsp;&nbsp; Proj1__Win32_Debug<br>
+&nbsp;&nbsp;&nbsp; Proj1__Win32_Release<br>
+&nbsp;&nbsp;&nbsp; Proj1__Win64_Debug<br>
+&nbsp;&nbsp;&nbsp; Proj1__Win64_Release<br>
+</p>
+<h4>Proxy / Stub Issues</h4>
+<p>Proxy / Stub dlls are built with output from the MIDL compiler.&nbsp; The
+default Visual C++ MIDL settings do not output correct IA64 proxy stubs.&nbsp;
+To have correct stubs you must do the following.</p>
+<table border="1" width="100%">
+  <tr>
+    <td width="50%"><b>Action</b></td>
+    <td width="50%"><b>Win32</b></td>
+    <td width="50%"><b>Win64</b></td>
+  </tr>
+  <tr>
+    <td width="50%">Add MIDL compiler directive</td>
+    <td width="50%">/env win32</td>
+    <td width="50%">/env win64</td>
+  </tr>
+  <tr>
+    <td width="50%">Add define for machine type</td>
+    <td width="50%">_M_X86</td>
+    <td width="50%">_M_IA64</td>
+  </tr>
+  <tr>
+    <td width="50%">Add output directory</td>
+    <td width="50%">/out ps_Win32</td>
+    <td width="50%">/out ps_Win64</td>
+  </tr>
+  <tr>
+    <td width="50%">Add win32 define</td>
+    <td width="50%">/D &quot;_WIN32_DCOM&quot;</td>
+    <td width="50%">/D &quot;_WIN32_DCOM&quot;</td>
+  </tr>
+</table>
+<p>&nbsp;When building a project that includes a proxy stub DLL it is best to
+divide the project into 4 separate projects</p>
+<ol>
+  <li>IDL Project - a <i>utility</i> project that contains only the IDL files.</li>
+  <li>proxy stub project - a Win32 DLL project that builds the proxy stub using
+    the generated files from the IDL project.&nbsp; Depends on the IDL project.</li>
+  <li>server project - The COM server.</li>
+  <li>client project - The COM client.</li>
+</ol>
+
+<h2>MIDL Compiler</h2>
+<p>The MIDL compiler version 6.0 or higher is required.</p>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+// CATLSmpl.idl : IDL source for CATLSmpl.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CATLSmpl.tlb) and marshalling code.
+
+    [
+        object,
+        uuid(61CECB2B-68D3-11D0-8AE3-00C0F00AE35A),
+        dual,
+        helpstring("ISimple Interface"),
+        pointer_default(unique),
+        oleautomation
+    ]
+    interface ISimple : IDispatch
+    {
+        import "oaidl.idl";
+
+        [propget, id(1), helpstring("Get MyProperty's value")]
+        HRESULT myProperty([out,retval] BSTR* pbstrOutValue);
+
+        [propput, id(1), helpstring("Set MyProperty's value")]
+        HRESULT myProperty([in] BSTR bstrInValue); 
+
+        [id(2), helpstring("Convert argument to uppercase")]
+        HRESULT myMethod([in] BSTR bstrIn, [out, retval] BSTR* pbstrOut);
+    };
+
+
+
+[
+    uuid(61CECB29-68D3-11D0-8AE3-00C0F00AE35A),
+    version(1.0),
+    helpstring("IISSample CATLSmpl Object Library")
+]
+library CATLSmpl
+{
+    importlib("stdole32.tlb");
+
+    [
+        uuid(61CECB2F-68D3-11D0-8AE3-00C0F00AE35A),
+        helpstring("Simple Class")
+    ]
+    coclass CSimple
+    {
+        [default] interface ISimple;
+    };
+
+};

@@ -1,0 +1,9 @@
+:Base leakybin.hlp
+:Title LeakyBin Application Help
+:Index=leakybin.hlp
+1 Overview=OVERVIEW@leakybin.hlp
+1 Menu Items
+2 File=MENU_FILE@leakybin.hlp
+2 Test=MENU_TEST@leakybin.hlp
+2 Help=MENU_HELP@leakybin.hlp
+

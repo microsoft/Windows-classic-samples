@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextService-Step06-3", "TextService-Step06-3.vcproj", "{ED0CC610-5F1E-43C1-8E31-122EE3EE70E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED0CC610-5F1E-43C1-8E31-122EE3EE70E9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ED0CC610-5F1E-43C1-8E31-122EE3EE70E9}.Debug|Win32.Build.0 = Debug|Win32
+		{ED0CC610-5F1E-43C1-8E31-122EE3EE70E9}.Release|Win32.ActiveCfg = Release|Win32
+		{ED0CC610-5F1E-43C1-8E31-122EE3EE70E9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

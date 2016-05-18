@@ -1,0 +1,607 @@
+<HTC URN="cb">
+
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         coolbutton.htc
+//
+//  Description:  The coolbar behavior allows web authors to easily add 
+//                Explorer-style menus to their web pages and applications. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="image"      />
+<PROPERTY NAME="hoverImage" />
+<PROPERTY NAME="group"      />
+<PROPERTY NAME="type"       />
+<PROPERTY NAME="state"      />
+<PROPERTY NAME="title"      />
+<PROPERTY NAME="href"       />
+<PROPERTY NAME="target"     />
+    
+<METHOD   NAME="DoMouseUp"  />
+<METHOD   NAME="DoMouseOut"  />
+
+<EVENT    NAME="onerror"    ID="error"    />
+    
+<ATTACH EVENT="onmouseover"     HANDLER="DoMouseOver" />
+<ATTACH EVENT="onmouseout"      HANDLER="DoMouseOut"  />
+<ATTACH EVENT="onmousedown"     HANDLER="DoMouseDown" />
+<ATTACH EVENT="onmouseup"       HANDLER="DoMouseUp"   />
+<ATTACH EVENT="ondocumentready" HANDLER="DoInit"      />
+<ATTACH EVENT="onselectstart"   HANDLER="DoSelect"    />
+
+
+<SCRIPT LANGUAGE="jscript">
+
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+
+var bImg;                       // Tracks if the button has an image
+
+var normColor;                  //
+var normBackground;             //
+var normBorder;                 // Variables to track the regular state
+var normPadLeft;                //    of these properties (as they change
+var normPadRight;               //    during the various events)
+var normPadTop;                 //
+var normPadBottom;              //
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions and attaches events to initialize behavior.
+//                  The DoSizeAll() function is a method of the parent coolbar
+//                  behavior that helps coordinate the sizing of the buttons.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+	FormatImage();
+    SetDefaults();
+	SetNormal();
+
+	parentElement.DoSizeAll();
+	
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+    //  CSS Property Defaults   
+    NormalDefault('padding',	     '0px',		        '3px');
+    NormalDefault('margin',		     'null',	        '3px');
+    NormalDefault('fontSize',		 '12',	            '10pt');
+    NormalDefault('fontFamily',      'Times New Roman', 'MS Sans Serif');
+    NormalDefault('color',		     'black',	        'menutext');
+    NormalDefault('backgroundColor', 'transparent',     'menu');
+    NormalDefault('cursor',		     'auto',            'default');
+    
+    if (currentStyle.height == "auto") style.height = GetHeight();
+	if (currentStyle.width == "auto")  style.width  = GetWidth();
+	
+	//  Custom CSS Property Defaults
+    CustomDefault('cb--border-width','cbBorderWidth','1px');
+    CustomDefault('cb--border-style','cbBorderStyle','solid');
+    CustomDefault('cb--hover-color', 'cbHoverColor', style.color);
+    CustomDefault('cb--hover-background', 'cbHoverBackground', style.backgroundColor);
+    CustomDefault('cb--hover-border', 'cbHoverBorder', 'threedhighlight threedshadow threedshadow threedhighlight');
+    CustomDefault('cb--selected-background', 'cbSelectedBackground', 'buttonhighlight');
+    CustomDefault('cb--selected-border', 'cbSelectedBorder', 'threedshadow threedhighlight threedhighlight threedshadow');
+	
+	style.textAlign = currentStyle.textAlign;
+	style.borderColor = style.backgroundColor;
+	style.borderStyle = style.cbBorderStyle;
+	style.borderWidth = style.cbBorderWidth;
+	
+    //  Attribute | Property Defaults
+    if (type == null)   type = "button";
+    state = false
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    switch(propertyName)
+    {
+        case "image"                    :
+            eval('img_' + uniqueID).src = image;
+            break;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatImage
+//
+//  Description:    If the button has an image specified, this function adds
+//                  the necessary HTML to the page.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FormatImage()
+{
+    bImg = (image != null);
+    if (bImg)
+    {
+        var sInsertImg = "<IMG ID='img_" + uniqueID + "' SRC='" + image + "'><BR>";
+        insertAdjacentHTML ("AfterBegin", sInsertImg);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetNormal
+//
+//  Description:    Sets the global variables that track the regular state
+//                  of a handful of CSS properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetNormal()
+{
+	if (!state)
+	{
+	    normBackground = style.backgroundColor;
+        normBorder = style.borderColor;
+        normColor = style.color;
+    
+        normPadLeft = parseInt(currentStyle.paddingLeft);
+        normPadRight = parseInt(currentStyle.paddingRight);
+        normPadTop = parseInt(currentStyle.paddingTop);
+        normPadBottom = parseInt(currentStyle.paddingBottom);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       GetHeight
+//
+//  Description:    Sets the default height of the button.
+//
+//  Arguments:      none
+//
+//  Returns:        parentElement.ButtonHeight if it exists
+//                  currentStyle.height if it is explicitly specified
+//                  "1px" if neither of the above are true
+//
+//-----------------------------------------------------------------------------
+
+function GetHeight()
+{
+    if (parentElement.ButtonHeight != null) return parentElement.ButtonHeight;
+    if (currentStyle.height != "auto") return currentStyle.height;
+    return "1px";
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       GetWidth
+//
+//  Description:    Sets the default width of the button.
+//
+//  Arguments:      none
+//
+//  Returns:        parentElement.ButtonWidth if it exists
+//                  currentStyle.width if it is explicitly specified
+//                  "1px" if neither of the above are true
+//
+//-----------------------------------------------------------------------------
+
+function GetWidth()
+{
+    if (parentElement.ButtonWidth != null) return parentElement.ButtonWidth;
+    else if (currentStyle.width != "auto") return currentStyle.width;
+    else return "1px";  
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CheckGroup
+//
+//  Description:    If a check button is part of a group, when that button is
+//                  pushed, any other buttons should be released.  This function
+//                  iterates through such buttons and releases them.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CheckGroup()
+{
+    //  The collection of coolbutton's in this element's parent coolbar
+    oCoolBar = element.parentElement.all.urns("cb");
+
+    //
+    //  Iterate through the buttons in this coolbar and check if they are in
+    //  this group.
+    //    
+    for (i=0; i<oCoolBar.length; i++)
+    {
+        if (oCoolBar(i).group != null && oCoolBar(i) != element)
+        {
+            //  If the button is selected and part of this group, unselect it
+            if (oCoolBar(i).group == group && oCoolBar(i).state)
+            {
+                oCoolBar(i).DoMouseUp(true);
+                oCoolBar(i).DoMouseOut();
+            }
+        }
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoHref
+//
+//  Description:    Open the HREF into the TARGET.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoHref()
+{
+    switch(target)
+    {
+        case "_self"        :   window.document.location.href = href;
+                                break;
+        
+        case "_top"         :   window.top.location.href = href;
+                                break;
+        
+        case "_parent"      :   window.parent.location.href = href;
+                                break;
+        
+        case "_blank"       :   window.open(href, target);
+                                break;
+        
+        default             :   FindTarget();
+                                break;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FindTarget
+//
+//  Description:    Take the TARGET property and determine whether it is
+//                  a separate frame or window, or an element.  Open the
+//                  HREF into that TARGET.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FindTarget()
+{
+    if (target == "")
+    {
+        window.open(href, "_blank");
+        return true;
+    }
+
+    //  Is there a frames collection and is this one of them?
+    if (window.top.frames.length > 1)
+    {
+        for (i=0; i<window.top.frames.length; i++)
+        {
+            if (window.top.frames(i).name == target)
+            {
+                window.top.frames(i).src = href;
+                return true;
+            }
+        }
+    }
+
+    for (i=0; i<window.document.frames.length; i++)
+    {
+        if (window.document.frames(i).name == target)
+        {
+            window.document.frames(i).document.location.href = href;
+            return true;
+        }
+    }
+    
+    window.open(href, target);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOver
+//
+//  Description:    Adds necessary formatting for mouseover event
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseOver()
+{
+    //  Capture the mouse
+    setCapture(true);
+
+    //  Call SetNormal() to record default properties before they are changed
+    SetNormal();
+
+    //  Format the button for the mouseover
+    if ((type == "check" && !state) || type != "check")
+    {
+        if (bImg) eval('img_' + uniqueID).src = hoverImage;
+        style.color = style.cbHoverColor;
+	    style.borderColor = style.cbHoverBorder;
+    }
+	style.background = style.cbHoverBackground;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOut
+//
+//  Description:    Removes formatting applied in mouseover event
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseOut()
+{
+    //  Remove formatting
+    if ((type == "check" && !state) || type != "check")
+    {
+        if (bImg) eval('img_' + uniqueID).src = image;
+	    style.color = normColor;
+	    style.borderColor = normBorder;
+	    style.background = normBackground;
+	}
+    else
+    {
+        style.background = style.cbSelectedBackground;
+    }
+
+    //  Release the mouse
+    releaseCapture();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseDown
+//
+//  Description:    Adds necessary formatting for mousedown event
+//
+//  Arguments:      none
+//
+//  Returns:        false if this is a check button and state is true
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseDown()
+{
+    if (type == "check" && state)
+    {
+        state = false;
+        return false;
+    }
+    else if (type == "check") state = true;
+    
+    //  Format the button for the mousedown
+    style.paddingLeft = normPadLeft + 1;
+    style.paddingRight = (normPadRight - 1 < 0 ? 0 : normPadRight - 1);
+    style.paddingTop = normPadTop + 1;
+    style.paddingBottom = (normPadBottom - 1 < 0 ? 0 : normPadBottom - 1);
+  	style.background = style.cbSelectedBackground;
+    style.borderColor = style.cbSelectedBorder;
+    
+    //  If this is a check button and part of a group, call CheckGroup()
+    if (group != null && type == "check") CheckGroup();
+    
+    //  If this button has an HREF, call DoHref to perform it.
+   	if (href != null) DoHref();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseUp
+//
+//  Description:    Removes formatting applied in mousedown event
+//
+//  Arguments:      bGroup - is the function being called as a result of
+//                      another button in the same group being selected
+//
+//  Returns:        false if this is a check button and state is true
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseUp(bGroup)
+{
+    if (bGroup != true)
+    {
+        if (type == "check" && state)
+        {
+            state = true;
+            return false;
+        }
+        else if (type == "check") state = false;
+    }
+    else state = false;
+
+    //  Remove formatting
+    style.paddingLeft = normPadLeft;
+    style.paddingRight = normPadRight;
+    style.paddingTop = normPadTop;
+    style.paddingBottom = normPadBottom;
+    style.borderColor = (bGroup==true ? normBorder : style.cbHoverBorder);
+    style.background = (bGroup==true ? normBackground : style.cbHoverBackground);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSelectStart
+//
+//  Description:    Cancels the onselectstart event to prevent user from
+//                  selecting text in the slider.
+//
+//  Arguments:      none
+//
+//  Returns:        false (returnValue)
+//
+//+----------------------------------------------------------------------------
+
+function DoSelect()
+{
+    window.event.cancelBubble = true;
+    window.event.returnValue = false;   
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+
+</SCRIPT>
+
+</HTC>
