@@ -1,0 +1,11 @@
+LIBRARY AUTHFILT
+
+;DESCRIPTION 'Sample ISAPI Authentication Filter'
+
+EXPORTS
+
+    DllMain
+
+    HttpFilterProc
+    GetFilterVersion
+

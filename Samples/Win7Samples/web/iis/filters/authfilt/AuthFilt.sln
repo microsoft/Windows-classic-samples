@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthFilt", "AuthFilt.vcproj", "{1161C81F-D073-400C-BC76-BC2C6B3C051B}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{1161C81F-D073-400C-BC76-BC2C6B3C051B}.Debug.ActiveCfg = Debug|Win32
+		{1161C81F-D073-400C-BC76-BC2C6B3C051B}.Debug.Build.0 = Debug|Win32
+		{1161C81F-D073-400C-BC76-BC2C6B3C051B}.Release.ActiveCfg = Release|Win32
+		{1161C81F-D073-400C-BC76-BC2C6B3C051B}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

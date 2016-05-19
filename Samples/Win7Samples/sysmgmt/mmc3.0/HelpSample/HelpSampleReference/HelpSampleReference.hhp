@@ -1,0 +1,21 @@
+[OPTIONS]
+Binary TOC=Yes
+Compatibility=1.1 or later
+Compiled file=HelpSampleReference.chm
+Contents file=HelpSampleReferenceTOC.hhc
+Default topic=Overview.htm
+Display compile progress=Yes
+Enhanced decompilation=Yes
+Full-text search=Yes
+Index file=HelpSampleReferenceIndex.hhk
+Language=0x409 English (United States)
+Title=Help Sample Reference
+
+
+[FILES]
+Topic2.htm
+Overview.htm
+Topic1.htm
+
+[INFOTYPES]
+

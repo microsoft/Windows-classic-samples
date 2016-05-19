@@ -1,0 +1,22 @@
+NAME         printer
+
+DESCRIPTION  'Sample Microsoft Win32 Application'
+
+STUB         'WINSTUB.EXE'
+
+CODE         PRELOAD MOVEABLE DISCARDABLE
+DATA         PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE     1024
+STACKSIZE    5120
+
+EXPORTS
+    MainWndProc                @1
+    AboutDlgProc               @2
+    AbortDlgProc               @3
+    DevCapsXDlgProc            @4
+    EnumPrintersDlgProc        @5
+    GetDeviceCapsDlgProc       @6
+    GetPrinterDriverDlgProc    @7
+    EnumPrinterDriversDlgProc  @8
+    EnumPrintersOptionsDlgProc @9

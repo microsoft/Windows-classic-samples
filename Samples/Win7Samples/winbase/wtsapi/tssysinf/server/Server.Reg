@@ -1,0 +1,6 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\AddIns\tssysinfo]
+"Name"="sysinf_s"
+"Type"=dword:00000003
+

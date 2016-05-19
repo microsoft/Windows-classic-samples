@@ -1,0 +1,17 @@
+<SCRIPT LANGUAGE=VBScript RUNAT=Server> 
+Sub Application_OnStart
+
+ '---- To optimize the performance, we hard code the GC servers --------
+ '---- To correct way always uses the GC://domain.name.com----------------
+   Session("ADsDomain") = "YourDominDNSNameHere" 'for example mydomain.mycompany.com
+   Application("UserID") = "YourDomainHere\YourUserNameHere"
+   Application("Password") = "yourPasswordHere"
+
+End Sub
+
+
+
+
+</SCRIPT>
+
+

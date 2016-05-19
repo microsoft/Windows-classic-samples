@@ -1,0 +1,8 @@
+LIBRARY   Select
+
+EXPORTS
+    StartSelection      @2
+    UpdateSelection     @3
+    EndSelection        @4
+    ClearSelection      @5
+

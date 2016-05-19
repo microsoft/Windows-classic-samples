@@ -1,0 +1,31 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetDiagFx\MyCompany\HostDLLs\L2SecExt]
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetDiagFx\MyCompany\HostDLLs\L2SecExt\HelperClasses]
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetDiagFx\MyCompany\HostDLLs\L2SecExt\HelperClasses\L2SecExt]
+"Extensible"=dword:00000000
+"Published"=dword:00000001
+"Version"="1.0"
+"CLSID"="{00102030-4050-6070-8090-A0B0C0D0E0F0}"
+"Parent"="Extensible L2Sec Helper Class"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\NetDiagFx\MyCompany\HostDLLs\L2SecExt\HelperClasses\L2SecExt\MatchAttributes]
+"DiagnosticsID"="{00102000-0003-0004-0005-000000000006}"
+
+[HKEY_CLASSES_ROOT\AppID\{00102030-4050-6070-8090-A0B0C0D0E0F0}]
+@="WirelessHelperClassExtension"
+"LaunchPermission"=hex:01,00,04,80,70,00,00,00,80,00,00,00,00,00,00,00,14,00,\
+  00,00,02,00,5c,00,04,00,00,00,00,00,14,00,1f,00,00,00,01,01,00,00,00,00,00,\
+  05,12,00,00,00,00,00,18,00,1f,00,00,00,01,02,00,00,00,00,00,05,20,00,00,00,\
+  20,02,00,00,00,00,14,00,1f,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,\
+  00,14,00,0b,00,00,00,01,01,00,00,00,00,00,05,13,00,00,00,01,02,00,00,00,00,\
+  00,05,20,00,00,00,20,02,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,\
+  00
+"AccessPermission"=hex:01,00,04,80,58,00,00,00,68,00,00,00,00,00,00,00,14,00,\
+  00,00,02,00,44,00,03,00,00,00,00,00,14,00,03,00,00,00,01,01,00,00,00,00,00,\
+  05,13,00,00,00,00,00,14,00,07,00,00,00,01,01,00,00,00,00,00,05,0a,00,00,00,\
+  00,00,14,00,03,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00,01,02,00,00,00,\
+  00,00,05,20,00,00,00,20,02,00,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,\
+  00,00

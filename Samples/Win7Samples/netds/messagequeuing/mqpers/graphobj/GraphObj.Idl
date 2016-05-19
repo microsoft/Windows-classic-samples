@@ -1,0 +1,68 @@
+// GraphObj.idl : IDL source for GraphObj.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (GraphObj.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(BEEDC08A-EBD2-11D0-A78F-00805F0D2083),
+		dual,
+		helpstring("IPoint Interface"),
+		pointer_default(unique)
+	]
+	interface IPoint : IDispatch
+	{
+		[propget, id(1), helpstring("property x")] HRESULT x([out, retval] long *pVal);
+		[propput, id(1), helpstring("property x")] HRESULT x([in] long newVal);
+		[propget, id(2), helpstring("property y")] HRESULT y([out, retval] long *pVal);
+		[propput, id(2), helpstring("property y")] HRESULT y([in] long newVal);
+	};
+	[
+		object,
+		uuid(BEEDC08B-EBD2-11D0-A78F-00805F0D2083),
+		dual,
+		helpstring("ILine Interface"),
+		pointer_default(unique)
+	]
+	interface ILine : IDispatch
+	{
+		[propget, id(1), helpstring("property x1")] HRESULT x1([out, retval] long *pVal);
+		[propput, id(1), helpstring("property x1")] HRESULT x1([in] long newVal);
+		[propget, id(2), helpstring("property y1")] HRESULT y1([out, retval] long *pVal);
+		[propput, id(2), helpstring("property y1")] HRESULT y1([in] long newVal);
+		[propget, id(3), helpstring("property x2")] HRESULT x2([out, retval] long *pVal);
+		[propput, id(3), helpstring("property x2")] HRESULT x2([in] long newVal);
+		[propget, id(4), helpstring("property y2")] HRESULT y2([out, retval] long *pVal);
+		[propput, id(4), helpstring("property y2")] HRESULT y2([in] long newVal);
+	};
+[
+	uuid(BEEDC07B-EBD2-11D0-A78F-00805F0D2083),
+	version(1.0),
+	helpstring("GraphObj 1.0 Type Library")
+]
+library GRAPHOBJLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(F36B4ADE-E7EC-11D0-A78A-00805F0D2083),
+		helpstring("Point Class")
+	]
+	coclass PointGO
+	{
+		[default] interface IPoint;
+	};
+	[
+		uuid(8650EE03-E4C0-11D0-81C4-204C4F4F5020),
+		helpstring("Line Class")
+	]
+	coclass Line
+	{
+		[default] interface ILine;
+	};
+};

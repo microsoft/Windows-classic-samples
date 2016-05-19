@@ -1,0 +1,247 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Mapper.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAPPER_DIALOG DIALOGEX 0, 0, 436, 345
+STYLE DS_MODALFRAME | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DirectShow Filter Mapper Sample"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "&Search",IDC_BUTTON_SEARCH,22,20,78,23
+    PUSHBUTTON      "&Clear",IDC_BUTTON_CLEAR,118,20,78,23
+    COMBOBOX        IDC_COMBO_MERIT,297,18,122,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_INPUT_CATEGORY,84,63,122,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_OUTPUT_CATEGORY,297,63,122,120,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Use exact match?",IDC_CHECK_EXACT_MATCH,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,243,35,86,10
+    LISTBOX         IDC_LIST_INPUT_MAJOR,12,89,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_INPUT_MINOR,113,89,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_INPUT_MAJOR2,12,138,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_INPUT_MINOR2,113,138,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_MAJOR,224,89,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_MINOR,326,89,93,36,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_MAJOR2,224,138,93,36,
+                    LBS_NOINTEGRALHEIGHT | WS_DISABLED | WS_VSCROLL | 
+                    WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_MINOR2,326,138,93,36,
+                    LBS_NOINTEGRALHEIGHT | WS_DISABLED | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Has at least one input pin?",IDC_CHECK_INPUT_PIN,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,178,126,10
+    CONTROL         "Has at least one output pin?",IDC_CHECK_OUTPUT_PIN,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,224,178,104,10
+    CONTROL         "Renders its output?",IDC_CHECK_RENDERER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,341,178,78,10
+    GROUPBOX        "Filters Matching Query : 0",IDC_STATIC_NUMFILTERS,7,194,
+                    419,144,BS_CENTER
+    LISTBOX         IDC_LIST_FILTERS,12,214,407,118,LBS_SORT | 
+                    LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    GROUPBOX        "Filter Input",IDC_STATIC,7,52,206,139,BS_LEFT
+    CTEXT           "Input pin category :",IDC_STATIC,13,65,68,8
+    CTEXT           "Input Media Type",IDC_STATIC,12,78,93,8
+    CTEXT           "Media Subtype",IDC_STATIC,113,78,93,8
+    CTEXT           "Secondary Media Type",IDC_STATIC,12,127,93,8
+    CTEXT           "Secondary Subtype",IDC_STATIC,113,127,93,8
+    GROUPBOX        "Filter Output",IDC_STATIC,220,52,206,139,BS_LEFT
+    CTEXT           "Output pin category : ",IDC_STATIC,226,65,67,8
+    CTEXT           "Output Media Type",IDC_STATIC,224,78,93,8
+    CTEXT           "Media Subtype",IDC_STATIC,326,78,93,8
+    CTEXT           "Secondary Media Type",IDC_STATIC,224,127,93,8
+    CTEXT           "Secondary Subtype",IDC_STATIC,326,127,93,8
+    GROUPBOX        "Global options",IDC_STATIC,219,6,206,44
+    RTEXT           "Minimum merit : ",IDC_STATIC,226,19,67,11,
+                    SS_CENTERIMAGE
+    GROUPBOX        "Select your filter query parameters and click Search.",
+                    IDC_STATIC,7,6,206,43
+    LTEXT           "Filter Name",IDC_STATIC,13,204,109,8
+    LTEXT           "Filter Merit",IDC_STATIC,153,204,74,8
+    LTEXT           "Server Filename",IDC_STATIC,243,204,109,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "Comments", "DirectShow Sample\0"
+            VALUE "CompanyName", "Microsoft\0"
+            VALUE "FileDescription", "Mapper MFC Application\0"
+            VALUE "FileVersion", "9.00\0"
+            VALUE "InternalName", "Mapper\0"
+            VALUE "LegalCopyright", "Copyright (c) Microsoft Corporation\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "Mapper.EXE\0"
+            VALUE "ProductName", "DirectX 9 SDK\0"
+            VALUE "ProductVersion", "9.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_MAPPER_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 432
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 338
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About FilterMapper..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Mapper.rc2"  // non-Microsoft Visual C++ edited resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

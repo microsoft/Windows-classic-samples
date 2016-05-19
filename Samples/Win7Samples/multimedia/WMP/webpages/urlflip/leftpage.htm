@@ -1,0 +1,42 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+</HEAD>
+
+<BODY>
+<H1>URL Flips</H1>
+<OBJECT ID="Player1"
+  CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">
+  <PARAM NAME="autoStart" VALUE="true">
+  <PARAM NAME="defaultFrame" VALUE="right">
+  <PARAM NAME="UIMode" VALUE="none">
+</OBJECT>
+<BR><BR>
+<INPUT TYPE="BUTTON" NAME="BtnPlay" VALUE="Play" OnClick="StartMeUp()">
+<INPUT TYPE="BUTTON" NAME="BtnStop" VALUE="Stop" OnClick="ShutMeDown()"><BR><BR>
+
+<p>The URL embedded in the media will cause an external web page to display in the right frame approximately five seconds after the file starts playing.
+<p><b>Note:</b> you may need to adjust the Player's security settings to allow invocation of script commands.
+You will also need to be connected to the Internet to display the web page that is called by the URL.</P>
+
+<SCRIPT>
+<!--
+
+function StartMeUp ()
+{
+	Player1.currentPlaylist = Player1.mediaCollection.getByName('glass');
+}
+
+function ShutMeDown ()
+{
+    Player1.controls.stop();
+}
+
+
+-->
+</SCRIPT>
+
+
+</BODY>
+</HTML>
+

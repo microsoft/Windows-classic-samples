@@ -1,0 +1,74 @@
+<HTML>
+<HEAD>
+
+<TITLE>Behavior Library: Rowover</TITLE>
+
+<STYLE>
+    .rowover        {
+	                behavior:url(rowover.htc);
+	                }
+	         
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+    TD              {
+                    font: 10pt verdana;
+                    }
+
+    TH              {
+                    font: bold 10pt verdana;
+                    color: maroon
+                    }
+	A:link { color:#003399; text-decoration:none; }
+	A:visited { color:#6699CC; text-decoration:none; }
+	A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H2>Rowover</H2>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+
+<TABLE CLASS="rowover" STRIPED="true" BORDER="1" CELLSPACING="0" CELLPADDING="0">
+    <thead><tr><th COLSPAN="3">Regular Table</th></tr></thead>
+    <tr><td>Some</td><td>Text</td><td>Here</td></tr>
+    <tr><td>Some</td><td>Text</td><td>Here</td></tr>
+    <tr><td>Some</td><td>Text</td><td>Here</td></tr>
+    <tr><td>Some</td><td>Text</td><td>Here</td></tr>
+</TABLE>
+
+<BR>
+
+<TABLE ID="data" DATASRC="#oTdc" CLASS="rowover" STRIPED="true" BORDER="1" CELLSPACING="0" CELLPADDING="0">
+    <thead><tr><th COLSPAN="3">Databound Table</th></tr></thead>
+    <tbody><tr>
+    <td><span DATAFLD="column1"></span></td>
+    <td><span DATAFLD="column2"></span></td>
+    <td><span DATAFLD="column3"></span></td>
+    </tr></tbody>
+</TABLE>
+
+<OBJECT ID="oTdc" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83" width="1" height="1">
+    <PARAM NAME="DataURL" VALUE="rowover.txt">
+    <PARAM NAME="FieldDelim" VALUE="|">
+</OBJECT>
+
+<P>
+
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+
+</BODY>
+</HTML>

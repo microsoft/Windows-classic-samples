@@ -1,0 +1,162 @@
+/**************************************************************************
+ *
+ *  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+ *  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ *  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+ *  PURPOSE.
+ *
+ *  Copyright (c)   Microsoft Corporation.  All Rights Reserved.
+ *
+ **************************************************************************/
+
+#include <windows.h>
+#include "amcap.h"
+
+//
+// Icons
+//
+
+//
+// Main menu
+//
+ID_APP menu
+BEGIN
+    POPUP "&File"
+    BEGIN
+            MENUITEM "Set &Capture File..."         , MENU_SET_CAP_FILE
+            MENUITEM "&Allocate File Space..."      , MENU_ALLOC_CAP_FILE
+            MENUITEM "&Save Captured Video..."      , MENU_SAVE_CAP_FILE
+            MENUITEM SEPARATOR
+            MENUITEM "E&xit"                        , MENU_EXIT
+        END
+    POPUP "&Devices"
+        BEGIN
+            MENUITEM SEPARATOR
+    END
+    POPUP "&Options"
+        BEGIN
+            MENUITEM "&Preview"             , MENU_PREVIEW
+        MENUITEM SEPARATOR
+            MENUITEM "&MPEG2"               , MENU_MPEG2
+            MENUITEM SEPARATOR
+            MENUITEM "&Audio Format..."     , MENU_AUDIOFORMAT
+            MENUITEM SEPARATOR
+        /* VIDEO dialogs are created dynamically */
+        END
+    POPUP "&Capture"
+        BEGIN
+            MENUITEM "&Start Capture"       , MENU_START_CAP
+            MENUITEM "Sto&p Capture"        , MENU_STOP_CAP
+            MENUITEM SEPARATOR
+            MENUITEM "Capture &Audio"       , MENU_CAP_AUDIO
+            MENUITEM "&Closed Captioning"   , MENU_CAP_CC
+            POPUP    "&Master Stream"
+        BEGIN
+            MENUITEM "&None"                , MENU_NOMASTER
+            MENUITEM "&Audio"               , MENU_AUDIOMASTER
+            MENUITEM "&Video"               , MENU_VIDEOMASTER
+        END
+            MENUITEM "Set &Frame Rate..."   , MENU_FRAMERATE
+            MENUITEM "Set &Time Limit..."   , MENU_TIMELIMIT
+        END
+    POPUP "&Help"
+        BEGIN
+            MENUITEM "&About..."            , MENU_ABOUT
+        END
+END
+
+//
+// Dialogs
+//
+
+// About Dialog
+IDD_ABOUT DIALOG DISCARDABLE  10, 20, 215, 78
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About AMCap..."
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "AMCAP - DirectShow Video Capture Sample",-1,23,
+                    8,170,8,NOT WS_GROUP
+    CTEXT           "Version 9.01",-1,41,23,134,8,NOT WS_GROUP
+    CTEXT           "Copyright ©  Microsoft Corp.",-1,23,
+                    38,170,8,NOT WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,91,53,32,14,WS_GROUP
+    ICON            "AMCAPICON"-1,7,17,21,20
+END
+
+IDD_AllocCapFileSpace DIALOG 6, 18, 160, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | DS_3DLOOK
+CAPTION "Set File Size"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Enter the amount of disk space to set ", -1, 5, 9, 130,
+                    8
+    LTEXT           "aside for the capture file.  Existing video", -1, 5, 19,
+                    135, 8
+    LTEXT           "data in the file will be lost.", -1, 5, 29, 93, 8
+    LTEXT           "Free disk space:", -1, 5, 50, 59, 8
+    LTEXT           "     ", IDD_SetCapFileFree, 73, 50, 20, 8
+    LTEXT           "MBytes", -1, 96, 50, 27, 8
+    LTEXT           "Capture file size:", -1, 5, 64, 60, 8
+    EDITTEXT        IDD_SetCapFileSize, 65, 64, 28, 12, ES_AUTOHSCROLL
+    LTEXT           "MBytes", -1, 96, 64, 27, 8
+    PUSHBUTTON      "OK", IDOK, 38, 84, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 88, 84, 40, 14
+END
+
+
+IDD_PressAKeyDialog DIALOG LOADONCALL MOVEABLE DISCARDABLE 12, 29, 121, 60
+CAPTION "Ready to Capture"
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "Select OK to start capture of video sequence to:",
+        -1, "static", SS_LEFT | WS_CHILD, 5, 4, 100, 16
+    CONTROL "", IDC_CAPFILENAME, "static", SS_LEFT | WS_CHILD, 5, 23, 100, 16
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD,
+        18, 42, 32, 14
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD,
+        69, 42, 32, 14
+END
+
+
+IDD_FrameRateDialog DIALOG LOADONCALL MOVEABLE DISCARDABLE 12, 29, 121, 50
+CAPTION "Choose Frame Rate"
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "", IDC_USEFRAMERATE "button", BS_AUTOCHECKBOX | WS_TABSTOP, 3, 4, 9, 8
+    CONTROL "Use Frame Rate", -1, "static", SS_LEFT | WS_CHILD, 13, 4, 73, 8
+    CONTROL "&Frame Rate:", -1, "static", SS_LEFT | WS_CHILD, 3, 18, 43, 8
+    CONTROL "", IDC_FRAMERATE, "edit", WS_BORDER | WS_TABSTOP | WS_CHILD, 44, 16, 44, 12
+    CONTROL "f/sec", -1, "static", SS_LEFT | WS_CHILD, 93, 18, 18, 8
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 18, 33, 32, 14
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 69, 33, 32, 14
+END
+
+
+IDD_TimeLimitDialog DIALOG LOADONCALL MOVEABLE DISCARDABLE 12, 29, 121, 50
+CAPTION "Capture Time Limit"
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | DS_MODALFRAME | WS_POPUP
+BEGIN
+    CONTROL "", IDC_USETIMELIMIT "button", BS_AUTOCHECKBOX | WS_TABSTOP, 3, 4, 9, 8
+    CONTROL "Use Time Limit", -1, "static", SS_LEFT | WS_CHILD, 13, 4, 73, 8
+    CONTROL "&Time Limit:", -1, "static", SS_LEFT | WS_CHILD, 3, 18, 43, 8
+    CONTROL "", IDC_TIMELIMIT, "edit", WS_BORDER | WS_TABSTOP | WS_CHILD, 44, 16, 44, 12
+    CONTROL "sec", -1, "static", SS_LEFT | WS_CHILD, 93, 18, 18, 8
+    CONTROL "OK", IDOK, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 18, 33, 32, 14
+    CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 69, 33, 32, 14
+END
+
+//
+// Version Info
+//
+#define VERSION_RES_BIN_NAME        "Amcap.exe\0"
+#define VERSION_RES_BIN_DESCRIPTION "Capture Application (Sample)\0"
+#define VERSION_RES_ACTIVEX         "\0"
+#define VERSION_RES_TYPE            VFT_APP
+
+#define AMOVIE_SELF_REGISTER
+
+

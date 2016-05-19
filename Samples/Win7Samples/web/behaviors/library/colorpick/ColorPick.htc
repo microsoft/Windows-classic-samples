@@ -1,0 +1,586 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:			colorpick.htc
+//
+//  Description:	This behavior allows web authors add a visual control
+//					for assigning color values to elements to a web page.
+//
+//
+//-------------------------------------------------------------------- -->
+
+
+<PROPERTY NAME="name"         />
+
+<METHOD   NAME="DoMouseOn"	  />
+<METHOD   NAME="DoMouseOff"	  />
+<METHOD   NAME="DoClick"	  />
+
+<EVENT    NAME="onchange"   ID="change" />
+<EVENT    NAME="onerror"    ID="error"  />
+   
+<ATTACH   EVENT="ondocumentready" HANDLER="DoInit"        />
+<ATTACH   EVENT="onselectstart"   HANDLER="DoSelectStart" />
+
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+var zColor = new Array();
+var oCurr = null;
+var bValueExists = false;
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoInit
+//
+//  Description:    Calls functions, set variables, and attaches events to
+//                  initialize behavior
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoInit()
+{
+	style.display = "none";
+
+    SetDefaults();
+    SetColor();
+    AddTable();
+    MakeGrid();
+    SetValue();
+
+    attachEvent("onpropertychange", DoPropChange);
+    
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       AddTable
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function AddTable()
+{
+    var sTab = '<TABLE ID="' + uniqueID + 'tab" BORDER="1" '
+		+ 'STYLE="background:silver; cursor:default"></TABLE>';
+
+	
+	
+
+	insertAdjacentHTML("AfterEnd", sTab);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetColor
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetColor()
+{
+	//var iFactor = parseInt(255/(parseInt(style.cpGridSize)-1));
+	var iFactor = 255/(parseInt(style.cpGridSize)-1);
+	
+	var iColors = 0;
+	
+	var iRed, iGreen, iBlue;
+	
+	for(r=0; r<parseInt(style.cpGridSize); r++)
+	{
+		for(g=0; g<parseInt(style.cpGridSize); g++)
+		{
+			for(b=0; b<parseInt(style.cpGridSize); b++)
+			{
+				iRed = parseInt(iFactor*r);
+				iGreen = parseInt(iFactor*g);
+				iBlue = parseInt(iFactor*b);
+				
+				iRed = iRed.toString(16);
+				iGreen = iGreen.toString(16);
+				iBlue = iBlue.toString(16);
+				
+				if(iRed=="0") iRed = "00";
+				if(iGreen=="0") iGreen = "00";
+				if(iBlue=="0") iBlue = "00";
+				
+				zColor[iColors] = iRed + iGreen + iBlue;
+				iColors++;
+			}
+		}
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DeleteGrid
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DeleteGrid()
+{
+	var oTab = eval(uniqueID + "tab");
+	
+	while(oTab.rows.length>0)
+	{
+		oTab.deleteRow();
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MakeGrid
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function MakeGrid()
+{
+	//the number of cells that will be created
+	var iNumCells = Math.pow(style.cpGridSize,3);
+	
+
+	//track the number of color cells that have been created
+	var iNumCellsCreated = 0;
+	
+	//what is grid width minimum?  Depends on how many cells there are, and how wide
+	//each cell is.  first, determine how many cells across we will have in our table
+	var iCellsAcross = parseInt(parseInt(style.cpGridWidth)/parseInt(style.cpCellWidth));
+	
+	if(iCellsAcross==0) iCellsAcross = 1;
+	
+	
+	var iCellsDown = parseInt(Math.ceil(iNumCells/iCellsAcross));
+	
+	if(iCellsDown==0) iCellsDown = 1;
+	
+
+	//then, determine height.  If the given height is too short, force a height that will
+	//contain all the cells
+	//ISSUE:  Should the grid be forced into a fixed height, with a scrollbar, if the cells
+	//won't all fit?
+	if((iCellsDown*parseInt(style.cpCellHeight))>parseInt(style.cpGridHeight)) 
+	{
+		style.cpGridHeight = iCellsDown*parseInt(style.cpCellHeight);
+	}
+	
+	var oTab = eval(uniqueID + "tab");
+	oTab.attachEvent("onclick", DoClick);
+	oTab.attachEvent("onmouseover", DoMouseOn);
+	oTab.attachEvent("onmouseout", DoMouseOff);
+	oTab.attachEvent("onselectstart", DoSelectStart);
+	
+	oTab.height = style.cpGridHeight;
+	
+	
+
+	for(i=0; i<iCellsDown; i++)
+	{
+		var oRow = oTab.insertRow();
+		for(j=0; j<iCellsAcross; j++)
+		{
+			var oCell = oRow.insertCell();
+			oCell.style.width = style.cpCellWidth;
+			oCell.style.height = style.cpCellHeight;
+			oCell.style.border = style.cpGridStyle;
+			oCell.style.fontSize = 0;
+			iCellCount = (i*iCellsAcross) + j;
+			oCell.title = oCell.style.color = oCell.style.backgroundColor = zColor[iCellCount];
+			oCell.innerText = ".";
+			iNumCellsCreated++;
+			if(iNumCellsCreated==iNumCells) break;
+		}
+	}
+	//add one more row to keep from vertically stretching our color rows if 
+	//grid is taller than all cells
+	var oRow = oTab.insertRow();
+	oRow.style.height = 0;
+	oRow.style.fontSize = "0";
+	
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Handles property changes on CSS and regular property/
+//                  attributes.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    if (propertyName.substring(0,5) == "style")
+    {
+        switch (propertyName)
+        {
+            case "style.cpGridSize"       :
+				DeleteGrid();
+				SetColor();
+				MakeGrid();
+                break;
+
+            case "style.cpGridStyle"      :
+            	DeleteGrid();
+				MakeGrid();
+                break;
+
+            case "style.cpSelectedStyle"  :
+            	DeleteGrid();
+				MakeGrid();
+            
+                break;
+
+            case "style.cpHoverStyle"     :
+            
+                break;
+
+            case "style.cpGridWidth"      :
+                DeleteGrid();
+				MakeGrid();
+                break;
+
+            case "style.cpGridHeight"     :
+                DeleteGrid();
+				MakeGrid();
+                break;
+
+            case "style.cpCellWidth"      :
+                DeleteGrid();
+				MakeGrid();
+                break;
+
+            case "style.cpCellHeight"     :
+                DeleteGrid();
+				MakeGrid();
+                break;
+        }
+    }
+    else
+    {
+        detachEvent("onpropertychange", DoPropChange);
+        
+        switch(propertyName)
+        {
+            case "name"                     :
+                break;
+                
+            case "value"                     :
+                break;
+                
+            default                         :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+        
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetValue
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetValue()
+{
+	var oTab = eval(uniqueID + "tab");
+
+	if (value == null)
+	{
+		value = oTab.rows(0).cells(0).style.backgroundColor;
+	}
+
+	for(i=0; i<oTab.rows.length; i++)
+	{
+		for(j=0; j<oTab.rows(i).cells.length; j++)
+		{
+			
+			if(oTab.rows(i).cells(j).style.backgroundColor.toLowerCase() == value.toLowerCase())
+			{
+				bValueExists = true;
+				oCurr = oTab.rows(i).cells(j);		
+				oCurr.style.border = style.cpSelectedStyle;
+				value = oCurr.style.backgroundColor;
+			}
+		}
+	}
+	
+	if(bValueExists==false) value = oTab.rows(0).cells(0).style.backgroundColor;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the defaults for custom CSS properties (calls the
+//                  CustomDefault() function), regular CSS properties (the
+//                  NormalDefault() function), and attribute/properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+	//store value to be passed for all three border styles
+	var sBorderDefault = style['cp--grid-style'];
+	if(sBorderDefault==null) sBorderDefault = '1px inset activeborder';
+	
+	
+	//store value to be passed for cpGridWidth
+	var iGridWidthDefault = '90px';
+	
+	if(style['cp--cell-width']==null)
+	{
+		if(style['cp--grid-width']==null)
+		{
+			switch(style['cp--grid-size'])
+			{
+				case '2':		iGridWidthDefault = '54px';
+							break;
+				case '3':		iGridWidthDefault = '90px';
+							break;
+				case '4':		iGridWidthDefault = '144px';
+							break;
+			}
+		}
+	}
+	
+    // Custom CSS Property Defaults
+    CustomDefault('cp--grid-size',		'cpGridSize',		'3');
+    CustomDefault('cp--grid-style',		'cpGridStyle',		sBorderDefault);
+    CustomDefault('cp--selected-style',	'cpSelectedStyle',	sBorderDefault);
+    CustomDefault('cp--hover-style',	'cpHoverStyle',		sBorderDefault);
+    CustomDefault('cp--grid-width',		'cpGridWidth',		iGridWidthDefault);
+    CustomDefault('cp--grid-height',	'cpGridHeight',		'1px');
+    CustomDefault('cp--cell-width',		'cpCellWidth',		'18px');
+    CustomDefault('cp--cell-height',	'cpCellHeight',		'18px');
+    
+    //  Attribute | Property Defaults
+    if (value == null) value = "#000000";
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       NormalDefault
+//
+//  Description:    Sets the defaults for CSS properties by checking the
+//                  currentStyle and style of the object against the IE
+//                  default.
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sIEDefault - the IE standard default of the property
+//                  sDefault - the desired default of the property
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function NormalDefault(sCSSName, sIEDefault, sDefault)
+{
+    if (currentStyle[sCSSName] == sIEDefault 
+        && (style[sCSSName] == "" || style[sCSSName] == null))
+    {
+        style[sCSSName] = sDefault;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOn
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        false if the srcElement is not the slider piece.
+//
+//+----------------------------------------------------------------------------
+
+function DoMouseOn()
+{
+	var e = window.event.srcElement;
+
+	if(e.tagName.toLowerCase()=="td" && e != oCurr)
+	{
+		e.style.border = style.cpHoverStyle;
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseOff
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DoMouseOff()
+{
+	var e = window.event.srcElement;
+
+	if(e.tagName.toLowerCase()=="td" && e != oCurr)
+	{
+		e.style.border = style.cpGridStyle;
+	}
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoClick
+//
+//  Description:    
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//+----------------------------------------------------------------------------
+
+function DoClick()
+{
+	var e = window.event.srcElement;
+
+	if(e.tagName.toLowerCase()=="td" && e != oCurr)
+	{
+		oCurr.style.border = style.cpGridStyle;
+		oCurr = e;
+		e.style.border = style.cpSelectedStyle;
+		value = e.style.backgroundColor;
+	}
+	
+	change.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSelectStart
+//
+//  Description:    Cancels the onselectstart event to prevent user from
+//                  selecting text in the slider.
+//
+//  Arguments:      none
+//
+//  Returns:        false (returnValue)
+//
+//+----------------------------------------------------------------------------
+
+function DoSelectStart()
+{
+    window.event.returnValue = false;
+    window.event.cancelBubble = true;
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+</SCRIPT>

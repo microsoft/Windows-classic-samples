@@ -1,0 +1,46 @@
+﻿<?xml version="1.0"?>
+<definitions name="StockQuote"
+
+targetNamespace="http://example.com/stockquote/service"
+          xmlns:tns="http://example.com/stockquote/service"
+          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+          xmlns:defs="http://example.com/stockquote/definitions"
+          xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <import namespace="http://example.com/stockquote/definitions"
+          location="http://example.com/stockquote/stockquote.wsdl"/>
+
+  <!-- ************************************************************ -->
+  <!-- The Devices Profile for Web Services (DPWS) defines the HTTP
+       binding outlined below.  Because WsdCodeGen is only used for
+       DPWS applications, WsdCodeGen ignores all binding sections
+       and assumes the binding in DPWS will be used.  The following
+       binding section is provided only as an example.
+   -->
+  <!-- ************************************************************ -->
+  <binding name="StockQuoteSoapBinding" type="defs:StockQuotePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetLastTradePrice">
+      <soap:operation soapAction="http://example.com/GetLastTradePrice"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <!-- ************************************************************ -->
+  <!-- This service section is only provided as an example.  Most
+       device communication WSDLs will not reference a static
+       service endpoint.
+   -->
+  <!-- ************************************************************ -->
+  <service name="StockQuoteService">
+    <documentation>Service for querying stock quotes</documentation>
+    <port name="StockQuotePort" binding="tns:StockQuoteBinding">
+      <soap:address location="http://example.com/stockquote"/>
+    </port>
+  </service>
+</definitions>

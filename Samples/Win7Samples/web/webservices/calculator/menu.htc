@@ -1,0 +1,225 @@
+<PUBLIC:COMPONENT TAGNAME="menu" LIGHTWEIGHT> 
+	<PUBLIC:ATTACH EVENT="oncontentready" ONEVENT="cReady();" />
+	<PUBLIC:ATTACH EVENT="onclick" ONEVENT="menuClick();" />
+	<PUBLIC:ATTACH EVENT="onmouseover" ONEVENT="menuItemOver();" />
+	<PUBLIC:ATTACH EVENT="onmouseout" ONEVENT="menuItemOut();" />
+	<PUBLIC:EVENT NAME="onsubmenu_click" ID="propId" />  
+    <PUBLIC:DEFAULTS style="cursor:default" />
+    <PUBLIC:PROPERTY NAME="backColor" VALUE="menu"/>
+</PUBLIC:COMPONENT>
+<script language="jscript">
+////////////////////////////////////////////////////////////////////////////////////
+// Global Variables
+////////////////////////////////////////////////////////////////////////////////////
+var minMenuWidth = 50;          // Minimum width for the children of the popUp
+var mColor = "menu";		    // Default color used for the backgroundColor
+var menuHeight = 23;            // Menu height
+var defaultWidth;               // Variable to store the width of the text for an element
+var srcElem = null;             // Object to the source element which generated the click event
+var ix = "";                    // Left position of the pop-up window
+var iy = "";                    // Top position of the pop-up window
+var iHeight = "";               // Height of the pop-up window
+var iWidth = "";                // Width of the pop-up window
+var popUp;                      // The pop-up window object
+var menuWidth = 0;              // Temporary variable to store the width of each menu item
+var maxMenuWidth = 0;           // Variable to store the maximum menuWidth
+
+////////////////////////////////////////////////////////////////////////////////////
+// Function : cReady
+// Executed : Executes when oncontentready fires on the HTC document
+// Usage : Oncontentready is used to set initial values and styles once the content
+//      of the HTC is parsed
+////////////////////////////////////////////////////////////////////////////////////
+function cReady(){
+    // Define the style for the current element
+    if(backColor == null || backColor == ""){
+        element.style.backgroundColor = mColor;
+    }else{ 
+        mColor = backColor;
+        element.style.backgroundColor = mColor;
+    }
+	element.style.fontFamily = "Verdana";
+    element.style.height = menuHeight;
+    element.style.padding = 4;
+    element.style.fontSize = "10px";
+    element.style.border = "1px solid";
+    element.style.borderColor = mColor;
+	// Hide all the first-level children for the Behavior
+	if(element.children.length > 0){
+		for(var i = 0; i < element.children.length; i++){
+            element.children[i].style.fontSize = "10px";
+            element.children[i].style.display = "none";
+            element.children[i].style.visibility = "hidden";
+            element.children[i].style.height = menuHeight;
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Function : menuClick
+// Executed	: When the onclick event fires on the custom Element
+// Usage	: Creates the pop-up window with the first-level children of the current
+//      element and displays the pop-up window with the first-level elements
+//      Each child element has its own events attached to it using the attach method            
+////////////////////////////////////////////////////////////////////////////////////
+function menuClick(){
+	ix = 0;
+	iy = 0;
+	iHeight = 0;
+	iWidth = 0;
+    // Retrieve the source element which fired the event
+	srcElem = event.srcElement;
+    srcElem.style.borderRight = "1px inset white";
+    srcElem.style.borderTop = "1px inset black";
+    srcElem.style.borderLeft = "1px inset black";
+    srcElem.style.borderBottom = "1px inset white";
+    // Hide the pop-up window
+	hidePopup();
+    // Create the pop-up window for the current parent menu item
+	popUp = window.createPopup();
+	var oPopBody = popUp.document.body;
+    // Does the custom element have any children?
+    if(srcElem.children.length > 0){
+            ix = 0;
+            iy = srcElem.offsetHeight;
+        // Get pop-up window Height and Width
+        iHeight = 23 * srcElem.children.length + 4;
+        iWidth = defaultWidth;
+        // Empty string to store the innerText of the current element's child
+        var sz = "";
+        for(var j = 0; j < element.children.length; j++){
+            // Store the innerText of the current element
+            sz = InnerText(element.children[j].innerHTML);
+            // Set the menuWidth variable to the length of the sz string
+            menuWidth = sz.length;
+            if(menuWidth > maxMenuWidth)
+                maxMenuWidth = menuWidth;
+            }
+            iWidth = maxMenuWidth * 10;
+            if(iWidth < minMenuWidth)
+                iWidth = 60;
+            
+            // Create an opening string of a SPAN Tag
+            var popupHTML = "<SPAN style='position:absolute;" + "top:0px;" + "left:0px; height:" + iHeight + "px; width:" + iWidth + "px'>";
+            // Go through all the first-level children elements and get their outerHTML and append it to the DIV Element as children 
+            for(j = 0; j < element.children.length; j++){
+                // Assign the ID of the current child element to its innerText 
+                element.children[j].id = element.children[j].id;
+                popupHTML += element.children[j].outerHTML + "\n";
+                element.children[j].style.width = iWidth + "px";
+            }
+            // Add the closing SPAN Tag to the popupHTML string variable
+            popupHTML += "</" + "SPAN>";
+            // Assign the HTML from above into the body of the pop-up window
+            oPopBody.innerHTML = popupHTML;
+   	        // Assign events to each of the children in the pop-up window, then show the custom elements in the pop-up window
+            for(j = 0; j < oPopBody.children[0].children.length; j++){
+                // Attach events to the children of the menu
+                oPopBody.children[0].children[j].onmouseover = menuChildmouseOver;
+                oPopBody.children[0].children[j].onclick = menuChildClick;
+                // Define the current child's style to display
+                oPopBody.children[0].children[j].style.display = "block";
+                oPopBody.children[0].children[j].style.visibility = "visible";
+            }
+            // Define the popUp's style
+            oPopBody.style.borderLeft = "2 outset white";
+            oPopBody.style.borderTop = "2 outset white";
+            oPopBody.style.borderRight = "1 outset black";
+            oPopBody.style.borderBottom = "1 outset black";
+            oPopBody.style.position = "absolute";
+            oPopBody.style.backgroundColor = mColor;
+            oPopBody.style.fontFamily = "Verdana";
+            // Call the hidePop function upon onmouseleave firing
+    		popUp.document.body.onmouseleave = hidePopup;
+
+            // Show the popUp using the show method
+            popUp.show( ix , iy , iWidth , iHeight, srcElem);	
+    }       
+}
+////////////////////////////////////////////////////////////////////////////////////
+function menuChildmouseOver(){
+    // Cancel the event so that it does not bubble up to its parent
+    popUp.document.parentWindow.event.cancelBubble = true;
+    // Retrieve the source element from the pop-up window which fired the event
+	srcElem = popUp.document.parentWindow.event.srcElement;
+	// Define the current element's style
+    srcElem.style.color = "white";
+    srcElem.style.background = "highlight";      
+    window.status = srcElem.innerHTML;  
+}
+////////////////////////////////////////////////////////////////////////////////////
+var oEvent;
+function menuChildClick(){
+    // Cancel the event so that it does not bubble up to its parent
+    popUp.document.parentWindow.event.cancelBubble = true;
+    // Retrieve the source element from the pop-up window which fired the event
+	srcElem = popUp.document.parentWindow.event.srcElement;
+    // Create a new event object
+    oEvent = createEventObject();
+    // Assign the event object's result property to the ID of the custom element's ID which fired this event
+    oEvent.result = srcElem.id;
+    // Fire the custom element's event
+    propId.fire (oEvent);
+    // Hide the pop-up window
+	hidePopup();	
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Function : HidePopup
+// Executed : When the onmouseleave event fires on the custom Element
+// Usage : Hides the pop-up window for the menu
+////////////////////////////////////////////////////////////////////////////////////
+function hidePopup(){
+	if(popUp)
+		if(popUp.isOpen)
+			popUp.hide();
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Function : menuItemOver
+// Executed : When the onmouseover event fires on the custom Element
+// Usage : Changes the background color & font color of the Element
+////////////////////////////////////////////////////////////////////////////////////
+function menuItemOver(){
+    // Retrieve the source element
+	srcElem = event.srcElement;
+    window.status = srcElem.id;
+    // Set the element's style
+    srcElem.style.borderRight = "1px outset black";
+    srcElem.style.borderTop = "1px outset white";
+    srcElem.style.borderLeft = "1px outset white";
+    srcElem.style.borderBottom = "1px outset black";
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Function : menuItemOut
+// Executed : When the onmouseout event fires on the custom Element
+// Usage : Restores the background color & font color of the Element
+//					  to the defaults
+////////////////////////////////////////////////////////////////////////////////////
+function menuItemOut(){
+    // Retrieve the source element
+	srcElem = event.srcElement;
+    // Set the element's style
+    srcElem.style.backgroundColor = mColor;
+    srcElem.style.color = "black";
+    srcElem.style.border = "1px solid";
+    srcElem.style.borderColor = mColor;
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Function : InnerText
+// Parameter : string
+// Executed : Called from the mouseClick function
+// Usage : InnerText function gets the innerHTML of the custom element, which can
+//      contain Text + HTML; for example, innerHTML of the first custom element looks like
+//      Start <ie:menu>Run</ie:menu>.... The function strips out the text until the
+//      first instance of "<" and returns the string
+////////////////////////////////////////////////////////////////////////////////////
+function InnerText(szText){
+	var startTag = szText.indexOf("<");
+	if(szText.substr(0, startTag) == "")
+		return szText;
+	else
+		return szText.substr(0,startTag);
+}
+</script>
+
+<BODY>
+</BODY>
+</HTML>

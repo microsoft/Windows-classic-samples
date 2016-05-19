@@ -1,0 +1,348 @@
+//Microsoft Developer Studio generated resource script.
+//
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "multichan.ico"
+IDI_CHECK               ICON    DISCARDABLE     "check.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open Source File",           ID_FILE_OPEN
+        MENUITEM "&Save Output File",           ID_FILE_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Mixer"
+    BEGIN
+        MENUITEM "&Merge",                      IDM_MIXER_MERGE
+        MENUITEM "&Play",                       IDM_MIXER_PLAY
+        MENUITEM "&Stop",                       IDM_MIXER_STOP
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About multichan...",         ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DST DIALOGEX 0, 0, 276, 166
+STYLE DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "WaveFormatEx",IDC_STATIC,5,16,265,124
+    COMBOBOX        IDC_COMBO_WAVEFORMAT,120,26,145,71,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "0",IDC_CHANNELS,121,41,49,11,SS_CENTERIMAGE | 
+                    WS_DISABLED | NOT WS_GROUP | WS_TABSTOP,WS_EX_STATICEDGE
+    COMBOBOX        IDC_COMBO_BITDEPTH,121,53,49,52,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SAMPLERATE,121,67,49,96,CBS_DROPDOWNLIST | 
+                    WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "0",IDC_AVEBITS,121,81,49,11,SS_CENTERIMAGE | 
+                    WS_DISABLED | NOT WS_GROUP | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_VALIDBITS,101,95,49,12,ES_NUMBER | WS_DISABLED
+    LTEXT           "0x00000000",IDC_SPEAKERFLAGS,101,109,49,10,
+                    SS_CENTERIMAGE | WS_DISABLED | NOT WS_GROUP | WS_TABSTOP,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "Re&mix",IDC_REMIX,6,146,49,14,WS_DISABLED
+    PUSHBUTTON      "&Play",IDC_PLAY,58,146,49,14,WS_DISABLED
+    PUSHBUTTON      "&Stop",IDC_STOP,110,146,49,14,WS_DISABLED
+    RTEXT           "Format.nFormatTag:",IDC_STATIC,7,28,111,8
+    RTEXT           "Format.nChannels:",IDC_STATIC,7,42,111,8
+    RTEXT           "Format.nBitsPerSample:",IDC_STATIC,7,56,111,8
+    RTEXT           "Format.nSamplesPerSecond:",IDC_STATIC,7,70,111,8
+    RTEXT           "Format.nAverageBitsPerSecond:",IDC_STATIC,7,83,111,8
+    RTEXT           "wValidBitsPerSample",IDC_STATIC,7,97,90,8
+    RTEXT           "dwChannelMask:",IDC_STATIC,7,110,90,8
+    RTEXT           "guid:",IDC_STATIC,7,123,90,8
+    CTEXT           "Output",IDC_OUTPUT,0,0,275,11,SS_CENTERIMAGE,
+                    WS_EX_TRANSPARENT
+    LTEXT           "KSDATAFORMAT_SUBTYPE_PCM",IDC_STATIC,102,123,119,8
+END
+
+IDR_MAINFRAME DIALOG DISCARDABLE  0, 0, 330, 16
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "TODO: layout dialog bar ",IDC_STATIC,12,4,300,8
+END
+
+IDD_SRC DIALOGEX 0, 0, 242, 102
+STYLE DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Shell Dlg"
+BEGIN
+    COMBOBOX        IDC_COMBO_SPEAKER,64,64,175,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Play",IDC_PLAY,4,83,39,14
+    PUSHBUTTON      "&Stop",IDC_STOP,46,83,39,14
+    PUSHBUTTON      "",IDOK,229,1,11,9,BS_ICON | NOT WS_TABSTOP,
+                    WS_EX_TRANSPARENT
+    LTEXT           "Static",IDC_BITDEPTH,101,15,49,11,0,WS_EX_STATICEDGE
+    LTEXT           "Static",IDC_SAMPLERATE,101,29,49,11,0,WS_EX_STATICEDGE
+    LTEXT           "Static",IDC_CHANNELNUM,64,51,25,11,0,WS_EX_STATICEDGE
+    CONTROL         "Include in output mix",IDC_USE,"Button",BS_AUTOCHECKBOX | 
+                    BS_LEFT | WS_DISABLED | WS_TABSTOP,151,86,89,10
+    RTEXT           "Speaker:",IDC_STATIC,4,66,56,8
+    RTEXT           "Channel Number:",IDC_STATIC,4,52,56,8
+    LTEXT           "",IDC_STATIC,3,44,236,2,0,WS_EX_STATICEDGE
+    RTEXT           "Format.nSamplesPerSecond:",IDC_STATIC,3,29,95,8
+    RTEXT           "Format.nBitsPerSample:",IDC_STATIC,3,16,95,8
+    CTEXT           "Input",IDC_INPUT,0,0,241,11,SS_CENTERIMAGE
+END
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Multichan"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Multichan Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 1998 - 2000, Microsoft Corp.",IDC_STATIC,
+                    40,25,189,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+    LTEXT           "For personal use only with express written permission from Microsoft Corp.  Do not distribute.",
+                    IDC_STATIC,40,39,189,19
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "multichan MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "multichan\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "multichan.EXE\0"
+            VALUE "ProductName", "multichan Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      IDM_MIXER_MERGE
+    BUTTON      IDM_MIXER_PLAY
+    BUTTON      IDM_MIXER_STOP
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "multichan"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "multichan"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_MIXER_MERGE         "Merge source files into output file \nMerge source files"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDM_MIXER_PLAY          "Play output file \nPlay output file"
+    IDM_MIXER_STOP          "Stop the current playback \nStop playback"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

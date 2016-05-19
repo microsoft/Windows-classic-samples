@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+
+<TITLE>Behavior Library: Mask</TITLE>
+
+<STYLE>
+   .mask	        { 
+	                behavior: url("mask.htc");
+	                font: bold 10pt verdana;
+	                color: maroon
+	                }
+	
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+    TD              {
+                    font: 10pt verdana;
+                    }
+    A:link { color:#003399; text-decoration:none; }
+    A:visited { color:#6699CC; text-decoration:none; }
+    A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<H2>Mask</H2>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><HR>
+
+<TABLE>
+<tr><td>Short Date:</td>   <td><input TYPE="text" CLASS="mask" preset="shortdate"></td></tr>
+<tr><td>Medium Date:</td>  <td><input TYPE="text" CLASS="mask" preset="mediumdate"></td></tr>
+<tr><td>Long Date:</td>    <td><input TYPE="text" CLASS="mask" preset="longdate"></td></tr>
+<tr><td>Currency:</td>     <td><input TYPE="text" CLASS="mask" preset="currency"></td></tr>
+<tr><td>Percent:</td>      <td><input TYPE="text" CLASS="mask" preset="percent"></td></tr>
+<tr><td>Zip:</td>          <td><input TYPE="text" CLASS="mask" preset="zip"></td></tr>
+<tr><td>Phone Number:</td> <td><input TYPE="text" CLASS="mask" preset="phone"></td></tr>
+</TABLE>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>

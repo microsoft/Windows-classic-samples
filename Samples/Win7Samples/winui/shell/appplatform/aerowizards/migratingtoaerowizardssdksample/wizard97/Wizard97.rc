@@ -1,0 +1,206 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winres.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_INTRO DIALOG  0, 0, 317, 193
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Welcome Page"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Welcome to Wiz97",IDC_TITLE,115,9,189,31,NOT WS_GROUP
+    LTEXT           "Some explanatory text",IDC_INTRO_TEXT,115,40,189,18
+END
+
+IDD_INTERIOR1 DIALOGEX 0, 0, 317, 143
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "First Interior Page"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "You must click the checkbox or a radio button to advance to the next page",IDC_STATIC,21,1,282,14
+    CONTROL         "A  radio button",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,28,41,62,10
+    CONTROL         "Another radio Button",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,28,61,81,10
+    CONTROL         "A third radio button",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,28,80,75,10
+    GROUPBOX        "A Group of radio buttons",IDC_GROUP1,21,24,119,74,WS_GROUP
+    CONTROL         "Go directly to the last page",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,194,61,100,10
+END
+
+IDD_INTERIOR3 DIALOG  0, 0, 317, 143
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Third Interior Page"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Some explanatory text",IDC_STATIC,21,1,70,8
+    LTEXT           "An Edit Box",IDC_STATIC,21,38,38,8
+    LTEXT           "Another Edit Box",IDC_STATIC,21,67,54,8
+    LTEXT           "A Third Edit Box",IDC_STATIC,21,96,52,8
+    EDITTEXT        IDC_EDIT2,108,38,86,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,108,67,86,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,108,96,86,14,ES_AUTOHSCROLL
+END
+
+IDD_INTERIOR2 DIALOGEX 0, 0, 287, 152
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Second Interior Page"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "Enable Buttons",IDC_STATIC,7,47,273,35
+    CONTROL         "Back",IDC_ENABLEBACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,62,31,10
+    CONTROL         "Enable Finish",IDC_ENABLEFINISH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,47,62,57,10
+    CONTROL         "Next",IDC_ENABLENEXT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,168,63,31,10
+    CONTROL         "Disable Finish",IDC_DISABLEFINISH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,105,62,59,10
+    PUSHBUTTON      "Update",IDC_UPDATEENABLE,222,59,50,14
+    GROUPBOX        "",IDC_STATIC,0,0,287,152
+END
+
+IDD_END DIALOGEX 0, 0, 317, 193
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Finish Page"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LTEXT           "Completing Wiz97",IDC_TITLE,115,8,195,37
+    LTEXT           "Some Explanatory Text",IDC_STATIC,115,58,195,128
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_INTRO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        VERTGUIDE, 115
+        VERTGUIDE, 304
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 186
+        HORZGUIDE, 8
+        HORZGUIDE, 40
+    END
+
+    IDD_INTERIOR1, DIALOG
+    BEGIN
+        LEFTMARGIN, 28
+        RIGHTMARGIN, 310
+        VERTGUIDE, 28
+        VERTGUIDE, 189
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_INTERIOR3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        VERTGUIDE, 21
+        VERTGUIDE, 108
+        VERTGUIDE, 194
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 136
+        HORZGUIDE, 38
+        HORZGUIDE, 68
+        HORZGUIDE, 98
+    END
+
+    IDD_END, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 310
+        VERTGUIDE, 115
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 186
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_TITLE1              "Title: First Interior Page"
+    IDS_SUBTITLE1           "Subtitle: Some explanatory text..."
+    IDS_TITLE2              "Title: Second Interior Page"
+    IDS_SUBTITLE2           "Subtitle: Some explanatory text..."
+    IDS_TITLE3              "Title: Third Interior Page"
+    IDS_SUBTITLE3           "Subtitle: Some explanatory text..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BANNER              BITMAP                  "header.bmp"
+IDB_WATERMARK           BITMAP                  "watermrk.bmp"
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

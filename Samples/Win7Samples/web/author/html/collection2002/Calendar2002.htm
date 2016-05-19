@@ -1,0 +1,204 @@
+<html>
+  <!----------------------
+  CALENDAR2002.HTM
+
+  Calendar 2002. 1998-2001
+
+  Version 1.11.012
+  ----------------------->
+
+  <head>
+    <title>Calendar 2002</title>
+  </head>
+
+  <style>
+    body	{margin: 1px; font-family: Small Fonts; cursor: default}
+    td		{width: 11px; height: 11px; font-size: 6pt}
+    div		{position: absolute; width: 44px; height: 37px; z-index: -100}
+    a:link	{color: white}
+    a:visited	{color: white}
+    #ID_Caption	{font: 8pt Tahoma; color: white; height: 18px; padding-bottom: 3px}
+    #ID_Today	{font-size: 6pt; line-height: 200%}
+    .hdrftr	{width: 100%}
+    .arrow	{font-weight: bold}
+    .prevnext	{background: none; color: gray}
+    .thismonth	{background: white; color: black}
+    .today	{background: black; color: white}
+    .R		{background: #FF3300; top: 20px; left:  1px}
+    .G		{background: #66CC33; top: 20px; left: 44px}
+    .B		{background: #0099FF; top: 57px; left:  1px}
+    .Y		{background: #FFCC00; top: 57px; left: 44px}
+    .K		{background: #000000; top:  0px; left:  0px; width: 89px; height: 110px}
+  </style>
+
+  <script src=shared.js> </script>
+
+  <body scroll=no onLoad=Initialize() onSelectStart=Ignore()>
+<!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+    <table cellspacing=1 cellpadding=0>
+
+      <tr>
+        <td id=ID_Caption class=hdrftr colspan=7 align=center> </td>
+      </tr>
+
+      <tr>
+        <td class=arrow onClick=clickPrev() onDblClick=this.click()>
+          <a id=ID_Prev target=_self href=javascript:ShowPrevMonth(true)>&lt;</a>
+        </td>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+      </tr>
+      <tr>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+      </tr>
+      <tr>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+      </tr>
+      <tr>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+      </tr>
+      <tr>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+      </tr>
+      <tr>
+        <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+        <td class=arrow onClick=clickNext() onDblClick=this.click()>
+          <a id=ID_Next target=_self href=javascript:ShowNextMonth(true)>&gt;</a>
+        </td> 
+      </tr>
+
+      <tr>
+        <td class=hdrftr colspan=7 align=center>
+          <a id=ID_Today target=_self href=javascript:ShowThisMonth(true)></a>
+        </td>
+      </tr>
+
+    </table>
+
+    <div class=K></div>
+    <div class=R></div> <div class=G></div>
+    <div class=B></div> <div class=Y></div>
+
+  </body>
+
+  <script>
+
+    // constants
+    var c_base = 0;  // 0 - Sunday based week, 1 - Monday based week, etc.
+
+    // global variables
+    var g_month, g_year;
+
+    function Initialize()
+      {
+      tick();
+      }
+
+    var thisDay = -1;  // static variable for tick()
+
+    function tick()
+      {
+      window.setTimeout("tick()", 2000);
+      day = new Date().getDay();
+      if (day == thisDay)
+        return;
+      thisDay = day;
+      ShowThisMonth(false);
+      ID_Today.innerText = CurrentShortWeekdayName() + " " + CurrentShortDate();
+      }
+
+    function numDays(Month, Year)
+      {
+      // day 0 of the next month is the last day of this month
+      return new Date(Year, Month + 1, 0).getDate();
+      }
+
+    function showMonth (Month, Year, HideFocus)
+      {
+      g_month = Month, g_year = Year;
+
+      // set calendar caption
+      ID_Caption.innerText = LongMonthName(1 + Month) + " " + Year;
+
+      tdColl = document.all.tags("td");
+
+      // get offset of the 1st day of the month
+      theFirst = new Date(Year, Month, 1);
+      offset = theFirst.getDay() - c_base;
+      if (offset <= 0)
+        offset += 7;
+
+      // fill out the previous month
+      nDays = numDays(Month - 1, Year); // OK for Month - 1 == -1 (Dec of previous year)
+      for (tdIndex = 1; tdIndex < offset; tdIndex++)
+        with (tdColl[1 + tdIndex])
+          {
+          className = "prevnext";
+          innerText = nDays - offset + 1 + tdIndex;
+          onclick = ondblclick = clickPrev;
+          }
+
+      // fill out this month
+      nDays = numDays(Month, Year);
+      now = new Date();
+      isMonthYear = (Month == now.getMonth()) && (Year == now.getFullYear());
+      for (date = 1; date <= nDays; date++, tdIndex++)
+        with (tdColl[1 + tdIndex])
+          {
+          isToday = isMonthYear && (date == now.getDate());
+          className = isToday ? "today" : "thismonth";
+          innerText = date;
+          onclick = ondblclick = "";
+          }
+
+      // fill out the next month
+      for (date = 1 ; tdIndex < 41; date++, tdIndex++)
+        with (tdColl[1 + tdIndex])
+          {
+          className = "prevnext";
+          innerText = date;
+          onclick = ondblclick = clickNext;
+          }
+
+      // hide focus rectangle around visited <a> link
+      if (HideFocus)
+        document.body.focus();
+      }
+
+    function clickPrev()
+      {
+      ID_Prev.click();
+      }
+
+    function clickNext()
+      {
+      ID_Next.click();
+      }
+
+    function ShowPrevMonth(HideFocus)
+      {
+      if (g_month == 0)
+        showMonth(11, g_year - 1, HideFocus);
+      else
+        showMonth(g_month - 1, g_year, HideFocus);
+      }
+
+    function ShowThisMonth(HideFocus)
+      {
+      now = new Date();
+      showMonth(now.getMonth(), now.getFullYear(), HideFocus);
+      }
+
+    function ShowNextMonth(HideFocus)
+      {
+      if (g_month == 11)
+        showMonth(0, g_year + 1, HideFocus);
+      else
+        showMonth(g_month + 1, g_year, HideFocus);
+      }
+
+  </script>
+
+  <!-- VBScript provides richer Windows locale support. -->
+  <script language=VBScript src=shared.vbs> </script>
+
+</html>

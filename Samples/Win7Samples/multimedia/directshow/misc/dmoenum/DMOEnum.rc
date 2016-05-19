@@ -1,0 +1,249 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\DMOEnum.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DMOENUM_DIALOG DIALOGEX 0, 0, 539, 216
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "DMO Enumerator Sample"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LISTBOX         IDC_LIST_DEVICES,7,18,113,67,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_FILTERS,127,18,136,116,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    LISTBOX         IDC_LIST_INPUT_STREAMS,7,97,51,26,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_STREAMS,69,97,51,26,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "&Include Keyed DMOs?",IDC_CHECK_KEYED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,11,126,107,10
+    EDITTEXT        IDC_STATIC_FILENAME,40,140,223,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LISTBOX         IDC_LIST_INPUT_TYPES,7,168,258,39,LBS_SORT | 
+                    LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_OUTPUT_TYPES,272,168,258,39,LBS_SORT | 
+                    LBS_USETABSTOPS | LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CHECKBOX        "Supports quality control?",IDC_CHECK_IN_SUPPORTS_QC,281,
+                    18,111,10
+    CHECKBOX        "Requires whole samples?",IDC_CHECK_IN_WHOLE_SAMPLES,281,
+                    29,111,10
+    CHECKBOX        "One sample per buffer?",IDC_CHECK_IN_ONESAMPLE,281,40,
+                    111,10
+    CHECKBOX        "Fixed sample size?",IDC_CHECK_IN_FIXED,281,51,111,10
+    CHECKBOX        "Holds buffers (for lookahead)?",
+                    IDC_CHECK_IN_HOLDSBUFFERS,281,62,111,10
+    CHECKBOX        "Supports quality control?",IDC_CHECK_OUT_SUPPORTS_QC,
+                    409,18,111,10
+    CHECKBOX        "Requires whole samples?",IDC_CHECK_OUT_WHOLE_SAMPLES,
+                    409,29,111,10
+    CHECKBOX        "One sample per buffer?",IDC_CHECK_OUT_ONESAMPLE,409,40,
+                    111,10
+    CHECKBOX        "Fixed sample size?",IDC_CHECK_OUT_FIXED,409,51,111,10
+    CHECKBOX        "Discardable stream?",IDC_CHECK_OUT_DISCARDABLE,409,62,
+                    111,10
+    CHECKBOX        "Optional stream?",IDC_CHECK_OUT_OPTIONAL,409,73,111,10
+    CTEXT           "DMO Categories",IDC_STATIC_CLASSES,7,5,113,8
+    CTEXT           "Registered DMOs",IDC_STATIC_FILTERS,127,5,136,8
+    LTEXT           "Server :",IDC_STATIC,7,143,32,8
+    LTEXT           "Output Type/Subtype GUIDs:",IDC_STATIC,272,159,97,8
+    LTEXT           "Input Type/Subtype GUIDs:",IDC_STATIC,7,159,97,8
+    LTEXT           "0",IDC_STATIC_NUM_ITYPES,110,159,19,8
+    LTEXT           "0",IDC_STATIC_NUM_OTYPES,375,159,19,8
+    LTEXT           "In Streams: 0",IDC_STATIC_INPUT_STREAMS,7,88,51,8
+    LTEXT           "Out Streams: 0",IDC_STATIC_OUTPUT_STREAMS,69,88,51,8
+    GROUPBOX        "Input",IDC_STATIC,273,7,125,148
+    CTEXT           "Preferred Media Type:",IDC_STATIC,278,87,116,8
+    CTEXT           "",IDC_STATIC_IN_TYPE,278,96,116,10,SS_SUNKEN
+    CTEXT           "Preferred Media Type:",IDC_STATIC,407,87,116,8
+    CTEXT           ".",IDC_STATIC_OUT_TYPE,407,96,116,10,SS_SUNKEN
+    CTEXT           "Preferred Media Subtype:",IDC_STATIC,278,108,116,8
+    CTEXT           "Preferred Media Subtype:",IDC_STATIC,407,108,116,8
+    CTEXT           "",IDC_STATIC_IN_SUBTYPE,278,118,116,10,SS_SUNKEN
+    CTEXT           "",IDC_STATIC_OUT_SUBYTPE,407,118,116,10,SS_SUNKEN
+    CTEXT           "Preferred Media Format:",IDC_STATIC,278,130,116,8
+    CTEXT           "",IDC_STATIC_IN_FORMAT,278,139,116,10,SS_SUNKEN
+    CTEXT           "Preferred Media Format:",IDC_STATIC,407,130,116,8
+    CTEXT           "",IDC_STATIC_OUT_FORMAT,407,139,116,10,SS_SUNKEN
+    GROUPBOX        "Output",IDC_STATIC,404,7,125,148
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "DirectShow Sample\0"
+            VALUE "CompanyName", "Microsoft\0"
+            VALUE "FileDescription", "DMOEnum MFC Application\0"
+            VALUE "FileVersion", "9.00\0"
+            VALUE "InternalName", "DMOEnum\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corporation\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "DMOEnum.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "DirectX 9 SDK\0"
+            VALUE "ProductVersion", "9.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_DMOENUM_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 532
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 209
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "&About DMOEnum..."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\DMOEnum.rc2"  // non-Microsoft Visual C++ edited resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

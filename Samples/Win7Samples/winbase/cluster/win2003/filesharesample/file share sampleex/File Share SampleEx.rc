@@ -1,0 +1,234 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\File Share SampleEx.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "FILE SHARE SAMPLEEX DLL\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "FILE SHARE SAMPLEEX\0"
+            VALUE "LegalCopyright", "Copyright (C) 2003\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "FILE SHARE SAMPLEEX.DLL\0"
+            VALUE "ProductName", "FILE SHARE SAMPLEEX Cluster Administrator Extension DLL\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PP_FILESHARESAMPLE_PARAMETERS DIALOG DISCARDABLE  0, 0, 252, 218
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Parameters"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            "",IDC_PP_ICON,8,7,21,20
+    CONTROL         "",IDC_PP_TITLE,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | 
+                    WS_GROUP,38,12,206,10
+    LTEXT           "&ShareName:",IDC_PP_FILESHARESAMPLE_SHARENAME_LABEL,8,36,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_SHARENAME,88,34,148,14,ES_AUTOHSCROLL
+    LTEXT           "&Path:",IDC_PP_FILESHARESAMPLE_PATH_LABEL,8,53,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_PATH,88,51,148,14,ES_AUTOHSCROLL
+    LTEXT           "&Remark:",IDC_PP_FILESHARESAMPLE_REMARK_LABEL,8,70,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_REMARK,88,68,148,14,ES_AUTOHSCROLL
+    LTEXT           "&MaxUsers:",IDC_PP_FILESHARESAMPLE_MAXUSERS_LABEL,8,87,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_MAXUSERS,88,85,148,14,ES_AUTOHSCROLL
+END
+
+IDD_WIZ_FILESHARESAMPLE_PARAMETERS DIALOG DISCARDABLE  0, 0, 293, 172
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File Share Sample Parameters"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            "",IDC_PP_ICON,8,7,21,20
+    CONTROL         "",IDC_PP_TITLE,"Static",SS_LEFTNOWORDWRAP | SS_NOPREFIX | 
+                    WS_GROUP,38,12,247,10
+    LTEXT           "&ShareName:",IDC_PP_FILESHARESAMPLE_SHARENAME_LABEL,8,36,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_SHARENAME,88,34,148,14,ES_AUTOHSCROLL
+    LTEXT           "&Path:",IDC_PP_FILESHARESAMPLE_PATH_LABEL,8,53,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_PATH,88,51,148,14,ES_AUTOHSCROLL
+    LTEXT           "&Remark:",IDC_PP_FILESHARESAMPLE_REMARK_LABEL,8,70,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_REMARK,88,68,148,14,ES_AUTOHSCROLL
+    LTEXT           "&MaxUsers:",IDC_PP_FILESHARESAMPLE_MAXUSERS_LABEL,8,87,74,8
+    EDITTEXT        IDC_PP_FILESHARESAMPLE_MAXUSERS,88,85,148,14,ES_AUTOHSCROLL
+END
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PP_FILESHARESAMPLE_PARAMETERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        RIGHTMARGIN, 244
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 211
+    END
+    IDD_WIZ_FILESHARESAMPLE_PARAMETERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        RIGHTMARGIN, 285
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 165
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CLUSTER_MENU_ITEM_1             "Cluster Menu Item #1"
+    IDS_CLUSTER_MENU_ITEM_1_DESC        "Cluster Extension Menu Item #1"
+    IDS_NODE_MENU_ITEM_1                "Node Menu Item #1"
+    IDS_NODE_MENU_ITEM_1_DESC           "Node Extension Menu Item #1"
+    IDS_GROUP_MENU_ITEM_1               "Group Menu Item #1"
+    IDS_GROUP_MENU_ITEM_1_DESC          "Group Extension Menu Item #1"
+    IDS_RESOURCE_MENU_ITEM_CALL_ISALIVE         "Perform a thorough health check."
+    IDS_RESOURCE_MENU_ITEM_CALL_ISALIVE_DESC    "Performs a thorough health check on the resource."
+    IDS_ALLRESOURCES_MENU_ITEM_1        "All Resources Menu Item #1"
+    IDS_ALLRESOURCES_MENU_ITEM_1_DESC   "All Resources Extension Menu Item #1"
+    IDS_RESTYPE_MENU_ITEM_1             "Resource Type Menu Item #1"
+    IDS_RESTYPE_MENU_ITEM_1_DESC        "Resource Type Extension Menu Item #1"
+    IDS_ALLRESTYPES_MENU_ITEM_1         "All Resource Types Menu Item #1"
+    IDS_ALLRESTYPES_MENU_ITEM_1_DESC    "All Resource Types Extension Menu Item #1"
+    IDS_NETWORK_MENU_ITEM_1             "Network Menu Item #1"
+    IDS_NETWORK_MENU_ITEM_1_DESC        "Network Extension Menu Item #1"
+    IDS_NETINTERFACE_MENU_ITEM_1        "Network Interface Menu Item #1"
+    IDS_NETINTERFACE_MENU_ITEM_1_DESC   "Network Interface Extension Menu Item #1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CLUADMEX_COMOBJ_DESC      "Cluster Administrator File Share Sample Extension (File Share SampleEx) 1.0"
+    IDS_ERROR_MSG_ID              "\n\nError ID: %d (%08.8x)."
+    IDS_REQUIRED_FIELD_EMPTY      "A value must be entered in the '%1' field."
+    IDS_ERROR_SETTING_PROPERTIES  "An error occurred attempting to set properties:"
+    IDS_ERROR_VALIDATING_PROPERTIES "An error occurred attempting to validate properties:"
+    IDS_APPLY_PARAM_CHANGES_ERROR "An error occurred attempting to save parameters to the cluster database:%n%n%1"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\File Share SampleEx.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

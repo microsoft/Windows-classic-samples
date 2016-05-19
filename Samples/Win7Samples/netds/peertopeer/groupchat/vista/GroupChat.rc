@@ -1,0 +1,357 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_APP                 ICON                    "GroupChat.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Clear Text",                 IDM_CLEARTEXT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Identity"
+    BEGIN
+        MENUITEM "&Create...",                  IDM_CREATEIDENTITY
+        MENUITEM "&Save Identity Info...",      IDM_SAVEIDENTITYINFO
+        MENUITEM "&Delete...",                  IDM_DELETEIDENTITY
+    END
+    POPUP "&Group"
+    BEGIN
+        MENUITEM "&Create...",                  IDM_CREATEGROUP
+        MENUITEM "&Join...",                    IDM_JOINGROUP
+        MENUITEM "&Open...",                    IDM_OPENGROUP
+        MENUITEM "C&lose",                      IDM_CLOSEGROUP
+        MENUITEM "&Delete...",                  IDM_DELETEGROUP
+        MENUITEM SEPARATOR
+        MENUITEM "Create In&vitation...",       IDM_CREATEINVITATION, GRAYED
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_ACCEL ACCELERATORS 
+BEGIN
+    "/",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "?",            IDM_ABOUT,              ASCII,  ALT, NOINVERT
+    "E",            IDM_CLEARTEXT,          VIRTKEY, CONTROL, NOINVERT
+    "L",            IDM_CLOSEGROUP,         VIRTKEY, CONTROL, NOINVERT
+    "N",            IDM_CREATEGROUP,        VIRTKEY, CONTROL, NOINVERT
+    "Q",            IDM_EXIT,               VIRTKEY, CONTROL, NOINVERT
+    "J",            IDM_JOINGROUP,          VIRTKEY, CONTROL, NOINVERT
+    "O",            IDM_OPENGROUP,          VIRTKEY, CONTROL, NOINVERT
+    "I",            IDM_CREATEIDENTITY,     VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 22, 17, 283, 51
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "About Group Chat"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    ICON            IDI_APP,IDI_APP,14,15,20,20
+    LTEXT           "Group Chat Version 1.1 (Vista Build)",IDC_STATIC,46,13,176,8,SS_NOPREFIX
+    LTEXT           "Copyright (c) Microsoft Corporation.  All rights reserved.",IDC_STATIC,46,30,188,8
+    DEFPUSHBUTTON   "OK",IDOK,225,9,50,14
+END
+
+IDD_CREATEGROUP DIALOGEX 0, 0, 234, 110
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create New Group"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC_ID,7,11,28,9
+    COMBOBOX        IDC_CB_IDENTITY,46,7,132,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&New...",IDC_BTN_NEW_IDENTITY,184,7,43,13
+    LTEXT           "&Group:",IDC_STATIC_GROUP,7,26,27,8
+    EDITTEXT        IDC_EDT_GROUPNAME,46,23,131,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,64,91,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,120,91,50,14
+    LTEXT           "Authentication:",IDC_STATIC_AUTH,7,42,51,8
+    CONTROL         "Invitation",IDC_RADIO_AUTH_INVITE,"Button",BS_AUTORADIOBUTTON,66,41,42,10
+    CONTROL         "Password",IDC_RADIO_AUTH_PASSW,"Button",BS_AUTORADIOBUTTON,129,42,44,9
+    LTEXT           "Password:",IDC_STATIC_PASSWORD,7,57,34,8,WS_DISABLED
+    EDITTEXT        IDC_EDIT_PASSWORD,46,54,131,14,ES_PASSWORD | ES_AUTOHSCROLL | WS_DISABLED
+    CONTROL         "Global",IDC_RADIO_GLOBAL_SCOPE,"Button",BS_AUTORADIOBUTTON,66,73,42,10
+    CONTROL         "Local",IDC_RADIO_LOCAL_SCOPE,"Button",BS_AUTORADIOBUTTON,129,74,48,9
+    LTEXT           "Scope:",IDC_STATIC,7,74,31,8
+END
+
+IDD_OPENGROUP DIALOGEX 0, 0, 159, 58
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open Group"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC,7,11,28,9
+    COMBOBOX        IDC_CB_IDENTITY,37,7,114,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Group:",IDC_STATIC,7,26,28,9
+    COMBOBOX        IDC_CB_GROUP,37,22,114,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,29,39,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,89,39,50,14
+END
+
+IDD_JOINGROUP DIALOGEX 0, 0, 193, 106
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Join Group"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC,9,9,28,9
+    COMBOBOX        IDC_CB_IDENTITY,43,7,143,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDT_LOCATION,43,30,97,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Browse...",IDC_BTN_BROWSE,143,30,43,13
+    DEFPUSHBUTTON   "OK",IDOK,53,86,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,109,86,50,14
+    EDITTEXT        IDC_EDT_PASSWORD,43,67,143,12,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Invitation:",IDC_STATIC,9,31,34,10
+    CONTROL         "Password-Based ",IDC_CHECK_PASSWORD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,49,66,10
+    LTEXT           "Password:",IDC_STATIC_PASSWORD,9,67,34,8
+END
+
+IDD_NEWIDENTITY DIALOGEX 0, 0, 178, 46
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create New Identity"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Name:",IDC_STATIC,7,10,22,8
+    EDITTEXT        IDC_EDT_FRIENDLYNAME,35,7,136,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,37,25,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,90,25,50,14
+END
+
+IDD_SAVEIDENTITYINFO DIALOGEX 0, 0, 242, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Identity Information"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC,7,11,28,9
+    COMBOBOX        IDC_CB_IDENTITY,39,7,147,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&New...",IDC_BTN_NEW_IDENTITY,192,7,43,13
+    LTEXT           "&File:",IDC_STATIC,7,26,14,8
+    EDITTEXT        IDC_EDT_LOCATION,39,23,146,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Browse...",IDC_BTN_BROWSE,192,22,43,13
+    DEFPUSHBUTTON   "OK",IDOK,68,39,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,39,50,14
+END
+
+IDD_CREATEINVITATION DIALOGEX 0, 0, 238, 60
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create Invitation"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC_IDENT,11,11,29,9
+    EDITTEXT        IDC_EDT_IDENT_LOCATION,46,8,137,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Browse...",IDC_BTN_IDENT_BROWSE,187,8,43,13
+    LTEXT           "I&nvitation:",IDC_STATIC,6,26,34,8
+    EDITTEXT        IDC_EDT_INV_LOCATION,46,23,137,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "B&rowse...",IDC_BTN_INV_BROWSE,187,23,43,13
+    DEFPUSHBUTTON   "OK",IDOK,66,39,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,121,39,50,14
+END
+
+IDD_WHISPERMESSAGE DIALOGEX 0, 65506, 451, 12
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_PALETTEWINDOW
+CAPTION "Whisper"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Private Message:",IDC_STATIC,11,2,56,8
+    EDITTEXT        IDC_EDT_MESSAGE,75,0,254,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "&Send",IDSEND,338,0,50,12
+    PUSHBUTTON      "Cancel",IDCANCEL,394,0,50,12
+END
+
+IDD_DELETEGROUP DIALOGEX 0, 0, 158, 65
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete Group"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC_ID,7,11,28,9
+    COMBOBOX        IDC_CB_IDENTITY,37,7,113,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Group:",IDC_STATIC_GROUP,7,26,27,8
+    COMBOBOX        IDC_CB_GROUP,37,22,113,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,26,46,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,82,46,50,14
+END
+
+IDD_DELETEIDENTITY DIALOGEX 0, 0, 158, 47
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete Identity"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "&Identity:",IDC_STATIC_ID,7,11,28,9
+    COMBOBOX        IDC_CB_IDENTITY,37,7,113,100,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,26,28,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,82,28,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CREATEGROUP, DIALOG
+    BEGIN
+        VERTGUIDE, 7
+        VERTGUIDE, 66
+        VERTGUIDE, 129
+        VERTGUIDE, 177
+        BOTTOMMARGIN, 105
+        HORZGUIDE, 46
+        HORZGUIDE, 78
+    END
+
+    IDD_OPENGROUP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 151
+        VERTGUIDE, 38
+        VERTGUIDE, 151
+        BOTTOMMARGIN, 53
+        HORZGUIDE, 46
+    END
+
+    IDD_JOINGROUP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 189
+        VERTGUIDE, 9
+        VERTGUIDE, 43
+        BOTTOMMARGIN, 101
+        HORZGUIDE, 36
+    END
+
+    IDD_WHISPERMESSAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 444
+    END
+
+    IDD_DELETEGROUP, DIALOG
+    BEGIN
+        RIGHTMARGIN, 151
+        VERTGUIDE, 7
+        VERTGUIDE, 66
+        VERTGUIDE, 129
+        VERTGUIDE, 151
+        BOTTOMMARGIN, 60
+        HORZGUIDE, 46
+    END
+
+    IDD_DELETEIDENTITY, DIALOG
+    BEGIN
+        RIGHTMARGIN, 151
+        VERTGUIDE, 7
+        VERTGUIDE, 66
+        VERTGUIDE, 129
+        VERTGUIDE, 151
+        BOTTOMMARGIN, 42
+        HORZGUIDE, 28
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_CLASS           "GROUPCHAT"
+    IDS_APP_TITLE           "Group Chat Sample Application (Vista Build)"
+    IDS_APP_ERROR           "Group Chat Error"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

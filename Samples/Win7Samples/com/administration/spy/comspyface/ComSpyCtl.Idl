@@ -1,0 +1,123 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include <olectl.h>
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ComSpyCtl.tlb) and marshalling code.
+cpp_quote ("#define DISPID_LOGFILE		5")
+cpp_quote ("#define DISPID_GRIDLINES	6")
+cpp_quote ("#define DISPID_COLWIDTH		8")
+cpp_quote ("#define DISPID_AUDIT		17")
+
+typedef enum 
+{
+	Application = 0,
+	Thread,
+	Instance,
+	Transaction,
+	Method,
+	Object,
+	Resource,
+	User,
+	Security,
+	ObjectPool,
+	ObjectPool2,
+	ObjectConstruction,
+	Activity,
+	Identity,
+	QC,
+	Exception,
+	CRM,
+	//System Events
+	EventStore,
+	LoadBalancing,
+} EventEnum;
+
+
+import "oaidl.idl";
+import "ocidl.idl";
+	
+
+	[
+		object,
+		uuid(A9B39080-AAD0-11D0-B183-00AA00BA3258),
+		dual,
+		helpstring("IComSpy Interface"),
+		pointer_default(unique)
+	]
+	interface IComSpy : IDispatch
+	{
+		[propget, id(DISPID_HWND)]
+		HRESULT Window([out, retval]LONG_PTR * phwnd);
+		[propputref, id(DISPID_FONT)]
+		HRESULT Font([in]IFontDisp* pFont);
+		[propput, id(DISPID_FONT)]
+		HRESULT Font([in]IFontDisp* pFont);
+		[propget, id(DISPID_FONT)]
+		HRESULT Font([out, retval]IFontDisp** ppFont);
+		[propget, id(5), helpstring("property LogFile")] HRESULT LogFile([out, retval] BSTR *pVal);
+		[propput, id(5), helpstring("property LogFile")] HRESULT LogFile([in] BSTR newVal);
+		[propget, id(6), helpstring("property ShowGridLines")] HRESULT ShowGridLines([out, retval] BOOL *pVal);
+		[propput, id(6), helpstring("property ShowGridLines")] HRESULT ShowGridLines([in] BOOL newVal);
+		[propget, id(8), helpstring("property ColWidth")] HRESULT ColWidth(short nColumn, [out, retval] long *pVal);
+		[propput, id(8), helpstring("property ColWidth")] HRESULT ColWidth(short nColumn, [in] long newVal);
+		[id(9), helpstring("method SelectApplications")] HRESULT SelectApplications();
+		[id(10), helpstring("method SaveToFile")] HRESULT SaveToFile();
+		[id(11), helpstring("method ClearAllEvents")] HRESULT ClearAllEvents();
+		[id(12), helpstring("method About")] HRESULT About();
+		[propget, id(13), helpstring("property LogToFile")] HRESULT LogToFile([out, retval] BOOL *pVal);
+		[propput, id(13), helpstring("property LogToFile")] HRESULT LogToFile([in] BOOL newVal);
+		[id(14), helpstring("method ChooseFont")] HRESULT ChooseFont();
+		[propget, id(15), helpstring("property ShowOnScreen")] HRESULT ShowOnScreen([out, retval] BOOL *pVal);
+		[propput, id(15), helpstring("property ShowOnScreen")] HRESULT ShowOnScreen([in] BOOL newVal);
+		[id(16), helpstring("method ChooseLogFile")] HRESULT ChooseLogFile([out] BSTR * sLogFileName, [out] BOOL * bCanceled);
+		[propget, id(17), helpstring("property Audit")] HRESULT Audit([out, retval] BOOL *pVal);
+		[propput, id(17), helpstring("property Audit")] HRESULT Audit([in] BOOL newVal);
+		
+	};
+	[
+		object,
+		uuid(0243D433-3849-11d2-89BB-00C04F99140F),
+		helpstring("ICOMSysLCE Interface"),
+		pointer_default(unique)
+	]
+	interface ICOMSysLCE : IUnknown
+	{
+		[helpstring("method GetEventType")] HRESULT GetEventType([out] EventEnum * e);
+		[helpstring("method GetEventClass")] HRESULT GetEventClass([out] LPGUID guid);
+		[helpstring("method Install")] HRESULT Install([in] BSTR* PropertyName, [in] VARIANT PropertyValue);
+		[helpstring("method Uninstall")] HRESULT Uninstall();
+	};
+[
+	uuid(A9B39071-AAD0-11D0-B183-00AA00BA3258),
+	version(1.0),
+	helpstring("COMSpyCtl 1.0 Type Library")
+]
+library COMSPYCTLLib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(A9B39081-AAD0-11D0-B183-00AA00BA3258),
+		helpstring("COM Spy ActiveX Control")
+	]
+	coclass ComSpy
+	{
+		[default] interface ICOMSpy;
+	};
+	
+
+	[
+		uuid(AAF6270D-AC5E-11D0-B185-00AA00BA3258),
+		helpstring("COMSpyPropPage Class")
+	]
+	coclass ComSpyPropPage
+	{
+		interface IUnknown;
+	};
+};

@@ -1,0 +1,78 @@
+#########################################################################
+#
+#   Microsoft Confidential
+#   Copyright (c) Microsoft Corporation. All rights reserved.
+#
+#########################################################################
+
+!include ..\vss.inc
+
+
+TARGET_DESTINATION  = vsstools
+TARGETNAME  = vshadow
+TARGETTYPE  = PROGRAM
+
+UMTYPE      = console
+UMENTRY     = wmain
+
+
+USE_NATIVE_EH   = 1
+USE_IOSTREAM    = 1
+USE_MSVCRT      = 1
+USE_ATL         = 1
+USE_STL         = 1
+STL_VER         = 60
+
+
+SOURCES = \
+    tracing.cpp     \
+    vssclient.cpp   \
+    create.cpp      \
+    expose.cpp      \
+    query.cpp       \
+    delete.cpp      \
+    revert.cpp      \
+    break.cpp       \
+    writer.cpp      \
+    select.cpp      \
+    stdafx.cpp      \
+    shadow.cpp      \
+    vshadow.rc      \
+
+
+C_DEFINES = -DWIN_32 -D_WINDOWS -DNT -D_WIN32_DCOM -DUNICODE -D_UNICODE  -D_ATL_NO_DEBUG_CRT -DVSS_SERVER -DTEST_FEATURES
+
+
+!if !$(FREEBUILD)
+C_DEFINES = $(C_DEFINES) -D_DEBUG
+!endif
+
+
+SUBSYSTEM_VERSION=$(SUBSYSTEM_501)
+
+
+INCLUDES = $(COM_INC_PATH);$(SDK_INC_PATH);$(INCLUDES)
+
+
+TARGETLIBS = \
+    $(SDK_LIB_PATH)\kernel32.lib    \
+    $(SDK_LIB_PATH)\oleaut32.lib    \
+    $(SDK_LIB_PATH)\ole32.lib       \
+    $(SDK_LIB_PATH)\uuid.lib        \
+    $(SDK_LIB_PATH)\advapi32.lib    \
+    $(SDK_LIB_PATH)\user32.lib      \
+    $(SDK_LIB_PATH)\rpcns4.lib      \
+    $(SDK_LIB_PATH)\rpcrt4.lib      \
+    $(SDK_LIB_PATH)\vssapi.lib      \
+    $(SDK_LIB_PATH)\ntdll.lib       \
+    $(SDK_LIB_PATH)\vssapi.lib      \
+    $(SDK_LIB_PATH)\vss_uuid.lib    \
+    $(SDK_LIB_PATH)\resutils.lib    \
+    $(SDK_LIB_PATH)\shlwapi.lib     \
+
+
+PRECOMPILED_CXX     = 1
+PRECOMPILED_INCLUDE = stdafx.h
+PRECOMPILED_OBJ     = precomp_vshadow.obj
+
+

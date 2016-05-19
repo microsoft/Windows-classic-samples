@@ -1,0 +1,24 @@
+HKCR
+{
+	MSP.MSP.2 = s 'MSP Class'
+	{
+		CLSID = s '{23F7C678-24E1-48db-AEAC-54A6F2A010A0}'
+	}
+	MSP.MSP = s 'MSP Class'
+	{
+		CurVer = s 'MSP.MSP.2'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {23F7C678-24E1-48db-AEAC-54A6F2A010A0} = s 'MSP Class'
+		{
+			ProgID = s 'MSP.MSP.2'
+			VersionIndependentProgID = s 'MSP.MSP'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+		}
+	}
+}

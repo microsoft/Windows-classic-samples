@@ -1,0 +1,157 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_DUCKINGMEDIAPLAYERSAMPLE ICON                    "DuckingMediaPlayerSample.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG_MEDIAPLAYER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 381
+        VERTGUIDE, 14
+        VERTGUIDE, 214
+        VERTGUIDE, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 151
+        HORZGUIDE, 28
+        HORZGUIDE, 87
+        HORZGUIDE, 109
+        HORZGUIDE, 122
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_MEDIAPLAYER DIALOGEX 0, 0, 388, 158
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION """Media Player"""
+FONT 8, "Segoe UI", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,277,137,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,331,137,50,14
+    EDITTEXT        IDC_EDIT_FILENAME,14,21,302,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BUTTON_BROWSE,323,21,50,14
+    CONTROL         "",IDC_SLIDER_PLAYBACKPOS,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS,14,55,359,15,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Play",IDC_BUTTON_PLAY,14,80,50,14
+    PUSHBUTTON      "Pause",IDC_BUTTON_PAUSE,66,80,50,14
+    PUSHBUTTON      "Stop",IDC_BUTTON_STOP,120,80,50,14
+    CONTROL         "Opt out of Ducking",IDC_CHECK_DUCKING_OPT_OUT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,105,91,10
+    CONTROL         "Pause On Duck",IDC_CHECK_PAUSE_ON_DUCK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,105,64,10
+    GROUPBOX        """Media Player"" Controls",IDC_STATIC,7,40,374,92
+    LTEXT           "File To Play:",IDC_STATIC,7,7,40,8
+    CONTROL         "",IDC_SLIDER_VOLUME,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,205,98,97,22,WS_EX_CLIENTEDGE
+    LTEXT           "Volume:",IDC_STATIC,183,83,29,8
+    CONTROL         "Mute",IDC_CHECK_MUTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,313,104,34,10
+    LTEXT           "0",IDC_STATIC,214,118,8,8
+    LTEXT           "100",IDC_STATIC,286,118,13,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Ducking Media Player Sample"
+    IDC_DUCKINGMEDIAPLAYERSAMPLE "DUCKINGMEDIAPLAYERSAMPLE"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

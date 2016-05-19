@@ -1,0 +1,19 @@
+/*
+    Copyright Microsoft Corp. 1992 - 2001
+
+    File Replication Sample
+
+    FILE: FileRepClient.acf
+
+    PURPOSE:  Defines the interface attributes for the client system service.
+
+*/
+
+[
+    explicit_handle
+] 
+
+interface FileRepClient
+{
+
+}

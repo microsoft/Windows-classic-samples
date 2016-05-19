@@ -1,0 +1,24 @@
+<?wpl version="1.0"?>
+<smil>
+    <head>
+        <meta name="Generator" content="Microsoft Windows Media Player -- 12.0.7033.7000"/>
+        <meta name="AverageRating" content="0"/>
+        <meta name="TotalDuration" content="0"/>
+        <meta name="ItemCount" content="4"/>
+        <meta name="IsFavorite"/>
+        <meta name="ContentPartnerListID"/>
+        <meta name="ContentPartnerNameType"/>
+        <meta name="ContentPartnerName"/>
+        <meta name="Subtitle"/>
+        <author/>
+        <title>Tracklist</title>
+    </head>
+    <body>
+        <seq>
+            <media src="Tracks\Valparaiso.wma"/>
+            <media src="Tracks\CrystalFree.wma"/>
+            <media src="Tracks\Sire.wma"/>
+            <media src="Tracks\SmallPines.wma"/>
+        </seq>
+    </body>
+</smil>

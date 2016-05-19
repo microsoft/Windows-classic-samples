@@ -1,0 +1,31 @@
+// WlExtHC.idl : IDL source for sample Wireless helper class extension
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WlExtHC.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+import "ndhelper.idl";
+
+[
+    uuid(8ab4b80c-3488-4612-b18c-fe6546363466),
+    version(1.0),
+    helpstring("Sample Helper Class Extension 1.0 Type Library")
+]
+
+library WirelessHelperExtensionLib
+{
+	importlib("stdole32.tlb");
+
+    [
+		uuid(00102030-4050-6070-8090-A0B0C0D0E0F0),
+		helpstring("Helper Class Extension Class")
+	]
+	coclass WirelessHelperExtension
+	{
+		[default] interface INetDiagHelperInfo;
+        interface INetDiagHelper;
+	};
+};

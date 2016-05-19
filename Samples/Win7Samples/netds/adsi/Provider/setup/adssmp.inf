@@ -1,0 +1,251 @@
+;
+; ACTIVE DS Installation Script
+;
+
+[Version]
+Signature=$CHICAGO$
+
+;
+; INF Entry Points
+;
+
+[DefaultInstall]
+CopyFiles = CopyInf, CopySys, CopySys.95
+AddReg = RegSMP, RegUninstall, RegUninstall.95, RegDS
+
+[DefaultInstall.NT]
+CopyFiles = CopyInf, CopySys, CopySys.NT, CopySys.Perm
+AddReg = RegSMP, RegUninstall, RegUninstall.NT, RegDS
+
+[Uninstall]
+DelFiles = CopySys, CopyInf, CopySys.95
+DelReg = UnRegSMP, UnRegUninstall
+
+[Uninstall.NT]
+DelFiles = CopySys, CopyInf, CopySys.NT
+DelReg = UnRegSMP, UnRegUninstall
+
+;
+; Destination Directories
+;
+
+[DestinationDirs]
+CopyInf = 17
+CopySys = 11
+CopySys.95 = 11
+CopySys.NT = 11
+CopySys.NW = 11
+
+;
+; File Sections
+;
+
+[CopyInf]
+adssmp.inf
+
+[CopySys]
+adssmp.dll,,,33
+
+[CopySys.95]
+
+[CopySys.NT]
+
+[CopySys.Perm]
+
+;
+; Registry Settings
+;
+
+[RegSMP]
+HKLM,Software\Microsoft\ADs\Providers\Sample,,,"SampleNamespace"
+
+HKCR,SampleNamespace\Clsid,,,"{F46430D0-CBfB-11CE-A9F7-00AA00B67689}"
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689},,,"Sample Namespace Object"
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}\InprocServer32,,,"adssmp.dll"
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}\InprocServer32,ThreadingModel,,Both
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}\ProgID,,,"SampleNamespace"
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}\TypeLib,,,"{F46430D2-CBfB-11CE-A9F7-00AA00B67689}"
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}\Version,,,"0.0"
+
+HKCR,Sample\Clsid,,,"{F46430D1-CBfB-11CE-A9F7-00AA00B67689}"
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689},,,"Sample Provider Object"
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}\InprocServer32,,,"adssmp.dll"
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}\InprocServer32,ThreadingModel,,Both
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}\ProgID,,,"Sample"
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}\TypeLib,,,"{F46430D2-CBfB-11CE-A9F7-00AA00B67689}"
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}\Version,,,"0.0"
+
+[UnRegSMP]
+HKLM,Software\Microsoft\ADs\Providers\Sample
+
+HKCR,SampleNamespace
+HKCR,CLSID\{F46430D0-CBfB-11CE-A9F7-00AA00B67689}
+
+HKCR,Sample
+HKCR,CLSID\{F46430D1-CBfB-11CE-A9F7-00AA00B67689}
+
+;
+; Add/Remove Control Panel Registry Settings
+;
+
+[RegUninstall]
+HKLM,%UninstKey%,"DisplayName",,%DispName%
+
+[RegUninstall.95]
+HKLM,%UninstKey%,"UninstallString",,"RunDll setupx.dll,InstallHinfSection Uninstall 4 %UninstInf%"
+
+[RegUninstall.NT]
+HKLM,%UninstKey%,"UninstallString",,"RunDll32 syssetup.dll,SetupInfObjectInstallAction Uninstall 4 %UninstInf%"
+
+[UnRegUninstall]
+HKLM,%UninstKey%
+
+[RegDS]
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle,TYPE,,organizational unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle,Description,,The Seattle Unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle,ID, %REG_DWORD%, 0xa345531
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle,Headcounts, %REG_DWORD%, 0x10
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond,TYPE,,organizational unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond,Description,,The Redmond Unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond,ID, %REG_DWORD%, 0xa534202
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond,Headcounts,REG_DWORD, 0x5
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\AnneA,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\AnneA,ID, %REG_DWORD%, 0x53953448
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\AnneA,Title,,Software Design Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\AnneA,Name,,Anne Annison
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\AnneA,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\BettyB,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\BettyB,ID, %REG_DWORD%, 0x53237948
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\BettyB,Title,,Software Design Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\BettyB,Name,,Betty Bettison
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\BettyB,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\CharlesC,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\CharlesC,ID, %REG_DWORD%, 0x53457948
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\CharlesC,Title,,Software Design Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\CharlesC,Name,,Charles Charleson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\CharlesC,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\DavidD,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\DavidD,ID, %REG_DWORD%, 0x53957948
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\DavidD,Title,,Software Design Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\DavidD,Name,,David Davisdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\DavidD,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\ElizabethE,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\ElizabethE,ID, %REG_DWORD%, 0x3532434
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\ElizabethE,Title,,Software Design Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\ElizabethE,Name,,Elizabeth Elizabethson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Redmond\ElizabethE,PhoneNumber,,(800)555-1212
+
+
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue,TYPE,,organizational unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue,Description,,The Bellevue Unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue,ID, %REG_DWORD%, 0x38375734
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue,Headcounts, %REG_DWORD%, 0x5
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\FredF,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\FredF,ID, %REG_DWORD%, 0x3935d39d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\FredF,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\FredF,Name,,Fred Fredsdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\FredF,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\GregG,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\GregG,ID, %REG_DWORD%, 0x3933439d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\GregG,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\GregG,Name,,Greg Gregson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\GregG,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\HarryH,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\HarryH,ID, %REG_DWORD%, 0x3235d39d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\HarryH,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\HarryH,Name,,Harry Harrisdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\HarryH,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\JamesJ,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\JamesJ,ID, %REG_DWORD%, 0x3934439d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\JamesJ,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\JamesJ,Name,,James Jamisdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\JamesJ,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\KatieK,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\KatieK,ID, %REG_DWORD%, 0x2335d39d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\KatieK,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\KatieK,Name,,Katie Katison
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Seattle\Bellevue\KatieK,PhoneNumber,,(800)555-1212
+
+
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto,TYPE,,organizational unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto,Description,,The Toronto Unit
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto,ID, %REG_DWORD%, 0x93587d324
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto,Headcounts, %REG_DWORD%, 0x6
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\MaryAnnM,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\MaryAnnM,ID, %REG_DWORD%, 0x934e931
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\MaryAnnM,Title,,Marketing Assistant
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\MaryAnnM,Name,,MaryAnn Marrison
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\MaryAnnM,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\PaulP,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\PaulP,ID, %REG_DWORD%, 0x349a934d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\PaulP,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\PaulP,Name,,Paula Paulson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\PaulP,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\RobertR,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\RobertR,ID, %REG_DWORD%, 0x349a343d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\RobertR,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\RobertR,Name,,Robert Robertson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\RobertR,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ScotS,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ScotS,ID, %REG_DWORD%, 0x3423933d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ScotS,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ScotS,Name,,Scot Scotsdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ScotS,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ThomasT,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ThomasT,ID, %REG_DWORD%, 0x349a323d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ThomasT,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ThomasT,Name,,Thomas Thomasdotter
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\ThomasT,PhoneNumber,,(800)555-1212
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\WillW,TYPE,,User
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\WillW,ID, %REG_DWORD%, 0x129a933d
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\WillW,Title,,Product Support Engineer
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\WillW,Name,,Will Williamson
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\DS\Toronto\WillW,PhoneNumber,,(800)555-1212
+
+
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Description,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Description,Syntax, %REG_DWORD%, 0x1
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Name,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Name,Syntax, %REG_DWORD%, 0x1
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\ID,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\ID,Syntax, %REG_DWORD%, 0x2
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Headcounts,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Headcounts,Syntax, %REG_DWORD%, 0x2
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\PhoneNumber,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\PhoneNumber,Syntax, %REG_DWORD%, 0x1
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Title,TYPE,,PROPERTY
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\Title,Syntax, %REG_DWORD%, 0x1
+
+
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\organizational unit,TYPE,,CLASS
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\organizational unit,Mandatory Properties,%REG_MULTI_SZ%, Description, ID, Headcounts
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\User,TYPE,,CLASS
+HKLM,SOFTWARE\Microsoft\ADs\SampleDS\Schema\User,Mandatory Properties,%REG_MULTI_SZ%, Name,ID, PhoneNumber, Title
+
+;
+; Disk Layout Information
+;
+
+[SourceDisksNames]
+99 = %DiskName%,ADs,0
+
+[SourceDisksFiles]
+adssmp.inf = 99
+adssmp.dll = 99
+
+;
+; Strings
+;
+
+[Strings]
+UninstKey = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\ADs"
+UninstInf = "adssmp.inf"
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+
+DispName = "ACTIVE DS Sample Provider"
+DiskName = "ACTIVE DS Sample Provider Installation Disk"

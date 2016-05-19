@@ -1,0 +1,80 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<HTML xmlns:t ="urn:schemas-microsoft-com:time">
+<?IMPORT namespace="t" implementation="#default#time2">   
+
+<HEAD>
+<TITLE>What's New Animated Banner</TITLE>
+<XML:namespace prefix="t"/>
+
+<STYLE TYPE="text/css">
+.time {	BEHAVIOR: url(#DEFAULT#TIME2)}
+t\:* {	BEHAVIOR: url(#DEFAULT#TIME2)}
+</STYLE>
+
+<SCRIPT TYPE="text/jscript" LANGUAGE="JScript">
+window.onload=fnInit;
+function fnInit(){
+   var iX2=container.offsetWidth/2;
+   var iY2=container.offsetHeight;
+   container.filters[0].addCone(-200,50,0,iX2,iY2,0,0,255,70,100);
+}
+</SCRIPT>		
+
+</HEAD>
+
+<BODY ID="nanimated" BGCOLOR="#FFFFFF" >
+<!-- Objects and Layout-->
+<DIV>
+<DIV STYLE="position:absolute; width:155; height: 130; top:0; left:0; background:black">
+<DIV ID="outercontainer" STYLE="position:absolute; width:160; height: 130; top:0; left:0; filter:alpha(opacity=0);">
+<DIV ID="container" STYLE="position:absolute; top:0; left:0; width:155; height:130; background-color:#3333CC; filter:light()">
+<DIV ID="IElogo" STYLE="position:absolute; width: 130; top: -20; left:-70; color:white; font-family:arial; font-weight:bold; font-size:120pt; z-index:5; filter:blur(Strength=0,); filter:alpha(opacity=30,); text-align:center"><IMG SRC="../Graphics Files/blacke.gif"></DIV>
+</DIV></DIV></DIV>
+<DIV ID="slHTMLTIME" STYLE="color:white; z-index:2; position:absolute; top:-50; left:170; font-size:225; font-family:arial; filter:alpha(opacity:30); font-weight:bold">55</DIV>
+
+<DIV ID="whatsnewin" STYLE="position:absolute; width: 150; top: 2; left:2; color:white; font-family:arial; font-weight:bold; font-size:12pt; z-index:5; text-align:left; filter:alpha(opacity=00,)">What's new in</DIV>
+
+<DIV ID="ietexter" STYLE="position:absolute; width: 150; top: 18; left:2; color:white; font-family:arial; font-weight:bold; font-size:12pt; z-index:5; text-align:left; filter:alpha(opacity=00,)"><IMG SRC="../Graphics Files/ietexter.gif"></DIV>
+
+<DIV  ID="n51" STYLE="position:absolute; width: 44; top: 48; left:50; z-index:5; filter:alpha(opacity=0,); font-size:85; font-family:arial; color:white; font-weight:bold">5</DIV>
+
+<IMG SRC="../Graphics Files/dot.gif" ID="dot" STYLE="position:absolute; width: 10; top: 113; left:75; z-index:3; filter:alpha(opacity=0,)">
+
+<DIV  ID="n52" STYLE="position:absolute; width: 44; top: 48; left:50; z-index:2; filter:alpha(opacity=0,); font-size:85; font-family:arial; color:white; font-weight:bold">5</DIV>
+</DIV>
+
+<!-- Animation -->
+
+<t:par  begin="0">
+<t:animate  targetElement="outercontainer" attributeName="filters.item(0).opacity" from="0" to="100" begin="0" dur=".5" />
+<t:set  targetElement="outercontainer" attributeName="filters.item(0).opacity" to="100" begin=".5"/>
+
+<t:animate  targetElement="whatsnewin" attributeName="filters.item(0).opacity" from="0" to="100" begin="2" dur="1" />
+<t:set  targetElement="whatsnewin" attributeName="filters.item(0).opacity" to="100" begin="3.0"/>
+
+<t:animate  targetElement="ietexter" attributeName="filters.item(0).opacity" from="0" to="100" begin="3" dur="1" />
+<t:set  targetElement="ietexter" attributeName="filters.item(0).opacity" to="100" begin="4.0"/>
+
+<t:animate  targetElement="n51" attributeName="filters.item(0).opacity" from="0" to="100" begin="4.5" dur=".5" />
+<t:set  targetElement="n51" attributeName="filters.item(0).opacity" to="100" begin="5"/>
+
+
+<t:animate  targetElement="dot" attributeName="left" from="75" to="94" begin="5.5" dur=".5" />
+
+<t:set  targetElement="dot" attributeName="filters.item(0).opacity" to="100" begin="5"/>
+<t:set  targetElement="dot" attributeName="left" to="94" begin="6"/>
+
+
+<t:animate  targetElement="n52" attributeName="left" from="55" to="103" begin="5" dur="1" />
+<t:set  targetElement="n52" attributeName="filters.item(0).opacity" to="100" begin="5"/>
+<t:set  targetElement="n52" attributeName="width" to="44" begin="6"/>
+<t:set  targetElement="n52" attributeName="left" to="105" begin="6"/>
+</t:par>
+
+<t:par  begin="2" repeatcount="indefinite">
+<t:animate  targetElement="slHTMLTIME" attributeName="left" from="170" to="-300" begin="0" dur="10" />
+</t:par>
+
+<P><FONT COLOR="black" FACE="ms sans serif" SIZE="2">For new and updated Web samples, visit the <A HREF="http://msdn.microsoft.com/downloads/c-frame.htm#/downloads/samples/internet/default.asp" TARGET="_blank">MSDN Online Web & Internet Samples</A> site.</FONT>
+</BODY>
+</HTML>

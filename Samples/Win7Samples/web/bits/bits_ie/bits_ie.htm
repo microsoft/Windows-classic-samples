@@ -1,0 +1,10 @@
+<SCRIPT LANGUAGE="JavaScript" defer>
+    var parentwin = external.menuArguments;
+    var doc = parentwin.document;
+    var clicklink = external.menuArguments.event.srcElement;
+    var clickhref = clicklink.href;
+    
+    var command = "bits_ie.exe /CREATEJOB "+clickhref;
+    var WshShell = new ActiveXObject("WScript.Shell");
+    WshShell.Run(command);
+</SCRIPT>

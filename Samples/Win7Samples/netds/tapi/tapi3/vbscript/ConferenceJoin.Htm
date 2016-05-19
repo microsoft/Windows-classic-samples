@@ -1,0 +1,704 @@
+<! -- 
+
+--------------------------------------------------------------------------
+
+  Copyright (C) 1998-1999 Microsoft Corporation. All rights reserved.
+
+--------------------------------------------------------------------------
+
+    TAPI3 Ip Multicast conference participation
+
+    This sample page demonstrates how to use tapi3 in vbscript to join a multicast conference.
+    
+    NOTE: this page could be used just with IE greater then 5.0
+		
+	NOTE: due to the simple event processing demonstrated in this page, 
+	your audio (and probably video) might be choppy. 
+	You can change this by modifying the sample to refresh the contents less often 
+	(you could implement your custom delay in TAPIOBJ_Event).
+    
+	What is shown:
+		1. Tapi initialization
+		2. REND usage (connecting to ILS server, conference info extraction)
+		3. Call management
+		4. Media and Terminal management (including preview window)
+		5. Video substreams management
+	
+	What is not shown:
+		1. You could improve performance by modifying the sample to react only for those tapi events
+		   that your app is interested in.
+		2. This page does not manage the positioning of video windows. 
+           (In order to do this, you can change the sample to use an ActiveX control that is able 
+           to set properties in IVideoWindow. This requires window handle values - HWND - which 
+           are not available in vbscripting).
+		3. This page performs Bind to the conference server using default credentials 
+           (the credentials of the currently logged on user). If you want to run the script without 
+           being logged on to a domain (without domain credentials), then remove the Bind call; that 
+           will work with ILS servers, but won't work with TAPI Active Directory Partitions. 
+		
+-->  
+
+<HTML>
+<HEAD>
+<META name=VI60_defaultClientScript content=VBScript>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<TITLE> 
+Conference
+</TITLE>
+</HEAD>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+
+    var ua = navigator.userAgent;
+    var an = navigator.appName;
+
+    // Is it IE?
+    bMSIE = (ua.indexOf("MSIE")>=1);
+    if (! bMSIE)
+    {
+     alert("You need to use IE to run this page");
+     window.close;
+    }
+//-->
+</SCRIPT>
+
+
+<SCRIPT  LANGUAGE=vbscript>
+
+'Constants section
+
+'The  number of windows (including preview) that are created at startup
+'Note: each window takes a lot of resources, so you need to carefully estimate
+'the required amount 
+Const S_MAX_CLIENT_WINDOWS=4
+
+
+'These constants are taken from tapi3.h, tapi3if.idl, rend.idl and confpriv.idl
+Const TAPIMEDIATYPE_AUDIO  = &H08&
+Const TAPIMEDIATYPE_VIDEO = &H8000&
+Const S_MEDIA_AUDIOVIDEO = &H8008&
+Const TD_CAPTURE  = 0
+Const TD_RENDER = 1
+Const QSL_NEEDED = 1
+Const LINEADDRESSTYPE_SDP = 2 
+Const AS_INSERVICE = 0
+Const DT_ILS = 2
+Const OT_CONFERENCE = 1
+Const DC_NORMAL = 0
+Const PTI_CANONICALNAME = 0
+Const AC_ADDRESSTYPES = 0
+ 
+'Interface IDs for casting 
+'Note: you can find the following IID-s in tapi3.h, tapi3if.idl, confpriv.idl, rend.idl or sdpblb.h
+
+Const IID_String_ITMediaSupport = "{B1EFC384-9355-11D0-835C-00AA003CCABD}"
+Const IID_String_ITTerminalSupport="{B1EFC385-9355-11D0-835C-00AA003CCABD}"
+Const IID_String_ITStreamControl= "{EE3BD604-3868-11D2-A045-00C04FB6809F}"
+Const IID_String_ITParticipantControl = "{d2ee6684-5a34-11d2-95a0-00a0244d2298}"
+Const IID_String_ITDirectoryObjectConference= "{F1029E5D-CB5B-11D0-8D59-00C04FD91AC0}"
+Const IID_String_ITConferenceBlob= "{C259D7AA-C8AB-11D0-8D58-00C04FD91AC0}"
+Const IID_String_ITAddressCapabilities="{8DF232F5-821B-11d1-BB5C-00C04FB6809F}"
+' IID of IVideoWindow 
+' Note: you can find this IID defined in control.h (from your sdk\inc directory), 
+' which contains the interface to type library for quartz.dll;
+' (search for the interface IVideoWindow)
+Const IID_String_IVideoWindow = "{56A868B4-0AD4-11CE-B03A-0020AF0BA770}"
+
+' The following CLSID is defined in tapi3.h 
+'(and it's used for creating a terminal of class "video window terminal")
+Const CLSID_String_VideoWindowTerm = "{F7438990-D6EB-11d0-82A6-00AA00B5CA1B}"
+
+
+'Definition of page-wide variables
+
+'Current ITBasicCallControl: current call
+DIM spITBasicCallControl
+'Current Address -  should be address with name "IPCONF LINE"
+DIM spITAddress
+
+DIM spITStreamControl
+DIM spITParticipantControl
+
+' The variable sintNumParticipants holds the current number of
+' participants. This is recalculated on each refresh cycle.
+DIM sintNumParticipants
+sintNumParticipants = 0
+'Array of ALL participants names
+DIM sPartNames(200)
+
+DIM sblnReadyToShow ' Prevent from trying "window operations" while we are not yet ready to show anything
+
+'Global var used for error handling
+DIM sbNeedToExit
+sbNeedToExit = False
+
+'Error handling routine: display error code, etc
+Sub CheckError(strMsg)
+if not Err.number = 0 Then
+	MsgBox strMsg & ":" & Err.number & ";"&Err.description
+	sbNeedToExit = True
+	Err.Clear
+End If
+End Sub
+
+'****************************************************************************
+' Starting procedure:
+'  1. Initialize global variables
+'  2. Find "IPCONF LINE" address
+'  3. Get SDP blob from ILS server
+'  4. Create Call and setup static terminals
+'  5. Create dynamic terminals
+'  6. Set QOS
+'  7. Connect to the conference 
+Sub connect_conference
+
+ ' Note: TAPI object SHOULD BE INITIALIZED BEFORE
+ ' window_onload EVENT. OTHERWISE YOU WILL NOT BE ABLE 
+ ' TO CATCH ANY EVENT.....
+
+sbNeedToExit = False
+
+if txtILSServer.value="" Then
+   MsgBox "Enter ILS server name",0,"Connect"
+   Exit Sub
+End If
+   
+if txtConfName.value="" Then
+   MsgBox "Enter conference name",0,"Connect"
+   Exit Sub
+End If
+
+On Error Resume Next
+
+sblnReadyToShow	= False 
+
+window.status = "Obtain conference information..."
+
+'First of all we need to obtain the SDP blob related to this conference from ILS Server      
+DIM pSDPBlob
+pSDPblob = Select_SDP_blob() 
+window.status = "Conference information obtained"
+
+if sbNeedToExit Then
+  Exit Sub
+End If  
+  
+call CheckError("connect_conference:after select_SDP_blob" )
+
+'Walk through the addresses in order to find our IPCONF line
+'Note: another way to find this address would be to look for addresses that support 
+'the address type LINEADDRESSTYPE_SDP.
+
+blnIsSelected = False
+window.status = "Perform local addresses checking..."
+DIM pITAddress
+
+For Each  pITAddress in TAPIOBJ.Addresses 
+   
+  DIM pITAddressCapabilities
+
+  Set pITAddressCapabilities = MAPPER.QueryDispatchInterface(IID_String_ITAddressCapabilities,pITAddress)
+  call CheckError("Query ITAddress for ITAddressCapabilities")
+
+  AddressTypes = pITAddressCapabilities.AddressCapability(AC_ADDRESSTYPES)	
+  call CheckError("Get AddressTypes")
+  'Check that this address supportonly  SDP blob as an address
+  if AddressTypes = LINEADDRESSTYPE_SDP Then
+  
+   'Obtain ITMediaSupport
+   DIM pITMediaSupport
+  
+   Set pITMediaSupport = MAPPER.QueryDispatchInterface(_
+       IID_String_ITMediaSupport,pITAddress)
+
+   call CheckError("connect_conference:Query ITAddress for ITMediaSupport" )
+
+   'Check if both audio and video are supported
+   blnSupportVideoAndAudio = _
+     pITMediaSupport.QueryMediaType(S_MEDIA_AUDIOVIDEO)
+    
+   call CheckError("connect_conference:ITMediaSupport.QueryMediaType" )
+    'Check if this address is in service
+
+   if blnSupportVideoAndAudio and pITAddress.State = AS_INSERVICE Then
+     ' This address will be used for conference
+     blnIsSelected = True
+     Exit For
+   End IF
+ End If 
+Next
+   
+call CheckError("connect_conference:After cycle on Addresses")
+
+
+'The address is selected?
+ 
+if not blnIsSelected Then
+  MsgBox "You have no IPCONF LINE address that supports both audio and video.Sorry."
+  Exit Sub
+End if
+ 
+Set spITAddress = pITAddress
+Set pITAddress = Nothing
+ 
+
+'Create a Call
+DIM lngMediaTypes
+
+'You can setup the call to be audio only, or video only or audio+video   
+lngMediaTypes = S_MEDIA_AUDIOVIDEO
+   
+'Create call with address type 2 = LINEADDRESSTYPE_SDP (SDP blob)   
+Set spITBasicCallControl = spITAddress.CreateCall(pSDPblob,LINEADDRESSTYPE_SDP,lngMediaTypes)
+ 
+call CheckError("connect_conference:CreateCall" )
+   
+
+'Terminal allocation
+Call SetupTerminals()
+
+if bNeedToExit Then
+  Exit Sub
+End If
+    
+'Let's try to setup QoS level
+window.status = "Set QOS..."
+ 
+ call spITBasicCallControl.SetQOS(TAPIMEDIATYPE_VIDEO,QSL_NEEDED)
+ call CheckError("connect_conference:set QOS_REQUIRED for Video" ) 
+ 
+ call spITBasicCallControl.SetQOS(TAPIMEDIATYPE_AUDIO,QSL_NEEDED)
+ call CheckError("connect_conference:set QOS_REQUIRED for Audio" )
+      
+if bNeedToExit Then
+  Exit Sub
+End If
+ 
+window.status = "Prepare to connect..."
+
+'Connect synchronous
+spITBasicCallControl.Connect(True)
+
+if not Err.number = 0 Then
+   MsgBox "Unable to connect: error " & Hex(Err.number)
+   window.status = "Done."
+   Err.Clear
+   Exit Sub
+End If      
+   
+window.status = "Connected."
+
+Set spITParticipantControl = MAPPER.QueryDispatchInterface( _
+        IID_String_ITParticipantControl, spITBasicCallControl )
+
+call CheckError("connect_conference: query ITCall for ITPArticipantControl")
+ 
+buttonConnect.disabled =  true
+buttonHangup.disabled =  False
+ 
+CAll Show_Participants()
+ 
+End Sub
+
+'*************************************************************
+'*************************************************************
+' disconnect from the conference
+Sub conference_hangup
+ 'Just set all global variables to nothing
+On Error resume Next
+sintNumParticipants = 0
+
+'The next function call (Disconnect) can eventually fail; this is because we don't check
+'in this sample the current status of the call when we call Disconnect. So we can ignore 
+'this error.
+spITBasicCallControl.Disconnect DC_NORMAL
+Err.Clear
+
+Set spITBasicCallControl = Nothing
+Set spITAddress = Nothing
+
+Set spITStreamControl = Nothing
+Set spITParticipantControl = Nothing
+
+ buttonConnect.disabled =  False
+ buttonHangup.disabled =  True
+ Call DrawParticipantsList() 
+End Sub 
+
+
+'*************************************************************
+'*************************************************************
+' Setting up Terminals routine
+' We need to specify a maximum number of participants 
+' and create for each possible participant a
+' "video render" terminal
+' In the case of static terminals, we just pick up the default terminal 
+' for that particular media + direction.
+Sub SetupTerminals()
+On Error Resume Next
+'Stream module
+Set spITStreamControl = MAPPER.QueryDispatchInterface(_
+  IID_String_ITStreamControl,spITBasicCallControl)
+
+call CheckError("SetupTerminals:Query ITCall for ITStreamControl" )
+
+DIM pITTerminalSupport
+  
+Set pITTerminalSupport = MAPPER.QueryDispatchInterface(_
+  IID_String_ITTerminalSupport,spITAddress)
+
+call CheckError("SetupTerminals:Query ITAddress for ITTerminalSuport" ) 
+
+DIM pITStream
+DIM lngMediaType
+DIM lngDirection
+DIM blnIsError
+Dim pIVideoWindow
+Dim pVideoWindow
+
+blnIsError = False
+
+window.status = "Configuring terminals..."
+
+For Each pITStream in spITStreamControl.Streams
+
+   lngMediaType = pITStream.MediaType
+   lngDirection = pITStream.Direction
+   
+   'Try to find the correspondent static terminal 
+   ' Video rendering stream is a special case - this one doesn't have 
+   ' a "default static terminal" - we rather have to create a dynamic terminal for it.
+
+   if not (lngMediaType = TAPIMEDIATYPE_VIDEO and lngDirection = TD_RENDER) Then
+
+      Set pITTerminal = pITTerminalSupport.GetDefaultStaticTerminal(lngMediaType,lngDirection)
+ 
+     if not (Err.number = 0) Then 'No such terminal? 
+        blnIsError = True
+        Err.Clear
+      Else
+        blnIsError = False                 
+        pITStream.SelectTerminal(pITTerminal)   
+        call CheckError("SetupTerminals:SelectTerminal" )
+     End if
+       
+   
+  
+    if  blnIsError Then 'Maybe we could join without this terminal
+     
+      if  (lngMediaType = TAPIMEDIATYPE_VIDEO  and _
+           lngDirection=TD_CAPTURE) Then
+        MsgBox "Unable to find video capture device: attach receive video only",0,"Terminal Selection"
+      Else
+        if  (lngMediaType = TAPIMEDIATYPE_AUDIO and lngDirection=TD_CAPTURE) Then
+          MsgBox "Unable to find audio capture device: attach receive audio only",0,"Terminal Selection"
+        Else
+          MsgBox "Unable to attach: even audio playback device is missing",0,"Terminal Selection"
+          sbNeedToExit = True
+          Exit Sub
+        End if
+      End if   
+   Else 'No errors, start this stream!
+     
+     ' Create preview window on the video capture stream     
+
+     ' Note: we already selected on this stream the default static terminal, which, 
+     ' in case it's present, would basically be a video camera.
+     ' Here, we do one more thing: on the same "video capture" stream we select a dynamic 
+     ' terminal as well, a video window; this will provide a "preview" window, which will 
+     ' show us the video stream that is being captured by the our local camera and sent to the 
+     ' other participants from the conference. 
+
+     if  ((lngMediaType = TAPIMEDIATYPE_VIDEO) and (lngDirection=TD_CAPTURE)) Then
+       
+       'Create Video Terminal       
+       Set pVideoWindow = pITTerminalSupport.CreateTerminal(CLSID_String_VideoWindowTerm,TAPIMEDIATYPE_VIDEO,TD_RENDER)
+	   call CheckError("SetupTerminals: Create Terminal")
+	   
+       'select on stream
+       pITStream.SelectTerminal(pVideoWindow)
+       call CheckError("SetupTerminals: SelectTerminal")
+       
+       'Immediately make it visible as soon as stream is active
+       Set pIVideoWindow = MAPPER.QueryDispatchInterface(IID_String_IVideoWindow, pVideoWindow)
+       call CheckError("SetupTerminals: query for IVideoWindow")
+	  
+       pIVideoWindow.AutoShow = TRUE			       	   
+       call CheckError("SetupTerminals: set visibility")          
+      End If      
+     
+   
+   End if 'have error      
+ Else
+   'Special case: video rendering stream
+
+  
+    For intCount = 1 to S_MAX_CLIENT_WINDOWS-1
+       
+       'Create Terminal
+       Set pVideoWindow = pITTerminalSupport.CreateTerminal(CLSID_String_VideoWindowTerm,TAPIMEDIATYPE_VIDEO,TD_RENDER)
+	   call CheckError("SetupTerminals: Create Terminal")
+       'select on stream
+       pITStream.SelectTerminal(pVideoWindow)
+       call CheckError("SetupTerminals: SelectTerminal")
+       
+       Set pIVideoWindow = MAPPER.QueryDispatchInterface(IID_String_IVideoWindow, pVideoWindow)
+       call CheckError("SetupTerminals: query for IVideoWindow")
+	  
+       pIVideoWindow.AutoShow = TRUE			       	   
+       call CheckError("SetupTerminals: set visibility")          
+      
+   Next 'for each terminal 
+  
+   
+ End if 'Necessary to check this stream
+   
+ call CheckError("SetupTerminals:GeneralChecking1" )
+  
+  
+ Next  ' End cycle for ITStreams
+  
+ call CheckError("SetupTerminals:Streams enumeration problems" )
+
+Set pIVideoWindow = Nothing
+Set pVideoWindow = Nothing
+
+ End Sub 
+
+'*************************************************************
+'*************************************************************
+'*************************************************************
+' Obtain from the ILS server the SDP blob that describes the conference 
+Function Select_SDP_blob
+On Error Resume Next
+DIM strDirectoryName
+DIM intDirectoryType
+DIM pITDirectory
+DIm pITDirectoryObject
+DIM pITDirectoryObjectConference
+  
+strDirectoryName = Trim(txtILSServer.value)  'Name and type of server to connect to
+intDirectoryType = DT_ILS
+ 
+
+Err.Clear 
+
+blnConnectFailed = False
+
+'REND is an object of type ITRendezvous
+Set pITDirectory = REND.CreateDirectory(intDirectoryType,strDirectoryName)
+call CheckError("select_SDP_blob:CreateDirectory 2" )
+  
+pITDirectory.Connect false
+  
+if not Err.number = 0 Then
+      MsgBox "Unable to connect to conference server: server down?",0,"Connect"  
+      sbNeedToExit =  True
+      Err.Clear  
+      Exit Function
+End If
+ 
+'
+'The next bind is needed only if you want this code to work with 
+'Tapi Active Directory Partitions as well, in addition to ILS servers. 
+'If you only want to run this script against ILS servers, then you might 
+'as well remove the Bind.
+'Also, you need to remove the Bind if you want the script to run for a user 
+'who doesn't have domain credentials (is not logged on to any particular 
+'domain). 
+'
+'Note that the next Bind is executed using default credentials (the credentials
+'of the currently logged on user); you can modify this source code and 
+'add UI elements that allow the user to specify his desired credentials. 
+'
+
+call pITDirectory.Bind("","","",15)
+  
+if not Err.number = 0 Then
+      MsgBox "Unable to Bind to conference server!",0,"Bind"  
+      sbNeedToExit =  True
+      Err.Clear  
+      Exit Function
+End If
+   
+  
+blnIsFound =  false
+
+For Each pITDirectoryObject_current in pITDirectory.DirectoryObjects(OT_CONFERENCE,txtConfName.value)
+  Dim tmpN
+  tmpN = escape(pITDirectoryObject_current.name)
+  tmpN1 = escape(txtConfName.value)
+
+  if (tmpN =  tmpN1) Then
+   blnIsFound = True
+   Set pITDirectoryObject = pITDirectoryObject_current       
+  End if
+Next
+
+call CheckError("select_SDP_blob:cycle for DirectoryObjects" )
+ 
+if not blnIsFound then
+  MsgBox "Sorry, this conference does not exist or you are not authorized to connect to it",0,"Connect"
+  sbNeedToExit = True
+  Exit Function
+End if
+  
+'Obtain ITDirectoryObjectConference  
+Set pITDirectoryObjectConference = _
+ MAPPER.QueryDispatchInterface(IID_String_ITDirectoryObjectConference,pITDirectoryObject)
+
+call CheckError("select_SDP_blob:query ITDirectoryObject for ITDirectoryObjectConference" )
+ 
+' Put properties into form
+        
+'Obtain ITConferenceBlob
+DIM pITConferenceBlob
+Set pITConferenceBlob = _
+   MAPPER.QueryDispatchInterface(IID_String_ITConferenceBlob,pITDirectoryObjectConference)
+
+call CheckError("select_SDP_blob:query ITDirectoryObjectConference for ITConferenceBlob" )
+  
+Select_SDP_blob =  pITConferenceBlob.ConferenceBlob
+
+call CheckError("select_SDP_blob:pITConferenceBlob.ConferenceBlob" )
+
+End Function
+
+
+'*************************************************************
+'*************************************************************
+'*************************************************************
+'*************************************************************
+'Make list of participants visible
+Sub DrawParticipantsList
+On Error Resume Next
+DIM strPartyList  
+DIM intPosition
+strPartyList = ""
+
+DIM curIndex
+curIndex = 0
+Dim oOption
+
+divPartNum.innerHTML = "Participants("&Cstr(sintNumParticipants)&")"
+
+ for i = 0 to selParticipants.options.length 
+   selParticipants.remove(0)
+ Next  
+ 
+for i=1 to sintNumParticipants
+		Set  oOption = document.createElement("OPTION") 
+		oOption.text  = Left(sPartNames(i),25)
+		oOption.value = Left(sPartNames(i),25)
+		selParticipants.add oOption
+ Next       
+
+Err.Clear
+End Sub
+
+'*************************************************************
+' Construct list of participants 
+Sub Show_participants
+On Error Resume Next
+
+window.status = "Update cycle started..."        
+
+sblnReadyToShow = False
+sintCallspostphoned =  0
+
+' Interfaces used here are described in confpriv.idl
+DIM pITParticipant
+DIM pCollectionParticipants 
+Set pCollectionParticipants = spITParticipantControl.Participants
+
+if not Err.number = 0 Then ' No participants object: conference disconnected?
+   Err.Clear
+   Exit Sub
+End If
+
+sintNumParticipants = 0
+For Each pITParticipant in pCollectionParticipants
+  strName = "<unknown>"
+  
+  'Get participant name  - this call sometimes could fail (if somebody does not supply name)
+  strName = pITParticipant.ParticipantTypedInfo(PTI_CANONICALNAME)
+  
+  If Err.number = 0 Then
+    sintNumParticipants = sintNumParticipants + 1
+    sPartNames(sintNumParticipants) = strName        
+  End If 'Could be queried for name
+  
+  'Just clear all errors that could occur
+  Err.Clear
+Next 
+
+Call DrawParticipantsList()
+
+sblnReadyToShow = True
+window.status = "Done."        
+End Sub
+
+'******************************************************************
+' Simplest Event-driving: on a case of ANY event 
+' redraw participant list
+ Sub TAPIOBJ_Event(tapi_event, pEvent)
+    Call show_participants()
+ End Sub
+   
+</SCRIPT>
+
+
+
+<BODY  unload="conference_hangup()">
+
+<div id=divPartList  style="position:absolute;Top:0px;Left:10px;Height:95%;width:150px">
+   <div id=divPartNum class="sectionheader" style="BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; HEIGHT: 30px; LEFT: 0px; TEXT-ALIGN: center; WIDTH: 150px">
+	  Participants 
+   </div>
+
+   <SELECT size=2 id=selParticipants  
+        style="border:none;left:0px;top:30px;position:absolute;height:200px;width:150px;FONT-SIZE:10px;COLOR:black"> 
+   </SELECT>
+
+   <div id=divPartyList style="FONT-SIZE:12px;COLOR:blue;position:absolute;Top:40px;Left:10px;width:145px;">
+
+   </div>
+</div>
+
+<p style="position:absolute;top:50px;left:200px"> 
+   ILS Server 
+</p>
+<INPUT id=txtILSServer style="position:absolute;top:50px;left:330px;width:200">  
+
+<p style="position:absolute;top:80px;left:200px"> Conference name </p>
+<INPUT id=txtConfName style="position:absolute;top:80px;left:330px;width:200">  
+
+<INPUT type=button title="Connect to the conference"  style="position:absolute;top:120px;left:260px;width:200px" value="Connect" onclick="Connect_conference()" id=buttonConnect>
+<INPUT type=button disabled style="position:absolute;top:150px;left:260px;width:200px" title="Hangup" value="Hangup" onclick="conference_hangup()" id=buttonHangup>
+
+<!-- Listed objects : TAPI(tapi3.h), DispatchMapper(tapi3.h), REND(rend.h-look for ITRendezvous) --> 
+ 
+<OBJECT classid=clsid:21D6D48E-A88B-11D0-83DD-00AA003CCABD 
+id=TAPIOBJ></OBJECT>
+
+<OBJECT classid=clsid:F1029E5B-CB5B-11D0-8D59-00C04FD91AC0 
+id=REND></OBJECT>
+
+<OBJECT classid=clsid:E9225296-C759-11d1-A02B-00C04FB6809F
+id=MAPPER></OBJECT>
+
+<SCRIPT LANGUAGE=vbscript>
+ window.status = "Initialization started"
+ call TAPIOBJ.Initialize
+ TAPIOBJ.EventFilter= &H1FFFF&
+ 
+ window.status = "Done."
+
+</SCRIPT>
+ 
+</BODY>
+
+</HTML>
+
+
+

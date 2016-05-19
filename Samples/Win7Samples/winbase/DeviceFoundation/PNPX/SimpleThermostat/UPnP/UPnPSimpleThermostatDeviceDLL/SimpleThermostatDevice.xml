@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <device xmlns:pnpx="http://schemas.microsoft.com/windows/pnpx/2005/11">
+    <pnpx:X_hardwareId>
+      PnPX_SimpleThermostat_HWID
+    </pnpx:X_hardwareId>
+    <pnpx:X_compatibleId>
+      PnPX_SimpleThermostat_CPID
+    </pnpx:X_compatibleId>
+    <pnpx:X_deviceCategory>
+      HomeAutomation.Thermostat
+    </pnpx:X_deviceCategory>
+    <deviceType>urn:schemas-upnp-org:device:SimpleThermostat:1</deviceType>
+    <friendlyName>UPnP Simple Thermostat</friendlyName>
+    <manufacturer>Microsoft</manufacturer>
+    <manufacturerURL>http://www.microsoft.com</manufacturerURL>
+    <modelDescription>Simple Thermostat Device using UPnP</modelDescription>
+    <modelName>UPnP Simple Thermostat Device</modelName>
+    <modelNumber>1000</modelNumber>
+    <modelURL>http://www.example.com/SimpleThermostat1000</modelURL>
+    <serialNumber>5123456789</serialNumber>
+    <UDN>uuid:2593cc72-9adb-4e17-8e30-1f00f14d7096</UDN>
+    <UPC></UPC>
+    <serviceList>
+      <service>
+        <serviceType>urn:schemas-upnp-org:service:SimpleThermostat:1</serviceType>
+        <serviceId>urn:upnp-org:serviceId:ISimpleThermostatUPnPService</serviceId>
+        <controlURL></controlURL>
+        <eventSubURL></eventSubURL>
+        <SCPDURL>SimpleThermostatService.xml</SCPDURL>
+      </service>
+    </serviceList>
+    <presentationURL></presentationURL>
+  </device>
+</root>

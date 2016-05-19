@@ -1,0 +1,29 @@
+#include "winres.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+
+// Main string table
+STRINGTABLE DISCARDABLE
+BEGIN
+
+    127                     "MyRuleGroup"
+    128                     "GRE_RULE"
+    129                     "Allow GRE Traffic"
+
+    // Rule group description, displayed by Firewall Control Panel
+
+    10127                    "This is a test rule group created by the Windows Firewall Add_GRE_Rule sample"
+    
+END
+
+#endif    // English (U.S.) resources

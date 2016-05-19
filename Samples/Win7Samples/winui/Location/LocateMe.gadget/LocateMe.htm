@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- The LocateMe gadget uses the Virtual Earth Platform APIs and is subject to the Virtual Earth Platform API Terms of Use 
+<!-- located here: http://www.microsoft.com/virtualearth/product/terms.html (and any successor thereto).  
+<!-- Your use of the content (e.g. maps, aerial imagery, and traffic data) available through the Virtual Earth Platform APIs 
+<!-- is also governed by the Virtual Earth Terms of Use.  You may modify, copy, and distribute the source and object code form of the LocateMe gadget, 
+<!-- provided you comply with the Virtual Earth Terms of Use.-->
+<!--
+ *************************************************************************
+ *
+ * File: LocateMe.htm
+ *
+ * THIS CODE AND INFORMATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ ************************************************************************
+-->
+
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2"></script>
+        <style>
+            body
+            {
+                margin: 0;
+                width: 260px;
+                height: 277px;
+            }
+             
+            #gadgetContent
+            {
+                width: 260px;
+                top: 0px;
+                text-align: center;
+                font-family: Tahoma;
+                font-size: 10pt;
+                position: absolute;
+            }
+        </style>
+      
+        <object id="LatLongFactory" 
+            classid="clsid:9DCC3CC8-8609-4863-BAD4-03601F4C65E8"
+            type="application/x-oleobject">
+        </object>
+
+        <script language="javascript" for="LatLongFactory">
+            // Event Handler code goes here
+            function LatLongFactory::NewLatLongReport( report )
+            {
+                try
+                {
+                    if( map == null )
+                    {
+                        map = new VEMap('myMap');
+                    }
+                    RemovePin();
+                    MoveMap(report.Latitude, report.Longitude);
+                    AddPin(report.Latitude, report.Longitude);
+                }
+                catch( err )
+                {
+                //Do nothing
+                }
+            }
+
+            function LatLongFactory::StatusChanged( status )
+            {
+            }
+        </script>
+
+        <script language="javascript">
+            var map = null;
+            var pin = null;
+            
+            System.Gadget.onUndock=UndockGadget;
+            System.Gadget.onDock=DockGadget;
+            
+            function DockGadget()
+            {
+                if (System.Gadget.docked)
+                {
+                    with (document.body.style)
+                    {
+                        width = "260px";
+                        height = "277px";
+                    }
+                    
+                    container = document.getElementById("myMap");
+                    with (container.style)
+                    {
+                        width = "258px";
+                        height = "245px";
+                    }
+                    
+                    container = document.getElementById("gadgetContent");
+                    with (container.style)
+                    {
+                        width = "260px";
+                    }
+                    
+                    ReloadMap();
+                }
+            }
+            
+            function UndockGadget()
+            {
+                if (!System.Gadget.docked)
+                {
+                    with (document.body.style)
+                    {
+                        width = "600px";
+                        height = "632px";
+                    }
+                    
+                    container = document.getElementById("myMap");
+                    with (container.style)
+                    {
+                        width = "598px";
+                        height = "600px";
+                    }
+                    
+                    container = document.getElementById("gadgetContent");
+                    with (container.style)
+                    {
+                        width = "600px";
+                    }
+                    
+                    ReloadMap();
+                }
+            }
+              
+            function GetMap()
+            {
+                var reportStatus = 0;
+                
+                try
+                {
+                    reportStatus = LatLongFactory.Status;
+                    if (reportStatus == 2)
+                    {
+                        LatLongFactory.RequestPermissions(0);
+                    }
+                                
+                    map = new VEMap('myMap');
+                    ReloadMap();
+                    ListenForReports();
+                }
+                catch( err )
+                {
+                //Do nothing
+                }
+            }
+                
+            function ReloadMap()
+            {
+                var reportStatus = 0;
+                var report = null;
+                    
+                try
+                {
+                    reportStatus = LatLongFactory.Status;
+                        
+                    if (reportStatus == 4)
+                    { 
+                        report = LatLongFactory.LatLongReport;
+                        UpdateMap(report.Latitude, report.Longitude); 
+                        AddPin(report.Latitude, report.Longitude);                       
+                    }
+                    else
+                    {
+                        UpdateMap(34.0540, -118.2370);
+                    }
+                }
+                catch( err )
+                {
+                    UpdateMap(34.0540, -118.2370);
+                }
+            }
+
+            function UpdateMap(latitude, longitude)
+            {
+                var latLong = null;
+
+                latLong = new VELatLong(latitude, longitude);
+                map.LoadMap(latLong, 6, VEMapStyle.Road, false, VEMapMode.Mode2D, true, 1);                
+            }
+             
+            function MoveMap(latitude, longitude)
+            {
+                var latLong = null;
+
+                latLong = new VELatLong(latitude, longitude);
+                map.PanToLatLong(latLong);                
+            }
+            
+            function AddPin(latitude, longitude)
+            {
+                var latLong = null;
+                
+                latLong = new VELatLong(latitude, longitude);
+                pin = new VEShape(VEShapeType.Pushpin, latLong);
+                                                
+                map.AddShape(pin);
+            }
+            
+            function RemovePin()
+            {
+                if( pin != null )
+                {                                                
+                    map.DeleteShape(pin);
+                    pin = null;
+                }
+            }
+            
+            function StopListeningForReports() 
+            {
+                try
+                {
+                    LatLongFactory.StopListeningForReports();
+                }
+                catch( err )
+                {
+                //Do nothing
+                }
+            }
+
+            function ListenForReports() 
+            {
+                LatLongFactory.ListenForReports(0);
+            }
+        </script>
+    </head>
+    
+    <body  onload="GetMap();"  onunload="StopListeningForReports();">
+        <span
+            id="gadgetContent"
+            style="font-family: Tahoma;font-size: 10pt;">
+            LocateMe
+            <div id='myMap' style="position:relative; width:245px; height:245px;"></div>
+            <div style="text-align:left">
+            <a href="http://go.microsoft.com/fwlink/?LinkId=21969" target="_blank">Terms of Use</a>
+            &nbsp;<a href="http://privacy.microsoft.com" target="_blank">Privacy</a>
+            </div>
+        </span>
+    </body>
+</html>

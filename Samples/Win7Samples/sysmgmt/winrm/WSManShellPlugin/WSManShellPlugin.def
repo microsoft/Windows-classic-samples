@@ -1,0 +1,11 @@
+LIBRARY		WSManShellPlugin.dll
+EXPORTS
+    WSManPluginStartup
+    WSManPluginShutdown
+    WSManPluginShell
+    WSManPluginCommand
+    WSManPluginSend
+    WSManPluginReceive
+    WSManPluginSignal
+    WSManPluginReleaseShellContext
+    WSManPluginReleaseCommandContext

@@ -1,0 +1,238 @@
+<html>
+  <!-----------------------------------
+  PUZZLE2002.HTM
+
+  Puzzle 2002. 1999-2001
+
+  Version 1.00.018
+  ------------------------------------>
+
+  <head>
+    <title>Puzzle 2002</title>
+  </head>
+
+  <style>
+    body	{margin: 0px; font-family: Verdana; color: white}
+    table	{background: black; cursor: default}
+    td		{margin: 0px; width: 18px; height: 19px; text-align: center}
+    #ID_Count	{width: 100%; line-height: 90%; font-size: 14pt; cursor: hand}
+    #ID_Field	{background: silver; font: bold 7pt Verdana; color: black; width: 81px}
+    .R		{background: #FF3300}
+    .G		{background: #66CC33}
+    .B		{background: #0099FF}
+    .Y		{background: #FFCC00}
+    .K		{background: #000000}
+  </style>
+
+  <script src=shared.js> </script>
+
+  <!-- Puzzle layout -->
+  <body scroll=no onSelectStart=Ignore()>
+    <table cellspacing=1 cellpadding=2 onClick=FieldClick()>
+    <!-- TOOLBAR_START --><!-- TOOLBAR_EXEMPT --><!-- TOOLBAR_END -->
+      <tr>
+        <td id=ID_Count onClick=CountClick()>
+          15
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table id=ID_Field cellspacing=1 cellpadding=0 onSelectStart=FieldClick()>
+            <tr>
+              <td class=R> 1 </td>
+              <td class=R> 2 </td>
+              <td class=G> 3 </td>
+              <td class=G> 4 </td>
+            </tr>
+            <tr>
+              <td class=R> 5 </td>
+              <td class=R> 6 </td>
+              <td class=G> 7 </td>
+              <td class=G> 8 </td>
+            </tr>
+            <tr>
+              <td class=B>  9 </td>
+              <td class=B> 10 </td>
+              <td class=Y> 11 </td>
+              <td class=Y> 12 </td>
+            </tr>
+            <tr>
+              <td class=B> 13 </td>
+              <td class=B> 14 </td>
+              <td class=Y> 15 </td>
+              <td class=K>  0 </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+
+  <!-- Puzzle logic -->
+  <script>
+
+    // constants
+    var c_timeout = 200;
+    var c_stateReady = 0;
+    var c_stateInitializing = -1;
+    var c_statePlayingGame = 1;
+    var c_colorGame = "gray";
+
+    // global variables
+    var g_objZero = ID_Field.rows[3].cells[3];
+    var g_zeroClassName = g_objZero.className;
+    var g_zeroInnerText = g_objZero.innerText;
+    var g_state = c_stateReady;
+
+    function FieldClick()
+      {
+      switch (g_state)
+        {
+        case c_stateReady:
+          g_state = c_stateInitializing;
+          ID_Count.colorSave = ID_Count.style.color;
+          ID_Count.style.color = c_colorGame;
+          beginGame();
+          break;
+
+        case c_statePlayingGame:
+          clickedObject = window.event.srcElement;
+          if (ID_Field.contains(clickedObject) && clickedObject.className != g_zeroClassName)
+            {
+            if (moveZeroTo(clickedObject))
+              ID_Count.innerText = parseInt(ID_Count.innerText) + 1;
+
+            if (isGameOver())
+              {
+              ID_Count.style.color = ID_Count.colorSave;
+              g_state = c_stateReady;
+              }
+            }
+          break;
+
+        default:
+          break;
+        }
+      }
+
+    function CountClick()
+      {
+      // if clicked when playing game, start over, re-initialize the game
+      // in all other states, the click event will bubble to the <body>
+      if (g_state == c_statePlayingGame)
+        location.reload();
+      }
+
+    function beginGame()
+      {
+      bRowCol = Math.round(Math.random());
+      window.setTimeout(bRowCol ? "clickRow()" : "clickCol()", c_timeout);
+      }
+
+    function isGameOver()
+      {
+      sequence = "";
+
+      for (i = 0; i < 4; i++)
+      for (j = 0; j < 4; j++)
+        sequence += parseInt(ID_Field.rows[i].cells[j].innerText).toString(16);
+
+      return (sequence == "123456789abcdef0");
+      }
+
+    function moveZeroTo(objTo)
+      {
+      rowTo = RowNum(objTo), rowZero = RowNum(g_objZero);
+      colTo = ColNum(objTo), colZero = ColNum(g_objZero);
+
+      if ((rowTo != rowZero) && (colTo != colZero))
+        return false;
+
+      if (rowTo == rowZero)
+        {
+        if (colTo < colZero)
+          for (j = colZero; j > colTo; j--)
+            {
+            obj0 = ID_Field.rows[rowZero].cells[j];
+            obj1 = ID_Field.rows[rowZero].cells[j - 1];
+            obj0.className = obj1.className;
+            obj0.innerText = obj1.innerText;
+            }
+
+        if (colTo > colZero)
+          for (j = colZero; j < colTo; j++)
+            {
+            obj0 = ID_Field.rows[rowZero].cells[j];
+            obj1 = ID_Field.rows[rowZero].cells[j + 1];
+            obj0.className = obj1.className;
+            obj0.innerText = obj1.innerText;
+            }
+        }
+
+      if (colTo == colZero)
+        {
+        if (rowTo < rowZero)
+          for (i = rowZero; i > rowTo; i--)
+            {
+            obj0 = ID_Field.rows[i].cells[colZero];
+            obj1 = ID_Field.rows[i - 1].cells[colZero];
+            obj0.className = obj1.className;
+            obj0.innerText = obj1.innerText;
+            }
+
+        if (rowTo > rowZero)
+          for (i = rowZero; i < rowTo; i++)
+            {
+            obj0 = ID_Field.rows[i].cells[colZero];
+            obj1 = ID_Field.rows[i + 1].cells[colZero];
+            obj0.className = obj1.className;
+            obj0.innerText = obj1.innerText;
+            }
+        }
+
+      g_objZero = objTo;
+      g_objZero.className = g_zeroClassName;
+      g_objZero.innerText = g_zeroInnerText;
+
+      return true;
+      }
+
+    function clickRow()
+      {
+      // pick a random column number; if it is same as zero's, try again
+      do
+        randomCol = Math.floor(4 * Math.random());
+      while (randomCol == ColNum(g_objZero))
+
+      moveZeroTo(ID_Field.rows[RowNum(g_objZero)].cells[randomCol]);
+
+      nCount = parseInt(ID_Count.innerText) - 1;
+      ID_Count.innerText = nCount;
+
+      if (nCount == 0)
+        g_state = c_statePlayingGame;
+      else
+        window.setTimeout("clickCol()", c_timeout);
+      }
+
+    function clickCol()
+      {
+      // pick a random row number; if it is same as zero's, try again
+      do
+        randomRow = Math.floor(4 * Math.random());
+      while (randomRow == RowNum(g_objZero))
+
+      moveZeroTo(ID_Field.rows[randomRow].cells[ColNum(g_objZero)]);
+
+      nCount = parseInt(ID_Count.innerText) - 1;
+      ID_Count.innerText = nCount;
+
+      if (nCount == 0)
+        g_state = c_statePlayingGame;
+      else
+        window.setTimeout ("clickRow()", c_timeout);
+      }
+
+  </script>
+
+</html>

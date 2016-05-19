@@ -1,0 +1,59 @@
+#include "resource.h"
+
+#include "Windows.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+STRINGTABLE 
+BEGIN
+    IDS_EXPLORE             "Explore"
+    IDS_OPEN                "Open"
+    IDS_GROUPBYSIDES        "Group By Sides"
+    IDS_EXPLORE_HELP        "Explore Item"
+    IDS_OPEN_HELP           "Open Item in New Window"
+    IDS_ONE                 "One"
+    IDS_TWO                 "Two"
+    IDS_THREE               "Three"
+    IDS_FOUR                "Four"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_FIVE                "Five"
+    IDS_SIX                 "Six"
+    IDS_SEVEN               "Seven"
+    IDS_EIGHT               "Eight"
+    IDS_NINE                "Nine"
+    IDS_ZERO                "Zero"
+    IDS_GROUPBYSIZE         "Group by Size"
+    IDS_GROUPBYALPHA        "Alphabetical"
+    IDS_VALUE               "Value"
+    IDS_SMALL               "Small"
+    IDS_MEDIUM              "Medium"
+    IDS_LARGE               "Large"
+    IDS_LESSTHAN5           "Less Than 5"
+    IDS_5ORGREATER          "Five or Greater"
+    IDS_GROUPBYVALUE        "Group by Value"
+    IDS_GROUPBYLEVEL        "Group by Level"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RECTANGLE           "Rectangle"
+    IDS_TRIANGLE            "Triangle"
+    IDS_CIRCLE              "Circle"
+    IDS_POLYGON             "Polygon"
+    IDS_TITLE               "Explorer Data Provider"
+    IDS_DISPLAY             "Display"
+    IDS_UNSPECIFIED         "Unspecified"
+    IDS_SETTINGS            "Settings"
+    IDS_SETTING1            "Setting 1"
+    IDS_SETTING2            "Setting 2"
+    IDS_SETTING3            "Setting 3"
+    IDS_DISPLAY_TT          "Display the item."
+    IDS_SETTINGS_TT         "Modify settings."
+    IDS_SETTING1_TT         "Modify setting 1."
+    IDS_SETTING2_TT         "Modify setting 2."
+    IDS_SETTING3_TT         "Modify setting 3."
+END

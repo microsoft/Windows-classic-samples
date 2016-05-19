@@ -1,0 +1,18 @@
+[ uuid (7f6c4340-eb67-11d1-b9d7-00c04fad9a3b),
+  version(1.0),
+  pointer_default(unique)
+]
+interface AsyncRPC
+{
+const long DEFAULT_ASYNC_DELAY        = 20;   // in seconds
+const char* DEFAULT_PROTOCOL_SEQUENCE = "ncacn_ip_tcp";
+const char* DEFAULT_ENDPOINT          = "8765";
+
+void NonAsyncFunc(handle_t hBinding,
+                  [in, string] unsigned char * pszMessage);
+
+void AsyncFunc(handle_t hBinding,
+               [in] unsigned long nAsychDelay);
+
+void Shutdown(handle_t hBinding);
+}

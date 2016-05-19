@@ -1,0 +1,7 @@
+LIBRARY      upcase
+
+;DESCRIPTION  'Internet Server Filter Sample'
+
+EXPORTS
+    HttpFilterProc
+    GetFilterVersion

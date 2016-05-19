@@ -1,0 +1,11 @@
+[ implicit_handle(handle_t ImplicitPicHandle )
+]
+interface proc_pickle
+{
+
+/* Both encode and decode will be used with this set of arguments. */
+
+[encode, decode] ProcPickle();
+
+}
+

@@ -1,0 +1,30 @@
+#include "halfime.h"
+
+ID_ICON ICON PRELOAD DISCARDABLE        halfime.ico
+
+ID_MENU MENU PRELOAD DISCARDABLE
+BEGIN
+    MENUITEM    "Clear",    IDC_CLEAR
+    POPUP       "Pattern"
+	BEGIN
+	MENUITEM    "ANSI", IDC_ANSIFILL
+	MENUITEM    "DBCS", IDC_DBCSFILL
+	END
+    POPUP       "ImeControl"
+	BEGIN       
+	MENUITEM    "Open IME",  IDC_OPENIME
+	MENUITEM    "Close IME", IDC_CLOSEIME
+	END
+    POPUP       "SetCompositionForm"
+	BEGIN
+	MENUITEM    "Default",   IDC_DEFAULT_POS
+	MENUITEM    "NearCaret", IDC_NEARCARET_POS
+	MENUITEM    "Prefer",    IDC_PREFER_POS
+	END
+END
+
+STRINGTABLE PRELOAD DISCARDABLE
+BEGIN
+    IDS_CLASS       "STE-DBCS-32"
+    IDS_TITLE       "Simple Text Editor - IME Half-Aware"
+END

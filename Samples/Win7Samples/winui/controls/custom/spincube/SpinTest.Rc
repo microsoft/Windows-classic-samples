@@ -1,0 +1,124 @@
+#include <windows.h>
+#include "spintest.h"
+
+#include "spintest.dlg"
+
+spintesticon ICON spintest.ico
+
+Menu MENU
+BEGIN
+    POPUP        "&Options"
+      BEGIN
+        MENUITEM    "&A DlgEdit dialog...", IDM_DLGEDITDIALOG
+        MENUITEM    "&Stats..."             IDM_SPINTESTSTATS
+        MENUITEM    SEPARATOR
+        MENUITEM    "&About..."             IDM_ABOUT
+       END
+END
+
+
+About DIALOG 30, 14, 136, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About SpinTest"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            "spintesticon", 101, 8, 22, 18, 20
+    CTEXT           "Microsoft Developer Support", 104, 0, 63, 136, 8
+    CTEXT           "Copyright 1992 - 2000 Microsoft Corporation", 105, 0, 74,
+                    136, 8
+    LTEXT           "SpinTest Win32 SDK sample ", 103, 40, 25, 95, 8
+    LTEXT           "version 1.0", 106, 40, 35, 95, 8
+    DEFPUSHBUTTON   "OK", IDOK, 95, 6, 40, 14
+    CONTROL         "", 108, "Static", SS_BLACKRECT, 0, 53, 136, 2
+END
+
+
+Stats DIALOG 150, 94, 160, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Stats"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         ":-)", 101, "Spincube", SS_INMOTION, 102, 44, 52, 48
+    LTEXT           "Number of spincubes:", 102, 7, 8, 84, 8
+    LTEXT           "This process : ", 103, 17, 27, 52, 8
+    LTEXT           "System wide : ", 104, 19, 53, 50, 8
+    PUSHBUTTON      "OK", IDOK, 8, 78, 40, 14
+    EDITTEXT        500, 71, 25, 18, 12, ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        501, 71, 50, 18, 12, ES_AUTOHSCROLL | ES_READONLY
+END
+
+STRINGTABLE
+BEGIN
+    IDS_REGCLASSFAIL "WinMain(): RegisterClass() failed"
+    IDS_WINDOWTITLE  "spintest Sample Application"
+END
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+#ifdef JAPAN
+LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
+
+
+
+
+Menu MENU
+BEGIN
+    POPUP        "オプション(&O)"
+      BEGIN
+        MENUITEM    "DlgEdit ダイアログ(&A)...", IDM_DLGEDITDIALOG
+        MENUITEM    "ステータス(&S)..."          IDM_SPINTESTSTATS
+        MENUITEM    SEPARATOR
+        MENUITEM    "バージョン情報(&A)..."      IDM_ABOUT
+       END
+END
+
+
+About DIALOG 30, 14, 143, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "SpinTest のバージョン情報"
+BEGIN
+    ICON            "spintesticon", 101, 8, 22, 18, 20
+    CTEXT           "Microsoft Developer Support", 104, 0, 63, 142, 8
+    CTEXT           "Copyright 1992 - 2000 Microsoft Corporation", 104, 0, 74,
+                    142, 8
+    LTEXT           "SpinTest Win32 SDK サンプル", 105, 36, 25, 103, 8
+    LTEXT           "version 1.0", 106, 36, 35, 103, 8
+    DEFPUSHBUTTON   "OK", IDOK, 95, 6, 40, 14
+    CONTROL         "", 108, "Static", SS_BLACKRECT, 0, 53, 143, 2
+END
+
+
+Stats DIALOG 150, 94, 160, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "ステータス"
+BEGIN
+    CONTROL         ":-)", 101, "Spincube", SS_INMOTION, 102, 44, 52, 48
+    LTEXT           "ｽﾋﾟﾝｷｭｰﾌﾞの個数:", 102, 7, 8, 84, 8
+    LTEXT           "このプロセス：", 103, 15, 27, 56, 8
+    LTEXT           "システム全体：", 104, 15, 53, 56, 8
+    PUSHBUTTON      "OK", IDOK, 8, 78, 40, 14
+    EDITTEXT        500, 72, 25, 18, 12, ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        501, 72, 50, 18, 12, ES_AUTOHSCROLL | ES_READONLY
+END
+
+
+
+
+SpintestDlg DIALOG 13, 22, 146, 117
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "DlgEdit ダイアログ"
+BEGIN
+    CONTROL         ":-)", 101, "Spincube", SS_INMOTION, 6, 7, 133, 66
+    LTEXT           "...ｶｽﾀﾑ ｺﾝﾄﾛｰﾙを使用しています！", 102, 15, 81, 128, 8
+    DEFPUSHBUTTON   "OK", IDOK, 6, 96, 132, 14
+END
+
+
+
+STRINGTABLE
+BEGIN
+    IDS_REGCLASSFAIL "WinMain(): RegisterClass() が失敗しました。"
+    IDS_WINDOWTITLE  "SpinTest サンプル アプリケーション"
+END
+#endif

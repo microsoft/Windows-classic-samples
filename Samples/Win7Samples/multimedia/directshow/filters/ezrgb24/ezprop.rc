@@ -1,0 +1,114 @@
+//==========================================================================;
+//
+//  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+//  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+//  PURPOSE.
+//
+//  Copyright (c)  Microsoft Corporation.  All Rights Reserved.
+//
+//==========================================================================;
+//
+//Microsoft Visual C++ generated resource script.
+//
+
+#include <windows.h>
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EZrgb24PROP DIALOG DISCARDABLE  0, 0, 215, 120
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Special Effect",IDS_STATIC,4,10,115,95
+    CONTROL         "Emboss",IDC_EMBOSS,"Button",BS_AUTORADIOBUTTON,57,70,44,
+                    14
+    CONTROL         "Grey",IDC_GREY,"Button",BS_AUTORADIOBUTTON,57,54,44,14
+    CONTROL         "Blur",IDC_BLUR,"Button",BS_AUTORADIOBUTTON,57,38,44,14
+    CONTROL         "Posterize",IDC_POSTERIZE,"Button",BS_AUTORADIOBUTTON,57,
+                    22,44,14
+    CONTROL         "XOR",IDC_XOR,"Button",BS_AUTORADIOBUTTON,11,86,41,14
+    CONTROL         "Darken",IDC_DARKEN,"Button",BS_AUTORADIOBUTTON,11,70,41,
+                    14
+    CONTROL         "Blue",IDC_BLUE,"Button",BS_AUTORADIOBUTTON,11,54,41,14
+    CONTROL         "Green",IDC_GREEN,"Button",BS_AUTORADIOBUTTON,11,38,41,
+                    14
+    CONTROL         "Red",IDC_RED,"Button",BS_AUTORADIOBUTTON,11,22,41,14
+    CONTROL         "No Effects",IDC_NONE,"Button",BS_AUTORADIOBUTTON,57,88,
+                    47,10
+    GROUPBOX        "Timing",IDS_STATIC,125,23,87,51
+    EDITTEXT        IDC_START,165,34,40,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LENGTH,165,53,40,13,ES_AUTOHSCROLL
+    LTEXT           "&Start",IDS_STATIC,132,37,25,9
+    LTEXT           "&Length",IDS_STATIC,132,55,25,9
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_TITLE,      "Special Effects"
+END
+
+//
+// Version
+//
+
+#define VERSION_RES_BIN_NAME        "EzRgb24.ax\0"
+#define VERSION_RES_BIN_DESCRIPTION "Special Effects Sample\0"
+
+#define AMOVIE_SELF_REGISTER
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

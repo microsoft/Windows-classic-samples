@@ -1,0 +1,14 @@
+#include "resource.h"
+#include "windows.h"
+
+IDI_SIMPLEPROVIDERUNMANAGED ICON                    "UIASimpleProvider.ico"
+
+IDD_MAIN DIALOGEX 0, 0, 178, 79
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | DS_CENTER
+CAPTION "UI Automation Provider"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,101,31,40,14
+    LTEXT           "&Custom button",IDC_STATIC,20,14,59,8
+    CONTROL         "SimpleProvider",IDC_COLORBUTTON1,"COLORBUTTON",WS_TABSTOP,24,25,37,32
+END

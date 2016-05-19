@@ -1,0 +1,14 @@
+/**********************************************************************/
+/*      IMEMSGS.RCV - vesrison stamping                              */
+/*                                                                    */
+/*      Copyright (c) 1993  Microsoft Corporation                     */
+/**********************************************************************/
+#include <version.h>
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "IME TEst Tool"
+#define VER_INTERNALNAME_STR            "IMEMSGS"
+#define VER_LEGALCOPYRIGHT_YEARS        "1994"
+
+#include <common.ver>

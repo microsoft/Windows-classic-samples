@@ -1,0 +1,174 @@
+;
+; Copyright (c) Microsoft Corporation.  All rights reserved.
+;
+; Description:
+;    INF for WSD and SSDP ISimpleThermostat devices
+;
+;    IMPORTANT: This INF file is written to support Vista and Windows 7.
+;               In Windows 7, a new cleaner way was introduced to use 
+;               UMPass.sys. There is now a UMPass.inf file that should be
+;               referenced through Includes/Needs directives.
+;               Note that the INF can be simplied greatly if you only need
+;               to support Windows 7 or later. 
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=PnpxSampleDevices                             ; Choose a class for your device. Predefined or new.
+Provider=%Mfg%                                      ; Provider of this device. i.e. Manufacturer
+ClassGuid={e6ef26a9-9ad3-4ce5-9718-8c32953d66fd}    ; If class above is new, specify your unique guid for it
+DriverVer=2/18/2009,1.01.0000
+; Uncomment this line when you're going to sign the INF and build a catalog file.
+;CatalogFile=SimpleThermostat.cat
+
+[SourceDisksNames.x86]
+1 = %disk%,,,\x86
+
+[SourceDisksNames.amd64]
+1 = %disk%,,,\x64
+
+[SourceDisksFiles]
+SimpleThermostatProxy.dll = 1
+
+[DestinationDirs]
+DefaultDestDir = 11   ; Install files to ...\system32 by default (DIRID_SYSTEM)
+
+
+; ================= PnP-X Sample Devices Class Section =====================
+
+; This section is required if you're defining a new Class
+
+[ClassInstall32]
+Addreg=PnpxSampleDevices_ClassReg
+
+[PnpxSampleDevices_ClassReg]
+HKR,,,,%ClassName%            ; Friendly Name for this device class
+HKR,,SilentInstall,,1         ; Specify a silent installation for this device class
+HKR,,Icon,,"-52"              ; Icon to use for this device class
+
+
+; ================= PnP-X Test Device section ====================
+
+
+; Should list all device manufacturer/model combinations here
+[Manufacturer]
+%Mfg%=PnpxTestDevice, NT.6.0, NT.6.1, NTamd64.6.0, NTamd64.6.1
+
+
+; Model Device Description     Install Section Defines    HWIDs, Compatible IDs
+; ------------------------     -----------------------    ----------------------------
+
+; Model specific install section list (x86 Section)
+[PnpxTestDevice.NT.6.0]
+%PnpxTestDevice.DeviceDesc1% = PnpxTestDevice_Install_Vista, UMB\PnPX_SimpleThermostat_HWID
+
+[PnpxTestDevice.NT.6.1]
+%PnpxTestDevice.DeviceDesc1% = PnpxTestDevice_Install, UMB\PnPX_SimpleThermostat_HWID
+
+
+; Model specific install section list (x64 section)
+[PnpxTestDevice.NTamd64.6.0]
+%PnpxTestDevice.DeviceDesc1% = PnpxTestDevice_Install_Vista, UMB\PnPX_SimpleThermostat_HWID
+
+[PnpxTestDevice.NTamd64.6.1]
+%PnpxTestDevice.DeviceDesc1% = PnpxTestDevice_Install, UMB\PnPX_SimpleThermostat_HWID
+
+
+; ================== Install Sections Defines===================
+
+
+
+; ==============================================================
+;                   WINDOWS 7+ INSTALL SECTION
+; ==============================================================
+
+[PnpxTestDevice_Install]
+Include         = umpass.inf
+Needs           = UmPass
+CopyFiles       = ThermCopyFiles
+RegisterDlls    = ThermRegSvr
+
+
+[PnpxTestDevice_Install.HW]
+Include = umpass.inf
+Needs   = UmPass.HW
+AddReg  = PnpxTestDevice_Install.HW.AddReg
+
+
+[PnpxTestDevice_Install.CoInstallers]
+Include = umpass.inf
+Needs   = UmPass.CoInstallers
+
+
+[PnpxTestDevice_Install.Services]
+Include = umpass.inf
+Needs   = UmPass.Services
+
+
+[PnpxTestDevice_Install.Interfaces]
+Include = umpass.inf
+Needs   = UmPass.Interfaces
+
+; ==============================================================
+
+
+
+; ==============================================================
+;                     VISTA INSTALL SECTION
+; ==============================================================
+
+[PnpxTestDevice_Install_Vista]
+CopyFiles       = ThermCopyFiles
+RegisterDlls    = ThermRegSvr
+
+
+; Optional section to add device specific information to the registry
+[PnpxTestDevice_Install_Vista.HW]
+AddReg = PnpxTestDevice_Install.HW.AddReg
+
+
+; Setup the UMPass service for the device
+[PnpxTestDevice_Install_Vista.Services]
+AddService = UMPass, 0x00000002, UMPassService_Install_Vista
+
+
+[UMPassService_Install_Vista]
+DisplayName    = "Microsoft UMPass Driver" ; Friendly Name of the Service
+ServiceType    = 1                         ; SERVICE_KERNEL_DRIVER
+StartType      = 3                         ; SERVICE_DEMAND_START 
+ErrorControl   = 1                         ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\umpass.sys
+LoadOrderGroup = Extended Base
+
+; ==============================================================
+
+
+
+; ==============================================================
+;                    COMMON INSTALL SECTION
+; ==============================================================
+
+; Copy the proxy dll to system32
+[ThermCopyFiles]
+SimpleThermostatProxy.dll
+
+
+; Register the proxy dll (calls DLLRegisterServer)
+[ThermRegSvr]
+11,,SimpleThermostatProxy.dll,1,
+
+ 
+;Add the interface the device supports (ISimpleThermostat)
+[PnpxTestDevice_Install.HW.AddReg]
+HKR,,InterfaceGUIDs,0x10000, "{340c0a5d-27f3-4ea3-9c38-44260b56c710}"
+
+; ==============================================================
+
+
+; Strings that are referenced throughout the INF
+[Strings]
+Mfg = "Microsoft"
+ClassName = "PnP-X Sample Devices"
+PnpxTestDevice.DeviceDesc1 = "Simple Thermostat"
+disk = "Simple Thermostat Disk"
+

@@ -1,0 +1,47 @@
+<HTML xmlns:control>
+<HEAD>
+<TITLE>Behavior Library: Slider</TITLE>
+
+<STYLE>
+    @media all
+    {
+	    control\:slider {
+	                    behavior:url(slider.htc);
+	                    }
+    }
+    
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+	A:link { color:#003399; text-decoration:none; }
+	A:visited { color:#6699CC; text-decoration:none; }
+	A:hover { text-decoration:underline; }
+</STYLE>
+
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000" LINK="#000066" VLINK="#666666">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<H1>Slider Behavior</H1>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick='self.close()'><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick='self.close()'>Close This Sample</A> 
+</FONT><HR>
+
+
+<control:slider ID="oSlider" STYLE="sl--orientation:vertical">
+</control:slider>
+
+<control:slider ID="oSlider" STYLE="position:relative; top:-150; left:50">
+</control:slider>
+
+<P>
+<HR>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<P>
+</BODY>
+</HTML>

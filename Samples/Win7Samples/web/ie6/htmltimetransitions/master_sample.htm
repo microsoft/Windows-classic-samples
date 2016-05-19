@@ -1,0 +1,68 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<html>
+<head>
+	<title>HTML+TIME Transitions Master Sample</title>
+
+<LINK REL="stylesheet" HREF="dxfiltran.css" TYPE="text/css">
+
+<script>
+//toss what ever page is appropriate into the IFrame
+function goTo(oPage) 
+	{
+	eyeFrame.location.href=oPage;
+	}
+</SCRIPT>
+
+
+
+	
+</head>
+
+<body onload="" scroll="no" style="background:#666666;  ">
+
+<nobr class="bar title" style="height:5%; padding-top:3px; padding-bottom:6px; background:#666666; border-bottom:0px solid black; border-top:0px solid #cccccc;; font-size:10pt; font-weight:normal; border-bottom:1px solid black">
+
+<div id="masterTitle" style="font-family:arial; position:absolute; top:8; left:8; font-size:18pt; font-weight:normal; z-index:1 ">Transition Filters master sample</div>
+
+
+<div style="position:relative; top:-5; padding:3px; float:right; padding-right:20px;"><div style="padding-bottom:5px;">Select a transition from below:</div>
+
+
+<select onchange=" var val = this.options[this.selectedIndex].value; if (val!='') {goTo(val)}" 
+id="transList" style="width:170px;">
+    <option value="barnDoorWipe.htm">barnDoorWipe</option>
+    <option value="barWipe.htm">barWipe</option>
+    <option value="clockWipe.htm">clockWipe</option>
+    <option value="ellipseWipe.htm">ellipseWipe</option>
+    <option value="fade.htm">fade</option>
+    <option value="fanWipe.htm">fanWipe</option>
+    <option value="irisWipe.htm">irisWipe</option>
+    <option value="pushWipe.htm">pushWipe</option>    
+    <option value="slideWipe.htm">slideWipe</option>
+    <option value="snakeWipe.htm">snakeWipe</option>
+    <option value="spiralWipe.htm">spiralWipe</option>
+    <option value="starWipe.htm">starWipe</option>
+    
+</select>
+</nobr>
+</div>
+
+<iframe id="eyeFrame" style="position:relative; top:0; width:100%; height:370px;" 
+frameborder="no" scrolling="no" src="barnDoorWipe.htm">
+</iframe>
+<div class="bar" style="position:relative; top:-5; width:100%; left:0; padding:5px; padding-bottom:0; height:30px;  background:#666666; border-bottom:0px solid black; border-top:1px solid #cccccc; text-align:center">
+<A href="http://www.microsoft.com/misc/info/cpyright.htm" target=_top>
+2001 Microsoft Corporation. All rights reserved. Terms of use.</A></div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

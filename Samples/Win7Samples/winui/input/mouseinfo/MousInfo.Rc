@@ -1,0 +1,19 @@
+//
+// RC file for the MousInfo tool
+//
+#include "windows.h"
+#include "mousinfo.h"
+
+MOUSINFO_ICON ICON    DISCARDABLE     "MOUSINFO.ICO"
+
+IDM_MENU MENU DISCARDABLE
+BEGIN
+    POPUP       "&TrackMouseEvent"
+    BEGIN   
+        MENUITEM    "Track Mouse &Hover",               IDM_HOVER
+        MENUITEM    "Track Mouse &Leave",               IDM_LEAVE
+
+    END
+    MENUITEM    "&About",                               IDM_ABOUT
+END
+    

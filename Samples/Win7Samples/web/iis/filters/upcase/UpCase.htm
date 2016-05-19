@@ -1,0 +1,31 @@
+<html>
+<title>Internet Server Sample Apps - UpCase</title>
+<body>
+<h1>Internet Server Sample Filter: UpCase</h1>
+<hr>
+<b><i>"Where do you want to uppercase today?"</i></b>
+<hr>
+This sample works by monitoring requests for .htm files in a directory path
+that ends with /UC. It then strips the trailing /UC from the directory path
+and uppercases the body of the HTML text that goes by.
+<P>
+
+To install this filter, use the Internet Service Manager in the Start menu.
+<pre>
+Start\
+  Programs\
+    Windows NT 4.0 Option Pack\
+      Microsoft Internet Information Server\
+        Internet Service Manager
+</pre>
+<P>
+Right mouse click on the Web Site you wish to install the filter on.  Choose
+Properties.  Click on the ISAPI Filters tab, and add the filter.
+<P>
+Like any ISAPI Filter, this DLL is loaded when the web server is started
+and it stays loaded until the  server is stopped.
+<p>
+<hr>
+<a href="UC/Upcase.Htm">Uppercase this page</a><p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MemFile", "MemFile.vcproj", "{36DC1879-2799-434B-876D-69FEC2945462}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Async", "async.vcproj", "{76FC45D6-69EF-41D6-91A4-BD3DAFAC67EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36DC1879-2799-434B-876D-69FEC2945462}.Debug|Win32.ActiveCfg = Debug|Win32
+		{36DC1879-2799-434B-876D-69FEC2945462}.Debug|Win32.Build.0 = Debug|Win32
+		{36DC1879-2799-434B-876D-69FEC2945462}.Release|Win32.ActiveCfg = Release|Win32
+		{36DC1879-2799-434B-876D-69FEC2945462}.Release|Win32.Build.0 = Release|Win32
+		{76FC45D6-69EF-41D6-91A4-BD3DAFAC67EB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{76FC45D6-69EF-41D6-91A4-BD3DAFAC67EB}.Debug|Win32.Build.0 = Debug|Win32
+		{76FC45D6-69EF-41D6-91A4-BD3DAFAC67EB}.Release|Win32.ActiveCfg = Release|Win32
+		{76FC45D6-69EF-41D6-91A4-BD3DAFAC67EB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+HKCR
+{
+	WMSContextSamplePropPage.ContextSamplePropPage.9 = s 'ContextSamplePropPage Class'
+	{
+		CLSID = s '{2B8E10C4-4DFE-4e4f-9BCC-2F01F611244B}'
+	}
+	WMSContextSamplePropPage.ContextSamplePropPage = s 'ContextSamplePropPage Class'
+	{
+		CLSID = s '{2B8E10C4-4DFE-4e4f-9BCC-2F01F611244B}'
+		CurVer = s 'WMSContextSamplePropPage.ContextSamplePropPage.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2B8E10C4-4DFE-4e4f-9BCC-2F01F611244B} = s 'ContextSamplePropPage Class'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}

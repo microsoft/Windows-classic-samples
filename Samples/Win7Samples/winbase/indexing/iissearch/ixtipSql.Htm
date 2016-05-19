@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<html>
+<head>
+<title>Indexing Service: SQL Query Syntax Tips</title>
+
+<script language="JavaScript">
+        version = navigator.appVersion
+    if (version.substring(0,1) == "2") {document.writeln('<link rel="stylesheet" disable="true" type="text/css" href="/iishelp/common/cocss.css">')} else
+                document.writeln('<link rel="stylesheet" type="text/css" href="/iishelp/common/coua.css">')
+//></script>
+
+<META NAME="DESCRIPTION" CONTENT="Gives basic tips for building effective queries in SQL">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<p><font size=6><strong>Tips for Searching using SQL</strong></font></p>
+<!--Chaptoc-->
+<hr>
+
+<h3>The SELECT Statement</h3>
+
+<p>Use the SELECT statement to retrieve rows. The SELECT statement consists of:
+<ul>
+<li> the <I>SELECT-list</I> which identifies the columns (properties) of interest, </li>
+<li> the <I>FROM clause</I> which specifies the scope (the set of files) for the search, and </li>
+<li> the <I>WHERE clause</I> which is the search criteria.</li>
+</ul>
+If the results must be ordered, you can add an additional <I>ORDER BY</I> clause to return 
+the rows in ascending or descending order.
+
+<p><b>Example</b>
+<p>
+<code>SELECT DocAuthor, size, DocTitle <br>
+FROM SCOPE(' "/IISSamples/ISSamples" ') WHERE CONTAINS(' "index server" ') > 0 ORDER BY size
+</code>
+
+<h4>The FROM Clause</h4>
+
+<p>The FROM clause of the SELECT statement is used to specify the files on which to perform the 
+search; that is, use the FROM clause to define the query scope. You can use the SCOPE() function, 
+which is the main component of the FROM clause. 
+The SCOPE function can take zero or more comma-separated Scope_Arguments (that is, <I>Traversal_Type</I> and 
+<I>Path</I> combinations). You can specify SCOPE with an empty argument list, or (). This is the default 
+scope that uses the virtual root ( / ) as its path. Each Scope_Argument must be surrounded by single 
+quotes (see Examples below).
+ 
+<p>In addition to using Scope(), you can also refer to any one of a set of predefined views of 
+Indexing Service properties that are often queried against. You can reference one of these pre-defined 
+views in the FROM clause by specifying the pre-defined View_Name.
+
+<p><b>Examples</b>
+<p>
+<code>
+SELECT DocAuthor, size FROM SCOPE() WHERE size > 500000
+<p>
+SELECT DocAuthor, size <br>
+FROM SCOPE(' SHALLOW TRAVERSAL OF "D:\Contracts\open" ',' DEEP TRAVERSAL OF "/Reports/Year 97" ')<br>
+WHERE CONTAINS(DocAuthor, ' "John" ') > 0
+<p>
+SELECT * FROM EXTENDED_WEBINFO <br>
+WHERE CONTAINS(DocSubject, ' "index server" NEAR()  "internet information server" ') > 0
+</code>
+
+<h4>The WHERE Clause</h4>
+<p>The WHERE clause of the SELECT statement specifies which rows in the virtual table defined by 
+the FROM clause make up the resulting rowset. The WHERE clause consists of one or more search conditions (that is, 
+one or more predicates combined with AND, OR and NOT) that filter out rows for which the search 
+condition is false.
+
+<p><b>Examples</b>
+<p>
+<code>
+SELECT FileName, size FROM SCOPE() WHERE DocTitle = 'Financial Data'  OR  DocAuthor = 'John Smith'
+<p>
+SELECT FileName, DocAuthor FROM FILEINFO WHERE size < 10000  OR  DocWordCount <= 800
+<p>
+SELECT DocTitle, FileName, write FROM SCOPE() <br>
+WHERE CONTAINS (' "Index" NEAR() "Server" NEAR() "Microsoft"') > 0 AND size < 5000
+</code>
+
+<h3>The ORDER BY Clause</h3>
+
+<p>The optional ORDER BY clause can be appended to the SELECT statement to sort the rows returned in the 
+rowset according to a specified set of criteria. Results are sorted by default in ascending order. 
+To sort in descending order, specify DESC after the column name.
+
+<p><b>Example</b>
+
+<code>
+<p>
+SELECT FileName, DocTitle, size, rank FROM SCOPE(' "/MyDocs/Specs97", "/YourDocs/Specs97" ')<br>
+WHERE FREETEXT (' "How do I index my HTML pages" ') > 0 ORDER BY rank, size DESC
+</code>
+
+<p><p>For a more detailed description of the SQL syntax supported in Indexing Service, including use of the 
+<I>CONTAINS</I> and <I>FREETEXT</I> predicates as illustrated in the examples on this page, please refer
+to the product documentation.
+<p>
+
+
+<hr class="iis" size="1">
+<p align="center"><em><a href="/iishelp/common/colegal.htm">&copy; 1997-2002 by Microsoft Corporation. All rights reserved.</a></em></p>
+
+</font>
+</body>
+</html>

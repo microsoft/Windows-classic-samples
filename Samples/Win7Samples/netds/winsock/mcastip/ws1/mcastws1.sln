@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C++ Express 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mcastws1", "mcastws1.vcproj", "{BDF37430-56E1-4E5E-8A2A-59A224141A55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDF37430-56E1-4E5E-8A2A-59A224141A55}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BDF37430-56E1-4E5E-8A2A-59A224141A55}.Debug|Win32.Build.0 = Debug|Win32
+		{BDF37430-56E1-4E5E-8A2A-59A224141A55}.Release|Win32.ActiveCfg = Release|Win32
+		{BDF37430-56E1-4E5E-8A2A-59A224141A55}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

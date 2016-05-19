@@ -1,0 +1,13 @@
+;+-------------------------------------------------------------------------
+;
+;  Microsoft Windows
+;
+;  Copyright (C) Microsoft Corporation. All rights reserved.
+;
+;  File:       create.def
+;
+;--------------------------------------------------------------------------
+
+
+EXPORTS
+CreateUserAccount	@5

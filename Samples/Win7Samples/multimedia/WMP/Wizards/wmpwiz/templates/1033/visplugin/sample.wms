@@ -1,0 +1,116 @@
+<!-- Test skin for [!output Safe_root] effect -->
+
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+
+<theme>
+    <view
+        titleBar="true"
+        resizable="true"
+        width="300"
+        height="320"
+    >
+        <text 
+            top="5"
+            left="20"
+            value="Previous"
+            hoverForegroundColor="red"
+            onClick="viz.previous();"
+            >
+        </text>
+
+        <text 
+            top="5"
+            left="80"
+            value="Next"
+            hoverForegroundColor="red"
+            onClick="viz.next();"
+            >
+        </text>
+
+        <effects id="viz"
+            top="22"
+            left="22"
+            width="256"
+            height="256"
+            allowAll="true"
+            horizontalAlignment="stretch" 
+            verticalAlignment="stretch"
+            windowed="true"
+            currentEffectType="[!output Safe_root]"
+            currentPreset="0"
+            >
+        </effects>
+
+        <text 
+            top="285"
+            left="20"
+            value="Type:"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="285"
+            left="56"
+            width="100"
+            height="20"
+            value="wmpprop:viz.currentEffectType"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="302"
+            left="20"
+            value="Title:"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="302"
+            left="56"
+            width="100"
+            height="20"
+            value="wmpprop:viz.currentEffectTitle"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="285"
+            left="160"
+            value="Preset:"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="285"
+            left="210"
+            width="100"
+            height="20"
+            value="wmpprop:viz.currentPreset"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="302"
+            left="160"
+            value="Title:"
+            verticalAlignment="bottom"
+            >
+        </text>
+
+        <text 
+            top="302"
+            left="210"
+            width="100"
+            height="20"
+            value="wmpprop:viz.currentPresetTitle"
+            verticalAlignment="bottom"
+            >
+        </text>
+    </view>
+</theme>

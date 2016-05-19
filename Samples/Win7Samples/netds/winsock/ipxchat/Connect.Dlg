@@ -1,0 +1,15 @@
+CONNECTBOX DIALOG 6, 18, 160, 69
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Connect"
+BEGIN
+    LTEXT           "&Network:", 108, 11, 9, 32, 9
+    EDITTEXT        CD_NETWORK, 44, 7, 53, 12, ES_AUTOHSCROLL
+    LTEXT           "N&ode:", 106, 11, 22, 32, 9
+    EDITTEXT        CD_NODE, 44, 20, 53, 12, ES_AUTOHSCROLL
+    LTEXT           "&Socket:", 101, 11, 36, 32, 9
+    EDITTEXT        CD_SOCKET, 44, 34, 53, 12, ES_AUTOHSCROLL
+    LTEXT           "Enter Address To Connect To", CD_STATUS, 6, 55, 151, 9
+    GROUPBOX        "", 104, 2, 48, 156, 19
+    DEFPUSHBUTTON   "OK", IDOK, 109, 6, 40, 14
+    PUSHBUTTON      "Cancel", IDCANCEL, 109, 24, 40, 15
+END

@@ -1,0 +1,107 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<THEME>
+	<VIEW
+		height = "175"
+	>
+
+		<TEXT 
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			disabledForegroundColor = "#CCCCCC"
+			justification = "Center"
+			value = "Play"
+			cursor = "hand"
+			onClick = "JScript:player.currentPlaylist = player.mediaCollection.GetByName('laure');player.controls.play();"
+		/>
+		
+		<TEXT
+			top = "50"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			disabledForegroundColor = "#CCCCCC"
+			justification = "Center"
+			value = "Log"
+			cursor = "hand"
+			onClick = "JScript: theme.logString('You pressed the log button'); ticker.value = 'You pressed the log button.'"
+		/>
+
+		<TEXT
+			top = "100"
+			width = "150"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "Close"
+			cursor = "hand"
+			onClick = "JScript: view.close();"
+		/>
+
+		<TEXT
+			top = "30"
+			left = "120"
+			width = "200"
+			fontSize = "20"
+			fontStyle = "Underline"
+			justification = "Center"
+			value = "Volume"
+		/>
+
+		<TEXT
+			top = "60"
+			left = "120"
+			width = "200"
+			fontSize = "40"
+			justification = "Center"
+			value = "wmpprop:player.settings.volume"
+		/>
+
+		<TEXT
+			top = "65"
+			left = "142"
+			width = "40"
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "-"
+			cursor = "hand"
+			toolTip = "decrease volume"
+			onClick = "player.settings.volume = player.settings.volume - 5"
+		/>
+
+		<TEXT
+			top = "65"
+			left = "260"
+			width = "40"	
+			fontSize = "30"
+			hoverFontStyle = "Bold"
+			hoverForegroundColor = "red"
+			justification = "Center"
+			value = "+"
+			cursor = "hand"
+			toolTip = "increase volume"
+			onClick = "player.settings.volume = player.settings.volume + 5"
+		/>
+
+		<TEXT
+			id = "ticker"
+			top = "155"
+			width = "300"
+			height = "30"
+			fontFace = "System"
+			backgroundColor = "blue"
+			foregroundColor = "white"
+			justification = "Center"
+			scrolling = "true"			
+			scrollingAmount = "1"
+			scrollingDelay = "50"
+			value = "wmpprop:player.status"
+		/>
+
+	</VIEW>
+</THEME>

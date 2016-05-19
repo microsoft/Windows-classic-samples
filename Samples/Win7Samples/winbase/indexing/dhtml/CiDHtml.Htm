@@ -1,0 +1,596 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+
+<!--------------------------------------------------------------------------
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright 1998-1999 Microsoft Corporation.  All Rights Reserved.
+//
+// PROGRAM:  CiDHtml.htm
+//
+// PURPOSE:  Illustrates use of Dynamic HTML to build a client-side
+//           query page used to access Indexing Service.
+//
+// PLATFORM: Windows 2000
+//
+//-------------------------------------------------------------------------->
+
+
+<HTML>
+<HEAD>
+
+  <TITLE>Indexing Service Dynamic HTML Sample</TITLE>
+  
+  <META NAME="DESCRIPTION" CONTENT="Indexing Service client-side query form">
+  <META NAME="AUTHOR"      CONTENT="Indexing Service Team">
+  <META NAME="KEYWORDS"    CONTENT="Indexing Service, query, content, hit">
+  <META NAME="SUBJECT"     CONTENT="Sample form">
+  <META NAME="MS.CATEGORY" CONTENT="Internet">
+  <META NAME="MS.LOCALE"   CONTENT="EN-US">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Windows-1252">
+  <base target="_blank">
+</HEAD>
+
+<BODY OnLoad="Init()" LANGUAGE="VBScript">
+<center>
+<DIV ID="idTransDiv" 
+  ALIGN=CENTER 
+  STYLE="position:0; top:0; height:0; width:500; filter:revealTrans(duration=3.0, transition=5);">
+  <H2 id="idHead" STYLE="position:0; visibility:visible; margin-bottom:0;">
+  <font color=Blue>
+  Indexing&nbsp;Service Query&nbsp;Form 
+  </font></H2>
+</DIV>
+
+</center>
+<br>
+
+  <!-- This table contains the user-entry form. -->
+
+  <div align=center>
+  <TABLE bgcolor=ffffcc cellpadding=2 cellspacing=3 Border=3 WIDTH=400>
+    <TR><td>
+      <div id="QueryHeader"><b><LABEL FOR=SrchStrCtrl NAME="UserSearchString">Enter your free text query below:</LABEL></b></div>
+      <INPUT ID="SrchStrCtrl" TYPE="TEXT" NAME="UserSearchString" SIZE="50" MAXLENGTH="100" TABINDEX=1>&nbsp;
+      <BUTTON TYPE=SUBMIT ID="CmdGo">&nbsp;<FONT SIZE=-1>Search</FONT>&nbsp;</BUTTON>&nbsp;<br>
+      <INPUT TYPE="RADIO" ID = StdQryButton NAME="radioQueryType" VALUE="0" checked onclick="StandardSelected()"> 
+      <LABEL FOR=StdQryButton> Standard query (free text) </LABEL> <br>
+      <INPUT TYPE="RADIO" ID = AdvQryButton NAME="radioQueryType" VALUE="1" onclick="AdvancedSelected()"> 
+      <LABEL FOR=AdvQryButton> Advanced query </LABEL> <br>
+
+      <div align=right> <A HREF="ixqlang.htm" target=_self>Tips for searching</A></div>
+      <LABEL FOR=SortCtrl> <b>Sort by: </b> </LABEL> <SELECT ID = SortCtrl NAME="selectSort" onchange="SortOrderSelected()">
+      <OPTION SELECTED VALUE="Rank"> Rank
+      <OPTION VALUE="DocTitle">Title
+      <OPTION VALUE="Path">Path
+      <OPTION VALUE="Size">Size
+      <OPTION VALUE="Write">Date
+      </SELECT>
+      <LABEL FOR=OrderCtrl> <b>Order by: </b> </LABEL>
+      <SELECT ID = OrderCtrl NAME="selectOrder" onchange="SortOrderSelected()">
+      <OPTION SELECTED VALUE="[d]"> Descending
+      <OPTION VALUE="[a]">Ascending
+      </SELECT>
+      <P><table ID=idUnfiltered cellspacing=0 cellpadding=0><tr><td> To see a list of unfiltered documents click:&nbsp; 
+            </td><td id="UnfilteredRequest" onmouseover="mouseoverUnfiltered()" onmouseout="mouseoutUnfiltered()" onclick="UnfilteredSelected()" bgcolor=ffffcc><FONT color=blue><u> Unfiltered Docs</u></FONT></td></a></tr></table>
+    </TD></TR>
+  </TABLE>
+
+  <p>
+    <HR WIDTH=80% ALIGN=center SIZE=3>
+  <p>
+
+  <!-- A couple of navigation buttons, initially disabled. -->
+
+<a id=JumpPoint name="ResultPart"></a>
+<table width=775 ID=TopButt>
+<tr><td>
+  <FORM NAME=Navigation ALIGN=RIGHT>
+    <INPUT TYPE="BUTTON" NAME="CmdPrevious" VALUE="Previous">
+    <INPUT TYPE="BUTTON" NAME="CmdNext" VALUE="Next">
+  </FORM>
+
+  <BR>
+
+  <P ID=Counter><EM>No results</EM>
+  <BR>
+
+  <!--
+    -- This is the output table.  Result rows will by dynamically added, but the header will
+    -- just be hidden until needed.
+  -->
+</td></td>
+</table>
+<!--  <br><INPUT TYPE="BUTTON" NAME="SortRank" VALUE="Sort by Ascending Rank"> -->
+
+  <P>
+  
+  <TABLE bgcolor=ffffcc ID=Results COLS=3 CELLSPACING=1 CELLPADDING=3>
+    <TR bgcolor=99cccc>
+        <TH>#</TH>
+        <TH>Title</TH>
+        <TH>Size</TH>
+        <TH>Modified</TH>
+        <TH>Path</TH>
+    </TR>
+  </TABLE>
+
+
+<table width=775 ID=BottomButt>
+<tr><td>
+  <br><br>
+  <FORM NAME=Navigation2 ALIGN=RIGHT>
+    <INPUT TYPE="BUTTON" NAME="CmdPrevious" VALUE="Previous">
+    <INPUT TYPE="BUTTON" NAME="CmdNext" VALUE="Next">
+  </FORM>
+</td></tr>
+</table>
+
+</BODY>
+
+
+<SCRIPT LANGUAGE=VBSCRIPT>
+  DIM RS                       ' The ADO Recordset.  Initially null.
+  DIM SortBy                   ' Current sort order
+  DIM FirstOnPage, LastOnPage  ' Keeps track of records being shown
+  DIM MaxDisplayed             ' Max number of results displayed on-screen
+  DIM machine,catalog
+  DIM OrigLocation
+  DIM fUnfiltered              ' Unfiltered query was requested.
+  DIM fFreetext                ' Free text query was requested
+
+  '
+  ' SubRoutine: Init
+  '
+  '   Synopsis: Initializes the page. Sets defaults for page-global variables
+  '             and DHTML elements.  Initially, no query is active.
+  '
+
+  Private SUB Init()
+    ' Make the heading roll into view
+'   idHead.style.visibility = "hidden"
+'   idTransDiv.filters.item(0).apply()
+'   idTransDiv.filters.item(0).transition = 3
+'   idHead.style.visibility = "visible"
+'   idTransDiv.filters(0).play(1.000)
+
+    UserSearchString.focus
+    Navigation.CmdPrevious.Disabled = TRUE
+    Navigation.CmdNext.Disabled = TRUE
+    Navigation2.CmdPrevious.Disabled = TRUE
+    Navigation2.CmdNext.Disabled = TRUE
+    FirstOnPage = 0
+    LastOnPage = 0
+    MaxDisplayed = 25
+    fUnfiltered = FALSE
+    SortBy = "Rank[d]"
+    
+    'Parse the catalog name out of the URL
+    'No need to localize "catalog", "machine" because they are hidden
+    'from the user.
+    'URL syntax is: file://<syspath>/help/ciquery.htm#machine=<machine>,catalog=<catalog>
+    'catPos = InStr(1, Document.Location.Hash, "catalog=", 1)
+    'catPos = catPos + 8
+    'catalog name is at the end of the string
+    'catalog = Right(Document.Location.Hash, len(Document.Location.Hash) - catPos + 1)
+    
+    'Parse the machine name out of the URL
+    'macPos = InStr(1, Document.Location.Hash, "machine=", 1)
+    'macPos = macPos + 8
+    'machine name is between "machine=" and ",catalog="
+    'commaPos = InStr(macPos, Document.Location.Hash, ",catalog", 1)
+    'machine = Mid(Document.Location.Hash, macPos, commaPos - macPos)
+    
+    'Check the state of buttons and init accordingly
+    IF StdQryButton.Checked THEN
+       call StandardSelected
+    ELSE
+       call AdvancedSelected
+    end if
+
+    HideTable()
+    HideBottomButt()
+
+  END SUB
+
+  Const L_Freetext_Text="<LABEL FOR=SrchStrCtrl> <b>Enter your free text query below:</b> </LABEL>"
+  Const L_Advanced_Text="<LABEL FOR=SrchStrCtrl> <b>Enter your advanced query below:</b> </LABEL>"
+
+  '
+  ' SubRoutine: StandardSelected()
+  '
+  '    Synopsis: Queries will be free-text
+  '
+  Private SUB StandardSelected()
+     Document.All.QueryHeader.innerHTML = CStr(L_Freetext_Text)
+     fFreetext = TRUE
+  END SUB
+
+  '
+  ' SubRoutine: AdvancedSelected
+  '
+  '    Synopsis:  Allows for advanced queries to be executed
+  '
+  Private SUB AdvancedSelected()
+     Document.All.QueryHeader.innerHTML = CStr(L_Advanced_Text)
+     fFreetext = FALSE
+  END SUB
+  
+  '
+  ' SubRoutine: mouseoverUnfiltered
+  '
+  '    Synopsis: Hilights the Unfiltered Docs cell
+  '
+  Private SUB mouseoverUnfiltered()
+    UnfilteredRequest.bgcolor = "99cccc"
+  END SUB
+
+  '
+  ' SubRoutine: mouseoutUnfiltered()
+  '
+  '   Synopsis: Un-hilights the Unfiltered Docs cell back to the original color
+  '
+  Private SUB mouseoutUnfiltered()
+    UnfilteredRequest.bgcolor = "ffffcc"
+  END SUB
+
+  '
+  ' SubRoutine: UnfilteredSelected()
+  '
+  '    Synopsis: Searches for unfiltered documents
+  '
+  Private SUB UnfilteredSelected()
+    fUnfiltered = TRUE
+    CmdGo_OnClick()
+  END SUB
+
+  '
+  ' SubRoutine: SortOrderSelected()
+  '
+  '   Synopsis: Sets the sort order as selected by the user
+  '
+  Private SUB SortOrderSelected()
+    IF StrComp(selectSort.value, "DocTitle") = 0 THEN
+       SortBy = selectSort.value & selectOrder.value & ",Filename" & selectOrder.value
+    ELSE
+       SortBy = selectSort.value & selectOrder.value
+    END IF
+  END SUB
+
+
+  '
+  ' SubRoutine: CmdNext_OnClick()
+  '
+  '   Synposis: Displays next page of query results.
+  '
+
+  Private SUB CmdNext_OnClick()
+    NextPage()
+  END SUB
+
+  '
+  ' SubRoutine: CmdPrevious_OnClick()
+  '
+  '   Synposis: Displays previous page of query results.
+  '
+  Private SUB CmdPrevious_OnClick()
+    RS.Move( -MaxDisplayed - LastOnPage + FirstOnPage )
+    NextPage()
+  END SUB
+
+  Const L_Creation_Status_Text="Creating query object..."
+  Const L_Issuing_Status_Text="Issuing query..."
+
+  '
+  ' SubRoutine: CmdGo_OnClick
+  '
+  '   Synopsis: Executes query
+  '
+  Private SUB CmdGo_OnClick()
+    ON ERROR RESUME NEXT
+    '
+    ' Setup Query
+    '
+
+    Window.Status = L_Creation_Status_Text
+    SET Q = CreateObject("ixsso.Query")
+    
+
+    Q.DefineColumn "Unfiltered(DBTYPE_BOOL, 1)  = 49691c90-7e17-101a-a91c-08002b2ecda9 7"
+    ' use the default catalog
+    'Q.Catalog = "query://"+ machine + "/" + catalog
+    Q.SortBy = SortBy
+    Q.Columns = "DocTitle, FileName, Path, Write, Size"
+    Q.Dialect = 2
+
+    '
+    ' The default use of the query form should be completely freetext.
+    ' Advanced users can then use all of the features of the query language
+    ' by having the check boxed checked.
+    '
+    IF fUnfiltered THEN
+        CompSearch = "@Unfiltered=TRUE"
+        fUnfiltered = FALSE
+    'ELSEIF Advanced.Checked THEN
+    ELSEIF fFreetext = TRUE THEN
+       CompSearch = "{freetext}" & UserSearchString.value & "{/freetext}"
+    ELSE
+       CompSearch = UserSearchString.value
+    END IF
+
+    '
+    ' The query is now set up.  Time to execute.
+    '
+
+    IF CompSearch <> "" THEN
+      Q.Query = CompSearch
+
+      ' Issue query
+      Window.Status = L_Issuing_Status_Text
+      set RS = Q.CreateRecordSet("nonsequential")
+
+      Navigation.CmdPrevious.Disabled = TRUE
+      Navigation.CmdNext.Disabled = TRUE
+      Navigation2.CmdPrevious.Disabled = TRUE
+      Navigation2.CmdNext.Disabled = TRUE
+      HideBottomButt()
+
+      IF Err.Number = 0 THEN
+        NextPage()
+      ELSE
+        ReportError Err.Number, Err.Description
+        Err.Clear()
+      END IF
+    END IF
+  END SUB
+
+  '
+  ' SubRoutine: NextPage
+  '
+  '   Synopsis: Workhorse routine to populate table with results
+  '
+  
+  
+  Const L_QueryMatched_Text="Query matched "
+  Const L_Records_Text=" record(s)"
+  Const L_NoResults_Text="<EM>No results</EM>"
+  Const L_NoResults_Text_NoEm="No results"
+  Const L_PopulatingList_Text="Populating result list (row "
+  Const L_Of_Text=" of "
+  Const L_ShowingRecords_Text=" record(s). Now showing "
+  Const L_To_Text=" to "
+
+  Private SUB NextPage
+    '
+    ' Populate result list.  Once this message is displayed, virtually all the time is being
+    ' spent in DHTML and not in query processing.
+    '
+
+    fFirstPage = TRUE
+
+    '
+    ' Did we actually get anything back?
+    '
+    
+    IF RS.RecordCount = 0 THEN
+      IF Err.Number = 0 THEN
+        Document.All.Counter.innerHTML = CStr(L_NoResults_Text)
+        Window.Status = CStr(L_NoResults_Text_NoEm)
+        MsgBox CStr(L_NoResults_Text_NoEm)
+      ELSE
+        ReportError Err.Number, Err.Description
+      END IF
+      JumpPoint.scrollintoview ( FALSE )
+      FirstOnPage = 0
+      Navigation.CmdNext.Disabled = TRUE
+      Navigation.CmdPrevious.Disabled = TRUE
+      Navigation2.CmdPrevious.Disabled = TRUE
+      Navigation2.CmdNext.Disabled = TRUE
+      HideBottomButt()
+      HideTable()
+    ELSE
+      JumpPoint.scrollintoview ( TRUE )
+      FirstOnPage = RS.AbsolutePosition
+      LastOnPage = FirstOnPage
+      Document.All.Counter.innerText = CStr(L_QueryMatched_Text) + CStr(RS.RecordCount) + CStr(L_Records_Text)
+      ShowTable()
+    END IF
+
+    '
+    ' Loop through the table.  For each row, either store values from Recordset or delete
+    ' the row.
+    '
+    
+    FOR i = 1 TO MaxDisplayed
+
+      Window.Status = CStr(L_PopulatingList_Text) + CStr(i) + CStr(L_Of_Text) + Cstr(MaxDisplayed) + ")"
+
+      IF RS.EOF THEN
+        '
+        ' We hit the end.  Just clear any remaining rows and fall out of loop.
+        '
+
+        FOR j = Results.Rows.length - 1 TO i STEP -1
+          Results.DeleteRow(j)
+        NEXT
+
+        EXIT FOR
+      ELSE
+        '
+        ' We may have to add a row...
+        '
+
+        IF i >= Results.Rows.length THEN
+          Results.InsertRow()
+
+          FOR j = 0 TO 4
+            Results.Rows(i).InsertCell()
+          NEXT
+
+          Results.Rows(i).Cells(0).align = "right"
+          Results.Rows(i).Cells(2).align = "right"
+          Results.Rows(i).Cells(3).align = "right"
+        END IF
+
+        ' Write record number
+        Results.Rows(i).Cells(0).innerText = CStr( RS.AbsolutePosition ) + "."
+
+        ' Write either title or filename
+        IF VarType(RS("DocTitle")) = 1 Or RS("DocTitle") = "" THEN
+          Results.Rows(i).Cells(1).innerHTML = "<A HREF=""file://" & RS("path") & """>" & RS("filename") & "</A>"
+        ELSE
+          Results.Rows(i).Cells(1).innerHTML = "<A HREF=""file://" & RS("path") & """>" & RS("DocTitle") & "</A>"
+        END IF
+
+        ' Size
+        Results.Rows(i).Cells(2).innerText = RS("Size")
+
+        ' Last Modify time
+        WriteTime = CDate( RS("Write") )
+        Results.Rows(i).Cells(3).innerText = CStr(Month(WriteTime)) + "-" + CStr(Day(WriteTime)) + "-" + CStr(Year(WriteTime) ) + "  "
+
+        ' Path
+        Results.Rows(i).Cells(4).innerHTML = "<A HREF=""file://" & RS("path") & """>" & RS("Path") & "</A>"
+
+        LastOnPage = LastOnPage + 1
+
+        RS.MoveNext
+      END IF
+    NEXT
+
+    '
+    ' Report result.
+    '
+
+    IF FirstOnPage <> LastOnPage And RS.RecordCount <> 0 THEN
+        Document.All.Counter.innerHTML = CStr(L_QueryMatched_Text) + CStr(RS.RecordCount) + CStr(L_ShowingRecords_Text) + CStr(FirstOnPage) + CStr(L_To_Text) + CStr(LastOnPage-1) + "."
+    END IF
+
+    '
+    ' Enable Previous/Next as appropriate
+    '
+
+    IF FirstOnPage <= 1 THEN
+      Navigation.CmdPrevious.Disabled = TRUE
+      Navigation2.CmdPrevious.Disabled = TRUE
+    ELSE
+      Navigation.CmdPrevious.Disabled = FALSE
+      Navigation2.CmdPrevious.Disabled = FALSE
+    END IF
+
+    IF RS.EOF THEN
+      Navigation.CmdNext.Disabled = TRUE
+      Navigation2.CmdNext.Disabled = TRUE
+      UserSearchString.focus
+    ELSE
+      Navigation.CmdNext.Disabled = FALSE
+      Navigation.CmdNext.focus
+      Navigation2.CmdNext.Disabled = FALSE
+    END IF
+    
+    IF Navigation2.CmdPrevious.Disabled = FALSE OR Navigation2.CmdNext.Disabled = FALSE THEN
+      ShowBottomButt()
+    END IF
+
+    '
+    ' Done!
+    '
+
+    Window.Status = Window.DefaultStatus
+
+  END SUB
+
+  '
+  ' SubRoutine: HideBottomButt
+  '
+  '   Synopsis: Hides the bottom button table from the user's view.
+  '
+
+  SUB HideBottomButt()
+    BottomButt.Rows(0).Cells(0).style.visibility = "hidden"
+
+    BottomButt.Border = 0
+    BottomButt.Rules = ""
+
+    FOR i = BottomButt.Rows.length - 1 TO 1 STEP -1
+        BottomButt.DeleteRow(i)
+    NEXT
+  END SUB
+
+  '
+  ' SubRoutine: ShowBottomButt
+  '
+  '   Synopsis: Shows the bottom button table from the user's view.
+  '
+
+  SUB ShowBottomButt()
+    BottomButt.Rows(0).Cells(0).style.visibility = "visible"
+
+    BottomButt.Border = 0
+    BottomButt.Rules = ""
+
+  END SUB
+  '
+  ' SubRoutine: HideTable
+  '
+  '   Synopsis: Hides the table from the user's view.
+  '
+
+  SUB HideTable()
+    Results.Rows(0).Cells(0).style.visibility = "hidden"
+    Results.Rows(0).Cells(1).style.visibility = "hidden"
+    Results.Rows(0).Cells(2).style.visibility = "hidden"
+    Results.Rows(0).Cells(3).style.visibility = "hidden"
+    Results.Rows(0).Cells(4).style.visibility = "hidden"
+
+    Results.Border = 0
+    Results.Rules = ""
+
+    FOR i = Results.Rows.length - 1 TO 1 STEP -1
+        Results.DeleteRow(i)
+    NEXT
+  END SUB
+
+  '
+  ' SubRoutine: ShowTable
+  '
+  '   Synopsis: Makes the result table visible.
+  '
+
+  SUB ShowTable()
+    Results.Rows(0).Cells(0).style.visibility = "visible"
+    Results.Rows(0).Cells(1).style.visibility = "visible"
+    Results.Rows(0).Cells(2).style.visibility = "visible"
+    Results.Rows(0).Cells(3).style.visibility = "visible"
+    Results.Rows(0).Cells(4).style.visibility = "visible"
+
+    Results.Border = 1
+    Results.Rules = "cols"
+
+  END SUB
+
+  '
+  ' SubRoutine: ReportError
+  '
+  '   Synopsis: Clears table and reports error.
+  '
+  '  Arguments: [ErrNo] -- Error to report
+  '
+  
+  Const L_RedError_Text="<FONT color=red><EM><B>Error "
+
+  SUB ReportError( ErrNo, ErrDesc )
+    HideTable()
+    Window.Status = Err.Description
+    MsgBox Err.Description
+    UserSearchString.focus
+    Document.All.Counter.innerHTML = CStr(L_RedError_Text) + Hex(Err.Number) + " - " + Err.Description + "</B></EM></FONT>"
+  END SUB
+
+</SCRIPT>
+
+</HTML>
+

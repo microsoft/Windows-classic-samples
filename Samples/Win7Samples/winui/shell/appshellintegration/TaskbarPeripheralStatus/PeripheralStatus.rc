@@ -1,0 +1,26 @@
+#include "resource.h"
+
+IDI_APP                 ICON                    "PeripheralStatus.ico"
+IDI_OVERLAY1            ICON                    "overlay1.ico"
+IDI_OVERLAY2            ICON                    "overlay2.ico"
+
+IDC_PERIPHERALSTATUS MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Peripheral Status"
+    BEGIN
+        MENUITEM "Overlay &1",                  IDM_OVERLAY1
+        MENUITEM "Overlay &2",                  IDM_OVERLAY2
+        MENUITEM "&Clear Overlay",              IDM_OVERLAY_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "Simulate &Progress",          IDM_SIMULATEPROGRESS
+    END
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "PeripheralStatus"
+END

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    This propdesc file contains the descriptions of Recipe Sample custom properties.
+    To register/unregister, use the PropertySchema SDK sample, or http://www.codeplex.com/prop.
+
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://schemas.microsoft.com/windows/2006/propertydescription"
+        schemaVersion="1.0">
+  <propertyDescriptionList publisher="Microsoft" product="SampleRecipe">
+    <propertyDescription name="Microsoft.SampleRecipe.Difficulty" formatID="{1794C9FE-74A9-497f-9C69-B31F03CE7EF9}" propID="100">
+      <description>This property indicates the preparation difficulty of a recipe.</description>
+      <searchInfo inInvertedIndex="true" isColumn="true" columnIndexType="OnDisk"/>
+      <typeInfo type="String" multipleValues="false" isViewable="true" isQueryable="true"/>
+      <labelInfo label="Recipe difficulty" invitationText="Specify recipe difficulty" />
+      <displayInfo displayType="Enumerated" >
+        <editControl control="DropList"/>
+        <enumeratedList>
+          <enum value="Easy" text="Easy" />
+          <enum value="Medium" text="Medium" />
+          <enum value="Hard" text="Hard" />
+        </enumeratedList>
+      </displayInfo>
+    </propertyDescription>
+  </propertyDescriptionList>
+</schema>

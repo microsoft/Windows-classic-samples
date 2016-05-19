@@ -1,0 +1,34 @@
+[!if TYPE1PLUGIN]
+Type1\sample.h
+Type1\resource.h
+Type1\stdafx.h
+Type1\sample.cpp
+Type1\ContextMenu.cpp
+Type1\Download.cpp
+Type1\GetInfo.cpp
+Type1\License.cpp
+Type1\List.cpp
+Type1\Login.cpp
+Type1\Notify.cpp
+Type1\Purchase.cpp
+Type1\SendMessage.cpp
+Type1\Threads.cpp
+Type1\UpdateDevice.cpp
+Type1\stdafx.cpp
+Type1\sample.def
+Type1\sample.rgs
+Type1\sample.rc
+[!endif]
+
+[!if TYPE2PLUGIN]
+Type2\dll.cpp
+Type2\resource.h
+Type2\sample.cpp
+Type2\sample.h
+Type2\sample.rc
+Type2\sample.def
+Type2\sample.rgs
+Type2\StdAfx.cpp
+Type2\StdAfx.h
+[!endif]
+

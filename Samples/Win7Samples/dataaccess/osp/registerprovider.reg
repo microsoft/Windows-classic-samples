@@ -1,0 +1,30 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\<INSERT:  ProgID for OLE DB Provider>]
+@="<INSERT:  Name of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\<INSERT:  ProgID for OLE DB Provider>\CLSID]
+@="<INSERT:  GUID for OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>]
+@="<INSERT:  ProgID of OLE DB Provider>"
+"OLEDB_SERVICES"=dword:00000000
+; "OLEDB_SERVICES"=dword:FFFFFFFF <-- Enables Service Components services and aggregation
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\InprocServer32]
+@="<INSERT:  Path to OLE DB Directory example --> c:\\Program Files\\Common Files\\System\\OLE DB\\>MSDAOSP.DLL"
+"ThreadingModel"="Both"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\ProgID]
+@="<INSERT:  ProgId of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\VersionIndependentProgID]
+@="<INSERT:  ProgId of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\OLE DB Provider]
+@="<INSERT:  Name of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\OSP Data Object]
+@="<INSERT:  ProgID for OSP Data Object>"
+
+

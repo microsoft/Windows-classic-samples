@@ -1,0 +1,43 @@
+/*++
+
+Copyright (c) 1999 Microsoft Corporation
+
+Module Name:
+
+    sampmsp.idl
+
+Abstract:
+
+    IDL source for sampmsp.dll
+
+--*/
+
+// This file will be processed by the MIDL tool to
+// produce the type library (sampmsp.tlb) and marshalling code.
+
+// import "oaidl.idl";
+// import "ocidl.idl";
+
+import "msp.idl";
+
+[
+	uuid(405AB7D7-BFA7-11d2-B11D-006008B0E5D2),
+	version(1.0),
+	helpstring("Sample MSP 1.0 Type Library")
+]
+library SampleMSPLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(23F7C678-24E1-48db-AEAC-54A6F2A010A0),
+		helpstring("Sample MSP Class")
+	]
+	coclass SampleMSP
+	{
+		[default] interface ITMSPAddress;
+	};
+};
+
+// eof

@@ -1,0 +1,164 @@
+//+---------------------------------------------------------------------------
+//
+//  Copyright (c) Microsoft Corporation. All rights reserved. 
+//
+//
+//  BITS Upload sample
+//  ==================
+//
+//  Module name: 
+//  dialog.rc
+//
+//  Purpose:
+//  Dialog layout for the user interface.
+//
+//----------------------------------------------------------------------------
+
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+#include "afxres.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", ""
+            VALUE "FileDescription", "BITS SDK Upload Sample"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "LegalCopyright", ""
+            VALUE "InternalName", "UploadSample.exe"
+            VALUE "OriginalFilename", "UploadSample.exe"
+            VALUE "ProductName", "Upload Sample"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_UPLOADSAMPLECLIENTDIALOG DIALOGEX 0, 0, 415, 303
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "BITS Upload Sample"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Upload file",IDOK,270,280,78,16
+    PUSHBUTTON      "Close",IDCANCEL,358,280,50,16
+    EDITTEXT        IDC_SAMPLETEXT,7,128,401,34,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_WANTRETURN
+    LTEXT           "This is a sample application that exercises BITS upload functionality. After you click the button Upload, we will pack the text in the edit box in a XML file and send it to the server.",
+                    IDC_STATIC,7,14,390,32
+    LTEXT           "Pack the following text in a XML file:",IDC_STATIC,7,
+                    117,118,8
+    LTEXT           "Upload file to the following virtual directory:",
+                    IDC_STATIC,7,43,142,8
+    CONTROL         "Process a reply from the server after the completion of the upload job",
+                    IDC_UPLOADREPLY_CHECKBOX,"Button",BS_AUTOCHECKBOX | 
+                    BS_MULTILINE | WS_TABSTOP,7,73,343,12
+    LTEXT           "Job Status:",IDC_STATIC,7,174,38,8
+    EDITTEXT        IDC_JOBSTATUS,7,184,401,80,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_VSCROLL
+    COMBOBOX        IDC_VIRTUALDIR,7,54,239,59,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "(only applicable if the upload virtual directory is configured to process notifications)",
+                    IDC_STATIC,19,84,266,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_UPLOADSAMPLECLIENTDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 408
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 296
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

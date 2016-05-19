@@ -1,0 +1,12 @@
+
+#
+# auto-generated from source depot info
+#
+
+FILE *
+$TAG ENGR
+$Module:  driverstest_storage_optical_imapi2sample
+$Owner:   scottt
+$Keywords: 
+$ENDTAG
+

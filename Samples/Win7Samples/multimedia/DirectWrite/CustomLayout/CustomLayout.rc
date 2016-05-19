@@ -1,0 +1,25 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+#include "WinResrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// Menu
+
+1 MENU 
+BEGIN
+    POPUP "Options"
+    BEGIN
+        MENUITEM "Latin text",                  CommandIdTextLatin
+        MENUITEM "Arabic text",                 CommandIdTextArabic
+        MENUITEM "Japanese text",               CommandIdTextJapanese
+        MENUITEM SEPARATOR
+        MENUITEM "Circle shape",                CommandIdShapeCircle
+        MENUITEM "Funnel",                      CommandIdShapeFunnel
+        MENUITEM SEPARATOR
+        MENUITEM "Nominal numbers",             CommandIdNumbersNominal
+        MENUITEM "Arabic contextual numbers",   CommandIdNumbersArabic
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        IDCLOSE
+    END
+END

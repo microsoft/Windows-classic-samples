@@ -1,0 +1,9 @@
+LANGUAGE LANG_KOREAN, SUBLANG_NEUTRAL
+// LANGUAGE LANG_KOREAN, SUBLANG_KOREAN
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SRGRAMMAR
+//
+
+IDR_SOL_CFG             SRGRAMMAR DISCARDABLE   "kor_cardinals.cfg"

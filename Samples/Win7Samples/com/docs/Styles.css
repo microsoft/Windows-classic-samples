@@ -1,0 +1,72 @@
+ BODY { 
+   
+    font-family: Verdana, Arial, Helvetica;
+/*    line-height: 1.1;*/
+    color: black; 
+    font-size:  9pt;
+  }
+
+ HR { 
+    color: 
+    Size:1;
+  }
+
+  
+  H1, H2, H3, H4, H5, H6, P, UL, OL, DIR, MENU, DIV, 
+  DT, DD, ADDRESS, BLOCKQUOTE, PRE, BR { display: block }
+
+  TD {font-size:  9pt}
+			
+  B, STRONG, I, EM, CITE, VAR, TT, CODE, KBD, SAMP, 
+  IMG, SPAN { display: inline }
+
+  LI { display: list-item }
+
+  H1, H2, H3, H4 { margin-top: 1em; margin-bottom: 1em }
+  H5, H6 { margin-top: 1em }
+  H1 { text-align: center }
+  H1, H2, H4, H6 { font-weight: bold }
+  H3, H5 { font-style: italic }
+
+  H1 { font-size: xx-large }
+  H2 { font-size: x-large }
+  H3 { font-size: large }
+
+  B, STRONG { font-weight: bold} 
+  I, CITE, EM, VAR, ADDRESS { font-style: italic }
+  PRE, TT, CODE, KBD, SAMP { font-family: monospace }
+
+  PRE { white-space: pre }
+
+  ADDRESS { margin-left: 3em }
+  BLOCKQUOTE { margin-left: 3em; margin-right: 3em }
+
+  UL, DIR { list-style: disc }
+  OL { list-style: decimal }
+  MENU { margin: 0 }              /* tight formatting */
+  LI { margin-left: 3em }
+
+  DT { margin-bottom: 0 }
+  DD { margin-top: 0; margin-left: 3em }
+
+  A:link { 
+	text-decoration: none;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 9pt;
+	font-weigth: bold;	
+	color: Olive;
+	}          /* unvisited link */
+  A:visited { 
+	text-decoration: none;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 9pt;
+	font-weigth: bold;	
+	color: 336666;
+	}        /* visited links */
+  A:active { 
+	text-decoration: none;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 9pt;
+	font-weigth: bold;	
+	color: red;
+	}        /* active links */

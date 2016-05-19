@@ -1,0 +1,43 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+// ContentBasedClassificationModule.idl : IDL source for ContentBasedClassificationModule
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ContentBasedClassificationModule.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(74614539-C851-4E87-BCAA-01C30246DC6E),
+	dual,
+	nonextensible,
+	helpstring("IContentBasedClassifier Interface"),
+	pointer_default(unique)
+]
+interface IContentBasedClassifier : IDispatch{
+};
+[
+	uuid(8AA0E007-2194-4D77-9465-C3FB69161364),
+	version(1.0),
+	helpstring("ContentBasedClassificationModule 1.0 Type Library")
+]
+library ContentBasedClassificationModuleLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(7853D011-8F9D-4831-BA8A-E5EE99B7CC65),
+		helpstring("ContentBasedClassifier Class")
+	]
+	coclass ContentBasedClassifier
+	{
+		[default] interface IContentBasedClassifier;
+	};
+};

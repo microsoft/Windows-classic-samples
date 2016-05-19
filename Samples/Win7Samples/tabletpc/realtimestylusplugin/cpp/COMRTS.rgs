@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'COMRTS'
+				'COMRTS.EXE'
+				{
+			val AppID = s '%APPID%'
+		}
+	}
+}

@@ -1,0 +1,23 @@
+HKCR
+{
+	plgTermSample.PlgTermSample.1 = s 'PlgTermSample Class'
+	{
+		CLSID = s '{9488FBA9-FFD2-413B-ADA1-85646C1488D0}'
+	}
+	plgTermSample.PlgTermSample = s 'PlgTermSample Class'
+	{
+		CLSID = s '{9488FBA9-FFD2-413B-ADA1-85646C1488D0}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9488FBA9-FFD2-413B-ADA1-85646C1488D0} = s 'PlgTermSample Class'
+		{
+			ProgID = s 'plgTermSample.PlgTermSample.1'
+			VersionIndependentProgID = s 'plgTermSample.PlgTermSample'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'both'
+			}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'tedutil'
+		'TEDUTIL.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {1FFD2046-C6C7-462d-A51F-7F85A375171E} = s 'CompReg Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{64D3D369-B1E9-4aff-B1A4-8D8518E14A97}'
+		}
+	}
+}

@@ -1,0 +1,23 @@
+HKCR
+{
+	COMRTS.CustomRenderer.1 = s 'CustomRenderer Class'
+	{
+		CLSID = s '{D919FD8D-A0BC-4072-9087-04D8A1CD37DF}'
+	}
+	COMRTS.CustomRenderer = s 'CustomRenderer Class'
+	{
+		CLSID = s '{D919FD8D-A0BC-4072-9087-04D8A1CD37DF}'
+		CurVer = s 'COMRTS.CustomRenderer.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D919FD8D-A0BC-4072-9087-04D8A1CD37DF} = s 'CustomRenderer Class'
+		{
+			ProgID = s 'COMRTS.CustomRenderer.1'
+			VersionIndependentProgID = s 'COMRTS.CustomRenderer'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{7819C446-8B13-4409-852D-B04BAA2198DE}'
+		}
+	}
+}

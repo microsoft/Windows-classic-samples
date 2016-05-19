@@ -1,0 +1,28 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+
+#ifdef __BUILD_FROM_CMDSHELL__
+
+#include <windows.h>
+#include <ntverp.h>
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "XPS Load Modify Save Sample"
+#define VER_INTERNALNAME_STR            "XpsLoadModifySave.exe"
+#define VER_ORIGINALFILENAME_STR        "XpsLoadModifySave.exe"
+#define VER_FILEVERSION                 1, 0, VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE
+
+#include "common.ver"
+
+#endif //__BUILD_FROM_CMDSHELL__
+
+#include "resource.h"
+
+IDR_RC_PACKAGE_DATA1    RC_PACKAGE_DATA         "sample1.xps"
+

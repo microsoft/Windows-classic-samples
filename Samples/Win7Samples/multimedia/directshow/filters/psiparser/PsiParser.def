@@ -1,0 +1,13 @@
+;===========================================================================
+;  Copyright (c) 2001-2002  Microsoft Corporation.  All Rights Reserved.
+;===========================================================================
+
+LIBRARY     PSIParser.dll
+
+EXPORTS
+            DllMain                 PRIVATE
+            DllGetClassObject       PRIVATE
+            DllCanUnloadNow         PRIVATE
+            DllRegisterServer       PRIVATE
+            DllUnregisterServer     PRIVATE
+

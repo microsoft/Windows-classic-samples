@@ -1,0 +1,9 @@
+; FsrmSampleClassificationModule.def : Declares the module parameters.
+
+LIBRARY      "FsrmSampleClassificationModule.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

@@ -1,0 +1,44 @@
+LIBRARY         ATSP32
+
+
+EXPORTS
+
+        TSPI_lineClose
+        TSPI_lineCloseCall
+        TSPI_lineConditionalMediaDetection
+        TSPI_lineDrop
+        TSPI_lineGetAddressCaps
+        TSPI_lineGetAddressStatus
+        TSPI_lineGetCallAddressID
+        TSPI_lineGetCallInfo
+        TSPI_lineGetCallStatus
+        TSPI_lineGetDevCaps
+        TSPI_lineGetID
+        TSPI_lineGetLineDevStatus
+        TSPI_lineGetNumAddressIDs
+        TSPI_lineMakeCall
+        TSPI_lineNegotiateTSPIVersion
+        TSPI_lineOpen
+        TSPI_lineSetDefaultMediaDetection
+
+		TSPI_lineReceiveMSPData
+		TSPI_lineCreateMSPInstance
+		TSPI_lineCloseMSPInstance
+		TSPI_lineMSPIdentify
+
+        TSPI_providerConfig
+        TSPI_providerInit
+        TSPI_providerInstall
+        TSPI_providerRemove
+        TSPI_providerShutdown
+        TSPI_providerEnumDevices
+
+        TSPI_providerGenericDialogData
+        TSPI_providerUIIdentify
+
+        TUISPI_lineConfigDialog
+        TUISPI_providerConfig
+        TUISPI_providerInstall
+        TUISPI_providerRemove
+
+        ConfigDlgProc

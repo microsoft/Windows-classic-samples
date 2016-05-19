@@ -1,0 +1,229 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+
+<THEME author="Microsoft Corporation" 
+       copyright="Copyright (c) Microsoft Corporation. All rights reserved.">
+
+
+	<VIEW
+		titleBar = "false"
+		backgroundColor = "none"
+		height = "200"
+                scriptFile = "bigdrawer.js"
+	>
+		
+		<SUBVIEW
+
+			id="mainview"
+			left = "100"
+			height = "400"
+		     	clippingColor = "#FFFFFF"
+        		backgroundImage = "background.bmp"
+			zIndex = "5"
+		>
+		
+			<EFFECTS
+				id = "myeffects"
+		        	top = "25"
+				left = "25"
+        	        	width = "75"
+			        height = "75"
+			/>
+			
+			
+			
+			<TEXT
+				top = "20"
+				left = "125"
+				width = "75"
+				fontSize = "11"
+				hoverFontStyle = "Bold"
+				hoverForegroundColor = "green"
+				justification = "Left"
+				value = "Audio"
+				onClick = "JScript:player.settings.autoStart = 'true';player.currentPlaylist = player.mediaCollection.GetByName('laure');"
+			/>
+
+			<TEXT
+				top = "40"
+				left = "125"
+				width = "75"
+				fontSize = "11"
+				hoverFontStyle = "Bold"
+				hoverForegroundColor = "purple"
+				justification = "Left"
+				value = "Video"
+				onClick = "JScript:player.settings.autoStart = 'true';player.currentPlaylist = player.mediaCollection.GetByName('seattle');g_isOpen=false;moveDrawer();"
+			/>
+			
+			<TEXT
+				top = "60"
+				left = "125"
+				width = "75"
+				fontSize = "11"
+				hoverFontStyle = "Bold"
+				hoverForegroundColor = "red"
+				justification = "Left"
+				value = "Stop"
+				onClick = "JScript:player.controls.stop();g_isOpen=true;moveDrawer();"
+			/>
+			
+			<TEXT
+				top = "80"
+				left = "125"
+				width = "75"
+				fontSize = "11"
+				hoverFontStyle = "Bold"
+				hoverForegroundColor = "blue"
+				justification = "Left"
+				value = "Drawer"
+				onClick = "JScript:moveDrawer();"
+			/>
+			
+			<TEXT
+				top = "100"
+				left = "125"
+				width = "75"
+				fontSize = "11"
+				hoverFontStyle = "Bold"
+				hoverForegroundColor = "white"
+				justification = "Left"
+				value = "Close"
+				onClick = "JScript: view.close();"
+			/>
+
+			
+			
+			
+			<SEEKSLIDER
+			    left="25"
+			    top="120"
+			    width="75"
+			    height="10"
+			    backgroundColor="red"
+			    thumbImage="thumb.bmp"
+			    borderSize="5"
+			    tooltip="Seek (current position)"
+			/>
+			    
+			<CUSTOMSLIDER 
+			       left="125"
+			       top="130"
+			       min="0"
+			       max="100"
+			       toolTip="Volume"
+			       image="dial.bmp"
+			       positionImage="dialmap.bmp"
+			       transparencyColor="#00FFFF"
+			       value="wmpprop:player.settings.volume"
+			       value_onchange="player.settings.volume=value;"
+			/>
+
+			<TEXT
+				top = "150"
+				left = "25"
+				width = "75"
+				height = "20"
+				backgroundColor = "#FF7934"
+				foregroundColor = "red"
+				justification = "Center"
+				scrolling = "true"			
+				scrollingAmount = "1"
+				scrollingDelay = "50"
+				value = "wmpprop:player.status"
+			/>
+
+			
+			         
+         
+		</SUBVIEW>	
+		
+
+		<SUBVIEW
+			id = "drawer"
+			left = "80"
+			backgroundImage="videodrawer.bmp"
+			transparencyColor="#000000"
+		>
+		        
+			<TEXT
+				top = "20"
+				left = "25"
+				width = "75"
+				height = "20"
+				backgroundColor = "blue"
+				foregroundColor = "white"
+				justification = "Center"
+				scrolling = "true"			
+				scrollingAmount = "1"
+				scrollingDelay = "50"
+				value = "wmpprop:player.currentMedia.name"
+			/>
+
+
+		        <VIDEO
+				id = "hiddenvideo"
+				backgroundColor = "#FF7934"
+				top = "40"
+				left = "25"
+				width = "75"
+				height = "75"
+                               
+			/>
+
+			<TEXT
+				top="60"
+				left="25"
+				width="75"
+				height="25"
+				foregroundColor = "blue"
+				value="No video.... "
+			/>		        
+		        
+		        
+		        <BUTTONGROUP
+        			mappingImage = "map.bmp"
+	                	hoverImage = "hover.bmp"
+			> 
+                
+	        		<BUTTONELEMENT
+        				mappingColor = "#00FF00"
+					upToolTip = "Next visualization"
+			    	        onClick = "JScript:myeffects.next();"
+				/>
+                          
+		        	<BUTTONELEMENT
+        				mappingColor = "#FF0000"
+					upToolTip = "Previous visualization"
+			        	onClick = "JScript:myeffects.previous();"
+				/>
+
+				<BUTTONELEMENT
+					id = "drawerButton"
+					mappingColor = "#0000FF"
+					upToolTip = "Show Video or Change Visualization"
+					onClick = "JScript:moveDrawer();"					
+				/>
+				
+                
+	        	</BUTTONGROUP>
+	        	
+	        	
+	        	<TEXT
+	        		top = "115"		        
+				left = "30"			
+				width = "75"	
+				height = "25"
+				wordWrap = "true"
+				fontSize = "8"	
+				value = "Prev/Next Visualization"			
+			/>			
+						
+
+	        	
+
+
+		</SUBVIEW>
+
+	</VIEW>
+
+</THEME>

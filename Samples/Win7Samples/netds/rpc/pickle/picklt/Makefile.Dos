@@ -1,0 +1,46 @@
+#*************************************************************#
+#**                                                         **#
+#**                 Microsoft RPC Examples                  **#
+#**                    pickle Application                   **#
+#**            Copyright(c) Microsoft Corp. 1992-1995       **#
+#**                                                         **#
+#*************************************************************#
+
+cc_ntenv = cl386
+cc = cl
+cflags= -c -AL -Gsw -Oas -Zpe -Zi -D_CRTAPI1=
+linker= link
+lflags= /CO /NOD
+
+.c.obj:
+   $(cc) $(cflags) $<
+
+all : pickltc
+
+idl : picklt.h
+
+# Make the client side application pickltc
+pickltc : pickltc.exe
+pickltc.exe : pickltc.obj picklt_c.obj
+    $(linker) $(lflags) pickltc picklt_c,,,\
+    llibce rpc;
+
+# Update the object files if necessary
+
+pickltc.obj : pickltc.c picklt.h
+
+picklt_c.obj : picklt_c.c picklt.h
+
+picklt.h picklt_c.c: picklt.idl picklt.acf
+   midl -env dos -oldnames -no_cpp -ms_ext picklt.idl
+
+# Clean up everything
+cleanall : clean
+    -del pickltc.exe
+
+# Clean up everything but the .EXEs
+clean :
+    -del *.obj
+    -del *.map
+    -del picklt_c.c
+    -del picklt.h

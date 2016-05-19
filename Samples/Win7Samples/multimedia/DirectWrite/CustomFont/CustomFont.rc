@@ -1,0 +1,24 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+#include "WinResrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// Font
+
+IDR_FONT_PERICLES       FONT                    "Fonts/peric.ttf"
+IDR_FONT_KOOTENAY       FONT                    "Fonts/kooten.ttf"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Custom Font Loader Sample"
+    IDS_HEADING             "DirectWrite Custom Font Loader Sample"
+    IDS_BODY1               "The text in this application is rendered using fonts that are embedded as resources. The fonts are sample fonts supplied under license from Ascender Corporation. The heading is rendered in Pericles and the body text in Kootenay. For more information, search for “Sample OpenType Font Pack” on MSDN."
+    IDS_BODY2               "The application implements a custom font file loader to provide access to the embedded font data. This enables DirectWrite to access the fonts even though they do not exist as discrete files."
+    IDS_BODY3               "The application also implements a custom font collection loader. This enables DirectWrite to recognize the family names ""Pericles"" and ""Kootenay"" even though these fonts are not installed on the system - i.e., not part of the system font collection."
+END

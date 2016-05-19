@@ -1,0 +1,110 @@
+#pragma autorecover
+
+#pragma namespace("\\\\.\\root")
+
+
+instance of __Namespace
+{
+	Name = "cimv2" ;
+} ;
+
+#pragma namespace("\\\\.\\root\\cimv2")
+
+		
+[Dynamic,Provider("DecoupledInstanceProvider") ] 
+class ContactInfo
+{
+	[Key] uint64 ID;
+	string FirstName;
+	string LastName;
+	string HomePhone;
+	string WorkPhone;
+};
+
+
+[Dynamic,Provider("DecoupledInstanceProvider") ] 
+class Win32_ProcessEx : CIM_Process
+{
+  [Read : ToSubclass,Privileges{"SeDebugPrivilege"} : ToSubclass,MappingStrings{"Win32API|Tool Help Structures|MODULEENTRY32|szExePath"} : ToSubclass] string ExecutablePath;
+  [Read : ToSubclass,Units("Kilobytes") : ToSubclass,Privileges{"SeDebugPrivilege"} : ToSubclass,MappingStrings{"Win32|WINNT.H|QUOTA_LIMITS|MaximumWorkingSetSize"} : ToSubclass] uint32 MaximumWorkingSetSize;
+  [Read : ToSubclass,Units("Kilobytes") : ToSubclass,Privileges{"SeDebugPrivilege"} : ToSubclass,MappingStrings{"Win32|WINNT.H|QUOTA_LIMITS|MinimumWorkingSetSize"} : ToSubclass] uint32 MinimumWorkingSetSize;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PageFaultCount"} : ToSubclass] uint32 PageFaults;
+  [Read : ToSubclass,Units("Kilobytes") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PagefileUsage"} : ToSubclass] uint32 PageFileUsage;
+  [Read : ToSubclass,Units("Kilobytes") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PeakPagefileUsage"} : ToSubclass] uint32 PeakPageFileUsage;
+  [Read : ToSubclass,Units("Kilobytes") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PeakWorkingSetSize"} : ToSubclass] uint32 PeakWorkingSetSize;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|PROCESS_INFORMATION|dwProcessId "} : ToSubclass] uint32 ProcessId;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|QuotaNonPagedPoolUsage"} : ToSubclass] uint32 QuotaNonPagedPoolUsage;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|QuotaPagedPoolUsage"} : ToSubclass] uint32 QuotaPagedPoolUsage;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|QuotaPeakNonPagedPoolUsage"} : ToSubclass] uint32 QuotaPeakNonPagedPoolUsage;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|QuotaPeakPagedPoolUsage"} : ToSubclass] uint32 QuotaPeakPagedPoolUsage;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process and Thread Functions|GetProcessVersion"} : ToSubclass] string WindowsVersion;
+  [Read : ToSubclass,Override("Priority") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|BasePriority"} : ToSubclass] uint32 Priority;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|NumberOfThreads"} : ToSubclass] uint32 ThreadCount;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|HandleCount"} : ToSubclass] uint32 HandleCount;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|InheritedFromUniqueProcessId"} : ToSubclass] uint32 ParentProcessId;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|SessionId"} : ToSubclass] uint32 SessionId;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PrivatePageCount"} : ToSubclass] uint64 PrivatePageCount;
+  [Read : ToSubclass,Units("Bytes") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|PeakVirtualSize"} : ToSubclass] uint64 PeakVirtualSize;
+  [Read : ToSubclass,Units("Bytes") : ToSubclass,MappingStrings{"Win32API|Process Status|SYSTEM_PROCESS_INFORMATION|VirtualSize"} : ToSubclass] uint64 VirtualSize;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|ReadOperationCount"} : ToSubclass] uint64 ReadOperationCount;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|WriteOperationCount"} : ToSubclass] uint64 WriteOperationCount;
+  [Read : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|OtherOperationCount"} : ToSubclass] uint64 OtherOperationCount;
+  [Read : ToSubclass,Units("Bytes") : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|ReadTransferCount"} : ToSubclass] uint64 ReadTransferCount;
+  [Read : ToSubclass,Units("Bytes") : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|WriteTransferCount"} : ToSubclass] uint64 WriteTransferCount;
+  [Read : ToSubclass,Units("Bytes") : ToSubclass,MappingStrings{"Win32API|Process and Thread Structures|SYSTEM_PROCESS_INFORMATION|OtherTransferCount"} : ToSubclass] uint64 OtherTransferCount;
+};
+
+/*
+ *	Registrations
+ */
+
+
+class MSFT_DecoupledProvider : __Win32Provider
+{
+	[Description ( "Decoupled provider CLSID, do not change. Do not override" ) , Override("Clsid")] 
+	String Clsid = "{54D8502C-527D-43F7-A506-A9DA075E229C}" ;
+	[Description ( "Hosting Model, provides compatibility with Windows XP and Windows Server .NET. Do not override." ) , Override("HostingModel")]
+	string HostingModel = "Decoupled:Com";
+	[Description("..."),Override("SecurityDescriptor")] 
+	string SecurityDescriptor; 		
+} ;
+
+
+instance of MSFT_DecoupledProvider as $PDecoupledInstance
+{
+	Name = "DecoupledInstanceProvider";
+	
+	// Setting the HostingModel to Decoupled:Com registers the provider as a decoupled com provider, 
+	// lowers RPC_C_IMP_LEVEL_IMPERSONATE and RPC_C_IMP_LEVEL_DELEGATE impersonation levels to 
+	//RPC_C_IMP_LEVEL_IDENTIFY before calling into provider:
+	
+	HostingModel = "Decoupled:Com:FoldIdentity(FALSE)" ;	
+	
+	// Setting the HostingModel to Decoupled:Com:FoldIdentity(FALSE} allows original client 
+	// impersonation level through to provider.
+	// This lets a decoupled provider impersonate the client and hence
+	// act in the role of that client. This poses a potential security risk for the client 
+	// if the decoupled provider security identity has less rights than the original cliient.
+	// Use a strong security descriptor when using this option:
+		
+	// HostingModel = "Decoupled:Com:FoldIdentity(FALSE}" ;	
+	
+	SecurityDescriptor = "O:BAG:SYD:(A;;0x10000001;;;BA)(A;;0x10000001;;;SY)" ;
+};    
+
+instance of __InstanceProviderRegistration
+{
+    Provider = $PDecoupledInstance;
+    SupportsGet = TRUE;
+    SupportsPut = TRUE;
+    SupportsDelete = TRUE;
+    SupportsEnumeration = TRUE;
+
+    QuerySupportLevels = { "WQL:UnarySelect" } ;
+};
+
+instance of __MethodProviderRegistration
+{
+    Provider = $PDecoupledInstance;
+};
+

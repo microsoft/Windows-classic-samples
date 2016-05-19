@@ -1,0 +1,25 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//
+//  Copyright (C) Microsoft Corporation, 2001
+//
+//  File:       wdstftpc.rc
+//
+//--------------------------------------------------------------------------
+
+#include <windows.h>
+#include <ntverp.h>
+
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows Deployment Services Transport Sample Consumer"
+#define VER_INTERNALNAME_STR        "wdsscon.exe"
+#define VER_ORIGINALFILENAME_STR    "wdsscon.exe"
+
+
+#include "common.ver"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+

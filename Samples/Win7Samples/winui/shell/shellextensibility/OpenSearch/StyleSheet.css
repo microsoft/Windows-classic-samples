@@ -1,0 +1,35 @@
+﻿/* THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+ THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ PARTICULAR PURPOSE.
+
+ Copyright (c) Microsoft Corporation. All rights reserved */
+ 
+body 
+{
+	background-color:White
+}
+
+div.itemBoxSmall
+{
+ background-color: #F0FFFF;
+ border: solid 1px Orange;
+ margin: 5px auto 0px 5px;
+ padding: 5px;
+ text-align: left;
+ width: 40%;
+}
+
+img.productImage
+{
+ border: solid 1px Black;
+ float: left;
+ margin-right: 10px;
+}
+
+a.productLink
+{
+ color: Black;
+ font-weight: bold;
+}
+

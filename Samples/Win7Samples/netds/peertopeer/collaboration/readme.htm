@@ -1,0 +1,267 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<title>Collaboration Sample</title>
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body bgcolor=white lang=EN-US>
+
+<div class=Section1>
+
+<h1><span style='font-family:"Arial","sans-serif"'>Peer-to-Peer Collaboration
+Infrastructure API Sample</span></h1>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>The Collaboration Sample Application demonstrates how to utilize the Peer-to-Peer Collaboration API.</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>Platforms supported:</p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>Windows Vista (except Starter Edition)</p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>Windows 7</p>
+
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Build: </span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>In a SDK command
+shell, navigate to the directory containing this sample and run
+&quot;nmake&quot;; or</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>Launch the .sln
+file in Visual Studio .NET </span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-left:.75in'><span
+style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-family:"Arial","sans-serif"'>To Run: </span></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>From a non-elevated window, type
+collaboration.exe (located in the Vista_DEBUG or WIN7_[ARCH]_DEBUG folder in the directory containing the sample)</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>Note that this sample must be executed in a non-elevated window because the Peer Collaboration Infrastructure can only be started as a non-elevated process.
+</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-left:.75in;text-indent:-.25in'><span
+style='font-family:"Arial","sans-serif"'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-family:"Arial","sans-serif"'>Follow the menu
+options.  To get started, try executing the following scenarios:</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>1. Enumerate People Near
+Me</span></b></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>a)
+Launch the Collaboration application on several computers connected to same IPv6
+subnet.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>b)
+Select Option 1 on each computer to sign in to PNM.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>c)
+If this is the first time signing in to People Near Me, a dialog will
+display.&nbsp; Enter a display name and select the default option to Allow
+invitations from Anyone (a user can later modify these settings from
+Control Panel\Network and Internet\People Near Me ).</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>d)
+From the Collaboration application select Option 7 to enumerate all the PNM
+contacts on your IPv6 subnet.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>2. Send an Invitation to a
+PNM endpoint</span></b></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>a)
+Launch the Collaboration application on two computers connected to the same IPv6
+subnet.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>b)
+Select Option 1 on each computer to sign in to PNM.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>c)
+On the first Computer, select Option 22 to register the sample application.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>d)
+On the second computer, select Option 25 to send an invitation to the PNM
+endpoint on the first computer.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>e)
+On the first computer, view the invitation and accept or decline it.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>f)
+If the invitation is accepted the Collaboration sample will be launched with a
+command line option of “/invite” (as specified when this application registered
+itself with Option 22).&nbsp; The sample will print supplemental data that was
+sent with the invitation before displaying the Collaboration sample menu.&nbsp;
+The data sent with an invitation can be used to convey information that your
+application requires to connect and participate in the collaboration session
+that the user was invited to join.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+<p><b><span style='font-family:"Arial","sans-serif"'>3. Adding contacts,
+sharing presence, and sending Invitations with Internet scope</span></b></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>a)
+Launch the Collaboration application on two computers connected to the same IPv6
+subnet.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>b)
+Select Option 1 on each computer to sign in to PNM.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>c)
+Select Option 8 on each computer to add the other party as a contact.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>d)
+Open your Contacts folder (e.g. C:\Users\&lt;username&gt;\Contacts ) and
+observe the new contact.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>e)
+Optionally, move one computer to another location (discovery will operate
+provided both computers have global IPv6 connectivity).</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>f)
+Select Options 14 and 15 on each computer to both watch the other party
+and to grant watch permissions.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>g)
+Select option 1 on each computer to sign in with Internet scope.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>h)
+Once the second contact signs in, notice in the events window that both
+contacts receive events indicating the others' presence.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>i)
+Update a contact's presence using Option 17 and view the event window on each computer.</span></p>
+
+<p style='text-indent:.5in'><span style='font-family:"Arial","sans-serif"'>j)
+Send an invitation to the contact, as instructed in the PNM scenario.</span></p>
+
+<p><span style='font-family:"Arial","sans-serif"'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>

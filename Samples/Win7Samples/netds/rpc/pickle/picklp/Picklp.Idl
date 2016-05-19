@@ -1,0 +1,29 @@
+[ uuid (B75AF600-9CF4-11CD-A076-08002B2BD711),
+  version(1.0),
+  pointer_default(unique)
+]
+interface proc_pickle
+{
+
+const short ARR_SIZE =  4;
+const short BUFSIZE = 1024;
+
+typedef struct _OBJECT1 {
+    long    al[ARR_SIZE];
+    short   s;
+    } OBJECT1;
+
+typedef struct _OBJECT2 {
+    short                   sSize;
+    [size_is(sSize)] short  as[];
+    } OBJECT2;
+
+void
+ProcPickle(
+    [in,out, string] char * pTextId,
+    [in,out]  OBJECT1 *     pObject1,
+    [in,out]  OBJECT2 *     pObject2
+    );
+
+}
+

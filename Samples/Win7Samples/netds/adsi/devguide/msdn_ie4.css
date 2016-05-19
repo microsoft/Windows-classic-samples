@@ -1,0 +1,89 @@
+BODY {
+	font: x-small Verdana, Arial, Helvetica, sans-serif;
+	background-color: #FFFFFF;
+	color: #000000; }
+	
+h1, h2, h3, h4 {
+	font-family: verdana, Arial, Helvetica, sans-serif;	
+	font-weight: bold;
+	color: #000000; }
+	
+h1 {
+	font-size: 145%;
+	margin-bottom: .5em; }
+	
+h2 {
+	font-size: 125%;
+	margin-top: 1.5em;
+	margin-bottom: .5em; }
+	
+h3 {
+	font-size: 115%;
+	margin-top: 1.2em;
+	margin-bottom: .5em}
+	
+h4 {
+	font-size: 100%;
+	margin-top: 1.2em;
+	margin-bottom: .5em; }
+
+P  {
+	font: x-small Verdana, Arial, Helvetica, sans-serif;
+	color: #000000; }
+
+CODE {
+	font: 120% "Courier New", Courier, mono; }
+
+TD {
+	font-size: x-small; }
+
+A:LINK {
+	color: #0000FF; }
+	
+A:VISITED {
+	color: #660066; }
+	
+A:HOVER {
+	color: #FF9900; }
+	
+.label {
+	font-weight: bold; }
+	
+.tl {
+	margin-bottom: .75em; }
+	
+.atl {
+	padding-left: 1.5em;
+	padding-bottom: .75em; }
+	
+.cfe {
+	font-weight: bold; }
+	
+.mini {
+	font-size: smaller; }
+	
+LI {
+	margin-top: .75em;
+	margin-bottom: .75em;
+	color: #000000; }
+	
+UL {
+	list-style: disc; }
+
+UL UL, OL OL, OL UL, UL OL {
+	margin-top: 1em;
+	margin-bottom: 1em; }
+	
+LI P {
+	margin-top: .5em;
+	margin-bottom: .5em; }
+
+.dt {
+	margin-bottom: -1em; }
+	
+.indent {
+	margin-left: 1.5em; }
+	
+SUP {
+	text-decoration: none;
+	font-size: smaller; }

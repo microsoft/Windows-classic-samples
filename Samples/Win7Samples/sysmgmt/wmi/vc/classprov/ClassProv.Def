@@ -1,0 +1,9 @@
+; Copyright (c)  Microsoft Corporation, All Rights Reserved
+LIBRARY         CLASSPROV
+;DESCRIPTION     'Sample WINMGMT Class Provider (c)1998 Microsoft Corp.'
+
+EXPORTS
+                DllGetClassObject         PRIVATE
+                DllCanUnloadNow           PRIVATE
+                DllRegisterServer         PRIVATE
+                DllUnregisterServer       PRIVATE

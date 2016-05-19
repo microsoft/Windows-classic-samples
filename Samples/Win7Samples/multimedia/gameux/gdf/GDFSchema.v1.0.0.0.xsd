@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GDFSchema" targetNamespace="urn:schemas-microsoft-com:GameDescription.v1" elementFormDefault="qualified" xmlns="urn:schemas-microsoft-com:GameDescription.v1" xmlns:mstns="urn:schemas-microsoft-com:GameDescription.v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:baseTypes="urn:schemas-microsoft-com:GamesExplorerBaseTypes.v1" version="1.0.0.0">
+  <xs:annotation>
+    <xs:documentation>
+            This is the Game Definition File Schema. It requires the Game Explorer Base Types schema to validate.
+        </xs:documentation>
+  </xs:annotation>
+  <xs:import namespace="urn:schemas-microsoft-com:GamesExplorerBaseTypes.v1" />
+  <xs:element name="GameDefinitionFile">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="GameDefinition" type="gameDefinition" />
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="gameDefinition">
+    <xs:all>
+      <xs:annotation>
+      </xs:annotation>
+      <xs:element name="Name" type="baseTypes:boundedString" nillable="false" />
+      <xs:element name="Description" type="baseTypes:boundedString" nillable="false" minOccurs="0">
+      </xs:element>
+      <xs:element name="ReleaseDate" type="xs:date" nillable="false" minOccurs="0">
+      </xs:element>
+      <xs:element name="Genres" type="Genres" minOccurs="0">
+      </xs:element>
+      <xs:element name="Ratings" minOccurs="0" type="ratings">
+      </xs:element>
+      <xs:element name="Version" type="version">
+      </xs:element>
+      <xs:element name="SavedGames" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+          </xs:sequence>
+          <xs:attributeGroup ref="baseTypes:filePathAttributeGroup" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="WindowsSystemPerformanceRating" minOccurs="0" type="windowsSystemPerformanceRating">
+      </xs:element>
+      <xs:element name="Developers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Developer" type="link" minOccurs="1" maxOccurs="5" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Publishers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Publisher" minOccurs="1" maxOccurs="5" type="link">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GameExecutables" type="gameExecutableList" maxOccurs="1" minOccurs="0">
+      </xs:element>
+    </xs:all>
+    <xs:attribute name="gameID" type="baseTypes:guid" use="required" />
+    <xs:attribute name="WMID" type="baseTypes:guid" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="Genres">
+    <xs:sequence>
+      <xs:element name="Genre" type="baseTypes:boundedString" maxOccurs="5" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parentalControlRating">
+    <xs:annotation>
+      <xs:documentation>
+                The parental controls ratings are split into a "Rating ID" which is the actual rating, and a "Rating System ID"
+                for the various rating systems. Each "Rating" has a set of Descriptors which represent specific content present in the game.
+            </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Descriptor" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence />
+          <xs:attribute name="descriptorID" type="baseTypes:guid" use="required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ratingSystemID" type="baseTypes:guid" use="required" />
+    <xs:attribute name="ratingID" type="baseTypes:guid" use="required" />
+  </xs:complexType>
+  <xs:complexType name="windowsSystemPerformanceRating">
+    <xs:sequence>
+    </xs:sequence>
+    <xs:attribute name="minimum" type="xs:decimal" use="required" />
+    <xs:attribute name="recommended" type="xs:decimal" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ratings">
+    <xs:sequence>
+      <xs:element name="Rating" type="parentalControlRating" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="version">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="VersionNumber" type="versionNumber" />
+        <xs:element name="VersionFile" type="versionFile" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="versionNumber">
+    <xs:annotation>
+      <xs:documentation>
+                You can either point the version number to a binary executable, which we will 
+                investigate for version information, or you can hard-code the version number into your GDF.
+            </xs:documentation>
+    </xs:annotation>
+    <xs:sequence />
+    <xs:attribute name="versionNumber" type="baseTypes:fourPartVersion" />
+  </xs:complexType>
+  <xs:complexType name="versionFile">
+    <xs:sequence>
+    </xs:sequence>
+    <xs:attributeGroup ref="baseTypes:filePathAttributeGroup" />
+  </xs:complexType>
+  <xs:complexType name="link">
+    <xs:simpleContent>
+      <xs:extension base="baseTypes:boundedString">
+        <xs:attribute name="URI" type="xs:anyURI" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="gameExecutableList">
+    <xs:sequence>
+      <xs:element name="GameExecutable" type="gameExecutable" maxOccurs="unbounded" minOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gameExecutable">
+    <xs:sequence />
+    <xs:attribute name="path" type="baseTypes:boundedString" />
+  </xs:complexType>
+</xs:schema>

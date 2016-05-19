@@ -1,0 +1,166 @@
+#include <windows.h>
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Set &Input File...",          IDM_SETINPUT
+        MENUITEM "Set &Output File...",         IDM_SETOUTPUT
+        MENUITEM "&Save Graph to File...",      IDM_OPTIONS_SAVEGRAPH
+        MENUITEM SEPARATOR
+        MENUITEM "&Capture Size...",            IDM_CAPSIZE
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+
+    POPUP "Graph &Mode"
+    BEGIN
+        MENUITEM "&Preview",                    IDM_PREVIEW, CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "&DV To File (Type1)",         IDM_DVTOFILE
+        MENUITEM "DV To File (Type1) (&no preview)", IDM_DVTOFILE_NOPRE
+        MENUITEM "&File (Type1) To DV",         IDM_FILETODV
+        MENUITEM "File (Type&1) To DV (no preview)", IDM_FILETODV_NOPRE
+        MENUITEM SEPARATOR
+        MENUITEM "D&V To File (Type2)",         IDM_DVTOFILE_TYPE2
+        MENUITEM "DV To File (Type2) (n&o preview)", 
+                                                IDM_DVTOFILE_NOPRE_TYPE2
+        MENUITEM "File (&Type2) To DV",         IDM_FILETODV_TYPE2
+        MENUITEM "File (Type&2) To DV (no preview)", 
+                                                IDM_FILETODV_NOPRE_TYPE2
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Refresh Mode",               IDM_REFRESHMODE
+        MENUITEM "&Check Tape",                 IDM_CHECKTAPE
+        MENUITEM "Change &Decode Size...",      IDM_DECODESIZE
+        MENUITEM "&Half FrameRate",             IDM_FRAMERATE
+    END
+ 
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About...",                   IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TOOLBAR             BITMAP  DISCARDABLE     "TOOLBAR.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOG DISCARDABLE  10, 20, 167, 92
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "About DVApp..."
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "Sample Digital Video Application",IDC_STATIC,10,29,146,
+                    8,NOT WS_GROUP
+    LTEXT           "Version",IDC_STATIC,66,53,26,8,NOT WS_GROUP
+    LTEXT           "9.0",IDC_STATIC,96,53,20,8,NOT WS_GROUP
+    CTEXT           "Copyright © Microsoft Corporation",IDC_STATIC,
+                    10,41,146,8,NOT WS_GROUP
+    DEFPUSHBUTTON   "OK",IDOK,70,69,32,14,WS_GROUP
+    CTEXT           "DVApp",IDC_STATIC,43,11,79,8,NOT WS_GROUP
+END
+
+IDD_DIALOG_CAPSIZE DIALOG DISCARDABLE  0, 0, 185, 105
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Choose capture size"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,124,10,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,124,27,50,14
+    GROUPBOX        "Size &options",IDC_STATIC,12,6,107,52
+    CONTROL         "Capture based on &time",IDC_RADIO_TIME,"Button",
+                    BS_AUTORADIOBUTTON,20,19,87,10
+    CONTROL         "Capture based on &size",IDC_RADIO_SIZE,"Button",
+                    BS_AUTORADIOBUTTON,20,31,86,10
+    CONTROL         "&No Limit",IDC_RADIO_NOLIMIT,"Button",
+                    BS_AUTORADIOBUTTON,20,43,79,10
+    EDITTEXT        IDC_EDIT_TIME,15,85,31,14,ES_NUMBER
+    CONTROL         "Spin2",IDC_SPIN_TIME,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,47,85,10,
+                    14
+    EDITTEXT        IDC_EDIT_SIZE,67,85,40,14,ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN_SIZE,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,108,85,10,
+                    14
+    LTEXT           "Capture time\n(seconds)",IDC_STATIC,14,66,49,17
+    LTEXT           "Capture size\n(MB)",IDC_STATIC,67,66,40,16
+END
+
+IDD_DIALOG_CHOOSEMODE DIALOG DISCARDABLE  0, 0, 186, 74
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Choose Camera Mode"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "The application cannot determine the playback mode of the DV camera.  Please choose the correct mode below.",
+                    IDC_STATIC,7,10,172,30
+    PUSHBUTTON      "&Camera",IDC_BUTTON_CAMERA,30,46,50,14
+    PUSHBUTTON      "&VCR",IDC_BUTTON_VCR,104,46,50,14
+END
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 9,0,0,0
+ PRODUCTVERSION 9,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "DirectShow Sample\0"
+            VALUE "CompanyName", "Microsoft\0"
+            VALUE "FileDescription", "DVApp Sample\0"
+            VALUE "FileVersion", "9.00\0"
+            VALUE "InternalName", "DVApp\0"
+            VALUE "LegalCopyright", "Copyright (c) Microsoft Corporation\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "DVApp.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "DirectX 9 SDK\0"
+            VALUE "ProductVersion", "9.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

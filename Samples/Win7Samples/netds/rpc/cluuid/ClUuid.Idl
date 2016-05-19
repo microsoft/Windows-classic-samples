@@ -1,0 +1,12 @@
+[ uuid (4AF72C40-4DAA-1068-A9AD-08002B2EB23C),
+  version(1.0),
+  pointer_default(unique)
+]
+interface cluuid
+{
+
+void HelloProc([in] handle_t h1,[in, string] unsigned char * pszString);
+
+void Shutdown([in] handle_t h1);
+
+}

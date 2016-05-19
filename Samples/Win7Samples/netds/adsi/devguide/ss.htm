@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<title>Active Directory Service Interfaces - Site Server</title>
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="40">
+  <tr>
+    <td width="2%" height="19"></td>
+    <td width="98%" height="19">
+    </td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21"><map name="FPMap4">
+      <area href="http://www.microsoft.com/siteserver/?RLD=259" shape="rect" coords="7, 7, 238, 59"></map><img src="siteserver.gif" width="250" height="60"
+    alt="http://www.microsoft.com/siteserver/?RLD=259" border = "0" usemap="#FPMap4"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21" valign="top">&nbsp;<p><strong><font face="Verdana" color="#0080C0"><small>Requirements</small></font></strong><ul>
+      <li><font face="Verdana"><small>Install Site Server 3.0 or Site Server
+        Commerce Edition 3.0,
+        and <a href="http://www.microsoft.com/siteserver/site/DeployAdmin/SP3.htm"> Site Server's Service Pack
+        3 or later</a>.&nbsp; For more information about Site Server, click <a
+        href="http://www.microsoft.com/siteserver">here</a>.</small><br>
+        <small></small></font></li>
+      <li><small><font face="Verdana">Install ADSI. </font></small></li>
+    </ul>
+    <p><small><font face="Verdana">&nbsp;</font></small></p>
+    <p><strong><font face="Verdana" color="#0080C0"><small>Creating Members</small></font></strong></p>
+    <p><font face="Verdana" size="2">This information is adopted from the Site Server Knowledge Base.</font></p>
+    <p><font face="Verdana"><small>Dim oADsContainer <br>
+    Dim oADsNewUser <br>
+    Dim oGuidGen <br>
+    Dim strGuid<br>
+    Dim strLdapPath 'The path to the ou=Members container<br>
+    <br>
+    strLdapPath = &quot;LDAP://localhost:5292/o=Microsoft/ou=Members&quot;<br>
+    </small><br>
+    <small>'Instantiate the GUID Generator that comes with Site Server<br>
+    'and store the GUID for use later on.
+    </small></font></p>
+    <p><font face="Verdana">
+    <small>Set oGuidGen = CreateObject(&quot;Membership.GuidGen.1&quot;)<br>
+    strGuid = oGuidGen.GenerateGuid<br>
+    </small><br>
+    <small>'Bind to the container in which the Member will be created.</small></font></p>
+    <p><font face="Verdana">
+    <small>Set oADsContainer = GetObject(strLdapPath)<br>
+    </small><br>
+    <small>'Create the new user object, note that the <b> Create()</b> method returns<br>
+    'an interface pointer.</small></font></p>
+    <p><font face="Verdana">
+    <small>Set oADsNewUser = oADsContainer.Create(&quot;member&quot;, &quot;cn=JohnDoe&quot;)<br>
+    oADsNewUser.Put &quot;givenName&quot;, &quot;John&quot; <br>
+    oADsNewUser.Put &quot;sn&quot;, &quot;Doe&quot;<br>
+    oADsNewUser.Put &quot;userPassword&quot;, &quot;password&quot;<br>
+    oADsNewUser.Put &quot;GUID&quot;, CStr(strGuid) <br>
+    oADsNewUser.SetInfo<br>
+    </small><br>
+    <small>'Destroy the objects.</small></font></p>
+    <p><font face="Verdana">
+    <small>Set oGuidGen = Nothing</small><br>
+    <small>Set oADsNewUser = Nothing<br>
+    Set oADsContainer = Nothing</small></font></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Adding Members to Groups</small></strong></font></p>
+    <p><font face="Verdana" size="2">Adopted from the Site Server Knowledge Base.</font></p>
+    <p><font face="Verdana"><small>Dim adsMemberOf </small><br>
+    <small>Dim adsGroup </small><br>
+    <small>Dim strLdapSrv<br>
+    Dim strMemberPath, strUserCn, strUserDn, _<br>
+    strGroupDn, strAdmin, strAdminPwd</small><br>
+    <small><br>
+    strLdapSrv = &quot;LDAP://localhost:5292&quot;<br>
+    strMemberPath = &quot;,ou=Members,o=Microsoft&quot;<br>
+    strUserCn = &quot;cn=JohnDoe&quot;<br>
+    strUserDn = strUserCn + strMemberPath<br>
+    strGroupDn = strLdapSrv + &quot;/o=Microsoft/ou=Groups/cn=Public&quot;<br>
+    strAdmin = &quot;cn=Administrator,ou=Members,o=Microsoft&quot;<br>
+    strAdminPwd = &quot;password&quot;</small><br>
+    <br>
+    <small><br>
+    'Bind to the specific group using Administrator credentials.</small></font></p>
+    <p><font face="Verdana">
+    <small>Set adsGroup = GetObject(&quot;LDAP:&quot;)<br>
+    Set adsGroup = adsGroup.OpenDSObject(strGroupDn, strAdmin, _<br>
+    strAdminPwd, CLng(0))</small><br>
+    <br>
+    <small><br>
+    'Create the new 'memberOf' object that will be stored in the group.</small></font></p>
+    <p><font face="Verdana">
+    <small>Set adsMemberOf = adsGroup.Create(&quot;memberof&quot;, strUserCn)<br>
+    </small><br>
+    <small>'Add the path to the user and store it in the 'memberObject' property.</small></font></p>
+    <p><font face="Verdana">
+    <small>adsMemberOf.Put &quot;memberobject&quot;, CStr(strUserDn)<br>
+    </small></font></p>
+    <p><font face="Verdana"><small>'Flush the property cache and update the directory.</small></font></p>
+    <p><font face="Verdana"><small>adsMemberOf.SetInfo</small><br>
+    <br>
+    <small>'Destroy the objects.</small></font></p>
+    <p><font face="Verdana">
+    <small> Set adsMemberOf = Nothing<br>
+    Set adsGroup = Nothing</small></font></p>
+    <p>&nbsp;</p>
+    <p><small><small><font face="Verdana">&nbsp;</font></small></small></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>&nbsp;</small></strong></font></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>&nbsp;</small></strong></font></td>
+  </tr>
+</table>
+</body>
+</html>

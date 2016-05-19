@@ -1,0 +1,127 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winresrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MAIN DIALOGEX 0, 0, 348, 201
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ASF Sample Generator"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Test Audio",IDC_PLAY_AUDIO,101,162,76,14
+    PUSHBUTTON      "Show Bitmap",IDC_SHOW_BITMAP,101,162,76,14
+    GROUPBOX        "Parser Configuration",IDC_STATIC_PARSER_CONFIG,9,34,168,116
+    CONTROL         "",IDC_SEEK,"msctls_trackbar32",WS_TABSTOP,16,108,160,21
+    LTEXT           "Start Position",IDC_STATIC_SEEK,16,96,78,8
+    CONTROL         "Reverse Parsing",IDC_REVERSE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,16,76,69,10
+    CONTROL         "",IDC_STREAM2,"Button",BS_AUTORADIOBUTTON | BS_LEFTTEXT | BS_NOTIFY,129,56,39,10
+    CONTROL         "",IDC_STREAM1,"Button",BS_AUTORADIOBUTTON | BS_LEFTTEXT | BS_NOTIFY,67,56,39,10
+    PUSHBUTTON      "Generate Samples",IDC_PARSE,9,162,76,14
+    LISTBOX         IDC_INFO,186,25,157,166,LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Open Media File...",IDC_OPENFILE,9,9,76,14
+    PUSHBUTTON      "Show File Properties",IDC_FILE_PROP,101,9,76,14
+    LTEXT           "Streams:",IDC_STATIC_STREAM,16,56,31,10
+    LTEXT           "00:00:00",IDC_TIME,142,133,29,8
+    RTEXT           "",IDC_STATIC_STREAM2,112,56,16,10,0,WS_EX_RIGHT
+    RTEXT           "",IDC_STATIC_STREAM1,51,56,16,10,0,WS_EX_RIGHT
+    LTEXT           "",IDC_STATIC_INFO,186,11,119,10
+END
+
+IDD_BITMAP DIALOGEX 0, 0, 315, 230
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Key Frame"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 343
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 191
+    END
+
+    IDD_BITMAP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 308
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 223
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

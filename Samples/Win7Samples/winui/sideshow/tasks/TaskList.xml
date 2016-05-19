@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tasks>
+	<Task>
+		<Name>Task 1</Name>
+		<Category>Work</Category>
+		<Details>Task details</Details>
+		<DueDate>12/05/2006</DueDate>
+	</Task>
+	<Task>
+		<Name>Task 2</Name>
+		<Category>Work</Category>
+		<Details>Task details</Details>
+		<DueDate>12/05/2006</DueDate>
+	</Task>
+	<Task>
+		<Name>Task 3</Name>
+		<Category>Work</Category>
+		<Details>Task details</Details>
+		<DueDate>12/05/2006</DueDate>
+	</Task>
+	<Task>
+		<Name>Task 4</Name>
+		<Category>Family</Category>
+		<Details>Task details</Details>
+		<DueDate>12/05/2006</DueDate>
+	</Task>
+	<Task>
+		<Name>Task 5</Name>
+		<Category>Family</Category>
+		<Details>Task details</Details>
+		<DueDate>12/05/2006</DueDate>
+	</Task>
+</Tasks>

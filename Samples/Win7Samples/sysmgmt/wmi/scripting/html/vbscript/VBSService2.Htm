@@ -1,0 +1,30 @@
+<!- Copyright (c)  Microsoft Corporation, All Rights Reserved ->
+<html>
+<!-------------------------------------------------------------------------
+ 
+	This sample illustrates the use of the WMI Scripting API within
+   an HTML page, using VBScript.  It displays a Win32_service name
+   using the synchronous API.
+
+   The WMI Scripting objects are instantiated using their PROGID's
+   and CreateObject call.
+
+---------------------------------------------------------------------------->
+
+<head>
+<title>WMI Scripting HTML Sample - Service Display 2 (VBScript synchronous version)</title>
+<script LANGUAGE="VBScript"> 
+	Sub window_onload 
+	Set Locator = CreateObject("WbemScripting.SWbemLocator")
+	Set Service = Locator.ConnectServer()
+	Set Process = Service.Get("Win32_Service.Name=""Winmgmt""")
+	document.all.info.innerText = Process.DisplayName
+	end sub
+</script>
+</head>
+
+<body>
+
+<p>The name of the WMI service is <span ID="info">unknown </span>. </p>
+</body>
+</html>

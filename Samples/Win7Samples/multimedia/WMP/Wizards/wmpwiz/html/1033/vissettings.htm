@@ -1,0 +1,144 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+<HTML DIR="LTR">
+    <HEAD>
+        <TITLE>Windows Media Player Plug-in Wizard</TITLE>
+        <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <STYLE TYPE="text/css">@import url();</STYLE>
+        <SCRIPT>
+        var strURL = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+        strURL += "VCWizards/";
+        strURL += window.external.GetHostLocale();
+        strURL += "/NewStyles.css";
+        document.styleSheets(0).imports(0).href = strURL;
+        </SCRIPT>
+        <SYMBOL NAME='HASPROPERTYPAGE' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='LISTENTOEVENTS' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='FRIENDLYNAME' TYPE="text" VALUE=""></SYMBOL>
+        <SYMBOL NAME='DESCRIPTION' TYPE="text" VALUE=""></SYMBOL>
+    </HEAD>
+    <BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        <DIV id="logo" style="POSITION: absolute"><IMG src="..\..\Images\logo.png">
+        </DIV>
+        <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            <P><FONT face="Arial" size="4">Visualization Plug-in</FONT>
+            </P>
+            <SPAN CLASS="itemText">
+                <FONT face="Arial" size="2">Choose visualization plug-in features:
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Property Page" id="HASPROPERTYPAGE" TABINDEX="1" ACCESSKEY="P" title="Property Page">
+                    <DIV CLASS="itemTextCheckboxA" ID="Div1" title="Property Page">
+                        <LABEL FOR="HASPROPERTYPAGE" ID="Label1"><u>P</u>roperty Page</LABEL>
+                    </DIV>
+                    <BR>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Listen to events" id="LISTENTOEVENTS" TABINDEX="2" ACCESSKEY="L" title="Listen to events" CLASS="SINGLECHECKBOX">
+                    <DIV CLASS="itemTextCheckboxA" ID="Div2" title="Listen to events">
+                        <LABEL FOR="LISTENTOEVENTS" ID="Label2"><u>L</u>isten to events</LABEL>
+                    </DIV>
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <SPAN CLASS="itemText" ID="Span3" title="Friendly name">
+                        <LABEL FOR="FRIENDLYNAME" ID="Label3"><u>F</u>riendly Name:</LABEL>
+                    </SPAN>
+                    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Friendly name" id="FRIENDLYNAME" TABINDEX="3" ACCESSKEY="F" title="Friendly name">
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <SPAN CLASS="itemText" ID="Span1" title="Description">
+                        <LABEL FOR="DESCRIPTION" ID="Label4"><u>D</u>escription:</LABEL>
+                    </SPAN>
+                    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Description" id="DESCRIPTION" TABINDEX="4" ACCESSKEY="D" title="Description">
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    To continue, click Next </FONT>
+            </SPAN>
+        </DIV>
+        <DIV style="LEFT: 0px; WIDTH: 600px; POSITION: absolute; TOP: 304px; HEIGHT: 2px">
+            <hr>
+        </DIV>
+        <DIV style="LEFT: 250px; WIDTH: 200px; POSITION: absolute; TOP: 316px; HEIGHT: 48px">
+            <TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0" ID="Table1">
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="FinishBtn" ACCESSKEY="N" onClick="OnNext(document);"><U>N</U>ext</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="CancelBtn" ACCESSKEY="C" onClick="window.external.Finish(document, 'cancel');">
+                        <U>C</U>ancel</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+                    &nbsp;
+                </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+    </BODY>
+</HTML>
+<SCRIPT LANGUAGE="JSCRIPT">
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+    setDirection();
+    window.external.Load(document);
+    
+    FRIENDLYNAME.value = window.external.FindSymbol("Root") + " Plugin";
+    DESCRIPTION.value = "Description of " + window.external.FindSymbol("Root") + " plugin";
+}
+
+function OnNext(document)
+{
+    window.external.RemoveSymbol("FLAGSTRING");
+
+    if (HASPROPERTYPAGE.checked)
+    {
+        window.external.AddSymbol("FLAGSTRING", "EFFECT_HASPROPERTYPAGE");
+    }
+    else
+    {
+        window.external.AddSymbol("FLAGSTRING", "0");
+    }
+
+    OnWizFinish(document);
+}
+
+function Next(document, linkto)
+
+// Tell the wizard control which page to load next
+
+{
+    window.external.Next(document, linkto);
+}
+
+
+
+function OnFinish(obj)
+
+// Called when the user clicks the finish button.  OnWizFinish is a function in common.js
+
+{
+    OnWizFinish(obj);
+}
+
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT>
+    var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+    strPath += "VCWizards/";
+    strPath += window.external.GetHostLocale();
+    var strScriptPath = strPath + "/Script.js";
+    var strCommonPath = strPath + "/Common.js";
+    document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+    document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

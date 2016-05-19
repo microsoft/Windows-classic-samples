@@ -1,0 +1,38 @@
+HKCR
+{
+	EraseSample.MsftEraseSample.1 = s 'Erase Sample for IMAPI v2'
+	{
+		CLSID = s '{786e85d1-9f56-47ed-9cbb-9be1e9b2b074}'
+	}
+	EraseSample.MsftEraseSample   = s 'Erase Sample for IMAPI v2'
+	{
+		CLSID = s '{786e85d1-9f56-47ed-9cbb-9be1e9b2b074}'
+		CurVer = s 'EraseSample.MsftEraseSample.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {786e85d1-9f56-47ed-9cbb-9be1e9b2b074} = s 'Erase Sample for IMAPI v2'
+		{
+			ProgID = s 'EraseSample.MsftEraseSample.1'
+			VersionIndependentProgID = s 'EraseSample.MsftEraseSample'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '{0D8D0D53-2375-4759-8A82-64D0F426EAB0}'
+			'TypeLib' = s '{32DAE09E-4A98-4967-A47C-C0744127B8CB}'
+		}
+	}
+	NoRemove AppID
+	{
+		'%APPID%' = s 'EraseSample'
+		{
+			val DLLSurrogate = s ''
+		}
+		'EraseSample.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

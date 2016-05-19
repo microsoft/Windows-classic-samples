@@ -1,0 +1,7 @@
+LIBRARY DumpVars
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+    TerminateExtension
+    

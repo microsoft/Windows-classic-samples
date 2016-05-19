@@ -1,0 +1,62 @@
+//+--------------------------------------------------------------------------
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+//  Abstract:
+//      IDL source for GamutMapModelPluginSample
+//      This file will be processed by the MIDL tool to
+//      produce the type library (GamutMapModelPluginSample.tlb) and
+//      marshalling code.
+//
+//----------------------------------------------------------------------------
+
+import "oaidl.idl";
+import "ocidl.idl";
+#ifdef USE_SDK_INC
+import "WcsPlugin.idl";
+#else
+import "WcsPlugin.idl";
+#endif
+//
+// Sample private interface
+//
+[
+    object,
+    // TODO: Replace all occurences with new GUID when developing plugin
+    uuid(94617F91-2C14-4485-9B94-A78579B73523),
+    helpstring("ISampleDeviceModelPrivateInterface Interface"),
+    pointer_default(unique)
+]
+interface ISampleDeviceModelPrivateInterface:IUnknown
+{    
+   HRESULT SamplePrivateMethod();
+};
+
+
+//
+// Plugin class object
+//
+[
+    // TODO: Replace all occurences with new GUID when developing plugin
+	uuid(32B5DD48-A0C5-4739-8693-EAD1DD840627),
+	version(1.0),
+	helpstring("GamutMapModelPluginSample 1.0 Type Library")
+]
+library GamutMapModelPluginSampleLib
+{
+	importlib("stdole2.tlb");
+	[
+        // TODO: Replace all occurences with new GUID when developing plugin
+		uuid(4B9E0DFE-F8F6-4d8c-B14F-F99511C5002F),
+		helpstring("Wcs Sample Gamut Map Model Plugin")
+	]
+	coclass GamutMapModelPluginSample
+	{   
+		[default] interface IGamutMapModelPlugIn;
+	};
+};

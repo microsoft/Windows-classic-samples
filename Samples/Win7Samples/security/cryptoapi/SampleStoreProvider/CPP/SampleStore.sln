@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleStore", "Store\SampleStore.vcproj", "{474C88C5-2740-49BD-84AF-FC2952CF8569}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleStoreProvider", "Provider\SampleStoreProvider.vcproj", "{176919BB-55B7-46B7-88BF-78218755C9A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Debug|Win32.ActiveCfg = Debug|Win32
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Debug|Win32.Build.0 = Debug|Win32
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Debug|x64.ActiveCfg = Debug|x64
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Debug|x64.Build.0 = Debug|x64
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Release|Win32.ActiveCfg = Release|Win32
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Release|Win32.Build.0 = Release|Win32
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Release|x64.ActiveCfg = Release|x64
+		{474C88C5-2740-49BD-84AF-FC2952CF8569}.Release|x64.Build.0 = Release|x64
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Debug|Win32.Build.0 = Debug|Win32
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Debug|x64.ActiveCfg = Debug|x64
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Debug|x64.Build.0 = Debug|x64
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Release|Win32.ActiveCfg = Release|Win32
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Release|Win32.Build.0 = Release|Win32
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Release|x64.ActiveCfg = Release|x64
+		{176919BB-55B7-46B7-88BF-78218755C9A4}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

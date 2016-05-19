@@ -1,0 +1,95 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_GALLERY       ICON         "Gallery.ico"
+IDI_SMALL               ICON         "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+IDB_RECTANGLE_96                BITMAP         "RES\\RECTANGLE_96.BMP"
+IDB_RECTANGLE_120               BITMAP         "RES\\RECTANGLE_120.BMP"
+IDB_RECTANGLE_144               BITMAP         "RES\\RECTANGLE_144.BMP"
+IDB_RECTANGLE_192               BITMAP         "RES\\RECTANGLE_192.BMP"
+IDB_ROUNDED_RECTANGLE_96        BITMAP         "RES\\ROUNDEDRECTANGLE_96.BMP"
+IDB_ROUNDED_RECTANGLE_120       BITMAP         "RES\\ROUNDEDRECTANGLE_120.BMP"
+IDB_ROUNDED_RECTANGLE_144       BITMAP         "RES\\ROUNDEDRECTANGLE_144.BMP"
+IDB_ROUNDED_RECTANGLE_192       BITMAP         "RES\\ROUNDEDRECTANGLE_192.BMP"
+IDB_ELLIPSE_96                  BITMAP         "RES\\ELLIPSE_96.BMP"
+IDB_ELLIPSE_120                 BITMAP         "RES\\ELLIPSE_120.BMP"
+IDB_ELLIPSE_144                 BITMAP         "RES\\ELLIPSE_144.BMP"
+IDB_ELLIPSE_192                 BITMAP         "RES\\ELLIPSE_192.BMP"
+IDB_DIAMOND_96                  BITMAP         "RES\\DIAMOND_96.BMP"
+IDB_DIAMOND_120                 BITMAP         "RES\\DIAMOND_120.BMP"
+IDB_DIAMOND_144                 BITMAP         "RES\\DIAMOND_144.BMP"
+IDB_DIAMOND_192                 BITMAP         "RES\\DIAMOND_192.BMP"
+
+IDB_NONE_96                     BITMAP         "RES\\NOBORDER_96.BMP"
+IDB_NONE_120                    BITMAP         "RES\\NOBORDER_120.BMP"
+IDB_NONE_144                    BITMAP         "RES\\NOBORDER_144.BMP"
+IDB_NONE_192                    BITMAP         "RES\\NOBORDER_192.BMP"
+IDB_SOLID_96                    BITMAP         "RES\\SOLIDBORDER_96.BMP"
+IDB_SOLID_120                   BITMAP         "RES\\SOLIDBORDER_120.BMP"
+IDB_SOLID_144                   BITMAP         "RES\\SOLIDBORDER_144.BMP"
+IDB_SOLID_192                   BITMAP         "RES\\SOLIDBORDER_192.BMP"
+IDB_DASH_96                     BITMAP         "RES\\DASHBORDER_96.BMP"
+IDB_DASH_120                    BITMAP         "RES\\DASHBORDER_120.BMP"
+IDB_DASH_144                    BITMAP         "RES\\DASHBORDER_144.BMP"
+IDB_DASH_192                    BITMAP         "RES\\DASHBORDER_192.BMP"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+   IDC_GALLERY   "GALLERY"
+   IDS_APP_TITLE       "Gallery"
+END
+
+STRINGTABLE
+BEGIN
+   IDS_RECTANGLE            "Rectangle"
+   IDS_ELLIPSE              "Ellipse"
+   IDS_ROUNDED_RECTANGLE    "Rounded Rectangle"
+   IDS_DIAMOND              "Diamond"
+
+   IDS_BORDER_NONE          "No Border"
+   IDS_BORDER_SOLID         "Solid Line"
+   IDS_BORDER_DASH          "Dash Line"
+
+   IDS_BORDERSIZE_1         "1"
+   IDS_BORDERSIZE_3         "3"
+   IDS_BORDERSIZE_5         "5"
+
+   IDS_LAYOUT_1             "1x1"
+   IDS_LAYOUT_2             "2x2"
+   IDS_LAYOUT_3             "3x3"
+
+   IDS_SIZE_CATEGORY        "Size"
+   IDS_COLOR_CATEGORY       "Color"
+
+   IDS_INVALID_SIZE_MESSAGE "Border size must be an integer from 1-15."
+   IDS_INVALID_SIZE_TITLE   "Invalid border size"
+
+END
+
+/////////////////////////////////////////////////////////////////////////////
+// Ribbon
+#include "galleryUI.rc"

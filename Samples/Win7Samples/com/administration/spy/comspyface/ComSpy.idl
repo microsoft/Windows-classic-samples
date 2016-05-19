@@ -1,0 +1,48 @@
+// ----------------------------------------------------------------------------
+// 
+// This file is part of the Microsoft COM+ Samples.
+// 
+// Copyright (C) 1995-2000 Microsoft Corporation. All rights reserved.
+// 
+// This source code is intended only as a supplement to Microsoft
+// Development Tools and/or on-line documentation. See these other
+// materials for detailed information regarding Microsoft code samples.
+// 
+// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+// 
+// ----------------------------------------------------------------------------
+import "oaidl.idl";
+import "ocidl.idl";
+
+	[
+		object,
+		uuid(27EF6FD1-AF60-11D0-B188-00AA00BA3258),		
+		helpstring("ISpyCon Interface"),
+		pointer_default(unique)
+	]
+	interface ISpyCon : IUnknown
+	{
+		[id(1), helpstring("method Run")] HRESULT Run();
+	};
+[
+	uuid(CBFE2577-B030-11D0-B188-00AA00BA3258),
+	version(1.0),
+	helpstring("ComSpy 1.0 Type Library")
+]
+library COMSPYLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(27EF6FD2-AF60-11D0-B188-00AA00BA3258),
+		helpstring("SpyCon Class")
+	]
+	coclass SpyCon
+	{
+		[default] interface ISpyCon;
+	};
+};

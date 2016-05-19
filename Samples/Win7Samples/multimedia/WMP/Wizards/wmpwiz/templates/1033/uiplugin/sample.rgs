@@ -1,0 +1,34 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {[!output CLASSID]} = s '[!output Safe_root] Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}
+HKEY_LOCAL_MACHINE
+{
+    NoRemove SOFTWARE
+    {
+        NoRemove Microsoft
+        {
+            NoRemove MediaPlayer
+            {
+                NoRemove UIPlugins
+                {
+                    ForceRemove {[!output CLASSID]}
+                    {
+                        val FriendlyName = s 'res://[!output root].dll/RT_STRING/#102'
+                        val Description = s 'res://[!output root].dll/RT_STRING/#103'
+                        val Capabilities = d '[!output FLAGS]'
+                    }
+                }
+            }
+        }
+    }
+}

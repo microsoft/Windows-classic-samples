@@ -1,0 +1,43 @@
+/*************************************************************************
+            Copyright Microsoft Corp. 1992 - 1996
+                Remote Machine strout sample
+
+    FILE    :   strout.idl
+
+    PURPOSE :   This file defines the interface for the strout example
+  
+*************************************************************************/
+[
+uuid(cab31280-b996-11cf-9548-00aa00374e69), // UUID
+pointer_default(unique),                    // Pointer default
+version(1.0)                                // Program version
+]
+interface strout_sample
+{
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/* Define a type for the second dimension variables that should be      */
+/* returned from the server. This should also work for UNICODE          */
+/* characters                                                           */
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#if defined _UNICODE
+    typedef [string, unique] wchar_t * str; // String of wide chars     
+#else
+    typedef [string, unique] char * str;    // String of ASCII chars    
+#endif
+
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /* Declaration of the remote procedure.                             */
+    /* This procedure will get the environment strings from the server  */
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    void GetRemoteEnv([in] handle_t h1,                  
+        // Number of lines in the envirionment block    
+        [in, out] unsigned long   * Lines, 
+        // Pointer to an array of pointers to the lines in the env. block. 
+        // MUST have comma before *Lines in size_of  to set the size of 
+        // the right dimension, which is the size of the array of pointers
+        [out, size_is(,*Lines)] str **EnvBlock);
+    
+    // Procedure to shut down the server 
+    void ShutDown([in] handle_t h1);
+}

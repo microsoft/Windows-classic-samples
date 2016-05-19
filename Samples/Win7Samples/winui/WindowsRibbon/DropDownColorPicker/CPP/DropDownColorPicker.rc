@@ -1,0 +1,36 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_RIBBONAPP       ICON         "res\\DDCP.ico"
+IDI_SMALL           ICON         "res\\DDCP.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN   
+   IDS_APP_TITLE       "DDCPSampleApp"
+   IDS_APP_CLASS       "RIBBONAPP"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Ribbon
+//
+#include "ribbonresUI.rc"

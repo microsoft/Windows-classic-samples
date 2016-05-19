@@ -1,0 +1,4 @@
+LIBRARY    ifslsp
+EXPORTS   
+    WSPStartup
+    GetLspGuid

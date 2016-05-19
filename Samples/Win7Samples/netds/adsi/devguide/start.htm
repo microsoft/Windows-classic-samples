@@ -1,0 +1,1398 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Getting Started</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="4588">
+  <tr>
+    <td width="2%" height="19"></td>
+    <td width="98%" height="19"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="1"></td>
+    <td width="98%" height="1"><img src="http://adsi/sdk/getstart.gif" width="148" height="56"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="4624"></td>
+    <td width="98%" height="4624" valign="top">&nbsp;
+      <p><font face="Verdana"><small>You should set up
+    your ADSI <a href="dev.htm">development environment</a> before we start.&nbsp; ADSI is
+    very easy and fun to program. This page gives you a quick start on ADSI programming. For
+    more advanced topics and provider-specific information, see the documentation and samples in the Platform SDK.</small></font>
+    
+      </p>
+    
+    <p><a name="top"></a><font face="Verdana" color="#0080C0"><strong><small>How do I:</small></strong></font>
+    
+    <ul>
+    
+      <li><font face="Verdana"><small><strong><a href="#connect">Connect/bind
+        to a directory object</a></strong><br>
+        First, you must bind to a directory object before any other operations, such as
+        searching, reading and modifying attributes, or enumerating are allowed.&nbsp; You can
+        connect or bind to a directory object remotely. </small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#credentials">Specify
+        alternate credentials</a></strong><br>
+        
+        In addition to the currently logged on user, ADSI allows you to specify other
+        alternate credentials. </small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#enumerate">Enumerate
+        children in a container</a></strong><br>
+        
+        A directory is normally a hierarchical model. It may have children which are also parents of other children.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#readAttr">Read an
+        attribute on an object</a></strong><br>
+        
+        An object may contain one or more attributes which can have a single
+        value or multiple values.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#write">Write an attribute
+        on an object</a></strong><br>
+        
+        You may modify attributes or write a new value.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#create">Create an object</a></strong><br>
+      
+      An object can be created for a given parent.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#delete">Delete an object</a></strong><br>
+      
+        An object can be deleted for a given parent.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#rename">Rename an object</a></strong><br>
+      
+        An object can be renamed for a given parent.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#move">Move an object</a></strong><br>
+      
+        An object can be moved from a given parent to a new destination parent.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#getObject">Get a child object</a></strong><br>
+        
+       You can bind to an object for a given parent.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#parent">Get a parent of an
+        object</a></strong><br>
+        
+        You can bind to the parent object.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#search">Search for a set
+        of objects</a></strong><br>
+        
+        You can specify criteria for searching a set of objects.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#filter">Filtering a set of
+        objects</a></strong><br>
+        
+        Another easy way to search is to use filtering. This is a subset of search capabilities.</small></font></li>
+    </ul>
+    
+    <ul>
+      <li><font face="Verdana"><small><strong><a href="#readSchema">Read Schema</a></strong><br>
+      
+        Each ADSI provider has a schema which defines the classes, attributes, and syntax.</small></font></li>
+    </ul>
+    
+    <p><font face="Verdana" color="#000000"><small>&nbsp;</small></font></p>
+    
+    <p><strong><font face="Verdana" color="#0080C0"><small>What's Next?</small></font></strong></p>
+    
+    <p><font face="Verdana" color="#000000"><small>Now that you are managing basic ADSI
+    operations, you can continue your quest to set up a fully functioning directory. To focus
+    on tasks you want to accomplish for the directory you're connecting to, visit the
+    provider's pages (WinNT for NT 4.0, LDAP for Active Directory, SiteServer, Exchange and
+    other LDAP directories, and more).</small></font></p>
+    
+    <br>
+    
+    <a name="connect"></a><font face="Verdana" color="#0080C0"><strong><small>Connecting/binding to a directory
+    object</small></strong></font>
+    
+    <p><font face="Verdana"><small>Before you bind to a directory object, you must know the
+    ADsPath.&nbsp; For example, in the Windows NT 4.0 directory, the path can be
+    WinNT://domainName/object. For Windows 2000 Active Directory, you can bind to it as
+    LDAP://DC=MyCompany, DC=COM.&nbsp; For Exchange Server, you should know the Exchange
+    Server name and its organization, for example, LDAP://exchSrv01/O=Microsoft. For more
+    information about each provider, visit the provider pages.</small></font></p>
+    
+    <p><font face="Verdana"><small>To bind to an object, use the <strong>GetObject</strong>
+    function for Visual Basic and the <strong>ADsGetObject</strong> function for Visual C++.
+    These functions run in the context of the currently logged on user.</small></font></p>
+    
+    <p><font face="Verdana"><small>'---Visual Basic Sample:&nbsp; Binding to JSmith user in
+    ARCADIABAY domain</small> <br>
+    
+    <small>Set obj = GetObject(&quot;WinNT://ARCADIABAY/JSmith,user&quot;)</small><br>
+    <br>
+    <small>'Source code can be found in the \samples\start\Binding\vb directory.</small></font></p>
+    <p><font face="Verdana"><small>// Visual C++ Sample: Binding to JSmith user in ARCADIABAY
+    domain</small><br>
+    <small>HRESULT hr;</small><br>
+    <small>IADs *pADs;</small><br>
+    <small>hr = ADsGetObject( L&quot;WinNT://ARCADIABAY/JSmith,user&quot;, IID_IADs, (void**)
+    &amp;pADs );</small><br>
+    //...<br>
+    <small>pADs-&gt;Release(); // Do not forget to release when you're done.</small></font></p>
+    <p><font face="Verdana"><small>//Source code can be found in the \samples\start\Binding\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p>&nbsp;</p>
+    <p><a name="credentials"></a><small><font face="Verdana"><strong><font color="#0080C0">Specifying
+    alternate credentials</font></strong> </font></small></p>
+    <p><small><font face="Verdana">Sometimes, you would like to bind to another object that
+    has a different set of credentials. This can be accomplished using the <strong>IADsOpenDSObject</strong>
+    interface, or the <strong>ADsOpenObject</strong> function for Visual C++.</font></small></p>
+    <p><small><font face="Verdana">'---- Visual Basic Sample: Binding to the JSmith user in
+    the ArcadiaBay domain with an alternate credential</font></small></p>
+    <p><font face="Verdana"><small>Set dso = GetObject(&quot;WinNT:&quot;)</small><br>
+    <small>Set usr = dso.OpenDSObject(&quot;WinNT://ARCADIABAY/JSmith,user&quot;,
+    &quot;Administrator&quot;, &quot;secret&quot;, ADS_SECURE_AUTHENTICATION)</small><br>
+    </font><br>
+    <font face="Verdana"><small>'Source code can be found in the \samples\start\Binding\vb
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>&nbsp;</small></font></p>
+    <p><font face="Verdana"><small>//---- Visual C++ Sample: Binding to the JSmith user in the
+    ArcadiaBay domain with an alternate credential</small><br>
+    <small>IADs *pADs;</small><br>
+    <small>HRESULT hr;</small><br>
+    <small>hr = ADsOpenObject(L&quot;WinNT://ARCADIABAY/JSmith,user&quot;,
+    L&quot;Administrator&quot;, L&quot;secret&quot;, ADS_SECURE_AUTHENTICATION, IID_IADs,
+    (void**) &amp;pADs );</small><br>
+    <small>//...</small><br>
+    <small>// Make sure that you release it after use</small>.<br>
+    <small>pADs-&gt;Release();</small></font></p>
+    <p><font face="Verdana"><small>//Source code can be found in the \samples\start\Binding\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p>&nbsp;</p>
+    <p><a name="enumerate"></a><font face="Verdana" color="#0080C0"><strong><small>Enumerating
+    children in a container</small></strong></font></p>
+    <p><font face="Verdana"><small>Once you bind to an object which is a container, you'll be
+    able to enumerate its children using a normal For...each statement in Visual Basic, or
+    using the <strong>ADsBuildEnumerator</strong> function for Visual C++. Note that only
+    immediate children are enumerated using this call. If you want to list all of the objects
+    of a subtree, you must use the <strong><a href="#search">Search</a></strong> function.</small></font></p>
+    <p><font face="Verdana"><small>' Visual Basic Sample:&nbsp; Enumerating children for a
+    given container</small><br>
+    <br>
+    <small>Set cont = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    For Each obj In cont<br>
+    &nbsp; Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp; &quot;)&quot;<br>
+    Next<br>
+    </small></font><br>
+    '<small><font face="Verdana">Source code can be found in the \samples\start\Enum\vb
+    directory.</font></small></p>
+    <p><font face="Verdana"><small>// Visual C++ Sample: Enumerating children for a given
+    container</small><br>
+    <br>
+    <small>&nbsp;&nbsp;&nbsp; ////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Bind to a domain object<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE&quot;, IID_IADsContainer,
+    (void**) &amp;pCont );<br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Enumerate<br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IEnumVARIANT *pEnum = NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsBuildEnumerator( pCont, &amp;pEnum );<br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ULONG lFetch;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IADs *pChild=NULL;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantInit(&amp;var);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while( SUCCEEDED(ADsEnumerateNext( pEnum, 1,
+    &amp;var, &amp;lFetch )) &amp;&amp; lFetch == 1 )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr =
+    V_DISPATCH(&amp;var)-&gt;QueryInterface( IID_IADs, (void**) &amp;pChild );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrName;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrClass;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Get more information on the child classes<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Name(&amp;bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Class(&amp;bstrClass);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    printf(&quot;%S\t(%S)\n&quot;, bstrName, bstrClass );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Clean-up<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrClass);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    </small></font></p>
+    <p><font face="Verdana"><small>// Do not forget to free up the enumerator using <strong>ADsFreeEnumerator</strong>.<br>
+    &nbsp;&nbsp;&nbsp; if ( pEnum )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ADsFreeEnumerator( pEnum );<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release();</small></font></p>
+    
+    <p><small><font face="Verdana">// Source code can be found in the \samples\start\Enum\vc
+    directory.</font></small></p>
+    <p><small><font face="Verdana">Back to <a href="#top">top</a></font></small></p>
+    
+    <p><small><font face="Verdana" color="#0080C0"><strong>&nbsp;</strong></font></small></p>
+    
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="readAttr"></a>Reading an attribute value on
+    an object</small></strong></font></p>
+    
+    <p><font face="Verdana"><small>To read an attribute, you can use the <strong>IADs::Get</strong>
+    method for both Visual Basic and Visual C++.&nbsp; If you are a Visual C++ programmer, you
+    can also use the <strong>IDirectoryObject::GetObjectAttributes</strong> method. Note that <u>not</u>
+    all providers support the <strong>IDirectoryObject</strong> interface. </small></font></p>
+    
+    <p><small><font face="Verdana">'--- Visual Basic Sample: Getting attributes with single
+    and multiple values</font></small></p>
+    
+    <p><small><font face="Verdana">Set usr =
+    GetObject(&quot;WinNT://INDEPENDENCE/Administrator,user&quot;)<br>
+    
+    <br>
+    
+    '---&nbsp; Reading an attribute with a single value<br>
+    Debug.Print usr.Name<br>
+    Debug.Print usr.FullName<br>
+    
+    <br>
+    
+    'Or you can also use generic <strong>Get</strong><br>
+    Debug.Print usr.Get(&quot;FullName&quot;)<br>
+    
+    <br>
+    
+    '--- Reading attributes with multiple values<br>
+    sid = usr.Get(&quot;objectSID&quot;)<br>
+    For Each sidByte In sid<br>
+    &nbsp;&nbsp; Debug.Print Hex(sidByte)<br>
+    Next<br>
+    <br>
+    'Or you can also use LBound and UBound for an attribute with multiple values.<br>
+    For i = LBound(sid) To UBound(sid)<br>
+    &nbsp;&nbsp; Debug.Print Hex(sid(i))<br>
+    Next i<br>
+    </font></small></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Read\vb
+    directory.</font></small></p>
+    <p>&nbsp;</p>
+    <p><small><font face="Verdana">'--- Visual C++ Sample: Getting attributes with single and
+    multiple values</font></small></p>
+    <p><font face="Verdana"><small>&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADs *pUsr=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Bind to a directory object<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE/Administrator,user&quot;,
+    IID_IADs, (void**) &amp;pUsr );</small><br>
+    <small>&nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Get an attribute with a single value<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    &nbsp;&nbsp;&nbsp; VariantInit(&amp;var);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pUsr-&gt;Get(L&quot;FullName&quot;, &amp;var );<br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;FullName: %S\n&quot;,
+    V_BSTR(&amp;var) );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( pUsr )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pUsr-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Get an attribute with a multiple value from a service object<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IADs *pSvc = NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;WinNT://INDEPENDENCE/ANDYHAR11/Browser,service&quot;, IID_IADs,
+    (void**) &amp;pSvc );<br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pSvc-&gt;Get(L&quot;Dependencies&quot;, &amp;var );<br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LONG lstart, lend;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SAFEARRAY *sa = V_ARRAY( &amp;var );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARIANT varItem;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get the lower and upper bound<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr = SafeArrayGetLBound( sa, 1, &amp;lstart );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr = SafeArrayGetUBound( sa, 1, &amp;lend );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Now iterate and print the content<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantInit(&amp;varItem);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Getting service dependencies using IADs
+    :\n&quot;);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for ( long idx=lstart; idx &lt; lend; idx++ )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr =
+    SafeArrayGetElement( sa, &amp;idx, &amp;varItem );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;%S &quot;,
+    V_BSTR(&amp;varItem));<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    VariantClear(&amp;varItem);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;\n&quot;);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; // Clean-up<br>
+    &nbsp;&nbsp;&nbsp; if ( pSvc )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pSvc-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;
+    //////////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Using <strong>IDirectoryObject</strong> to get an attribute with
+    multiple values<br>
+    &nbsp;&nbsp;&nbsp; // Note: NOT all providers support this interface.<br>
+    &nbsp;&nbsp;&nbsp;
+    /////////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDirectoryObject&nbsp;&nbsp;&nbsp; *pDirObject=NULL;<br>
+    &nbsp;&nbsp;&nbsp; ADS_ATTR_INFO&nbsp;&nbsp; *pAttrInfo=NULL;<br>
+    &nbsp;&nbsp;&nbsp; DWORD
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    dwReturn;<br>
+    &nbsp;&nbsp;&nbsp; LPWSTR
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pAttrNames[]={L&quot;objectClass&quot; };<br>
+    &nbsp;&nbsp;&nbsp; DWORD
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    dwNumAttr=sizeof(pAttrNames)/sizeof(LPWSTR);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://CN=Administrator,CN=Users,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    IID_IDirectoryObject, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pDirObject );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; // Now get the attribute<br>
+    &nbsp;&nbsp;&nbsp; hr = pDirObject-&gt;GetObjectAttributes( pAttrNames, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    dwNumAttr, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &amp;pAttrInfo, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &amp;dwReturn );<br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;Getting the objectClass multivalue
+    attribute using IDirectoryObject :\n&quot;);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (DWORD val=0; val &lt;
+    pAttrInfo-&gt;dwNumValues; val++, pAttrInfo-&gt;pADsValues++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    printf(&quot; %S\n&quot;, pAttrInfo-&gt;pADsValues-&gt;CaseIgnoreString);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FreeADsMem(pAttrInfo); // the pAttrInfo must be
+    freed using FreeADsMem<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; //Clean-up<br>
+    &nbsp;&nbsp;&nbsp; pDirObject-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    </small></font></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Read\vc
+    directory.</font></small></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="write"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Writing an attribute on an object</small></strong></font></p>
+    <p><font face="Verdana"><small>You can modify an attribute using the <strong>IADs::Put</strong>
+    and <strong>IADs::PutEx</strong> methods. For Visual C++, you can also use the <strong>IDirectoryObject::SetObjectAttributes
+    </strong>method.</small></font></p>
+    <p><small><font face="Verdana">'--- Visual Basic Sample:&nbsp; Setting attributes with
+    single and multiple values</font></small></p>
+    <p><small><font face="Verdana">'Bind to a user<br>
+    Set usr = GetObject(&quot;LDAP://CN=Jane
+    Johnson,OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;)<br>
+    <br>
+    'Modify single attributes<br>
+    usr.Put &quot;givenName&quot;, &quot;Jane&quot;<br>
+    usr.Put &quot;sn&quot;, &quot;Johnson&quot;<br>
+    <br>
+    'Modify multivalue attributes<br>
+    usr.Put &quot;otherTelephone&quot;, Array(&quot;425 844 1234&quot;, &quot;425 924
+    4321&quot;)<br>
+    <br>
+    'Commit to the directory<br>
+    usr.SetInfo</font></small></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Write\vb
+    directory.</font></small></p>
+    <p>&nbsp;</p>
+    <p><small><font face="Verdana">//--- Visual C++ Sample:&nbsp; Setting attributes with
+    single and multiple values</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADs *pADs=NULL;<br>
+    &nbsp;&nbsp;&nbsp; LPWSTR pszADsPath = L&quot;LDAP://CN=Jane
+    Johnson,OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Modifying attributes using <strong>IADs</strong><br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(pszADsPath,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IID_IADs, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pADs );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; // We omit checking the result for brevity.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; // First Name<br>
+    &nbsp;&nbsp;&nbsp; VariantInit(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp; V_BSTR(&amp;var) = SysAllocString(L&quot;Jane&quot;);<br>
+    &nbsp;&nbsp;&nbsp; V_VT(&amp;var) = VT_BSTR;<br>
+    &nbsp;&nbsp;&nbsp; hr = pADs-&gt;Put( L&quot;givenName&quot;, var );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; // Last Name<br>
+    &nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp; V_BSTR(&amp;var) = SysAllocString(L&quot;Johnson&quot;);<br>
+    &nbsp;&nbsp;&nbsp; V_VT(&amp;var) = VT_BSTR;<br>
+    &nbsp;&nbsp;&nbsp; hr = pADs-&gt;Put( L&quot;givenName&quot;, var ); <br>
+    &nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; // Other Telephones<br>
+    &nbsp;&nbsp;&nbsp; LPWSTR pszPhones[] = { L&quot;425 844 1234&quot;, L&quot;425 924
+    4321&quot; };<br>
+    &nbsp;&nbsp;&nbsp; DWORD dwNumber = sizeof( pszPhones ) /sizeof(LPWSTR);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsBuildVarArrayStr( pszPhones, dwNumber, &amp;var );<br>
+    &nbsp;&nbsp;&nbsp; hr = pADs-&gt;Put( L&quot;otherTelephone&quot;, var ); <br>
+    &nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pADs-&gt;SetInfo();<br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Alternatively, you can use <strong>IDirectoryObject</strong><br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDirectoryObject *pDir=NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(pszADsPath,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IID_IDirectoryObject, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pDir );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; DWORD dwReturn;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE snValue;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE fNameValue;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE phoneValue[2];<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ADS_ATTR_INFO attrInfo[] = { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {L&quot;givenName&quot;,ADS_ATTR_UPDATE,
+    ADSTYPE_CASE_IGNORE_STRING,&amp;snValue,1},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {L&quot;sn&quot;, ADS_ATTR_UPDATE,
+    ADSTYPE_CASE_IGNORE_STRING,&amp;fNameValue,1 },<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {L&quot;otherTelephone&quot;, ADS_ATTR_UPDATE,
+    ADSTYPE_CASE_IGNORE_STRING, phoneValue,2 }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    };<br>
+    &nbsp;&nbsp;&nbsp; DWORD dwAttrs = sizeof(attrInfo)/sizeof(ADS_ATTR_INFO); <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///// First Name ///////////<br>
+    &nbsp;&nbsp;&nbsp; fNameValue.dwType=ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; fNameValue.CaseIgnoreString = L&quot;Johnson&quot;;<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///// Last Name ///////////<br>
+    &nbsp;&nbsp;&nbsp; snValue.dwType= ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; snValue.CaseIgnoreString = L&quot;Johnson&quot;;<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; ///// Other Telephone ///////////<br>
+    &nbsp;&nbsp;&nbsp; phoneValue[0].dwType = ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; phoneValue[0].CaseIgnoreString = L&quot;425 844 1234&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; phoneValue[1].dwType = ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; phoneValue[1].CaseIgnoreString = L&quot;425 924 4321&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pDir-&gt;SetObjectAttributes(attrInfo, dwAttrs, &amp;dwReturn);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; pDir-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    &nbsp;&nbsp;&nbsp; return 0;</font></small></p>
+    <p><small><font face="Verdana">//Source code can be found in the \samples\start\Write\vc
+    directory.</font></small></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="create"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Creating an object</small></strong></font></p>
+    <p><font face="Verdana"><small>To create an object, you can use the <strong>IADsContainer::Create</strong>
+    method for both Visaul Basic and Visual C++. You can also use the <strong>IDirectoryObject::CreateDSObject</strong>
+    method.</small></font></p>
+    <p><small><font face="Verdana">'-- Visual Basic Sample: Creating a user object</font></small></p>
+    <p><small><font face="Verdana">Set cont = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    <br>
+    '---- Creating a user<br>
+    Set usr = cont.Create(&quot;user&quot;, &quot;JohnD&quot;)<br>
+    usr.FullName = &quot;John Doe&quot;<br>
+    usr.SetInfo</font></small></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Create\vb
+    directory.</font></small></p>
+    <p><small><font face="Verdana">//-- Visual C++ Sample: Creating a user object</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont = NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject( L&quot;WinNT://INDEPENDENCE&quot;,
+    IID_IADsContainer, (void**) &amp;pCont );<br>
+    &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; IADs *pADs=NULL;<br>
+    &nbsp;&nbsp;&nbsp; IDispatch *pDisp=NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = pCont-&gt;Create(L&quot;user&quot;, L&quot;AliceW&quot;,
+    &amp;pDisp );<br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pDisp-&gt;QueryInterface( IID_IADs, (void**) &amp;pADs );<br>
+    &nbsp;&nbsp;&nbsp; pDisp-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;SetInfo(); // Commit<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;Release(); // Release<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>&nbsp;&nbsp;&nbsp;
+    ///////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Use <strong>IDirectoryObject</strong> to create an object.<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDirectoryObject *pDirObject=NULL;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE sAMValue;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE uPNValue;<br>
+    &nbsp;&nbsp;&nbsp; ADSVALUE classValue;<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ADS_ATTR_INFO attrInfo[] = <br>
+    &nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { L&quot;objectClass&quot;, ADS_ATTR_UPDATE,
+    &nbsp; ADSTYPE_CASE_IGNORE_STRING, &amp;classValue, 1 },<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {L&quot;sAMAccountName&quot;, ADS_ATTR_UPDATE,
+    ADSTYPE_CASE_IGNORE_STRING, &amp;sAMValue, 1},<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {L&quot;userPrincipalName&quot;,
+    ADS_ATTR_UPDATE, ADSTYPE_CASE_IGNORE_STRING, &amp;uPNValue, 1},<br>
+    &nbsp;&nbsp;&nbsp; };</small><br>
+    <small><br>
+    &nbsp;&nbsp;&nbsp; DWORD dwAttrs = sizeof(attrInfo)/sizeof(ADS_ATTR_INFO); <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; classValue.dwType = ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; classValue.CaseIgnoreString = L&quot;user&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; sAMValue.dwType=ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; sAMValue.CaseIgnoreString = L&quot;mikes&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; uPNValue.dwType=ADSTYPE_CASE_IGNORE_STRING;<br>
+    &nbsp;&nbsp;&nbsp; uPNValue.CaseIgnoreString = L&quot;mikes@arcadiabay.com&quot;;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; // Create this user in an organizational unit<br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    IID_IDirectoryObject, (void**) &amp;pDirObject );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr = pDirObject-&gt;CreateDSObject(
+    L&quot;CN=Mike Smith&quot;, attrInfo, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    dwAttrs, &amp;pDisp );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDisp-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; pDirObject-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();</small></font></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Create\vc
+    directory.</font></small></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="delete"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Deleting an object</small></strong></font></p>
+    <p><font face="Verdana"><small>You can use the <strong>IADsContainer::Delete</strong>
+    method in Visual Basic or Visual C++.&nbsp; You can also use the <strong>IDirectoryObject::DeleteDSObject</strong>
+    method to delete an object if you are using Visual C++.</small></font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Deleting a user object</small><br>
+    <small>Set cont = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    <br>
+    '---- Deleting a user<br>
+    cont.Delete &quot;user&quot;, &quot;JohnD&quot;<br>
+    </small><br>
+    <small>'Source code can be found in the \samples\start\Delete\vb directory.</small></font></p>
+    <p><font face="Verdana"><br>
+    <small>//-- Visual C++ Sample: Deleting a user object using the <strong>IADsContainer::Delete</strong>
+    and <strong>IDirectoryObject::DeleteDSObject</strong> methods</small></font></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE&quot;, IID_IADsContainer,
+    (void**) &amp;pCont);<br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Using <strong>IADsContainer::Delete</strong> to delete a user<br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = pCont-&gt;Delete(L&quot;user&quot;, L&quot;AliceW&quot;);<br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Using <strong>IDirectoryObject::DeleteDSObject</strong> to delete a
+    user<br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDirectoryObject *pDirObject=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    IID_IDirectoryObject, (void**) &amp;pDirObject );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr =
+    pDirObject-&gt;DeleteDSObject(L&quot;CN=Mike Smith&quot;);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDirObject-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();</font></small></p>
+    <p><small><font face="Verdana">'Source code can be found in the \samples\start\Delete\vc
+    directory.</font></small></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="rename"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Renaming an object</small></strong></font></p>
+    <p><font face="Verdana"><small>You can rename an object using the <strong>IADsContainer::MoveHere</strong>
+    method. First, you must know the object's parent.</small></font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Renaming a user object using the <strong>IADsContainer::MoveHere</strong>
+    method</small> <br>
+    <small>&nbsp; </small><br>
+    <small>&nbsp; Set cont = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    <br>
+    &nbsp; '---- Renaming a user and updating its attributes<br>
+    &nbsp; Set usr = cont.MoveHere(&quot;WinNT://INDEPENDENCE/JSmith&quot;,
+    &quot;JJohnson&quot;)<br>
+    &nbsp; usr.FullName = &quot;Jane Johnson&quot;<br>
+    &nbsp; usr.SetInfo<br>
+    </small><br>
+    <small>'Source code can be found in the \samples\start\Rename\vb directory.</small></font></p>
+    <p><font face="Verdana"><br>
+    <small>//-- Visual C++ Sample: Renaming a user object using the <strong>IADsContainer::MoveHere</strong>
+    method</small></font></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont=NULL;<br>
+    &nbsp;&nbsp;&nbsp; IDispatch *pDisp=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE&quot;, IID_IADsContainer,
+    (void**) &amp;pCont);<br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; hr =
+    pCont-&gt;MoveHere(L&quot;WinNT://INDEPENDENCE/JSmith&quot;,L&quot;JJohnson&quot;,
+    &amp;pDisp );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDisp-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>'Source code can be found in the \samples\start\Rename\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="move"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Moving an object</small></strong></font></p>
+    <p><font face="Verdana" color="#000000"><small>To move an object, you must bind to the
+    parent's destination first, then call the <strong>IADsContainer::MoveHere</strong> method.
+    Note that you can move and rename and object at the same time.</small></font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Moving user object using the <strong>IADsContainer::MoveHere</strong>
+    method</small></font></p>
+    <p><small><font face="Verdana">'Bind to the parent object's destination.<br>
+    Set cont =
+    GetObject(&quot;LDAP://OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;)<br>
+    <br>
+    '---- Moving a user from one organization to another.<br>
+    Set usr = cont.MoveHere(&quot;LDAP://CN=Mike
+    Smith,OU=MCS,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;, vbNullString)<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>'Source code can be found in the \samples\start\Move\vb
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>//-- Visual C++ Sample: Moving a user object using the <strong>IADsContainer::MoveHere</strong>
+    method</small></font></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // First, bind to the destination container.<br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont=NULL;</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://OU=MCS,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    IID_IADsContainer,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pCont );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Now, move the object to the bound container.<br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDispatch *pDisp=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pCont-&gt;MoveHere(L&quot;LDAP://CN=Mike
+    Smith,OU=DSys,DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;, NULL, &amp;pDisp );<br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if (SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // You may do another operation here, such as
+    updating attributes.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDisp-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>'Source code can be found in the \samples\start\Move\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="getObject"></a></p>
+    <p><small><font face="Verdana" color="#0080C0"><strong>Getting a child object</strong></font></small></p>
+    <p><font size="2" face="Verdana">In ADSI, a container object exposes an <b>IADsContainer</b>
+    interface. The <b>IADsContainer</b> interface has the <b>IADsContainer::GetObject</b>
+    method so that you can bind directly to a child object. Note that the object returned by
+    the <b>IADsContainer::GetObject</b> method has the same security context as the object on
+    which the method was called. This means that if you have pointer to a container object and
+    you know the relative path to a child object, you can avoid having to pass credentials
+    again when binding to the child object. This may be useful when your application is
+    binding using alternate credentials (that is, when it is not in the context of the logged
+    on user).</font></p>
+    <p><small><font face="Verdana">'-- Visual Basic Sample: Getting a child object</font></small></p>
+    <p><font face="Verdana"><small>'Bind to the parent container.<br>
+    Set cont = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    <br>
+    '---- Getting a child object from the container<br>
+    Set usr = cont.GetObject(&quot;user&quot;, &quot;JJohnson&quot;)<br>
+    </small><br>
+    <small>'Source code can be found in the \samples\start\Child\vb directory.</small></font></p>
+    <p><font face="Verdana"><small>//Visual C++ Sample: Getting a child object</small></font></p>
+    <p><small><font face="Verdana">#define RETURN_ON_FAILURE(hr) if(!SUCCEEDED(hr)) return hr;</font><br>
+    </small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IID_IADsContainer, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pCont );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; RETURN_ON_FAILURE(hr);<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;
+    ////////////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Get the child from the container.<br>
+    &nbsp;&nbsp;&nbsp; // Note in the LDAP provider you can go down more than one level.<br>
+    &nbsp;&nbsp;&nbsp;
+    ////////////////////////////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IDispatch *pDisp = NULL;<br>
+    &nbsp;&nbsp;&nbsp; IADs&nbsp;&nbsp;&nbsp; *pADs = NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = pCont-&gt;GetObject(L&quot;user&quot;, L&quot;CN=Mike Smith,
+    OU=DSys&quot;, &amp;pDisp );<br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; RETURN_ON_FAILURE(hr);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; hr = pDisp-&gt;QueryInterface( IID_IADs, (void**) &amp;pADs );<br>
+    &nbsp;&nbsp;&nbsp; pDisp-&gt;Release();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; RETURN_ON_FAILURE(hr);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; // Do something with pADs here.<br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;Release();<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();</font></small></p>
+    <p><font face="Verdana"><small>// Source code can be found in the \samples\start\Child\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="parent"></a></p>
+    <p><font face="Verdana" color="#0080C0"><small><strong>Getting the parent of an object</strong></small></font></p>
+    <p><font size="2" face="Verdana">In ADSI, a directory object is represented by an ADSI COM
+    object, and every ADSI COM object exposes an <b>IADs</b> interface. The <b>IADs</b>
+    interface has the <b>IADs::get_Parent</b> method so that you can get the ADsPath for the
+    parent of the directory object. You can use that ADsPath to bind to the parent object.</font></p>
+    <p><small><font face="Verdana">'-- Visual Basic Sample: Getting a parent object</font></small></p>
+    <p><small><font face="Verdana">'Bind to an object.<br>
+    Set usr = GetObject(&quot;WinNT://INDEPENDENCE/JJohnson,user&quot;)<br>
+    <br>
+    '---- Getting a parent object using the <strong>IADs::get_Parent</strong> method.<br>
+    Set cont = GetObject(usr.Parent)<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>' Source code can be found in the \samples\start\Parent\vb
+    directory.</small></font></p>
+    <p><font face="Verdana"><small><small>//</small>-- Visual C++ Sample: Getting a parent
+    object</small><br>
+    <small>&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; //Bind to an object<br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IADs *pADs = NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE/JJohnson&quot;, IID_IADs,
+    (void**) &amp;pADs );<br>
+    &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; BSTR bstrParent;<br>
+    &nbsp;&nbsp;&nbsp; IADs *pParent=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Get the ADs Parent's Path<br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;get_Parent(&amp;bstrParent);<br>
+    &nbsp;&nbsp;&nbsp; pADs-&gt;Release();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Bind to the Parent<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject( bstrParent, IID_IADs, (void**) &amp;pParent );<br>
+    &nbsp;&nbsp;&nbsp; SysFreeString(bstrParent);<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if (SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Do something with pParent.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pParent-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();</small><br>
+    </font></p>
+    <p><font face="Verdana"><small>// Source code can be found in the \samples\start\Parent\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><a name="search"></a></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small>Searching for a set of objects</small></strong></font></p>
+    <p><font face="Verdana"><small>You must use ADO to perform searches when using Visual
+    Basic. If you use Visual C++, you can also use the <strong>IDirectorySearch</strong>
+    interface.</small></font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Searching for all groups</small><br>
+    <small>Dim con As New Connection, rs As New Recordset<br>
+    Dim Com As New Command<br>
+    <br>
+    'Open a Connection object<br>
+    con.Provider = &quot;ADsDSOObject&quot;<br>
+    con.Open &quot;Active Directory Provider&quot;<br>
+    <br>
+    ' Create a command object on this connection<br>
+    Set Com.ActiveConnection = con<br>
+    Com.CommandText = &quot;select name from
+    'LDAP://DC=windows2000,DC=nttest,DC=microsoft,DC=com' where objectCategory='group' ORDER
+    BY NAME&quot;<br>
+    <br>
+    Set rs = Com.Execute<br>
+    <br>
+    '--------------------------------------<br>
+    ' Navigate the record set<br>
+    '----------------------------------------<br>
+    While Not rs.EOF<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print rs.Fields(&quot;Name&quot;)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; rs.MoveNext<br>
+    Wend<br>
+    </small></font></p>
+    <p><font face="Verdana"><small>' Source code can be found in the \samples\start\Search\vb
+    directory.</small></font></p>
+    <p><small><font face="Verdana">//-- Visual C++ Sample: Searching for all groups</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IDirectorySearch *pSearch;<br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Bind to the object, it serves as a base search<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr =
+    ADsGetObject(L&quot;LDAP://DC=windows2000,DC=nttest,DC=microsoft,DC=com&quot;,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IID_IDirectorySearch,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    (void**) &amp;pSearch );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Perform a subtree search<br>
+    &nbsp;&nbsp;&nbsp; /////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; ADS_SEARCHPREF_INFO prefInfo[1];<br>
+    &nbsp;&nbsp;&nbsp; prefInfo[0].dwSearchPref = ADS_SEARCHPREF_SEARCH_SCOPE;<br>
+    &nbsp;&nbsp;&nbsp; prefInfo[0].vValue.dwType = ADSTYPE_INTEGER;<br>
+    &nbsp;&nbsp;&nbsp; prefInfo[0].vValue.Integer = ADS_SCOPE_SUBTREE;<br>
+    &nbsp;&nbsp;&nbsp; hr = pSearch-&gt;SetSearchPreference( prefInfo, 1);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Prepare for attribute return<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; LPWSTR pszAttr[] = { L&quot;Name&quot;};<br>
+    &nbsp;&nbsp;&nbsp; ADS_SEARCH_HANDLE hSearch;<br>
+    &nbsp;&nbsp;&nbsp; DWORD dwCount= sizeof(pszAttr)/sizeof(LPWSTR);<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Search for all groups in a domain<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = pSearch-&gt;ExecuteSearch(L&quot;(objectCategory=Group)&quot;,
+    pszAttr, dwCount, &amp;hSearch );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pSearch-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Now enumerate the result<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; ADS_SEARCH_COLUMN col;<br>
+    &nbsp;&nbsp; while( pSearch-&gt;GetNextRow(hSearch) != S_ADS_NOMORE_ROWS )<br>
+    &nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Get 'Name' attribute<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr = pSearch-&gt;GetColumn( hSearch,
+    pszAttr[0], &amp;col );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    printf(&quot;%S\n&quot;, col.pADsValues-&gt;CaseIgnoreString);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pSearch-&gt;FreeColumn(
+    &amp;col ); // You need to FreeColumn after use.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Clean-up<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////<br>
+    &nbsp;&nbsp;&nbsp; pSearch-&gt;CloseSearchHandle(hSearch);<br>
+    &nbsp;&nbsp;&nbsp; pSearch-&gt;Release();<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>// Source code can be found in the \samples\start\Search\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p>&nbsp;</p>
+    <p><a name="filter"></a><font face="Verdana" color="#0080C0"><strong><small>Filtering a
+    set of objects</small></strong></font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Getting groups and users</small></font></p>
+    <p><small><font face="Verdana">'Bind to a domain object<br>
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    <br>
+    'Show all users and groups<br>
+    dom.Filter = Array(&quot;user&quot;, &quot;group&quot;)<br>
+    For Each obj In dom<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp;
+    &quot;)&quot;<br>
+    Next</font></small></p>
+    <p><font face="Verdana"><small>' Source code can be found in the \samples\start\Filter\vb
+    directory.</small></font></p>
+    <p><small><font face="Verdana">// -- Visual C++ Sample: Getting groups and users</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    &nbsp;&nbsp;&nbsp; IADsContainer *pCont=NULL;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Bind to the object<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE&quot;, IID_IADsContainer,
+    (void**) &amp;pCont );<br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Build variant filter<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; LPWSTR pszFilter[] = { L&quot;user&quot;, L&quot;group&quot; };<br>
+    &nbsp;&nbsp;&nbsp; DWORD dwNumber = sizeof( pszFilter ) /sizeof(LPWSTR);<br>
+    &nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsBuildVarArrayStr( pszFilter, dwNumber, &amp;var );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ///////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Set the filter<br>
+    &nbsp;&nbsp;&nbsp; //////////////////////////////////<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = pCont-&gt;put_Filter(var);<br>
+    &nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pCont-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; // Enumerate the result<br>
+    &nbsp;&nbsp;&nbsp; ////////////////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IEnumVARIANT *pEnum = NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsBuildEnumerator( pCont, &amp;pEnum );<br>
+    &nbsp;&nbsp;&nbsp; pCont-&gt;Release(); // This is no longer needed, since we have the
+    enumerator already.<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ULONG lFetch;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IADs *pChild=NULL;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantInit(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while( SUCCEEDED(ADsEnumerateNext( pEnum, 1,
+    &amp;var, &amp;lFetch )) &amp;&amp; lFetch == 1 )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr =
+    V_DISPATCH(&amp;var)-&gt;QueryInterface( IID_IADs, (void**) &amp;pChild );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrName;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrClass;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Get more information on the child classes<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Name(&amp;bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Class(&amp;bstrClass);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    printf(&quot;%S\t\t(%S)\n&quot;, bstrName, bstrClass );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Clean-up<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrClass);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();<br>
+    </font></small></p>
+    <p><font face="Verdana"><small>// Source code can be found in the \samples\start\Filter\vc
+    directory.</small></font></p>
+    <p><font face="Verdana" color="#0080C0"><strong><br>
+    </strong></font><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p><small><strong><font face="Verdana" color="#0080C0">&nbsp;</font></strong></small></p>
+    <p><font face="Verdana" color="#0080C0"><strong><small><a name="readSchema"></a>Reading the Schema</small></strong></font></p>
+    <p><font face="Verdana"><small>Most providers support the schema. The schema contains
+    class and attribute definitions. ADSI abstracts the schema in the well known location,
+    Provider://schema. Some providers may prefer to use the real schema for schema operations.
+    Each object carries the schema location in which its class is defined.&nbsp; This
+    information can be obtained using the <strong>IADs::get_Class</strong> method.</small><br>
+    </font></p>
+    <p><font face="Verdana"><small>'-- Visual Basic Sample: Listing a schema information</small><br>
+    <small>'Bind to a schema container<br>
+    Set Scm = GetObject(&quot;WinNT://INDEPENDENCE/Schema&quot;)<br>
+    <br>
+    'Show all items in the schema container<br>
+    For Each obj In Scm<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print obj.Name &amp; &quot; (&quot; &amp; obj.Class &amp;
+    &quot;)&quot;<br>
+    Next<br>
+    <br>
+    'You can also bind to an object and get the schema location<br>
+    Set dom = GetObject(&quot;WinNT://INDEPENDENCE&quot;)<br>
+    Debug.Print dom.Schema<br>
+    Set Class = GetObject(dom.Schema)<br>
+    'Mandatory attributes<br>
+    For Each prop In Class.MandatoryProperties<br>
+    &nbsp;&nbsp;&nbsp; Debug.Print prop<br>
+    Next<br>
+    <br>
+    'Optional attributes<br>
+    For Each prop In Class.OptionalProperties<br>
+    &nbsp;&nbsp; Debug.Print prop<br>
+    Next<br>
+    </small></font></p>
+    <p><font face="Verdana"><small>'Source code can be found in the \samples\start\Schema\vb
+    directory.</small></font></p>
+    <p>&nbsp;</p>
+    <p><small><font face="Verdana">//-- Visual C++ Sample: Listing schema information</font></small></p>
+    <p><small><font face="Verdana">&nbsp;&nbsp;&nbsp; IADsContainer *pSchema=NULL;<br>
+    &nbsp;&nbsp;&nbsp; HRESULT hr;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoInitialize(NULL);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;WinNT://INDEPENDENCE/Schema&quot;,
+    IID_IADsContainer, (void**) &amp;pSchema );<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp; ////////////// Enumerate Schema objects
+    ///////////////////////////////////<br>
+    &nbsp;&nbsp;&nbsp; IEnumVARIANT *pEnum = NULL;<br>
+    &nbsp;&nbsp;&nbsp; hr = ADsBuildEnumerator( pSchema, &amp;pEnum );<br>
+    &nbsp;&nbsp;&nbsp; pSchema-&gt;Release(); // This is no longer needed, since we have the
+    enumerator already.<br>
+    &nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VARIANT var;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ULONG lFetch;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IADs *pChild=NULL;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantInit(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while( SUCCEEDED(ADsEnumerateNext( pEnum, 1,
+    &amp;var, &amp;lFetch )) &amp;&amp; lFetch == 1 )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hr =
+    V_DISPATCH(&amp;var)-&gt;QueryInterface( IID_IADs, (void**) &amp;pChild );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( SUCCEEDED(hr) )<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrName;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    BSTR bstrClass;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Get more information on the child classes<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Name(&amp;bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;get_Class(&amp;bstrClass);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    printf(&quot;%S\t\t(%S)\n&quot;, bstrName, bstrClass );<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    // Clean-up<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrName);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    SysFreeString(bstrClass);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    pChild-&gt;Release();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VariantClear(&amp;var);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+    &nbsp;&nbsp;&nbsp; }<br>
+    <br>
+    &nbsp;&nbsp;&nbsp; CoUninitialize();</font></small></p>
+    <p><font face="Verdana"><small>// Source code can be found in the \samples\start\Schema\vc
+    directory.</small></font></p>
+    <p><font face="Verdana"><small>Back to <a href="#top">top</a></small></font></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</small></strong></td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><font SIZE="2">&nbsp;</p>
+
+<p></font>&nbsp;</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

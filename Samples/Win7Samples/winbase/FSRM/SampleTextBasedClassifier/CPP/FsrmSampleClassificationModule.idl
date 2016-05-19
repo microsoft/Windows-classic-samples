@@ -1,0 +1,33 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+// FsrmSampleClassificationModule.idl : IDL source for FsrmSampleClassificationModule
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (FsrmSampleClassificationModule.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(13D6AF99-B3EC-4DA9-9DDC-ACE21B4ADE8F),
+	version(1.0),
+	helpstring("FsrmSampleClassificationModule 1.0 Type Library")
+]
+library FsrmSampleClassificationModuleLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(0F5F3806-2DAD-4050-9D30-50C35FB7ED0E),
+		helpstring("FsrmSampleClassifier Class")
+	]
+	coclass FsrmSampleClassifier
+	{
+		[default] interface IUnknown;
+	};
+};

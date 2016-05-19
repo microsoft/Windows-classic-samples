@@ -1,0 +1,148 @@
+﻿<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation
+      xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">      <provider
+          guid="{21a9201e-73b0-43fe-9821-7e159a59bc71}"
+          message="$(string.providermessage)"
+          messageFileName="%SystemDrive%\Eventing\Simple\CSharp\SimpleProvider.exe"
+          name="Microsoft-Windows-SDKSample-SimpleProvider-CS"
+          resourceFileName="%SystemDrive%\Eventing\Simple\CSharp\SimpleProvider.exe"
+          symbol="MicrosoftWindowsSDKSampleSimpleProviderCs"
+          >
+      <channels>
+        <!--ImportChannels - System, Application, Security or Setup-->
+        <importChannel
+            chid="C1"
+            name="Application"
+              />
+        <!--Direct channels - type Analytic or Debug-->
+        <channel name="Microsoft-Windows-SDKSample-SimpleProvider-CS/Analytic" chid="C2" type="Analytic" symbol="ANALYTIC_CHANNEL" isolation="System" enabled="true" message="$(string.AnalyticChannelMessage)">
+          <logging>
+            <retention>true</retention>
+            <maxSize>1000000</maxSize>
+          </logging>
+          <publishing>
+            <level>2</level>
+            <keywords>0x00</keywords>
+          </publishing>
+        </channel>
+      </channels>
+      <!--Templates define event payloads. In this sample, simple data types such as Integer, Float, Boolean, String and GUID are considered. 
+        inType is the type of data that the provider logs to ETW session at run time. 
+        outType is the type of data that a consumer tool uses to interprete the log.
+        If outType is ommitted then it means it is the same as inType-->
+      <templates>
+        <template tid="T_INT32">
+          <data
+              inType="win:Int32"
+              name="Prop_Int32"
+                />
+        </template>
+        <template tid="T_FLOAT">
+          <data
+              inType="win:Float"
+              name="Prop_Float"
+                />
+        </template>
+        <template tid="T_BOOL">
+          <data
+              inType="win:Boolean"
+              name="Prop_Bool"
+                />
+        </template>
+        <template tid="T_UnicodeString">
+          <data
+              inType="win:UnicodeString"
+              name="Prop_UnicodeString"
+                />
+        </template>
+        <template tid="T_GUID">
+          <data
+              inType="win:GUID"
+              name="Prop_Guid"
+                />
+        </template>
+      </templates>
+      <events>
+        <event
+            channel="C1"
+            level="win:Informational"
+            message="$(string.event.101)"
+            symbol="SampleEvt_INT32"
+            template="T_INT32"
+            value="101"
+              />
+        <event
+            channel="C2"
+            level="win:Warning"
+            message="$(string.event.102)"
+            symbol="SampleEvt_Float"
+            template="T_FLOAT"
+            value="102"
+              />
+        <event
+            channel="C2"
+            level="win:Error"
+            message="$(string.event.103)"
+            symbol="SampleEvt_Bool"
+            template="T_BOOL"
+            value="103"
+              />
+        <event
+            channel="C1"
+            level="win:Critical"
+            message="$(string.event.104)"
+            symbol="SampleEvt_UnicodeString"
+            template="T_UnicodeString"
+            value="104"
+              />
+        <event
+            channel="C1"
+            level="win:Critical"
+            message="$(string.event.105)"
+            symbol="SampleEvt_Guid"
+            template="T_GUID"
+            value="105"
+              />
+      </events>
+    </provider>
+  </events>
+</instrumentation>
+<localization>
+  <resources culture="en-US">
+    <stringTable>
+      <string
+          id="event.101"
+          value="Event 101 has been fired and logged an integer value: %1"
+            />
+      <string
+          id="event.102"
+          value="Event 102 has been fired and logged a float value: %1"
+            />
+      <string
+          id="event.103"
+          value="Event 103 has been fired and logged a boolean value: %1"
+            />
+      <string
+          id="event.104"
+          value="Event 104 has been fired and logged a unicode string value: %1"
+            />
+      <string
+          id="event.105"
+          value="Event 105 has been fired and logged a guid value: %1"
+            />
+      <string
+          id="AnalyticChannelMessage"
+          value="Analytic channel localized message goes here."
+            />
+      <string
+          id="providermessage"
+          value="Provider localized message goes here. Provider Name: Microsoft-Windows-SDKSample-SimpleProvider-CS."
+                />
+    </stringTable>
+  </resources>
+</localization>
+</instrumentationManifest>

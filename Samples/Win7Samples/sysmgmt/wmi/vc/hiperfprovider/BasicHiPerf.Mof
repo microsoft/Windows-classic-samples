@@ -1,0 +1,93 @@
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+
+#PRAGMA AUTORECOVER
+#pragma namespace("\\\\.\\Root\\CimV2")
+
+qualifier vendor:ToInstance;
+qualifier guid:ToInstance;
+qualifier displayname:ToInstance;
+qualifier perfindex:ToInstance;
+qualifier helpindex:ToInstance;
+qualifier perfdetail:ToInstance;
+qualifier countertype:ToInstance;
+qualifier perfdefault:ToInstance;
+qualifier defaultscale:ToInstance;
+
+[
+  hiperf(true),
+  dynamic,
+  provider("BasicHiPerf_v1"),
+  displayname("Basic WMI Perf Counter"),
+  perfdetail(100), 
+  locale(0x409), 
+  maxInstances( 100 ) 
+]
+class Win32_BasicHiPerf : Win32_PerfRawData
+{
+    [key, label] string Name = NULL;
+
+// Unsigned Counters
+// =================
+
+    [
+     displayname("Counter1"),
+     countertype(0x10000),
+     defaultscale(0),
+     perfdetail(100)
+    ]
+    uint32 Counter1 = 0;
+
+    [
+     displayname("Counter2"),
+     countertype(0x10000),
+     defaultscale(0),
+     perfdetail(100)
+    ]
+    uint32 Counter2 = 0;
+
+    [
+     displayname("Counter3"),
+     countertype(0x10000),
+     defaultscale(0),
+     perfdetail(100)
+    ]
+    uint32 Counter3 = 0;
+
+    [
+     displayname("Counter4"),
+     countertype(0x10000),
+     defaultscale(0),
+     perfdetail(100)
+    ]
+    uint32 Counter4 = 0;
+
+    [
+     displayname("Counter5"),
+     countertype(0x10000),
+     defaultscale(0),
+     perfdetail(100)
+    ]
+    uint32 Counter5 = 0;
+
+};
+
+
+// Registration of the providers.
+
+
+
+// HiPerfProvider:
+
+instance of __Win32Provider as $P
+{
+    Name="BasicHiPerf_v1";
+    CLSID="{B56B1D80-AA4F-11d2-B348-00105A1469B7}";
+    ClientLoadableCLSID="{B56B1D80-AA4F-11d2-B348-00105A1469B7}";
+};
+
+instance of __InstanceProviderRegistration
+{
+    Provider = $P;
+    SupportsGet = TRUE;
+    SupportsEnumeration = TRUE;
+};

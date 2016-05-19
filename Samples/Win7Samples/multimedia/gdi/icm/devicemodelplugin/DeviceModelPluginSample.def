@@ -1,0 +1,10 @@
+; DeviceModelPluginSample.def : Declares the module parameters.
+; TODO Rename the dll
+
+LIBRARY      "DeviceModelPluginSample.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

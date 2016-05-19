@@ -1,0 +1,219 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOG  0, 0, 217, 116
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Phonebook Entries"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,160,60,50,14
+    COMBOBOX        IDC_COMBO1,5,10,145,80,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Change...",IDCHANGE,160,35,50,14
+    PUSHBUTTON      "New...",IDNEW,160,10,50,14
+END
+
+IDD_DIALOG2 DIALOG  0, 0, 227, 135
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Basic"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_ENTRYNAME,70,5,145,15,ES_AUTOHSCROLL
+    LTEXT           "Entry name:",IDC_STATIC,15,10,50,10
+    COMBOBOX        IDC_COMBO1,70,25,145,50,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Country Code:",IDC_STATIC,15,30,50,10
+    EDITTEXT        IDC_ACODE,70,45,50,15,ES_AUTOHSCROLL
+    LTEXT           "Area Code:",IDC_STATIC,15,50,40,10
+    EDITTEXT        IDC_PHONE,69,65,145,15,ES_AUTOHSCROLL
+    LTEXT           "Phone Number:",IDC_STATIC,15,70,50,10
+    CONTROL         "Enable Country/Region and Area Codes",IDC_ECAC,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,95,200,10
+    COMBOBOX        IDC_COMBO3,78,115,137,50,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dialing using:",IDC_STATIC,18,115,50,10
+END
+
+IDD_DIALOG3 DIALOGEX 0, 0, 186, 166
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Server"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Dial-up server type:",IDC_STATIC,10,5,80,10
+    COMBOBOX        IDC_COMBO2,10,20,155,80,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "TCP/IP",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,50,80,10
+    GROUPBOX        "Network protocols",IDC_STATIC,5,40,100,35
+    CONTROL         "Enable Software Compression",IDC_CHECK4,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,99,120,10
+    CONTROL         "Enable PPP LCP extensions",IDC_CHECK5,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,119,120,10
+    PUSHBUTTON      "TCP/IP Settings",IDC_BUTTON1,120,50,60,15
+END
+
+IDD_DIALOG4 DIALOG  0, 0, 186, 130
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Script"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "None",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,15,25,105,
+                    10
+    CONTROL         "Run this script",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,
+                    15,55,105,10
+    CONTROL         "Pop up a terminal window",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON,15,40,105,10
+    GROUPBOX        "After dialing (login)",IDC_STATIC,5,10,170,80
+    EDITTEXT        IDC_EDIT1,30,70,125,15,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG7 DIALOG  0, 0, 197, 236
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "TCP/IP Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,60,215,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,135,215,50,14
+    CONTROL         "Server assigned IP address",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON,10,15,135,10
+    CONTROL         "Specify an IP address",IDC_RADIO2,"Button",
+                    BS_AUTORADIOBUTTON,10,30,140,10
+    GROUPBOX        "",IDC_STATIC,5,5,180,55
+    LTEXT           "IP Address:",IDC_STATIC,25,45,45,10
+    GROUPBOX        "",IDC_STATIC,5,70,180,100
+    CONTROL         "Server assigned name server addresses",IDC_RADIO3,
+                    "Button",BS_AUTORADIOBUTTON,10,80,140,10
+    CONTROL         "Specify name server addresses",IDC_RADIO4,"Button",
+                    BS_AUTORADIOBUTTON,10,95,140,10
+    EDITTEXT        IDC_EDIT2,85,110,85,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,85,125,85,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT6,85,140,85,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7,85,155,85,10,ES_AUTOHSCROLL
+    LTEXT           "Primary DNS:",IDC_STATIC,15,110,60,10
+    LTEXT           "Primary WINS:",IDC_STATIC,15,140,60,10
+    LTEXT           "Secondary DNS:",IDC_STATIC,15,125,60,10
+    LTEXT           "Secondary WINS:",IDC_STATIC,15,155,60,10
+    CONTROL         "Use IP header compression",IDC_CHECK7,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,5,180,155,10
+    CONTROL         "Use default gateway on remote network",IDC_CHECK8,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,195,155,10
+    EDITTEXT        IDC_EDIT8,85,45,85,10,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 109
+    END
+
+    IDD_DIALOG2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 220
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 128
+    END
+
+    IDD_DIALOG3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 159
+    END
+
+    IDD_DIALOG4, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 123
+    END
+
+    IDD_DIALOG7, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 190
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 229
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,254 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+-->
+
+<Application xmlns='http://schemas.microsoft.com/windows/2009/Ribbon'>
+  <!-- Commands section -->
+  <!-- For resource ids, strings begin from 200, images begin from 250 -->
+  <Application.Commands>
+    <Command Name="cmdTab1" Comment="These comments are optional and are inserted into the header file.">
+      <Command.LabelTitle>
+          <String Id="200">Tab 1</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="cmdGroup1" Comment="Group #1">
+      <!-- This image is used for when the group shrinks into a "pop-up".  The other groups
+      in the markup don't display as pop-ups, so we don't specify an image for them.  -->
+      <Command.SmallImages>
+        <Image Id="250">res/Button_Image.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdContext1" Comment="Button that activates context 1" Symbol="IDC_CMD_CONTEXT1" Id="30001">
+      <Command.LabelTitle>
+          <String Id="201">Activate&#x0a;Context 1&#x0a;</String>
+      </Command.LabelTitle>
+      <!-- Providing both large and small images isn't required, but it usually improves the look
+      of your application if the control size changes. -->
+      <Command.LargeImages>
+        <Image Id="251">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdContext2" Comment="Button that activates context 2" Symbol="IDC_CMD_CONTEXT2" Id="30002">
+      <Command.LabelTitle>
+          <String Id="202">Activate&#x0a;Context 2&#x0a;</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="252">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdContext3" Comment="Button that activates context 3" Symbol="IDC_CMD_CONTEXT3" Id="30003">
+      <Command.LabelTitle>
+          <String Id="203">Activate&#x0a;Context 3&#x0a;</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="253">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdContext4" Comment="Button that activates context 4" Symbol="IDC_CMD_CONTEXT4" Id="30004">
+      <Command.LabelTitle>
+          <String Id="204">Activate&#x0a;Context 4&#x0a;</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="254">res/AddTableL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdCut" Comment="Cut button">
+      <Command.LabelTitle>
+          <String Id="205">Cut</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="255">res/Cut.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdCopy" Comment="Copy button">
+      <Command.LabelTitle>
+          <String Id="206">Copy</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="256">res/Copy.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdPaste" Comment="Paste button">
+      <Command.LabelTitle>
+          <String Id="207">Paste</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="257">res/Paste.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdToggleButton" Comment="Toggle Button">
+      <Command.LabelTitle>
+          <String Id="208">ToggleButton</String>
+      </Command.LabelTitle>
+      <Command.SmallImages>
+        <Image Id="258">res/DeleteTableL.bmp</Image>
+      </Command.SmallImages>
+    </Command>
+    <Command Name="cmdButton1" Comment="Button #1">
+      <Command.LabelTitle>
+          <String Id="209">Button 1</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="259">res/OpenHH.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdButton2" Comment="Button #2">
+      <Command.LabelTitle>
+          <String Id="210">Button 2</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="260">res/delete.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdButton3" Comment="Button #3">
+      <Command.LabelTitle>
+          <String Id="211">Button 3</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="261">res/PrintRelationshipsL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdButtons" Comment="DropDownButton that contains the three buttons">
+      <Command.LabelTitle>
+          <String Id="212">Buttons</String>
+      </Command.LabelTitle>
+      <Command.LargeImages>
+        <Image Id="262">res/GraphHH.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdQat" Comment="This is the Quick Access Toolbar"/>
+    <Command Name="cmdFileMenu" Comment="The application menu anchor"/>
+    <Command Name="cmdMRUList" Comment="The Most Recently Used Menu">
+      <Command.LabelTitle>
+          <String Id="213">MRU List</String>
+      </Command.LabelTitle>
+    </Command>
+    <Command Name="cmdExit" Comment="Dummy exit command">
+      <Command.LabelTitle>Exit Button</Command.LabelTitle>
+      <Command.LargeImages>
+        <Image>res/ExitL.bmp</Image>
+      </Command.LargeImages>
+    </Command>
+    <Command Name="cmdContextMap1" Comment="the Context Map for Context 1" Symbol="IDC_CMD_CONTEXTMAP1"/>
+    <Command Name="cmdContextMap2" Comment="the Context Map for Context 2" Symbol="IDC_CMD_CONTEXTMAP2"/>
+    <Command Name="cmdContextMap3" Comment="the Context Map for Context 3" Symbol="IDC_CMD_CONTEXTMAP3"/>
+    <Command Name="cmdContextMap4" Comment="the Context Map for Context 4" Symbol="IDC_CMD_CONTEXTMAP4"/>
+  </Application.Commands>
+  <Application.Views>
+    <Ribbon>
+      <Ribbon.ApplicationMenu>
+        <ApplicationMenu CommandName="cmdFileMenu">
+          <ApplicationMenu.RecentItems>
+            <RecentItems CommandName="cmdMRUList" MaxCount="1" />
+          </ApplicationMenu.RecentItems>
+          <MenuGroup Class="MajorItems">
+            <Button CommandName="cmdExit" />
+          </MenuGroup>
+        </ApplicationMenu>
+      </Ribbon.ApplicationMenu>
+      <Ribbon.Tabs>
+        <Tab CommandName="cmdTab1">
+          <Tab.ScalingPolicy>
+            <ScalingPolicy>
+              <ScalingPolicy.IdealSizes>
+                <Scale Group="cmdGroup1" Size="Large" />
+              </ScalingPolicy.IdealSizes>
+              <!-- This describes the order and how the groups shrink when the window is
+              resized. -->
+              <Scale Group="cmdGroup1" Size="Popup" />
+            </ScalingPolicy>
+          </Tab.ScalingPolicy>
+          <Group CommandName="cmdGroup1" SizeDefinition="FourButtons">
+            <ToggleButton CommandName="cmdContext1" />
+            <ToggleButton CommandName="cmdContext2" />
+            <ToggleButton CommandName="cmdContext3" />
+            <ToggleButton CommandName="cmdContext4" />
+          </Group>
+        </Tab>
+      </Ribbon.Tabs>
+      <Ribbon.QuickAccessToolbar>
+        <QuickAccessToolbar CommandName="cmdQat" />
+      </Ribbon.QuickAccessToolbar>
+    </Ribbon>
+    <ContextPopup>
+      <!--
+        The MiniToolbars and Context Menus are the basic ingredients for the contextual UI popup.
+        You may mix-and-match them and associate that combination with a ContextMap Command invoked in code.
+      -->
+      <ContextPopup.MiniToolbars>
+        <MiniToolbar Name="MiniToolbar2">
+          <MenuGroup>
+            <Button CommandName="cmdCut" />
+            <Button CommandName="cmdCopy" />
+            <Button CommandName="cmdPaste" />
+          </MenuGroup>
+          <MenuGroup>
+            <ToggleButton CommandName="cmdToggleButton" />
+            <DropDownButton CommandName="cmdButtons">
+              <MenuGroup>
+                <Button CommandName="cmdButton1" />
+                <Button CommandName="cmdButton2" />
+                <Button CommandName="cmdButton3" />
+              </MenuGroup>
+            </DropDownButton>
+          </MenuGroup>
+        </MiniToolbar>
+        <MiniToolbar Name="MiniToolbar3">
+          <MenuGroup>
+            <Button CommandName="cmdButton1" />
+            <Button CommandName="cmdButton2" />
+            <Button CommandName="cmdButton3" />
+          </MenuGroup>
+        </MiniToolbar>
+      </ContextPopup.MiniToolbars>
+      <ContextPopup.ContextMenus>
+        <ContextMenu Name="ContextMenu1">
+          <MenuGroup>
+            <Button CommandName="cmdCut" />
+            <Button CommandName="cmdCopy" />
+            <Button CommandName="cmdPaste" />
+          </MenuGroup>
+        </ContextMenu>
+        <ContextMenu Name="ContextMenu2">
+          <MenuGroup>
+            <ToggleButton CommandName="cmdToggleButton" />
+          </MenuGroup>
+          <MenuGroup>
+            <Button CommandName="cmdButton1" />
+            <Button CommandName="cmdButton2" />
+            <Button CommandName="cmdButton3" />
+          </MenuGroup>
+        </ContextMenu>
+        <ContextMenu Name="ContextMenu4">
+          <MenuGroup>
+            <Button CommandName="cmdCut" />
+            <Button CommandName="cmdCopy" />
+            <Button CommandName="cmdPaste" />
+          </MenuGroup>
+          <MenuGroup>
+            <ToggleButton CommandName="cmdToggleButton" />
+          </MenuGroup>
+          <MenuGroup>
+            <Button CommandName="cmdButton1" />
+            <Button CommandName="cmdButton2" />
+            <Button CommandName="cmdButton3" />
+          </MenuGroup>
+        </ContextMenu>
+      </ContextPopup.ContextMenus>
+      <ContextPopup.ContextMaps>
+        <ContextMap CommandName="cmdContextMap1" ContextMenu="ContextMenu1"/>
+        <ContextMap CommandName="cmdContextMap2" ContextMenu="ContextMenu2" MiniToolbar="MiniToolbar2"/>
+        <ContextMap CommandName="cmdContextMap3" MiniToolbar="MiniToolbar3"/>
+        <ContextMap CommandName="cmdContextMap4" ContextMenu="ContextMenu4"/>
+        <!-- Of course you can reuse, repeat, mix and match any of the context menu and mini-toolbars in any context map -->
+      </ContextPopup.ContextMaps>
+    </ContextPopup>
+  </Application.Views>
+</Application>

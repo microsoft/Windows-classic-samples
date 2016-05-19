@@ -1,0 +1,134 @@
+//Microsoft Visual C++ generated resource script.
+// Copyright 1993 - 2000 Microsoft Corporation. All rights reserved
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <winuser.h>
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT_DIALOG DIALOG DISCARDABLE  0, 0, 186, 94
+STYLE WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,67,75,50,14
+    CTEXT           "Microsft Windows 95\nProperty Sheet Sample Application",
+                    -1,5,5,175,20
+END
+
+IDD_BUTTONS DIALOG DISCARDABLE  0, 0, 206, 70
+STYLE WS_CHILD | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Pushbuttons",IDC_STATIC,5,5,60,60
+    PUSHBUTTON      "Pushbutton",IDC_BUTTON2,10,20,49,14
+    GROUPBOX        "Radio Buttons",IDC_STATIC,70,5,60,60
+    CONTROL         "Radio1",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,75,20,50,10
+    CONTROL         "Radio2",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,75,36,50,
+                    10
+    CONTROL         "Radio3",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,75,50,50,
+                    10
+    GROUPBOX        "Check Boxes",IDC_STATIC,135,5,60,60
+    CONTROL         "Check1",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,20,50,10
+    CONTROL         "Check2",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,36,50,10
+    CONTROL         "Check3",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,50,50,10
+END
+
+IDD_COMBOBOXES DIALOG DISCARDABLE  0, 0, 230, 94
+STYLE WS_CHILD | WS_VISIBLE | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_COMBO1,10,15,60,70,CBS_SIMPLE | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Simple",IDC_STATIC,5,0,70,90
+    COMBOBOX        IDC_COMBO2,85,15,60,75,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Drop Down",IDC_STATIC,80,0,70,90
+    COMBOBOX        IDC_COMBO3,160,15,60,75,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Drop List",IDC_STATIC,155,0,70,90
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include <winuser.h>\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN_MENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Test"
+    BEGIN
+        MENUITEM "Modal &Property Sheet",       IDM_MODAL
+        MENUITEM "&Modeless Property Sheet",    IDM_MODELESS
+        MENUITEM "&Wizard",                     IDM_WIZARD
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About",                      IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_BACKCOLOR           ICON    DISCARDABLE     "backcolo.ico"
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED

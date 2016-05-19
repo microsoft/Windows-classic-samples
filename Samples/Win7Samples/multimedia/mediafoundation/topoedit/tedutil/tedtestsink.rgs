@@ -1,0 +1,26 @@
+HKCR
+{
+	tedutil.TedTestSink.1 = s 'TED Multi-input Test Sink Class'
+	{
+		CLSID = s '{3A59CBE9-E5D7-4769-9D3A-4EE0F327A3C3}'
+	}
+	tedutil.TedTestSink = s 'TED Multi-input Test Sink Class'
+	{
+		CLSID = s '{3A59CBE9-E5D7-4769-9D3A-4EE0F327A3C3}'
+		CurVer = s 'tedutil.TedTestSink.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3A59CBE9-E5D7-4769-9D3A-4EE0F327A3C3} = s 'TED Multi-input Test Sink'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{64D3D369-B1E9-4aff-B1A4-8D8518E14A97}'
+			'Version' = s '1.0'
+		}
+	}
+}

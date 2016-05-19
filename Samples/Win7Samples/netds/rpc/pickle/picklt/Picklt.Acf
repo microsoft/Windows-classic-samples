@@ -1,0 +1,15 @@
+[ implicit_handle(handle_t ImplicitPicHandle )
+]
+interface type_pickle
+{
+
+/* Both encode and decode will be used with OBJECT2 objects. 
+   We don't need to generate pickling routines for OBJECT1 type.
+   If OBJECT1 object needed to be serialized separately,
+   it would be easier to put encode,decode attributes on the interface.
+*/
+
+typedef [encode, decode] OBJECT2;
+
+}
+

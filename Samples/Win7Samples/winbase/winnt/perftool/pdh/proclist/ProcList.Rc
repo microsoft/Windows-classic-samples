@@ -1,0 +1,52 @@
+/*-------------------------------------------------------------------------
+THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED
+TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+
+Copyright (C) 1996 - 2000.  Microsoft Corporation.  All rights reserved.
+-------------------------------------------------------------------------*/
+
+#include "windows.h"
+#include "winver.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 4,0,0,0
+ PRODUCTVERSION 4,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0xbL
+#else
+ FILEFLAGS 0xaL
+#endif
+ FILEOS 0x10001L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+ BEGIN
+    BLOCK "StringFileInfo"
+      BEGIN
+        BLOCK "040904E4"
+          BEGIN
+            VALUE "Comments", "Process Lister\0"
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "PDH.DLL Demo Application\0"
+            VALUE "FileVersion", "0.0\0"
+            VALUE "InternalName", "proclist\0"
+            VALUE "LegalCopyright", "Copyright (C) Microsoft Corp. 1996 - 2000\0"
+            VALUE "LegalTrademarks", "Microsoft(R) is a registered trademark of Microsoft Corporation. Windows(TM) is a trademark of Microsoft Corporation\0"
+            VALUE "OriginalFilename", "\0"
+            VALUE "ProductName", "Proclist\0"
+            VALUE "ProductVersion", "4.0\0"
+          END
+       END
+    BLOCK "VarFileInfo"
+      BEGIN
+            VALUE "Translation", 0x409, 0x04E4, 0x411, 0x04E4
+      END
+ END
+

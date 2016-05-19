@@ -1,0 +1,1 @@
+MessageType=Praise&Subject=%28Other%29&SubjectOther=spaciousness&Comments=The+spaciousness+was+pleasant.&Username=Name&UserEmail=Name@mailserver.com&UserTel=n%2Fa&UserFAX=n%2Fa

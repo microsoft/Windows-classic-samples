@@ -1,0 +1,80 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+#define APSTUDIO_READOLY_SYMBOLS
+#include "winresrc.h"
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#include <ntverp.h>
+
+#define VER_FILETYPE             VFT_APP
+#define VER_FILESUBTYPE          VFT2_UNKNOWN
+
+#define VER_FILEDESCRIPTION_STR  "WHEA DUMPREC Application"
+#define VER_INTERNALNAME_STR     "dumprec.exe"
+
+#include <common.ver>
+#include "dumprecs.h"
+
+//
+// Insertion strings contain explicit NULL terminators. This is to allow the
+// resources to be used in-place rather than having to copy them out using the
+// LoadString API.
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+  IDS_WHEA_UNKNOWN                                      L"Unknown\x0000 "
+
+  //
+  // Header labels.
+  //
+
+  IDS_LABEL_INVALID_ERROR_RECORD                        L"Invalid Common Platform Error Record.\n\x0000 "
+  IDS_LABEL_HEADER                                      L"Common Platform Error Record: %0#18I64x\n\x0000 "
+  IDS_LABEL_SEVERITY                                    L"Error severity:         %s\n\x0000 "
+  IDS_LABEL_SEVERITY_WITH_FLAGS                         L"Error severity:         %s (%s)\n\x0000 "
+  IDS_LABEL_TIMESTAMP                                   L"Timestamp:              %s (UTC)\n\x0000 "
+  IDS_LABEL_PLATFORM_ID                                 L"Platform ID:            %s\n\x0000 "
+  IDS_LABEL_PARTITION_ID                                L"Partition ID:           %s\n\x0000 "
+  IDS_LABEL_NOTIFICATION_TYPE                           L"Notification Type:      %s\n\x0000 "
+
+  IDS_WHEA_SEVERITY_INFORMATIONAL                       L"Informational\x0000 "
+  IDS_WHEA_SEVERITY_CORRECTED                           L"Corrected\x0000 "
+  IDS_WHEA_SEVERITY_RECOVERABLE                         L"Recoverable\x0000 "
+  IDS_WHEA_SEVERITY_FATAL                               L"Fatal\x0000 "
+  IDS_WHEA_RECORD_FLAGS_RECOVERED                       L"Recovered\x0000 "
+  IDS_WHEA_RECORD_FLAGS_PREVIOUSERROR                   L"Previous Error\x0000 "
+  IDS_WHEA_RECORD_FLAGS_SIMULATED                       L"Simulated\x0000 "
+  IDS_WHEA_GUID_CMC_NOTIFY_TYPE                         L"Corrected Machine Check\x0000 "
+  IDS_WHEA_GUID_CPE_NOTIFY_TYPE                         L"Corrected Platform Error\x0000 "
+  IDS_WHEA_GUID_MCE_NOTIFY_TYPE                         L"Machine Check Exception\x0000 "
+  IDS_WHEA_GUID_PCIE_NOTIFY_TYPE                        L"PCIe Advanced Error Reporting\x0000 "
+  IDS_WHEA_GUID_INIT_NOTIFY_TYPE                        L"INIT\x0000 "
+  IDS_WHEA_GUID_NMI_NOTIFY_TYPE                         L"Non-maskable Interrupt\x0000 "
+  IDS_WHEA_GUID_BOOT_NOTIFY_TYPE                        L"Boot Error\x0000 "
+  IDS_WHEA_GUID_PROCESSOR_GENERIC_ERROR_SECTION         L"Processor Generic Error Section\x0000 "
+  IDS_WHEA_GUID_XPF_PROCESSOR_ERROR_SECTION             L"XPF Processor Error Section\x0000 "
+  IDS_WHEA_GUID_IPF_PROCESSOR_ERROR_SECTION             L"IPF Processor Error Section\x0000 "
+  IDS_WHEA_GUID_MEMORY_ERROR_SECTION                    L"Memory Error Section\x0000 "
+  IDS_WHEA_GUID_PCIEXPRESS_ERROR_SECTION                L"PCIe Error Section\x0000 "
+  IDS_WHEA_GUID_PCIXBUS_ERROR_SECTION                   L"PCI-X Bus Error Section\x0000 "
+  IDS_WHEA_GUID_PCIXDEVICE_ERROR_SECTION                L"PCI-X Device Error Section\x0000 "
+  IDS_WHEA_GUID_FIRMWARE_ERROR_RECORD_REFERENCE_SECTION L"Firmware Error Record Reference Section\x0000 "
+  IDS_WHEA_GUID_CACHE_CHECK                             L"Cache Check\x0000 "
+  IDS_WHEA_GUID_TLB_CHECK                               L"TLB Check\x0000 "
+  IDS_WHEA_GUID_BUS_CHECK                               L"BUS Check\x0000 "
+  IDS_WHEA_GUID_MS_CHECK                                L"Microarchitecture Specific Check\x0000 "
+  IDS_WHEA_GUID_WHEA_RECORD_CREATOR                     L"Windows Hardware Error Architecture\x0000 "
+  IDS_WHEA_GUID_GENERIC_NOTIFY_TYPE                     L"Generic Error Source\x0000 "
+  IDS_WHEA_GUID_IPF_SAL_RECORD_SECTION                  L"IPF SAL Record Section\x0000 "
+  IDS_WHEA_GUID_XPF_MCA_SECTION                         L"XPF MCA Section\x0000 "
+  IDS_WHEA_GUID_NMI_SECTION                             L"Non-maskable Interrupt Section\x0000 "
+  IDS_WHEA_GUID_GENERIC_SECTION                         L"Generic Section\x0000 "
+  IDS_WHEA_GUID_ERROR_PACKET_SECTION                    L"Error Packet Section\x0000 "
+END
+

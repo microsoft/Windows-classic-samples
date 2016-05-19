@@ -1,0 +1,102 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright © Microsoft Corporation. All rights reserved
+
+// SampleSrEngine.idl : IDL source for SampleSrEngine.dll
+//
+//
+// This file will be processed by the MIDL tool to
+// produce the type library (SampleSrEngine.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "sapiddk.idl";
+
+typedef [restricted, hidden] struct SPDISPLAYTOKEN
+{
+    const WCHAR    *pszLexical;
+    const WCHAR    *pszDisplay;
+    BYTE            bDisplayAttributes;
+} SPDISPLAYTOKEN;
+
+typedef [restricted, hidden] struct SPDISPLAYPHRASE
+{
+    ULONG            ulNumTokens;
+    SPDISPLAYTOKEN  *pTokens;
+} SPDISPLAYPHRASE;
+
+[
+    object,
+    uuid(BBC18F3B-CF35-4f7c-99E8-D1F803AB4851),
+    helpstring("ISampleSRExtension Interface"),
+    pointer_default(unique)
+]
+interface ISampleSRExtension : IUnknown
+{
+    HRESULT ExamplePrivateEngineCall(void);
+};
+
+[
+    object,
+    uuid(C8D7C7E2-0DDE-44b7-AFE3-B0C991FBEB5E),
+    helpstring("ISpDisplayAlternates Interface"),
+    pointer_default(unique),
+    local
+]
+interface ISpDisplayAlternates : IUnknown
+{
+    HRESULT GetDisplayAlternates(
+        [in] const SPDISPLAYPHRASE *pPhrase, 
+        [in] ULONG cRequestCount, 
+        [annotation("__out_ecount_part(cRequestCount, *pcPhrasesReturned)")][out] SPDISPLAYPHRASE **ppCoMemPhrases,
+        [out] ULONG *pcPhrasesReturned);
+    HRESULT SetFullStopTrailSpace([in] ULONG ulTrailSpace);
+};
+
+[
+    uuid(41B89B6C-9399-11D2-9623-00C04F8EE628),
+    version(1.0),
+    helpstring("SampleSrEngine 1.0 Type Library")
+]
+library SRENGLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [
+        uuid(41B89B79-9399-11D2-9623-00C04F8EE628),
+        helpstring("Sample SR Engine Class")
+    ]
+    coclass SampleSREngine
+    {
+        [default] interface ISpSREngine;
+    };
+    [
+        uuid(B84714C0-3BFD-405D-83C5-E9C486826AD5),
+        helpstring("Sample SR Engine UI Class")
+    ]
+    coclass SampleSREngineUI
+    {
+        [default] interface ISpTokenUI;
+    };
+    [
+        uuid(78771A48-CE55-46a5-B78C-B813E3403F82),
+        helpstring("Sample SR Engine Extension Class")
+    ]
+    coclass SampleSRExtension
+    {
+        [default] interface ISampleSRExtension;
+        interface ISpDisplayAlternates;
+    };
+    [
+        uuid(882CAE4A-99BA-490b-BF80-CF69A60454A7),
+        helpstring("Sample SR Engine Alternates Class")
+    ]
+    coclass SampleSREngineAlternates
+    {
+        [default] interface ISpSRAlternates;
+    };
+};

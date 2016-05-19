@@ -1,0 +1,25 @@
+[ uuid (A4F1DB00-CA47-1067-B31F-00DD010662DA),
+  version(1.0),
+  pointer_default(unique)
+]
+interface cxhndl
+{
+
+const short BUFSIZE = 1024; 
+
+typedef [context_handle] void *PCONTEXT_HANDLE_TYPE;
+
+short RemoteOpen( [out] PCONTEXT_HANDLE_TYPE *pphContext,
+                  [in, string] unsigned char *pszFile
+                );
+
+short RemoteRead( [in]  PCONTEXT_HANDLE_TYPE phContext,
+                  [out] unsigned char achBuf[BUFSIZE],
+                  [out] short *pcbBuf
+                );
+
+short RemoteClose([in, out] PCONTEXT_HANDLE_TYPE *pphContext );
+
+void Shutdown(void);
+
+}

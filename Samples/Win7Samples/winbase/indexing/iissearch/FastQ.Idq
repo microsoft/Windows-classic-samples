@@ -1,0 +1,144 @@
+#
+# This is the query file for the query.htm query form.
+#
+
+[Query]
+
+# The CiCatalog variable must point to where the catalog (index) files
+# are stored on your system.  You will probably have to change this
+# value.  If this value is not specified, a default value is read from
+# the registry from:
+# HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\ContentIndex\IsapiDefaultCatalogDirectory
+#
+# An alternate form of the catalog specification is query://machine/catalog
+# This enables doing queries on a remote machine.  Note that the user
+# context issuing the query must have sufficient rights to access the
+# network or the query will fail with access denied.  By default the
+# anonymous account is a local account that can't logon remotely.  Either
+# use a domain anonymous account or basic authentication.  NTLM authentication
+# will not work.
+
+# CiCatalog=web     <= COMMENTED OUT - default registry value used
+CiCatalog=web
+
+# These are the columns that are referenced in the .htx files
+# when formatting output for each hit.
+
+CiColumns=filename,size,characterization,vpath,DocTitle,write
+
+# Do a recursive search (ie all directories under CiScope).
+# The opposite is SHALLOW
+
+CiFlags=DEEP
+
+# The CiRestriction is the query.  Here, it's just pass in from the
+# form in the .htm file.
+
+CiRestriction=%CiRestriction%
+
+# Don't allow more than 300 total hits in the result set.  It can be
+# expensive for the server to allow this value to get too large.
+
+CiMaxRecordsInResultSet=100
+
+# Display CiMaxRecordsPerPage hits on each page of output.
+
+CiMaxRecordsPerPage=10
+
+# CiScope is the directory (virtual or real) under which results are
+# returned.  If a file matches the query but is not in a directory beneath
+# CiScope, it is not returned in the result set.
+# A scope of / means all hits indexed in the virtual namespace matching
+# the query are returned.  A scope of \ means all hits are returned.
+
+CiScope=%CiScope%
+
+# This is the .htx file to use for formatting the results of the query.
+
+CiTemplate=/%FastDir%/fastq.htx
+
+# This is the list of property names to use in sorting the results.
+# Append [a] or [d] to the property name to specify ascending or
+# descending.  Separate keys in multi-key sorts with commas.
+# For example, to sort on file write date ascending, then file size
+# descending, use CiSort=write[a],filesize[d]
+
+CiSort=rank[d]
+
+# Setting CiForceUseCi to true means that the index is assumed to be
+# up to date, so queries that might otherwise force a walk of the
+# directory structure (find files older than X), will instead use
+# the index and run more quickly.  Of course, that means that the results
+# might miss files that match the query.
+
+CiForceUseCi=true
+
+#
+# Setting CiLocale allows the web master to override the locale sent from
+# the browser.  Supported locals include (from ISO 639:1988 language codes
+# and ISO 3166 country codes):
+#
+#   BG        Bulgarian
+#   ZH        Chinese
+#   ZH-CN     Chinese/china
+#   ZH-TW     Chinese/taiwan
+#   HR        Croatian
+#   CS        Czech
+#   DA        Danish
+#   NL        Dutch
+#   EN        English
+#   EN-GB     English-United kingdom
+#   EN-US     English-United States
+#   FI        Finnish
+#   FR        French
+#   FR-CA     French-Canadian
+#   FR-FR     French-France
+#   DE        German
+#   EL        Greek
+#   IS        Icelandic
+#   IT        Italian
+#   JA        Japanese
+#   KO        Korean
+#   NO        Norwegian
+#   PL        Polish
+#   PT        Portuguese
+#   PT-BR     Portuguese-Brazil
+#   RO        Romanian
+#   RU        Russian
+#   SK        Slovak
+#   SL        Slovenian
+#   ES        Spanish
+#   ES-ES     Spanish-Spain
+#   SV        Swedish
+#   TR        Turkish
+#
+# The locale effects the formatting of dates, times, and numbers.  Currency
+# is formatted according to the locale of the web server.  Locale is also
+# used to select the word breaker, and the stop word list.
+#
+# The web master may want to allow the browser to send the locale when
+# attempting to query for text in variety of languages.  For example,
+# given a single HTML page, one query couold be for German text (CiLocale=De)
+# and another could be for Spanish text (CiLocale=Es). If CiLocale is
+# not found in the IDQ file the locale send by the web browser is used.  If
+# no locale is send from the browser, the locale of the web server is used.
+#
+# The web browser sends its locale via the HTTP_ACCEPT_LANGUAGE parameter
+#
+#CiLocale=En-US         <== specified by the web master
+#CiLocale=%CiLocale%    <== send from the HTML page
+#CiLocale=              <== value used from the web browser
+
+#
+# The CiDialect parameter specifies the version of the query language to
+# use.  1 is the language used in previous versions of Indexing Service.
+# 2 is a more advanced language.  The default in 2 is for free-text queries.
+# So for the query 'dog and cat', dialect 1 will find documents containing
+# both words.  Dialect 2 will find documents containing either word.
+# Use dialect 1 to maintain backward-compatibility with previous versions
+# of Indexing Service and dialect 2 to take advantage of new features.
+# The default if no dialect is specified is 2.
+#
+
+CiDialect=2
+

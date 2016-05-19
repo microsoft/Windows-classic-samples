@@ -1,0 +1,36 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_FONTCONTROL        ICON         "FontControl.ico"
+IDI_SMALL              ICON         "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+   IDC_FONTCONTROL    "FontControl"
+   IDS_APP_TITLE      "FontControl"
+   IDS_DEFAULTTEXTFONT "Arial"
+END
+
+////////////////////////////////////////////////////////////////////
+// Ribbon
+#include "ids.h"
+#include "FontControlUI.rc"

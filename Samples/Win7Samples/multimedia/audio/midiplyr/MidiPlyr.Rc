@@ -1,0 +1,60 @@
+#include <windows.h>
+
+#include "MIDIPlyr.H"
+#include "MIDIPlyr.RCV"
+
+ID_ICON ICON "MIDIPlyr.ICO"
+
+ID_MENU MENU
+{
+    POPUP "&File"
+    {
+        MENUITEM "&Open",           IDM_OPEN
+        MENUITEM "E&xit",           IDM_EXIT
+    }
+
+    POPUP "&Actions"
+    {
+        MENUITEM "&Play",           IDM_PLAY
+        MENUITEM "P&ause",          IDM_PAUSE
+        MENUITEM "&Stop",           IDM_STOP
+    }
+
+    POPUP "&Options"
+    {
+        MENUITEM "&Toolbar",        IDM_TOOLBAR
+        MENUITEM "&Status bar",     IDM_STATUS
+        MENUITEM SEPARATOR
+        MENUITEM "&Autoplay dropped files", IDM_AUTOPLAY
+    }
+
+    POPUP "&Play Thru"
+    {
+        MENUITEM "&Midi Mapper",    IDM_MAPPER
+    }
+}
+
+IDB_TOOLBAR BITMAP MOVEABLE PURE "TOOLBAR.BMP"
+
+STRINGTABLE
+{
+    IDS_APPNAME,        "MIDI Player"
+    IDS_APPTITLEMASK,   "MIDI Player - [%s]"
+    IDS_UNTITLED,       "Untitled"
+
+    IDS_OPENFAILED,     "Open of MIDI file failed"
+    IDS_PREROLLFAILED,  "Preroll of MIDI file failed"
+    IDS_TESTERR,        "Something stupid happened"
+    IDS_STOPFAILED,     "Attempt to stop playback failed"
+
+    IDS_HMS,            "HH:MM:SS"
+    IDS_TICKS,          "Ticks"
+
+    IDS_NOFILE,         ""
+    IDS_OPENED,         "Stopped"
+    IDS_PREROLLING,     "Seeking"
+    IDS_PREROLLED,      "Prerolled"
+    IDS_PLAYING,        "Playing"
+    IDS_PAUSED,         "Paused"
+    IDS_STOPPING,       "Stopping"
+}

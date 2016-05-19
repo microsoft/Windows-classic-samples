@@ -1,0 +1,5 @@
+LIBRARY	"FDProviderSample"
+
+EXPORTS 
+    DllGetClassObject   PRIVATE
+    DllCanUnloadNow     PRIVATE

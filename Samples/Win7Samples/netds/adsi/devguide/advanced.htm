@@ -1,0 +1,501 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Active Directory Service Interfaces - Advanced Topic</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body topmargin="0" leftmargin="0">
+
+<table border="0" height="86" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="77%" valign="top" height="58"><map name="FPMap2">
+      <area href="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" shape="rect" coords="4, 6, 248, 57"></map><img src="banner.gif"
+     border="0" alt="http://www.microsoft.com/windows2000/library/howitworks/activedirectory/adsilinks.asp" width="250" height="60" usemap="#FPMap2"></td>
+    <td width="3%" height="58"></td>
+    <td width="21%" height="58" valign="bottom"><p align="right"><map name="FPMap3">
+      <area href="http://www.microsoft.com" shape="rect" coords="7, 6, 108, 39"></map><img src="mslogo.gif"
+     border="0" alt="http://www.microsoft.com" width="112" height="40" usemap="#FPMap3"></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left" height="28"><map name="FPMap0">
+      <area href="rtk.htm" shape="rect" coords="420, 1, 515, 18" ALT="rtk.htm">
+      <area href="interopt.htm" shape="rect" coords="350, 1, 415, 19" ALT="interopt.htm">
+      <area href="ad.htm" shape="rect" coords="233, 1, 345, 19" ALT="ad.htm">
+      <area href="winnt.htm" shape="rect" coords="165, 1, 223, 19" ALT="winnt.htm">
+      <area href="dev.htm" shape="rect" coords="67, 1, 165, 19" ALT="dev.htm">
+      <area href="../default.htm" shape="rect" coords="13, 1, 65, 20" ALT = "../default.htm"></map>
+      <img rectangle="(233,1) (345, 19)  ad.htm" rectangle="(165,1) (223, 19)  winnt.htm" rectangle="(67,1) (165, 19)  dev.htm" rectangle="(13,1) (65, 20)  ../default.htm" src="router.gif" alt="router.gif (3874 bytes)" border="0" usemap="#FPMap0" width="536" height="26"></td>
+    <td width="3%" height="28"></td>
+    <td width="21%" height="28"></td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="40">
+  <tr>
+    <td width="2%" height="19"></td>
+    <td width="98%" height="19">
+    </td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21"><img border="0" src="advanced.gif" width="209" height="123"></td>
+  </tr>
+  <tr>
+    <td width="2%" height="21"></td>
+    <td width="98%" height="21" valign="top">&nbsp;<table border="0" width="100%" cellspacing="0"
+    cellpadding="0">
+      <tr>
+        <td width="43%"></td>
+      </tr>
+      <tr>
+        <td width="43%"><font face="Verdana" size="2" color="#0080C0"><b><a name="top"></a>General</b></font>
+          <ul>
+            <li><a href="#GetInfoEx"><font face="Verdana" size="2">GetInfoEx</font></a></li>
+            <li><a href="#Filter"><font face="Verdana" size="2">Filtering</font></a></li>
+            <li><a href="#PropertyCache"><font face="Verdana" size="2">Property
+              Caching</font></a></li>
+            <li><a href="#GetEx"><font face="Verdana" size="2">GetEx</font></a></li>
+          </ul>
+          <p><font size="2" color="#0080C0" face="Verdana"><b>WinNT</b></font></p>
+          <ul>
+            <li><a href="#ntBinding"><font face="Verdana" size="2">WinNT
+              Binding</font></a></li>
+            <li><a href="#ntDC"><font face="Verdana" size="2">Communicating
+              to a specific domain controller</font></a></li>
+            <li><a href="#ntReadOnly"><font face="Verdana" size="2">Including
+              backup domain controllers as part of selection&nbsp;</font></a></li>
+          </ul>
+          <p><font size="2" color="#0080C0" face="Verdana"><b>Active Directory</b></font></p>
+          <ul>
+            <li><a href="#adTree"><font face="Verdana" size="2">Searching
+              the entire tree</font></a></li>
+            <li><a href="#ObjectCategory"><font face="Verdana" size="2">Object
+              Class vs Object Category</font></a></li>
+            <li><a href="#fastBind"><font face="Verdana" size="2">Fast
+              Bind</font></a></li>
+            <li><a href="#operationalAttribute"><font face="Verdana" size="2">Operational
+              Attributes</font></a></li>
+            <li><font face="Verdana" size="2"><a href="#pageSize">Specifying
+              Page Size</a>&nbsp;</font></li>
+            <li><a href="#guid"><font face="Verdana" size="2">GUID
+              searching</font></a></li>
+            <li><a href="#mandatoryAttr"><font face="Verdana" size="2">Listing
+              Mandatory and Optional Attributes</font></a></li>
+            <li><a href="#adSecurity"><font face="Verdana" size="2">Active
+              Directory Security</font></a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td width="43%">
+          <hr color="#0080C0">
+        </td>
+      </tr>
+      <tr>
+        <td width="43%"><font face="Verdana" size="2" color="#0080C0"><a name="GetInfoEx"></a><b>GetInfoEx</b></font>
+          <p><font face="Verdana" size="2">When the first Get issue on an
+          object, ADSI ,implicitly,brings all attributes which have 1) value 2)
+          user has a read permission into ADSI cache. This is designed for
+          optimizing network traffic, server load for most cases and ease of
+          use- one big round trip is normally better than chatty traffics.&nbsp;
+          However, in some cases, you like to get only a small set of
+          attributes. GetInfoEx does exactly this. It allows you to specify only
+          attributes you're interested in.<br>
+          <br>
+          Example,<br>
+          Set o = GetObject(&quot;LDAP://CN=Jsmith, DC=ArcadiaBay, DC=COM&quot;)<br>
+          o.GetInfoEx
+          Array(&quot;sn&quot;,&quot;givenName&quot;,&quot;telephoneNumber&quot;),
+          0<br>
+          Debug.Print o.Get(&quot;sn&quot;)<br>
+          Debug.Pritn o.Get(&quot;givenName&quot;)<br>
+          &nbsp;<br>
+          Back to <a href="#top">top</a></font></p>
+          <p><font face="Verdana" size="2" color="#0080C0"><a name="Filter"></a><b>Filtering</b></font></p>
+          <p><font face="Verdana" size="2">Often time you would like to
+          enumerate only certain types of class in a container. It's more efficient
+          to filter first, instead of doing comparision during the enumeration.<br>
+          <br>
+          Example, instead of doing this<br>
+          '--- Print all users in a domain<br>
+          Set cont = GetObject(&quot;WinNT://ARCADIABAY&quot;)<br>
+          For each obj in cont<br>
+          &nbsp; if obj.Class = &quot;User&quot; then<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print obj.Name<br>
+          &nbsp; End if&nbsp;<br>
+          Next<br>
+          <br>
+          Instead, you should do this:</font></p>
+          <p><font face="Verdana" size="2">'--- Print all users in a domain<br>
+          Set cont = GetObject(&quot;WinNT://ARCADIABAY&quot;)<br>
+          con.Filter = Array(&quot;user&quot;)<br>
+          For each usr in cont<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; Debug.Print usr.Name<br>
+          Next</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a><br>
+          <br>
+          </font><font face="Verdana" size="2" color="#0080C0"><a name="GetEx"></a><b>GetEx</b></font></p>
+          <p><font face="Verdana" size="2">If you want to read a property but don't know whether
+          it is single-valued or multi-valued, GetEx comes in handy. Regardless how
+          many values in an attribute, you can rely on GetEx for value
+          enumeration.<br>
+          <br>
+          Example,<br>
+          Set usr = GetObject(&quot;LDAP://CN=Jsmith, DC=Fabrikam,
+          DC=COM&quot;)<br>
+          <br>
+          phone = usr.GetEx(&quot;telephoneNumber&quot;) 'single-valued property<br>
+          For Each pnumber In phone<br>
+          &nbsp;&nbsp; Debug.Print pnumber<br>
+          Next&nbsp;<br>
+          <br>
+          phone = usr.GetEx(&quot;otherTelephone&quot;) 'multi-valued property<br>
+          For Each pnumber In phone<br>
+          &nbsp;&nbsp; Debug.Print pnumber<br>
+          Next</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font face="Verdana" size="2" color="#0080C0"><a name="PropertyCache"></a><b>Property
+          Caching</b></font></p>
+          <font face="Verdana" size="2">With IADsPropertyList, IADsPropertyEntry
+          and IADsPropertyValue, you will be able to manipulate ADSI caches.<br>
+          <br>
+          Example,<br>
+          <br>
+          Set oObject = GetObject("LDAP://CN=Andrew Anderson,OU=Sales,DC=Antipodes,DC=com")<br>
+          WScript.Echo "User: " &amp; oObject.cn<br>
+          <br>
+          oObject.GetInfo 'Load into ADSI's caches<br>
+          WScript.Echo "Property Count: " &amp; oObject.PropertyCount<br>
+          For i = 0 to oObject.PropertyCount -1<br>
+          &nbsp; Set X = oObject.Item(i+1)&nbsp;<br>
+          &nbsp; For Each Y In X.Values<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; WScript.Echo "Attribute: " &amp; X.Name &amp; " " &amp; " (" &amp; CStr(aProperty(Y.ADsType+1)) &amp; ")"<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Select Case Y.ADsType + 1<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_DN_STRING<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.DNString<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_CASE_EXACT_STRING<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.CaseExactString&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_CASE_IGNORE_STRING<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.CaseIgnoreString<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_PRINTABLE_STRING<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.PrintableString<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_NUMERIC_STRING<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.NumericString<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_BOOLEAN<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.Boolean<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Case ADSTYPE_INTEGER<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          WScript.Echo "Value: " &amp; Y.Integer<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //... and
+          more here....&nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp; Next<br>
+          Next<br>
+          <br>
+          </font><font face="Verdana" size="2">Back to <a href="#top">top</a></font>
+          <hr color="#0080C0">
+          <p><font face="Verdana" color="#0080C0" size="2"><b><a name="ntBinding"></a>WinNT:
+          Binding</b></font></p>
+          <p><font size="2" face="Verdana">In WinNT, you will be able to specify
+          the object's class as part of the ADsPath. This will speed up the bind
+          in most cases. Examples: &quot;WinNT://ARCADIABAY/jsmith<b>,user</b>&quot;
+          , &quot;WinNT://ARCADIABAY/marketing<b>,group</b>&quot;&nbsp;</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p>&nbsp;</p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="ntDC"></a>WinNT:
+          Communicating to a specific domain controller</b></font></p>
+          <p><font size="2" face="Verdana">If you specify bind to a domain or
+          objects in a domain, ADSI, by default, communicates to Primary Domain
+          Controller. In ADSI, there is a way, to select to a specific domain
+          controller. Specify the computer name with ',computer' as part of
+          ADsPath.<br>
+          Example: &quot;WinNT://bdc02,computer&quot;&nbsp;</font></p>
+          <p><font size="2" face="Verdana">Note: if the domain controller is a
+          backup domain controller, all the write operations will fail.</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><br>
+          <font face="Verdana" size="2" color="#0080C0"><b><a name="ntReadOnly"></a>WinNT:
+          Including backup domain controllers as part of selection</b></font></p>
+          <p><font face="Verdana" size="2">ADSI introduces a new flag (ADS_READONLY_SERVER)
+          for including back up domain controllers as part of selection criteria
+          when bind to a domain. ADSI may select either PDC or BDC.&nbsp;&nbsp;<br>
+          <br>
+          Example,<br>
+          Set dso = GetObject(&quot;WinNT:&quot;)<br>
+          Set obj = dso.OpenDSObject(&quot;WinNT://ARCADIABAY/jsmith,user&quot;,
+          &quot;Administrator&quot;, &quot;secret&quot;, ADS_READONLY_SERVER )<br>
+          <br>
+          </font><font size="2" face="Verdana">Note: if the domain controller is
+          a backup domain controller, all the write operations will fail.</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <hr color="#0080C0">
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="adTree"></a>Active
+          Directory: Searching the entire domain tree</b></font></p>
+          <p><font size="2" face="Verdana">Although it's very possible, chasing
+          referral is discouraged for a domain tree search. The client may have
+          to connect n number of domain controllers before getting the complete
+          result set. Global catalog is designed for enterprise, tree search.
+          Since not all attributes are replicated to Global Catalog, you may
+          want to rebind to the targeted object once you retreive its
+          distinguished name.</font></p>
+          <p><font size="2" face="Verdana">example,<br>
+          Set gc = GetObject(&quot;GC://DC=Central, DC=ArcadiaBay, DC=COM&quot;)<br>
+          //... do ADO search here...</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="ObjectCategory"></a>Active
+          Directory: Object Class vs Object Category</b></font></p>
+          <p><font size="2" face="Verdana">Object class is a multi-valued
+          attribute. Active Directory does not index this attribute for many
+          reasons. Active Directory introduces a similar concept -
+          objectCategory, is an indexed, single value attributes. Include
+          objectCategory to search a certain type of class.<br>
+          <br>
+          Note: With the exception of (objectClass=*), you should always include
+          objectCategory for efficient searches.&nbsp;</font></p>
+          <p><font size="2" face="Verdana">Example,<br>
+          <br>
+          -Find all users<br>
+          (&amp;(objectCategory=Person)(objectClass=user))</font></p>
+          <p><font size="2" face="Verdana">-Find all groups<br>
+          (objectCategory=Group)<br>
+          <br>
+          -Find all computers<br>
+          (objectCategory=Computer)<br>
+          <br>
+          -Find all object<br>
+          (objectClass=*)</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="fastBind"></a>LDAP:
+          Fast Bind</b></font></p>
+          <p><font size="2" face="Verdana">When you request an LDAP bind using
+          ADSI, one of things ADSI will do is to do a quick base search on that
+          object itself. This is done for the following reasons: 1) to make sure
+          the object exists 2) to get the object class so that ADSI will be able
+          to load the appropriate ADSI extensions and interfaces. By specifying
+          ADS_FAST_BIND, ADSI will skip this base search. This means that ADSI
+          does not check if object's existence, and ADSI only supports IADs
+          interface for this bound object.&nbsp;<br>
+          <br>
+          One scenario is updating attributes on objects found in a result set.
+          Since the objects are included in the result set, they are highly
+          likely exist in the directory.&nbsp;<br>
+          <br>
+          example,&nbsp;<br>
+          Set dso = GetObject(&quot;LDAP:&quot;)<br>
+          ... do Search....<br>
+          while rs.EOF&nbsp;<br>
+          &nbsp;&nbsp;&nbsp; adsPath = rs.Fields(&quot;ADsPath&quot;)<br>
+          &nbsp;&nbsp;&nbsp; Set obj = dso.OpenDSObject(adsPath, vbNullString,
+          vbNullString, ADS_SECURE_AUTHENTICATION | ADS_FAST_BIND )<br>
+          &nbsp;&nbsp;&nbsp; rs.MoveNext<br>
+          wend<br>
+          <br>
+          Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="operationalAttribute"></a>Active
+          Directory: Operational Attributes</b></font></p>
+          <p><font face="Verdana" size="2">Active Directory defines several
+          operational attributes. An operational attribute is an artifact
+          attribute. When one sets an operational attribute value, it, normally,
+          triggers some actions on the server. On the other hand, when one gets
+          an operational attribute value, the value itself, usually, is
+          calculated on the server.&nbsp;&nbsp; Like a normal attribute, an
+          operational attribute can be either multivalue or single value. The
+          operational attribute may be in read-only, write-only or read and
+          write mode.</font></p>
+          <p><font size="2" face="Verdana">Active Directory defines several
+          operational attributes,for examples: <i>canonicalName</i>, <i>allowedChildClassesEffective,
+          allowedAttributes, possibleInferirors, lowestUncommitedUSN</i>, and
+          many more.</font></p>
+          <p><font face="Verdana" size="2">To retrieve or set an operational
+          attribute value, you must use IDirectoryObject, or IADs::GetInfoEx<br>
+          <br>
+          '--- Retrieve a canonical name (every object in Active Directory has a
+          canonicalName)<br>
+          Set obj = GetObject("LDAP://CN=Cert Publishers,CN=Users,DC=Arcadiabay,DC=com&quot;)<br>
+          obj.GetInfoEx Array("canonicalName"), 0<br>
+          Debug.Print obj.Get(&quot;canonicalName&quot;) '---it should be:
+          arcadiabay.com/Users/Cert Publishers</font></p>
+          <p><font face="Tahoma" size="2">//----- Find all allowed attributes
+          for a given object in the current user security context&nbsp; -------</font></p>
+          <p><small><font face="Tahoma">&nbsp;&nbsp;&nbsp; IIDirectoryObject *pObject;<br>
+          &nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp; hr = ADsGetObject(L&quot;LDAP://DC=activeds,DC=ntdev,DC=Microsoft,DC=Com&quot;,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IID_IDirectoryObject,
+          (void**) &amp;pObject );<br>
+          <br>
+          &nbsp;&nbsp;&nbsp; if (!SUCCEEDED(hr) )<br>
+          &nbsp;&nbsp;&nbsp; {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+          &nbsp;&nbsp;&nbsp; }<br>
+          <br>
+          &nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp; LPWSTR szAttrs[] = {
+          L&quot;allowedAttributesEffective&quot; };<br>
+          &nbsp;&nbsp;&nbsp; PADS_ATTR_INFO pAttrEntry;<br>
+          &nbsp;&nbsp;&nbsp; DWORD dwReturn;<br>
+          &nbsp;&nbsp;&nbsp; hr = pObject-&gt;GetObjectAttributes( szAttrs, 1,
+          &amp;pAttrEntry, &amp;dwReturn );<br>
+          <br>
+          &nbsp;&nbsp;&nbsp; if ( !SUCCEEDED(hr) )<br>
+          &nbsp;&nbsp;&nbsp; {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pObject-&gt;Release();<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return hr;<br>
+          &nbsp;&nbsp;&nbsp; }<br>
+          <br>
+          &nbsp;&nbsp;&nbsp; if ( pAttrEntry )<br>
+          &nbsp;&nbsp;&nbsp; {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for( DWORD idx=0; idx &lt;
+          pAttrEntry-&gt;dwNumValues; idx++ )<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          printf(&quot;%ws\n&quot;, pAttrEntry-&gt;pADsValues[idx].CaseIgnoreString
+          );<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FreeADsMem( pAttrEntry );<br>
+          &nbsp;&nbsp;&nbsp; }<br>
+          <br>
+          &nbsp;&nbsp;&nbsp; pObject-&gt;Release();<br>
+          &nbsp;&nbsp;&nbsp; return hr;<br>
+          </font></small></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="guid"></a>Active
+          Directory: GUID searching</b></font></p>
+          <p><font face="Verdana" size="2">Every object in Active Directory
+          carries GUID which guarantees to be unique. GUID never changes even
+          the object is renamed or moved. ADSI support GUID binding in the form
+          of&nbsp; LDAP://&lt;GUID=xxxxxx&gt; or GC://&lt;GUID=xxx&gt;<br>
+          <br>
+          For example of GUID binding please see <a href="ad.htm#BindGUID">Active
+          Directory GUID Binding</a></font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><b><a name="mandatoryAttr"></a>Active
+          Directory: Listing Mandatory and Optional Attributes</b></font></p>
+          <p><font face="Verdana" size="2">Both mandatory and operational
+          attributes can be obtained from IADsClass. To get the IADsClass
+          interface, first you must know the class name of an object. Secondly,
+          compose the ADSPath from the class name and schema path. Third, bind
+          this object and ask for IADsClass. The MandatoryProperties and
+          OptionalProperties attributes contain in this interface.</font></p>
+          <p><font face="Verdana">&nbsp;</font></p>
+          <font color="#0000ff" size="2">
+          <p></font><font size="2"><font face="Verdana">Dim x As IADsClass<br>
+          Dim classNams As String<br>
+          Dim provider As String</font></p>
+          <p></font><font size="2" face="Verdana">className = &quot;user&quot;<br>
+          provider&nbsp; = &quot;LDAP://schema/&quot;<br>
+          <br>
+          Set x = GetObject( provider &amp; className )</font><font size="2"></p>
+          <p></font><font size="2" face="Verdana">For Each attr In
+          x.MandatoryProperties<br>
+          &nbsp;&nbsp;&nbsp; Debug.Print attr<br>
+          Next</font><font size="2"></p>
+          <p></font><font size="2" face="Verdana">For Each attr In
+          x.OptionalProperties<br>
+          &nbsp;&nbsp;&nbsp; Debug.Print attr<br>
+          Next</font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" face="Verdana" color="#0080C0"><b><a name="pageSize"></a>Active
+          Directory: Specifying Page Size&nbsp;</b></font></p>
+          <p><font size="2" face="Verdana">On subtree search, it's recommended
+          to specify the page size. Even if you're not expecting to find many
+          objects with the search. Paging allows the search to timeout in a re-startable
+          way, so that you can resume the search where it left off. Without
+          paging, the search will simply fail when it hits a time limit. Paging
+          also promote scalability for both clients and servers.&nbsp;<br>
+          <br>
+          ADSI handles the page size transparently. No need additional
+          programming required, except specifying the page size in the search
+          preferences.</font></p>
+          <p><font size="2" face="Verdana"><br>
+          <i>VB Example,<br>
+          </i>Command.Properties(&quot;Page Size&quot;) = 500<br>
+          <br>
+          '--Execute and enumerate ...<br>
+          <br>
+          <i>VC Example,</i><br>
+          ADS_SEARCHPREF_INFO prefInfo[ MAX_SEARCH_PREF ];<br>
+          <br>
+          prefInfo[dwCountPref].dwSearchPref = ADS_SEARCHPREF_PAGESIZE;&nbsp;<br>
+          prefInfo[dwCountPref].vValue.dwType = ADSTYPE_INTEGER;<br>
+          prefInfo[dwCountPref].vValue.Integer = m_nPageSize;<br>
+          dwCountPref++;<br>
+          <br>
+          hr = m_pSearch-&gt;SetSearchPreference( prefInfo, dwCountPref )</font></p>
+          <p><font size="2" face="Verdana">Back to <a href="#top">top</a></font></p>
+          <p><font size="2" color="#0080C0" face="Verdana"><a name="adSecurity"></a><b>Active
+          Directory: Security</b></font></p>
+          <p><font size="2" face="Verdana">Active Directory Security covers in
+          detail in the <a href="http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp">Active
+          Directory Programmer's Guide</a>.&nbsp;<br>
+          Two common scenarios are presented here. - Organizational Unit
+          Delegation and Setting ACL on an attribute<br>
+          <br>
+          Example 1 - Organizational Unit Delegation</font></p>
+          <p><font size="2" face="Verdana">'---- Allow JSmith to create and
+          delete users in the sales organization ----------<br>
+          <br>
+          Dim ace As New AccessControlEntry<br>
+          Dim secDesc As IADsSecurityDescriptor<br>
+          Dim acl As IADsAccessControlList<br>
+          <br>
+          Set x = GetObject("LDAP://OU=Sales,DC=Arcadiay,DC=com")<br>
+          Set secDesc = x.Get("ntSecurityDescriptor")<br>
+          Set acl = secDesc.DiscretionaryAcl<br>
+          <br>
+          ace.ObjectType = "{BF967ABA-0DE6-11D0-A285-00AA003049E2}"&nbsp; '---
+          This is the User Class' schemaID GUID<br>
+          ace.AccessMask =  ADS_RIGHT_DS_CREATE_CHILD Or ADS_RIGHT_DS_DELETE_CHILD<br>
+          ace.AceType = ADS_ACETYPE_ACCESS_ALLOWED_OBJECT<br>
+          ace.AceFlags = ADS_ACEFLAG_INHERIT_ACE<br>
+          ace.Flags = ADS_FLAG_OBJECT_TYPE_PRESENT<br>
+          ace.Trustee = &quot;ARCADIABAY\JSmith&quot;<br>
+          <br>
+          acl.AddAce ace<br>
+          secDesc.DiscretionaryAcl = acl<br>
+          x.Put "ntSecurityDescriptor", Array(secDesc)<br>
+          x.SetInfo<br>
+          <br>
+          <br>
+          Example 2 - Setting ACL on an attribute<br>
+          <br>
+          ‘-- Deny JSmith to write “Managed By” attributes<br>
+          </font><font size="2" face="Verdana">Dim ace As New AccessControlEntry<br>
+          Dim secDesc As IADsSecurityDescriptor<br>
+          Dim acl As IADsAccessControlList<br>
+          <br>
+          Set x = GetObject(&quot;LDAP://OU=Sales,DC=Arcadiay,DC=com&quot;)<br>
+          Set secDesc = x.Get(&quot;ntSecurityDescriptor&quot;)<br>
+          Set acl = secDesc.DiscretionaryAcl<br>
+          </font><font size="2" face="Verdana"><br>
+          ace.ObjectType = "{0296C120-40DA-11D1-A9C0-0000F80367C1}” ‘Managed By<br>
+          ace.AccessMask = ADS_RIGHT_DS_WRITE_PROP<br>
+          ace.AceType = ADS_ACETYPE_ACCESS_DENIED_OBJECT<br>
+          ace.AceFlags = ADS_ACEFLAG_INHERIT_ACE<br>
+          ace.Flags = ADS_FLAG_OBJECT_TYPE_PRESENT<br>
+          ace.Trustee = &quot;ARCADIABAY\JSmith&quot;<br>
+          <br>
+          acl.AddAce ace<br>
+          secDesc.DiscretionaryAcl = acl<br>
+          x.Put &quot;ntSecurityDescriptor&quot;, Array(secDesc)<br>
+          x.SetInfo<br>
+          </font></p>
+          <p><font face="Verdana" size="2">Back to <a href="#top">top</a></font></p>
+          <p><font face="Verdana" size="2" color="#0080C0">&nbsp;</font></td>
+      </tr>
+      <tr>
+        <td width="43%"></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

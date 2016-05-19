@@ -1,0 +1,703 @@
+<!-- ---------------------------------------------------------------------
+//
+//  Copyright 1999 Microsoft Corporation.  All Rights Reserved.
+//
+//  File:         movable.htc
+//
+//  Description:  This behavior allows the web author to make page elements
+//                moveable via the mouse or through script. The movement can
+//                be limited to a set area, or to horizontal or vertical 
+//                movement only. 
+//
+//-------------------------------------------------------------------- -->
+
+<PROPERTY NAME="movable"    />
+<PROPERTY NAME="direction"  />
+<PROPERTY NAME="snapable"   />
+<PROPERTY NAME="selectable" />
+    
+<METHOD   NAME="moveTo"     />
+<METHOD   NAME="snapToGrid" />
+    
+<EVENT    NAME="ondrag"           ID="drag"      />
+<EVENT    NAME="ondragstart"      ID="dragstart" />
+<EVENT    NAME="ondragend"        ID="dragend"   />
+<EVENT    NAME="onerror"          ID="error"     />
+
+<ATTACH   EVENT="onmouseup"       HANDLER="DoMouseUp"   />
+<ATTACH   EVENT="onmousedown"     HANDLER="DoMouseDown" />
+<ATTACH   EVENT="onclick"         HANDLER="DoSelect"    />
+<ATTACH   EVENT="onselectstart"   HANDLER="DoSelect"    />
+<ATTACH   EVENT="ondocumentready" HANDLER="SetDefaults" />
+
+
+<SCRIPT LANGUAGE="jscript">
+
+//+----------------------------------------------------------------------------
+//
+//  Global Variables
+//
+//-----------------------------------------------------------------------------
+
+var iOffsetX;                       // On the dragstart event, this variable is
+                                    //    set to track the difference between the
+                                    //    mouse position and the corner of the
+                                    //    element
+
+var iOffsetY;                       // Same as iOffsetX, but for Y coordinate
+
+var normZindex = style.zIndex;      // Tracks the regular zIndex so it can be
+                                    //    restored once the dragend event occurs
+
+var zBound = new Array              // Used for parsing the mvBoundary prop
+    ('Top', 'Right',                //     into it's four component parts 
+    'Bottom', 'Left');
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetDefaults
+//
+//  Description:    Called during the initialization of the behavior.  Sets
+//                  the required settings for CSS properties, the defaults for
+//                  custom CSS properties, and attaches the onpropertychange
+//                  event (not done in the header to prevent firing the event
+//                  during initialization).
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetDefaults()
+{
+    //  Required CSS properties
+    style.left = offsetLeft;
+    style.top = offsetTop;
+    style.position = "absolute";
+
+    //
+    //  Set these properties before the individual ones are set next.  Thus,
+    //  individual properties will override the container properties here.
+    //
+    style['mvBoundary'] = currentStyle['mv--boundary'];
+    style['mvGrid'] = currentStyle['mv--grid'];
+
+    //  Custom CSS Property Defaults
+    CustomDefault('mv--boundary-left','mvBoundaryLeft',null);
+    CustomDefault('mv--boundary-right','mvBoundaryRight',null);
+    CustomDefault('mv--boundary-top','mvBoundaryTop',null);
+    CustomDefault('mv--boundary-bottom','mvBoundaryBottom',null);
+    CustomDefault('mv--grid-rows','mvGridRows',null);
+    CustomDefault('mv--grid-cols','mvGridCols',null);
+
+    //  Format the grid and boundary
+    FormatGrid();
+    FormatBoundary();
+
+    //  Attach the onpropertychange event
+    attachEvent("onpropertychange", DoPropChange);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       CustomDefault
+//
+//  Description:    Sets the defaults for custom CSS properties and establishes
+//                  a scriptable name for the property
+//
+//  Arguments:      sCSSName - the CSS name of the property
+//                  sScriptName - the desired Scriptable name of the property
+//                  sDefault - the desired default value
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function CustomDefault(sCSSName, sScriptName, sDefault)
+{
+    if (currentStyle[sCSSName] == null)
+    {
+        style[sCSSName] = sDefault;
+    }
+    else style[sCSSName] = currentStyle[sCSSName];
+    
+    style[sScriptName] = style[sCSSName];
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatGrid
+//
+//  Description:    Parse the mvGrid space-delimited string to get mvGridRows
+//                  and mvGridCols
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FormatGrid()
+{
+    if (style['mvGrid'] != null)
+    {
+        if (style['mvGridCols'] == null)
+        {
+            style['mvGridCols'] = parseInt(style['mvGrid'].substring(
+                0,style['mvGrid'].indexOf(" ")));
+        }
+    
+        if (style['mvGridRows'] == null)
+        {
+            style['mvGridRows'] = parseInt(style['mvGrid'].substring(
+                style['mvGrid'].indexOf(" ")+1,style['mvGrid'].length));
+        }
+    }
+    
+    //  Call snapToGrid to enforce new values
+    snapToGrid();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       FormatBoundary
+//
+//  Description:    Parse the mvBoundary space-delimited string to get 
+//                  mvBoundaryTop, mvBoundaryRight, mvBoundaryBottom, and
+//                  mvBoundaryLeft.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function FormatBoundary()
+{
+    if (style['mvBoundary'] != null)
+    {
+        var iStart = 0;
+        var iEnd = style['mvBoundary'].indexOf(" ");
+                
+        for (i=0; i<zBound.length; i++)
+        {
+            style['mvBoundary' + zBound[i]] = 
+                style['mvBoundary'].substring(iStart,iEnd);
+                
+            if (iEnd == style['mvBoundary'].length) break;
+            
+            iStart = iEnd + 1;
+            iEnd = style['mvBoundary'].indexOf(" ", iStart);
+            if (iEnd == -1) iEnd = style['mvBoundary'].length;
+        }
+    }
+
+    SetBoundary();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoPropChange
+//
+//  Description:    Runs on the onpropertychange event and calls the necessary
+//                  functions to correctly handle the property that was just
+//                  changed.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoPropChange()
+{
+    var propertyName = window.event.propertyName;
+
+    //
+    //  Handle CSS property changes by calling necessary functions, setting
+    //  variables, and/or setting styles
+    //
+    if (propertyName.substring(0,5) == "style")
+    {
+        switch(propertyName)
+        {
+            case "style.zIndex"             :
+                normZindex = style.zIndex;
+                break;
+                
+            case "style.position"           :
+                style.position = "absolute";
+                break;
+   
+            case "style.mvGridRows"           :
+                snapToGrid();
+                break;
+                
+            case "style.mvGridCols"           :
+                snapToGrid();
+                break;
+                
+             case "style.mvGrid"               :
+                FormatGrid();
+                break;               
+                
+            case "style.mvBoundaryLeft"       :
+                SetBoundary();
+                break;
+
+            case "style.mvBoundaryTop"        :
+                SetBoundary();
+                break;
+                
+            case "style.mvBoundaryRight"      :
+                SetBoundary();
+                break;
+                
+            case "style.mvBoundaryBottom"     :
+                SetBoundary();
+                break;
+                               
+            case "style.mvBoundary"           :
+                FormatBoundary();
+                break;
+        }
+    }
+    else
+    {
+        //
+        //  Detach the onpropertychange event to prevent it from firing while
+        //  the changes are handled
+        //
+        detachEvent("onpropertychange", DoPropChange);
+        
+        switch(propertyName)
+        {
+            case "movable"                  :
+                break;
+              
+            case "direction"                :
+                break;
+                
+            case "snapable"                 :
+                if (snapable == true || snapable == "true") snapToGrid();
+                break;
+                
+            case "selectable"               :
+                break;    
+
+            default                         :
+                ReturnError(propertyName + " not a valid property");
+                break;
+        }
+        
+        //  Re-attach the onpropertychange event
+        attachEvent("onpropertychange", DoPropChange);
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       moveTo
+//                  
+//  Description:    Moves the piece to the specified coordinates by calling
+//                  the MoveElement() function.  
+//
+//  Arguments:      iNewX - Left position to move the piece to
+//                  iNewY - Top position to move the piece to
+//
+//  Returns:        true if the movable property is set to false
+//                  false if iNewX or iNewY do not contain numbers
+//
+//-----------------------------------------------------------------------------
+
+function moveTo(iNewX, iNewY)
+{
+    if (movable == false || movable == "false") return true;
+
+    iNewX = parseInt(iNewX);
+    iNewY = parseInt(iNewY);
+
+    if (isNaN(iNewX) && isNaN(iNewY)) return false;
+    
+    //  Call MoveElement to move the piece
+    MoveElement(iNewX, iNewY);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       snapToGrid
+//
+//  Description:    Based on the grid established with the mvGridRows and
+//                  mvGridCols properties, snap the piece to the grid.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function snapToGrid()
+{
+    //  Call MoveElement to move the piece
+    MoveElement(offsetLeft, offsetTop, true);
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       SetBoundary
+//
+//  Description:    Move the element within the boundaries specified by the
+//                  mvBoundary properties.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function SetBoundary()
+{
+    //  Obey right boundary
+    if (style.mvBoundaryRight != null
+        && style.mvBoundaryRight < style.posLeft + offsetWidth)
+    {
+        style.left = style.mvBoundaryRight - offsetWidth;
+    }
+    
+    //  Obey left boundary
+    if (style.mvBoundaryLeft
+        && style.mvBoundaryLeft > style.posLeft)
+    {
+        style.left = style.mvBoundaryLeft;
+    }
+    
+    //  Obey bottom boundary
+    if (style.mvBoundaryBottom
+        && style.mvBoundaryBottom < style.posTop + offsetHeight)
+    {
+        style.top = style.mvBoundaryBottom - offsetHeight;
+    }
+    
+    //  Obey top boundary
+    if (style.mvBoundaryTop
+        && style.mvBoundaryTop > style.posTop)
+    {
+        style.top = style.mvBoundaryTop;
+    }
+    
+    //  If the element is snapable, call snapToGrid to snap it.
+    if (snapable == true || snapable == "true") snapToGrid();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       MoveElement
+//                  
+//  Description:    Moves the piece to the specified coordinates.  If any
+//                  of the mvGrid or mvBoundary properties are set, they are
+//                  enforced.
+//
+//  Arguments:      iNewX - Left position to move the piece to
+//                  iNewY - Top position to move the piece to
+//                  bSnapTo - called explicitly from snapToGrid()
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function MoveElement(iNewX, iNewY, bSnapTo)
+{
+    if (direction != "vertical" && iNewX != null)
+    {
+        //
+        //  If the piece is snapable, then both the grid and the boundary
+        //  (if one exists) have to be enforced
+        //
+        if ((snapable == true || snapable == "true" 
+            || bSnapTo == true) && style.mvGridCols != null)
+        {
+            //  Find the closest grid
+            var iSnapX = (Math.round(iNewX/style.mvGridCols)) * style.mvGridCols;
+
+            //  If the piece is outside of the boundaries, put on a grid inside
+            if (style.mvBoundaryLeft != null
+                && iSnapX < style.mvBoundaryLeft)
+            {
+                iSnapX = (Math.ceil(style.mvBoundaryLeft/style.mvGridCols))
+                    * style.mvGridCols;
+            }
+            else if (style.mvBoundaryRight != null
+                && iSnapX > style.mvBoundaryRight - offsetWidth)
+            {
+                iSnapX = (Math.floor((style.mvBoundaryRight-offsetWidth)
+                    /style.mvGridCols)) * style.mvGridCols;
+            }
+            iNewX = iSnapX;
+        }
+        //
+        //  Otherwise, if the piece has just a boundary, then it needs to be
+        //  enforced.  If the piece is outside the boundaries, put it inside
+        //
+        else if (style.mvBoundaryLeft != null
+            && iNewX < style.mvBoundaryLeft)
+        {
+            iNewX = style.mvBoundaryLeft;
+        }
+        else if (style.mvBoundaryRight != null
+            && iNewX > style.mvBoundaryRight - offsetWidth)
+        {
+            iNewX = style.mvBoundaryRight - offsetWidth;
+        }
+
+        //  Put the piece in it's (possibly adjusted) position
+        style.left = iNewX;
+    }
+
+    if (direction != "horizontal" && iNewY != null)
+    {
+        //
+        //  If the piece is snapable, then both the grid and the boundary
+        //  (if one exists) have to be enforced
+        //
+        if ((snapable == true || snapable == "true" 
+            || bSnapTo == true) && style.mvGridRows != null)
+        {
+            //  Find the closest grid
+            var iSnapY = (Math.round(iNewY/style.mvGridRows)) * style.mvGridRows;
+
+            //  If the piece is outside of the boundaries, put on a grid inside
+            if (style.mvBoundaryTop != null
+                && iSnapY < style.mvBoundaryTop)
+            {
+                iSnapY = (Math.ceil(style.mvBoundaryTop/style.mvGridRows))
+                    * style.mvGridRows;
+            }
+            else if (style.mvBoundaryBottom != null 
+                && iSnapY > style.mvBoundaryBottom - offsetHeight)
+            {
+                iSnapY = (Math.floor((style.mvBoundaryBottom-offsetHeight)
+                    /style.mvGridRows)) * style.mvGridRows;
+            }
+            
+            iNewY = iSnapY;
+        }
+        //
+        //  Otherwise, if the piece has just a boundary, then it needs to be
+        //  enforced.  If the piece is outside the boundaries, put it inside
+        //
+        else if (style.mvBoundaryTop != null
+            && iNewY < style.mvBoundaryTop)
+        {
+            iNewY = style.mvBoundaryTop;
+        }
+        else if (style.mvBoundaryBottom != null
+            && iNewY > style.mvBoundaryBottom - offsetHeight)
+        {
+            iNewY = style.mvBoundaryBottom - offsetHeight;
+        }
+    
+        //  Put the piece in it's (possibly adjusted) position
+        style.top = iNewY;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseDown 
+//
+//  Description:    Begins the moving process.
+//
+//  Arguments:      none
+//
+//  Returns:        true if the movable property is set to false 
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseDown()
+{
+    //  If the piece is not movable, don't allow it to be moved
+    if (movable == false || movable == "false") return true;
+    
+//    if (Selectable == true || Selectable == "true")
+//    {
+//		var sTag = window.event.srcElement.tagName.toLowerCase();
+//		if (sTag == "input" || sTag == "textarea" ||
+//			sTag == "button" || sTag == "a" ||
+//			sTag == "select" || sTag == "object")
+//		return false;
+//    }
+        
+    //  Capture the mouse
+    setCapture();
+    
+    //  Set the zIndex to 1000 to put it over other elements while it's moved
+	style.zIndex = 1000;
+
+    //
+    //  Determine the difference between the mouse click on the element and
+    //  the top left corner	
+    //
+	iOffsetX = window.event.x - element.style.pixelLeft;
+	iOffsetY = window.event.y - element.style.pixelTop;
+
+    //  Start tracking the mousemove
+	attachEvent ("onmousemove", DoMouseMove);
+
+	dragstart.fire();
+}	
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseMove
+//
+//  Description:    Moves the element.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseMove()
+{
+	if (direction != "vertical") 
+	{
+	    //  Set position based on mouse movement
+	    var iNewX = window.event.x - iOffsetX;
+    
+        //  Obey left boundary
+	    if (style.mvBoundaryLeft != null
+	        && iNewX < style.mvBoundaryLeft)
+	    {
+	        iNewX = style.mvBoundaryLeft;
+	    }
+	    
+	    //  Obey right boundary
+	    if (style.mvBoundaryRight != null
+	        && iNewX > style.mvBoundaryRight - offsetWidth)
+	    {
+	        iNewX = style.mvBoundaryRight - offsetWidth;
+	    }
+
+        //  Place element
+	    style.left = iNewX;
+	}
+
+	if (direction != "horizontal")
+	{
+	    //  Set position based on mouse movement
+	    var iNewY = window.event.y - iOffsetY;
+	    
+	    //  Obey top boundary
+	    if (style.mvBoundaryTop != null 
+	        && iNewY < style.mvBoundaryTop)
+	    {
+	        iNewY = style.mvBoundaryTop;
+	    }
+	    
+	    //  Obey bottom boundary
+	    if (style.mvBoundaryBottom != null 
+	        && iNewY > style.mvBoundaryBottom - offsetHeight)
+	    {
+	        iNewY = style.mvBoundaryBottom - offsetHeight;
+	    }
+	    
+	    //  Place element
+	    style.top = iNewY;
+	}
+	
+	drag.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoMouseUp
+//
+//  Description:    Ends the moving process.
+//
+//  Arguments:      none
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function DoMouseUp()
+{
+    //  Return the zIndex to its previous value
+	style.zIndex = normZindex;
+
+    //  Stop tracking the onmousemove event
+	detachEvent ("onmousemove", DoMouseMove);
+	
+	//  Release the mouse
+	releaseCapture();
+
+    //  If it's snapable, snap it now
+	if (snapable == "true" || snapable == true) snapToGrid();
+
+    //
+    //  Create a click on the srcElement. If the selectable property is set
+    //  to true, this will allow clicks on links, etc. to occur
+    //
+    window.event.srcElement.click();
+	
+	dragend.fire();
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       DoSelect 
+//
+//  Description:    If the selectable property is set to false, this function
+//                  cancels clicks and drags inside of the element itself.
+//
+//  Arguments:      none
+//
+//  Returns:        false (returnValue)
+//
+//-----------------------------------------------------------------------------
+
+function DoSelect()
+{
+    if (selectable != "true" && selectable != true)
+    {
+        window.event.returnValue = false;
+    }
+}
+
+
+//+----------------------------------------------------------------------------
+//
+//  Function:       ReturnError
+//
+//  Description:    Fires the error event, along with a descriptive text
+//                  message.
+//
+//  Arguments:      sMsg - descriptive text message
+//
+//  Returns:        nothing
+//
+//-----------------------------------------------------------------------------
+
+function ReturnError(sMsg)
+{
+    var oEvent = createEventObject();
+    oEvent.setAttribute("error", sMsg);
+    error.fire(oEvent);
+}
+
+</SCRIPT>

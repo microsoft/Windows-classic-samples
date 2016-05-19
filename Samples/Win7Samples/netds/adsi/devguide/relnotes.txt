@@ -1,0 +1,227 @@
+        Microsoft Active Directory Service Interfaces (ADSI) 2.5
+                          Release Notes
+                            May l999
+           Microsoft(R) Corporation, 1999. All rights reserved.
+
+This document provides late-breaking or other information that supplements the Microsoft Active Directory(TM) Service Interfaces (ADSI) 2.5 documentation.
+
+--------------------------------------------
+Table of Contents
+--------------------------------------------
+
+GENERAL INFORMATION
+WHAT'S NEW IN ADSI 2.5
+    Extension Model
+    Fast Bind (LDAP Only)
+    IADsObjectOption
+    IADsDeleteOps
+    Binding to GUID and SID (Active Directory Only)
+    Cache Support Option
+    SORT Support in ADO
+    Support for Distributed Query
+    Global Catalog Support (Active Directory)
+    Domain Binding (Active Directory Only)
+    Data Link Environment Support
+    LDAP Extensible Matching
+    LDAP Range Retrievals for Attributes with Multiple Values
+    IADsPathName
+    Internet Ready
+    More Security Support
+    Read-Only Server for Communicating to the Backup Domain Controller (WinNT)
+    HomeDirDrive (WinNT)
+    ObjectSID (WinNT)
+    Support for More NDS Syntaxes
+
+--------------------------
+General Information
+--------------------------
+
+* ADSI 2.5 no longer installs ADO/OLEDB binaries. If you must use ADO with ADSI, you have to install ADO/OLEDB separately. For more information about ADO/OLEDB, you can visit http://www.microsoft.com/data.
+* ADSI 2.5 SDK no longer ships with any OLEDB header.
+* ADSI 2.5 is compatible with MDAC 2.0, 2.1.
+* For Site Server 3.0, you must install Site Server SP3 or higher to be compatible with ADSI 2.5.
+* Serverless binding is not supported on Windows NT(R) 4.0, Windows(R) 95, or Windows 98 without the DS package client. Examples of serverless binding are: LDAP://DC=ArcadiaBay, DC=COM, LDAP://RootDSE.
+* If you are using OLE DB to access ADSI, define DBINITCONSTANTS before including oledb.h. Note: in Visual C++ 6.0 or higher, you no longer have to define DBINITCONSTANTS.
+* All ADSI 2.5 samples are compiled using Visual C++(R) 6.0 and Visual Basic(R) 6.0 with the MSDN Platform build environment.
+* ADSI is included in Windows 2000. ADSI in Windows 2000 is a superset of ADSI 2.5. 
+* If you install DevStudio, you should re-install ADSI 2.5.
+* New! ADSI 2.5 SDK Web Pages starts from default.htm in the SDK directory. 
+* New! Many new ADSI 2.5 samples. The samples can be found in the Samples directory.
+* New! ADSI 2.5 Help File. 
+* New! ADSI 2.5 Resource Kit is a collection of non-supported components. It should be treated as samples. You may use them at your own risk.
+* New! ADSI SDK HTML Pages. These pages help you navigate the ADSI 2.5 SDK. They include many links to the actual samples, descriptions, instructions, and features showcase. The homepage for the ADSI 2.4 SDK can be found in the SDK directory (default.htm). You don't need a Web server to view these pages. 
+* New! The Active Directory Programmer's Guide and Exchange Programmer's Guide are included in the ADSI 2.5 help file.
+
+
+----------------------
+What's New in ADSI 2.5
+----------------------
+
+---------------
+Extension Model
+---------------
+The ADSI extension model allows a developer to add a new method to a directory object. The Automation consumers see only one IDispatch interface. It allows multiple extension writers to extend ADSI objects independently.  The following example shows how extension is used.
+
+Dim comp As IADs 
+Dim exch as IExchUser  'This is an extension interface
+
+Set comp = GetObject("LDAP://CN=serve01,OU=Dsys, DC=Microsoft,DC=COM")
+Debug.Print comp.Name
+Set  exch = comp
+exch.CreateMailBox(...)
+
+The extension writer optionally implements IADsExtension for late binding support.
+
+Note: Only WinNT and LDAP providers support the extension.
+
+---------------------
+Fast Bind (LDAP Only)
+---------------------
+A new flag in IADsOpenDSObject::OpenDSObject allows you to bind to an object without issuing an LDAP search to check for the object's existence and class.  It saves one LDAP round trip, but it will not validate the object's existence.
+
+----------------
+IADsObjectOption
+----------------
+The IADsObjectOption interface provides support for Active Directory LDAP extensions, such as page size and chase referrals. It also allows you to set the security descriptor inclusion of DACL and SACL.
+
+-------------
+IADsDeleteOps
+-------------
+The IADsDeleteOps interface deletes sub-tree operations in Active Directory.
+
+-----------------------------------------------
+Binding to GUID, SID and WKGUID (Active Directory Only)
+-----------------------------------------------
+ADSI now allows a developer to add functionality for binding to GUID and SID strings directly, rather than having to encode the string and search for it manually. The formats for doing this are: "<GUID=guidstringhere>", "<SID=sidstringhere>".  Binding to a GUID is shown in the following example.
+
+LPWSTR pszFilter = L"LDAP://dc01/<GUID=63560110f7e1d111a6bfaaaf842b9cfa>";
+
+hr = ADsGetObject( pszFilter, IID_IADs, (void**)&pADs);
+
+You can get the object's GUID using the IADs::get_GUID method.
+
+-----------------------------------------------
+Binding to Wellknown GUID (Active Directory Only).
+-----------------------------------------------
+WKGUID is a wellknown guid
+example:
+
+Const ADS_GUID_COMPUTRS_CONTAINER = "aa312825768811d1aded00c04fd8d5cd"
+
+Set rootDSE = GetObject("LDAP://RootDSE")
+sPath = "LDAP://<WKGUID=" & ADS_GUID_COMPUTRS_CONTAINER
+sPath = sPath + ","
+sPath = sPath + rootDSE.Get("defaultNamingContext")
+sPath = sPath + ">"
+Set compCont = GetObject(sPath)
+
+
+
+
+
+--------------------
+Cache Support Option
+--------------------
+A new flag, ADS_SEARCHPREF_CACHE_RESULTS, has been added to the IDirectorySearch interface. This flag gives you the option to not cache the result set. By default, ADSI will cache all of the result set. By not caching the result set, you can reduce the memory requirement. 
+
+--------------------
+SORT Support in ADO
+--------------------
+ADSI 2.5 adds SORT support in OLE DB. This is support on the server side. Having this support allows you to sort a result set from ADO and Automation clients.  Currently, only Active Directory supports the SORT support.
+ 
+In ADSI 2.0, you have to use the IDirectorySearch interface to specify SORT. This is still supported in ADSI 2.5. 
+ 
+The following examples show how this is done using SQL and OLE DB properties. 
+    ----------------
+    In SQL Statement
+    ----------------
+    "Select cn, samAccountname FROM     
+    'LDAP://DC=Dsys,DC=microsoft,DC=com' where 
+    objectClass='user'ORDER BY samAccountName" 
+
+    -----------------------
+    Using OLE DB Properties
+    -----------------------
+    Com.Properties("SORT ON") = "samAccountName, cn"     
+    Com.Properties("SORT ON") = "samAccountName"
+
+-----------------------------
+Support for Distributed Query
+-----------------------------
+With SQL 7.0 technology, you may join a result set obtained from the Directory to a result set that is obtained from another OLE DB provider, such as SQL or the Index Server.  The following example shows how this is done.
+
+select userName, givenName, sn, bugAssigned, bugResolved
+from OpenQuery( ADSI, 'SELECT samAccountName, givenName, sn FROM ''LDAP://OU=Sales, 
+DC=ArcadiaBay,DC=Com'' WHERE objectCategory=''person'' AND objectClass=''user'''), RAID
+where userName = samAccountName
+
+-----------------------------------------
+Global Catalog Support (Active Directory)
+-----------------------------------------
+You can bind directly to the GC using a well known ADSI Path, GC:.
+
+--------------------------------------
+Domain Binding (Active Directory Only)
+--------------------------------------
+
+You may bind directly to an Active Directory domain, as in the following example:
+ 
+Set seaDom = GetObject("LDAP://seattle.acme.com")
+
+-----------------------------
+Data Link Environment Support
+-----------------------------
+Creating an Active Directory report without a single line of code in few minutes? Data Link and ADSI 2.5 can do it.  The data environment can be found in Visual Basic 6.0.
+
+------------------------
+LDAP Extensible Matching
+------------------------
+ADSI includes support for extension matching in the search filter, as shown in the following example:
+ 
+(&(objectCategory=group)
+(groupType:1.2.840.113556.1.4.803:=2147483650))
+
+---------------------------------------------------------
+LDAP Range Retrievals for Attributes with Multiple Values
+---------------------------------------------------------
+(Active Directory) LDAP now allows you to specify a range of values to retrieve, for attributes that have multiple values, as shown in the following example:
+
+Member;Range:0-500 
+ 
+In this example, it retrieves values from 0 to 500, inclusively.
+
+------------
+IADSPathName
+------------
+New interface: IADsPathName. Retrieve various elements of an AdsPath. It's useful for displaying objects in a friendly manner.
+ 
+--------------
+Internet Ready
+--------------
+With ADSI 2.5, you will be able to connect many of your favorite Internet directory services. 
+
+---------------------------------
+Active Directory Security Support
+---------------------------------
+ADSI 2.5 includes more support for ACL and ACE manipulation. You can set the Access Control List at the object and property level. You can also set the extended right ACEs for each object. ACL inheritance is also supported.
+
+--------------------------------------------------------------------------
+Read-Only Server for Communicating to the Backup Domain Controller (WinNT)
+--------------------------------------------------------------------------
+By specifying ADS_READONLY_SERVER in your binding flag, ADSI will look for backup domain controllers (BDCs) and primary domain controllers (PDC) when locating a domain controller.
+
+--------------------
+HomeDirDrive (WinNT)
+--------------------
+A new attribute, HomeDirDrive, allows you to retrieve the user's home directory drive.
+
+-----------------
+ObjectSID (WinNT)
+-----------------
+The ObjectSID attribute is now exposed in security principals, such as in user and group objects.
+
+-----------------------------
+Support for More NDS Syntaxes
+-----------------------------
+ADSI 2.5 supports more NDS Syntaxes such as IADsPath, IADsReplicaPointer, IADsAcl, and many more.
+

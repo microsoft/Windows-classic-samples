@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AppRecovery", "AppRecovery.vcproj", "{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 x86 = Debug|Win32 x86
+		Debug|Win64 x64 = Debug|Win64 x64
+		Release|Win32 x86 = Release|Win32 x86
+		Release|Win64 x64 = Release|Win64 x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Debug|Win32 x86.ActiveCfg = Debug|Win32
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Debug|Win32 x86.Build.0 = Debug|Win32
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Debug|Win64 x64.ActiveCfg = Debug|x64
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Debug|Win64 x64.Build.0 = Debug|x64
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Release|Win32 x86.ActiveCfg = Release|Win32
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Release|Win32 x86.Build.0 = Release|Win32
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Release|Win64 x64.ActiveCfg = Release|x64
+		{CC74C8C5-7D21-4AC6-BFBC-9C923A6FB174}.Release|Win64 x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

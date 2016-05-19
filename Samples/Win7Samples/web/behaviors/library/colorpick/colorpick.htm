@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Behavior Library: Colorpick</title>
+
+<style>
+    .colorpick    {behavior: url(ColorPick.htc)}
+     H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+    P               {
+                    font: 10pt verdana;
+                    }
+    A:link { color:#003399; text-decoration:none; }
+    A:visited { color:#6699CC; text-decoration:none; }
+    A:hover { text-decoration:underline; }
+</style>
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+
+<h1 id=theHead>Color Picker</h1>
+
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0" ALT="Click to Close Sample"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><hr>
+
+
+
+<p>Use the color picker to set color values visually.</p>
+<br>
+<input ID=cp type="text" class="colorpick" value="#fFFf00" onchange="fnColorChange()" style="cp--grid-size:2">
+<br>
+<br>
+
+<script>
+function fnColorChange()
+{
+	theHead.style.color = cp.value;
+}
+</script>
+
+<p>
+<hr>
+<font FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <a HREF="/misc/cpyright.htm" TARGET="_top">1999 Microsoft Corporation. All rights reserved. Terms of use</a>.
+</font>
+<p>
+
+</body>
+</html>

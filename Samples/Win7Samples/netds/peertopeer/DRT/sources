@@ -1,0 +1,51 @@
+PEERNETBASEDIR=..\..
+!include $(PEERNETBASEDIR)\makefile.inc
+
+
+TARGETNAME=DrtSdkSample
+TARGETTYPE=PROGRAM
+TARGET_DESTINATION=retail
+
+C_DEFINES=-D_UNICODE -DUNICODE -DENABLE_OVERWRITE_NEW_DELETE
+
+UMTYPE=console
+UMENTRY=main
+USE_MSVCRT=1
+USE_NATIVE_EH=1
+USE_STL=1
+
+SOURCES = DrtSdkSample.cpp \
+          CustomBootstrapper.cpp \
+          CustomSecurityProvider.cpp \
+          CAPIWrappers.cpp \
+          FirewallConfig.cpp \
+          version.rc \
+
+LINKLIBS= \
+
+
+TARGETLIBS= \
+  $(SDK_LIB_PATH)\advapi32.lib \
+  $(SDK_LIB_PATH)\user32.lib \
+  $(SDK_LIB_PATH)\kernel32.lib \
+  $(SDK_LIB_PATH)\Ws2_32.lib \
+  $(SDK_LIB_PATH)\shlwapi.lib \
+  $(SDK_LIB_PATH)\iphlpapi.lib \
+  $(SDK_LIB_PATH)\Crypt32.lib \
+  $(SDK_LIB_PATH)\ole32.lib \
+  $(SDK_LIB_PATH)\shell32.lib \
+  $(SDK_LIB_PATH)\ntdll.lib \
+  $(SDK_LIB_PATH)\rpcrt4.lib \
+  $(SDK_LIB_PATH)\p2p.lib \
+  $(SDK_LIB_PATH)\drt.lib \
+  $(SDK_LIB_PATH)\drtprov.lib \
+  $(SDK_LIB_PATH)\drttransport.lib \
+  $(SDK_LIB_PATH)\ole32.lib \
+  $(SDK_LIB_PATH)\oleaut32.lib \
+
+
+
+INCLUDES=.;\
+         ..\inc ; \
+         $(PEERNET_INC_PATH); \
+         $(BASE_INC_PATH)

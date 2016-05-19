@@ -1,0 +1,210 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!-- Windows Media Player SDK Embedded Player Sample -->
+
+<HTML>
+<HEAD>
+    <TITLE>Embedded Player Control Sample</TITLE>
+</HEAD>
+
+<BODY onLoad = "Init();">
+
+<H1>Embedding Windows Media Player</H1>
+<H2>Includes custom error handling</H2>
+
+<OBJECT id=Player classid=CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6 height="200" width="200">
+    <PARAM NAME="autoStart" VALUE="true">
+</OBJECT>
+
+<BR><BR>
+
+<INPUT type=button value="Play Audio" name=btnPlayAudio  onclick=PlayAudio()>
+<INPUT type=button value="Play Video" name=btnPlayVideo  onclick=PlayVideo()>
+<INPUT type=button value="  Pause  " name=btnPause  onclick=PauseMe()>
+<INPUT type=button value="Stop" name=btnStop  onclick=StopMe()>
+<INPUT type=button value="Generate Error" name=btnMakeError  onclick=MakeError()>
+
+<BR><BR>
+
+<DIV id=divName size=50>Media name: </DIV><BR><BR>
+<DIV id=divState size=50>Playstate: </DIV><BR><BR>
+<DIV id=divStatus size=50>Status: </DIV><BR><BR>
+
+<SCRIPT language = "JScript">
+
+var g_bPaused = false; // To track pause button state;
+
+// Check for JScript errors.
+onerror = ShowError;
+
+// Display JScript errors.
+function ShowError (msg,url,linenumber)
+{
+    alert(msg + " at line " + linenumber);
+}
+
+// Initialized states.
+function Init()
+{
+    Player.uiMode = "none";
+    btnPause.disabled = true;
+    btnStop.disabled = true;
+
+    // Request Media Libary access rights, if none exists.
+    if( Player.settings.mediaAccessRights == "none" )
+    {
+        // Request access rights.
+        Player.settings.requestMediaAccessRights( "read" );
+    }
+}
+
+// Play a known audio file from Media Library.
+function PlayAudio ()
+{
+    var plRet;
+    plRet = Player.mediaCollection.getByName('laure');
+
+    if( plRet.count > 0 )
+    {
+        Player.currentPlaylist = plRet;
+    }
+    else
+    {
+        alert ("Media not found in Media Library.");
+    }
+}
+
+// Play a known video file from Media Library.
+function PlayVideo ()
+{
+    var plRet;
+    plRet = Player.mediaCollection.getByName('seattle');
+
+    if( plRet.count > 0 )
+    {
+        Player.currentPlaylist = plRet;
+    }
+    else
+    {
+        alert ("Media not found in Media Library.");
+    }
+}
+
+// Try to play a file that doesn't exist.
+function MakeError ()
+{
+    StopMe();
+    Player.URL = "z:\\123xyz###.wmv"; // This assumes you don't have a file by this name!
+}
+
+// Pause the Player.
+function PauseMe ()
+{
+    if( g_bPaused == true )
+    {
+        Player.controls.play();
+        g_bPaused = false;
+        btnPause.value = "  Pause  ";
+    }
+    else
+    {  
+        Player.controls.pause();
+        g_bPaused = true;
+        btnPause.value = "Resume";
+    }
+}
+
+// Stop the Player.
+function StopMe ()
+{
+    Player.controls.stop();
+}
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE = "JScript"  FOR = Player EVENT = PlayStateChange(NewState)>
+
+// Test for the current state.
+// If playing, display the name of the current media.
+
+switch (NewState){
+    case 1:
+    divState.innerHTML = "Playstate: Stopped";
+
+    // Toggle the button states.
+    btnPause.disabled = true;
+    btnPause.value = "  Pause  ";
+    btnStop.disabled = true;
+
+    break;
+
+    case 2:
+    divState.innerHTML = "Playstate: Paused";
+    break;
+
+    case 3:
+    divState.innerHTML = "Playstate: Playing";
+    divName.innerHTML = "Media name: " + Player.currentMedia.name;
+
+    // Toggle the button states.
+    btnPause.disabled = false;
+    btnStop.disabled = false;
+
+    break;
+
+    case 6:
+    divState.innerHTML = "Playstate: Buffering";
+    break;
+
+    case 7:
+    divState.innerHTML = "Playstate: Waiting";
+    break;
+
+    case 8:
+    divState.innerHTML = "Playstate: Media Ended";
+    break;
+
+    case 9:
+    divState.innerHTML = "Playstate: Transitioning";
+    break;
+
+    case 10:
+    divState.innerHTML = "Playstate: Ready";
+    break;
+
+    // Other cases go here.
+
+    default:
+    divState.innerHTML = "Playstate: Other";
+}
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE = "JScript"  FOR = Player EVENT = StatusChange()>
+
+    divStatus.innerHTML = "Status: " + Player.status;
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE = "JScript"  FOR = Player  EVENT = Error()>
+
+    var strError = "";
+
+    // Store the number of errors in the queue.
+    var max = Player.error.errorCount
+
+    // Loop through the list of errors.
+    for (var i = 0; i < max; i++)
+    {
+        // Display the error description for each item.
+        strError += "Error: " + Player.error.item(i).errorDescription + "\n";
+    }
+
+    alert( strError ); // Display the error warning.
+
+    // Clear the error queue to prepare for the next group of errors.
+    Player.error.clearErrorQueue();
+ 
+</SCRIPT>
+
+</BODY>
+</HTML>

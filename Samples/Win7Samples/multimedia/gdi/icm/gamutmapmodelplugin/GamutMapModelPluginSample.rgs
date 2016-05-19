@@ -1,0 +1,29 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'GamutMapModelPluginSample'
+		'GamutMapModelPluginSample.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+	WcsSampleGMPlugin.Plugin.1 = s 'Wcs Sample Gamut Map Model Plugin'
+	{
+		CLSID = s '{4B9E0DFE-F8F6-4d8c-B14F-F99511C5002F}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4B9E0DFE-F8F6-4d8c-B14F-F99511C5002F} = s 'Wcs Sample Gamut Map Model Plugin'
+		{
+			ProgID = s 'WcsSampleGMPlugin.Plugin.1'
+			VersionIndependentProgID = s 'WcsSampleGMPlugin.Plugin'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{32B5DD48-A0C5-4739-8693-EAD1DD840627}'
+		}
+	}		
+}

@@ -1,0 +1,24 @@
+//+-------------------------------------------------------------------------
+//
+//  Microsoft Windows
+//
+//  Copyright (C) Microsoft Corporation, 2001
+//
+//  File:       wdstptc.rc
+//
+//--------------------------------------------------------------------------
+
+#include <windows.h>
+#include <ntverp.h>
+
+
+#define VER_FILETYPE    VFT_APP
+#define VER_FILESUBTYPE VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR     "Windows Deployment Services Transport Provider"
+#define VER_INTERNALNAME_STR        "wdscp.dll"
+#define VER_ORIGINALFILENAME_STR    "wdscp.dll"
+
+#include "common.ver"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+

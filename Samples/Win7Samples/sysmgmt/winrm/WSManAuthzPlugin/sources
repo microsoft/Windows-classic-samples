@@ -1,0 +1,30 @@
+
+TARGETNAME=WSManAuthzPlugin
+TARGETTYPE=DYNLINK
+TARGET_DESTINATION=WSMan\WSManAuthzPlugin
+
+INCLUDES= \
+	$(INCLUDES); \
+	$(SDK_INC_PATH); \
+    	$(SDK_INC_PATH)\atl30; \
+	
+SOURCES= \
+	WSManAuthzPlugin.cpp \
+
+TARGETLIBS= \
+	$(SDK_LIB_PATH)\kernel32.lib \
+	$(SDK_LIB_PATH)\advapi32.lib \
+	$(SDK_LIB_PATH)\ole32.lib \
+	$(SDK_LIB_PATH)\user32.lib \
+	$(SDK_LIB_PATH)\uuid.lib \
+	$(SDK_LIB_PATH)\crypt32.lib \
+	$(SDK_LIB_PATH)\Userenv.lib \
+    	$(SDK_LIB_PATH)\wsmsvc.lib \
+
+DLLDEF=$(OBJ_PATH)\$O\WSManAuthzPlugin.def
+
+USE_MSVCRT=1
+USE_NATIVE_EH=1
+
+C_DEFINES=$(C_DEFINES) /D_UNICODE /DUNICODE
+

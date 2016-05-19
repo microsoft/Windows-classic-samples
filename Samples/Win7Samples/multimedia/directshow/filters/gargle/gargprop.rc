@@ -1,0 +1,48 @@
+//==========================================================================;
+//
+//  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+//  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+//  PURPOSE.
+//
+//  Copyright (c)  Microsoft Corporation.  All Rights Reserved.
+//
+//==========================================================================;
+
+// The dialog on the property sheet:  two buttons, a slider and some text.
+// The slider controls the frequency of the modulation.  It canot be created
+// here, but must be created dynamically.  Alongside where the slider goes
+// this dialog provides some text which acts as a scale for the slider.
+// The scale is logarithmic (so 10 to 100 has the same spacing as 100 to 1000).
+// The principal difficulty with this technique lies in the units as it's
+// necessary to convert between window coordinates measured in pixels and
+// dialog units.  See the WIN32 help for GetDialogBaseUnits.
+
+#include <windows.h>
+
+#include "resource.h"
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_NAME,    "Gargle"
+END
+
+
+//
+// Dialog
+//
+
+IDD_GARGPROP DIALOG DISCARDABLE  0, 0, 160, 93
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    LTEXT           "Tremolo\naka gargling.",IDS_STATIC,0,5,50,18
+//  see CreateSlider in gargprop to see where the slider is
+    LTEXT           "1Hz",IDS_STATIC,110,3,20,9
+    LTEXT           "10Hz (Default)",IDS_STATIC,110,14,46,10
+    LTEXT           "100Hz",IDS_STATIC,110,26,26,8
+    LTEXT           "1KHz",IDS_STATIC,110,38,20,8
+    PUSHBUTTON      "&Default rate",IDB_DEFAULT,10,30,50,14
+    PUSHBUTTON      "Triangle wave ->Square",IDB_SQUARE_TRIANGLE,8,67,100,14
+END
+

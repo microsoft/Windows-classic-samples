@@ -1,0 +1,66 @@
+<!--TOOLBAR_START--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<html xmlns:tool>
+<head>
+
+<title>Behavior Library: ToolTip</title>
+
+<style>
+
+    @media all
+    {
+        tool\:tip   {
+                    behavior: url(tooltip_vbs.htc)
+                    }
+    }
+    
+    H1              {
+                    font: bold 18pt verdana;
+                    color: navy
+                    }
+                    
+    P               {
+                    font: 10pt verdana;
+                    }
+                    
+    .tip            {
+                    color: green;
+                    font-weight: bold;
+                    cursor: hand
+                    }
+    A:link { color:#003399; text-decoration:none; }
+	A:visited { color:#6699CC; text-decoration:none; }
+	A:hover { text-decoration:underline; }
+</style>
+
+</head>
+<body bgcolor=white>
+<h1>ToolTips</h1>
+<P>
+<FONT FACE="verdana,arial,helvetica" SIZE=1>
+<A href="#" onclick=self.close()><IMG ALIGN="middle" SRC="demo.gif" WIDTH="16" HEIGHT="16" BORDER="0"></A>
+&nbsp;<A href="#" onclick=self.close()>Close This Sample</A> 
+</FONT><hr>
+
+<p>Use <span ID="oTipEl" class="tip">ToolTips</span>
+on your HTML pages to give users extra information.</p>
+
+
+<p>&nbsp;
+<p>&nbsp;
+<p>&nbsp;
+
+<!---------------------------------------------------------------------------->
+<!-- TOOLTIP (Use conditional comments to hide from non-behavior browsers) --->
+<!---------------------------------------------------------------------------->
+
+<!--[if gte IE 5]><tool:tip element="oTipEl" avoidmouse="false">Put any <span style="color:red; font-weight:bold">HTML</span> inside this tooltip, including<br><b>bold</b>, <i>italic</i>, and <u>underline</u></tool:tip><![endif]-->
+<p>
+<hr>
+<FONT FACE="MS SANS SERIF" SIZE="1" COLOR="BLACK">
+&copy; <A HREF="http://msdn.microsoft.com/isapi/gomscom.asp?TARGET=/info/cpyright.htm" TARGET="_top">2001-2002 Microsoft Corporation. All rights reserved. Terms of use</A>.
+</FONT>
+<p>
+
+
+</body>
+</html>

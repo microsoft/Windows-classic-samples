@@ -1,0 +1,40 @@
+// Copyright (c)  Microsoft Corporation, All Rights Reserved
+
+#pragma namespace("\\\\.\\root")
+
+instance of __Namespace
+{
+    Name = "registryScriptExample";
+};
+
+#pragma namespace("//./root/registryScriptExample")
+
+// Instance provider
+instance of __Win32Provider as $InstProv
+{
+    Name    = "RegProv" ;
+    ClsId   = "{fe9af5c0-d3b6-11ce-a5b6-00aa00680c3f}" ;
+};    
+
+instance of __InstanceProviderRegistration
+{
+    Provider = "__Win32Provider.Name=\"RegProv\"";
+    SupportsPut = TRUE;
+    SupportsGet = TRUE;
+    SupportsDelete = FALSE;
+    SupportsEnumeration = TRUE;
+};
+
+[
+ dynamic, provider("RegProv"), 
+ ClassContext("local|hkey_local_machine\\software\\microsoft\\WBEM\\transports\\Network Transport Modules")
+]
+
+class RegTrans
+{
+  [key] string  TransportsGUID;
+  [PropertyContext("Name")] string Name;
+  [PropertyContext("Independent")] uint32 Enabled;
+};
+
+ 

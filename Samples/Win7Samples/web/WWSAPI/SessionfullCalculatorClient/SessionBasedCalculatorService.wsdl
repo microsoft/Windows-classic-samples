@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+    xmlns:tns="http://www.example.org" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+    targetNamespace="http://www.example.org">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.example.org" elementFormDefault="qualified">
+            <xsd:element name="AddType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="addend" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="SubtractType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="subtractend" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="TotalResponseType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="total" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="AddResponseType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="SubtractResponseType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="TotalRequestType">
+                <xsd:complexType/>
+            </xsd:element>
+            <xsd:element name="ClearType">
+                <xsd:complexType/>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="AddMessage">
+        <wsdl:part name="parameters" element="tns:AddType"/>
+    </wsdl:message>
+    <wsdl:message name="AddResponseMessage">
+        <wsdl:part name="parameters" element="tns:AddResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="SubtractMessage">
+        <wsdl:part name="parameters" element="tns:SubtractType"/>
+    </wsdl:message>
+    <wsdl:message name="SubtractResponseMessage">
+        <wsdl:part name="parameters" element="tns:SubtractResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="TotalRequest">
+        <wsdl:part name="parameters" element="tns:TotalRequestType"/>
+    </wsdl:message>
+    <wsdl:message name="TotalResponse">
+        <wsdl:part name="parameters" element="tns:TotalResponseType"/>
+    </wsdl:message>
+    <wsdl:message name="ClearMessage">
+        <wsdl:part name="parameters" element="tns:ClearType"/>
+    </wsdl:message>
+    <wsdl:portType name="ISessionBasedCalculator">
+        <wsdl:operation name="Add">
+            <wsdl:input message="tns:AddMessage" wsaw:Action="http://www.example.org/Add"/>
+            <wsdl:output message="tns:AddResponseMessage" wsaw:Action="http://www.example.org/AddResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="Subtract">
+            <wsdl:input message="tns:SubtractMessage" wsaw:Action="http://www.example.org/Subtract"/>
+            <wsdl:output message="tns:SubtractResponseMessage" wsaw:Action="http://www.example.org/SubtractResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="Total">
+            <wsdl:output message="tns:TotalResponse" wsaw:Action="http://www.example.org/TotalResponse"/>
+            <wsdl:input message="tns:TotalRequest" wsaw:Action="http://www.example.org/Total"/>
+        </wsdl:operation>
+        <wsdl:operation name="Clear">
+            <wsdl:input message="tns:ClearMessage" wsaw:Action="http://www.example.org/Clear"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CalculatorBinding" type="tns:ISessionBasedCalculator">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Add">
+            <soap:operation soapAction="http://www.example.org/Add"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Subtract">
+            <soap:operation soapAction="http://www.example.org/Subtract"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Total">
+            <soap:operation soapAction="http://www.example.org/Total"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Clear">
+            <soap:operation soapAction="http://www.example.org/Clear"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SessionBasedService">
+        <wsdl:port name="Calculator" binding="tns:CalculatorBinding">
+            <soap:address location="No Target Adress"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

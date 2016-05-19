@@ -1,0 +1,1 @@
+The example shows how to use the ChangeWindowMessageFilterEx function to modify the User Interface Privilege Isolation (UIPI) message filter for a specified window. Example code in C++. Visual Studio 2008 and Windows 7 SDK required.

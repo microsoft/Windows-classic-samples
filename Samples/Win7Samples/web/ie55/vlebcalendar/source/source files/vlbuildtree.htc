@@ -1,0 +1,47 @@
+<PUBLIC:ATTACH EVENT="onclick" ONEVENT="fnbuildTree()"/>
+<SCRIPT LANGUAGE="JScript">
+
+function fnbuildTree()
+{
+            var intParents = 0;
+            var intIndent = 0;
+            // strStruct stores the HTML string that
+            // will represent the document.
+            var strStruct = "<HTML><TITLE>Document Tree</TITLE>" +
+               "<BODY style='background:#cccccc'><TABLE BORDER=0 CELLPADDING=5><TR>";
+            var elParent;
+            // Walk through every element in the document.
+            for (var intLoop = 0; intLoop < element.document.all.length;
+                  intLoop++) {
+               elParent = element.document.all[intLoop];
+               // Determine depth of the element.
+               while (elParent.tagName != "HTML") {
+                  intParents++;
+                  elParent = elParent.parentElement;
+               }
+               // Nest or close nesting based on new depth.
+               if (intParents > intIndent)
+                  strStruct +=
+                     "<TABLE CELLPADDING='0' BORDER='0' CELLSPACING='0' style='1px solid black; '><TR>";
+               else if (intParents < intIndent) { 
+                  for (var intClose = intParents;
+                        intClose < intIndent; intClose++)
+                     strStruct += "</TABLE>";
+               }
+               intIndent = intParents;
+               intParents = 0;
+               strStruct += "<TD style='width:10px; font-family:verdana; font-size:8pt; color:#336699; text-transform:capitalize; border:1px solid black; padding:5px; background:white'>" +
+                  element.document.all[intLoop].tagName;
+            }
+            // Close any remaining scopes.
+            for (var intClose = intParents; intClose < intIndent;
+                  intClose++)
+               strStruct += "</TD></TR></TABLE>";
+            strStruct += "</BODY></HTML>";
+               // Output the new document in a new window.
+            var w = window.open("", "tree");
+            w.document.open();
+            w.document.write(strStruct);
+            w.document.close();       
+}
+</SCRIPT>

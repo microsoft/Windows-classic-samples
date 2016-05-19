@@ -1,0 +1,154 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+<HTML DIR="LTR">
+    <HEAD>
+        <TITLE>Windows Media Player Plug-in Wizard</TITLE>
+        <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <STYLE TYPE="text/css">@import url();</STYLE>
+        <SCRIPT>
+        var strURL = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+        strURL += "VCWizards/";
+        strURL += window.external.GetHostLocale();
+        strURL += "/NewStyles.css";
+        document.styleSheets(0).imports(0).href = strURL;
+        </SCRIPT>
+    </HEAD>
+
+    <BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        <DIV id="logo" style="POSITION: absolute"><IMG src="..\..\Images\logo.png">
+        </DIV>
+        <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            <P><FONT face="Arial" size="4">DSP Plug-in</FONT>
+            </P>
+            <SPAN CLASS="itemText">
+                <FONT face="Arial" size="2">Choose the type of DSP plug-in you wish to create:
+                    <P CLASS="Spacer">&nbsp;</P>
+                   
+                                     
+                    <INPUT TYPE="radio" NAME="appType" ID="AUDIODSP"  ACCESSKEY="A" CHECKED="true">
+                    <DIV CLASS="itemTextRadioB">
+                        <LABEL FOR="AUDIODSP"><U>A</U>udio DSP plug-in</LABEL>
+                    </DIV>
+                    <BR>
+
+                    <INPUT TYPE="radio" NAME="appType" ID="AUDIODSPDUAL"  ACCESSKEY="u">  
+                    <DIV CLASS="itemTextRadioB">
+                        <LABEL FOR="AUDIODSPDUAL">A<U>u</U>dio DSP plug-in (dual mode)</LABEL>
+                    </DIV>                       
+                    <BR>
+
+                    <INPUT TYPE="radio" NAME="appType" ID="VIDEODSP" ACCESSKEY="V">
+                    <DIV CLASS="itemTextRadioB">
+                        <LABEL FOR="VIDEODSP"><U>V</U>ideo DSP plug-in</LABEL>
+                    </DIV>
+                    <BR>
+
+                    <INPUT TYPE="radio" NAME="appType" ID="VIDEODSPDUAL" ACCESSKEY="i">   
+                    <DIV CLASS="itemTextRadioB">
+                        <LABEL FOR="VIDEODSPDUAL">V<U>i</U>deo DSP plug-in (dual mode)</LABEL>
+                    </DIV>                
+                    <BR>
+
+                    <P CLASS="Spacer">&nbsp;</P>
+                    To continue, click Next </FONT>
+
+
+            </SPAN>
+        </DIV>
+        <DIV style="LEFT: 0px; WIDTH: 600px; POSITION: absolute; TOP: 304px; HEIGHT: 2px">
+            <hr>
+        </DIV>
+        <DIV style="LEFT: 250px; WIDTH: 200px; POSITION: absolute; TOP: 316px; HEIGHT: 48px">
+            <TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0" ID="Table1">
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="FinishBtn" ACCESSKEY="N" onClick="OnNext(document);"><U>N</U>ext</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="CancelBtn" ACCESSKEY="C" onClick="window.external.Finish(document, 'cancel');">
+                        <U>C</U>ancel</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+                    &nbsp;
+                </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+    </BODY>
+</HTML>
+<SCRIPT LANGUAGE="JSCRIPT">
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+    setDirection();
+    window.external.SetDefaults(document);
+    window.external.Load(document);
+}
+
+
+function OnNext(document)
+{
+    var bVS70 = window.external.FindSymbol("VS70");
+
+    if(bVS70)
+    {
+        window.external.RemoveSymbol("AUDIO");
+        window.external.RemoveSymbol("VIDEO");
+        window.external.RemoveSymbol("DUALMODE");
+    }   
+    else
+    {
+        window.external.AddSymbol("AUDIO", false);
+        window.external.AddSymbol("VIDEO", false);
+        window.external.AddSymbol("DUALMODE", false);
+    }
+
+
+    if (AUDIODSP.checked)
+    {       
+        window.external.AddSymbol("AUDIO", true);
+    }
+
+    else if (AUDIODSPDUAL.checked)
+    {
+        window.external.AddSymbol("AUDIO", true);
+        window.external.AddSymbol("DUALMODE", true);
+    }
+
+    else if (VIDEODSP.checked)
+    {
+        window.external.AddSymbol("VIDEO", true);
+    }
+
+    else if (VIDEODSPDUAL.checked)
+    {
+        window.external.AddSymbol("VIDEO", true);
+        window.external.AddSymbol("DUALMODE", true);
+    }
+    
+    OnWizFinish(document);
+}
+
+
+
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT>
+    var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+    strPath += "VCWizards/";
+    strPath += window.external.GetHostLocale();
+    var strScriptPath = strPath + "/Script.js";
+    var strCommonPath = strPath + "/Common.js";
+    document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+    document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

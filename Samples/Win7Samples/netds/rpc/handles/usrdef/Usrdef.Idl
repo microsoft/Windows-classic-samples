@@ -1,0 +1,24 @@
+[ uuid (85D7D1C0-CA47-1067-B31E-00DD010662DA),
+  version(1.0),
+  pointer_default(unique)
+]
+interface usrdef
+{
+
+typedef struct _DATA_TYPE {
+    unsigned char * pszUuid;
+    unsigned char * pszProtocolSequence;
+    unsigned char * pszNetworkAddress;
+    unsigned char * pszEndpoint;
+    unsigned char * pszSpn;
+    unsigned char * pszOptions;
+} DATA_TYPE;
+
+typedef [handle] DATA_TYPE *DATA_HANDLE_TYPE;
+
+void UsrdefProc([in]	     DATA_HANDLE_TYPE  hBinding,
+		[in, string] unsigned char     *pszString);
+
+void Shutdown([in] DATA_HANDLE_TYPE  hBinding);
+
+}

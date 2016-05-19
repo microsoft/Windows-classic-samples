@@ -1,0 +1,292 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,50,38,19
+ PRODUCTVERSION 2,50,38,19
+ FILEFLAGSMASK 0x3L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "Microsoft Corporation\0"
+            VALUE "FileDescription", "Microsoft OLE DB TableCopy Sample\0"
+            VALUE "FileVersion", "2.50.3819.0\0"
+            VALUE "InternalName", "TABLECOPY\0"
+            VALUE "LegalCopyright", "Copyright © Microsoft Corporation 1995-2000\0"
+            VALUE "LegalTrademarks", "Windows(TM) is a trademark of Microsoft Corporation.  Microsoft® is a registered trademark of Microsoft Corporation.\0"
+            VALUE "OriginalFilename", "TABLECOPY.EXE\0"
+            VALUE "ProductName", "Microsoft OLE DB\0"
+            VALUE "ProductVersion", "2.50.3819.0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FROM_INFO DIALOGEX 0, 0, 379, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_STATICEDGE
+CAPTION "Microsoft OLE DB Table Copy - Step 1 of 4"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    DEFPUSHBUTTON   "&Connect...",IDB_FROM_CONNECT,5,5,50,14
+    COMBOBOX        IDC_PROVIDER_NAME,60,5,315,75,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Press Connect to establish a connection",IDT_CONNECT,5,
+                    25,370,20,SS_SUNKEN
+    CONTROL         "Tree1",IDL_TABLES,"SysTreeView32",TVS_HASBUTTONS | 
+                    TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | 
+                    TVS_DISABLEDRAGDROP | TVS_SHOWSELALWAYS | WS_BORDER | 
+                    WS_TABSTOP,5,50,140,150
+    CONTROL         "List1",IDL_COLUMNS,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,145,50,230,150
+    CTEXT           "Select Desired Table and Columns to Copy",
+                    IDT_FROMTABLEHELP,5,205,260,15,SS_CENTERIMAGE | 
+                    SS_SUNKEN
+    PUSHBUTTON      "&Next >",IDOK,270,205,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,325,205,50,14
+END
+
+IDD_TO_INFO DIALOG DISCARDABLE  0, 0, 379, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft OLE DB Table Copy - Step 3 of 4"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    PUSHBUTTON      "&Connect...",IDB_TO_CONNECT,5,5,50,14,WS_GROUP
+    COMBOBOX        IDC_PROVIDER_NAME,60,5,315,75,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Press Connect to establish a connection",
+                    IDT_CONNECTSTATUS,5,25,370,25,SS_CENTERIMAGE | SS_SUNKEN | 
+                    NOT WS_GROUP
+    GROUPBOX        "Source",IDT_SOURCE,10,70,170,100
+    CTEXT           "",IDT_FROM_CONNECT,15,80,160,65,SS_SUNKEN | NOT 
+                    WS_GROUP
+    EDITTEXT        IDE_FROM_TABLE,15,150,160,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    GROUPBOX        "Target",IDT_TARGET,200,70,170,100
+    CTEXT           "",IDT_TO_CONNECT,205,80,160,65,SS_SUNKEN
+    EDITTEXT        IDE_TO_TABLE,205,150,160,12,ES_CENTER | ES_AUTOHSCROLL
+    PUSHBUTTON      "< &Back",IDB_PREV,220,205,50,14,WS_GROUP
+    PUSHBUTTON      "&Next >",IDOK,270,205,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,325,205,50,14
+    CTEXT           "Select Target Table Name",IDT_TOTABLEHELP,5,205,210,15,
+                    SS_CENTERIMAGE | SS_SUNKEN
+END
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 379, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft OLE DB Table Copy - Step 4 of 4"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    GROUPBOX        "Create",IDC_STATIC,5,5,120,75,WS_GROUP
+    CONTROL         "&Table",IDX_COPY_TABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,10,15,90,10
+    CONTROL         "&Indexes",IDX_COPY_INDEXES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,25,90,10
+    CONTROL         "&Primary Keys",IDX_COPY_PRIMARYKEYS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,35,90,10
+    GROUPBOX        "Copy",IDC_STATIC,130,5,120,75,WS_GROUP
+    CONTROL         "&All rows",IDR_ALL_ROWS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,135,15,90,10
+    CONTROL         "&Rows:",IDR_ROW_COUNT,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,135,30,35,10
+    EDITTEXT        IDE_ROW_COUNT,145,45,75,12,ES_AUTOHSCROLL | WS_GROUP
+    GROUPBOX        "Options",IDC_STATIC,255,5,120,75,WS_GROUP
+    CONTROL         "&Show SQL statements",IDX_SHOW_SQL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,260,15,90,10
+    GROUPBOX        "Insert",IDC_STATIC,130,85,120,75,WS_GROUP
+    CONTROL         "InsertRow (&Immediate)",IDR_INSERTROW_IMMEDIATE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,135,95,90,10
+    CONTROL         "InsertRow (&Buffered)",IDR_INSERTROW_BUFFERED,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,135,110,90,10
+    CONTROL         "&ParamSets",IDR_PARAM_SETS,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,135,125,48,10
+    EDITTEXT        IDE_PARAM_SETS,145,140,75,12,ES_AUTOHSCROLL | WS_GROUP
+    GROUPBOX        "BLOB Columns",IDC_STATIC,255,85,120,75,WS_GROUP
+    CONTROL         "I&Sequential Stream",IDR_ISEQ_STREAM,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,260,95,90,10
+    CONTROL         "&Inline Size",IDR_BLOB_SIZE,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,260,110,48,10
+    EDITTEXT        IDE_BLOB_SIZE,270,125,75,12,ES_AUTOHSCROLL | WS_GROUP
+    CTEXT           "Select Desired Options for the Copy.",IDT_OPTIONMSG,5,
+                    205,210,15,SS_CENTERIMAGE | SS_SUNKEN | NOT WS_GROUP
+    PUSHBUTTON      "< &Back",IDB_PREV,220,205,50,14,WS_GROUP
+    DEFPUSHBUTTON   "&Next >",IDOK,270,205,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,325,205,50,14
+END
+
+IDD_INDEX_INFO DIALOG DISCARDABLE  0, 0, 379, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft OLE DB Table Copy - Step 2 of 4"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "List1",IDL_INDEXES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,5,20,370,175
+    CTEXT           "Select Indexes to be copied.",IDT_INDEXMSG,5,205,210,15,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    PUSHBUTTON      "< &Back",IDB_PREV,220,205,50,14,WS_GROUP
+    DEFPUSHBUTTON   "&Next >",IDOK,270,205,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,325,205,50,14
+END
+
+IDD_DATA_TYPES DIALOG DISCARDABLE  0, 0, 379, 225
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft OLE DB Table Copy - DataType Mappings"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CONTROL         "List1",IDL_FROM_TYPES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,5,35,185,160
+    CONTROL         "List2",IDL_TO_TYPES,"SysListView32",LVS_REPORT | 
+                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
+                    WS_TABSTOP,190,35,185,160
+    CTEXT           "DataSource Type Mappings",IDC_STATIC,5,205,210,15,
+                    SS_CENTERIMAGE | SS_SUNKEN
+    PUSHBUTTON      "< &Back",IDB_PREV,220,205,50,14,WS_GROUP
+    DEFPUSHBUTTON   "Finish",IDOK,270,205,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,325,205,50,14
+    CTEXT           "",IDT_FROM_CONNECT,5,10,185,20,SS_SUNKEN
+    CTEXT           "",IDT_TO_CONNECT,190,10,185,20,SS_SUNKEN
+END
+
+IDD_PROGRESS DIALOG DISCARDABLE  0, 0, 277, 68
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Microsoft OLE DB Table Copy - Progress"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "",IDT_STATUS,20,10,240,15,SS_CENTERIMAGE | SS_SUNKEN
+    CTEXT           "",IDT_STAT_INFO,20,30,240,15,SS_CENTERIMAGE | SS_SUNKEN
+    PUSHBUTTON      "Cancel",IDCANCEL,115,50,50,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_TABLE_COPY          ICON    DISCARDABLE     "TABLE_CO.ICO"
+IDI_COLUMN              ICON    DISCARDABLE     "Column.ico"
+IDI_INDEX               ICON    DISCARDABLE     "Index.ico"
+IDI_PRIMARYKEY          ICON    DISCARDABLE     "PrimaryKey.ico"
+IDI_COLUMNREAD          ICON    DISCARDABLE     "columnread.ico"
+IDI_COLUMNLONG          ICON    DISCARDABLE     "columnlong.ico"
+IDI_SCHEMA              ICON    DISCARDABLE     "Schema.ico"
+IDI_CATALOG             ICON    DISCARDABLE     "Catalog.ico"
+IDI_TABLE               ICON    DISCARDABLE     "Table.ico"
+IDI_TYPE                ICON    DISCARDABLE     "Type.ico"
+IDI_VIEW                ICON    DISCARDABLE     "View.ico"
+IDI_SYNONYM             ICON    DISCARDABLE     "Synonym.ico"
+IDI_SYSTABLE            ICON    DISCARDABLE     "SysTable.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_TO_INFO, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 207
+    END
+
+    IDD_INDEX_INFO, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 207
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

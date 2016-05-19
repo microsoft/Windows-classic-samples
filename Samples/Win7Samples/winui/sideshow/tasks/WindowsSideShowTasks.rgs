@@ -1,0 +1,26 @@
+HKCR
+{
+    WindowsSideShow.TasksPropPage.1 = s 'TasksPropPage Class'
+    {
+        CLSID = s '{E363F045-E2F9-4C95-87A2-BF4721928740}'
+    }
+    WindowsSideShow.TasksPropPage = s 'TasksPropPage Class'
+    {
+        CLSID = s '{E363F045-E2F9-4C95-87A2-BF4721928740}'
+        CurVer = s 'WindowsSideShow.TasksPropPage.1'
+    }
+    NoRemove CLSID
+    {
+        ForceRemove {E363F045-E2F9-4C95-87A2-BF4721928740} = s 'TasksPropPage Class'
+        {
+            ProgID = s 'WindowsSideShow.TasksPropPage.1'
+            VersionIndependentProgID = s 'WindowsSideShow.TasksPropPage'
+            InprocServer32 = s '%MODULE%'
+            {
+                val ThreadingModel = s 'Apartment'
+            }
+            val AppID = s '%APPID%'
+            'TypeLib' = s '{5AF03226-EC4D-4982-892B-F3BA36E210A9}'
+        }
+    }
+}

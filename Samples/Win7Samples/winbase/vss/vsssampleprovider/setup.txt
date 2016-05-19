@@ -1,0 +1,74 @@
+========================================================================
+    VssSampleProvider Setup Overview
+========================================================================
+
+(1) Install virtualstorage driver:
+
+    Find virtualstorage.sys and vstorcontrol.exe from the platform SDK.
+    Run "vstorcontrol.exe install"
+
+(2) Install VssSampleProvider:
+
+    If the target test machine has the Vista platform SDK installed, you may directly run install-sampleprovider.cmd
+    from the VssSampleProvider directory in the SDK samples. The installation script will find VssSampleProvider.dll
+    in the SDK BIN directory and register it.
+
+    You may also copy all the necessary binaries into a single directory, then run install-sampleprovider.cmd 
+    from there. Please copy
+        VssSampleProvider.dll,
+        VstorInterface.dll 
+    from the platform SDK to a target directory, e.g. C:\VssSampleProvider; and also copy 
+        install-sampleprovider.cmd,
+        uninstall-sampleprovider.cmd, 
+        register_app.vbs 
+    from the sample code directory to the same target directory C:\VssSampleProvider.
+    In C:\VssSampleProvider, run install-sampleprovider.cmd
+
+
+    Note: 
+         InstallClusterMSDTC is disabled by default. You need to modify install-sampleprovider.cmd
+         by adding "-msdtc" parameter to register_app.vbs to enable InstallClusterMSDTC.
+
+         If you compile VssSampleProvider sample code under Visual Stuio 2005, and the runtime library
+         option is Multi-threaded DLL (/MD) or Multi-threaded Debug DLL (/MDd), you need to install
+         Microsoft.VC80.CRT from Visual Studio redist or copy Microsoft.VC80.DebugCRT depending on if it is
+         a free or debug build. However, VssSampleProvider.dll shipped in the platform SDK does not have
+         such a dependency.
+
+
+(3) Create virtual LUNs to test VssSampleProvider:
+
+    Run vstorcontrol.exe create fixeddisk -newimage C:\disk1.image -size 20M -storid "VSS Sample HW Provider"
+    Open dispart.exe or diskmgmt.msc to format the virtual disk and assign it a driver letter, e.g. E:
+
+
+    Note: 
+          You may run "vstorcontrol.exe create fixeddisk ..." multiple times to create a number of 
+          virtual LUNs.
+
+          -storid "VSS Sample HW Provider" is used to create a virtual LUN with a storage identifier.
+          VssSampleProvider will recognize a LUN if "VSS Sample HW Provider" is a part of the storage identifier.
+          Please refer VssSampleProvider sample code for details.
+
+
+(4) Test VssSampleProvider:
+
+    Find vshadow.exe from the platform SDK.
+    If the virtual LUN is E:, run vshadow.exe -p -nw E:
+
+
+
+========================================================================
+    VssSampleProvider Uninstall Overview
+========================================================================
+
+(1) Uninstall VssSampleProvider:
+
+    In the SDK smaple code directory, run uninstall-sampleprovider.cmd, or 
+    In the place where you copied all the binaries, e.g. C:\VssSampleProvider, run uninstall-sampleprovider.cmd
+
+(2) Uninstall virtualstorage:
+
+    Run "vstorcontrol.exe uninstall"
+
+

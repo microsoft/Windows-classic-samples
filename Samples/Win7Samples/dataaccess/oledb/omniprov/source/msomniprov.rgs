@@ -1,0 +1,27 @@
+HKCR
+{
+	TheProvider.MSOmniProv.1 = s 'MSOmniProv OLE DB Provider'
+	{
+		CLSID = s '{B14C8EB2-3632-11D3-AC81-00C04F8DB3D5}'
+	}
+	TheProvider.MSOmniProv = s 'MSOmniProv OLE DB Provider'
+	{
+		CLSID = s '{B14C8EB2-3632-11D3-AC81-00C04F8DB3D5}'
+		CurVer = s 'TheProvider.MSOmniProv.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B14C8EB2-3632-11D3-AC81-00C04F8DB3D5} = s 'TheProvider.MSOmniProv.1'
+		{
+			ProgID = s 'TheProvider.MSOmniProv.1'
+			VersionIndependentProgID = s 'TheProvider.MSOmniProv'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'OLE DB Provider' = s 'MSOmniProv OLE DB Provider'
+			val OLEDB_SERVICES = d '4294967295'
+			'TypeLib' = s '{B14C8EA5-3632-11D3-AC81-00C04F8DB3D5}'
+		}
+	}
+}

@@ -1,0 +1,174 @@
+<HTML>
+
+<!--
+    This is the formatting page for query results.  This file defines
+    how the result page header, rows, and footer will appear.
+-->
+
+<HEAD>
+	<LINK REL=STYLESHEET HREF="is2admin.css" TYPE="text/css">
+    <TITLE>Unfiltered documents</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#000066" VLINK="#808080" ALINK="#FF0000" TOPMARGIN=0>
+
+<TABLE>
+    <TR><TD><A HREF="http://www.microsoft.com/ntserver/search" target="_top"><IMG SRC ="is2logo.gif" VALIGN=MIDDLE ALIGN=LEFT border=0></a></TD></TR>
+    <TR><TD ALIGN="RIGHT"><H3>Administration - Unfiltered Documents</H3></TD></TR>
+</TABLE>
+
+<!-- Print a header that lists the query and the number of hits -->
+
+
+<table width=100%>
+	<tr>
+		<td bgcolor=pink align=center class=RecordStats>
+				<%if CiMatchedRecordCount eq 0%>
+					All documents have been successfully filtered.
+			    <%else%>
+					Documents in this list failed to filter.  Possible causes include document corruption,
+					property set corruption and password protection.
+				<%endif%>
+		</td>
+	</tr>
+</table>
+
+<!--
+    This table has a link to a new query page, a previous button, and
+    a next page button.  The buttons are only displayed when appropriate.
+-->
+
+<TABLE>
+	<tr>
+    <!-- Define a "previous" button if this isn't the first page -->
+
+    <%if CiContainsFirstRecord eq 0%>
+        <TD ALIGN=LEFT>
+            <FORM ACTION="/iisadmin/isadmin/unfilt.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="-<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Previous <%CiMaxRecordsPerPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+
+    <!-- Define a "next" button if this isn't the last page -->
+
+    <%if CiContainsLastRecord eq 0%>
+        <TD ALIGN=RIGHT>
+            <FORM ACTION="/iisadmin/isadmin/unfilt.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Next <%CiRecordsNextPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+
+	</tr>
+</TABLE>
+
+<!--
+    The begindetail/enddetail section describes how each row of output
+    is be formatted.  The sample below prints:
+
+        - record number
+        - document title (if one exists) or virtual path of the file
+        - the abstract for the file
+        - the url for the file
+        - the file's size and last write time
+-->
+<table width=100%>
+<colgroup span=1 width=120 bgcolor=#AACCEE align=right>
+<%begindetail%>
+				<tr><td><b>Virtual Path:</b></td><td><a href="<%EscapeURL vpath%>"><%vpath%></a></td></tr>
+				<tr><td><b>Physical Path:</b></td><td><%path%></td></tr>
+				<tr><td><b>Last Modified:</b></td><td><%if write ne ""%><%write%> GMT<%endif%></td></tr>
+				<tr><td bgcolor=#FFFFFF>&nbsp<br></td></tr>
+<%enddetail%>
+</table><br>
+
+
+<P>
+
+<!-- Only display a line if there were any hits that matched the query -->
+
+<%if CiMatchedRecordCount ne 0%>
+    <HR>
+<%endif%>
+
+<TABLE>
+
+    <!-- Define a "previous" button if this isn't the first page -->
+
+    <%if CiContainsFirstRecord eq 0%>
+        <TD ALIGN=LEFT>
+            <FORM ACTION="/iisadmin/isadmin/unfilt.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="-<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiRestriction" VALUE="<%CiRestriction%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Previous <%CiMaxRecordsPerPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+
+    <!-- Define a "next" button if this isn't the last page -->
+
+    <%if CiContainsLastRecord eq 0%>
+        <TD ALIGN=RIGHT>
+            <FORM ACTION="/iisadmin/isadmin/unfilt.idq" METHOD="GET">
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookMark" VALUE="<%CiBookMark%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiBookmarkSkipCount" VALUE="<%EscapeRAW CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiRestriction" VALUE="<%CiRestriction%>" >
+                <INPUT TYPE="HIDDEN"
+                    NAME="CiMaxRecordsPerPage" VALUE="<%CiMaxRecordsPerPage%>" >
+                <INPUT TYPE="SUBMIT"
+                    VALUE="Next <%CiRecordsNextPage%> documents">
+            </FORM>
+        </TD>
+    <%endif%>
+</TABLE>
+
+<!--
+     If the index is out of date (for example, if it's still being created
+     or updated after changes to files in an indexed directory) let the
+     user know.
+-->
+
+
+<table width=100%>
+	<tr>
+		<td class=RecordStats align=center bgcolor=pink>
+			<%if CiOutOfDate ne 0%>
+				<P class=RecordStats>The index is out of date.
+			<%endif%>
+
+<!--
+    If the query was not executed because it needed to enumerate to
+    resolve the query instead of using the index, but CiForceUseCi
+    was TRUE, let the user know
+-->
+
+			<%if CiQueryIncomplete eq 1%>
+				<p class=RecordStats>The query is too expensive to complete.
+			<%endif%>
+		</td>
+	</tr>
+</table>
+
+</body>
+</HTML>

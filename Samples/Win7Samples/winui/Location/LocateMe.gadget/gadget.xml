@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *************************************************************************
+ *
+ * File: gadget.xml
+ *
+ * THIS CODE AND INFORMATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ ************************************************************************
+-->
+<gadget>
+    <name>LocateMe</name>
+    <namespace>www.microsoft.com</namespace>
+    <version>1.0.0.0</version>
+    <author name="Microsoft Corporation">
+        <info url="http://www.microsoft.com" />
+    </author>
+    <copyright>&#169; 2008 Microsoft Corporation. All rights reserved.</copyright>
+    <description>Microsoft LocateMe Gadget</description>
+    <hosts>
+        <host name="sidebar">
+            <autoscaleDPI>true</autoscaleDPI>
+            <base type="HTML" apiVersion="1.0.0" src="LocateMe.htm" />
+            <permissions>Full</permissions>
+            <platform minPlatformVersion="1.0" />
+        </host>
+    </hosts>
+</gadget>

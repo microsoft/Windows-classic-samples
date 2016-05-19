@@ -1,0 +1,16 @@
+LIBRARY ClientSdkMethodDll.dll
+
+EXPORTS
+   DllRegisterServer PRIVATE
+   DllUnregisterServer PRIVATE
+   EapPeerFreeErrorMemory
+   EapPeerGetInfo
+   EapPeerInvokeConfigUI
+   EapPeerConfigXml2Blob
+   EapPeerCredentialsXml2Blob
+   EapPeerConfigBlob2Xml
+   EapPeerInvokeInteractiveUI
+   EapPeerInvokeIdentityUI
+   EapPeerFreeMemory
+   EapPeerQueryCredentialInputFields
+   EapPeerQueryUserBlobFromCredentialInputFields

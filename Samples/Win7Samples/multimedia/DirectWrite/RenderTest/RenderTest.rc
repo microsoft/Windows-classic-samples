@@ -1,0 +1,90 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+#include "winresrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// Menu
+
+IDC_DWRITERENDERTEST MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Copy\tCTRL+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCTRL+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "&Font...",                    ID_EDIT_FONT
+        MENUITEM "&Increase Text Size\tCTRL+UP", ID_EDIT_INCREASETEXTSIZE
+        MENUITEM "&Decrease Text Size\tCTRL+DOWN", ID_EDIT_DECREASETEXTSIZE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Nudge Left\tLEFT",            ID_VIEW_NUDGELEFT
+        MENUITEM "Nudge Right\tRIGHT",          ID_VIEW_NUDGERIGHT
+        MENUITEM SEPARATOR
+        MENUITEM "Rotate &Left\tCTRL+LEFT",     ID_VIEW_ROTATELEFT
+        MENUITEM "Rotate &Right\tCTRL+RIGHT",   ID_VIEW_ROTATERIGHT
+        MENUITEM SEPARATOR
+        MENUITEM "Show &Magnifier",             ID_VIEW_SHOWMAGNIFIER
+        POPUP "Magnifier &Type"
+        BEGIN
+            MENUITEM "&Vector",                     ID_MAGNIFIERTYPE_VECTOR
+            MENUITEM "&Pixels",                     ID_MAGNIFIERTYPE_PIXELS
+            MENUITEM "&Subpixels",                  ID_MAGNIFIERTYPE_SUBPIXELS
+        END
+        POPUP "Magnifier &Scale"
+        BEGIN
+            MENUITEM "3x",                          ID_MAGNIFIERSCALE_3X
+            MENUITEM "6x",                          ID_MAGNIFIERSCALE_6X
+        END
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Natural Mode\tCTRL+1",       ID_OPTIONS_NATURALMODE
+        MENUITEM "&GDI Classic Mode\tCTRL+2",   ID_OPTIONS_GDICLASSICMODE
+        MENUITEM "G&DI Natural Mode\tCTRL+3",   ID_OPTIONS_GDINATURALMODE
+        MENUITEM SEPARATOR
+        MENUITEM "Render to DI&B\tCTRL+B",      ID_OPTIONS_USEDIRECTWRITE
+        MENUITEM "Render to &Direct2D Surface\tCTRL+D", ID_OPTIONS_USEDIRECT2D
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Accelerator
+
+IDR_ACCELERATOR ACCELERATORS 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DOWN,        ID_EDIT_DECREASETEXTSIZE, VIRTKEY, CONTROL, NOINVERT
+    VK_UP,          ID_EDIT_INCREASETEXTSIZE, VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    "2",            ID_OPTIONS_GDICLASSICMODE, VIRTKEY, CONTROL, NOINVERT
+    "3",            ID_OPTIONS_GDINATURALMODE, VIRTKEY, CONTROL, NOINVERT
+    "1",            ID_OPTIONS_NATURALMODE, VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_OPTIONS_USEDIRECT2D, VIRTKEY, CONTROL, NOINVERT
+    "B",            ID_OPTIONS_USEDIRECTWRITE, VIRTKEY, CONTROL, NOINVERT
+    VK_LEFT,        ID_VIEW_NUDGELEFT,      VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_VIEW_NUDGERIGHT,     VIRTKEY, NOINVERT
+    VK_LEFT,        ID_VIEW_ROTATELEFT,     VIRTKEY, CONTROL, NOINVERT
+    VK_RIGHT,       ID_VIEW_ROTATERIGHT,    VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_VIEW_SHOWMAGNIFIER,  VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+// String Table
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "Direct Write Text Rendering Sample"
+    IDS_NATURAL_MODE        "Natural Mode"
+    IDS_GDI_CLASSIC_MODE    "GDI Classic Mode"
+    IDS_GDI_NATURAL_MODE    "GDI Natural Mode"
+    IDS_USING_D2D           "Rendering to Direct2D Surface"
+    IDS_USING_DWRITE        "Rendering to DIB"
+END

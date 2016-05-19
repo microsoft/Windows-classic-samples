@@ -1,0 +1,26 @@
+HKCR
+{
+	tedutil.XMLDataSaver.1 = s 'TED XML Data Saver Class'
+	{
+		CLSID = s '{F517B713-86B1-4bc3-BF16-F09119F6725A}'
+	}
+	tedutil.XMLDataSaver = s 'TED XML Data Saver Class'
+	{
+		CLSID = s '{F517B713-86B1-4bc3-BF16-F09119F6725A}'
+		CurVer = s 'tedutil.XMLDataSaver.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F517B713-86B1-4bc3-BF16-F09119F6725A} = s 'TED XML Data Saver'
+		{
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{64D3D369-B1E9-4aff-B1A4-8D8518E14A97}'
+			'Version' = s '1.0'
+		}
+	}
+}

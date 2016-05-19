@@ -1,0 +1,5 @@
+LIBRARY sysinf_c
+
+EXPORTS
+        VirtualChannelEntry @1
+

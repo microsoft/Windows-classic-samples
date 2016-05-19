@@ -1,0 +1,6 @@
+[implicit_handle(handle_t humarsh)]
+interface humarsh
+{
+typedef [user_marshal( WCHAR_STRING )] CHAR_STRING;
+
+}

@@ -1,0 +1,1033 @@
+<!-- 
+     
+--------------------------------------------------------------------------
+
+  Copyright (C) 1998-1999 Microsoft Corporation. All rights reserved.
+
+--------------------------------------------------------------------------
+
+     This page allows the user to originate a call from a given address and using the selected address type 
+     This sample is also able to accept incoming calls.
+
+     What is covered by this sample:
+			1. Address enumerations and registering on address in order to receive call notifications
+			2. Call operations: create, connect, answer, disconnect
+			3. Setting application priority (which application will receive notifications about incoming calls)
+			4. Processing of TAPI events.
+			5. QOS usage.
+			
+	  What is not covered:
+			This page does not manage the positioning of video windows. 
+			(In order to do this, you can change the sample to use an ActiveX control that is able 
+			to set properties in IVideoWindow. This requires window handle values - HWND - which 
+			are not available in vbscripting).
+			
+			Note: you can call methods and set properties in a IVideoWindow interface ONLY AFTER 
+			the event "stream active" is received (for the stream on which that particular window 
+			is selected).
+			Excheption: AutoShow property
+ 
+ -->
+     
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD W3 HTML//EN">
+
+<html>
+<head>
+</head>
+<meta content="text/html; charset=unicode" http-equiv="Content-Type">
+<title>Call operations</title>
+
+<SCRIPT LANGUAGE="JavaScript"><!--
+
+    var ua = navigator.userAgent;
+    var an = navigator.appName;
+
+    // Is it IE?
+    bMSIE = (ua.indexOf("MSIE")>=1);
+    if (! bMSIE)
+    {
+     alert("You need to use IE to run this page");
+     window.close;
+    }
+//-->
+</SCRIPT>
+
+
+<script LANGUAGE="VbScript">
+
+'Constants section
+'These constants are copied from tapi3if.idl
+Const TAPIMEDIATYPE_AUDIO  = &H08&
+Const TAPIMEDIATYPE_VIDEO = &H8000&
+Const S_MEDIA_AUDIOVIDEO = &H8008&
+Const TD_CAPTURE  = 0
+Const TD_RENDER = 1
+Const QSL_NEEDED = 1
+Const AS_INSERVICE = 0
+Const DC_NORMAL = 0
+Const TE_CALLSTATE = 8
+Const TE_CALLNOTIFICATION = 4
+Const CS_DISCONNECTED = 3
+Const CS_IDLE = 0
+Const CS_OFFERING = 4
+Const CS_CONNECTED = 2
+Const CNE_OWNER =  0
+Const CIS_CALLERIDNAME = 0
+'Interface IDs for casting 
+'Note: you can find the following IID-s in tapi3.h, tapi3if.idl or rend.idl
+
+Const IID_String_ITMediaSupport = "{B1EFC384-9355-11D0-835C-00AA003CCABD}"
+Const IID_String_ITTerminalSupport="{B1EFC385-9355-11D0-835C-00AA003CCABD}"
+Const IID_String_ITBasicCallControl = "{B1EFC389-9355-11D0-835C-00AA003CCABD}"
+
+'Const IID_String_ITCallInfo = "{B1EFC390-9355-11d0-835C-00AA003CCABD}"
+'New interface
+Const IID_String_ITCallInfo = "{350F85D1-1227-11D3-83D4-00C04FB6809F}"
+Const IID_String_ITStreamControl= "{EE3BD604-3868-11D2-A045-00C04FB6809F}"
+Const IID_String_ITDirectoryObjectConference= "{F1029E5D-CB5B-11D0-8D59-00C04FD91AC0}"
+Const IID_String_ITCallStateEvent = "{62F47097-95C9-11d0-835D-00AA003CCABD}"
+Const IID_String_ITCallNotificationEvent = "{895801DF-3DD6-11d1-8F30-00C04FB6809F}"
+
+' IID of IVideoWindow 
+' Note: you can find this IID defined in control.h (from your sdk\inc directory), 
+' which contains the interface to type library QuartzTypeLib for quartz.dll;
+' (search for the interface IVideoWindow)
+Const IID_String_IVideoWindow = "{56A868B4-0AD4-11CE-B03A-0020AF0BA770}"
+
+' The following CLSID is defined in tapi3.h 
+'(and it's used for creating a terminal of class "video window terminal")
+Const CLSID_String_VideoWindowTerm = "{F7438990-D6EB-11d0-82A6-00AA00B5CA1B}"
+
+
+'****************************************************************************
+'Global variable section
+'****************************************************************************
+
+'Set on True when we are unable to complete the connecting phase, to skip rest of processing
+DIM sUnableToComplete
+DIM sbNeedToExit
+sUnableToComplete = False
+sbNeedToExit = False
+
+' If we want to receive incoming calls, we have to register on the corresponding addresses.
+'We don't really use the values returned by registration (they are supposed to be used 
+'for unregistration), because Unregistration is performed automatically when we shutdown the TAPI object
+
+'The variable pRegisteredCallNotification is an array that contains cookies returned by RegisterCallNotifications;
+'these would normally be used to call UnregisterNotifications.
+
+'The variable pRegisteredName holds correspondent AddressName 
+
+DIM pRegisteredCallNotification(50)
+DIM pRegisteredName(50)
+DIM iQtaRegistered
+iQtaRegistered = 0
+
+
+'Set by radio button "Select Address Type" 
+DIM sCurrentAddressType
+sCurrentAddressType = -1
+
+' This variable will hold a reference to the currently established call
+DIM spITCall 
+spITCall = Empty
+
+
+DIm pVideoWindow1
+DIm pVideoWindow2
+
+</script>
+
+
+<script ID="clientEventHandlersVBS" LANGUAGE="vbscript">
+
+'Simplest error processing
+Sub CheckError(strMsg)
+if not Err.number = 0 Then
+	MsgBox strMsg & ":" & Err.number & ";"&Err.description
+	sbNeedToExit = True
+	Err.Clear
+End If
+
+End Sub
+	
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+' Enumerate addresses, register for incoming calls and fill listbox 
+Sub window_onload
+On Error Resume Next
+
+' If TAPI object is not initialized, we can't do anything, so exit.
+If sUnableToComplete = True Then
+  Exit Sub
+End If  
+
+'Listen on ALL available addresses
+DIM intTmp
+intTmp = Find_Address_And_Register()
+
+If sbNeedToExit Then
+ Exit Sub
+End If 
+
+If intTmp = 0  Then
+  MsgBox "Unable to find any valid address. Try to reload page.",0,"Initializing"
+  Exit Sub
+End If
+  
+' Select first address option
+selAddress.options(0).selected = True
+   
+call changeOptionsState()
+
+window.status = "Done."
+
+End Sub
+
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+' Find all addresses that have state "in service" and have at least audio capabilities.
+'  Register the app as "owner" on all these addresses 
+' Return number of addresses for which we registered...
+Function Find_Address_And_Register()
+On Error Resume Next
+ DIM bUsefulAddress
+ DIM bSupportVideoOrAudio
+ DIM bSupportVideo
+ 
+ Find_Address_And_Register = 0
+ For Each  pITAddress in TAPIOBJ.Addresses
+ 
+  	 bUsefulAddress = False
+
+  	 if  pITAddress.State = AS_INSERVICE Then
+  	    'Check if this address supports Audio or Video  	    
+	    'Obtain ITMediaSupport
+        DIM pITMediaSupport
+
+        Set pITMediaSupport = MAPPER.QueryDispatchInterface(_
+           IID_String_ITMediaSupport,pITAddress)
+
+        'If this address does not support streaming 
+		'(such as the addresses exposed by RemoteSP, data modems, etc,) 
+		'skip it
+        if not  Err.number = 0 Then
+           Err.Clear
+        Else  
+        
+          'Check if	audio or video are supported
+        
+          bSupportVideo = pITMediaSupport.QueryMediaType(TAPIMEDIATYPE_VIDEO)
+
+          bSupportVideoOrAudio = _
+    	     pITMediaSupport.QueryMediaType(TAPIMEDIATYPE_AUDIO)	or  bSupportVideo
+	                         	
+          call CheckError("Find_Address_And_Register:ITMediaSupport.QueryMediaType"	)
+
+           bUsefulAddress = bSupportVideoOrAudio     
+        End If
+    End If
+   
+   if bUsefulAddress Then             	      
+	   ' This address should be used:
+	   ' register the application to receive notifications on this address
+		iQtaRegistered =	iQtaRegistered + 1
+		
+		if  bSupportVideo Then		
+		  modes = S_MEDIA_AUDIOVIDEO
+		Else
+		  modes = TAPIMEDIATYPE_AUDIO
+		End If
+		    
+		'Register as Owner of any incoming call    
+		pRegisteredCallNotification(iQtaRegistered) = TAPIOBJ.RegisterCallNotifications(pITAddress,True,True,modes,0)
+		pRegisteredName(iQtaRegistered) = pITAddress.AddressName	 
+		
+		if not Err.number = 0 Then 'Probably this address does not support incoming calls
+			 iQtaRegistered	= iQtaRegistered - 1
+			 Err.Clear
+		Else
+		     Find_Address_And_Register = Find_Address_And_Register + 1	 
+		End If	 
+
+        
+        'Fill address list
+        DIM oOption
+	    Set	oOption	= document.createElement("OPTION") 
+		oOption.text	 = pITAddress.AddressName
+		oOption.value = pITAddress.AddressName
+		selAddress.add(oOption)
+		 
+		Set oOption = Nothing		 
+    End IF
+ Next
+
+
+'This section shows how to override Application Priority:
+'after the execution of the following lines, our app will always receive incoming calls
+'even if there are other running tapi apps that had registered for receiving calls before our app.
+
+call TAPIOBJ.SetApplicationPriority("IEXPLORE.EXE",TAPIMEDIATYPE_AUDIO,TRUE)
+call TAPIOBJ.SetApplicationPriority("IEXPLORE.EXE",TAPIMEDIATYPE_VIDEO,TRUE)
+ 
+End Function
+
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+'fired when user changes selected outgoing address radio button
+Sub changeOptionsState
+On Error Resume Next
+
+'Find address selected
+Selstr = ""
+
+bSupportVideo = false
+For i = 0 to selAddress.length - 1  
+   If selAddress.options(i).selected = True Then 
+     selstr = selAddress.options(i).value 
+     Exit For
+   End If    
+Next
+
+'Find this address and check if video is supported
+For Each  pITAddress in TAPIOBJ.Addresses
+
+  if   pITAddress.AddressName =SelStr Then
+   'Obtain ITMediaSupport
+   DIM pITMediaSupport
+   
+   Set pITMediaSupport = MAPPER.QueryDispatchInterface(_
+   IID_String_ITMediaSupport,pITAddress)
+
+   call CheckError("changeOptionsState:Query ITAddress for ITMediaSupport" )
+ 
+  'Check if video is supported
+   bSupportVideo = _
+    pITMediaSupport.QueryMediaType(TAPIMEDIATYPE_VIDEO)
+    
+   call CheckError("changeOptionsState:ITMediaSupport.QueryMediaType" )
+   Set pITMediaSupport = Nothing
+  
+   Exit For
+  End If
+ Next
+call CheckError("changeOptionsState:After enumerating the Addresses")
+checkAOnly.disabled = not bSupportVideo
+checkNoOutgoingVideo.disabled = not bSupportVideo
+
+End Sub
+
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Check parameters of a call before connecting it
+Sub PressConnect
+On Error Resume Next
+DIM iAddressType
+DIM pConnectTo
+DIM addressFrom
+DIM selStr
+
+If not IsEmpty(spITCall) Then
+  MsgBox "You are currently in call. Disconnect first",0,"connect"
+  Exit Sub
+End If
+
+ 
+If txtAddress.value = "" Then
+    MsgBox "You have not entered a destination address",0,"connect"
+    Exit Sub        
+End If
+
+'Check if type is supplied
+if sCurrentAddressType < 0 Then
+   MsgBox "You have not selected addres type",0,"connect"
+   Exit Sub
+End If
+
+  ' Address type. This app uses only type = 1 ("Phone") and type = 16 ("ip address")
+  iAddressType =  CInt(sCurrentAddressType)
+
+  pConnectTo =  txtAddress.value
+  
+  'Find selected originating address 
+  For i = 0 to selAddress.length - 1  
+     If selAddress.options(i).selected = True Then 
+       addressFrom = selAddress.options(i).value 
+       Exit For
+     End If    
+  Next
+  
+  If addressFrom = "" Then
+    MsgBox "Originating Address is not selected or doesn't exist at all: uable to connect",0,"COnnect"
+    Exit Sub
+  End If   
+
+ Call Connect(pConnectTo,iAddressType,addressFrom,checkAOnly.value="on" or checkAOnly.disabled,checkNoOutgoingVideo.value="on" or checkNoOutgoingVideo.disabled)
+ 
+End Sub
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Create Call object, setup terminals, connect call
+Sub Connect(pConnectTo,iAddressType,addressFrom,blnAOnly,blnNoOutVideo)
+On Error resume Next
+
+sUnableToComplete = False
+
+ConnANN.innerHTML = "Connecting to " & pConnectTo & "..."
+
+window.status = "Call creation..."
+
+'Create new internal call representation 
+
+'Find address selected
+DIM pITAddress_Connect
+DIM blnFoundAddress
+blnFoundAddress = False 
+DIM pITAddress
+ 
+ For Each  pITAddress in TAPIOBJ.Addresses 
+    if pITAddress.AddressName = addressFrom Then
+     'Obtain ITMediaSupport
+     DIM pITMediaSupport
+     Set pITMediaSupport = MAPPER.QueryDispatchInterface(_
+        IID_String_ITMediaSupport,pITAddress)
+
+     call CheckError("connect:Query ITAddress for ITMediaSupport" )
+ 
+     'Check what is supported
+     bSupportVideo = _
+      pITMediaSupport.QueryMediaType(TAPIMEDIATYPE_VIDEO)
+    
+     call CheckError("connect:ITMediaSupport.QueryMediaType" )
+     blnFoundAddress = True
+     Set pITAddress_Connect = pITAddress
+     Exit For
+  End If    
+ Next
+
+ Set pITAddress = Nothing
+
+ if not blnFoundAddress Then
+   MsgBox "Sorry, outgoing address " & addressFrom & "does not exist",0,"Connect"
+   ConnANN.innerHTML = "Call to "& pConnectTo & " failed."
+   Exit Sub
+ End If    
+
+  
+  Call CreateCallWindow(pITAddress_Connect,blnAOnly or not bSupportVideo,blnNoOutVideo or not bSupportVideo)
+  Call CheckError("Connect: after CreateCallWindow")    
+ 
+   
+ 'Create a Call
+ DIM MediaTypes
+  
+ If not bSupportVideo or  blnAOnly Then
+   MediaTypes = TAPIMEDIATYPE_AUDIO
+ Else  
+   MediaTypes = S_MEDIA_AUDIOVIDEO
+ End If
+
+ Set pCall = pITAddress_Connect.CreateCall(pConnectTo,iAddressType,MediaTypes)
+ 
+ call CheckError("connect:CreateCall" )
+ 
+ Set spITCall = pCall
+ 
+ window.status = "Configure terminals..."
+ Call AssignTerminals(pCall,blnAOnly,blnNoOutVideo,True)    
+ call CheckError("connect:after AssignTerminals" )
+ 
+ if sUnableToComplete Then
+   Call DisconnectCall(1)
+   window.status = ""
+   ConnANN.innerHTML = "Call to "& pConnectTo & " failed."
+   window.status = "Done."
+   Exit Sub
+ End If
+    
+
+ window.status = "Connecting..."
+ 
+ Call pCall.Connect(false)
+ 
+ ' Check for error "invalid address" (see in tapi3err.h TAPI_E_INVALADDRESS=(HRESULT)0x8004000C)
+ if Err.Number = &H8004000C Then
+  Err.Clear
+  Call DisconnectCall(1)
+  ConnANN.innerHTML = "Call to "& pConnectTo & " failed: Address is invalid"
+  window.status="Done."
+  Set pCall = Nothing
+
+Else
+  if not Err.Number = 0 Then 
+    Err.Clear
+    Call DisconnectCall(1)
+    ConnANN.innerHTML = "Call to "& pConnectTo & " failed: error " & Hex(Err.number)
+    window.status="Done."     
+    Set pCall = Nothing
+  Else
+    Set spITCall = pCall
+  End if
+   
+End If
+ 
+call CheckError("connect:main connect" )
+
+Set pCall = Nothing
+
+End Sub
+
+  
+ 
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' For static terminals: get default static terminal, select it on stream and start the stream
+Sub AssignTerminals(pCall, is_no_video, is_no_render,bSetQOS)
+On Error Resume Next
+DIM pITCallInfo
+Set pITCallInfo = MAPPER.QueryDispatchInterface( _ 
+    IID_String_ITCallInfo, pCall)
+    
+Call CheckError("AssignTerminals:query for pITCallInfo")
+
+DIM pITAddress
+Set pITAddress = pITCallInfo.Address
+
+Call CheckError("AssignTerminals:pITCallInfo.Address")
+
+DIM pITTerminalSupport
+  
+Set pITTerminalSupport = MAPPER.QueryDispatchInterface(_
+  IID_String_ITTerminalSupport,pITAddress)
+
+if Err.Number = 5 Then
+  ' This address does not support any terminals
+  Err.Clear
+  Exit Sub
+End If
+
+Call CheckError("AssignTerminals:query for pITTerminalSupport")
+
+
+ DIM pITStreamControl
+  Set pITStreamControl = MAPPER.QueryDispatchInterface(_
+  IID_String_ITStreamControl,pCall)
+
+  call CheckError("AssignTerminals:Query ITCall for ITStreamControl" ) 
+ 
+ DIM pITStream
+ DIM lMediaType
+ DIM lDirection
+ 
+ 'Setup all static terminals: video capture,
+ ' and both audio terminals (microphone and speakers)
+      
+ For Each pITStream in pITStreamControl.Streams
+   lMediaType = pITStream.MediaType
+   lDirection = pITStream.Direction
+   'Try to find correspondent terminal (if we need one ;))
+   
+   if not ((is_no_video and lMediaType = TAPIMEDIATYPE_VIDEO) or _
+           (is_no_render  and lMediaType = TAPIMEDIATYPE_VIDEO and lDirection=TD_CAPTURE) ) Then
+     
+     if (lMediaType = TAPIMEDIATYPE_VIDEO) and (lDirection=TD_RENDER) Then
+      is_error = false
+     Else
+     
+      Set pITTerminal = pITTerminalSupport.GetDefaultStaticTerminal(lMediaType,lDirection)
+ 
+      if not (Err.number = 0) Then 'No such terminal? 
+        is_error = True
+        Err.Clear
+      Else
+        is_error =  False 
+        pITStream.SelectTerminal(pITTerminal)
+      End if
+       
+      call CheckError("AssignTerminals:SelectTerminal" )
+     End If
+     
+        
+   if  is_error Then 'Maybe unnecessary
+   ' Maybe join audio only - special case
+      if  (lMediaType =  TAPIMEDIATYPE_VIDEO and lDirection=TD_CAPTURE) Then
+        MsgBox "Unable to find video capture device: attach video receive only"
+      Else
+        if   (lMediaType =  TAPIMEDIATYPE_AUDIO and lDirection=TD_CAPTURE) Then
+          MsgBox "Unable to find audio recording device: attach audio receive only"
+        Else
+          MsgBox "Unable to find audio playback device."
+          Err.Clear
+          sUnableToComplete = True
+          Exit Sub
+        End If
+      End if
+    
+   Else 'No errors
+     
+    'And now setup specific devices: video windows...
+    
+    if (lMediaType = TAPIMEDIATYPE_VIDEO ) Then 
+	'for Video Capture we will create a "Preview Window"terminal
+	'for Video Render we will create a "Video Window" Terminal
+
+	      if lDirection = 0 Then	'see TD_CAPTURE = 0 in tapi3if.idl
+
+            'Preview window
+  	       pITStream.SelectTerminal(pVideoWindow2)
+       	   call CheckError("AssignTerminals: SelectTerminalStream")
+       	          	   
+       	   'Show preview window (this will show the video stream sent by our app to the other party)
+       	   Dim pIVideoWindow2
+       	   Set pIVideoWindow2 = MAPPER.QueryDispatchInterface(IID_String_IVideoWindow, pVideoWindow2)
+       	   call CheckError("AssignTerminals: query for IVideoWindow")
+		   pIVideoWindow2.AutoShow = True			       	   
+       	   call CheckError("AssignTerminals: set visibility")
+       	   
+
+          End If
+                     
+	      if lDirection = 1 Then	'see TD_RENDER = 1 in tapi3if.idl
+
+    	     pITStream.SelectTerminal(pVideoWindow1)
+				
+	         call CheckError("AssignTerminals: SelectTerminalStream")
+
+       	   'Show window (this will show us the video stream received by our app from the other party)
+       	   Dim pIVideoWindow1
+       	   Set pIVideoWindow1 = MAPPER.QueryDispatchInterface(IID_String_IVideoWindow, pVideoWindow1)
+       	   call CheckError("AssignTerminals: query for IVideoWindow")
+		   pIVideoWindow1.AutoShow = True			       	   
+       	   call CheckError("AssignTerminals: set visibility")
+            
+           
+          End If
+
+	      call CheckError("AssignTerminals: SelectTerminalStream")
+	      	      
+    End If 'Create Preview  
+   End if 'have error      
+
+ End if 'our Stream
+   
+  call CheckError("AssignTerminals:GeneralChecking1" )
+   
+ Next  ' End cycle for ITStreams
+  
+   
+ call CheckError("AssignTerminals:Streams cycle problems" )
+   
+ 
+if bSetQOS Then 
+'Let's try to setup QoS level for video and audio
+if not is_no_video Then
+  call pCall.SetQOS(TAPIMEDIATYPE_VIDEO,QSL_NEEDED)
+  call CheckError("AssignTerminals:set QOS_REQUIRED for Video" )
+End If
+  
+call pCall.SetQOS(TAPIMEDIATYPE_AUDIO,QSL_NEEDED)
+call CheckError("AssignTerminals:set QOS_REQUIRED for Audio" )
+End IF
+
+End Sub
+
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Create two new Video Window terminals
+Sub CreateCallWindow(pITAddress, AOnly,NoOutgoingVideo)
+On Error Resume Next
+
+ 'Obtain Terminal support
+  DIM pITTerminalSupport
+  
+  Set pITTerminalSupport = MAPPER.QueryDispatchInterface(_
+  "{B1EFC385-9355-11D0-835C-00AA003CCABD}",pITAddress)
+
+  if Err.Number = 5 Then
+    ' This address does not support any terminals
+    Err.Clear
+    Exit Sub
+  End If
+
+  call CheckError("CreateCallWindow:Query ITAddress for ITTerminalSuport" )
+ 
+   if not AOnly Then 'create window for your party
+
+      Set pVideoWindow1 = pITTerminalSupport.CreateTerminal(CLSID_String_VideoWindowTerm,TAPIMEDIATYPE_VIDEO,TD_RENDER)
+   End If
+   
+   if not AOnly and not NoOutgoingVideo Then
+   
+      Set pVideoWindow2 = pITTerminalSupport.CreateTerminal(CLSID_String_VideoWindowTerm,TAPIMEDIATYPE_VIDEO,TD_RENDER)
+   End If 'Create window for preview
+   
+  call CheckError("CreateCallWindow:GeneralChecking1" )
+
+End Sub
+                    
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Tapi events processing: 
+' - call state events ("connected", "disconnected") 
+' - and call notification events (these calls will be in "offering" state)
+Sub TAPIOBJ_Event(event_type, tapi_event)
+On Error Resume Next  
+
+'Check For disconnected call
+if event_type = TE_CALLSTATE Then
+  DIM pITCallStateEvent
+  
+  Set pITCallStateEvent = MAPPER.QueryDispatchInterface(_
+  IID_String_ITCallStateEvent,tapi_event)
+
+  call CheckError("TAPIOBJ_Event:unable to map" )
+
+  iCallState = pITCallStateEvent.State 
+
+  call CheckError("TAPIOBJ_Event:get CallState" )
+
+  if iCallState= CS_DISCONNECTED or iCallState= CS_IDLE Then
+
+
+   cause = pITCallStateEvent.Cause
+
+   strinnerHTML = ""
+   Select Case cause
+     Case 1 '  CEC_DISCONNECT_NORMAL
+		' Normal disconnect
+     Case 2 '  CEC_DISCONNECT_BUSY
+       strinnerHTML =  "Your Party is busy.Try Later."
+     Case 3 '  CEC_DISCONNECT_BADADDRESS
+       strinnerHTML =  "Address is invalid"
+     case 4 '  CEC_DISCONNECT_NOANSWER
+       strinnerHTML =  "No answer from your party."
+     case 0 'CEC_NONE
+       strinnerHTML =  "No answer from your party."
+     Case Else
+       strinnerHTML =  "Your call is cancelled, rejected or failed"       
+   End Select
+   
+   window.status = "Done."
+   
+    
+    if strinnerHTML= "" Then 
+       ConnANN.innerHTML =  "You are disconnected from "& sPartyName(i)    
+    Else
+       ConnANN.innerHTML = strinnerHTML   
+    End if   
+    
+    Call DisconnectCall(1)
+                 
+  End If  'Call is disconnected
+  
+  if iCallState = CS_CONNECTED Then 'Call is connected
+   ConnANN.innerHTML =  "Call is connected."
+   
+   window.status = "Connected."
+   buttConnect.disabled =  True
+   buttDisconnect.disabled =  False
+  End If 'Call is connected
+End If ' event: call state
+
+
+'Check only for incoming calls
+if event_type = TE_CALLNOTIFICATION Then ' We have an incoming call (an "offering" call)
+
+  DIM pITCallNotificationEvent
+  Set pITCallNotificationEvent = MAPPER.QueryDispatchInterface(_
+  IID_String_ITCallNotificationEvent,tapi_event)
+
+  Call CheckError("TAPIOBJ_Event:query for pITDirectoryObjectUser")   
+      
+  CallOwnership = pITCallNotificationEvent.Event
+
+  DIM pITCallInfo
+  
+  Set pITCallInfo = pITCallNotificationEvent.Call
+  
+  Call CheckError("TAPIOBJ_Event:get pITCallInfo")   
+
+  if not blnShowOnlyOnce and  pITCallInfo.CallState  = CS_OFFERING and not ( CallOwnership = CNE_OWNER) Then
+    MsgBox "Unable to accept incoming calls: is other instance of this app running?",0,"Info"
+     blnShowOnlyOnce  = True
+    Exit Sub
+  End IF
+    
+  if CallOwnership = CNE_OWNER Then  'We are the owner!
+ 
+    if not IsEmpty(spITCall) Then
+      MsgBox "Already in call, disconnect first",0,"Incoming Call"
+      Exit Sub
+    End if
+      
+    if  pITCallInfo.CallState  = CS_OFFERING Then 'Offering
+  
+      sCalleeName = pITCallInfo.CallInfoString(CIS_CALLERIDNAME)
+      
+      if not Err.number = 0 then ' Caller ID name is not supported 
+        sCalleeName =  "Unknown"
+        Err.Clear
+      End if
+              
+      DIM pITCallOffer
+      Set pITCallOffer = MAPPER.QueryDispatchInterface( _ 
+        IID_String_ITBasicCallControl, pITCallInfo)
+
+      Call CheckError("TAPIOBJ_Event:query for pITCall")   
+      
+      
+      response = MsgBox("A call from "&sCalleeName& " has arrived. Do you want to accept it?",4,"Incoming call")
+
+      if not response = 7    Then       'the did not press "NO", so he pressed "YES"
+        Call AcceptIncomingCall(pITCallOffer, pITCallInfo)
+      End If  
+    End If 'Call is offering
+   End If 'We are owner   
+  
+End If 'Call Notification has arrived  
+
+End Sub 
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Sub for incoming calls processing
+Sub AcceptIncomingCall(pITCallIncoming,pITCallInfoIncoming)
+On Error Resume Next
+ 'Get address 
+ 
+ sUnableToComplete = False
+ DIM pITAddress
+ Set pITAddress = pITCallInfoIncoming.Address
+ Call CheckError("AcceptIncomingCall:pITCallInfo.Address")
+
+
+ sname1 = pITCallInfoIncoming.CallerIDName
+ if not Err.number = 0 Then
+   sname1 = "Unknown"
+   Err.Clear
+ End If
+   
+  
+Call CheckError("AcceptIncomingCall:sFriendltName")
+ 
+sAddressName = pITAddress.AddressName
+Call CheckError("AcceptIncomingCall:AddressName")
+
+Call CreateCallWindow(pITAddress,False,False)
+
+Call CheckError("AcceptIncomingCall: after CreateCallWindow")   
+  
+ Set spITCall = pITCallIncoming
+ 
+ window.status = "Configure terminals."
+ 
+ Call AssignTerminals(pITCallIncoming,False,False,False)    
+ call CheckError("AcceptIncomingCall:after AssignTerminals" )
+
+ if sUnableToComplete or sbNeedToExit Then
+   window.status = ""
+   pITCallIncoming.Disconnect 6   'rejected
+   Exit Sub
+ End If
+
+ window.status = "Answering..."
+
+ Call pITCallIncoming.Answer()
+ window.status = "Connected."
+ 
+ call CheckError("AcceptIncomingCall:main connect" )
+ 
+ buttConnect.disabled =  True
+ buttDisconnect.disabled =  False
+
+ window.status = "Done."
+ End Sub
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Disconnect current call
+Sub DisconnectCall(callDisc)
+On Error resume Next
+
+if not IsEmpty(spITCall) Then
+
+if not callDisc = 8 and not callDisc = 0 Then 
+  ' We need some kind of message pump here. The following call to MsgBox does exactly this:
+  MsgBox "A call is disconnected",0,"Disconnect"  
+End If  
+
+Set pVideoWindow1 = Nothing
+Set pVideoWindow2 = Nothing
+
+ConnANN.innerHTML =  "You are disconnected"  
+ 
+if callDisc=0  Then
+  spITCall.Disconnect(DC_NORMAL)
+End If
+
+Set spITCall = Nothing 
+spITCall = Empty  
+
+buttConnect.disabled =  False
+buttDisconnect.disabled =  True
+ 
+End If
+End Sub
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Disconnect call if we have one and shutdown TAPI object on exit from page
+Sub window_onunload
+On Error Resume Next
+
+Call DisconnectCall(0)
+ 
+TAPIOBJ.Shutdown
+End Sub 
+
+
+'******************************************************************
+'******************************************************************
+'******************************************************************
+' Used by radio button: address type
+Sub change_type
+ sCurrentAddressType = CInt(window.event.srcElement.value )
+End Sub 
+
+
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+'******************************************************************** 
+'small function to change value of checkboxes in a more appropriate
+' manner.
+Sub  togglechk()
+'Toggle state of checkbox
+ If (window.event.srcElement.value = "off") Then 
+   window.event.srcElement.value ="on"
+ Else
+   window.event.srcElement.value ="off"
+ End IF  
+End Sub
+</script>
+
+<div id="AllElementsNonSimple" style="position:absolute;top:40px" >
+<p style="HEIGHT: 20px; POSITION: absolute; TOP: 0px;width:300px;background:blue;LEFT:0px;FONT-SIZE:18px;COLOR:white;TEXT-ALIGN:center">
+Call by address and type
+</p>
+
+<div id="UserSelectionSection" style="position:absolute;Width:300px">
+
+<p style="HEIGHT: 20px;  background:#000080;POSITION: absolute; TOP: 20px;width:200px;LEFT:20px;FONT-SIZE:16px;COLOR:white;TEXT-ALIGN:center">
+Address
+</p>
+
+<p style="HEIGHT: 20px; POSITION: absolute;  background:#000080;TOP: 75px;width:200px;LEFT:20px;FONT-SIZE:16px;COLOR:white;TEXT-ALIGN:center">
+Address type
+</p>
+
+<input id="txtAddress" style="HEIGHT: 30px; POSITION: absolute; TOP: 40px;LEFT:20px;FONT-SIZE:16px;COLOR:black;WIdth:200px">
+
+<div id="divRadioGroup" style="BORDER-BOTTOM: black 2px solid; BORDER-LEFT: black 2px solid; BORDER-RIGHT: black 2px solid; BORDER-TOP: black 2px solid; HEIGHT: 80px; LEFT: 20px; POSITION: absolute; TOP: 100px; WIDTH: 200px">
+<font style="COLOR: black; FONT-SIZE: 12px;font-style:oblique">
+
+
+<input id="radioAddressType" name="radioAddressType" onclick="change_type()" style="HEIGHT: 20px; POSITION: absolute; TOP: 10px;LEFT:10px" type="radio" value="16" title="IP Address">
+
+<input id="radioAddressType" name="radioAddressType" onclick="change_type()" style="HEIGHT: 20px; POSITION: absolute; TOP: 40px; LEFT:10px" type="radio" value="1" title="Phone Number">
+
+<p style="HEIGHT: 20px; POSITION: absolute; TOP: 10px;LEFT:40px">
+IP Address
+</p>
+
+<p style="HEIGHT: 20px; POSITION: absolute; TOP: 40px;LEFT:40px">
+Phone Number
+</p>
+ 
+</font>
+</div>
+
+</div>
+
+<div id="Separator3" style="position:absolute;BORDER-BOTTOM: blue 2px solid; BORDER-LEFT: blue 2px solid; BORDER-RIGHT: blue 2px solid; BORDER-TOP: blue 2px solid; HEIGHT: 220px; LEFT: 310px; POSITION: absolute; TOP: 0px; WIDTH: 0px">
+</div>
+
+<div id="PropertiesSelectionSection" style="LEFT:320px;ALIGN:CENTER;position:absolute;top:0px;Width:400px">
+<p style="HEIGHT: 10px; POSITION: absolute; TOP: 0px;background:blue;width:100%;LEFT:0px;FONT-SIZE:18px;COLOR:white;TEXT-ALIGN:center">
+Originating address and call properties
+</p>
+
+<p style="HEIGHT: 20px; POSITION: absolute;background:#000080; TOP: 20px;width:200px;LEFT:0px;FONT-SIZE:16px;COLOR:white;TEXT-ALIGN:center">
+Address
+</p>
+<select id="selAddress" name="selAddress" onchange="changeOptionsState()" style="position:absolute;width:200px;Left:0px;FONT-SIZE:16px;COLOR:black;top:40px"> 
+</select>
+ 
+<p style="HEIGHT: 20px; POSITION: absolute; TOP: 20px;width:150px;LEFT:200px;FONT-SIZE:16px;COLOR:black;TEXT-ALIGN:center">
+Setup audio only
+</p>
+
+<p style="HEIGHT: 20px; POSITION: absolute; TOP: 40px;width:150px;LEFT:200px;FONT-SIZE:16px;COLOR:black;TEXT-ALIGN:center">
+Setup no video-out
+</p>
+
+<input type="checkbox" id="checkAOnly" name="checkAROnly" value="off" onclick="togglechk()" style="HEIGHT:  20px; LEFT: 350px; POSITION: absolute; TOP: 20px; WIDTH: 20px" title="Connect Audio Only">
+
+<input type="checkbox" id="checkNoOutgoingVideo" value="off" onclick="togglechk()" style="HEIGHT:  20px; LEFT: 350px; POSITION: absolute; TOP: 40px; WIDTH: 20px" title="Do not send outgoing video">
+
+
+</div>
+
+</div>
+
+
+<INPUT type=button id="buttConnect" style="cursor:hand;LEFt:400px; HEIGHT: 30px; POSITION: absolute; WIDTH: 200px; top:140px"  onclick="PressConnect()" value="Connect" title="Connect">	 
+
+<INPUT type=button disabled id="buttDisconnect" style="cursor:hand;LEFt:400px; HEIGHT: 30px; POSITION: absolute; WIDTH: 200px; top:180px"  onclick="DisconnectCall(0)" value="Disconnect" title="Disconnect">	 
+
+
+<p id=ConnANN style="HEIGHT: 20px; POSITION: absolute; TOP: 250px;width:100%;background:blue;LEFT:3px;FONT-SIZE:18px;COLOR:white;TEXT-ALIGN:center">
+</p>
+
+<!-- Listed objects : TAPI(tapi3.h),  DispatchMapper(tapi3.h) --> 
+<object classid="clsid:21D6D48E-A88B-11D0-83DD-00AA003CCABD" id="TAPIOBJ"></object>
+
+<object classid="clsid:E9225296-C759-11d1-A02B-00C04FB6809F" id="MAPPER"></object>
+
+<script LANGUAGE="vbscript">
+
+' Be sure that you call TAPIOBJ.Initialize before window_onload, otherwise you'll
+' never receive events from tapi... 
+On Error Resume Next
+window.status = "Initialization phase started..."
+
+call TAPIOBJ.Initialize
+sUnableToComplete = False
+TAPIOBJ.EventFilter = &H1FFFF&
+
+ 
+if Not Err.number = 0  Then
+   MsgBox "Unable to perform Tapi3 initialization",0,"Init"
+   sUnableToComplete = True
+End If  
+
+</script>
+
+</body></html>

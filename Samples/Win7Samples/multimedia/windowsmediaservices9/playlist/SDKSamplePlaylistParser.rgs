@@ -1,0 +1,58 @@
+HKCR
+{
+	SDKSamplePlaylistPlugin.SDKSamplePlaylistParser.9 = s 'SDKSamplePlaylistParser Class'
+	{
+		CLSID = s '{15D0B1CE-E2C1-40E0-B705-219FD74F4375}'
+	}
+	SDKSamplePlaylistPlugin.SDKSamplePlaylistParser = s 'SDKSamplePlaylistParser Class'
+	{
+		CLSID = s '{15D0B1CE-E2C1-40E0-B705-219FD74F4375}'
+		CurVer = s 'SDKSamplePlaylistPlugin.SDKSamplePlaylistParser.9'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {15D0B1CE-E2C1-40E0-B705-219FD74F4375} = s 'SDKSamplePlaylistParser Class'
+		{
+			ProgID = s 'SDKSamplePlaylistPlugin.SDKSamplePlaylistParser.9'
+			VersionIndependentProgID = s 'SDKSamplePlaylistPlugin.SDKSamplePlaylistParser'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{F297F477-6FE2-4260-BE52-5F0CD960C780}'
+			ForceRemove Properties
+			{
+				val Name = s 'WMS SDK Sample Playlist Parser'
+				val Author = s 'Microsoft Corporation'
+				val Copyright = s 'Copyright (c) Microsoft Corporation.  All rights reserved.'
+				val 'URL Suffix' = s '.playlist'
+			}
+		}
+	}
+}
+
+HKLM 
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Windows Media'
+			{
+				NoRemove Server
+				{
+					NoRemove RegisteredPlugins
+					{
+                        NoRemove 'Playlist Parser'
+                        {
+					        ForceRemove {15D0B1CE-E2C1-40E0-B705-219FD74F4375} = s 'WMS SDK Sample Playlist Parser'
+					    }
+					}
+				}
+			}
+		}
+	}
+}
+
+

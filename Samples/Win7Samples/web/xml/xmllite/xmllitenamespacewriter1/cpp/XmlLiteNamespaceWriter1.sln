@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlLiteNamespaceWriter1", "XmlLiteNamespaceWriter1.vcproj", "{F050B30C-6B8B-49BC-A07D-37E17577C414}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F050B30C-6B8B-49BC-A07D-37E17577C414}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F050B30C-6B8B-49BC-A07D-37E17577C414}.Debug|Win32.Build.0 = Debug|Win32
+		{F050B30C-6B8B-49BC-A07D-37E17577C414}.Release|Win32.ActiveCfg = Release|Win32
+		{F050B30C-6B8B-49BC-A07D-37E17577C414}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

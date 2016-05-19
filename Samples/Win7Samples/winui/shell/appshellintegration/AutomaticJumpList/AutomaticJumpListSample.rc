@@ -1,0 +1,30 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+
+#include "resource.h"
+#include "windows.h"
+
+IDI_AUTOMATICJUMPLISTSAMPLE ICON                    "AutomaticJumpListSample.ico"
+
+IDC_AUTOMATICJUMPLISTSAMPLE MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open...",                    IDM_FILE_OPEN
+        MENUITEM SEPARATOR
+        POPUP "&Known Category"
+        BEGIN
+            MENUITEM "&Recent",                 IDM_CATEGORY_RECENT
+            MENUITEM "&Frequent",               IDM_CATEGORY_FREQUENT
+        END
+        MENUITEM "&Clear History",              IDM_FILE_CLEARHISTORY
+        MENUITEM SEPARATOR
+        MENUITEM "Clean&up Files and Types",    IDM_FILE_DEREGISTERFILETYPES
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+END

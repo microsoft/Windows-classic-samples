@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ElevationSample", "ElevationSample\ElevationSample.vcproj", "{C3C1A351-AEF2-466F-9151-2F5068A929B5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RegisterServer", "RegisterServer\RegisterServer.vcproj", "{354B7754-1999-4555-AA7C-8C5C83A71C68}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProxyStub", "ProxyStub\ProxyStub.vcproj", "{FE7E84F3-32FD-4615-BF3C-C9C56C2A797F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{354B7754-1999-4555-AA7C-8C5C83A71C68} = {354B7754-1999-4555-AA7C-8C5C83A71C68}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3C1A351-AEF2-466F-9151-2F5068A929B5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3C1A351-AEF2-466F-9151-2F5068A929B5}.Debug|Win32.Build.0 = Debug|Win32
+		{C3C1A351-AEF2-466F-9151-2F5068A929B5}.Release|Win32.ActiveCfg = Release|Win32
+		{C3C1A351-AEF2-466F-9151-2F5068A929B5}.Release|Win32.Build.0 = Release|Win32
+		{354B7754-1999-4555-AA7C-8C5C83A71C68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{354B7754-1999-4555-AA7C-8C5C83A71C68}.Debug|Win32.Build.0 = Debug|Win32
+		{354B7754-1999-4555-AA7C-8C5C83A71C68}.Release|Win32.ActiveCfg = Release|Win32
+		{354B7754-1999-4555-AA7C-8C5C83A71C68}.Release|Win32.Build.0 = Release|Win32
+		{FE7E84F3-32FD-4615-BF3C-C9C56C2A797F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE7E84F3-32FD-4615-BF3C-C9C56C2A797F}.Debug|Win32.Build.0 = Debug|Win32
+		{FE7E84F3-32FD-4615-BF3C-C9C56C2A797F}.Release|Win32.ActiveCfg = Release|Win32
+		{FE7E84F3-32FD-4615-BF3C-C9C56C2A797F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

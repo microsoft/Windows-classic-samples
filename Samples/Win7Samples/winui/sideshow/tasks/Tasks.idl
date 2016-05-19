@@ -1,0 +1,27 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+    uuid(5AF03226-EC4D-4982-892B-F3BA36E210A9),
+    version(1.0),
+    helpstring("WindowsSideShowTasks 1.0 Type Library")
+]
+library TasksLib
+{
+    importlib("stdole2.tlb");
+    [
+        uuid(E363F045-E2F9-4C95-87A2-BF4721928740),
+        helpstring("WindowsSideShowTasks Property Page Class")
+    ]
+    coclass TasksPropertyPage
+    {
+        [default] interface IUnknown;
+    };
+};

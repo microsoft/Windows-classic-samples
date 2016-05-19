@@ -1,0 +1,18 @@
+1.Copy WlExtHC.exe to system32
+2.Run L2SecExt.reg (you may have to remove sfp protection from SYSTEM\CurrentControlSet\Control\NetDiagFx.  Alternately, you can run regedt32 and import the L2SecExt.reg file)
+3.Run WlExtHC.exe /RegServer (from system32\)
+
+NOTE: The .reg file has a binary LaunchPermission key. This should setup the permissions so that Local Service can activate the extension. If you run into any problems, here's how to check the security settings:
+
+    Give Local Service access to run the extension
+       3a.Run Aministrative Tools > Component Services (or run "dcomcnfg" from the command-line)
+       3b.Expand Component Services > Computers > My Computers> DCOM config, right click WirelessHelperClassExtension, select Properties
+       3c.Under Security, Under Launch and Activation select customize and edit. Local Service should be listed and should have permissions for local launch and activation
+
+4. Stop and start the dps service (net stop dps & net start dps)
+
+Notes:
+------
+When writing your own helper class, please do the following:
+1)  Replace the CLSID {00102030-4050-6070-8090-A0B0C0D0E0F0} everywhere with the CLSID of your helper class
+2)  Use the IHV-specific DiagnosticsID instead of {00102000-0003-0004-0005-000000000006}

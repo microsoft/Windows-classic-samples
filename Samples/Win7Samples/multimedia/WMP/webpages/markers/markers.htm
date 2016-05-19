@@ -1,0 +1,56 @@
+  <!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<HTML>
+<HEAD>
+<TITLE>Markers example</TITLE>
+</HEAD>
+
+<BODY>
+<OBJECT ID="Player1" height="0" width="0"
+  CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">
+  <PARAM NAME="autoStart" VALUE="true">
+</OBJECT>
+
+<H1>Markers in Media</H1>
+
+<P>This digital media file has <b><SPAN id="myspan">an unknown quantity of</SPAN></b>
+markers in it.
+<BR>
+<i>(Note that the number of markers cannot be determined until a marker is referenced)</i></p>
+
+<p>Press Play and then choose the beginning, middle, or end of the song.</P>
+
+<INPUT TYPE="BUTTON" NAME="BtnPlay" VALUE="Play" OnClick="StartMeUp()">
+<INPUT TYPE="BUTTON" NAME="BtnStop" VALUE="Stop" OnClick="ShutMeDown()"><BR><BR>
+Marker Name: <INPUT TYPE="TEXT" NAME="MyText1" VALUE=""><BR>
+Marker Time (in seconds): <INPUT TYPE="TEXT" NAME="MyText2" VALUE="">
+<BR><BR>
+<INPUT TYPE="BUTTON" NAME="FirstMarker" VALUE="Beginning (0 seconds)" OnClick="GoMarker(1)">
+<INPUT TYPE="BUTTON" NAME="SecondMarker" VALUE="Middle (19 seconds)" OnClick="GoMarker(2)">
+<INPUT TYPE="BUTTON" NAME="ThirdMarker" VALUE="End (43 seconds)" OnClick="GoMarker(3)">
+
+<SCRIPT>
+<!--
+
+function StartMeUp ()
+{
+    Player1.currentPlaylist = Player1.mediaCollection.getByName('jeanne');
+}
+
+function ShutMeDown ()
+{
+    Player1.controls.stop();
+}
+
+function GoMarker (mymark)
+{
+    Player1.controls.currentMarker = mymark;
+    MyText1.value = Player1.currentMedia.getMarkerName(mymark);
+    MyText2.value = Player1.currentMedia.getMarkerTime(mymark);
+    myspan.innerHTML = Player1.currentMedia.markerCount;
+}
+
+-->
+</SCRIPT>
+
+</BODY>
+</HTML>

@@ -1,0 +1,39 @@
+/*
+    Copyright Microsoft Corp. 1992 - 2001
+
+    File Replication Sample
+
+    FILE: FileRepClient.idl
+
+    PURPOSE:  Defines the interface for the client system service.
+
+*/
+
+[
+    uuid(fe7f2eda-5da1-4041-928c-d2534d3fa129),
+    pointer_default(ref),
+    version(1.0)
+]
+
+interface FileRepClient {
+  
+// Declare the string data type. This should work for UNICODE.
+#ifdef _UNICODE
+    typedef wchar_t * STR;
+#else
+    typedef unsigned char * STR;
+#endif
+
+    /*
+        A replication request is made by making this RPC.  With ServerName
+	specifying the source machine for replication, RemoteFileName
+	specifying the source file for replication, and LocalFileName
+	the name for the file on the local machine.  A thread is forked
+	to handle the actual file replication and an error encountered by
+	the thread will not produce the error return status.
+    */
+    void RequestFile([in] handle_t hFileRepClient,
+		     [in, ref, string] STR ServerName,
+		     [in, ref, string] STR RemoteFileName,
+		     [in, ref, string] STR LocalFileName);
+}

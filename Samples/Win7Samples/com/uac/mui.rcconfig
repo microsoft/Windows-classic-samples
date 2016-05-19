@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+  <resources>
+    <win32Resources
+      fileType="System">
+      <neutralResources>
+        <resourceType
+          typeNameId="#16"
+			/>
+      </neutralResources>
+
+      <localizedResources>
+        <resourceType
+          typeNameId="#4"
+			/>
+        <resourceType
+          typeNameId="#5"
+			/>
+        <resourceType
+          typeNameId="#6"
+			/>
+        <resourceType
+          typeNameId="#9"
+			/>
+        <resourceType
+          typeNameId="#11"
+			/>
+        <resourceType
+          typeNameId="#16"
+			/>
+        <resourceType
+          typeNameId="HTML"
+			/>
+        <resourceType
+          typeNameId="MOFDATA"
+			/>
+        <resourceType
+          typeNameId="#23"
+			/>
+        <resourceType
+          typeNameId="#240"
+			/>
+        <resourceType
+          typeNameId="#1024"
+			/>
+        <resourceType
+          typeNameId="#2110"
+			/>
+      </localizedResources>
+    </win32Resources>
+  </resources>
+</localization>

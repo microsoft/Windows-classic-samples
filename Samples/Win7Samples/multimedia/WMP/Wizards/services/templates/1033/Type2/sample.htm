@@ -1,0 +1,23 @@
+<HTML>
+    <HEAD>
+        <SCRIPT>
+
+        var strPath = "file://c:\\sample.wma";
+        
+        function OnPlay()
+        {
+            player.mediaCollection.add(strPath);
+        }
+        
+        </SCRIPT>
+    </HEAD>
+    <BODY>
+        <OBJECT ID="player" CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6" WIDTH=0 HEIGHT=0>
+        <param name="uiMode" value="none">
+        </OBJECT>
+        
+        <H1>Windows Media Test Subscription Service</H1>
+        <BUTTON onclick='OnPlay()'>Click here to add song to library</BUTTON><BR>
+        Then goto the media library pane to play the song
+    </BODY>
+</HTML>

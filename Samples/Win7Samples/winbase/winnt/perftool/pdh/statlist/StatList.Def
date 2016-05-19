@@ -1,0 +1,4 @@
+; Module-Definition file for STATLIST -- used by LINK.EXE
+; ==========================================================================
+; This isn't really needed for an Application, but it's handy to use for
+; setting the 'NAME         STATLIST       ; application's module name

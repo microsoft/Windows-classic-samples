@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Redirect", "Redirect.vcproj", "{386E5A7B-B757-455E-B987-3625B7824B65}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{386E5A7B-B757-455E-B987-3625B7824B65}.Debug.ActiveCfg = Debug|Win32
+		{386E5A7B-B757-455E-B987-3625B7824B65}.Debug.Build.0 = Debug|Win32
+		{386E5A7B-B757-455E-B987-3625B7824B65}.Release.ActiveCfg = Release|Win32
+		{386E5A7B-B757-455E-B987-3625B7824B65}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CATLSmpl", "catlsmpl.vcproj", "{57389D96-0F8A-4F87-B896-9453C064705F}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+		ConfigName.2 = Unicode Debug
+		ConfigName.3 = Unicode Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Debug.ActiveCfg = Debug|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Debug.Build.0 = Debug|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Release.ActiveCfg = Release|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Release.Build.0 = Release|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Unicode Debug.ActiveCfg = Unicode Debug|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Unicode Debug.Build.0 = Unicode Debug|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Unicode Release.ActiveCfg = Unicode Release|Win32
+		{57389D96-0F8A-4F87-B896-9453C064705F}.Unicode Release.Build.0 = Unicode Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

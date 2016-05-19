@@ -1,0 +1,14 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\shellex\DragDropHandlers\NonDefaultDropMenuVerb]
+@="{c18f21bf-bfc0-44c2-85b0-104a60cecea6}"
+
+[HKEY_CLASSES_ROOT\CLSID\{c18f21bf-bfc0-44c2-85b0-104a60cecea6}]
+@="Sample Drag&Drop Extension"
+
+[HKEY_CLASSES_ROOT\CLSID\{c18f21bf-bfc0-44c2-85b0-104a60cecea6}\InProcServer32]
+@="NonDefaultDropMenuVerb.dll"
+"ThreadingModel"="Apartment"
+
+
+

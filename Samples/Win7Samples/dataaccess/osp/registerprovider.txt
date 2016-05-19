@@ -1,0 +1,79 @@
+This document describes how the RegisterProvider.reg file should be filled in.  It is used to register an OLE DB provider created using the Provider Writer Toolkit.  If you are coding in VC, you could add these entries by using DLLRegisterServer as well.  This does not register the OSP Data Object, but it will use it, so it must be registed as well.
+
+Values you will need ============================================>
+ProgID for OLE DB Provider:  This is a value you come up with to identify your OLE DB provider in the registry.
+Name of OLE DB Provider:  The name that your provider will be listed by.  It is also created by you.
+GUID for OLE DB Provider:  This is a unique guid which identifies the OLE DB provider you have created.  Use a guid generator to create this guid.
+ProgId for OSP Data Object:  This value you must get from the OSP Data Object you have developed see the section in each of the development tools as to how this is determined.  (In VB it will be the project name & "." & class or control name.
+OLEDB_SERVICES:  A DWORD indicating whether the Simple Provider wants services and aggregation provided by the OLE DB Service Components.
+
+Note that the name of the provider is localizable.  This is because the ProgID is what is used to reference the object, not the name.  The ProgID is not localized.
+
+Template ========================================================>
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\<INSERT:  ProgID for OLE DB Provider>]
+@="<INSERT:  Name of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\<INSERT:  ProgID for OLE DB Provider>\CLSID]
+@="<INSERT:  GUID for OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>]
+@="<INSERT:  ProgID of OLE DB Provider>"
+"OLEDB_SERVICES"=dword:00000000
+; "OLEDB_SERVICES"=dword:FFFFFFFF <-- Enables Service Components services and aggregation
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\InprocServer32]
+@="<INSERT:  Path to OLE DB Directory example --> c:\\Program Files\\Common Files\\System\\OLE DB\\>MSDAOSP.DLL"
+"ThreadingModel"="Both"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\ProgID]
+@="<INSERT:  ProgId of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\VersionIndependentProgID]
+@="<INSERT:  ProgId of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\OLE DB Provider]
+@="<INSERT:  Name of OLE DB Provider>"
+
+[HKEY_CLASSES_ROOT\CLSID\<INSERT:  GUID for OLE DB Provider>\OSP Data Object]
+@="<INSERT:  ProgID for OSP Data Object>"
+
+Example Notes ==========================================>
+ProgID for OLE DB Provider = TestPWProv
+Name of OLE DB Provider = Microsoft Test OLE DB Provider for OSP
+GUID for OLE DB Provider = {6B94E051-E170-11d0-94EA-00C04FB66A50}
+ProgId for OSP Data Object= MyOSPProject.OSPClass
+
+Example ================================================>
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\TestPWProv]
+@="Microsoft Test OLE DB Provider for OSP"
+
+[HKEY_CLASSES_ROOT\TestPWProv\CLSID]
+@="{6B94E051-E170-11d0-94EA-00C04FB66A50}"
+"OLEDB_SERVICES"=dword:00000000
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}]
+@="TestPWProv"
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}\InprocServer32]
+@="c:\\Program Files\\Common Files\\System\\OLE DB\\MSDAOSP.DLL"
+"ThreadingModel"="Both"
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}\ProgID]
+@="TestPWProv"
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}\VersionIndependentProgID]
+@="TestPWProv"
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}\OLE DB Provider]
+@="Microsoft Test OLE DB Provider for OSP"
+
+[HKEY_CLASSES_ROOT\CLSID\{6B94E051-E170-11d0-94EA-00C04FB66A50}\OSP Data Object]
+@="MyOSPProject.OSPClass"
+
+
+
+

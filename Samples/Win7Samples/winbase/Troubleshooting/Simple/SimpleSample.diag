@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dcmPS:AdvDiagnosticPackage SchemaVersion="1.0" Localized="false" xmlns:dcmPS="http://www.microsoft.com/schemas/dcm/package/2007" xmlns:dcmRS="http://www.microsoft.com/schemas/dcm/resource/2007">
+    <DiagnosticIdentification>
+        <ID>581b2823-4a69-4e76-bbde-0171ebc74d22</ID>
+        <Version>1.0</Version>
+    </DiagnosticIdentification>
+    <DisplayInformation>
+        <Parameters />
+        <Name>
+            <dcmRS:LocalizeResourceElement comment="Comment" index="1">Pop-up Blocker</dcmRS:LocalizeResourceElement>
+        </Name>
+        <Description>
+            <dcmRS:LocalizeResourceElement comment="This is a comment" index="2">Detects if the Pop-up Blocker feature of Internet Explorer is turned off. If the feature is disabled, the troubleshooting pack enables it.</dcmRS:LocalizeResourceElement>
+        </Description>
+    </DisplayInformation>
+    <PrivacyLink>http://privacy.contoso.com</PrivacyLink>
+    <PowerShellVersion>2.0</PowerShellVersion>
+    <SupportedOSVersion clientSupported="true" serverSupported="true">6.1</SupportedOSVersion>
+    <Rootcauses>
+        <Rootcause>
+            <ID>DetectPopupBlocker</ID>
+            <DisplayInformation>
+                <Parameters />
+                <Name>
+                    <dcmRS:LocalizeResourceElement comment="This is a comment" index="3">Pop-up Blocker is turned off</dcmRS:LocalizeResourceElement>
+                </Name>
+                <Description>
+                    <dcmRS:LocalizeResourceElement comment="This is a comment" index="4">A pop-up is a small web browser window that appears on top of the website you're viewing. Pop-up windows often open as soon as you visit a website and are usually created by advertisers. Pop-up Blocker lets you limit or block most pop-ups.</dcmRS:LocalizeResourceElement>
+                </Description>
+            </DisplayInformation>
+            <Troubleshooter>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_DetectPopupBlocker.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Troubleshooter>
+            <Resolvers>
+                <Resolver>
+                    <ID>Resolver1</ID>
+                    <DisplayInformation>
+                        <Parameters />
+                        <Name>
+                            <dcmRS:LocalizeResourceElement comment="This is a comment" index="5">Turn on Pop-up Blocker</dcmRS:LocalizeResourceElement>
+                        </Name>
+                        <Description>
+                            <dcmRS:LocalizeResourceElement comment="This is a comment" index="6">Enabling Pop-up Blocker will help making browsing the web safer by preventing malicious or unsafe pop-ups from automatically appearing.</dcmRS:LocalizeResourceElement>
+                        </Description>
+                    </DisplayInformation>
+                    <RequiresConsent>false</RequiresConsent>
+                    <Script>
+                        <Parameters />
+                        <ProcessArchitecture>Any</ProcessArchitecture>
+                        <RequiresElevation>false</RequiresElevation>
+                        <RequiresInteractivity>false</RequiresInteractivity>
+                        <FileName>RS_DetectPopupBlocker.ps1</FileName>
+                        <ExtensionPoint />
+                    </Script>
+                    <ExtensionPoint />
+                </Resolver>
+            </Resolvers>
+            <Verifier>
+                <Script>
+                    <Parameters />
+                    <ProcessArchitecture>Any</ProcessArchitecture>
+                    <RequiresElevation>false</RequiresElevation>
+                    <RequiresInteractivity>false</RequiresInteractivity>
+                    <FileName>TS_DetectPopupBlocker.ps1</FileName>
+                    <ExtensionPoint />
+                </Script>
+                <ExtensionPoint />
+            </Verifier>
+            <ContextParameters />
+            <ExtensionPoint />
+        </Rootcause>
+    </Rootcauses>
+    <Interactions>
+        <SingleResponseInteractions />
+        <MultipleResponseInteractions />
+        <TextInteractions />
+        <PauseInteractions />
+        <LaunchUIInteractions />
+    </Interactions>
+    <ExtensionPoint></ExtensionPoint>
+</dcmPS:AdvDiagnosticPackage>

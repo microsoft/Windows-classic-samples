@@ -1,0 +1,42 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+//
+// UPNPSampleDimmerDevice.rc
+// 
+// Include our VERSIONINFO structure.
+//
+#include "resource.h"
+
+#include <ntverp.h>
+#include <winver.h>
+
+
+#define VER_FILETYPE                    VFT_APP
+#define VER_FILESUBTYPE                 VFT2_UNKNOWN
+#define VER_FILEDESCRIPTION_STR         "UPnP SDK Device Host Dimmer Device"
+#define VER_INTERNALNAME_STR            "UPNPSampleDimmerDevice.dll"
+
+#include <common.ver>
+
+//+---------------------------------------------------------------------------
+// Strings resources
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+   "1 TYPELIB ""dimmerdevice.tlb""\r\n"
+   "\0"
+END
+
+
+//+---------------------------------------------------------------------------
+// Reigstry resources
+//
+
+1 TYPELIB "dimmerdevice.tlb"
+
+IDR_UPNPDIMMERDEVICE       REGISTRY DISCARDABLE    "DimmerDeviceDCO.rgs"

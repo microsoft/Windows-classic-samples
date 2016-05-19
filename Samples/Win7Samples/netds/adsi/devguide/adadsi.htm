@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<Head>
+<META NAME="DESCRIPTION" CONTENT="MSDN Library - Backgrounders.  Excerpt:  Easy Access to Active Directory Using ADSI Andy Harjanto and Ajay Ramachandran Microsoft Corporation August 1999 Summary: Describes how to access Active Directory™ using Active Directory Service Inter">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+<meta name="MS.LOCALE" content="EN-US">
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1252">
+<TITLE>Easy Access to Active Directory Using ADSI</TITLE>
+<meta name="description" content="Describes how to access Active Directory™ using Active Directory Service Interfaces (ADSI), included with the Microsoft® Windows® 2000 operating system."><meta name="keywords" content="Active Directory; Active Directory Service Interfaces; ADSI; Windows 2000; SQL Server; ArcadiaBay; organizational units; RootDSE; global catalogs; C++ programming"><style>@import url(/library/msdn_ie4.css);</style>
+<link disabled rel="stylesheet" href="msdn_ie3.css">
+</HEAD>
+<BODY>
+	
+<!--TOOLBAR_START-->
+<!--TOOLBAR_EXEMPT-->
+<!--TOOLBAR_END-->
+
+<!--SYNC_START-->
+<script language="JavaScript" src='/library/synch.js'></script>
+<!--SYNC_END-->
+<P>
+
+ 
+
+<H1><A NAME="adadsi"></A>Easy Access to Active Directory Using ADSI</H1>
+
+<P>Andy Harjanto and Ajay Ramachandran<BR>
+Microsoft Corporation</P>
+
+<P>August 1999</P>
+
+<P><B>Summary: </B>Describes how to access Active Directory™ using Active Directory Service Interfaces (ADSI), included with the Microsoft® Windows® 2000 operating system. (20 printed pages).</P>
+
+<H4><A NAME="top">Contents</H4>
+
+<P></a><A HREF="#adadsi_topic1">Introduction</A><BR>
+<A HREF="#adadsi_topic2">Installing Active Directory</A><BR>
+<A HREF="#adadsi_topic3">Start Connecting to Active Directory</A><BR>
+<A HREF="#adadsi_topic4"><font COLOR="#0000ff">Fabrikam</font> Corporation</A><BR>
+<A HREF="#adadsi_topic5">Advanced Topics</A><BR>
+<A HREF="#adadsi_topic6">Summary</A><BR>
+<A HREF="#adadsi_topic7">For More Information</A></P>
+
+ 
+
+<H2><A NAME="adadsi_topic1"></A>Introduction</H2>
+
+<P>By now, you've probably heard about one of the coolest features in the Microsoft Windows 2000 operating system&mdash;Active Directory. If not, you might be asking why you should care, why it's so important, why it is such cool technology. Plenty of reasons&mdash;when you log on to a Windows 2000 domain, Active Directory is put into action; when you want to search for the closest color printer in your building, Active Directory is at your service. How about
+an address book lookup or a search for users who work in Building 40? No sweat. Worried about deploying your applications? Active Directory will
+locate the applications and components for you transparently. Can you use a smart card to log on to a Windows 2000 domain? You bet!</P>
+
+<P>Still need more examples? How about this: Do you want to impress your boss with a cool looking report? With Active Directory, you should be able to do it in less than 15 minutes. How about joining data from Microsoft SQL Server™ and Active Directory? By now, you know the answer. Can it sing and dance? No, but hey, you can make this a feature request.</P>
+
+<P>On top of these reasons to take notice, many other Microsoft technologies, such as Microsoft Message Queue Server (MSMQ), COM (Class Store), IP Sec, Group Policy Objects (GPO), and Exchange are integrated with Active Directory. Equally important are your future applications.</P>
+
+<P>Okay, so what is Active Directory? It would take a white paper to explain that, but we'll try to tell you in a single paragraph. Active Directory is a special-purpose database—it
+is not a registry replacement, nor is it a general-purpose database. The directory is designed to handle a large number of read/search operations and a significantly smaller number of
+changes and updates. The data in the Active Directory is hierarchical, replicated, and extensible. Because it's replicated, you don't want to store dynamic data, such as Internet stock prices, CPU performance, and the like. If your data were machine-specific, you'd be better off storing them in the registry. Typical examples of data stored in the directory include printer queue data, user contact information, and network/computer configuration information. The Active Directory database consists of objects and attributes. The objects and attribute definitions are stored in the Active Directory schema. In summary, if you have relatively static, global, sharable data, a directory is a good place to store it.&nbsp;</P>
+
+<P>You're probably scratching your head, wondering, "What objects are currently stored in Active Directory?" In Windows 2000, Active Directory has three partitions (also known as
+naming contexts): domain, schema, and configuration. The domain partition is shown in Figure 1. It contains users, groups, contacts, computers, organizational units, and many other object types. Because Active Directory is extensible, you can also add your own classes and/or attributes. The second partition, schema, contains classes and attribute definitions. The last partition is the configuration partition, which includes configuration data for services, partitions, and sites.</P>
+
+<P><img border="0" src="adadsi01.gif" width="442" height="394"></P>
+
+<P class=label><B>Figure 1. The domain partition of the Active Directory</B></P>
+
+<P>That's a quick (and rather dirty) five-minute introduction to Active Directory. You may want to consult other documentation that talks about the Active Directory in detail, some of which is available from MSDN Online. For now, though, are you ready to have some fun coding?</P>
+
+ 
+
+<P><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></P>
+
+ 
+
+<H2><A NAME="adadsi_topic2"></A>Installing Active Directory</H2>
+
+<P>First, you will need to install the Windows 2000 Server or Enterprise Edition. Once the installation is done, you will need to install Active Directory by following the
+<b> Configure Your Server Wizard </b> or running dcpromo.exe directly.</P>
+
+<P>For the client, you can either use the same computer, or you can install Windows 2000 Professional on a separate computer. ADSI is a part of the Windows 2000 operating system. Optionally, you can use Microsoft Windows NT® 4.0 or Windows 9.<I>x</I> to communicate with Active Directory. You must, however, install ADSI 2.5 on those computers. Note that some of the features in Windows 2000 are not available in ADSI 2.5.</P>
+
+ 
+
+<P><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></P>
+
+ 
+
+<H2><A NAME="adadsi_topic3"></A>Start Connecting to Active Directory</H2>
+
+<P>There are a few different ways to access Active Directory. Microsoft recommends using ADSI as the strategic API to access Active Directory. Underneath, ADSI uses the LDAP protocol to communicate to Active Directory. Now, let's get started with some easy and fun access to Active Directory. For brevity, all samples are written in Microsoft Visual Basic®. A guideline for converting the samples to Microsoft Visual C++® for C++ fans is provided at the end of the article.</P>
+
+<PRE><CODE>Set ns = GetObject(&quot;LDAP:&quot;)
+</CODE></PRE>
+
+<P>That's it. You will be connecting to one of the Active Directory domain controllers via ADSI. ADSI, with the help of the locator service, will attempt to find the best domain controller (DC) for you. (Note that the locator service algorithm is beyond the scope of this article. Essentially, the locator service will use site information to determine the best domain controller for a given client.) You don't need to worry about trivialities like the server name. This is what we refer to as server-less binding.</P>
+
+<P>But wait, you say, I like server names. Well, ADSI also allows you to specify the server name.</P>
+
+<PRE><CODE>Set obj = GetObject(&quot;LDAP://mysrv01&quot;)
+</CODE></PRE>
+
+<P>In another scenario, you may only know the domain name (but not the specific server name). Again, ADSI allows you to specify the domain name. In Windows 2000, the domain name is represented as a DNS name.</P>
+
+<PRE><CODE>Set obj = GetObject(&quot;LDAP://fabrikam.com&quot;)
+</CODE></PRE>
+
+<P>ADSI will connect you to one of the domain controllers in the fabrikam.com domain.</P>
+
+<P>Look too easy for you? Not convinced? Follow these steps to see what's in Active Directory:
+
+<OL>
+	<LI>Run adsvw.exe, located in the SDK Samples directory. ADSI Viewer is a testing tool for ADSI.<BR><BR></LI>
+
+	<LI>Select <B>ObjectViewer</B>. Type "LDAP:" or "LDAP://yourServer" or "LDAP://yourDomain.com".<BR><BR></LI>
+
+	<LI>Make sure you have cleared the check box for <B>Use OpenObject</B>.</LI>
+</OL>
+
+<P>You'll see Active Directory objects in your domain.</P>
+
+<P><img src="adadsi02.gif" ALT="" BORDER=0 width="576" height="357"></P>
+
+<P class=label><B>Figure 2. ADSI Viewer </B></P>
+
+ 
+
+<P><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></P>
+
+ 
+
+<H2><A NAME="adadsi_topic4"></A>Fabrikam Corporation</H2>
+
+<P>Fabrikam is a fictitious company. We will use this company to illustrate typical scenarios for an organization.</P>
+
+<P>Fabrikam just upgraded their domain from Windows NT 4.0 to Windows 2000. Their administrator, Joe, is excited about administering Active Directory. Of course, he can use Active Directory Tools to manage the Active Directory, but this article is not about using the administrative tools, it's about programmatic access. During the installation, Joe was asked the domain DNS name and he typed
+&quot;fabrikam.com.&quot; The existing users, groups, and computers will be migrated to Active Directory into the new domain:
+fabrikam.com.</P>
+
+<P>Before we continue with our scenario, let's switch our discussion. First we need to know how objects are named in Active Directory. To start with, let us look at how files are named, since most of you are familiar with the file system. Each file has a name and a path. The file name must be unique among siblings. Consider the following example: "c:\public\specs\adsi25.doc." In this case, the file name is "adsi25.doc" and the file path is "c:\public\specs\adsi25.doc."</P>
+
+<P>Objects in Active Directory are named in a somewhat similar manner. Every object has an <I>object name </I>or <I>relative distinguished name </I>(RDN), and an <I>object path </I>or <I>distinguished name </I>(DN). The RDN or object name has two parts: attribute IDand the value itself. For example,
+DC=Fabrikam. DC is an RDN attribute ID and stands for domain component, and Fabrikam
+is the value of the attribute. In our case, the Fabrikam domain object's distinguished name will be
+DC=Fabrikam, DC=Com. A DN is composed of multiple RDNs.</P>
+
+<P>Now, you can bind to the domain object as follows:</P>
+
+<PRE><CODE>Set dom = GetObject(&quot;LDAP://DC=Fabrikam,DC=Com&quot;)
+</CODE></PRE>
+
+<P>Given that we have the domain object, we can now print some its attributes:</P>
+
+<PRE><CODE>Debug.Print dom.Get(&quot;Name&quot;)
+Debug.Print dom.Get(&quot;whenCreated&quot;)
+</CODE></PRE>
+
+<H3>Creating an Organizational Unit</H3>
+
+<P>Hold on to that domain object! Let's make the scenario more interesting. Fabrikam
+has two divisions: Sales and Production. The company is planning to hire two Windows 2000 administrators to manage each division. Joe, as the enterprise administrator, will create two new organizational units under
+Fabrikam domain. By creating an organizational unit, Joe can group multiple objects together and let someone else
+manage these objects. Here is the code that does the Sales Organizational Unit (OU) creation:</P>
+
+<PRE><CODE>Set salesOrg = dom.Create(&quot;organizationalUnit&quot;, &quot;OU=Sales&quot;)
+salesOrg.Put &quot;description&quot;, &quot;Sales Headquarter,SF&quot;
+salesOrg.Put &quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales&quot;
+salesOrg.SetInfo
+</CODE></PRE>
+
+<P>Let's help you<CODE> </CODE>digest that code. The <B>Create</B> method accepts the class name and the name of the new object. At this point, the object is not committed to Active Directory. You will, however, have an ADSI/COM object reference on the client. With this ADSI object, you'll be able to set or modify attributes using the <B>Put</B> method. The <B>Put</B> method accepts the attribute name and the value of the attribute. Still, nothing is committed to the directory; everything is cached at the client side. When you call the <B>SetInfo</B><I> </I>method, the changes (in this case, object creation and attribute modification) are committed to the directory. These changes are transacted, meaning you'll either see the new object with all attributes you set, or no object at all.</P>
+
+<P>We will leave the Production Division organizational unit creation as your homework exercise. Can you nest organizational units? You bet! Let's assume the Sales division is divided further into the East and West regions.</P>
+
+<PRE><CODE>Set east = salesOrg.Create(&quot;organizationalUnit&quot;, &quot;OU=East&quot;)
+…
+east.SetInfo
+</CODE></PRE>
+
+<P>We can do the same thing for the West region.</P>
+
+<P>If you want to bind directly to the East region in the Sales organization, you need to specify the distinguished name.</P>
+
+<PRE><CODE>Set east = GetObject(&quot;LDAP://OU=East, OU=Sales, DC=Fabrikam,DC=COM&quot;)
+Debug.Print east.Get &quot;description&quot;
+east.Put &quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales/east&quot;
+</CODE></PRE>
+
+<P>If you already have the parent object (Sales), you can bind to the child object (East) from the parent object.</P>
+
+<PRE><CODE>Set east = salesOU.GetObject(&quot;organizationalUnit&quot;, &quot;OU=East&quot;)
+</CODE></PRE>
+
+<P>"How do I know that I really created these new objects?" you ask. Well, you can use the Active Directory Users and Computers<I> </I>MMC snap-in and <I>presto!</I> The new organizational units should be there.</P>
+
+<H3>Moving Existing Users to the Organizational Unit</H3>
+
+<P>When Joe upgraded the Windows NT 4.0 domain to Active Directory, all the users and groups were migrated to the "Users" containers in the
+Fabrikam domain. Let's move some of the users to the appropriate organizational units. Note that you can also move an object between related Windows 2000 domains using ADSI.</P>
+
+<PRE><CODE>Set usr = salesOU.MoveHere(&quot;LDAP://CN=mikeg,CN=Users,DC=Fabrikam,DC=COM&quot;, vbNullString)
+</CODE></PRE>
+
+<P>Let's look at what <B>MoveHere</B> does. <B>MoveHere </B>takes the <B>ADsPath</B> (the provider moniker, that is, LDAP, and a distinguished name) of the object you want to move and the new object name (RDN). If you want to keep the same name, you can specify NULL. If you want to rename the object, you can specify the new name as the second parameter. In this example we are moving Michael Gray (mikeg) to the Sales organizational unit.</P>
+
+<P class=indent><B><B>Note&nbsp;&nbsp;&nbsp;</B></B>AdsPAths are beyond the scope of this article but are discussed in detail in the ADSI documentation.</P>
+
+<H3>Creating New Users in the Organizational Unit</H3>
+
+<P>A new user, Julie Adam, was just hired in the sales organization. She'll be Michael Gray's new boss. Joe, the administrator, was asked to create a new account for her.</P>
+
+<PRE><CODE>Set salesOU = GetObject(&quot;LDAP://OU=Sales,DC=Fabrikam,DC=COM&quot;)
+Set usr = salesOU.Create(&quot;user&quot;, &quot;CN=Julie Adam&quot;)
+usr.Put &quot;samAccountName&quot;, &quot;juliea&quot;
+usr.Put &quot;userPrincipalName&quot;, &quot;julie@fabrikam.com&quot; 
+usr.Put &quot;title&quot; &quot;Marketing Manager&quot;
+usr.SetInfo
+
+usr.SetPassword &quot;seahorse&quot;
+usr.AccountDisabled = False
+usr.SetInfo
+</CODE></PRE>
+
+<P>What's new here? Notice that you have to specify <B>samAccountName</B>. This is a mandatory attribute for the user class. Before an instance of an object can be created, all mandatory attributes must be set. The user <B>samAccountName</B> is used to log on from pre-Windows 2000 computers (that is, Windows NT 4.0 and Win 9.<I>x</I>). Windows 2000 computers continue to understand the <B>samAccountName</B>. So, what's the <B>userPrincipalName</B>? In a Windows 2000 environment (both client and DC are running Windows 2000), you can log on using the user principal name (UPN). In this example, Julie's UPN is set to
+julie@fabrikam.com. If Julie moves to a different domain in the same enterprise (Active Directory refers to this as Forest), she can continue to use her user principal name.</P>
+
+<P>Joe, as an administrator, will also be able to assign her password using the <B>SetPassword </B>method. The <B>SetPassword</B> method only works when the actual object has been created in the directory. We therefore need to call <B>SetInfo</B> before attempting to set the user's password. Finally, we enable the user's account by setting the <B>AccountDisabled</B> property to FALSE.</P>
+
+<P>Now, let's make Julie Michael's manager.</P>
+
+<PRE><CODE>Set usr = GetObject(&quot;LDAP://CN=mikeg, OU=Sales, DC=Fabrikam, DC=COM&quot;)
+usr.Put &quot;manager&quot;, &quot;CN=Julie Adam,OU=Sales, DC=Fabrikam,DC=COM&quot;
+usr.SetInfo
+</CODE></PRE>
+
+<P>You've probably seen a potential problem here. What happens if Julie changes her name, moves to a different organization, or leaves the company? Who maintains this manager-direct report link? We'll revisit this later when we do the reorganization exercise. One more note—because the Active Directory schema is extensible, you can model your objects to include similar manager-direct report style relationships.</P>
+
+<P>Before we go onto the next task, let's look at Julie's direct reports.</P>
+
+<PRE><CODE>Set usr = GetObject(&quot;LDAP://CN=Julie Adam, OU=Sales, DC=Fabrikam, DC=COM&quot;)
+reports = usr.GetEx (&quot;directReports&quot;)
+
+For each directReport in reports
+&nbsp;&nbsp;&nbsp;Debug.Print directReport
+Next
+</CODE></PRE>
+
+<P>You should see MichaelG as her direct report, even though you never modified the <B>directReports </B>attribute.
+Active Directory &quot;automagically&quot; does this for you.</P>
+
+<P>But, what's the <B>GetEx</B> method ? In the directory world, an attribute can be single or multivalued. Since we know that <B>directReports</B> is multivalued (you can get this information by looking at the schema), it's easier to use <B>GetEx</B>, which always returns an array of variants regardless of whether single or multiple values are returned.</P>
+
+<P>The Active Directory Users and Computers snap-in lets you see direct reports and manager relationships on the user's property page.</P>
+
+<H3>Creating a New Group</H3>
+
+<P>Joe needs to create a new group. He would like to secure some resources (file, Active Directory objects, or other objects) based on the membership of this group.</P>
+
+<PRE><CODE>Set ou = GetObject(&quot;LDAP://OU=Sales,DC=Fabrikam,DC=COM&quot;)
+Set grp = ou.Create(&quot;group&quot;, &quot;CN=Management&quot;)
+grp.Put &quot;samAccountName&quot;, &quot;mgmt&quot;
+grp.Put &quot;groupType&quot;, ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP Or ADS_GROUP_TYPE_SECURITY_ENABLED
+grp.SetInfo
+</CODE></PRE>
+
+<P>This group, "Management," will be created in the Sales organizational unit. The first thing we need is the ADSI object for the Sales organizational unit. The <B>samAccountName</B> is a mandatory attribute for backward compatibility. In this example, Windows NT 4.0 tools, like User Manager, will see "mgmt" instead of "Management." Finally, you should also specify the type of group. In a Windows 2000 domain, there are three types of groups: Global, Domain Local, and Universal. In addition, the group carries its security characteristic. A group can be either security-enabled or a non-secured group. Essentially, security-enabled groups are those that can be granted/denied access rights to resources (just like a user). Granting a group access to a file share, for example, implies that all members of the group can access the file share. Distribution lists cannot be used in a similar manner—you cannot, for example, grant a distribution list rights to access a file share. During the upgrade, Windows NT 4.0 groups will be migrated as the security enabled groups. Non-secured groups in Active Directory are similar to distribution lists in Exchange. Hence, creating groups or distribution lists are very similar operations in Windows 2000.In Windows 2000 native mode (native mode means all domain controllers in a domain are Windows 2000 servers), the groups can be nested to any level.</P>
+
+<H3>Adding Users to a Group</H3>
+
+<P>Let's add Julie to the Management group.</P>
+
+<PRE><CODE>Set grp = GetObject(&quot;LDAP://CN=Management, OU=Sales, DC=Fabrikam, DC=COM&quot;) 
+grp.Add (&quot;LDAP://CN=Julie Adam, OU=Sales, DC=Fabrikam, DC=COM&quot;)
+</CODE></PRE>
+
+<P>The <B>Add</B> method adds an object to a group. Julie has now been added to the Management group.</P>
+
+<H3>Enumerating Objects</H3>
+
+<P>Oftentimes, you'd like to enumerate children in a container or organizational unit. Enumerating the children of a container is the operation by which you view objects that exist directly under this container. In the file system this would correspond to files in the current directory. You may also want to traverse up one level to get the parent object of a given object.</P>
+
+<P>To enumerate the children of a container:</P>
+
+<PRE><CODE>Set ou = GetObject(&quot;LDAP://OU=Sales, DC=Fabrikam, DC=COM&quot;)
+For each child in ou
+&nbsp;&nbsp;&nbsp;Debug.Print child.Name
+Next
+</CODE></PRE>
+
+<P>You can filter the types of objects returned from the enumeration. For example, if you want to display only users and groups, you can use Ou.Filter = Array("user", "group") before the enumeration.</P>
+
+<P>If you have an object reference, you can get its parent using the <B>Parent </B>property. You can use this information to bind to the parent object.</P>
+
+<PRE><CODE>parentPath = obj.Parent
+Set parent = GetObject(parentPath)
+</CODE></PRE>
+
+<H3>Searching for Objects</H3>
+
+<P>Julie needs to find telephone numbers for all Program Managers who work in Department 101. Let's help Julie create a script that uses ADO and ADSI to achieve this.</P>
+
+<PRE><CODE>'Create connection and command object
+Set con = CreateObject(&quot;ADODB.Connection&quot;)
+Set com = CreateObject(&quot;ADODB.Command&quot;)
+' — Opening the connection
+con.Provider = &quot;ADsDSOObject&quot;&nbsp;&nbsp;'this is the ADSI-OLEDB provider name
+con.Open &quot;Active Directory Provider&quot;
+ ' Create a command object for this connection
+Set Com.ActiveConnection = con
+
+'Compose a search string
+Com.CommandText = &quot;select name,telephoneNumber from 'LDAP://DC=Fabrikam, DC=com' WHERE 
+objectCategory='Person' 
+AND objectClass = 'user'
+AND title='Program Manager'
+AND department=101&quot;
+
+' — Execute the query
+Set rs = Com.Execute
+'--------------------------------------
+' Navigate the record set
+'----------------------------------------
+While Not rs.EOF
+&nbsp;&nbsp;Debug.Print rs.Fields(&quot;Name&quot;) &amp; &quot; , &quot; &amp; rs.Fields(&quot;telephoneNumber&quot;)
+&nbsp;&nbsp;&nbsp;rs.MoveNext
+Wend
+</CODE></PRE>
+
+<P>Okay, okay, we know this is the first time you are seeing working code that is more than 10 lines long in this article. If you're familiar with Microsoft ActiveX® Data Objects (ADO), this should be a no-brainer. In order to do an ADSI search in Visual Basic or a scripting environment, you will need three components: <B>Connection</B>, <B>Command</B>, and <B>Recordset</B>. The <B>Connection</B> object allows you to specify the provider name, alternate credentials (if applicable), and other flags. The <B>Command</B> object allows you to specify search preferences and the query string. You need to associate the <B>Connection</B> object to a <B>Command</B> object before the execution of the query. Lastly, the <B>Recordset</B> object is used to iterate the result set.</P>
+
+<P>ADSI supports two types of query strings or dialects. The preceding example uses the SQL dialect. You can also use the LDAP dialect. The LDAP dialect query string is based on RFC 2254 (RFC = Request For Comments). The preceding example can be translated to:</P>
+
+<PRE><CODE>Com.CommandText = &quot;&lt;LDAP://DC=fabrikam, DC=COM&gt;;(&amp;(objectCategory=Person)(objectClass=user)(title=ProgramManager)(department=101);name,telephoneNumber;subTree&quot;
+</CODE></PRE>
+
+<P>What's that <I>subtree</I> word at the end of the string? In the directory world, you can specify the scope of search. The choices are: <I>base</I>, <I>oneLevel</I> and <I>subtree</I>. Base is basically to read the object itself; oneLevel refers to the immediate children, similar to the "dir" command; subtree is to search deep or down multiple levels (similar to dir /s).</P>
+
+<P>If you're using the SQL dialect, you can specify scope in the command's property. For example, Command.Properties("Search Scope") = ADS_SCOPE_ONELEVEL. If no scope is specified by default, it's a subtree search.</P>
+
+<P class=indent><B><B>Note&nbsp;&nbsp;&nbsp;</B></B>If you use C++, you can use the <B>IDirectorySearch</B> interface from ADSI.</P>
+
+<H3>Reorganization</H3>
+
+<P>The whole sales organization is moved to a new organization—"Sales and Support." Julie has been promoted to Vice President and is going to lead the new organization.</P>
+
+<PRE><CODE>Set dom = GetObject(&quot;LDAP://DC=Fabrikam, DC=COM&quot;)
+Set salesSupport = dom.Create(&quot;organizationalUnit&quot;, &quot;CN=Sales and Support&quot;)
+Set sales = salesSupport.MoveHere(&quot;LDAP://OU=Sales, DC=Fabrikam, DC=COM&quot;, vbNullString)
+</CODE></PRE>
+
+<P>Three lines of code for a reorganization isn't too bad, is it? All objects in the sales organizational unit, including the sub-organizational units, are moved to the new organizational unit.</P>
+
+<P>Now, let's move Julie into the Sales and Support organizational unit.</P>
+
+<PRE><CODE>Set usr = salesSupport.MoveHere(&quot;LDAP://CN=Julie Adam, OU=Sales, OU=Sales and Support, DC=Fabrikam,DC=COM&quot;)
+usr.Put &quot;title&quot;, &quot;Vice President&quot;
+usr.SetInfo
+</CODE></PRE>
+
+<P>You may wonder whatever happened to the manager-direct report link between Julie and Michael. "Who gets to fix this link after the reorganization?" you ask. As it turns out, Active Directory automagically fixes the links for you We told you Active Directory and ADSI are cool, didn't we?</P>
+
+<H3>Creating a Report</H3>
+
+<P>Creating an Active Directory report using ADSI is a snap. Follow these steps:
+
+<OL>
+	<LI>Open Visual Basic version 6.0.<BR><BR></LI>
+
+	<LI>When asked for the project type, select <B>Data Project</B>.<BR><BR></LI>
+
+	<LI>On <B>Data Project</B>, double-click <B>Data Environment1</B>.<BR><BR></LI>
+
+	<LI>On the Data Environment window, right-click on the <B>Connection Object (Connection1)</B> and select <B>Properties</B>.<BR><BR></LI>
+
+	<LI>Select <B>OLE DB Provider for Microsoft Directory Services</B>, and click the <B>Next</B> button.<BR><BR></LI>
+
+	<LI>Select <B>Use NT Integrated Environment</B>, and we're done creating a connection object.<BR><BR></LI>
+
+	<LI>On the Data Environment window again, right-click to select <B>Add Command</B>. Right click on <B>Command1</B> object and select property. A dialog box will appear (see Figure 3).<BR><BR></LI>
+
+	<LI>Check <B>SQL Statement</B>, and type the following (see Figure 3):
+<PRE><CODE>SELECT Name,telephoneNumber from 'LDAP://DC=Fabrikam,DC=com'
+WHERE objectClass='user' AND objectCategory='Person'&nbsp;
+</CODE></PRE>
+</LI>
+
+	<LI>We're done creating a <B>Command</B> object. It's time to add the <B>Command</B> object to the report.
+<P><img src="adadsi03.gif" ALT="" BORDER=0 width="399" height="339"></P>
+<P class=label><B>Figure 3. Command1 Properties dialog box</B>
+</LI>
+
+	<LI>Double-click <B>Data Report1</B> from the Project window.<BR><BR></LI>
+
+	<LI>Drag and drop the <B>Command1</B> object on <B>Data Environment</B> to the <B>Detail </B>section in the <B>Data Report</B>.<BR><BR></LI>
+
+	<LI>On <B>DataReport1</B> <B>Properties</B>, make DataSource=DataEnvironment1 and DataMember=Command1.<BR><BR></LI>
+
+	<LI>Right-click <B>Data Project</B>, and select <B>DataProject Properties</B>.<BR><BR></LI>
+
+	<LI>On the <B>DataProject Properties Dialog - Startup Object</B>, select <B>Data Report1</B>.<BR><BR></LI>
+
+	<LI>Run. You should see a similar report with data obtained from Active Directory.
+<P><img src="adadsi04.gif" ALT="" BORDER=0 width="274" height="358"></P>
+<P class=label><B>Figure 4. DataReport1 dialog box</B>
+</LI>
+</OL>
+
+<H3>Joining Heterogeneous Data</H3>
+
+<P>Typical organizations store the data in multiple heterogeneous databases. Human resources data may be stored in SQL Server, while account management information is stored in the directory. Other information may be stored in proprietary formats. It's increasingly difficult to merge data from two or more sources into one usable report because of different APIs, protocols, and data formats. </P>
+
+<P>With, SQL Server 7.0 Distributed Query, ADSI, OLEDB, and Active Directory, it is possible to join information from Active Directory to data that resides in SQL Server. You can even create a view of the joined data.</P>
+
+<P>Here are the step-by-step instructions:</P>
+
+<P class=label><B>In SQL Server</B>
+
+<OL>
+	<LI>Run the <B>Query Analyzer</B> (Start | Programs | Microsoft SQL Server 7.0)<BR><BR></LI>
+
+	<LI>Log on to the SQL Server computer.<BR><BR></LI>
+
+	<LI>Execute the following line (by highlighting it and pressing CTRL+E):
+<PRE><CODE>sp_addlinkedserver 'ADSI', 'Active Directory Service Interfaces', 'ADSDSOObject', 'adsdatasource'
+go
+</CODE></PRE>
+
+<P class=tl>This tells SQL Server to associate the word "ADSI" with the ADSI OLE DB provider, "ADSDSOObject."</P>
+<P class=tl>Now we are ready to access Active Directory from SQL Server.</P></LI>
+
+	<LI>Type and execute:
+<PRE><CODE>SELECT * FROM OpenQuery( ADSI, 'SELECT name, adsPath FROM &quot;LDAP://DC=Fabrikam,DC=com&quot; WHERE objectCategory = &quot;Person&quot; AND objectClass= &quot;user&quot;&quot;)
+</CODE></PRE>
+</LI>
+
+	<LI>You may also use the ADSI LDAP dialect. For example:
+<PRE><CODE>SELECT * FROM OpenQuery(ADSI,'&lt;LDAP://DC=Fabrikam;DC=COM&gt;;(&amp;(objectCategory=Person)(objectClass=user));name, adspath;subtree')
+</CODE></PRE>
+</LI>
+</OL>
+
+<H4>Creating and Executing a View</H4>
+
+<P>You can create a view for data obtained from Active Directory. Note that only the view definition is stored in SQL Server, not the actual result set. Hence, you may get a different result when you execute the view later. To create a view, type and execute the following:</P>
+
+<PRE><CODE>CREATE VIEW viewADUsers AS
+SELECT * FROM OpenQuery( ADSI,'&lt;LDAP://DC=Fabrikam,DC=com&gt;;(&amp;(objectCategory=Person)(objectClass=user));name, adspath,title;subtree')
+</CODE></PRE>
+
+<P>To execute a view, type the following:</P>
+
+<PRE><CODE>SELECT * from viewADUsers 
+</CODE></PRE>
+
+<H4>Heterogeneous Join between SQL Server and Active Directory</H4>
+
+<P>All employees in Fabrikam are reviewed every six months. The review ratings will be stored in the Human Resource database in SQL Server. First, we need to create an employee performance review table:</P>
+
+<PRE><CODE>CREATE TABLE EMP_REVIEW
+(
+userName varChar(40),
+reviewDate datetime,
+rating decimal 
+)
+</CODE></PRE>
+
+<P>Insert a few records:</P>
+
+<PRE><CODE>INSERT EMP_REVIEW VALUES('Julie Adam', '2/15/1999', 4 )
+INSERT EMP_REVIEW VALUES('Julie Adam', '7/15/1999', 5 )
+INSERT EMP_REVIEW VALUES('Michael Gray', '2/15/1999', 3 )
+INSERT EMP_REVIEW VALUES('Michael Gray', '7/15/1999', 4 )
+</CODE></PRE>
+
+<P>Now, let's join the two—the Active Directory user objects to the SQL Server table:</P>
+
+<PRE><CODE>SELECT ADsPath, userName, title, ReviewDate, Rating 
+FROM EMP_REVIEW, viewADUsers
+WHERE userName = Name
+</CODE></PRE>
+
+<P><I>Voila!</I> You should get the result from both SQL Server and Active Directory. AdsPath and Title columns are from Active Directory, whereas username, ReviewDate, and Rating are from the SQL table. You can even create another view for this join.</P>
+
+<PRE><CODE>CREATE VIEW reviewReport
+SELECT ADsPath, userName, title ReviewDate, Rating 
+FROM EMP_REVIEW, viewADUsers
+WHERE userName = Name 
+</CODE></PRE>
+
+ 
+
+<p><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></p>
+
+ 
+
+<H2><A NAME="adadsi_topic5"></A>Advanced Topics</H2>
+
+<P>There are still plenty of Active Directory and ADSI features we have not discussed. Next, we will selectively and briefly touch on a few advanced topics.</P>
+
+<H3>RootDSE</H3>
+
+<P>Each directory server has a unique entry called <B>RootDSE</B>. It gives you information about the server—information such as what the server capabilities are, which LDAP version the server supports, what naming contexts exist under this server, and other useful data.</P>
+
+<P>Let's suppose you want to create a script or application that can run on any Windows 2000 domain environment. We can specify either the distinguished name, server name, or domain name when connecting to Active Directory. What if you don't have this information? The <B>RootDSE</B> object comes to the rescue. The following code example changes the domain description in any domain:</P>
+
+<PRE><CODE>Set rootDSE = GetObject(&quot;LDAP://RootDSE&quot;)
+Set dom = GetObject( &quot;LDAP://&quot; &amp; rootDSE.Get(&quot;defaultNamingContext&quot;))
+dom.Put &quot;description&quot;, &quot;My domain&quot;
+dom.SetInfo
+</CODE></PRE>
+
+<P>By getting the <B>defaultNamingContext</B> attribute from <B>RootDSE</B>, you will be able to bind to the current domain (for Arcadia Bay the <B>defaultNamingContext</B> would have been
+dc=Fabrikam, DC=COM).</P>
+
+<H3>Delegating Organizational Units</H3>
+
+<P>Fabrikam just hired two administrators, Mike and Paul, to manage the East and West organizational units respectively. Joe will delegate his administrative responsibilities to them so that they can create and delete users in their respective organizational units.</P>
+
+<PRE><CODE>Set ou = GetObject(&quot;LDAP://OU=East, OU=Sales, DC=Fabrikam,DC=COM&quot;)
+Set sec = ou.Get(&quot;ntSecurityDescriptor&quot;)
+Set acl = sec.DiscretionaryAcl
+
+'---Or you can use Set ace = new ADsAccessControlEntry
+Set ace = CreateObject(&quot;AccessControlEntry&quot;) 
+
+'Allow to--
+ace.AceType = ADS_ACETYPE_ACCESS_ALLOWED_OBJECT 
+'--- Create and Delete…
+ace.AccessMask = ADS_RIGHT_DS_CREATE_CHILD Or ADS_RIGHT_DS_DELETE_CHILD 
+'---User object----
+ace.ObjectType = &quot;{BF967ABA-0DE6-11D0-A285-00AA003049E2}&quot; 'User's schema IDGUID ace.AceFlags = ADS_ACEFLAG_INHERIT_ACE 'Propogate the ace down
+ace.Flags = ADS_FLAG_OBJECT_TYPE_PRESENT 'Tells that objectType is filled
+ace.Trustee = &quot;FABRIKAM\Mike&quot; 'Who is the beneficiary of this ace
+acl.AddAce ace
+
+sec.DiscretionaryAcl = acl
+ou.Put &quot;ntSecurityDescriptor&quot;, Array(sec)
+ou.SetInfo 'Commit to Active Directory
+
+Set ace = Nothing
+Set acl&nbsp;&nbsp;= Nothing
+Set sec = Nothing
+</CODE></PRE>
+
+<P>A touch complicated isn't it?</P>
+
+<P>Each object in Active Directory has a security descriptor. With the security descriptor, you'll be able to modify permissions on the object, propagate permissions, enable auditing, and so on. The security descriptor itself has two Access Control Lists (ACLs), called Discretionary ACL (DACL) and System ACL (SACL). Each ACL can contain Access Control Entries (ACEs). With an ACE, you can set allowed or denied access on an object. In addition, you can specify which actions are to be allowed or denied. Examples of actions include <I>Create Child</I>, <I>Delete Child, Read Property, Write Property.</I> Next, you may specify which classes or attributes this ACE will take effect upon. In our example, we pick the <I>user</I> class. Next, you have to answer the question: "Who will be the beneficiary of this ACE?" In our example, we specify Mike. Finally, you can set the ACE inheritance behavior—for example, ACE's can be specified to be propagated down the hierarchy. In summary, the previous example will result in Mike being able to create and delete user objects under the East Sales organizational unit. Figure 5 shows the Active Directory <B>Create New View</B> menu after we run the code. When you logon as Joe (Administrator), you will see quite a few classes you can create. However, when you log on as Mike, you can only create user objects.</P>
+
+<P><img src="adadsi05.gif" ALT="" BORDER=0 width="263" height="206"></P>
+
+<P class=label><B>Figure 5. Create New View Menu from two different users perspectives</B></P>
+
+<H3>Global Catalog</H3>
+
+<P>Multiple domains may be joined together to form a tree of domains, and multiple trees joined to form a forest. Each forest shares the same schema and configuration partitions. All objects in a forest are replicated to a global catalog (GC). You may have more than one global catalog for a given forest. A global catalog is always a domain controller, but a domain controller is not necessarily a global catalog. <I>Not all attributes are replicated </I>to the global catalog. Only selected attributes are replicated to the GC, and you can select attributes to be replicated to GC.</P>
+
+<P>The primary purpose of the global catalog is to enable enterprise-wide searches. For example, Joe wants to find all users in the forest hired in the last 30 days.</P>
+
+<P>To bind to a global catalog programmatically, use the GC: moniker instead of the LDAP: moniker.</P>
+
+<PRE><CODE>Set gc = GetObject(&quot;GC://srv01.fabrikam.com&quot;)
+Set gc = GetObject(&quot;GC://DC=Fabrikam, DC=COM&quot;)
+</CODE></PRE>
+
+<P>If Europe.Fabrikam.com is a child of Fabrikam.com, searching from GC://DC=Fabrikam,DC=Com will include objects in the
+Europe.fabrikam.com as well.</P>
+
+<H3>Extending ADSI</H3>
+
+<P>With the ADSI extension model, you can associate a directory class with your own COM object. From an ADSI programmer/script writer's perspective, the extension becomes an integral part of ADSI.</P>
+
+<P>Let's revisit our scenario. When a new employee joins Fabrikam, the Windows NT administrator will create a user object in the directory and the payroll administrator will need to set up some entries in the human resource systems for this user. With an ADSI extension, this process can be streamlined into one single script.</P>
+
+<PRE><CODE>Set usr = ou.Create(&quot;user&quot;, &quot;CN=Alice Johnson&quot;)
+// setting some attributes…
+usr.SetInfo
+
+usr.AddToPayroll&nbsp;&nbsp;'this is a custom method from an ADSI Extension
+Debug.Print &quot;User: &quot; &amp; usr.Name &amp; &quot;has been created&quot;
+</CODE></PRE>
+
+<H3>Note for C++ Programmers</H3>
+
+<P>ADSI consists of more than 50 interfaces. The good news is you can do almost 90 percent of directory operations using only five interfaces. They are:
+
+<UL type=disc>
+	<LI>IADsOpenDSObject<BR><BR></LI>
+
+	<LI>IADs<BR><BR></LI>
+
+	<LI>IADsContainer<BR><BR></LI>
+
+	<LI>IDirectoryObject<BR><BR></LI>
+
+	<LI>IDirectorySearch</LI>
+</UL>
+
+<P>Here are some mappings from ADSI VB/VBS code to C++ code. Note that this is not a complete list.</P>
+
+<TABLE border=1 cellpadding=5 cols=2 frame=below rules=rows>
+
+<TR VALIGN="top">
+<td class=label width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2"><B>VBS code</B></FONT></TD>
+<td class=label width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2"><B>VC code</B></FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">Set obj = GetObject()</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">hr = AdsGetObject()</FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">obj.Put<BR>
+obj.Get<BR>
+obj.Parent</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">IADs or IDirectoryObject</FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">obj.Create<BR>
+obj.Delete<BR>
+obj.MoveHere</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">IADsContainer </FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">For each … in …</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">AdsBuildEnumerator()<BR>
+ADsEnumerateNext</FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">Connection, Command, RecordSet</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">IDirectorySearch</FONT></TD>
+</TR>
+
+<TR VALIGN="top">
+<td width=44%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">Security descriptor, ACL, ACE</FONT></TD>
+<td width=56%><FONT FACE="Verdana, Arial, Helvetica" SIZE="2">IADsSecurityDescriptor, IADsAccessControlList, IADsAccessControlEntry</FONT></TD>
+</TR>
+</TABLE><BR>
+
+ 
+
+<p><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></p>
+
+ 
+
+<H2><A NAME="adadsi_topic6"></A>Summary</H2>
+
+<P>Accessing Active Directory using ADSI is easy, simple, and fun. ADSI is well integrated with Active Directory. Now, it's the time to integrate your applications to Active Directory and make good use of this excellent technology.</P>
+
+<P>Before we close the article, let's look at few integration possibilities. Active Directory is an enabling distributed technology for you to explore. The possibilities are truly endless, only your creativity and imagination are the limit.
+
+<UL type=disc>
+	<LI><I>Meet me at the Active Directory Cafe</I>. Let's say you're creating a client server application. Your server application written as a Windows NT service can be installed on a number of servers. During the server installation, the service publishes some information about itself (enough information for the client to connect to the service). When the client starts, it can query Active Directory for specific services. After getting the result, the client can examine the information published by the service. This information is enough for the client to connect to the service.<BR><BR></LI>
+
+	<LI><I>Follow me anywhere I go. </I> When an Fabrikam employee logs on in the morning, he's greeted with the up-to-date information from his organization's Web site. When he moves to a different organization, the Web site changes correspondingly. How is this possible? Easily done. You can create an ADSI logon script. In the script, you will ask who the user is and where the user object is located in Active Directory. Once you bind to the object, you can ask for its parent, which most likely is an organizational unit. Then you can display the URL obtained from the wwwHomePage attribute on the organizational unit object.<BR><BR></LI>
+
+	<LI><I>Tell me, who should I talk to? </I>Active Directory includes site and subnet information. Your application may leverage this information to match the servers and clients based on the site.<BR><BR></LI>
+
+	<LI><I>Don't share my information. </I>Julie is working on a secret project, the "X-File." She doesn't want anybody to know about this project. Only members of "The X" group can see this project. She can extend the Active Directory schema to add a <I>project</I> class and a few attributes related to the project. Now, she can set the permissions on the "X-File" object so that only the "The X Group" can read the object.<BR><BR></LI>
+
+	<LI><I>Share my information. </I>You create a server application that can be deployed on many servers. Let's say you store "Protocol of Choice" data in the Active Directory. Servers will obey and use the preferred protocol based on this information for communication between them. When an admin changes the protocol information in the Active Directory, sooner or later this information will be replicated to other Active Directory replicas. The servers will then pick up this change from their closest Active Directory replica and finally they will all talk the same language again. Without Active Directory, an Admin may have to visit each server (remotely or locally) and reconfigure the information.</LI>
+</UL>
+
+ 
+
+<p><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></p>
+
+ 
+
+<H2><A NAME="adadsi_topic7"></A>For More Information</H2>
+
+<P>Active Directory Programmer's Guide:<BR>
+<a HREF="http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp">http://msdn.microsoft.com/developer/windows2000/adsi/actdirguide.asp</a></P>
+
+<P>ADSI:<BR>
+<a HREF="http://www.microsoft.com/windows/server/Technical/directory/adsilinks.asp">http://www.microsoft.com/windows/server/Technical/directory/adsilinks.asp</a></P>
+
+<P>Windows 2000 Server:<BR>
+<a HREF="http://www.microsoft.com/windows/server/default.asp">http://www.microsoft.com/windows/server/</a></P>
+
+<P><font face="Verdana"><small>Go to <a href="#top">top</a>.</small></font></P>
+
+<a HREF="http://www.microsoft.com/info/cpyright.htm" TARGET="_top">&#169; 1999 Microsoft Corporation. All rights reserved. Terms of use.</a>
+</BODY>
+</HTML>

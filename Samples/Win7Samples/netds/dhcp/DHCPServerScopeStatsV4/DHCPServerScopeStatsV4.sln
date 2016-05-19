@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DHCPServerScopeStatsV4", "DHCPServerScopeStatsV4.vcproj", "{F784625F-F148-49F6-BB71-15D60D8A783B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Debug|Win32.Build.0 = Debug|Win32
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Debug|x64.ActiveCfg = Debug|x64
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Debug|x64.Build.0 = Debug|x64
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Release|Win32.ActiveCfg = Release|Win32
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Release|Win32.Build.0 = Release|Win32
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Release|x64.ActiveCfg = Release|x64
+		{F784625F-F148-49F6-BB71-15D60D8A783B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

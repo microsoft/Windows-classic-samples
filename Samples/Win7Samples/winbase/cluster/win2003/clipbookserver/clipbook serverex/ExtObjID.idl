@@ -1,0 +1,43 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2003 <company name>
+//
+//  Module Name:
+//      ExtObjID.idl
+//
+//  Description:
+//      Definition of COM interfaces for the Cluster Administrator
+//      ClipBookServerEx Extension DLL.
+//
+//  Author:
+//      <name> (<e-mail name>) Mmmm DD, 2003
+//
+//  Revision History:
+//
+//  Notes:
+//      This file will be processed by the MIDL tool to
+//      produce the type library (ExtObj.tlb) and marshalling code.
+//
+/////////////////////////////////////////////////////////////////////////////
+
+[
+    uuid(0047E941-ABBC-456F-8814-11B0B3351B2E),
+    version(1.0),
+    helpstring("ClipBookServerEx 1.0 Type Library")
+]
+library CLUADMEXLib
+{
+    importlib("stdole2.tlb");
+    import "CluAdmEx.idl";
+
+    [
+        uuid(9E747617-E5D1-42D7-A8C3-0FC1D418B76B),
+        helpstring("CoClipBookServerEx Class")
+    ]
+    coclass CoClipBookServerEx
+    {
+        interface IWEExtendPropertySheet;
+        interface IWEExtendWizard;
+    };
+
+};

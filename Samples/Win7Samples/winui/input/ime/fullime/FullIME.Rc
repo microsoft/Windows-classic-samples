@@ -1,0 +1,28 @@
+#include "fullime.h"
+
+ID_ICON ICON PRELOAD DISCARDABLE        fullime.ico
+
+ID_MENU MENU PRELOAD DISCARDABLE
+BEGIN
+    MENUITEM    "Clear",    IDC_CLEAR
+    POPUP       "Pattern"
+	BEGIN
+	MENUITEM    "ANSI", IDC_ANSIFILL
+	MENUITEM    "DBCS", IDC_DBCSFILL
+	END
+    POPUP       "ImeControl"
+	BEGIN       
+	MENUITEM    "Open IME",  IDC_OPENIME
+	MENUITEM    "Close IME", IDC_CLOSEIME
+	END
+END
+
+STRINGTABLE PRELOAD DISCARDABLE
+BEGIN
+    IDS_CLASS       "FULL-STE-DBCS"
+    IDS_TITLE       "Simple Text Editor - IME Full-Aware"
+    IDS_COMPTITLE   "Simple Text Editor - IME Full-Aware - Composition Mode"
+    IDS_CANDTITLE   "Simple Text Editor - IME Full-Aware - Candidate Mode"
+    IDS_CANDUI      "CAND-PARENT"
+    IDS_CANDCLASS   "Cand-win-class"
+END

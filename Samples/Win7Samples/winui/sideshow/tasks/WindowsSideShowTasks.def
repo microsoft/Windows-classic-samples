@@ -1,0 +1,17 @@
+; THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+; ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+; THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+; PARTICULAR PURPOSE.
+;
+; Copyright (c) Microsoft Corporation. All rights reserved
+
+; WindowsSideShowTasks.def : Declares the module parameters.
+
+LIBRARY      "WindowsSideShowTasks.DLL"
+
+EXPORTS
+    StartTasks           PRIVATE
+    DllCanUnloadNow      PRIVATE
+    DllGetClassObject    PRIVATE
+    DllRegisterServer    PRIVATE
+    DllUnregisterServer  PRIVATE

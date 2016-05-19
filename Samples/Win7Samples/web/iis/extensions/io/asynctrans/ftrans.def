@@ -1,0 +1,8 @@
+LIBRARY FTRANS
+
+;DESCRIPTION 'File Transfer using TransmitFile()'
+
+EXPORTS
+    HttpExtensionProc
+    GetExtensionVersion
+    TerminateExtension

@@ -1,0 +1,65 @@
+
+#include "windows.h"
+#include "demo.h"
+
+Menu MENU
+BEGIN
+    POPUP        "&Options"
+      BEGIN
+        MENUITEM    "&Line",            IDM_BOX
+        MENUITEM    "&Box",             IDM_BLOCK, CHECKED
+        MENUITEM    "&Retain",          IDM_RETAIN
+        MENUITEM    SEPARATOR
+        MENUITEM    "&About Demo...",   IDM_ABOUT
+      END
+END
+
+AboutBox DIALOG 22, 17, 144, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "About Demo"
+BEGIN
+    CTEXT "Microsoft Windows"         -1,      0,  5, 144,  8
+    CTEXT "Demo Library Application"  -1,      0, 14, 144,  8
+    CTEXT "Version 3.0"               -1,      0, 34, 144,  8
+    DEFPUSHBUTTON "OK"                IDOK,   53, 59,  32, 14,   WS_GROUP
+END
+
+STRINGTABLE
+BEGIN
+    IDS_APPNAME     "Demo Sample Application"
+    IDS_NOMEM       "<DemoInit> Not enough memory."
+END
+
+#ifdef JAPAN
+// Japanese language version of resources
+LANGUAGE LANG_JAPANESE, SUBLANG_NEUTRAL
+
+Menu MENU
+BEGIN
+    POPUP	 "オプション(&O)"
+      BEGIN
+	    MENUITEM    "線(&L)",		            IDM_BOX
+	    MENUITEM    "ボックス(&B)",		        IDM_BLOCK, CHECKED
+	    MENUITEM    "保持(&R)",		            IDM_RETAIN
+	    MENUITEM    SEPARATOR
+	    MENUITEM    "バージョン情報(&A)...",	IDM_ABOUT
+      END
+END
+
+AboutBox DIALOG 22, 17, 144, 75
+STYLE DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "Demo のバージョン情報"
+BEGIN
+    CTEXT "Microsoft Windows"	      -1,      0,  5, 144,  8
+    CTEXT "Demo ﾗｲﾌﾞﾗﾘ ｱﾌﾟﾘｹｰｼｮﾝ"     -1,      0, 14, 144,  8
+    CTEXT "Version 3.0" 	          -1,      0, 34, 144,  8
+    DEFPUSHBUTTON "OK"	              IDOK,   53, 59,  32, 14,	 WS_GROUP
+END
+
+STRINGTABLE
+BEGIN
+    IDS_APPNAME     "Demo サンプル アプリケーション"
+    IDS_NOMEM       "<DemoInit> メモリ不足です。"
+END
+
+#endif

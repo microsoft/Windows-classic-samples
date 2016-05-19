@@ -1,0 +1,41 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+#pragma once
+#include <windows.h>
+
+VS_VERSION_INFO     VERSIONINFO
+  FILEVERSION       1,0,0,1
+  PRODUCTVERSION    1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN 
+            VALUE "CompanyName",     "\0"
+            VALUE "FileDescription", "ClipBook Server Resource DLL\0"
+            VALUE "FileVersion",     "1, 0, 0, 1\0"
+            VALUE "InternalName",    "ClipBook Server\0"
+            VALUE "LegalCopyright",  "Copyright \251 2003\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename","CLIPBOOK SERVER.DLL\0"
+            VALUE "ProductName",     "ClipBook Server Resource DLL\0"
+            VALUE "ProductVersion",  "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo" 
+    BEGIN 
+        VALUE "Translation", 0x409, 1200
+    END
+END

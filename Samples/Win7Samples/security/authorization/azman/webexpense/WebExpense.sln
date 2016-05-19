@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "http://localhost/WebExpense/", "http://localhost/WebExpense", "{C6EC28CC-7FD6-4636-8159-D0F3507BA69C}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/temp"
+		Debug.AspNetCompiler.PhysicalPath = "..\WebExpense\"
+		Debug.AspNetCompiler.TargetPath = "..\..\..\temp\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/temp"
+		Release.AspNetCompiler.PhysicalPath = "..\WebExpense\"
+		Release.AspNetCompiler.TargetPath = "..\..\..\temp\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "..\WebExpense\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Release|.NET = Release|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6EC28CC-7FD6-4636-8159-D0F3507BA69C}.Debug|.NET.ActiveCfg = Debug|.NET
+		{C6EC28CC-7FD6-4636-8159-D0F3507BA69C}.Debug|.NET.Build.0 = Debug|.NET
+		{C6EC28CC-7FD6-4636-8159-D0F3507BA69C}.Release|.NET.ActiveCfg = Debug|.NET
+		{C6EC28CC-7FD6-4636-8159-D0F3507BA69C}.Release|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

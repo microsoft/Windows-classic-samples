@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+<TITLE>Classified Ads Application</TITLE>
+<link rel="stylesheet" type="text/css" href="Styles.css">
+</HEAD>
+
+<BODY>
+<h2 align="left">Samples Build Environment</h2>
+<p>The COM+ Samples require a particular build environment.&nbsp; The elements
+of the build environment are</p>
+<ul>
+  <li>Installed Software</li>
+  <li>Environment variables</li>
+</ul>
+<h4 >Software Requirements </h4>
+<P >&nbsp;To build and run the COM+ samples you will
+need the following Microsoft products </P>
+<ul>
+  <li>Microsoft Visual C++ 6.0</li>
+  <li>Microsoft Visual Basic 6.0</li>
+  <li>Microsoft SQL Server 7.0</li>
+  <li>Microsoft Windows 2000 (COM+/IIS)</li>
+  <li>Microsoft Platform SDK</li>
+</ul>
+<h4>Command Line Build</h4>
+<p>The command line tools make use of the following environment variables</p>
+<ul>
+  <li>PATH</li>
+  <li>INCLUDE</li>
+  <li>LIB</li>
+  <li>MSSDK</li>
+</ul>
+<h5>Path</h5>
+<p>Your path must include the following directories:</p>
+<table border="1" width="100%">
+  <tr>
+    <td width="18%">Description</td>
+    <td width="17%">Tool</td>
+    <td width="65%">Default Location</td>
+  </tr>
+  <tr>
+    <td width="18%">C Compiler</td>
+    <td width="17%">CL.EXE</td>
+    <td width="65%">\Program Files\Microsoft Visual Studio\VC98\Bin</td>
+  </tr>
+  <tr>
+    <td width="18%">Linker</td>
+    <td width="17%">LINK.EXE</td>
+    <td width="65%">\Program Files\Microsoft Visual Studio\VC98\Bin</td>
+  </tr>
+  <tr>
+    <td width="18%">IDL Compiler</td>
+    <td width="17%">MIDL.EXE</td>
+    <td width="65%">\Program Files\Microsoft Visual Studio\VC98\Bin</td>
+  </tr>
+  <tr>
+    <td width="18%">VB Compiler</td>
+    <td width="17%">VB6.EXE</td>
+    <td width="65%">\Program Files\Microsoft Visual Studio\VB98</td>
+  </tr>
+  <tr>
+    <td width="18%">FIXVBPRef utility</td>
+    <td width="17%">FIXVBPREF.EXE</td>
+    <td width="65%">\Program Files\Microsoft Platform SDK\Bin</td>
+  </tr>
+</table>
+<h5>Include</h5>
+<p>Include indicates the directories the C compiler will search for include
+files.&nbsp; This variable is typically set by the Visual Studio setup and can
+also bet set by running VCVARS32.BAT</p>
+<h5>Lib</h5>
+<p>Include indicates the directories the linker will search for libraries.&nbsp;
+This variable is typically set by the Visual Studio setup and can also bet set
+by running VCVARS32.BAT</p>
+<h5>MSSDK</h5>
+<p>The MSSDK environment variable is created by the Platform SDK setup and
+indicates the directory where the platform SDK is installed.</p>
+<P>
+<FONT CLASS="SMALL" FACE="Verdana, Arial, Geneva, Helvetica, sans-serif" SIZE=1><A HREF="http://www.microsoft.com/info/cpyright.htm">&copy; 2000 Microsoft Corporation. All rights reserved. Terms of Use.</A>
+</FONT>
+&nbsp;
+</BODY>
+</HTML>

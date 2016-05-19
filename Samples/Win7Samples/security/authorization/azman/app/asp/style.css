@@ -1,0 +1,47 @@
+BODY
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: Arial;
+    BACKGROUND-COLOR: #666699;    
+    COLOR: #666699;        
+}
+h1
+{
+    FONT-SIZE: 18pt;
+    COLOR: #ffffff;
+    FONT-STYLE: italic;
+    FONT-FAMILY: Verdana, Arial;
+    LETTER-SPACING: 0.5em;
+    TEXT-ALIGN: center
+}
+h2
+{
+    FONT-SIZE: 12pt;
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: #666699;        
+    FONT-STYLE: italic;
+    FONT-FAMILY: Verdana, Arial;
+    TEXT-ALIGN: center;
+    PADDING:3px;
+}
+h3
+{
+    FONT-SIZE: 12pt;
+    FONT-STYLE: italic;
+    FONT-FAMILY: Verdana, Arial;
+}
+td
+{
+    FONT-SIZE: 9pt;
+    FONT-FAMILY: Arial;
+    padding-left:12px;
+}
+th
+{
+    FONT-SIZE: 10pt;
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: #666699;        
+    FONT-FAMILY: Verdana, Arial;
+    TEXT-ALIGN: center;
+    PADDING:2px;
+}

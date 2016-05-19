@@ -1,0 +1,10 @@
+; SdkShaInfo.def : Declares the module parameters.
+
+LIBRARY      "SdkShaInfo.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall		PRIVATE

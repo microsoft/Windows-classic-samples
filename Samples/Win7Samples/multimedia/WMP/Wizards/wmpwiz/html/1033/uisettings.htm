@@ -1,0 +1,224 @@
+<!-- (C) Microsoft Corporation. All Rights Reserved.  -->
+<HTML DIR="LTR">
+    <HEAD>
+        <TITLE>Windows Media Player Plug-in Wizard</TITLE>
+        <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <STYLE TYPE="text/css">@import url();</STYLE>
+        <SCRIPT>
+        var strURL = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+        strURL += "VCWizards/";
+        strURL += window.external.GetHostLocale();
+        strURL += "/NewStyles.css";
+        document.styleSheets(0).imports(0).href = strURL;
+        </SCRIPT>
+        <SYMBOL NAME='HASPROPERTYPAGE' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='LAUNCHPROPERTYPAGE' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='INSTALLAUTORUN' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='LISTENTOEVENTS' TYPE="checkbox" VALUE="false"></SYMBOL>
+        <SYMBOL NAME='FRIENDLYNAME' TYPE="text" VALUE=""></SYMBOL>
+        <SYMBOL NAME='DESCRIPTION' TYPE="text" VALUE=""></SYMBOL>
+    </HEAD>
+    <BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress();">
+        <DIV id="logo" style="POSITION: absolute"><IMG src="..\..\Images\logo.png">
+        </DIV>
+        <DIV id="options" style="LEFT: 190px; WIDTH: 300px; POSITION: absolute; TOP: 40px; HEIGHT: 291px">
+            <P><FONT face="Arial" size="4">UI Plug-in</FONT>
+            </P>
+            <SPAN CLASS="itemText">
+                <FONT face="Arial" size="2">Choose UI plug-in features:
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Property Page" id="HASPROPERTYPAGE" TABINDEX="1" ACCESSKEY="P" title="Property Page">
+                    <DIV CLASS="itemTextCheckboxA" ID="Div1" title="Property Page">
+                        <LABEL FOR="HASPROPERTYPAGE" ID="Label1"><u>P</u>roperty page</LABEL>
+                    </DIV>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Launch Property Page" id="LAUNCHPROPERTYPAGE" TABINDEX="2" ACCESSKEY="A" title="Launch Property Page">
+                    <DIV CLASS="itemTextCheckboxA" style="width:400" ID="Div3" title="Launch Property Page">
+                        <LABEL FOR="LAUNCHPROPERTYPAGE" ID="Label5"><u>S</u>how property page on first launch</LABEL>
+                    </DIV>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Auto run" id="INSTALLAUTORUN" TABINDEX="3" ACCESSKEY="A" title="Auto run">
+                    <DIV CLASS="itemTextCheckboxA" ID="Div4" title="Auto run">
+                        <LABEL FOR="INSTALLAUTORUN" ID="Label6"><u>A</u>uto-run plug-in</LABEL>
+                    </DIV>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <INPUT CLASS="CheckBox" type="checkbox" name="Listen to events" id="LISTENTOEVENTS" TABINDEX="4" ACCESSKEY="L" title="Listen to events">
+                    <DIV CLASS="itemTextCheckboxA" ID="Div2" title="Listen to events">
+                        <LABEL FOR="LISTENTOEVENTS" ID="Label2"><u>L</u>isten to events</LABEL>
+                    </DIV>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <SPAN CLASS="itemText" ID="Span3" title="Friendly name">
+                        <LABEL FOR="FRIENDLYNAME" ID="Label3"><u>F</u>riendly Name:</LABEL>
+                    </SPAN>
+                    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Friendly name" id="FRIENDLYNAME" TABINDEX="5" ACCESSKEY="F" title="Friendly name">
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <SPAN CLASS="itemText" ID="Span1" title="Description">
+                        <LABEL FOR="DESCRIPTION" ID="Label4"><u>D</u>escription:</LABEL>
+                    </SPAN>
+                    <INPUT CLASS="itemTextTwoColumnLong" type="text" name="Description" id="DESCRIPTION" TABINDEX="6" ACCESSKEY="D" title="Description">
+                    <BR>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    <P CLASS="Spacer">&nbsp;</P>
+                    To continue, click Next </FONT>
+            </SPAN>
+        </DIV>
+        <DIV style="LEFT: 0px; WIDTH: 600px; POSITION: absolute; TOP: 304px; HEIGHT: 2px">
+            <hr>
+        </DIV>
+        <DIV style="LEFT: 250px; WIDTH: 200px; POSITION: absolute; TOP: 316px; HEIGHT: 48px">
+            <TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0" ID="Table1">
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="FinishBtn" ACCESSKEY="N" onClick="OnNext(document);"><U>N</U>ext</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+                    <BUTTON CLASS="BUTTONS" ID="CancelBtn" ACCESSKEY="C" onClick="window.external.Finish(document, 'cancel');">
+                        <U>C</U>ancel</BUTTON>
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+                    &nbsp;
+                </TD>
+                <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+                    &nbsp;
+                </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+    </BODY>
+</HTML>
+<SCRIPT LANGUAGE="JSCRIPT">
+
+function InitDocument(document)
+
+// When the page is first loaded, the wizard control automatically calls InitDocument.
+// This is where you should handle any necessary tasks that must occur before the page
+// is displayed.
+
+{
+    setDirection();
+    window.external.SetDefaults(document);
+    window.external.Load(document);
+    
+    FRIENDLYNAME.value = window.external.FindSymbol("Root") + " Plugin";
+    DESCRIPTION.value = "Description of " + window.external.FindSymbol("Root") + " plugin";
+}
+
+var PLUGIN_TYPE_BACKGROUND = 0x1;
+var PLUGIN_TYPE_SEPARATEWINDOW = 0x2;
+var PLUGIN_TYPE_DISPLAYAREA = 0x3;
+var PLUGIN_TYPE_SETTINGSAREA = 0x4;
+var PLUGIN_TYPE_METADATAAREA = 0x5;
+var PLUGIN_FLAGS_HASPROPERTYPAGE = 0x80000000;
+var PLUGIN_FLAGS_INSTALLAUTORUN = 0x40000000
+var PLUGIN_FLAGS_LAUNCHPROPERTYPAGE = 0x20000000;
+
+function OnNext(document)
+{
+    var strFlags = window.external.FindSymbol("FLAGSTRING");
+    var iFlags = 0;
+    window.external.RemoveSymbol("FLAGSTRING");
+    window.external.RemoveSymbol("FLAGS");
+
+    window.external.RemoveSymbol("HASWINDOW");
+
+    switch (strFlags)
+    {
+        case "PLUGIN_TYPE_DISPLAYAREA":
+            iFlags = PLUGIN_TYPE_DISPLAYAREA;
+            window.external.AddSymbol("HASWINDOW", true);
+            break;
+        case "PLUGIN_TYPE_SETTINGSAREA":
+            iFlags = PLUGIN_TYPE_SETTINGSAREA;
+            window.external.AddSymbol("HASWINDOW", true);
+            break;
+        case "PLUGIN_TYPE_METADATAAREA":
+            iFlags = PLUGIN_TYPE_METADATAAREA;
+            window.external.AddSymbol("HASWINDOW", true);
+            break;
+        case "PLUGIN_TYPE_SEPARATEWINDOW":
+            iFlags = PLUGIN_TYPE_SEPARATEWINDOW;
+            window.external.AddSymbol("HASWINDOW", true);
+            break;
+        case "PLUGIN_TYPE_BACKGROUND":
+            iFlags = PLUGIN_TYPE_BACKGROUND;
+            window.external.AddSymbol("HASWINDOW", false);
+            break;
+    }
+
+    if (HASPROPERTYPAGE.checked)
+    {
+        strFlags +=  " | PLUGIN_FLAGS_HASPROPERTYPAGE";
+        iFlags |= PLUGIN_FLAGS_HASPROPERTYPAGE;
+    }
+
+    if (LAUNCHPROPERTYPAGE.checked)
+    {
+        strFlags +=  " | PLUGIN_FLAGS_LAUNCHPROPERTYPAGE";
+        iFlags |= PLUGIN_FLAGS_LAUNCHPROPERTYPAGE;
+    }
+
+    if (INSTALLAUTORUN.checked)
+    {
+        strFlags +=  " | PLUGIN_FLAGS_INSTALLAUTORUN";
+        iFlags |= PLUGIN_FLAGS_INSTALLAUTORUN;
+    }
+
+    var fFlags = 0.0;
+    if (iFlags < 0)
+    {
+        fFlags = 0x40000000 * 1.0;
+        fFlags += fFlags;
+        fFlags += (iFlags & 0x7FFFFFFF) * 1.0;
+    }
+    else
+    {
+        fFlags = iFlags;
+    }
+
+    window.external.AddSymbol("FLAGSTRING", strFlags);
+    window.external.AddSymbol("FLAGS", fFlags);
+
+    OnWizFinish(document);
+}
+
+function Next(document, linkto)
+
+// Tell the wizard control which page to load next
+
+{
+    window.external.Next(document, linkto);
+}
+
+
+
+function OnFinish(obj)
+
+// Called when the user clicks the finish button.  OnWizFinish is a function in common.js
+
+{
+    OnWizFinish(obj);
+}
+
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT>
+    var strPath = window.external.FindSymbol("PRODUCT_INSTALLATION_DIR");
+    strPath += "VCWizards/";
+    strPath += window.external.GetHostLocale();
+    var strScriptPath = strPath + "/Script.js";
+    var strCommonPath = strPath + "/Common.js";
+    document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+    document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>
