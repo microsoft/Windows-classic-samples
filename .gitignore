@@ -198,3 +198,4 @@ FakesAssemblies/
 
 # Custom ignores
 gallery.xml
+*.db
