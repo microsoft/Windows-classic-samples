@@ -1,9 +1,0 @@
-﻿<Window x:Class="DesktopToastsSample.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Desktop Toasts Sample" Height="200" Width="300">
-    <StackPanel Orientation="Vertical">
-        <Button x:Name="ShowToastButton" Height="50">Show Toast</Button>
-        <TextBlock x:Name="Output" Margin="10" TextWrapping="Wrap">Whatever action you take on the displayed toast will appear here</TextBlock>
-    </StackPanel>
-</Window>
