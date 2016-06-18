@@ -1,0 +1,3 @@
+# The *.txt files in this directory are UTF-16-encoded and should
+# therefore be treated as pure binary data.
+*.txt binary
