@@ -10,8 +10,11 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-These  repostories hold related samples include
+These repositories hold related samples include
 - [Windows Universal Samples (UWP)](https://github.com/Microsoft/Windows-universal-samples)
 - [Desktop Bridge to Universal Windows Platform (UWP)](https://github.com/Microsoft/DesktopBridgeToUWP-Samples)
 - [Desktop Toasts](https://github.com/WindowsNotifications/desktop-toasts)
 
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
