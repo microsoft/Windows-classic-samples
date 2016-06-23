@@ -1,76 +1,108 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
-using DesktopToastsSample.ShellHelpers;
-using MS.WindowsAPICodePack.Internal;
-using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
-
-using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
+using DesktopToastsSample.ShellHelpers;
 
 namespace DesktopToastsSample
 {
     public partial class MainWindow : Window
     {
-        private const String APP_ID = "Microsoft.Samples.DesktopToastsSample";
+        private const String APP_ID = "Microsoft.Samples.DesktopToasts";
         public MainWindow()
         {
             InitializeComponent();
-            TryCreateShortcut();
+            RegisterAppForNotificationSupport();
+
+            NotificationActivator.Initialize();
             ShowToastButton.Click += ShowToastButton_Click;
+            this.Closing += CloseMainWindow;
+        }
+
+        public void ToastActivated()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Activate();
+                Output.Text = "The user activated the toast.";
+            });
+        }
+
+        private void CloseMainWindow(object sender, CancelEventArgs e)
+        {
+            NotificationActivator.Uninitialize();
         }
 
         // In order to display toasts, a desktop application must have a shortcut on the Start menu.
         // Also, an AppUserModelID must be set on that shortcut.
+        //
+        // For the app to be activated from Action Center, it needs to register a COM server with the OS
+        // and register the CLSID of that COM server on the shortcut.
+        //
         // The shortcut should be created as part of the installer. The following code shows how to create
-        // a shortcut and assign an AppUserModelID using Windows APIs. You must download and include the 
-        // Windows API Code Pack for Microsoft .NET Framework for this code to function
+        // a shortcut and assign the AppUserModelID and ToastActivatorCLSID properties using Windows APIs.
         //
         // Included in this project is a wxs file that be used with the WiX toolkit
         // to make an installer that creates the necessary shortcut. One or the other should be used.
-        private bool TryCreateShortcut()
+        //
+        // This sample doesn't clean up the shortcut or COM registration.
+
+        private void RegisterAppForNotificationSupport()
         {
-            String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Desktop Toasts Sample CS.lnk";
+            String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Nitro Desktop Toasts Sample CS.lnk";
             if (!File.Exists(shortcutPath))
             {
-                InstallShortcut(shortcutPath);
-                return true;
+                // Find the path to the current executable
+                String exePath = Process.GetCurrentProcess().MainModule.FileName;
+                InstallShortcut(shortcutPath, exePath);
+                RegisterComServer(exePath);
             }
-            return false;
         }
 
-        private void InstallShortcut(String shortcutPath)
+        private void InstallShortcut(String shortcutPath, String exePath)
         {
-            // Find the path to the current executable
-            String exePath = Process.GetCurrentProcess().MainModule.FileName;
             IShellLinkW newShortcut = (IShellLinkW)new CShellLink();
 
             // Create a shortcut to the exe
-            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetPath(exePath));
-            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetArguments(""));
+            newShortcut.SetPath(exePath);
 
             // Open the shortcut property store, set the AppUserModelId property
             IPropertyStore newShortcutProperties = (IPropertyStore)newShortcut;
 
-            using (PropVariant appId = new PropVariant(APP_ID))
-            {
-                ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.SetValue(SystemProperties.System.AppUserModel.ID, appId));
-                ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.Commit());
-            }
+            PropVariantHelper varAppId = new PropVariantHelper();
+            varAppId.SetValue(APP_ID);
+            newShortcutProperties.SetValue(PROPERTYKEY.AppUserModel_ID, varAppId.Propvariant);
+
+            PropVariantHelper varToastId = new PropVariantHelper();
+            varToastId.VarType = VarEnum.VT_CLSID;
+            varToastId.SetValue(typeof(NotificationActivator).GUID);
+
+            newShortcutProperties.SetValue(PROPERTYKEY.AppUserModel_ToastActivatorCLSID, varToastId.Propvariant);
 
             // Commit the shortcut to disk
-            IPersistFile newShortcutSave = (IPersistFile)newShortcut;
+            ShellHelpers.IPersistFile newShortcutSave = (ShellHelpers.IPersistFile)newShortcut;
 
-            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
+            newShortcutSave.Save(shortcutPath, true);
+        }
+
+        private void RegisterComServer(String exePath)
+        {
+            // We register the app process itself to start up when the notification is activated, but
+            // other options like launching a background process instead that then decides to launch
+            // the UI as needed.
+            string regString = String.Format("SOFTWARE\\Classes\\CLSID\\{{{0}}}\\LocalServer32", typeof(NotificationActivator).GUID);
+            var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(regString);
+            key.SetValue(null, exePath);
         }
 
         // Create and show the toast.
         // See the "Toasts" sample for more detail on what can be done with toasts
         private void ShowToastButton_Click(object sender, RoutedEventArgs e)
         {
-
             // Get a toast XML template
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
 
@@ -81,8 +113,8 @@ namespace DesktopToastsSample
                 stringElements[i].AppendChild(toastXml.CreateTextNode("Line " + i));
             }
 
-            // Specify the absolute path to an image
-            String imagePath = "file:///" + Path.GetFullPath("toastImageAndText.png");
+            // Specify the absolute path to an image as a URI
+            String imagePath = new System.Uri(Path.GetFullPath("toastImageAndText.png")).AbsoluteUri;
             XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
             imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
 
@@ -98,11 +130,7 @@ namespace DesktopToastsSample
 
         private void ToastActivated(ToastNotification sender, object e)
         {
-            Dispatcher.Invoke(() =>
-            {
-                Activate();
-                Output.Text = "The user activated the toast.";
-            });
+            ToastActivated();
         }
 
         private void ToastDismissed(ToastNotification sender, ToastDismissedEventArgs e)
