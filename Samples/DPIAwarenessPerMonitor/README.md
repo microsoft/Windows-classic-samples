@@ -1,20 +1,18 @@
-DPI Tutorial sample
-===================
+# Per-monitor DPI awareness sample
 
 This sample uses DPI Awareness APIs to show how to implement basic application functionality for a per-monitor DPI aware application. This includes operations like scaling a window, selecting new fonts, and re-rendering the window's content when the window moves to a monitor with a different DPI.
 
-**Warning**  This sample requires Microsoft Visual Studio Ultimate 2013 and doesn't compile in Microsoft Visual Studio Express 2013 for Windows.
+**Note** This sample has been superseded by the
+[Per-window DPI awareness sample](../DPIAwarenessPerWindow).
+
+**Warning** This sample requires Microsoft Visual Studio Ultimate 2013 and doesn't compile in Microsoft Visual Studio Express 2013 for Windows.
 
 Operating system requirements
 -----------------------------
 
-Client
+Client: Windows 8.1
 
-Windows 8.1
-
-Server
-
-Windows Server 2012 R2
+Server: Windows Server 2012 R2
 
 Build the sample
 ----------------

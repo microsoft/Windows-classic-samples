@@ -52,12 +52,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     wcex.style = CS_HREDRAW | CS_VREDRAW;
     wcex.lpfnWndProc = WndProc;
     wcex.hInstance = hInstance;
-    wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_SETTHREADDPIAWARENESSCONTEXTSAMPLE));
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = WINDOWCLASSNAME;
-    wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     RegisterClassExW(&wcex);
 
@@ -83,7 +81,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     g_hInst = hInstance; // Store instance handle in our global variable
-    HMENU hmenu = LoadMenu(hInstance, MAKEINTRESOURCEW(IDC_SETTHREADDPIAWARENESSCONTEXTSAMPLE));
+    HMENU hmenu = LoadMenu(hInstance, MAKEINTRESOURCEW(IDC_MAINMENU));
     if (hmenu == nullptr)
     {
         return FALSE;
@@ -95,7 +93,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // resize it for DPI in the WM_CREATE handler in the winproc.
     HWND hWnd = CreateWindowW(
         WINDOWCLASSNAME,
-        L"SetThreadDpiAwarenessContext Sample",
+        L"DpiAwarenessContext Sample",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         0,
@@ -271,7 +269,7 @@ VOID CreateDpiUnawareWindow(HWND hWnd)
     DPI_AWARENESS_CONTEXT previousDpiContext = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_UNAWARE);
 
     HWND hWndUnaware = CreateWindow(
-        L"SetThreadDpiAwarenessContextSample",
+        WINDOWCLASSNAME,
         L"DPI Unaware Top-Level Window",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,

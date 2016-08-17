@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SetThreadDpiAwarenessContextSample</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <ProjectName>DpiAwarenessContext</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -156,21 +157,14 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SetThreadDpiAwarenessContextSample.cpp" />
+    <ClCompile Include="DpiAwarenessContext.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SetThreadDpiAwarenessContextSample.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="SetThreadDpiAwarenessContextSample.ico" />
-    <Image Include="small.ico" />
+    <ResourceCompile Include="DpiAwarenessContext.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
