@@ -299,7 +299,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // not per-monitor-DPI-aware). This API should be called while 
             // processing WM_NCCREATE.
             EnableNonClientDpiScaling(hWnd);
-            return TRUE;
+
+            return DefWindowProc(hWnd, message, wParam, lParam);
         }
 
         case WM_CREATE:
