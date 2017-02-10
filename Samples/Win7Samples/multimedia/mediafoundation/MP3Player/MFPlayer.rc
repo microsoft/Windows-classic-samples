@@ -1,0 +1,160 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""windows.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 275, 280
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "MFPlayer Sample"
+MENU IDR_MENU1
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_VIDEO_ZOOM,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,36,229,100,15
+    LTEXT           "Zoom",IDC_STATIC,14,231,18,8
+    CONTROL         "",IDC_SEEKBAR,"SLIDER_CLASS",0x0,7,158,261,12
+    CONTROL         "",IDC_VOLUME,"SLIDER_CLASS",WS_TABSTOP,151,189,84,12
+    PUSHBUTTON      "Button1",IDC_MUTE,241,183,24,23
+    LTEXT           "Volume",IDC_STATIC,152,178,83,8
+    PUSHBUTTON      "Button2",IDC_PLAY,7,179,36,34
+    PUSHBUTTON      "Rew",IDC_REWIND,49,188,32,14
+    PUSHBUTTON      "FF",IDC_FASTFORWARD,86,188,32,14
+    GROUPBOX        "Video",IDC_STATIC,7,217,138,35
+    CONTROL         "",IDC_VIDEO,"Static",SS_BLACKFRAME,7,7,261,146
+    DEFPUSHBUTTON   "Exit",IDOK,218,246,50,14
+    LTEXT           "MEDIA_TITLE",IDC_MEDIA_TITLE,151,217,110,8
+    LTEXT           "MEDIA AUTHOR",IDC_MEDIA_AUTHOR,151,230,110,8
+END
+
+IDD_OPENURL DIALOGEX 0, 0, 186, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Open URL"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_URL,7,18,172,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,76,73,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,73,50,14
+    LTEXT           "Enter the URL to open:",IDC_STATIC,7,7,75,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 268
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 273
+    END
+
+    IDD_OPENURL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Open File",                   ID_FILE_OPENFILE
+        MENUITEM "Open URL",                    ID_FILE_OPENURL
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+    POPUP "Options"
+    BEGIN
+        MENUITEM "Video Effect",                ID_OPTIONS_VIDEOEFFECT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SLIDER              BITMAP                  "images\\slider.bmp"
+IDB_VOLUME              BITMAP                  "images\\volume.bmp"
+IDB_MUTE                BITMAP                  "images\\mute.bmp"
+IDB_PLAY                BITMAP                  "images\\play.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
