@@ -55,7 +55,6 @@ struct OpenUrlDialogInfo
 INT_PTR CALLBACK OpenUrlDialogProc(HWND, UINT, WPARAM, LPARAM);
 
 void    NotifyError(HWND hwnd, const WCHAR *sErrorMessage, HRESULT hrErr);
-void    ToggleMenuItemCheck(UINT bMenuItemID, HMENU hmenu);
 HRESULT AllocGetWindowText(HWND hwnd, WCHAR **pszText, DWORD *pcchLen);
 void    EnableDialogControl(HWND hDlg, int nIDDlgItem, BOOL bEnable); 
 BOOL    StatusBar_SetText(HWND hwnd, int iPart, const WCHAR* pszText);
@@ -200,11 +199,6 @@ INT_PTR MainDialog::OnCommand(HWND /*hControl*/, WORD idControl, WORD /*msg*/)
     case IDC_FASTFORWARD:
         OnFastForward();
         break;
-
-    case ID_OPTIONS_VIDEOEFFECT: 
-        ToggleMenuItemCheck(idControl, GetMenu(m_hDlg)); 
-        break;
-
     }
 
     return 1;
@@ -418,8 +412,6 @@ void MainDialog::OnFileOpen()
 
     if (GetOpenFileName(&ofn))
     {
-        ApplyOptions();
-
         // Try to open the file.
         hr = m_pPlayer->OpenURL(szFileName);
 
@@ -683,49 +675,6 @@ void MainDialog::OnTimer()
             SetStatusTime(timeNow);
         }
     }
-}
-
-
-//-----------------------------------------------------------------------------
-// ApplyOptions
-//
-// Applies the user's playback options, before opening a new media file.
-//-----------------------------------------------------------------------------
-
-void MainDialog::ApplyOptions()
-{
-    HRESULT hr = S_OK;
-
-    HMENU hMenu = GetMenu(m_hDlg);
-
-    BOOL bVideoFX = IsMenuChecked(hMenu, ID_OPTIONS_VIDEOEFFECT);
-
-    if (bVideoFX)
-    {
-        IMFTransform *pMFT = NULL;
-
-        hr = CoCreateInstance(
-            CLSID_GrayscaleMFT, 
-            NULL, 
-            CLSCTX_INPROC_SERVER, 
-            IID_PPV_ARGS(&pMFT)
-            );
-
-        if (FAILED(hr))
-        {
-            NotifyError(m_hDlg, L"Cannot create grayscale transform. Did you register the DLL?", hr);
-        }
-        else
-        {
-            hr = m_pPlayer->SetEffect(pMFT);
-            pMFT->Release();
-        }
-    }
-    else
-    {
-        hr = m_pPlayer->SetEffect(NULL);
-    }
-
 }
 
 
@@ -1183,29 +1132,6 @@ INT_PTR CALLBACK OpenUrlDialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARA
         return (INT_PTR)FALSE;
     }
     return (INT_PTR)FALSE;
-}
-
-
-
-//-----------------------------------------------------------------------------
-// ToggleMenuItemCheck
-//
-// Toggle a menu item's checked state.
-//-----------------------------------------------------------------------------
-
-void ToggleMenuItemCheck(UINT bMenuItemID, HMENU hmenu) 
-{ 
-    BOOL bChecked = IsMenuChecked(hmenu, bMenuItemID); 
-
-    BYTE fNewState = MF_CHECKED;
-
-    if (bChecked & MF_CHECKED) 
-    { 
-        fNewState = MF_UNCHECKED;
-    }
-    CheckMenuItem(hmenu, (UINT) bMenuItemID, 
-        MF_BYCOMMAND | fNewState); 
-    
 }
 
 

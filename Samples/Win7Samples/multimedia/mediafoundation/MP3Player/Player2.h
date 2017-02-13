@@ -74,9 +74,6 @@ public:
     HRESULT Rewind();
     HRESULT FrameStep();
 
-    // Effects
-    HRESULT SetEffect(IMFTransform *pMFT);
-
 protected:
     // Constructor is private. Call CreateSamplePlayer to instantiate.
     MFPlayer2(HWND hwndEvent);

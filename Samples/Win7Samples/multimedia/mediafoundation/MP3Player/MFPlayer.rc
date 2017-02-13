@@ -126,10 +126,6 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Exit",                        ID_FILE_EXIT
     END
-    POPUP "Options"
-    BEGIN
-        MENUITEM "Video Effect",                ID_OPTIONS_VIDEOEFFECT
-    END
 END
 
 

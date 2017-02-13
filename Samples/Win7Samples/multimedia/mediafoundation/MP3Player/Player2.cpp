@@ -780,36 +780,6 @@ HRESULT MFPlayer2::FrameStep()
 }
 
 
-//-----------------------------------------------------------------------------
-// SetEffect
-//
-// Adds a video or audio effect.
-//
-// To remove all effects, pass NULL.
-//-----------------------------------------------------------------------------
-
-HRESULT  MFPlayer2::SetEffect(IMFTransform *pMFT)
-{
-    if (m_pPlayer == NULL)
-    {
-        return E_FAIL;
-    }
-
-    HRESULT hr = S_OK;
-
-    if (pMFT == NULL)
-    {
-        hr = m_pPlayer->RemoveAllEffects();
-    }
-    else
-    {
-        hr = m_pPlayer->InsertEffect(pMFT, TRUE);
-    }
-
-    return hr;
-}
-
-
 //------------------------------------------------------------------------------
 //  Initialize
 //  Creates an instance of the MFPlay player object.

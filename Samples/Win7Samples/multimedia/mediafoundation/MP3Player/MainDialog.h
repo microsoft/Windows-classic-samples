@@ -59,7 +59,6 @@ private:
     void    UpdateMetadata();
     void    ClearMetadata();
     
-    void    ApplyOptions();
     void    StopTimer();
     void    SetStatusTime(const MFTIME& time);
     void    SetStatusText(const WCHAR *szStatus);
