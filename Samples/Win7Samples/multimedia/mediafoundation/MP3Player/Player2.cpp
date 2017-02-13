@@ -51,8 +51,6 @@ MFPlayer2::MFPlayer2(HWND hwndEvent) :
     m_cRef(1), 
     m_pPlayer(NULL),
     m_hwndEvent(hwndEvent),
-    m_bHasVideo(FALSE),
-    m_fZoom(1.0f),
     m_pVolume(NULL),
     m_fRate(1.0f),
     m_caps(0)
@@ -315,107 +313,6 @@ done:
     return hr;
 }
 
-
-
-//-----------------------------------------------------------------------------
-// HasVideo
-//
-// Queries if current media file has a video stream.
-//-----------------------------------------------------------------------------
-
-HRESULT MFPlayer2::HasVideo(BOOL *pfHasVideo)
-{
-    if (pfHasVideo == NULL)
-    {
-        return E_POINTER;
-    }
-
-    *pfHasVideo = m_bHasVideo;
-
-    return S_OK;
-}
-
-
-
-//-----------------------------------------------------------------------------
-// SetZoom
-//
-// Sets the video zoom level. 
-//-----------------------------------------------------------------------------
-
-HRESULT MFPlayer2::SetZoom(float fZoom)
-{
-    if (fZoom < 1.0f)
-    {
-        return E_INVALIDARG;
-    }
-
-    if (m_fZoom == fZoom)
-    {
-        return S_OK; // no-op
-    }
-
-    m_fZoom = fZoom;
-
-    return SetZoom();
-}
-
-
-//-----------------------------------------------------------------------------
-// SetZoom
-//
-// Sets the video zoom level (using the current cached zoom value).
-//-----------------------------------------------------------------------------
-
-HRESULT MFPlayer2::SetZoom()
-{
-    HRESULT hr = S_OK;
-
-    if (m_bHasVideo && m_pPlayer)
-    {
-        if (m_fZoom == 1.0f)
-        {
-            // For 100% zoom, the normalized rectangle is {0,0,1,1}.
-
-            MFVideoNormalizedRect nrcSource = { 0.0f, 0.0f, 1.0f, 1.0f };
-
-            hr = m_pPlayer->SetVideoSourceRect(&nrcSource);
-        }
-        else
-        {
-            // For higher zoom levels, calculate the normalized rectangle.
-
-            float fMargin = (0.5f - (0.5f / m_fZoom));
-
-            MFVideoNormalizedRect nrcSource = { 
-                fMargin, fMargin, (1.0f - fMargin), (1.0f - fMargin)
-            };
-
-            hr = m_pPlayer->SetVideoSourceRect(&nrcSource);
-        }
-    }
-    return hr;
-}
-
-
-//-----------------------------------------------------------------------------
-// UpdateVideo
-// 
-// Call this method to repaint the current video frame or when the video
-// window is resized.
-//-----------------------------------------------------------------------------
-
-HRESULT MFPlayer2::UpdateVideo()
-{
-    HRESULT hr = S_OK;
-
-    if (m_pPlayer)
-    {
-        hr = m_pPlayer->UpdateVideo();
-    }
-
-    return hr;
-}
 
 
 //-----------------------------------------------------------------------------
@@ -849,17 +746,8 @@ void MFPlayer2::OnMediaItemCreated(MFP_MEDIAITEM_CREATED_EVENT *pEvent)
 
     IUnknown *pMFT = NULL;
 
-    m_bHasVideo = TRUE;
-
     if ((m_pPlayer != NULL) && (pEvent->pMediaItem != NULL))
     {
-        BOOL bHasVideo = FALSE, bIsSelected = FALSE;
-
-        hr = pEvent->pMediaItem->HasVideo(&bHasVideo, &bIsSelected);
-        if (FAILED(hr)) { goto done; }
-
-        m_bHasVideo = bHasVideo && bIsSelected;
-
         hr = m_pPlayer->SetMediaItem(pEvent->pMediaItem);
         if (FAILED(hr)) { goto done; }
     }

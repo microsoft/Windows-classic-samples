@@ -29,14 +29,6 @@ const LONG      MAX_VOL = 100;
 
 #include <initguid.h>
 
-// CLSID of the sample video effect MFT. 
-// (To use this CLSID, you must build the MFT_Grayscale sample and register the DLL.)
-
-// {2F3DBC05-C011-4a8f-B264-E42E35C67BF4}
-DEFINE_GUID(CLSID_GrayscaleMFT, 
-0x2f3dbc05, 0xc011, 0x4a8f, 0xb2, 0x64, 0xe4, 0x2e, 0x35, 0xc6, 0x7b, 0xf4);
-
-
 //------------------------------------------------------------------------------
 // OpenUrlDialogInfo struct
 // 
@@ -251,33 +243,15 @@ LRESULT MainDialog::OnNotify(NMHDR *pHdr)
 
 INT_PTR MainDialog::OnReceiveMsg(UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    PAINTSTRUCT ps;
-
     switch (msg)
     {
     case WM_TIMER:          // Timer message
         OnTimer();
         break;
 
-    case WM_HSCROLL:        // Trackbar scroll
-        OnScroll(LOWORD(wParam), HIWORD(wParam), (HWND)lParam);
-        break;
-
     case WM_THEMECHANGED:   // User changed the current theme.
         m_mute.ResetTheme();
         m_play.ResetTheme();
-        break;
-
-    case WM_PAINT:
-
-        BeginPaint(m_hDlg, &ps);
-
-        if (m_pPlayer)
-        {
-            m_pPlayer->UpdateVideo();
-        }
-
-        EndPaint(m_hDlg, &ps);
         break;
 
     case WM_CLOSE:
@@ -437,39 +411,6 @@ void MainDialog::OnFileOpen()
         if (err != 0)
         {
             NotifyError(m_hDlg, L"GetOpenFileName failed.", E_FAIL);
-        }
-    }
-}
-
-
-//-----------------------------------------------------------------------------
-//  OnScroll
-//
-//  Called when user selects, drags, or releases a trackbar control.
-//-----------------------------------------------------------------------------
-
-void MainDialog::OnScroll(WORD request, WORD /*position*/, HWND hControl)
-{
-    // We ignore the following trackbar requests:
-    switch (request)
-    {
-    case SB_ENDSCROLL: 
-    case SB_LEFT: 
-    case SB_RIGHT:
-    case SB_THUMBPOSITION: 
-        return;
-    }
-
-    if (hControl == GetDlgItem(IDC_VIDEO_ZOOM))
-    {
-        if (m_pPlayer)
-        {
-            LONG pos = (LONG)SendMessage(hControl, TBM_GETPOS, 0, 0);
-
-            // Scale the video.
-            float fZoom = (float)pos / 100;
-
-            m_pPlayer->SetZoom(fZoom);
         }
     }
 }
@@ -707,7 +648,6 @@ void MainDialog::UpdateUI()
 void MainDialog::UpdateUI(MFP_MEDIAPLAYER_STATE state)
 {
     BOOL bFileOpen = TRUE;
-    BOOL bHasVideo = FALSE;
     BOOL bHasAudio = FALSE;
     BOOL bEnablePlay = FALSE;
     BOOL bPlay = TRUE;  
@@ -724,7 +664,6 @@ void MainDialog::UpdateUI(MFP_MEDIAPLAYER_STATE state)
 
     if (m_pPlayer)
     {
-        m_pPlayer->HasVideo(&bHasVideo);
         m_pPlayer->CanSeek(&bCanSeek);
         m_pPlayer->CanFastForward(&bCanFF);
         m_pPlayer->CanRewind(&bCanRewind);
@@ -761,8 +700,6 @@ void MainDialog::UpdateUI(MFP_MEDIAPLAYER_STATE state)
         break;
     }
 
-
-    EnableDialogControl(m_hDlg, IDC_VIDEO_ZOOM, bHasVideo);
 
     EnableDialogControl(m_hDlg, IDC_PLAY, bEnablePlay);
     EnableDialogControl(m_hDlg, IDC_SEEKBAR, bEnablePlay);

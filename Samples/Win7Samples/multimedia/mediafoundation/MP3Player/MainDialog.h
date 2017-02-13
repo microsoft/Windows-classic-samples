@@ -65,7 +65,6 @@ private:
 
     // Commands
     void    OnFileOpen();
-    void    OnScroll(WORD request, WORD position, HWND hControl);
     void    OnSeekbarNotify(const NMSLIDER_INFO *pInfo);
     void    OnVolumeNotify(const NMSLIDER_INFO *pInfo);
     void    OnTimer();

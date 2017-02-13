@@ -10,8 +10,6 @@ This sample implements the following playback features:
 - Seeking
 - Volume and mute
 - Metadata
-- Video zoom
-- Video effects
 
 For a more basic example of using IMFPMediaPlayer, see the SimplePlay
 sample. 

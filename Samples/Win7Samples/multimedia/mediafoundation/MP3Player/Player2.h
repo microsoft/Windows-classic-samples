@@ -48,11 +48,6 @@ public:
     HRESULT GetState(MFP_MEDIAPLAYER_STATE *pState);
     HRESULT GetMetadata(IPropertyStore **ppProp);
 
-    // Video
-    HRESULT HasVideo(BOOL *pfHasVideo);
-    HRESULT SetZoom(float fZoom);
-    HRESULT UpdateVideo();
-
     // Audio
     BOOL    IsAudioEnabled() const { return (m_pVolume != NULL); }
     HRESULT SetVolume(float fLevel);
@@ -94,7 +89,6 @@ protected:
     }
 
     HRESULT Initialize(HWND hwndVideo);
-    HRESULT SetZoom();
 
     float   GetNominalRate() { return m_fRate; }
 
@@ -108,10 +102,6 @@ protected:
     IMFPMediaPlayer     *m_pPlayer;
 
     HWND                m_hwndEvent;        // App window to receive events.    
-
-    // Video
-    BOOL                m_bHasVideo;
-    float               m_fZoom;            // Zoom level (1.0 = 100%)
 
     // Audio
     CAudioSessionVolume             *m_pVolume;
