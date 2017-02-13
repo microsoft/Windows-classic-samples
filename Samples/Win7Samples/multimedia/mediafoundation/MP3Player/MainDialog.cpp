@@ -181,10 +181,6 @@ INT_PTR MainDialog::OnCommand(HWND /*hControl*/, WORD idControl, WORD /*msg*/)
         OnFileOpen();
         break;
 
-    case ID_FILE_OPENURL:
-        OnOpenURL();
-        break;
-
     case ID_FILE_EXIT:
         PostQuitMessage(0);
         break;
@@ -452,57 +448,6 @@ void MainDialog::OnFileOpen()
         }
     }
 }
-
-
-//-----------------------------------------------------------------------------
-//  OnOpenURL
-//
-//  Opens a media file from a URL.
-//-----------------------------------------------------------------------------
-
-void MainDialog::OnOpenURL()
-{
-    HRESULT hr = S_OK;
-    INT_PTR result = 0;
-
-    // Pass in an OpenUrlDialogInfo structure to the dialog. The dialog 
-    // fills in this structure with the URL. The dialog proc allocates
-    // the memory for the string. 
-
-    OpenUrlDialogInfo url;
-    ZeroMemory(&url, sizeof(&url));
-
-    // Show the Open URL dialog.
-    result = DialogBoxParam(GetInstance(), MAKEINTRESOURCE(IDD_OPENURL), m_hDlg, 
-        OpenUrlDialogProc, (LPARAM)&url);
-
-    if (result == IDOK)
-    {
-        ApplyOptions();
-
-        // Open the file with the playback object.
-        hr = m_pPlayer->OpenURL(url.pszURL);
-
-        // Update the state of the UI. (Regardless of success/failure code)
-        UpdateUI();
-
-        SetStatusText(L"Opening...");
-
-        // Invalidate the video window, in case there is an old video 
-        // frame from the previous file and there is no video now. (eg, the
-        // new file is audio only, or we failed to open this file.)
-        InvalidateRect(GetDlgItem(IDC_VIDEO), NULL, FALSE);
-
-        if (FAILED(hr))
-        {
-            NotifyError(m_hDlg, L"Cannot open this URL.", hr);
-        }
-    }
-
-    // The app must release the string for the URL.
-    CoTaskMemFree(url.pszURL);
-}
-
 
 
 //-----------------------------------------------------------------------------

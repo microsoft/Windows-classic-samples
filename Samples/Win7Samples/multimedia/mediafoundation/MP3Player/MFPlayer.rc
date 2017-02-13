@@ -123,7 +123,6 @@ BEGIN
     POPUP "File"
     BEGIN
         MENUITEM "Open File",                   ID_FILE_OPENFILE
-        MENUITEM "Open URL",                    ID_FILE_OPENURL
         MENUITEM SEPARATOR
         MENUITEM "Exit",                        ID_FILE_EXIT
     END

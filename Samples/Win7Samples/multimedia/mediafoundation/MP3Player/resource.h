@@ -24,7 +24,6 @@
 #define IDC_MEDIA_AUTHOR                1022
 #define ID_FILE_OPENFILE                40001
 #define ID_FILE_EXIT                    40002
-#define ID_FILE_OPENURL                 40003
 #define ID_OPTIONS_VIDEOEFFECT          40006
 #define IDC_STATIC                      -1
 
