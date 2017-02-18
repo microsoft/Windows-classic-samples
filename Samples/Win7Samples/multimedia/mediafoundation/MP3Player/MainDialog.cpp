@@ -326,7 +326,7 @@ void MainDialog::InitializeControls()
     m_play.SetButtonImage((UINT)-1, 0);
 
     // Set the range for the "zoom" trackbar.
-    HWND hZoom = GetDlgItem(IDC_VIDEO_ZOOM);
+    HWND hZoom = GetDlgItem(IDC_RATE);
 
     SendMessage(hZoom, TBM_SETRANGEMIN, TRUE, 100);
     SendMessage(hZoom, TBM_SETRANGEMAX, TRUE, 500);
