@@ -29,22 +29,7 @@ const LONG      MAX_VOL = 100;
 
 #include <initguid.h>
 
-//------------------------------------------------------------------------------
-// OpenUrlDialogInfo struct
-// 
-// Contains data passed to the "Open URL" dialog proc.
-//------------------------------------------------------------------------------
-
-struct OpenUrlDialogInfo
-{
-    WCHAR *pszURL;
-    DWORD cch;
-};
-
-
 // Function declarations
-
-INT_PTR CALLBACK OpenUrlDialogProc(HWND, UINT, WPARAM, LPARAM);
 
 void    NotifyError(HWND hwnd, const WCHAR *sErrorMessage, HRESULT hrErr);
 HRESULT AllocGetWindowText(HWND hwnd, WCHAR **pszText, DWORD *pcchLen);
@@ -1022,54 +1007,6 @@ void NotifyError(
     }
 }
 
-
-
-
-//-----------------------------------------------------------------------------
-//  OpenUrlDialogProc
-//
-//  Dialog procedure for the "Open URL" window.
-//-----------------------------------------------------------------------------
-
-INT_PTR CALLBACK OpenUrlDialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    static OpenUrlDialogInfo *pUrl = NULL;
-
-    BOOL result = FALSE;
-
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        // The app sends a pointer to an OpenUrlDialogInfo structure as the lParam. 
-        // We use this structure to store the URL.
-        pUrl = (OpenUrlDialogInfo*)lParam;
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        switch (LOWORD(wParam))
-        {
-        case IDOK:
-            if (pUrl)
-            {
-                // Get the URL from the edit box in the dialog.
-                // This function allocates memory. The app must call CoTaskMemAlloc.
-                HRESULT hr = AllocGetWindowText(GetDlgItem(hDlg, IDC_EDIT_URL), &pUrl->pszURL, &pUrl->cch);
-                if (SUCCEEDED(hr))
-                {
-                    result = TRUE;
-                }
-            }
-            EndDialog(hDlg, result ? IDOK : IDABORT);
-            break;
-
-        case IDCANCEL:
-            EndDialog(hDlg, LOWORD(IDCANCEL));
-            break;
-        }
-        return (INT_PTR)FALSE;
-    }
-    return (INT_PTR)FALSE;
-}
 
 
 
