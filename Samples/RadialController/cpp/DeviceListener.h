@@ -16,7 +16,10 @@ public:
 private:
     HRESULT RegisterForEvents(HWND hwnd);
     HRESULT PopulateMenuItems();
-    HRESULT AddMenuItemFromKnownIcon(_In_ HSTRING itemName, _In_ ABI::Windows::UI::Input::RadialControllerMenuKnownIcon icon);
+    HRESULT AddMenuItemFromKnownIcon(_In_ HSTRING itemName, _In_ ABI::Windows::UI::Input::RadialControllerMenuKnownIcon icon, _In_ EventRegistrationToken registrationToken);
+    HRESULT AddMenuItemFromSystemFont();
+    HRESULT AddMenuItem(_In_ Microsoft::WRL::ComPtr<ABI::Windows::UI::Input::IRadialControllerMenuItem> item, _In_ HSTRING itemName, _In_ EventRegistrationToken registrationToken);
+    HRESULT GetFontUri(_Out_ Microsoft::WRL::ComPtr<ABI::Windows::Foundation::IUriRuntimeClass>* fontUri);
     HRESULT OnItemInvoked(_In_ ABI::Windows::UI::Input::IRadialControllerMenuItem* item, _In_ IInspectable* args);
 
     HRESULT OnScreenContactContinued(_In_ ABI::Windows::UI::Input::IRadialController*, _In_ ABI::Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs* args);
@@ -45,7 +48,9 @@ private:
     EventRegistrationToken _controlLostToken;
     EventRegistrationToken _controlAcquiredToken;
     EventRegistrationToken _buttonClickedToken;
-    EventRegistrationToken _menuItem1Token;
-    EventRegistrationToken _menuItem2Token;
+    EventRegistrationToken _knownIconItem1Token;
+    EventRegistrationToken _knownIconItem2Token;
+    EventRegistrationToken _systemFontItemToken;
+    EventRegistrationToken _customFontItemToken;
 };
 
