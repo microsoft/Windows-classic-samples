@@ -72,22 +72,22 @@ HRESULT CSampleProvider::SetUsageScenario(
     __in DWORD dwFlags
     )
 {
-    HRESULT hr;
+    HRESULT hr = S_OK;
 
-    // Create the password credential provider and query its interface for an
-    // ICredentialProvider we can use. Once it's up and running, ask it about the 
-    // usage scenario being provided.
-    IUnknown *pUnknown = NULL;
-    hr = CoCreateInstance(CLSID_PasswordCredentialProvider, NULL, CLSCTX_ALL, IID_PPV_ARGS(&pUnknown));
+    // Create the password credential provider if we don't already have one,
+    // and query its interface for an ICredentialProvider we can use.
+    if (_pWrappedProvider == NULL)
+    {
+        hr = CoCreateInstance(CLSID_PasswordCredentialProvider, NULL, CLSCTX_ALL, IID_PPV_ARGS(&_pWrappedProvider));
+    }
+
+    // Once the provider is up and running, ask it about the usage scenario
+    // being provided.
     if (SUCCEEDED(hr))
     {
-        hr = pUnknown->QueryInterface(IID_PPV_ARGS(&(_pWrappedProvider)));
-        if (SUCCEEDED(hr))
-        {
-            hr = _pWrappedProvider->SetUsageScenario(cpus, dwFlags);
-        }
-        pUnknown->Release();
+        hr = _pWrappedProvider->SetUsageScenario(cpus, dwFlags);
     }
+
     if (FAILED(hr))
     {
         if (_pWrappedProvider != NULL)
