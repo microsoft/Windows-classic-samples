@@ -24,7 +24,7 @@ it might have platform, version, or SKU-specific requirements.
 If you have any issues with the samples, please provide feedback using the Issues list.
 
 To get a copy of Windows, go to
-[Downloads and tools](http://go.microsoft.com/fwlink/p/?linkid=301696).
+[Downloads and tools](https://developer.microsoft.com/en-us/windows/downloads).
 
 To get a copy of Visual Studio, go to
 [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
