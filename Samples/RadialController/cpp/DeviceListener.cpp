@@ -12,6 +12,7 @@
 #include <wrl.h>
 #include <map>
 #include <vector>
+#include <Pathcch.h>
 #include <windows.foundation.h>
 #include <windows.foundation.numerics.h>
 #include <windows.foundation.collections.h>
@@ -133,37 +134,94 @@ HRESULT DeviceListener::PopulateMenuItems()
 
 
     RETURN_IF_FAILED(AddMenuItemFromKnownIcon(HStringReference(L"My Ink").Get(),
-        RadialControllerMenuKnownIcon::RadialControllerMenuKnownIcon_InkColor));
+        RadialControllerMenuKnownIcon::RadialControllerMenuKnownIcon_InkColor,
+        _knownIconItem1Token));
 
     RETURN_IF_FAILED(AddMenuItemFromKnownIcon(HStringReference(L"Ruler").Get(),
-        RadialControllerMenuKnownIcon::RadialControllerMenuKnownIcon_Ruler));
+        RadialControllerMenuKnownIcon::RadialControllerMenuKnownIcon_Ruler,
+        _knownIconItem2Token));
+
+    RETURN_IF_FAILED(AddMenuItemFromSystemFont());
 
     return S_OK;
 }
 
-HRESULT DeviceListener::AddMenuItemFromKnownIcon(_In_ HSTRING itemName, _In_ RadialControllerMenuKnownIcon icon)
+HRESULT DeviceListener::AddMenuItemFromKnownIcon(_In_ HSTRING itemName, _In_ RadialControllerMenuKnownIcon icon, _In_ EventRegistrationToken registrationToken)
 {
     // Get menu items
     ComPtr<Collections::IVector<RadialControllerMenuItem*>> menuItems;
     RETURN_IF_FAILED(_menu->get_Items(&menuItems));
 
-    // Create item
+    // Create item from known icon
     ComPtr<IRadialControllerMenuItem> menuItem;
     RETURN_IF_FAILED(_menuItemStatics->CreateFromKnownIcon(itemName, icon, &menuItem));
 
+    RETURN_IF_FAILED(AddMenuItem(menuItem, itemName, registrationToken));
 
+    return S_OK;
+}
+
+HRESULT DeviceListener::AddMenuItemFromSystemFont()
+{
+    // Create item from system font
+    ComPtr<IRadialControllerMenuItemStatics2> menuItemStatics2;
+    RETURN_IF_FAILED(Windows::Foundation::GetActivationFactory(
+        HStringReference(RuntimeClass_Windows_UI_Input_RadialControllerMenuItem).Get(),
+        &menuItemStatics2));
+
+    HSTRING toolDisplayName = HStringReference(L"System Font Item").Get();
+    ComPtr<IRadialControllerMenuItem> systemFontItem;
+    menuItemStatics2->CreateFromFontGlyph(toolDisplayName, HStringReference(L"\x2764").Get(), HStringReference(L"Segoe UI Emoji").Get(), &systemFontItem);
+
+    RETURN_IF_FAILED(AddMenuItem(systemFontItem, toolDisplayName, _systemFontItemToken));
+
+    // Get font uri
+    ComPtr<IUriRuntimeClass> fontUri;
+    RETURN_IF_FAILED(GetFontUri(&fontUri));
+
+    // Create item from custom font
+    toolDisplayName = HStringReference(L"Custom Font Item").Get();
+    ComPtr<IRadialControllerMenuItem> customFontItem;
+    menuItemStatics2->CreateFromFontGlyphWithUri(toolDisplayName, HStringReference(L"\ue102").Get(), HStringReference(L"Symbols").Get(), fontUri.Get(), &customFontItem);
+
+    RETURN_IF_FAILED(AddMenuItem(customFontItem, toolDisplayName, _customFontItemToken));
+}
+
+HRESULT DeviceListener::AddMenuItem(_In_ ComPtr<IRadialControllerMenuItem> item, _In_ HSTRING itemName, _In_ EventRegistrationToken registrationToken)
+{
     // Set Callback
-    RETURN_IF_FAILED(menuItem->add_Invoked(
+    RETURN_IF_FAILED(item->add_Invoked(
         Callback<ITypedEventHandler<RadialControllerMenuItem*, IInspectable*>>(this, &DeviceListener::OnItemInvoked).Get(),
-        &_menuItem2Token));
+        &registrationToken));
+
+    // Get menu items
+    ComPtr<Collections::IVector<RadialControllerMenuItem*>> menuItems;
+    RETURN_IF_FAILED(_menu->get_Items(&menuItems));
 
     // Add item to menu
-    RETURN_IF_FAILED(menuItems->Append(menuItem.Get()));
+    RETURN_IF_FAILED(menuItems->Append(item.Get()));
 
     // Log new item
     wchar_t message[2000];
     swprintf_s(message, 2000, L"Added %s to menu\n", WindowsGetStringRawBuffer(itemName, nullptr));
     PrintMsg(message, FOREGROUND_BLUE | FOREGROUND_GREEN);
+
+    return S_OK;
+}
+
+HRESULT DeviceListener::GetFontUri(_Out_ ComPtr<IUriRuntimeClass>* fontUri)
+{
+    WCHAR currentPath[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, currentPath);
+    WCHAR fontFile[] = L"..\\shared\\Symbols.ttf";
+
+    WCHAR fontPath[MAX_PATH];
+    RETURN_IF_FAILED(PathCchCombine(fontPath, MAX_PATH, currentPath, fontFile));
+
+    ComPtr<IUriRuntimeClassFactory> uriRuntimeClassFactory;
+    RETURN_IF_FAILED(GetActivationFactory(HStringReference(RuntimeClass_Windows_Foundation_Uri).Get(), &uriRuntimeClassFactory));
+
+    RETURN_IF_FAILED(uriRuntimeClassFactory->CreateUri(HStringReference(fontPath).Get(), &(*fontUri)));
 
     return S_OK;
 }
