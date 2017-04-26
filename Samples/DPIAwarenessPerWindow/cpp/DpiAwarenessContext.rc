@@ -33,8 +33,37 @@ IDC_MAINMENU MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "&Create DPI Unaware Window",  IDM_DPIUNAWARE
+        POPUP "Item 1"
+        BEGIN
+            MENUITEM "Sub Item 1",                  ID_ITEM1_SUBITEM1
+            MENUITEM "Sub Item 2",                  ID_ITEM1_SUBITEM2
+            MENUITEM "Sub Item 3",                  ID_ITEM1_SUBITEM3
+        END
+        MENUITEM "Item 2",                      ID_FILE_ITEM2
+        MENUITEM "Item 3",                      ID_FILE_ITEM3
         MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "Edit"
+    BEGIN
+        POPUP "Edit Item 1"
+        BEGIN
+            MENUITEM "Edit Sub Item 1",             ID_EDITITEM1_EDITSUBITEM1
+            MENUITEM "Edit Sub Item 2",             ID_EDITITEM1_EDITSUBITEM2
+            MENUITEM "Edit Sub Item 3",             ID_EDITITEM1_EDITSUBITEM3
+        END
+        MENUITEM "Edit Item 2",                 ID_EDIT_EDITITEM2
+        MENUITEM "Edit Item 3",                 ID_EDIT_EDITITEM3
+    END
+    POPUP "View"
+    BEGIN
+        POPUP "View Item 1"
+        BEGIN
+            MENUITEM "View Sub Item 1",             ID_VIEWITEM1_VIEWSUBITEM1
+            MENUITEM "View Sub Item 2",             ID_VIEWITEM1_VIEWSUBITEM2
+            MENUITEM "View Sub Item 3",             ID_VIEWITEM1_VIEWSUBITEM3
+        END
+        MENUITEM "View Item 2",                 ID_VIEW_VIEWITEM2
+        MENUITEM "View Item 3",                 ID_VIEW_VIEWITEM3
     END
 END
 
@@ -67,6 +96,44 @@ BEGIN
     "\0"
 END
 
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 304, 300
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "High DPI Awareness Sample"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Create a DPI unaware window\r\n(DPI_AWARENESS_CONTEXT_UNAWARE)",IDC_BUTTON_UNAWARE,7,111,290,30,BS_MULTILINE
+    PUSHBUTTON      "Create a System DPI aware window\r\n(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE)",IDC_BUTTON_SYSTEM,7,148,290,30,BS_MULTILINE
+    PUSHBUTTON      "Create a Windows 8.1 era Per Monitor window (DPI_AWARENESS_CONTEXT_PER_MONITOR)",IDC_BUTTON_81,7,186,290,30,BS_MULTILINE
+    PUSHBUTTON      "Create a Windows 10 (1703) ""Creators Update"" Per Monitor DPI aware window (DPI_AWARENESS_CONTEXT_PER_MONITOR_V2)",IDC_BUTTON_1703,7,263,290,30,BS_MULTILINE
+    EDITTEXT        IDC_EDIT1,7,7,290,95,ES_MULTILINE | ES_READONLY | NOT WS_BORDER
+    PUSHBUTTON      "Create a Windows 10 (1607) Per Monitor window with non-client scaling\r\n(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE + EnableNonClientDpiScaling())",IDC_BUTTON_1607,7,223,290,33,BS_MULTILINE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 297
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 293
+    END
+END
 #endif    // APSTUDIO_INVOKED
 
 #endif    // English (United States) resources
