@@ -60,27 +60,50 @@ namespace RadialControllerWinForms
 
         private void AddCustomItems()
         {
-            radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromKnownIcon("My Ruler", RadialControllerMenuKnownIcon.Ruler));
+            radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromKnownIcon("Ruler", RadialControllerMenuKnownIcon.Ruler));
 
-            AddItemFromImageFile();
+            AddItemFromImage();
+            AddItemsFromFont();
         }
 
-        private void AddItemFromImageFile()
+        private void AddItemsFromFont()
         {
-            string iconFileName = "Item0.png";
-            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, iconFileName);
-            var getItemImageOperation = StorageFile.GetFileFromPathAsync(filePath);
+            // Using custom font
+            string fontFilePath = GetSharedFilePath("Symbols.ttf");
+            radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromFontGlyph("Custom Font Icon", "\xe102", "Symbols", new Uri(fontFilePath)));
 
-            getItemImageOperation.Completed += new AsyncOperationCompletedHandler<StorageFile>(AddMenuItemFromImage);
+            // Using system font
+            radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromFontGlyph("System Font Icon", "\xD83D\xDC31\x200D\xD83D\xDC64", "Segoe UI Emoji"));
         }
 
-        private void AddMenuItemFromImage(IAsyncOperation<StorageFile> asyncInfo, AsyncStatus asyncStatus)
+        private void AddItemFromImage()
+        {
+            string iconFilePath = GetFilePath("Palette.png");
+            var getItemImageOperation = StorageFile.GetFileFromPathAsync(iconFilePath);
+
+            getItemImageOperation.Completed += new AsyncOperationCompletedHandler<StorageFile>(OnImageFileFound);
+        }
+
+        private void OnImageFileFound(IAsyncOperation<StorageFile> asyncInfo, AsyncStatus asyncStatus)
         {
             if (asyncStatus == AsyncStatus.Completed)
             {
                 StorageFile imageFile = asyncInfo.GetResults();
-                radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromIcon("test", RandomAccessStreamReference.CreateFromFile(imageFile)));
+                radialController.Menu.Items.Add(RadialControllerMenuItem.CreateFromIcon("Custom Image", RandomAccessStreamReference.CreateFromFile(imageFile)));
             }
+        }
+
+        private string GetSharedFilePath(string fileName)
+        {
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string sharedFolderName = "shared";
+            return Path.Combine(projectDirectory, sharedFolderName, fileName);
+        }
+
+        private string GetFilePath(string fileName)
+        {
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            return Path.Combine(projectDirectory, fileName);
         }
 
         private void SetDefaultItems()
@@ -105,6 +128,7 @@ namespace RadialControllerWinForms
 
         private void RadialController_ButtonClicked(RadialController sender, RadialControllerButtonClickedEventArgs args)
         {
+            Rotation(180);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -118,8 +142,13 @@ namespace RadialControllerWinForms
 
             float nx = (float)Math.Cos(_angle * (Math.PI / 180.0)) * r + cx;
             float ny = (float)Math.Sin(_angle * (Math.PI / 180.0)) * r + cy;
-
             e.Graphics.DrawLine(Pens.Black, cx, cy, nx, ny);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            Invalidate();
         }
 
         private void Rotation(double delta)
@@ -136,6 +165,17 @@ namespace RadialControllerWinForms
             }
 
             Invalidate();
+        }
+
+        private void MenuSuppressionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RadialControllerConfiguration radialControllerConfig;
+            IRadialControllerConfigurationInterop radialControllerConfigInterop = (IRadialControllerConfigurationInterop)System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.GetActivationFactory(typeof(RadialControllerConfiguration));
+            Guid guid = typeof(RadialControllerConfiguration).GetInterface("IRadialControllerConfiguration").GUID;
+
+            radialControllerConfig = radialControllerConfigInterop.GetForWindow(this.Handle, ref guid);
+            radialControllerConfig.ActiveControllerWhenMenuIsSuppressed = radialController;
+            radialControllerConfig.IsMenuSuppressed = MenuSuppressionCheckBox.Checked;
         }
     }
 }
