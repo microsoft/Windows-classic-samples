@@ -22,7 +22,7 @@
     <ProjectGuid>{F9626F74-5C4E-40B7-A0D9-687E0C68B69D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SetThreadDpiAwarenessContextSample</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15042.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>DpiAwarenessContext</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
