@@ -450,6 +450,11 @@ HRESULT DrawDevice::DrawFrame(IMFMediaBuffer *pBuffer)
         m_width,
         m_height
         );
+	unsigned char *bits = (unsigned char *)lr.pBits;
+	for (unsigned int i = 0; i < 640000; i++)
+	{
+		bits[i] = bits[i] + (255 - bits[i]) * 0.5;
+	}
 
     hr = pSurf->UnlockRect();
 
@@ -461,7 +466,7 @@ HRESULT DrawDevice::DrawFrame(IMFMediaBuffer *pBuffer)
 
     if (FAILED(hr)) { goto done; }
 
-    hr = m_pDevice->ColorFill(pBB, NULL, D3DCOLOR_XRGB(0, 0, 0x80));
+    hr = m_pDevice->ColorFill(pBB, NULL, D3DCOLOR_XRGB(0, 0, 0));
 
     if (FAILED(hr)) { goto done; }
 
