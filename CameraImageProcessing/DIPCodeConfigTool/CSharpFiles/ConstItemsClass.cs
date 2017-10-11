@@ -8,6 +8,7 @@ namespace DIPCodeConfigTool.CSharpFiles                                         
 {																				//	進入命名空間
 	class ConstItemsClass                                                       //	ConstItemsClass類別
 	{                                                                           //	進入ConstItemsClass類別
+		public readonly static ConstItemsClass Instance = new ConstItemsClass();//	宣告公用唯讀靜態物件，作為外部存取介面
 		public const string CodeHeader =                                        //	建立CodeHeader字串物件
 			@"/*\tC語言影像處理函式庫 \n \
 				\tDevelop by Jimmy HU<s103360021@gmail.com> \n \ 
