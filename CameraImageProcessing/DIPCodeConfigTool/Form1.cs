@@ -15,6 +15,7 @@ namespace DIPCodeConfigTool
 		public Form1()
 		{
 			InitializeComponent();
+			tabControlInitialize();
 		}
 		void tabControlInitialize()
 		{
