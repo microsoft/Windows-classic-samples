@@ -109,5 +109,7 @@ enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode列舉(用於HaarWave
 
 enum YUVGUID															//	宣告YUVGUID列舉(用於YUV與RGB轉換)
 {																		//	進入YUVGUID列舉
+	MEDIASUBTYPE_RGB1 = 1,												//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB4 = 2,												//	條列YUVGUID內容
 
 };																		//	結束YUVGUID列舉
