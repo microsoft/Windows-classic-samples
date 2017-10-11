@@ -347,3 +347,12 @@ inline LONG Height(const RECT& r)
 {
 	return r.bottom - r.top;
 }
+
+/*	YUVtoRGB24 function is proformed to convert the YUV image to RGB image
+	input parameter is (const YUV image, const YUV encoding type)
+	return ()
+	YUVtoRGB24函數用於將YUV格式圖像轉換為RGB格式圖像
+	輸入參數為(YUV圖像常數資料, YUV圖像編碼方式)
+
+*/
+unsigned char* YUVtoRGB24()
