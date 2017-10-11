@@ -175,17 +175,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="device.cpp" />
+    <ClCompile Include="ImageProcessing\Conversion.cpp" />
+    <ClCompile Include="ImageProcessing\MainImageProcessing.cpp" />
     <ClCompile Include="preview.cpp" />
-    <ClCompile Include="Conversion.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BufferLock.h" />
     <ClInclude Include="device.h" />
-    <ClInclude Include="Conversion.h" />
+    <ClInclude Include="ImageProcessing\Conversion.h" />
+    <ClInclude Include="ImageProcessing\DIPDefine.h" />
+    <ClInclude Include="ImageProcessing\MainImageProcessing.h" />
     <ClInclude Include="MFCaptureD3D.h" />
     <ClInclude Include="preview.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="unistd.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFCaptureD3D.rc" />
