@@ -13,6 +13,7 @@
 
 #include "MFCaptureD3D.h"
 #include "BufferLock.h"
+#include "ImageProcessing\\MainImageProcessing.h"
 
 const DWORD NUM_BACK_BUFFERS = 2;
 
@@ -441,11 +442,8 @@ HRESULT DrawDevice::DrawFrame(IMFMediaBuffer *pBuffer)
         m_width,
         m_height
         );
-	unsigned char *bits = (unsigned char *)lr.pBits;
-	for (unsigned int i = 0; i < 640000; i++)
-	{
-		bits[i] = (unsigned char)(bits[i] + (255 - bits[i]) * 0.5);
-	}
+	
+	MainImageProcessing((unsigned char *)lr.pBits, m_width, m_height);
 
     hr = pSurf->UnlockRect();
 
