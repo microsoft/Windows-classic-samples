@@ -18,5 +18,10 @@ namespace DIPCodeConfigTool.CSharpFiles                                         
 		{                                                                       //	進入ConstItemsClass類別建構子
 
 		}                                                                       //	結束ConstItemsClass類別建構子
+		public void WriteHeader(string FileName)                                //	WriteHeader方法
+		{                                                                       //	進入WriteHeader方法
+			FileIO.Instance.FileWrite(FileName, CodeHeader);					//	建立檔案
+			return;                                                             //	結束方法
+		}                                                                       //	結束WriteHeader方法
 	}                                                                           //	結束ConstItemsClass類別
 }																				//	結束命名空間
