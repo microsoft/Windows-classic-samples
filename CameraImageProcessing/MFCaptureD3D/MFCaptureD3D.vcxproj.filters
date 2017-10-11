@@ -30,7 +30,10 @@
     <ClCompile Include="winmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Conversion.cpp">
+    <ClCompile Include="ImageProcessing\Conversion.cpp">
+      <Filter>Source Files\ImageProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageProcessing\MainImageProcessing.cpp">
       <Filter>Source Files\ImageProcessing</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,8 +53,17 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Conversion.h">
+    <ClInclude Include="ImageProcessing\Conversion.h">
       <Filter>Header Files\ImageProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcessing\DIPDefine.h">
+      <Filter>Header Files\ImageProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageProcessing\MainImageProcessing.h">
+      <Filter>Header Files\ImageProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="unistd.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
