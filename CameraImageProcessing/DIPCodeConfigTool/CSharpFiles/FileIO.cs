@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;                                                              //	使用System.Text函式庫
 using System.Threading.Tasks;
 
-namespace ExplorerGDriveSync.CSharpFiles                                        //	ExplorerGDriveSync.CSharpFiles命名空間
+namespace DIPCodeConfigTool.CSharpFiles                                         //	DIPCodeConfigTool.CSharpFiles命名空間
 {																				//	進入命名空間
 	class FileIO                                                                //	FileIO類別
 	{                                                                           //	進入FileIO類別
