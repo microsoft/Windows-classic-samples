@@ -176,11 +176,13 @@
   <ItemGroup>
     <ClCompile Include="device.cpp" />
     <ClCompile Include="preview.cpp" />
+    <ClCompile Include="Conversion.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BufferLock.h" />
     <ClInclude Include="device.h" />
+    <ClInclude Include="Conversion.h" />
     <ClInclude Include="MFCaptureD3D.h" />
     <ClInclude Include="preview.h" />
     <ClInclude Include="resource.h" />
