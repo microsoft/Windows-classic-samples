@@ -107,7 +107,7 @@ enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode列舉(用於HaarWave
 	LowLow = 8,															//	定義二階Haar小波轉換模式LowLow
 };																		//	結束HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
 
-enum YUVGUID															//	宣告YUVGUID集合(用於YUV與RGB轉換)
-{																		//	進入YUVGUID集合
+enum YUVGUID															//	宣告YUVGUID列舉(用於YUV與RGB轉換)
+{																		//	進入YUVGUID列舉
 
-};
+};																		//	結束YUVGUID列舉
