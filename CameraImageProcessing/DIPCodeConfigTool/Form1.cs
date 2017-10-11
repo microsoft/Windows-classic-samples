@@ -16,5 +16,9 @@ namespace DIPCodeConfigTool
 		{
 			InitializeComponent();
 		}
+		void tabControlInitialize()
+		{
+
+		}
 	}
 }
