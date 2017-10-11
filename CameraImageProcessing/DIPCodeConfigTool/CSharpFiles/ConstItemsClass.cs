@@ -14,6 +14,9 @@ namespace DIPCodeConfigTool.CSharpFiles                                         
 				\tThis program is licensed under GNU General Public License v3. \n \
 				\tDIPDefine.h定義影像處理函數所使用之結構、資料型態 \n \
 				*/";                                                            //	建立CodeHeader內容
+		public ConstItemsClass()                                                //	ConstItemsClass類別建構子
+		{                                                                       //	進入ConstItemsClass類別建構子
 
+		}                                                                       //	結束ConstItemsClass類別建構子
 	}                                                                           //	結束ConstItemsClass類別
 }																				//	結束命名空間
