@@ -99,13 +99,13 @@ enum HaarWaveletMode													//	宣告HaarWaveletMode集合(用於HaarWavele
 		水平方向低通濾波(呼叫HaarWavelet副程式HorizontalLowPass模式)、垂直方向低通濾波(呼叫HaarWavelet副程式VerticalLowPass模式)
 	並給定二進位冪次方數值，以便選定多重模式(如：HighHigh|HighLow、HighLow|LowHigh)
  */
-enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode集合(用於HaarWavelet2副程式)
-{																		//	進入HaarWavelet2Mode集合(用於HaarWavelet2副程式)
+enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
+{																		//	進入HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
 	HighHigh = 1,														//	定義二階Haar小波轉換模式HighHigh
 	HighLow = 2,														//	定義二階Haar小波轉換模式HighLow
 	LowHigh = 4,														//	定義二階Haar小波轉換模式LowHigh
 	LowLow = 8,															//	定義二階Haar小波轉換模式LowLow
-};																		//	結束HaarWavelet2Mode集合(用於HaarWavelet2副程式)
+};																		//	結束HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
 
 enum YUVGUID															//	宣告YUVGUID集合(用於YUV與RGB轉換)
 {																		//	進入YUVGUID集合
