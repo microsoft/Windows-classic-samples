@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DIPCodeConfigTool
-{
+{                                                                               //	進入命名空間
 	public partial class Form1 : Form
 	{
 		public Form1()
@@ -22,4 +22,4 @@ namespace DIPCodeConfigTool
 
 		}
 	}
-}
+}																				//	結束命名空間
