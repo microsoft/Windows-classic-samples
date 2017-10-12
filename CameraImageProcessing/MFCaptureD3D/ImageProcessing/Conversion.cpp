@@ -355,4 +355,4 @@ inline LONG Height(const RECT& r)
 	輸入參數為(YUV圖像常數資料, YUV圖像編碼方式)
 
 */
-unsigned char* YUVtoRGB24()
+//unsigned char* YUVtoRGB24()
