@@ -19,7 +19,7 @@ namespace DIPCodeConfigTool
 		}
 		void tabControlInitialize()
 		{
-
+			CSharpFiles.ConstItemsClass.Instance.WriteHeader("test.txt");
 		}
 	}
 }																				//	結束命名空間

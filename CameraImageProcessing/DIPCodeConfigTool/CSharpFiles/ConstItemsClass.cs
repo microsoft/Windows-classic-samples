@@ -10,18 +10,19 @@ namespace DIPCodeConfigTool.CSharpFiles                                         
 	{                                                                           //	進入ConstItemsClass類別
 		public readonly static ConstItemsClass Instance = new ConstItemsClass();//	宣告公用唯讀靜態物件，作為外部存取介面
 		public const string CodeHeader =                                        //	建立CodeHeader字串物件
-			@"/*\tC語言影像處理函式庫 \n \
-				\tDevelop by Jimmy HU<s103360021@gmail.com> \n \ 
-				\tThis program is licensed under GNU General Public License v3. \n \
-				\tDIPDefine.h定義影像處理函數所使用之結構、資料型態 \n \
-				*/";                                                            //	建立CodeHeader內容
+			@"/*	C語言影像處理函式庫
+	Develop by Jimmy HU<s103360021@gmail.com> 
+	This program is licensed under GNU General Public License v3.
+	DIPDefine.h定義影像處理函數所使用之結構、資料型態
+*/";																			//	建立CodeHeader內容
 		public ConstItemsClass()                                                //	ConstItemsClass類別建構子
 		{                                                                       //	進入ConstItemsClass類別建構子
 
 		}                                                                       //	結束ConstItemsClass類別建構子
 		public void WriteHeader(string FileName)                                //	WriteHeader方法
 		{                                                                       //	進入WriteHeader方法
-			FileIO.Instance.FileWrite(FileName, CodeHeader);					//	建立檔案
+			FileIO.Instance.FileWrite(FileName, CodeHeader, System.IO.FileMode.Create);
+			//	建立檔案
 			return;                                                             //	結束方法
 		}                                                                       //	結束WriteHeader方法
 	}                                                                           //	結束ConstItemsClass類別
