@@ -11,6 +11,7 @@
 #include <stdlib.h>														//	引入標頭檔stdlib.h
 #include <string.h>														//	引入標頭檔string.h
 #include "..\\unistd.h"													//	引入標頭檔unistd.h
+#include "Conversion.h"
 
 //-----funtion declaration, 副程式宣告區-----
 /*	MainImageProcessing副程式撰寫串流影像主要處理流程，

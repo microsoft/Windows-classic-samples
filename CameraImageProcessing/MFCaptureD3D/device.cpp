@@ -10,10 +10,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //
 //////////////////////////////////////////////////////////////////////////
-
-#include "MFCaptureD3D.h"
-#include "BufferLock.h"
 #include "ImageProcessing\\MainImageProcessing.h"
+#include "BufferLock.h"
+
 
 const DWORD NUM_BACK_BUFFERS = 2;
 
