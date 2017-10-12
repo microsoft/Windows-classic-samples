@@ -5,7 +5,6 @@
 //-------------------------------------------------------------------
 
 //-----include header files, 引入標頭檔-----
-#include "..\\MFCaptureD3D.h"											//	include "MFCaptureD3D.h" header file, 引入標頭檔MFCaptureD3D.h
 #include "Conversion.h"
 
 //-----funtion implementation, 副程式實作-----
