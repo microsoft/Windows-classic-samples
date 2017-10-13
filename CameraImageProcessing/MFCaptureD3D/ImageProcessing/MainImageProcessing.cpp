@@ -13,36 +13,10 @@ void MainImageProcessing(unsigned char* InputImage, unsigned int ImageSizeX, uns
 	BMP24RGBIMAGE RGBImage1;											//	宣告RGBImage1用於BMP24RGB型態圖像資料處理
 	RGBImage1.XSIZE = ImageSizeX;										//	傳遞XSIZE資訊
 	RGBImage1.YSIZE = ImageSizeY;										//	傳遞YSIZE資訊
-	RGBImage1.IMAGE_DATA = (BMP24RGB*)InputImage;						//	傳遞影像資料
-	unsigned char Y, U, V, R, G, B;
-	for (unsigned int i = 1; i < 64000; i++)
-	{
-		R = 0;
-		G = 255;
-		B = 255;
-		Y = 0.299*R + 0.587*G + 0.114*B;
-		U = -0.169*R - 0.331*G + 0.5*B + 128;
-		V = 0.5*R - 0.419*G - 0.081*B + 128;
-		for (unsigned int j = 0; j < 4; j++)
-		{
-			if (j == 0)
-			{
-				InputImage[i * 4 + j] = U;
-			}
-			else if (j == 1)
-			{
-				InputImage[i * 4 + j] = Y;
-			}
-			else if (j == 2)
-			{
-				InputImage[i * 4 + j] = V;
-			}
-			else if (j == 3)
-			{
-				InputImage[i * 4 + j] = Y;
-			}
-		}
-	}
+	TransformImage_YUY2((BYTE*)RGBImage1.IMAGE_DATA, 0, (BYTE*)InputImage, 0, ImageSizeX, ImageSizeY);
+	//	傳遞影像資料
+	//BmpWriteV1(ArrayToRAWImage((BMP24RGB*)RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
+	//	呼叫BmpToGraylevel將影像轉為灰階後，呼叫ArrayToRAWImage副程式將AnalysisData轉換回BMP影像資料格式後以BmpWrite副程式寫入BMP檔
 	return;																//	結束MainImageProcessing副程式
 }																		//	結束MainImageProcessing副程式
 
