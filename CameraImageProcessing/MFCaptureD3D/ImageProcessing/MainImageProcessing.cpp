@@ -15,7 +15,7 @@ void MainImageProcessing(unsigned char* InputImage, unsigned int ImageSizeX, uns
 	RGBImage1.YSIZE = ImageSizeY;										//	傳遞YSIZE資訊
 	TransformImage_YUY2((BYTE*)RGBImage1.IMAGE_DATA, 0, (BYTE*)InputImage, 0, ImageSizeX, ImageSizeY);
 	//	傳遞影像資料
-	//BmpWriteV1(ArrayToRAWImage((BMP24RGB*)RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
+	BmpWriteV1(ArrayToRAWImage(BmpToGraylevel((BMP24RGB*)RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
 	//	呼叫BmpToGraylevel將影像轉為灰階後，呼叫ArrayToRAWImage副程式將AnalysisData轉換回BMP影像資料格式後以BmpWrite副程式寫入BMP檔
 	return;																//	結束MainImageProcessing副程式
 }																		//	結束MainImageProcessing副程式
