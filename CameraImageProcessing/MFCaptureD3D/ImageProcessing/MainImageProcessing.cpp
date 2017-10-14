@@ -13,10 +13,11 @@ void MainImageProcessing(unsigned char* InputImage, unsigned int ImageSizeX, uns
 	BMP24RGBIMAGE RGBImage1;											//	宣告RGBImage1用於BMP24RGB型態圖像資料處理
 	RGBImage1.XSIZE = ImageSizeX;										//	傳遞XSIZE資訊
 	RGBImage1.YSIZE = ImageSizeY;										//	傳遞YSIZE資訊
-	TransformImage_YUY2((BYTE*)RGBImage1.IMAGE_DATA, 0, (BYTE*)InputImage, 0, ImageSizeX, ImageSizeY);
+	RGBImage1.IMAGE_DATA = RGBQUADtoBMP24RGB((RGBQUAD*)InputImage, ImageSizeX, ImageSizeY);
 	//	傳遞影像資料
-	BmpWriteV1(ArrayToRAWImage(BmpToGraylevel((BMP24RGB*)RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
+	BmpWriteV1(ArrayToRAWImage(RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
 	//	呼叫BmpToGraylevel將影像轉為灰階後，呼叫ArrayToRAWImage副程式將AnalysisData轉換回BMP影像資料格式後以BmpWrite副程式寫入BMP檔
+	free((void*)RGBImage1.IMAGE_DATA);
 	return;																//	結束MainImageProcessing副程式
 }																		//	結束MainImageProcessing副程式
 
@@ -326,6 +327,34 @@ BMP24RGB *InitialIMGArray(const int xsize, const int ysize)				//	InitialIMGArra
 	}																	//	結束for迴圈
 	return OutputData;													//	回傳生成結果
 }																		//	結束InitialIMGArray副程式
+
+BMP24RGB *RGBQUADtoBMP24RGB(const RGBQUAD* InputRGBQUADImage, const int xsize, const int ysize)
+//	RGBQUADtoBMP24RGB副程式
+{																		//	進入RGBQUADtoBMP24RGB副程式
+	BMP24RGB *OutputData;												//	宣告OutputData為BMP24RGB指標型態變數
+	OutputData = (BMP24RGB*)malloc(xsize * ysize * sizeof(BMP24RGB));	//	配置OutputData(二維)指標記憶體大小
+	if (OutputData == NULL)												//	若Output為空指標
+	{																	//	進入if敘述
+		printf("記憶體分配錯誤!");										//	顯示"記憶體分配錯誤"
+		return NULL;													//	回傳NULL，並結束副程式
+	}																	//	結束if敘述
+	int LoopNumber1, LoopNumber2;										//	宣告LoopNumber1與LoopNumber2，用於迴圈計算
+	for (LoopNumber1 = 0; LoopNumber1<ysize; LoopNumber1++)				//	以for迴圈依序處理圖像像素
+	{																	//	進入for迴圈
+		for (LoopNumber2 = 0; LoopNumber2<xsize; LoopNumber2++)			//	以for迴圈依序處理圖像像素
+		{																//	進入for迴圈
+			OutputData[LoopNumber1*xsize + LoopNumber2].R = 			//	填入R像素資料
+				InputRGBQUADImage[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbRed;
+			OutputData[LoopNumber1*xsize + LoopNumber2].G = 			//	填入G像素資料
+				InputRGBQUADImage[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbGreen;
+			OutputData[LoopNumber1*xsize + LoopNumber2].B = 			//	填入B像素資料
+				InputRGBQUADImage[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbBlue;
+		}																//	結束for迴圈
+	}																	//	結束for迴圈
+	return OutputData;													//	回傳轉換結果
+}																		//	結束RGBQUADtoBMP24RGB副程式
+
+
 BMP24RGB *RAWImageToArray(const unsigned char *image, const int xsize, const int ysize)
 //	BMP圖檔資料至陣列轉換副程式
 {																		//	進入BMP圖檔資料至陣列轉換副程式
