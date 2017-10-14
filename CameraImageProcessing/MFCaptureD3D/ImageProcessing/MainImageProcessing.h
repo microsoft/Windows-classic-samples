@@ -89,6 +89,7 @@ BMP24RGB *InitialIMGArray(const int, const int);						//	宣告InitialIMGArray副程
 	 
  */
 BMP24RGB *RGBQUADtoBMP24RGB(const RGBQUAD* InputRGBQUADImage, const int xsize, const int ysize);
+RGBQUAD* BMP24RGBtoRGBQUAD(const BMP24RGB* InputBMP24RGBImage, const int xsize, const int ysize);
 BMP24RGB *RAWImageToArray(const unsigned char*, const int, const int);	//	宣告RAWImageToArray(BMP圖檔資料至陣列轉換)副程式
 /*	ArrayToRAWImage副程式用於將RGB型態圖像二維陣列轉換至符合BMP圖檔格式之圖像資料(含填補位元)
 	副程式輸入為(RGB型態圖像二維陣列,圖像寬度,圖像高度)
