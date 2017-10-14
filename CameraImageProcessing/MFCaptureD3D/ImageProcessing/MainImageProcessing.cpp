@@ -354,6 +354,30 @@ BMP24RGB *RGBQUADtoBMP24RGB(const RGBQUAD* InputRGBQUADImage, const int xsize, c
 	return OutputData;													//	回傳轉換結果
 }																		//	結束RGBQUADtoBMP24RGB副程式
 
+RGBQUAD* BMP24RGBtoRGBQUAD(const BMP24RGB* InputBMP24RGBImage, const int xsize, const int ysize)
+{
+	RGBQUAD *OutputData;												//	宣告OutputData為BMP24RGB指標型態變數
+	OutputData = (RGBQUAD*)malloc(xsize * ysize * sizeof(RGBQUAD));	//	配置OutputData(二維)指標記憶體大小
+	if (OutputData == NULL)												//	若Output為空指標
+	{																	//	進入if敘述
+		printf("記憶體分配錯誤!");										//	顯示"記憶體分配錯誤"
+		return NULL;													//	回傳NULL，並結束副程式
+	}																	//	結束if敘述
+	int LoopNumber1, LoopNumber2;										//	宣告LoopNumber1與LoopNumber2，用於迴圈計算
+	for (LoopNumber1 = 0; LoopNumber1<ysize; LoopNumber1++)				//	以for迴圈依序處理圖像像素
+	{																	//	進入for迴圈
+		for (LoopNumber2 = 0; LoopNumber2<xsize; LoopNumber2++)			//	以for迴圈依序處理圖像像素
+		{																//	進入for迴圈
+			OutputData[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbRed = 
+				InputBMP24RGBImage[LoopNumber1*xsize + LoopNumber2].R;	//	填入R像素資料
+			OutputData[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbGreen = 
+				InputBMP24RGBImage[LoopNumber1*xsize + LoopNumber2].G;	//	填入G像素資料
+			OutputData[(ysize - LoopNumber1) * xsize + LoopNumber2].rgbBlue = 
+				InputBMP24RGBImage[LoopNumber1*xsize + LoopNumber2].B;	//	填入B像素資料
+		}																//	結束for迴圈
+	}																	//	結束for迴圈
+	return OutputData;													//	回傳轉換結果
+}
 
 BMP24RGB *RAWImageToArray(const unsigned char *image, const int xsize, const int ysize)
 //	BMP圖檔資料至陣列轉換副程式
