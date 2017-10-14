@@ -357,7 +357,7 @@ BMP24RGB *RGBQUADtoBMP24RGB(const RGBQUAD* InputRGBQUADImage, const int xsize, c
 RGBQUAD* BMP24RGBtoRGBQUAD(const BMP24RGB* InputBMP24RGBImage, const int xsize, const int ysize)
 {
 	RGBQUAD *OutputData;												//	宣告OutputData為BMP24RGB指標型態變數
-	OutputData = (RGBQUAD*)malloc(xsize * ysize * sizeof(RGBQUAD));	//	配置OutputData(二維)指標記憶體大小
+	OutputData = (RGBQUAD*)malloc(xsize * ysize * sizeof(RGBQUAD));		//	配置OutputData(二維)指標記憶體大小
 	if (OutputData == NULL)												//	若Output為空指標
 	{																	//	進入if敘述
 		printf("記憶體分配錯誤!");										//	顯示"記憶體分配錯誤"
