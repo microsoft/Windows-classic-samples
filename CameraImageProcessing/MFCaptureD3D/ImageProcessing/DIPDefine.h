@@ -99,10 +99,60 @@ enum HaarWaveletMode													//	宣告HaarWaveletMode集合(用於HaarWavele
 		水平方向低通濾波(呼叫HaarWavelet副程式HorizontalLowPass模式)、垂直方向低通濾波(呼叫HaarWavelet副程式VerticalLowPass模式)
 	並給定二進位冪次方數值，以便選定多重模式(如：HighHigh|HighLow、HighLow|LowHigh)
  */
-enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode集合(用於HaarWavelet2副程式)
-{																		//	進入HaarWavelet2Mode集合(用於HaarWavelet2副程式)
+enum HaarWavelet2Mode													//	宣告HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
+{																		//	進入HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
 	HighHigh = 1,														//	定義二階Haar小波轉換模式HighHigh
 	HighLow = 2,														//	定義二階Haar小波轉換模式HighLow
 	LowHigh = 4,														//	定義二階Haar小波轉換模式LowHigh
 	LowLow = 8,															//	定義二階Haar小波轉換模式LowLow
-};																		//	結束HaarWavelet2Mode集合(用於HaarWavelet2副程式)
+};																		//	結束HaarWavelet2Mode列舉(用於HaarWavelet2副程式)
+
+/*	YUVGUID用於YUVtoRGB24函數作為YUV編碼型態參數
+	
+	GUID					格式描述
+	MEDIASUBTYPE_RGB1		2色，每个像素用1位表示，需要调色板
+	MEDIASUBTYPE_RGB4		16色，每个像素用4位表示，需要调色板
+	MEDIASUBTYPE_RGB8		256色，每个像素用8位表示，需要调色板
+	MEDIASUBTYPE_RGB565		每个像素用16位表示，RGB分量分别使用5位、6位、5位
+	MEDIASUBTYPE_RGB555		每个像素用16位表示，RGB分量都使用5位（剩下的1位不用）
+	MEDIASUBTYPE_RGB24		每个像素用24位表示，RGB分量各使用8位
+	MEDIASUBTYPE_RGB32		每个像素用32位表示，RGB分量各使用8位（剩下的8位不用）
+	MEDIASUBTYPE_ARGB32		每个像素用32位表示，RGB分量各使用8位（剩下的8位用于表示Alpha通道值）
+	MEDIASUBTYPE_YUY2		YUY2格式，以4:2:2方式打包
+	MEDIASUBTYPE_YUYV		YUYV格式（实际格式与YUY2相同）
+	MEDIASUBTYPE_YVYU		YVYU格式，以4:2:2方式打包
+	MEDIASUBTYPE_UYVY		UYVY格式，以4:2:2方式打包
+	MEDIASUBTYPE_AYUV		带Alpha通道的4:4:4 YUV格式
+	MEDIASUBTYPE_Y41P		Y41P格式，以4:1:1方式打包
+	MEDIASUBTYPE_Y411		Y411格式（实际格式与Y41P相同）
+	MEDIASUBTYPE_Y211		Y211格式
+	MEDIASUBTYPE_IF09		IF09格式
+	MEDIASUBTYPE_IYUV		IYUV格式
+	MEDIASUBTYPE_YV12		YV12格式
+	MEDIASUBTYPE_YVU9		YVU9格式
+
+	Reference：http://blog.csdn.net/zoutian007/article/details/7585511
+*/
+enum YUVGUID															//	宣告YUVGUID列舉(用於YUV與RGB轉換)
+{																		//	進入YUVGUID列舉
+	MEDIASUBTYPE_RGB1 = 1,												//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB4 = 2,												//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB8 = 3,												//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB565 = 4,											//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB555 = 5,											//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB24 = 6,												//	條列YUVGUID內容
+	MEDIASUBTYPE_RGB32 = 7,												//	條列YUVGUID內容
+	MEDIASUBTYPE_ARGB32 = 8,											//	條列YUVGUID內容
+	MEDIASUBTYPE_YUY2 = 9,												//	條列YUVGUID內容
+	MEDIASUBTYPE_YUYV = 10,												//	條列YUVGUID內容
+	MEDIASUBTYPE_YVYU = 11,												//	條列YUVGUID內容
+	MEDIASUBTYPE_UYVY = 12,												//	條列YUVGUID內容
+	MEDIASUBTYPE_AYUV = 13,												//	條列YUVGUID內容
+	MEDIASUBTYPE_Y41P = 14,												//	條列YUVGUID內容
+	MEDIASUBTYPE_Y411 = 15,												//	條列YUVGUID內容
+	MEDIASUBTYPE_Y211 = 16,												//	條列YUVGUID內容
+	MEDIASUBTYPE_IF09 = 17,												//	條列YUVGUID內容
+	MEDIASUBTYPE_IYUV = 18,												//	條列YUVGUID內容
+	MEDIASUBTYPE_YV12 = 19,												//	條列YUVGUID內容
+	MEDIASUBTYPE_YVU9 = 20,												//	條列YUVGUID內容
+};																		//	結束YUVGUID列舉

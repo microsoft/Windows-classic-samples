@@ -5,10 +5,7 @@
 //-------------------------------------------------------------------
 
 //-----include header files, 引入標頭檔-----
-#include "..\\MFCaptureD3D.h"											//	include "MFCaptureD3D.h" header file, 引入標頭檔MFCaptureD3D.h
-#include "..\\BufferLock.h"												//	include "BufferLock.h" header file, 引入標頭檔BufferLock.h
 #include "Conversion.h"
-#include <stdio.h>														//	include "stdio.h" header file, 引入標頭檔stdio.h
 
 //-----funtion implementation, 副程式實作-----
 __forceinline BYTE Clip(int clr)
@@ -355,4 +352,4 @@ inline LONG Height(const RECT& r)
 	輸入參數為(YUV圖像常數資料, YUV圖像編碼方式)
 
 */
-unsigned char* YUVtoRGB24()
+//unsigned char* YUVtoRGB24()
