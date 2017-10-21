@@ -10,14 +10,37 @@
 void MainImageProcessing(unsigned char* InputImage, unsigned int ImageSizeX, unsigned int ImageSizeY)
 //	MainImageProcessing副程式
 {																		//	進入MainImageProcessing副程式
+	if (ImageSizeX == 0 || ImageSizeY == 0)
+	{
+		return;
+	}
 	BMP24RGBIMAGE RGBImage1;											//	宣告RGBImage1用於BMP24RGB型態圖像資料處理
 	RGBImage1.XSIZE = ImageSizeX;										//	傳遞XSIZE資訊
 	RGBImage1.YSIZE = ImageSizeY;										//	傳遞YSIZE資訊
 	RGBImage1.IMAGE_DATA = RGBQUADtoBMP24RGB((RGBQUAD*)InputImage, ImageSizeX, ImageSizeY);
 	//	傳遞影像資料
-	BmpWriteV1(ArrayToRAWImage(RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, "BMPGraylevelOut");
+
+	//-----生成影像檔名-----
+	char* FileName = NULL;
+	char* FileNameBMP = NULL;
+	int Counter = 1;
+	FileName = (char*)malloc(100 * sizeof(char));
+	FileNameBMP = (char*)malloc(100 * sizeof(char));
+	do
+	{
+		sprintf(FileName, "%s%d", "Output", Counter);
+		sprintf(FileNameBMP, "%s%s", FileName, ".BMP");
+		Counter = Counter + 1;
+	} while (FileExistCheck(FileNameBMP));
+
+	BmpWriteV1(ArrayToRAWImage(RGBImage1.IMAGE_DATA, RGBImage1.XSIZE, RGBImage1.YSIZE), RGBImage1.XSIZE, RGBImage1.YSIZE, FileName);
 	//	呼叫BmpToGraylevel將影像轉為灰階後，呼叫ArrayToRAWImage副程式將AnalysisData轉換回BMP影像資料格式後以BmpWrite副程式寫入BMP檔
 	free((void*)RGBImage1.IMAGE_DATA);
+	RGBImage1.IMAGE_DATA = NULL;
+	free((void*)FileName);
+	FileName = NULL;
+	free((void*)FileNameBMP);
+	FileNameBMP = NULL;
 	return;																//	結束MainImageProcessing副程式
 }																		//	結束MainImageProcessing副程式
 
@@ -266,6 +289,8 @@ int BmpWriteV1(const unsigned char *image,const int xsize,const int ysize,const 
 	fwrite(image, sizeof(unsigned char), (size_t)(long)(xsize * 3 + FillingByte)*ysize, fp);
 	//	寫入BMP圖檔影像資料
 	fclose(fp);															//	關閉檔案指標
+	free((void*)image);
+	image = NULL;
 	return 0;															//	傳回0並結束副程式
 }																		//	結束BmpWriteV1(BMP圖檔寫入)副程式
 int BmpWriteV2(const BMPIMAGE OutputFile)								//	BmpWriteV2副程式
