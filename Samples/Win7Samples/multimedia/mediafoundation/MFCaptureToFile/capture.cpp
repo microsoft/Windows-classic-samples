@@ -262,6 +262,48 @@ HRESULT CCapture::OnReadSample(
 
         if (FAILED(hr)) { goto done; }
 
+		IMFMediaBuffer *mediaBuffer = NULL;
+		BYTE *pData = NULL;
+		BYTE Y, U, V, R, G, B;
+		pSample->ConvertToContiguousBuffer(&mediaBuffer);
+
+		hr = mediaBuffer->Lock(&pData, NULL, NULL);
+
+		if (FAILED(hr)) { goto done; }
+
+		for (unsigned int i = 0; i < 1280; i++)
+		{
+			
+			R = 0;
+			G = 0;
+			B = 255;
+			Y = 0.299*R + 0.587*G + 0.114*B;
+			U = -0.169*R - 0.331*G + 0.5*B + 128;
+			V = 0.5*R - 0.419*G - 0.081*B + 128;
+			for (unsigned int j = 0; j < 4; j++)
+			{
+				if (j == 0)
+				{
+					pData[i * 4 + j] = Y;
+				}
+				else if (j == 1)
+				{
+					pData[i * 4 + j] = U;
+				}
+				else if (j == 2)
+				{
+					pData[i * 4 + j] = Y;
+				}
+				else if (j == 3)
+				{
+					pData[i * 4 + j] = V;
+				}
+			}
+		}
+		hr = mediaBuffer->Unlock();
+
+		if (FAILED(hr)) { goto done; }
+
         hr = m_pWriter->WriteSample(0, pSample);
 
         if (FAILED(hr)) { goto done; }
