@@ -11,7 +11,7 @@
 
 BOOL CTextContainer::InsertText(int nPos, const WCHAR *psz, UINT nCnt)
 {
-    if (!EnsureBuffer(_nTextSize + nCnt))
+    if (_nTextSize + nCnt > 0 && !EnsureBuffer(_nTextSize + nCnt))
     {
         return FALSE;
     }

@@ -195,7 +195,7 @@ LRESULT CALLBACK CTextInputCtrl::s_WndProc(HWND hwnd, UINT message, WPARAM wPara
                     LONG lAttrSize = ImmGetCompositionString(himc, GCS_COMPATTR, NULL, 0);
                     LONG lClauseInfoSize = ImmGetCompositionString(himc, GCS_COMPCLAUSE, NULL, 0);
 
-                    if (lSize)
+                    if (lSize >= 0)
                     {
                         BYTE *prgAttr = NULL;
                         LONG *prgClauseInfo = NULL;
@@ -209,7 +209,7 @@ LRESULT CALLBACK CTextInputCtrl::s_WndProc(HWND hwnd, UINT message, WPARAM wPara
 
                         if (psz)
                         {
-                            if (ImmGetCompositionString(himc, GCS_COMPSTR, psz, lSize))
+                            if (ImmGetCompositionString(himc, GCS_COMPSTR, psz, lSize) == lSize)
                             {
                                 if (prgAttr)
                                 {
