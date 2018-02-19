@@ -63,7 +63,7 @@ static const BYTE PublisherKeyList[][SHA1_HASH_LEN] = {
 #define PUBLISHER_KEY_LIST_CNT  (sizeof(PublisherKeyList) / sizeof(PublisherKeyList[0]))
 
 //
-// Checks if the certificate's public key matches one of the SHA1 key identifers
+// Checks if the certificate's public key matches one of the SHA1 key identifiers
 // in the list.
 //
 

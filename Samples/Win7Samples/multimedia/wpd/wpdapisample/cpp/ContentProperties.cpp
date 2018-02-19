@@ -106,7 +106,7 @@ void ReadContentProperties(
     CComPtr<IPortableDeviceKeyCollection> pPropertiesToRead;
 
     // Prompt user to enter an object identifier on the device to read properties from.
-    printf("Enter the identifer of the object you wish to read properties from.\n>");
+    printf("Enter the identifier of the object you wish to read properties from.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -227,7 +227,7 @@ void WriteContentProperties(
     BOOL                                  bCanWrite            = FALSE;
 
     // Prompt user to enter an object identifier on the device to write properties on.
-    printf("Enter the identifer of the object you wish to write properties on.\n>");
+    printf("Enter the identifier of the object you wish to write properties on.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -338,7 +338,7 @@ void WriteContentProperties(
     }
 }
 
-// Retreives the object identifier for the persistent unique identifer
+// Retreives the object identifier for the persistent unique identifier
 void GetObjectIdentifierFromPersistentUniqueIdentifier(
     IPortableDevice* pDevice)
 {

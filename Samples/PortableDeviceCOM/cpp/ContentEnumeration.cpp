@@ -107,7 +107,7 @@ void RecursiveEnumerateAndCopyToCollection(
         return;
     }
 
-    // Add the object identifer...
+    // Add the object identifier...
     hr = objectIDs->Add(&pv);
 
     // Free the allocated string in the PROPVARIANT

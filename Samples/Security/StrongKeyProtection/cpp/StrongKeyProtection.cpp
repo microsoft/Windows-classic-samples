@@ -107,7 +107,7 @@ wmain(
                                         &KeyHandle,                 // Address of the variable that recieves the key handle
                                         NCRYPT_RSA_ALGORITHM,       // Algorithm name (null terminated unicode string)
                                         KeyName,                    // Key name (null terminated unicode string)
-                                        AT_SIGNATURE,               // Legacy identifer (AT_KEYEXCHANGE, AT_SIGNATURE or 0 )
+                                        AT_SIGNATURE,               // Legacy identifier (AT_KEYEXCHANGE, AT_SIGNATURE or 0 )
                                         NCRYPT_OVERWRITE_KEY_FLAG); // Flags; If a key already exists in the container with the specified name, the existing key will be overwritten.
     if( FAILED(secStatus) )
     {

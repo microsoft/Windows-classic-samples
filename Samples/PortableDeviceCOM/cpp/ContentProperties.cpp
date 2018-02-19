@@ -97,7 +97,7 @@ void ReadContentProperties(
     ComPtr<IPortableDeviceKeyCollection>  propertiesToRead;
 
     // Prompt user to enter an object identifier on the device to read properties from.
-    wprintf(L"Enter the identifer of the object you wish to read properties from.\n>");
+    wprintf(L"Enter the identifier of the object you wish to read properties from.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -209,7 +209,7 @@ void WriteContentProperties(
     ComPtr<IPortableDeviceValues>         attributes;
 
     // Prompt user to enter an object identifier on the device to write properties on.
-    wprintf(L"Enter the identifer of the object you wish to write properties on.\n>");
+    wprintf(L"Enter the identifier of the object you wish to write properties on.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -320,7 +320,7 @@ void WriteContentProperties(
     }
 }
 
-// Retreives the object identifier for the persistent unique identifer
+// Retreives the object identifier for the persistent unique identifier
 void GetObjectIdentifierFromPersistentUniqueIdentifier(
     _In_ IPortableDevice* device)
 {

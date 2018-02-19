@@ -164,7 +164,7 @@ void TransferContentFromDevice(
     ComPtr<IStream>                   finalFileStream;
 
     // Prompt user to enter an object identifier on the device to transfer.
-    wprintf(L"Enter the identifer of the object you wish to transfer.\n>");
+    wprintf(L"Enter the identifier of the object you wish to transfer.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -302,7 +302,7 @@ void DeleteContentFromDevice(
     ComPtr<IPortableDevicePropVariantCollection>  objectsFailedToDelete;
 
     // Prompt user to enter an object identifier on the device to delete.
-    wprintf(L"Enter the identifer of the object you wish to delete.\n>");
+    wprintf(L"Enter the identifier of the object you wish to delete.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -415,7 +415,7 @@ void MoveContentAlreadyOnDevice(
     }
 
     // Prompt user to enter an object identifier on the device to move.
-    wprintf(L"Enter the identifer of the object you wish to move.\n>");
+    wprintf(L"Enter the identifier of the object you wish to move.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -423,7 +423,7 @@ void MoveContentAlreadyOnDevice(
     }
 
     // Prompt user to enter an object identifier on the device to move.
-    wprintf(L"Enter the identifer of the object you wish to move '%ws' to.\n>", selection);
+    wprintf(L"Enter the identifier of the object you wish to move '%ws' to.\n>", selection);
     hr = StringCchGetsW(destinationFolderObjectID, ARRAYSIZE(destinationFolderObjectID));
     if (FAILED(hr))
     {
@@ -758,7 +758,7 @@ void TransferContentToDevice(
     ComPtr<IStream>                     tempStream;  // Temporary IStream which we use to QI for IPortableDeviceDataStream
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    wprintf(L"Enter the identifer of the parent object which the file will be transferred under.\n>");
+    wprintf(L"Enter the identifier of the parent object which the file will be transferred under.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -923,7 +923,7 @@ void CreateContactPhotoResourceOnDevice(
     ComPtr<IPortableDeviceResources>    resources;
 
     // Prompt user to enter an object identifier for the object to which we will add a Resource.
-    wprintf(L"Enter the identifer of the object to which we will add a photograph.\n>");
+    wprintf(L"Enter the identifier of the object to which we will add a photograph.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -1247,7 +1247,7 @@ void TransferContactToDevice(
     ComPtr<IPortableDeviceContent>  content;
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    wprintf(L"Enter the identifer of the parent object which the contact will be transferred under.\n>");
+    wprintf(L"Enter the identifier of the parent object which the contact will be transferred under.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -1313,7 +1313,7 @@ void CreateFolderOnDevice(
     ComPtr<IPortableDeviceContent>  content;
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    wprintf(L"Enter the identifer of the parent object which the folder will be created under.\n>");
+    wprintf(L"Enter the identifier of the parent object which the folder will be created under.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {
@@ -1473,7 +1473,7 @@ void UpdateContentOnDevice(
     ComPtr<IStream>                     tempStream;  // Temporary IStream which we use to QI for IPortableDeviceDataStream
 
     // Prompt user to enter an object identifier for the object on the device to update.
-    wprintf(L"Enter the identifer of the object to update.\n>");
+    wprintf(L"Enter the identifier of the object to update.\n>");
     hr = StringCchGetsW(selection, ARRAYSIZE(selection));
     if (FAILED(hr))
     {

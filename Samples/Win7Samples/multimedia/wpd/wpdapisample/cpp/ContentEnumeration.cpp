@@ -111,7 +111,7 @@ void RecursiveEnumerateAndCopyToCollection(
     pv.vt      = VT_LPWSTR;
     pv.pwszVal = AtlAllocTaskWideString(pszObjectID);
 
-    // Add the object identifer...
+    // Add the object identifier...
     hr = pObjectIDs->Add(&pv);
 
     // Free the allocated string in the PROPVARIANT
