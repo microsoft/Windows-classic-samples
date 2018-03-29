@@ -76,6 +76,8 @@ To build the sample using Visual Studio (preferred method):
 Run the sample
 --------------
 
+Note that the sample must be built for the native operating system. A 64-bit operating system cannot load a 32-bit writer.
+
 To run the sample:
 
 1.  Navigate to the directory that contains the new executable file, using the **Command Prompt** or **File Explorer**.
