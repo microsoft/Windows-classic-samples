@@ -693,7 +693,7 @@ struct ltguid
     bool operator()(GUID guid1, GUID guid2) const
     {
         return (guid1.Data1 < guid2.Data1) ||
-               (guid1.Data1 == guid2.Data1 && guid1.Data2 < guid1.Data2) ||
+               (guid1.Data1 == guid2.Data1 && guid1.Data2 < guid2.Data2) ||
                (guid1.Data1 == guid2.Data1 && guid1.Data2 == guid2.Data2 && guid1.Data3 < guid2.Data3);
     }
 };
