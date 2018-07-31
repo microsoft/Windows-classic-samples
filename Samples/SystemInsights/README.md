@@ -24,8 +24,8 @@ This sample demonstrates how to write a capability in [System Insights](https://
 
 ## Run the sample
 After you've created the capability library, you need to add the capability to System Insights.
-1. Confirm you're running the most recent Windows Server Insider Preview build, which has the System Insights feature installed.
-    - This sample applies to Windows Server Insider Preview build 17723 and later.
+1. Confirm you're running the a version of Windows Server which has the System Insights feature installed.
+    - This sample requires Windows Server Insider Preview build 17723 or later.
 2. Copy the capability library onto the server. 
 3. Add the capability using the **Add-InsightsCapability** cmdlet:
 
