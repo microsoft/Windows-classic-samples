@@ -184,7 +184,8 @@ HRESULT SampleAmsiProvider::Scan(_In_ IAmsiStream* stream, _Out_ AMSI_RESULT* re
 
     TraceLoggingWrite(g_traceLoggingProvider, "Scan End", TraceLoggingValue(requestNumber));
 
-    *result = AMSI_RESULT_CLEAN;
+    // AMSI_RESULT_NOT_DETECTED means "We did not detect a problem but let other providers scan it, too."
+    *result = AMSI_RESULT_NOT_DETECTED;
     return S_OK;
 }
 
