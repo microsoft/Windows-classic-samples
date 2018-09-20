@@ -607,6 +607,8 @@ HRESULT CHWMFT::RequestSample(
         ** we know m_pEventQueue can never be
         ** NULL due to InitializeTransform()
         ***************************************/
+        
+        CAutoLock lock(&m_csLock);
 
         hr = m_pEventQueue->QueueEvent(pEvent);
         if(FAILED(hr))
@@ -615,8 +617,6 @@ HRESULT CHWMFT::RequestSample(
         }
 
         {
-            CAutoLock lock(&m_csLock);
-
             m_dwNeedInputCount++;
 
             TraceString(CHMFTTracing::TRACE_INFORMATION, L"%S(): NeedInputCount: %u",  __FUNCTION__, m_dwNeedInputCount);
