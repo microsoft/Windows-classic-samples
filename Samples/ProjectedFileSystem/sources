@@ -1,0 +1,46 @@
+TARGETNAME                      =   regfs
+TARGETTYPE                      =   PROGRAM
+TARGET_DESTINATION              =   bldtools\gvflt\test
+DLLDEF                          =
+UMTYPE=console
+UMENTRY=wmain
+
+USE_DEFAULT_WIN32_LIBS          =   0 # prevent kernel32.dll, advapi32.dll, etc. from being linked in automatically
+BUILD_FOR_CORESYSTEM            =   1 # enable CoreSystem-specific ATL, psapi, etc.
+USE_MSVCRT                      =   1
+USE_UNICRT                      =   1
+TEST_CODE                       =   1
+
+USE_NATIVE_EH                   =   1
+USE_STL                         =   1
+STL_VER                         =   STL_VER_CURRENT
+MSC_WARNING_LEVEL               =   /W3
+C_DEFINES                       =   $(C_DEFINES) -DUNICODE -D_UNICODE -DINLINE_TEST_METHOD_MARKUP
+
+INCLUDES                        =   $(INCLUDES);\
+                                    $(PROJECT_ROOT)\fs\gvflt\api\inc; \
+                                    ..\inc;\
+
+PRECOMPILED_INCLUDE             =   stdafx.h
+PRECOMPILED_CXX                 =   1
+
+SOURCES                         =   \
+                                    dirInfo.cpp \
+                                    virtualizationInstance.cpp \
+                                    main.cpp \
+                                    regfsProvider.cpp \
+
+TARGETLIBS_PROJECT              =   \
+                                    $(SDK_LIB_PATH)\ProjectedFSLib.lib \
+                                    
+TARGETLIBS_API_SETS             =   \
+                                    $(ONECORE_SDK_LIB_VPATH)\onecore.lib \
+                                    $(MINWIN_SDK_LIB_PATH)\ntdll.lib
+
+TARGETLIBS                      =   \
+                                    $(TARGETLIBS_PROJECT) \
+                                    $(TARGETLIBS_API_SETS) \
+                                    $(TARGETLIBS_LEGACY)
+
+VARIABLE_OVERRIDES              =   $(VARIABLE_OVERRIDES);OBJ_PATH=$(OBJ_PATH)
+VARIABLE_OVERRIDES              =   $(VARIABLE_OVERRIDES);TARGETNAME=$(TARGETNAME)
