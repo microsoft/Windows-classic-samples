@@ -167,7 +167,8 @@ HRESULT CTedTestSink::Shutdown()
 HRESULT CTedTestSink::InitAudioStream()
 {
     HRESULT hr = S_OK;
-
+	CComObject<CTedTestMediaTypeHandler>* pAudioTypeHandler = NULL;
+	CComObject<CTedTestStreamSink>* pAudioStreamSink = NULL;
     InternalAddRef();
     /*IMFMediaSink* pMediaSink;
     InternalQueryInterface(this, CTedTestSink::_GetEntries(), IID_IMFMediaSink, (void**) &pMediaSink);*/
@@ -177,13 +178,13 @@ HRESULT CTedTestSink::InitAudioStream()
     IFC( spAudioType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Audio) );
     IFC( spAudioType->SetGUID(MF_MT_SUBTYPE, MFAudioFormat_Float) );
 
-    CComObject<CTedTestMediaTypeHandler>* pAudioTypeHandler = NULL;
+
     IFC( CComObject<CTedTestMediaTypeHandler>::CreateInstance(&pAudioTypeHandler) );
     pAudioTypeHandler->AddRef();
     pAudioTypeHandler->SetMajorType(MFMediaType_Audio);
     pAudioTypeHandler->AddAvailableType(spAudioType);
 
-    CComObject<CTedTestStreamSink>* pAudioStreamSink = NULL;
+
     IFC( CComObject<CTedTestStreamSink>::CreateInstance(&pAudioStreamSink) );
     pAudioStreamSink->AddRef();
     m_spAudioStreamSink = pAudioStreamSink;
@@ -193,15 +194,17 @@ HRESULT CTedTestSink::InitAudioStream()
     pAudioStreamSink->Release();
 
     //pMediaSink->Release();
-    InternalRelease();
+    
 Cleanup:
+	InternalRelease();
     return hr;
 }
 
 HRESULT CTedTestSink::InitVideoStream()
 {
     HRESULT hr = S_OK;
-
+	CComObject<CTedTestMediaTypeHandler>* pVideoTypeHandler = NULL;
+	CComObject<CTedTestStreamSink>* pVideoStreamSink = NULL;
     InternalAddRef();
     /*IMFMediaSink* pMediaSink;
     InternalQueryInterface(this, CTedTestSink::_GetEntries(), IID_IMFMediaSink, (void**) &pMediaSink);*/
@@ -211,13 +214,13 @@ HRESULT CTedTestSink::InitVideoStream()
     IFC( spVideoType->SetGUID(MF_MT_MAJOR_TYPE, MFMediaType_Video) );
     IFC( spVideoType->SetGUID(MF_MT_SUBTYPE, MFVideoFormat_RGB24) );
 
-    CComObject<CTedTestMediaTypeHandler>* pVideoTypeHandler = NULL;
+
     IFC( CComObject<CTedTestMediaTypeHandler>::CreateInstance(&pVideoTypeHandler) );
     pVideoTypeHandler->AddRef();
     pVideoTypeHandler->SetMajorType(MFMediaType_Video);
     pVideoTypeHandler->AddAvailableType(spVideoType);
 
-    CComObject<CTedTestStreamSink>* pVideoStreamSink = NULL;
+
     IFC( CComObject<CTedTestStreamSink>::CreateInstance(&pVideoStreamSink) );
     pVideoStreamSink->AddRef();
     m_spVideoStreamSink = pVideoStreamSink;
@@ -228,6 +231,7 @@ HRESULT CTedTestSink::InitVideoStream()
 
     //pMediaSink->Release();
 Cleanup:
+	InternalRelease();
     return hr;
 }
 /*
@@ -287,7 +291,7 @@ CTedTestStreamSink::~CTedTestStreamSink()
 HRESULT CTedTestStreamSink::Init(CTedTestSink* pSink, IMFMediaTypeHandler* pMTH, DWORD dwIdentifier)
 {
     m_pSink = pSink;
-    m_pSink->InternalAddRef();
+    //m_pSink->InternalAddRef();
 
     m_pMTH = pMTH;
     m_pMTH->AddRef();
