@@ -13,23 +13,29 @@
 //*********************************************************
 
 #include <windows.h>
+#include <WinUser.h>
 #include <windowsx.h>
 #include <Strsafe.h>
 #include <commdlg.h>
 #include <stdio.h>
 #include "Resource.h"
+#include "PluginHeader.h"
 
-#define DEFAULT_PADDING96        20
-#define WINDOW_WIDTH96           600
-#define WINDOW_HEIGHT96          350
-#define DEFAULT_CHAR_BUFFER      150
-#define DEFAULT_BUTTON_HEIGHT96  25
-#define DEFAULT_BUTTON_WIDTH96   100
-#define SAMPLE_STATIC_HEIGHT96   50
-#define WINDOWCLASSNAME          L"SetThreadDpiAwarenessContextSample"
-#define HWND_NAME_RADIO          L"RADIO"
-#define HWND_NAME_CHECKBOX       L"CHECKBOX"
-#define HWND_NAME_DIALOG         L"Open a System Dialog"
+#define DEFAULT_PADDING96          20
+#define WINDOW_WIDTH96             500
+#define WINDOW_HEIGHT96            700
+#define DEFAULT_CHAR_BUFFER        150
+#define DEFAULT_BUTTON_HEIGHT96    25
+#define DEFAULT_BUTTON_WIDTH96     100
+#define SAMPLE_STATIC_HEIGHT96     50
+#define EXTERNAL_CONTENT_WIDTH96   400
+#define EXTERNAL_CONTENT_HEIGHT96  400
+#define WINDOWCLASSNAME            L"SetThreadDpiAwarenessContextSample"
+#define HWND_NAME_RADIO            L"RADIO"
+#define HWND_NAME_CHECKBOX         L"CHECKBOX"
+#define HWND_NAME_DIALOG           L"Open a System Dialog"
+#define HWND_NAME_STATIC           L"Static"
+#define PROP_DPIISOLATION          L"PROP_ISOLATION"
 
 // Globals
 HINSTANCE g_hInst;
@@ -40,12 +46,17 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK    HostDialogProc(HWND, UINT, WPARAM, LPARAM);
 LRESULT             DoInitialWindowSetup(HWND hWnd);
 UINT                HandleDpiChange(HWND hWnd, WPARAM wParam, LPARAM lParam);
-void                CreateSampleWindow(HWND hWndDlg, DPI_AWARENESS_CONTEXT context, BOOL bEnableNonClientDpiScaling);
+void                CreateSampleWindow(HWND hWndDlg, DPI_AWARENESS_CONTEXT context, BOOL bEnableNonClientDpiScaling, BOOL bChildWindowDpiIsolation);
 void                DeleteWindowFont(HWND hWnd);
 void                ShowFileOpenDialog(HWND hWnd);
 void                UpdateAndDpiScaleChildWindows(HWND hWnd, UINT uDpi);
 void                UpdateDpiString(HWND hWnd, UINT uDpi);
 
+struct CreateParams
+{
+    BOOL bEnableNonClientDpiScaling;
+    BOOL bChildWindowDpiIsolation;
+};
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR, _In_ int nCmdShow)
 {
@@ -138,7 +149,7 @@ void UpdateAndDpiScaleChildWindows(HWND hWnd, UINT uDpi)
     GetClientRect(hWnd, &rcClient);
 
     // Size and position the static control
-    HWND hWndStatic = GetWindow(hWnd, GW_CHILD);
+    HWND hWndStatic = FindWindowEx(hWnd, nullptr, L"STATIC", nullptr);
     if (hWndStatic == nullptr)
     {
         return;
@@ -187,11 +198,19 @@ void UpdateAndDpiScaleChildWindows(HWND hWnd, UINT uDpi)
     hWndDialog = FindWindowEx(hWnd, nullptr, L"BUTTON", HWND_NAME_DIALOG);
     GetParentRelativeWindowRect(hWndCheckbox, &rcClient);
     SetWindowPos(hWndDialog, nullptr, uPadding, rcClient.bottom + uPadding,
-        MulDiv(DEFAULT_BUTTON_WIDTH96*2, uDpi, 96),
+        MulDiv(DEFAULT_BUTTON_WIDTH96 * 2, uDpi, 96), // Make this one twice as wide as the others
         MulDiv(DEFAULT_BUTTON_HEIGHT96, uDpi, 96),
         SWP_NOZORDER | SWP_NOACTIVATE);
 
-    // Send a new font to all child controls
+    // Size and position the external content HWND
+    HWND hWndExternal = FindWindowEx(hWnd, nullptr, PLUGINWINDOWCLASSNAME, HWND_NAME_EXTERNAL);
+    GetParentRelativeWindowRect(hWndDialog, &rcClient);
+    SetWindowPos(hWndExternal, hWndDialog, uPadding, rcClient.bottom + uPadding,
+        MulDiv(EXTERNAL_CONTENT_WIDTH96, uDpi, 96),
+        MulDiv(EXTERNAL_CONTENT_HEIGHT96, uDpi, 96),
+        SWP_NOZORDER | SWP_NOACTIVATE);
+
+    // Send a new font to all child controls (the 'plugin' content is subclassed to ignore WM_SETFONT)
     auto hFontOld = GetWindowFont(hWndStatic);
     LOGFONT lfText = {};
     SystemParametersInfoForDpi(SPI_GETICONTITLELOGFONT, sizeof(lfText), &lfText, FALSE, uDpi);
@@ -250,8 +269,7 @@ LRESULT DoInitialWindowSetup(HWND hWnd)
     // Create a static control for use displaying DPI-related information.
     // Initially the static control will not be sized, but we will next DPI
     // scale it with a helper function.
-    GetClientRect(hWnd, &rcWindow);
-    HWND hWndStatic = CreateWindowExW(WS_EX_LEFT, L"STATIC", nullptr, SS_LEFT | WS_CHILD | WS_VISIBLE,
+    HWND hWndStatic = CreateWindowExW(WS_EX_LEFT, L"STATIC", HWND_NAME_STATIC, SS_LEFT | WS_CHILD | WS_VISIBLE,
         0, 0, 0, 0, hWnd, nullptr, g_hInst, nullptr);
     if (hWndStatic == nullptr)
     {
@@ -263,12 +281,39 @@ LRESULT DoInitialWindowSetup(HWND hWnd)
     HWND hWndRadio = CreateWindow(L"BUTTON", HWND_NAME_RADIO, BS_PUSHBUTTON | BS_TEXT | BS_DEFPUSHBUTTON | BS_USERBUTTON | BS_AUTORADIOBUTTON | WS_CHILD | WS_OVERLAPPED | WS_VISIBLE, 0, 0, 0, 0, hWnd, nullptr, g_hInst, nullptr);
     HWND hWndDialog = CreateWindow(L"BUTTON", HWND_NAME_DIALOG, WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 0, 0, 0, 0, hWnd, (HMENU)IDM_SHOWDIALOG, g_hInst, nullptr);
 
-    // Set a font for the static control, then DPI scale it.
-    LOGFONT lfText = {};
-    SystemParametersInfoForDpi(SPI_GETICONTITLELOGFONT, sizeof(lfText), &lfText, FALSE, uDpi);
-    HFONT hFontNew = CreateFontIndirectW(&lfText);
-    SendMessage(hWnd, WM_SETFONT, (WPARAM)hFontNew, MAKELPARAM(TRUE, 0));
+    // Load an HWND from an external source (a DLL in this example)
+    //
+    // HWNDs from external sources might not support Per-Monitor V2 awareness. Hosting HWNDs that
+    // don't support the same DPI awareness mode as their host can lead to rendering problems.
+    // When child-HWND DPI isolation is enabled, Windows will try to let that HWND run in its native
+    // DPI scaling mode (which might or might not have been defined explicitly). 
 
+    // First, determine if we are in the correct mode to use this feature
+    BOOL bDpiIsolation = (BOOL)GetProp(hWnd, PROP_DPIISOLATION);
+
+    DPI_AWARENESS_CONTEXT previousDpiContext = {};
+	DPI_HOSTING_BEHAVIOR previousDpiHostingBehavior = {};
+    if (bDpiIsolation)
+    {
+        previousDpiHostingBehavior = SetThreadDpiHostingBehavior(DPI_HOSTING_BEHAVIOR_MIXED);
+
+        // For this example, we'll have the external content run with System-DPI awareness
+		previousDpiContext = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
+    }
+
+    HWND hWndExternal = PlugInDll::PlugInDll::CreateContentHwnd(g_hInst, EXTERNAL_CONTENT_WIDTH96, EXTERNAL_CONTENT_HEIGHT96);
+
+    // Return the thread context and hosting behavior to its previous value, if using DPI-isolation
+	if (bDpiIsolation)
+	{
+		SetThreadDpiAwarenessContext(previousDpiContext);
+		SetThreadDpiHostingBehavior(previousDpiHostingBehavior);
+	}
+
+    // After the external content HWND was create with a system-DPI awareness context, reparent it
+    HWND hWndResult = SetParent(hWndExternal, hWnd);
+
+    // DPI scale child-windows
     UpdateAndDpiScaleChildWindows(hWnd, uDpi);
 
     return 0;
@@ -279,7 +324,8 @@ LRESULT DoInitialWindowSetup(HWND hWnd)
 // then call a function to redo layout for the child controls
 UINT HandleDpiChange(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
-    HWND hWndStatic = GetWindow(hWnd, GW_CHILD);
+    HWND hWndStatic = FindWindowEx(hWnd, nullptr, L"STATIC", nullptr);
+
     if (hWndStatic != nullptr)
     {
         UINT uDpi = HIWORD(wParam);
@@ -294,25 +340,34 @@ UINT HandleDpiChange(HWND hWnd, WPARAM wParam, LPARAM lParam)
         // Redo layout of the child controls
         UpdateAndDpiScaleChildWindows(hWnd, uDpi);
     }
+
     return 0;
 }
 
-struct CreateParams
-{
-    BOOL bEnableNonClientDpiScaling;
-};
 // Create the sample window and set its initial size, based off of the
 // DPI awareness mode that it's running under
-void CreateSampleWindow(HWND hWndDlg, DPI_AWARENESS_CONTEXT context, BOOL bEnableNonClientDpiScaling)
+void CreateSampleWindow(HWND hWndDlg, DPI_AWARENESS_CONTEXT context, BOOL bEnableNonClientDpiScaling, BOOL bChildWindowDpiIsolation)
 {
     // Store the current thread's DPI-awareness context
     DPI_AWARENESS_CONTEXT previousDpiContext = SetThreadDpiAwarenessContext(context);
 
     // Create the window. Initially create it using unscaled (96 DPI)
-    // sizes. We'll resize the window when it's created
+    // sizes. We'll resize the window after it's created
 
     CreateParams createParams;
     createParams.bEnableNonClientDpiScaling = bEnableNonClientDpiScaling;
+    createParams.bChildWindowDpiIsolation = bChildWindowDpiIsolation;
+
+    // Windows 10 (1803) supports child-HWND DPI-mode isolation. This enables
+    // child HWNDs to run in DPI-scaling modes that are isolated from that of 
+    // their parent (or host) HWND. Without child-HWND DPI isolation, all HWNDs 
+    // in an HWND tree must have the same DPI-scaling mode.
+	DPI_HOSTING_BEHAVIOR previousDpiHostingBehavior = {};
+	if (bChildWindowDpiIsolation)
+	{
+		previousDpiHostingBehavior = SetThreadDpiHostingBehavior(DPI_HOSTING_BEHAVIOR_MIXED);
+	}
+
     HWND hWnd = CreateWindowExW(0L, WINDOWCLASSNAME, L"", WS_OVERLAPPEDWINDOW | WS_HSCROLL | WS_VSCROLL,
         CW_USEDEFAULT, 0, WINDOW_WIDTH96, WINDOW_HEIGHT96, hWndDlg, LoadMenuW(g_hInst, MAKEINTRESOURCEW(IDC_MAINMENU)),
         g_hInst, &createParams);
@@ -321,6 +376,12 @@ void CreateSampleWindow(HWND hWndDlg, DPI_AWARENESS_CONTEXT context, BOOL bEnabl
 
     // Restore the current thread's DPI awareness context
     SetThreadDpiAwarenessContext(previousDpiContext);
+
+	// Restore the current thread DPI hosting behavior, if we changed it.
+	if (bChildWindowDpiIsolation)
+	{
+		SetThreadDpiHostingBehavior(previousDpiHostingBehavior);
+	}
 }
 
 // The window procedure for the sample windows
@@ -348,6 +409,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             {
                 EnableNonClientDpiScaling(hWnd);
             }
+
+            // Store a flag on the window to note that it'll run its child in a different awareness
+			if (createParams->bChildWindowDpiIsolation)
+			{
+				SetProp(hWnd, PROP_DPIISOLATION, (HANDLE)TRUE);
+			}
 
             return DefWindowProc(hWnd, message, wParam, lParam);
         }
@@ -393,6 +460,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_DESTROY:
         {
             DeleteWindowFont(hWnd);
+
             return 0;
         }
     }
@@ -448,6 +516,7 @@ LRESULT CALLBACK HostDialogProc(HWND hWndDlg, UINT message, WPARAM wParam, LPARA
         {
             DPI_AWARENESS_CONTEXT context = nullptr;
             BOOL bNonClientScaling = false;
+			BOOL bChildWindowDpiIsolation = false;
             switch (LOWORD(wParam))
             {
                 case IDC_BUTTON_UNAWARE:
@@ -466,6 +535,10 @@ LRESULT CALLBACK HostDialogProc(HWND hWndDlg, UINT message, WPARAM wParam, LPARA
                 case IDC_BUTTON_1703:
                     context = DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2;
                     break;
+                case IDC_BUTTON_1803:
+                    context = DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2;
+                    bChildWindowDpiIsolation = true;
+                    break;
                 case IDM_EXIT:
                     DestroyWindow(hWndDlg);
                     return 0;
@@ -473,7 +546,7 @@ LRESULT CALLBACK HostDialogProc(HWND hWndDlg, UINT message, WPARAM wParam, LPARA
 
             if (context != nullptr)
             {
-                CreateSampleWindow(hWndDlg, context, bNonClientScaling);
+                CreateSampleWindow(hWndDlg, context, bNonClientScaling, bChildWindowDpiIsolation);
             }
             return TRUE;
 

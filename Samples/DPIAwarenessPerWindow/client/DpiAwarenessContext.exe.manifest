@@ -16,7 +16,7 @@
     <windowsSettings>
         <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
         <!-- Un-comment the line below to enable GDI-scaling in this project. This will enable text -->
-        <!-- to render crisply in DPI-unaware content --> 
+        <!-- to render crisply in DPI-unaware contexts --> 
         <!--<gdiScaling xmlns="http://schemas.microsoft.com/SMI/2017/WindowsSettings">true</gdiScaling>-->
     </windowsSettings>
 </application>

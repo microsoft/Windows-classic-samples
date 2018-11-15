@@ -34,13 +34,8 @@ namespace Microsoft.SystemInsights.Samples
         /// Method to register the data sources required for the capability. 
         /// This method registers a performance counter, an ETW event, and a well-known series. 
         /// </summary>
-        ///
-        /// <param name="capabilityName"> 
-        ///     Name of the capability, which is taken from the name
-        ///     specified in the Add-InsightsCapability or Update-InsightsCapability cmdlet. 
-        /// </param>
         /// <returns></returns>
-        public CapabilityInformation GetCapabilityInformation(string capabilityName)
+        public CapabilityInformation GetCapabilityInformation()
         {
             DataSource wellKnownSeriesVolume = new DataSource
             {
@@ -88,16 +83,12 @@ namespace Microsoft.SystemInsights.Samples
         /// This only shows how to parse the data sources
         /// and return a prediction status.
         /// </summary>
-        /// <param name="capabilityName"> 
-        ///     Name of the capability, which is taken from the name
-        ///     specified in the Add-InsightsCapability or Update-InsightsCapability cmdlet.  
-        /// </param>
         /// <param name="invokeRequest"> 
         ///     The prediction request object. 
         ///     Dictionary of data containing the data sources specified above. 
         /// </param>
         /// <returns></returns>
-        public InvokeResult Invoke(string capabilityName, InvokeRequest invokeRequest)
+        public InvokeResult Invoke(InvokeRequest invokeRequest)
         {
             cts.Token.Register(() => OnCancel());
 
