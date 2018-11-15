@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DpiAwarenessContext", "DpiAwarenessContext.vcxproj", "{F9626F74-5C4E-40B7-A0D9-687E0C68B69D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PluginDLL", "..\PluginDLL\PluginDLL.vcxproj", "{B7706FFA-1964-4F5A-9493-073A5490595C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3F1A44A-292B-42C9-A8A4-7A325194A26A}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +28,19 @@ Global
 		{F9626F74-5C4E-40B7-A0D9-687E0C68B69D}.Release|x64.Build.0 = Release|x64
 		{F9626F74-5C4E-40B7-A0D9-687E0C68B69D}.Release|x86.ActiveCfg = Release|Win32
 		{F9626F74-5C4E-40B7-A0D9-687E0C68B69D}.Release|x86.Build.0 = Release|Win32
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Debug|x64.ActiveCfg = Debug|x64
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Debug|x64.Build.0 = Debug|x64
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Debug|x86.ActiveCfg = Debug|Win32
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Debug|x86.Build.0 = Debug|Win32
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Release|x64.ActiveCfg = Release|x64
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Release|x64.Build.0 = Release|x64
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Release|x86.ActiveCfg = Release|Win32
+		{B7706FFA-1964-4F5A-9493-073A5490595C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91EA315D-001C-45FF-9ECF-9D44D3BEC32F}
 	EndGlobalSection
 EndGlobal
