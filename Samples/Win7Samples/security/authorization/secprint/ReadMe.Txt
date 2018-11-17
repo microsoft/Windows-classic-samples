@@ -22,4 +22,4 @@ specified access is granted.)
 
 Note: On NT4 or earlier denied 'Full Control' is displayed as 'No Access'
 by the Explorer Printer Permissions dialog. Denying P, MD, or MP on NT4 or
-earlier will not be viewable using this dialog eventhough the DACL is valid.
+earlier will not be viewable using this dialog even though the DACL is valid.
