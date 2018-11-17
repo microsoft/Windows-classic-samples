@@ -84,7 +84,7 @@ Return Value:
         }
         Buffer = (PWSTR)LogContext->PrintBuffer;
         vswprintf_s(Buffer, StrLen, FormatString, Arguments);
-        wprintf(L"%s", Buffer);
+        wprintf(L"%ls", Buffer);
     }
 
     va_end(Arguments);
@@ -187,7 +187,7 @@ Return Value:
         (IS_WBEM_EVENT(EventInfo) == 0) && 
         (TEI_PROVIDER_NAME(EventInfo) != NULL)) {
 
-        VPrintFToFile(FALSE, LogContext, L" Name=\"%s\"", TEI_PROVIDER_NAME(EventInfo));
+        VPrintFToFile(FALSE, LogContext, L" Name=\"%ls\"", TEI_PROVIDER_NAME(EventInfo));
     }
         
     Guid = &Event->EventHeader.ProviderId;
@@ -198,7 +198,7 @@ Return Value:
     if (Guid != NULL) {
         Status = GuidToBuffer((PBYTE)Guid, DataLeft, (PBYTE)&GuidString, GuidStringSize, &Consumed);
         if (Status == ERROR_SUCCESS) {
-            VPrintFToFile(FALSE, LogContext, L" Guid=\"%s", GuidString);
+            VPrintFToFile(FALSE, LogContext, L" Guid=\"%ls", GuidString);
         }
     }
     VPrintFToFile(FALSE, LogContext, L"\" />");
@@ -224,7 +224,7 @@ Return Value:
     Status = FileTimeToBuffer((PBYTE)&FileTime, sizeof(FILETIME), (PBYTE)&DateTimeString[0], DateTimeStringSize, &Consumed);
 
     if (Status == ERROR_SUCCESS) {
-        VPrintFToFile(FALSE, LogContext, L"\r\n\t\t<TimeCreated SystemTime=\"%s\" />", DateTimeString);
+        VPrintFToFile(FALSE, LogContext, L"\r\n\t\t<TimeCreated SystemTime=\"%ls\" />", DateTimeString);
     }
 
     //
@@ -236,14 +236,14 @@ Return Value:
     
     Status = GuidToBuffer((PBYTE)&Header->ActivityId, sizeof(GUID), (PBYTE)&GuidString, GuidStringSize, &Consumed);
     if (Status == ERROR_SUCCESS) {
-        VPrintFToFile(FALSE, LogContext, L"ActivityID=\"%s\"", (PWSTR)GuidString);
+        VPrintFToFile(FALSE, LogContext, L"ActivityID=\"%ls\"", (PWSTR)GuidString);
     }
 
     if (RelatedActivityID != NULL) {
         Status = GuidToBuffer((PBYTE)RelatedActivityID, sizeof(GUID), (PBYTE)&GuidString, ULONG_MAX, &Consumed);
         if (Status == ERROR_SUCCESS) {
                 VPrintFToFile(FALSE, LogContext, L" RelatedActivityID=\"");
-                VPrintFToFile(FALSE, LogContext, L"%s\"", GuidString);
+                VPrintFToFile(FALSE, LogContext, L"%ls\"", GuidString);
         }
     }
 
@@ -928,13 +928,13 @@ Return Value:
 
         if (ArrayCount > 1) {
             VPrintFToFile(FALSE, LogContext,
-                          L"\r\n\t\t<Data Name=\"%s[%d]\">%s</Data>",
+                          L"\r\n\t\t<Data Name=\"%ls[%d]\">%ls</Data>",
                           TEI_PROPERTY_NAME(EventInfo, Property),
                           Counter,
                           (PWSTR)DataContext->Buffer);
         } else {
             VPrintFToFile(FALSE, LogContext,
-                          L"\r\n\t\t<Data Name=\"%s\">%s</Data>",
+                          L"\r\n\t\t<Data Name=\"%ls\">%ls</Data>",
                           TEI_PROPERTY_NAME(EventInfo, Property),
                           (PWSTR)DataContext->Buffer);
         }
@@ -1002,7 +1002,7 @@ Return Value:
     
     VPrintFToFile(FALSE,
                   LogContext,
-                  L"\r\n\t\t<ComplexData Name=\"%s\">",
+                  L"\r\n\t\t<ComplexData Name=\"%ls\">",
                   TEI_PROPERTY_NAME(EventInfo, ComplexProperty));
 
     //
@@ -1278,7 +1278,7 @@ Return Value:
         //
 
         if (Status == ERROR_SUCCESS) {
-            VPrintFToFile(TRUE, LogContext, L"\r\nEventMessage: %s\n", EventMessage);
+            VPrintFToFile(TRUE, LogContext, L"\r\nEventMessage: %ls\n", EventMessage);
             if (EventMessage != NULL) {
                 LocalFree(EventMessage);
             }
