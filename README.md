@@ -27,7 +27,7 @@ To get a copy of Windows, go to
 [Downloads and tools](http://go.microsoft.com/fwlink/p/?linkid=301696).
 
 To get a copy of Visual Studio, go to
-[Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
+[Visual Studio Downloads](https://visualstudio.microsoft.com/downloads/).
 
 Other samples repos:
 
