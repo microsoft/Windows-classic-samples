@@ -95,7 +95,7 @@ CSampleDesktopWindow::Run()
             WaitMessage();
         }
 
-        while (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE))
+        while (PeekMessage(&message, nullptr, 0, 0, PM_REMOVE) && (message.message != WM_QUIT))
         {
 			TranslateMessage(&message);
             
@@ -200,6 +200,8 @@ CSampleDesktopWindow::OnDestroy(
     _Out_ BOOL &bHandled
     )
 {
+    m_visible = false;
+
     PostQuitMessage(0);
 
     bHandled = TRUE;

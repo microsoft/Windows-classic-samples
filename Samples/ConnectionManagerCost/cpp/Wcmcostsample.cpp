@@ -303,7 +303,7 @@ int GetUserChoice()
    
    for(int i=0; i<numchoices; i++)
    {
-      wprintf(L"   %i. %s\n",i+1,choices[i]);
+      wprintf(L"   %i. %ls\n",i+1,choices[i]);
    }
    
    wprintf(L"---------------------------------------------------------\n");
@@ -329,7 +329,7 @@ int GetUserChoice()
 //
 //********************************************************************************************
 
-void __cdecl main()
+int __cdecl main()
 {
     int userChoice = -1;
     
@@ -340,4 +340,5 @@ void __cdecl main()
             
     }
     wprintf(L"WCM Sample SDK exited\n");
+    return 0;
 }

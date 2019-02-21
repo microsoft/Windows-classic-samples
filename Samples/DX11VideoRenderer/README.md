@@ -50,7 +50,7 @@ To build this sample:
 Run the sample
 --------------
 
-To run this sample after building it, go to the installation folder for this sample with Windows Explorer and run DX11VideoRenderer.exe from the *\<install\_root\>*\\DX11VideoRenderer\\C++\\Debug folder.
-
-To run this sample from Microsoft Visual Studio, press the F5 key to run with debugging enabled, or Ctrl+F5 to run without debugging enabled. Alternatively, select **Start Debugging** or **Start Without Debugging** from the **Debug** menu.
-
+1. Register the DLL by running the command `regsvr32 DX11VideoRenderer.dll` from an elevated command prompt.
+2. Run [the `topoedit.exe` program from the Windows SDK](https://docs.microsoft.com/en-us/windows/desktop/medfound/topoedit).
+3. From the Topology menu, select "Add DX11 Video Renderer."
+4. When you are finished using the sample, unregister the DLL by running the command `regsvr32 /u DX11VideoRenderer.dll` from an elevated command prompt.
