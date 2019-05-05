@@ -24,7 +24,7 @@ ProjFS is an Optional Component available in the Windows 10 October 2018 Update 
 To use PowerShell to enable ProjFS use the `Enable-WindowsOptionalFeature` cmdlet in an elevated PowerShell window:
 
 ```PowerShell
-Enable-WindowsOptionalFeature -Online -FeatureName ProjFS-Client -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Client-ProjFS -NoRestart
 ```
 
 Reboot the computer if the Enable-WindowsOptionalFeature reports `RestartNeeded: True`.
