@@ -340,7 +340,7 @@ HRESULT CRowset::CreateHelperFunctions
     // Create helper objects
     //----------------------
 
-    // Bit array to track presence/absense of rows.
+    // Bit array to track presence/absence of rows.
     m_prowbitsIBuffer = new CBitArray;
     if( !m_prowbitsIBuffer || FAILED(m_prowbitsIBuffer->FInit(MAX_BITS, g_dwPageSize)))
         return ResultFromScode( E_FAIL );
