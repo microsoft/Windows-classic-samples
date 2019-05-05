@@ -72,7 +72,7 @@ private:
     // Handle to the window
     HWND m_hWnd;
 
-    // Unique timer identifer for this processor
+    // Unique timer identifier for this processor
     int m_iTimerId;
 
     // Flag the determines if this event sink handles inertia

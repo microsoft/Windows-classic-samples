@@ -120,7 +120,7 @@ static const LPCWSTR PublisherNameList[][PUBLISHER_ATTR_CNT] = {
 #define PUBLISHER_NAME_LIST_CNT  (sizeof(PublisherNameList) / sizeof(PublisherNameList[0]))
 
 //
-// Checks if the certificate's public key matches one of the SHA1 key identifers
+// Checks if the certificate's public key matches one of the SHA1 key identifiers
 // in the list.
 //
 

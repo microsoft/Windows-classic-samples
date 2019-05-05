@@ -493,7 +493,7 @@ wmain(
                                         &KdfKeyHandle,              // Address of the variable that recieves the key handle
                                         NCRYPT_SP800108_CTR_HMAC_ALGORITHM, // Algorithm name (null terminated unicode string)
                                         KdfKeyName,                 // Key name (null terminated unicode string)
-                                        0,                          // Legacy identifer (AT_KEYEXCHANGE, AT_SIGNATURE or 0 )
+                                        0,                          // Legacy identifier (AT_KEYEXCHANGE, AT_SIGNATURE or 0 )
                                         NCRYPT_OVERWRITE_KEY_FLAG); // Flags; If a key already exists in the container with the specified name, the existing key will be overwritten.
     if( FAILED(secStatus) )
     {

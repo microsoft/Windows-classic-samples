@@ -177,7 +177,7 @@ void TransferContentFromDevice(
 
 
     // Prompt user to enter an object identifier on the device to transfer.
-    printf("Enter the identifer of the object you wish to transfer.\n>");
+    printf("Enter the identifier of the object you wish to transfer.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -309,7 +309,7 @@ void DeleteContentFromDevice(
     }
 
     // Prompt user to enter an object identifier on the device to delete.
-    printf("Enter the identifer of the object you wish to delete.\n>");
+    printf("Enter the identifier of the object you wish to delete.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -434,7 +434,7 @@ void MoveContentAlreadyOnDevice(
     }
 
     // Prompt user to enter an object identifier on the device to move.
-    printf("Enter the identifer of the object you wish to move.\n>");
+    printf("Enter the identifier of the object you wish to move.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -442,7 +442,7 @@ void MoveContentAlreadyOnDevice(
     }
 
     // Prompt user to enter an object identifier on the device to move.
-    printf("Enter the identifer of the object you wish to move '%ws' to.\n>", szSelection);
+    printf("Enter the identifier of the object you wish to move '%ws' to.\n>", szSelection);
     hr = StringCbGetsW(szDestinationFolderObjectID,sizeof(szDestinationFolderObjectID));
     if (FAILED(hr))
     {
@@ -793,7 +793,7 @@ void TransferContentToDevice(
     CComPtr<IStream>                    pTempStream;  // Temporary IStream which we use to QI for IPortableDeviceDataStream
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    printf("Enter the identifer of the parent object which the file will be transferred under.\n>");
+    printf("Enter the identifier of the parent object which the file will be transferred under.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -965,7 +965,7 @@ void CreateContactPhotoResourceOnDevice(
     CComPtr<IPortableDeviceResources>   pResources;
 
     // Prompt user to enter an object identifier for the object to which we will add a Resource.
-    printf("Enter the identifer of the object to which we will add a photograph.\n>");
+    printf("Enter the identifier of the object to which we will add a photograph.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -1312,7 +1312,7 @@ void TransferContactToDevice(
     CComPtr<IPortableDeviceContent>     pContent;
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    printf("Enter the identifer of the parent object which the contact will be transferred under.\n>");
+    printf("Enter the identifier of the parent object which the contact will be transferred under.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -1385,7 +1385,7 @@ void CreateFolderOnDevice(
     CComPtr<IPortableDeviceContent>     pContent;
 
     // Prompt user to enter an object identifier for the parent object on the device to transfer.
-    printf("Enter the identifer of the parent object which the folder will be created under.\n>");
+    printf("Enter the identifier of the parent object which the folder will be created under.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {
@@ -1556,7 +1556,7 @@ void UpdateContentOnDevice(
     CComPtr<IStream>                    pTempStream;  // Temporary IStream which we use to QI for IPortableDeviceDataStream
 
     // Prompt user to enter an object identifier for the object on the device to update.
-    printf("Enter the identifer of the object to update.\n>");
+    printf("Enter the identifier of the object to update.\n>");
     hr = StringCbGetsW(szSelection,sizeof(szSelection));
     if (FAILED(hr))
     {

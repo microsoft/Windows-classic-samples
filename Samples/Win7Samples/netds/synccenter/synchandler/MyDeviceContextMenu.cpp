@@ -153,7 +153,7 @@ STDMETHODIMP CMyDeviceContextMenu::Initialize(
 //
 //  Return Values:
 //      HRESULT value that has its severity value set to SEVERITY_SUCCESS and
-//          its code value set to the largest command identifer that was
+//          its code value set to the largest command identifier that was
 //          assigned, plus one.
 //      HRESULT value - An error occurred.
 //
