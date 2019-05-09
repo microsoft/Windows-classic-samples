@@ -1,0 +1,8 @@
+namespace WinRTComponent
+{
+    runtimeclass MessageHolder
+    {
+        MessageHolder();
+        String Message;
+    }
+}

@@ -21,6 +21,14 @@ Note that the provider is loaded as an in-process server, which means that you n
 regsvr32 AmsiProvider.dll
 ````
 
+If your system has other providers installed, they may take priority over the sample provider.
+To prevent this from happening (for testing purposes), go to the
+`HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\AMSI\Providers`
+and
+`HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\AMSI\Providers`
+registry keys and temporarily rename the other providers
+so that the system will use the sample provider.
+
 ### Exercising the sample provider
 
 Events logged by the sample provider
@@ -54,3 +62,5 @@ to stop capturing events.
 ````
 regsvr32 /u AmsiProvider.dll
 ````
+
+If you temporarily renamed conflicting providers when you installed the sample provider, rename the keys back.
