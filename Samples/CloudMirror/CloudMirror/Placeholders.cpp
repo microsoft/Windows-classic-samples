@@ -36,12 +36,12 @@ void Placeholders::Create(
         // make this either "subdirname\" or "" so that we can just always
         // append it without worry
         std::wstring sourceSubDir(sourceSubDirstr);
+        std::wstring fileName(sourcePath);
         if (sourceSubDir[0])
         {
-            sourceSubDir.append(L"\\");
+            fileName.append(L"\\");
         }
 
-        std::wstring fileName(sourcePath);
         fileName.append(sourceSubDir);
         fileName.append(L"\\*");
 
@@ -56,7 +56,7 @@ void Placeholders::Create(
 
         if (hFileHandle != INVALID_HANDLE_VALUE)
         {
-            do 
+            do
             {
                 if (!wcscmp(findData.cFileName, L".") ||
                     !wcscmp(findData.cFileName, L".."))
@@ -65,6 +65,8 @@ void Placeholders::Create(
                 }
 
                 std::wstring relativeName(sourceSubDir);
+                if (relativeName[0]) // if sourceSubDir is not emtpy string we need to end it with \ relativeName does not have the path seperator at the end.
+                    relativeName.append(L"\\");
                 relativeName.append(findData.cFileName);
 
                 cloudEntry.FileIdentity = relativeName.data();
