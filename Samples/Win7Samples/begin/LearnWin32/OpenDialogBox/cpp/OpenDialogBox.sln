@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenDialogBox", "OpenDialogBox.vcxproj", "{200E2C18-2D1B-416A-BD1E-658117D7CC4E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenDialogBoxVariations", "OpenDialogBoxVariations.vcxproj", "{D45D4E17-3640-4001-90A5-739D2C0547A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{287ED6A1-7844-4844-95A7-5DDE79026F1C}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{200E2C18-2D1B-416A-BD1E-658117D7CC4E}.Debug|x86.ActiveCfg = Debug|Win32
+		{200E2C18-2D1B-416A-BD1E-658117D7CC4E}.Debug|x86.Build.0 = Debug|Win32
+		{200E2C18-2D1B-416A-BD1E-658117D7CC4E}.Release|x86.ActiveCfg = Release|Win32
+		{200E2C18-2D1B-416A-BD1E-658117D7CC4E}.Release|x86.Build.0 = Release|Win32
+		{D45D4E17-3640-4001-90A5-739D2C0547A7}.Debug|x86.ActiveCfg = Debug|Win32
+		{D45D4E17-3640-4001-90A5-739D2C0547A7}.Debug|x86.Build.0 = Debug|Win32
+		{D45D4E17-3640-4001-90A5-739D2C0547A7}.Release|x86.ActiveCfg = Release|Win32
+		{D45D4E17-3640-4001-90A5-739D2C0547A7}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1002C2DB-9E02-4991-B36C-74874B54E287}
+	EndGlobalSection
+EndGlobal

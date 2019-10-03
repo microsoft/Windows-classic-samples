@@ -163,7 +163,7 @@ namespace Microsoft.Samples.Touch.MTScratchpadWMTouch
         // We must p/invoke into user32 [winuser.h]
         [DllImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool RegisterTouchWindow(System.IntPtr hWnd, ulong ulFlags);
+        private static extern bool RegisterTouchWindow(System.IntPtr hWnd, uint ulFlags);
 
         [DllImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]

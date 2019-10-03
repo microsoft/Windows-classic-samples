@@ -25,7 +25,7 @@ To use this sample (Media Foundation):
 
 1. Build the sample.
 2. Regsvr32 EvrPresenter.dll.
-3. Build and run the MFPlayer sample.
+3. Build and run the MFPlayer2 sample.
 4. From the File menu, select Open File
 5. In the Open File dialog, check "Custom EVR Presenter."
 6. Select a file for playback.

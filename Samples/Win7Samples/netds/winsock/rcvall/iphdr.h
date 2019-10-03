@@ -61,7 +61,7 @@ typedef struct udp_hdr
 //
 // Define the TCP header
 //
-typedef struct tpc_hdr
+typedef struct tcp_hdr
 {
     unsigned short src_portno;       // Source port no.
     unsigned short dest_portno;      // Dest. port no.

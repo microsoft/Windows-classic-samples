@@ -510,11 +510,11 @@ void ComputeUdpPseudoHeaderChecksumV4(
 }
 
 //
-// Function: CompouteUdpPsuedoHeaderChecksumV6
+// Function: CompouteUdpPseudoHeaderChecksumV6
 //
 // Description:
 //    Compute the pseudo header checksum for IPv6. The required fields for
-//    computing the psuedo checksum are:
+//    computing the pseudo checksum are:
 //
 //       o 128-bit source address
 //       o 128-bit destination address
