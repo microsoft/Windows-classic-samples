@@ -152,10 +152,19 @@ void CAlarmClient::ShowNotification(Alarm* pAlarm)
         }
 
         //
-        // Set the Notification to expire after 1 year
+        // Set the Notification to expire after 90 days
         //
         ::GetLocalTime(&expTime);
-        expTime.wYear++;
+
+        FILETIME ft = { 0 };
+        SystemTimeToFileTime(&expTime, &ft);
+
+        ULARGE_INTEGER u = { 0 };
+        memcpy(&u, &ft, sizeof(u));
+        u.QuadPart += 90 * 24 * 60 * 60 * 10000000LLU;  // 90 days
+        memcpy(&ft, &u, sizeof(ft));
+
+        FileTimeToSystemTime(&ft, &expTime);
 
         hr = m_pNotification->put_ExpirationTime(&expTime);
         if (FAILED(hr))
