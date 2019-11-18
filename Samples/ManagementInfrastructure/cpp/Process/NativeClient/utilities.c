@@ -287,7 +287,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.boolean = elementValue->booleana.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->booleana.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -305,7 +305,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.sint8 = elementValue->sint8a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->sint8a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -323,7 +323,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.uint8 = elementValue->uint8a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->uint8a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -341,7 +341,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.sint16 = elementValue->sint16a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->sint16a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -359,7 +359,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.uint16 = elementValue->uint16a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->uint16a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -377,7 +377,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.sint32 = elementValue->sint32a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->sint32a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -395,7 +395,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.uint32 = elementValue->uint32a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->uint32a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -413,7 +413,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.sint64 = elementValue->sint64a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->sint64a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -431,7 +431,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.uint64 = elementValue->uint64a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->uint64a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -449,7 +449,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.real32 = elementValue->real32a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->real32a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -467,7 +467,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.real64 = elementValue->real64a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->real64a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
@@ -485,7 +485,7 @@ void Print_Element_Value(
                     MI_Value value;
                     value.char16 = elementValue->char16a.data[i];
                     Print_Element_Value(&value, nonArrayType, level);
-                    if (i + 1 != elementValue->datetimea.size)
+                    if (i + 1 != elementValue->char16a.size)
                         wprintf(L", ");
                 }
                 wprintf(L"}");
