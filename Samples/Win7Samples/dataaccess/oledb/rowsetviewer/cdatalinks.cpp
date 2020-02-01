@@ -150,8 +150,8 @@ HRESULT CServiceComp::CreateDBInstance(REFCLSID clsid, CAggregate* pCAggregate, 
 	if(m_pIDataInitialize)
 	{
 		//Now Obtain Instance of Provider (with Service Components)
-		XTEST(hr = m_pIDataInitialize->CreateDBInstance(clsid, pCAggregate, dwCLSCTX, L"pwszReserved", riid, ppIUnknown));
-		TESTC(TRACE_METHOD(hr, L"IDataInitialize::CreateDBInstance(%s, 0x%p, 0x%08x, \"pwszReserved\", %s, &0x%p)", pwszProgID, pCAggregate, dwCLSCTX, GetInterfaceName(riid), ppIUnknown ? *ppIUnknown : NULL));
+		XTEST(hr = m_pIDataInitialize->CreateDBInstance(clsid, pCAggregate, dwCLSCTX, NULL, riid, ppIUnknown));
+		TESTC(TRACE_METHOD(hr, L"IDataInitialize::CreateDBInstance(%s, 0x%p, 0x%08x, NULL, %s, &0x%p)", pwszProgID, pCAggregate, dwCLSCTX, GetInterfaceName(riid), ppIUnknown ? *ppIUnknown : NULL));
 
 		//Handle Aggregation
 		if(pCAggregate)
