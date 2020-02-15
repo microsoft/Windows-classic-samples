@@ -502,7 +502,7 @@ HRESULT CApplication::CreateDCompositionRenderTarget()
 
     if (SUCCEEDED(hr))
     {
-        hr = m_pDevice->CreateTargetForHwnd(m_hMainWindow, TRUE, &m_pHwndRenderTarget);
+        hr = m_pDevice->CreateTargetForHwnd(m_hMainWindow, FALSE, &m_pHwndRenderTarget);
     }
 
     return hr;
