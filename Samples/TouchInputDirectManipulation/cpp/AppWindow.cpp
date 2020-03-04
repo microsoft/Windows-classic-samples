@@ -259,6 +259,7 @@ namespace DManipSample
             break;
         case WM_KEYDOWN:
         case WM_MOUSEWHEEL:
+        case WM_MOUSEHWHEEL:
             {
                 DWORD targetContact = (message == WM_KEYDOWN) ? DIRECTMANIPULATION_KEYBOARDFOCUS : DIRECTMANIPULATION_MOUSEFOCUS;
                 BOOL fHandled = FALSE;  
