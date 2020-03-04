@@ -49,6 +49,9 @@ namespace DManipSample
 
         HINSTANCE hModule = GetModuleHandle(nullptr);
 
+        // Receive mouse events as WM_POINTER* messages
+        EnableMouseInPointer(TRUE);
+
         WNDCLASSEX wc;
         wc.cbSize           = sizeof(wc);
         wc.lpszClassName    = WNDCLASSNAME;
