@@ -289,10 +289,11 @@ LRESULT DoInitialWindowSetup(HWND hWnd)
     // DPI scaling mode (which might or might not have been defined explicitly). 
 
     // First, determine if we are in the correct mode to use this feature
-    BOOL bDpiIsolation = (BOOL)GetProp(hWnd, PROP_DPIISOLATION);
+    BOOL bDpiIsolation = PtrToInt(GetProp(hWnd, PROP_DPIISOLATION));
 
     DPI_AWARENESS_CONTEXT previousDpiContext = {};
-	DPI_HOSTING_BEHAVIOR previousDpiHostingBehavior = {};
+    DPI_HOSTING_BEHAVIOR previousDpiHostingBehavior = {};
+
     if (bDpiIsolation)
     {
         previousDpiHostingBehavior = SetThreadDpiHostingBehavior(DPI_HOSTING_BEHAVIOR_MIXED);

@@ -195,7 +195,7 @@ LRESULT CALLBACK CTextInputCtrl::s_WndProc(HWND hwnd, UINT message, WPARAM wPara
                     LONG lAttrSize = ImmGetCompositionString(himc, GCS_COMPATTR, NULL, 0);
                     LONG lClauseInfoSize = ImmGetCompositionString(himc, GCS_COMPCLAUSE, NULL, 0);
 
-                    if (lSize)
+                    if (lSize > 0)
                     {
                         BYTE *prgAttr = NULL;
                         LONG *prgClauseInfo = NULL;
@@ -209,12 +209,13 @@ LRESULT CALLBACK CTextInputCtrl::s_WndProc(HWND hwnd, UINT message, WPARAM wPara
 
                         if (psz)
                         {
-                            if (ImmGetCompositionString(himc, GCS_COMPSTR, psz, lSize))
+                            if (ImmGetCompositionString(himc, GCS_COMPSTR, psz, lSize) > 0)
                             {
                                 if (prgAttr)
                                 {
-                                    if (!ImmGetCompositionString(himc, GCS_COMPATTR, prgAttr, lAttrSize))
+                                    if (ImmGetCompositionString(himc, GCS_COMPATTR, prgAttr, lAttrSize) <= 0)
                                     {
+                                        LocalFree(prgAttr);
                                         prgAttr = NULL;
                                         lAttrSize = 0;
                                     }
@@ -222,8 +223,9 @@ LRESULT CALLBACK CTextInputCtrl::s_WndProc(HWND hwnd, UINT message, WPARAM wPara
     
                                 if (prgClauseInfo)
                                 {
-                                    if (!ImmGetCompositionString(himc, GCS_COMPCLAUSE, prgClauseInfo, lClauseInfoSize))
+                                    if (ImmGetCompositionString(himc, GCS_COMPCLAUSE, prgClauseInfo, lClauseInfoSize) <= 0)
                                     {
+                                        LocalFree(prgClauseInfo);
                                         prgClauseInfo = NULL;
                                         lClauseInfoSize = 0;
                                     }

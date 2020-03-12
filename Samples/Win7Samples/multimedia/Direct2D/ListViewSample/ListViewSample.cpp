@@ -1200,18 +1200,18 @@ LRESULT CALLBACK ListViewApp::ParentWndProc(HWND hwnd, UINT message, WPARAM wPar
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pListViewApp)
+            reinterpret_cast<LONG_PTR>(pListViewApp)
             );
 
         result = 1;
     }
     else
     {
-        ListViewApp *pListViewApp = reinterpret_cast<ListViewApp *>(static_cast<LONG_PTR>(
+        ListViewApp *pListViewApp = reinterpret_cast<ListViewApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 

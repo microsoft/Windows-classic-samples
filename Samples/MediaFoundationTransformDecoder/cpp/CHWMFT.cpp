@@ -607,15 +607,15 @@ HRESULT CHWMFT::RequestSample(
         ** we know m_pEventQueue can never be
         ** NULL due to InitializeTransform()
         ***************************************/
-
-        hr = m_pEventQueue->QueueEvent(pEvent);
-        if(FAILED(hr))
-        {
-            break;
-        }
-
+        
         {
             CAutoLock lock(&m_csLock);
+
+            hr = m_pEventQueue->QueueEvent(pEvent);
+            if(FAILED(hr))
+            {
+                break;
+            }
 
             m_dwNeedInputCount++;
 

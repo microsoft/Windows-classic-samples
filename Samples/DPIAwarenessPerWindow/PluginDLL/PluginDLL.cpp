@@ -14,6 +14,10 @@
 #include <windows.h>
 #include <Commctrl.h>
 
+#define DEFAULT_PADDING96          20
+#define DEFAULT_CHAR_BUFFER        200
+#define PROP_FONTSET               L"FONT_SET"
+
 namespace PlugInDll
 {
 
@@ -95,7 +99,6 @@ namespace PlugInDll
         }
 
         // Convert DPI awareness context to a string
-        WCHAR awareness[DEFAULT_CHAR_BUFFER];
         WCHAR awarenessContext[DEFAULT_CHAR_BUFFER];
 
         DPI_AWARENESS_CONTEXT dpiAwarenessContext = GetThreadDpiAwarenessContext();
@@ -178,7 +181,7 @@ namespace PlugInDll
             // don't let the font be set after that
             case WM_SETFONT:
             {
-                BOOL bFontSet = (BOOL)GetProp(hWnd, PROP_FONTSET);
+                BOOL bFontSet = PtrToInt(GetProp(hWnd, PROP_FONTSET));
                 if (!bFontSet)
                 {
                     // Allow the font set to happen

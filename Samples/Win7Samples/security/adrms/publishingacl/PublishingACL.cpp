@@ -468,7 +468,16 @@ wmain(
     //
     GetSystemTime( &stTimeFrom );
     GetSystemTime( &stTimeUntil );
-    stTimeUntil.wYear++;
+    
+    FILETIME ft = { 0 };
+    SystemTimeToFileTime(&stTimeUntil, &ft);
+
+    ULARGE_INTEGER u = { 0 };
+    memcpy(&u, &ft, sizeof(u));
+    u.QuadPart += 90 * 24 * 60 * 60 * 10000000LLU;  // 90 days
+    memcpy(&ft, &u, sizeof(ft));
+
+    FileTimeToSystemTime(&ft, &stTimeUntil);
 
     //
     // 1. Create an unsigned issuance license from scratch

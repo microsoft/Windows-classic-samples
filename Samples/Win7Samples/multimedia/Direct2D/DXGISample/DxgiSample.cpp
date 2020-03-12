@@ -1293,18 +1293,18 @@ LRESULT CALLBACK DXGISampleApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, 
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pDXGISampleApp)
+            reinterpret_cast<LONG_PTR>(pDXGISampleApp)
             );
 
         result = 1;
     }
     else
     {
-        DXGISampleApp *pDXGISampleApp = reinterpret_cast<DXGISampleApp *>(static_cast<LONG_PTR>(
+        DXGISampleApp *pDXGISampleApp = reinterpret_cast<DXGISampleApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 

@@ -1105,18 +1105,18 @@ LRESULT CALLBACK MSAASampleApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, 
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pMSAASampleApp)
+            reinterpret_cast<LONG_PTR>(pMSAASampleApp)
             );
 
         result = 1;
     }
     else
     {
-        MSAASampleApp *pMSAASampleApp = reinterpret_cast<MSAASampleApp *>(static_cast<LONG_PTR>(
+        MSAASampleApp *pMSAASampleApp = reinterpret_cast<MSAASampleApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 

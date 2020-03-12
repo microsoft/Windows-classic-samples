@@ -1,6 +1,6 @@
 #pragma once
 
-#ifndef PLUGINDLL_EXPORTS
+#ifdef PLUGINDLL_EXPORTS
 #define PLUGINDLL_API __declspec(dllexport)
 #else
 #define PLUGINDLL_API __declspec(dllimport)
@@ -8,9 +8,6 @@
 
 #define HWND_NAME_EXTERNAL         L"External Content"
 #define PLUGINWINDOWCLASSNAME      L"Plugin Window Class"
-#define DEFAULT_PADDING96          20
-#define DEFAULT_CHAR_BUFFER        200
-#define PROP_FONTSET               L"FONT_SET"
 
 namespace PlugInDll
 {

@@ -2122,18 +2122,18 @@ LRESULT CALLBACK Interactive3dTextSampleApp::WndProc(HWND hwnd, UINT message, WP
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pInteractive3dTextSampleApp)
+            reinterpret_cast<LONG_PTR>(pInteractive3dTextSampleApp)
             );
 
         result = 1;
     }
     else
     {
-        Interactive3dTextSampleApp *pInteractive3dTextSampleApp = reinterpret_cast<Interactive3dTextSampleApp *>(static_cast<LONG_PTR>(
+        Interactive3dTextSampleApp *pInteractive3dTextSampleApp = reinterpret_cast<Interactive3dTextSampleApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 

@@ -918,18 +918,18 @@ LRESULT CALLBACK DemoApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pDemoApp)
+            reinterpret_cast<LONG_PTR>(pDemoApp)
             );
 
         result = 1;
     }
     else
     {
-        DemoApp *pDemoApp = reinterpret_cast<DemoApp *>(static_cast<LONG_PTR>(
+        DemoApp *pDemoApp = reinterpret_cast<DemoApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 

@@ -23,7 +23,7 @@
 //===============================================================
 
 void Placeholders::Create(
-    _In_ PCWSTR sourcePath,
+    _In_ PCWSTR sourcePathStr,
     _In_ PCWSTR sourceSubDirstr,
     _In_ PCWSTR destPath)
 {
@@ -33,17 +33,23 @@ void Placeholders::Create(
         HANDLE hFileHandle;
         CF_PLACEHOLDER_CREATE_INFO cloudEntry;
 
-        // make this either "subdirname\" or "" so that we can just always
-        // append it without worry
-        std::wstring sourceSubDir(sourceSubDirstr);
-        if (sourceSubDir[0])
+        // Ensure that the source path ends in a backslash.
+        std::wstring sourcePath(sourcePathStr);
+        if (sourcePath.back() != L'\\')
         {
-            sourceSubDir.append(L"\\");
+            sourcePath.push_back(L'\\');
+        }
+
+        // Ensure that a nonempty subdirectory ends in a backslash.
+        std::wstring sourceSubDir(sourceSubDirstr);
+        if (sourceSubDir.length() && sourceSubDir.back() != '\\')
+        {
+            sourceSubDir.push_back(L'\\');
         }
 
         std::wstring fileName(sourcePath);
         fileName.append(sourceSubDir);
-        fileName.append(L"\\*");
+        fileName.append(L"*");
 
         hFileHandle =
             FindFirstFileEx(
@@ -56,7 +62,7 @@ void Placeholders::Create(
 
         if (hFileHandle != INVALID_HANDLE_VALUE)
         {
-            do 
+            do
             {
                 if (!wcscmp(findData.cFileName, L".") ||
                     !wcscmp(findData.cFileName, L".."))
@@ -113,7 +119,7 @@ void Placeholders::Create(
 
                     if ((findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
                     {
-                        Create(sourcePath, relativeName.data(), destPath);
+                        Create(sourcePath.c_str(), relativeName.data(), destPath);
                     }
                 }
                 catch (...)

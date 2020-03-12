@@ -118,8 +118,8 @@ HRESULT DemoApp::Initialize()
             WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT,
             CW_USEDEFAULT,
-            static_cast<UINT>(ceil(640.f * dpiX / 96.f)),
-            static_cast<UINT>(ceil(480.f * dpiY / 96.f)),
+            static_cast<INT>(ceil(640.f * dpiX / 96.f)),
+            static_cast<INT>(ceil(480.f * dpiY / 96.f)),
             NULL,
             NULL,
             HINST_THISCOMPONENT,
@@ -256,8 +256,8 @@ HRESULT DemoApp::CreateDeviceResources()
         GetClientRect(m_hwnd, &rc);
 
         D2D1_SIZE_U size = D2D1::SizeU(
-            rc.right - rc.left,
-            rc.bottom - rc.top
+            static_cast<UINT>(rc.right - rc.left),
+            static_cast<UINT>(rc.bottom - rc.top)
             );
 
         // Create a Direct2D render target.
@@ -557,18 +557,18 @@ LRESULT CALLBACK DemoApp::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pDemoApp)
+            reinterpret_cast<LONG_PTR>(pDemoApp)
             );
 
         result = 1;
     }
     else
     {
-        DemoApp *pDemoApp = reinterpret_cast<DemoApp *>(static_cast<LONG_PTR>(
+        DemoApp *pDemoApp = reinterpret_cast<DemoApp *>(
             ::GetWindowLongPtrW(
                 hwnd,
                 GWLP_USERDATA
-                )));
+                ));
 
         bool wasHandled = false;
 
