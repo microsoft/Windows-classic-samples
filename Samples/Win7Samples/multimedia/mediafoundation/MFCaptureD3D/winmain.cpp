@@ -415,6 +415,10 @@ void OnChooseDevice(HWND hwnd, BOOL bPrompt)
             bCancel = TRUE; // User cancelled
         }
     }
+    else {
+        // This increases chances of success.
+        Sleep(5000);
+    }
 
     if (!bCancel && (param.count > 0))
     {
