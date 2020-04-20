@@ -348,7 +348,7 @@ done:
 void DrawDevice::UpdateDestinationRect()
 {
     RECT rcClient;
-    RECT rcSrc = { 0, 0, m_width, m_height };
+    RECT rcSrc = { 0, 0, static_cast<LONG>(m_width), static_cast<LONG>(m_height) };
 
     GetClientRect(m_hwnd, &rcClient);
 
