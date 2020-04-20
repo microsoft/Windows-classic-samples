@@ -11,6 +11,8 @@
 //
 //////////////////////////////////////////////////////////////////////////
 
+#include <comdef.h>
+
 #include "MFCaptureD3D.h"
 #include "resource.h"
 
@@ -110,7 +112,16 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         HANDLE_MSG(hwnd, WM_SIZE,    OnSize);
 
     case WM_APP_PREVIEW_ERROR:
-        ShowErrorMessage(L"Error", (HRESULT)wParam);
+        if (wParam == 0x800701B1 || // "A device which does not exist was specified"
+            wParam == 0xC00D3EA2 || // "The video recording device is no longer present"
+            wParam == 0xC00D3E9B || // "The media source is in the wrong state"
+            wParam == 0x80070003 // "The system cannot find the path specified"
+            ) {
+            ShowErrorMessage(L"Weird errors probably due to some race condition", (HRESULT)wParam);
+        }
+        else {
+            ShowErrorMessage(L"Error", (HRESULT)wParam);
+        }
         break;
 
     case WM_DEVICECHANGE:
@@ -356,7 +367,10 @@ void OnChooseDevice(HWND hwnd, BOOL bPrompt)
 
     hr = MFCreateAttributes(&pAttributes, 1);
     
-    if (FAILED(hr)) { goto done; }
+    if (FAILED(hr)) {
+        ShowErrorMessage(L"MFCreateAttributes failed", hr);
+        goto done; 
+    }
 
     // Ask for source type = video capture devices.
     
@@ -365,12 +379,18 @@ void OnChooseDevice(HWND hwnd, BOOL bPrompt)
         MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_GUID
         );
 
-    if (FAILED(hr)) { goto done; }
+    if (FAILED(hr)) {
+        ShowErrorMessage(L"pAttributes->SetGUID(...) failed", hr); 
+        goto done; 
+    }
     
     // Enumerate devices.
     hr = MFEnumDeviceSources(pAttributes, &param.ppDevices, &param.count);
 
-    if (FAILED(hr)) { goto done; }
+    if (FAILED(hr)) {
+        ShowErrorMessage(L"MFEnumDeviceSources failed", hr); 
+        goto done; 
+    }
 
     // NOTE: param.count might be zero.
 
@@ -400,6 +420,10 @@ void OnChooseDevice(HWND hwnd, BOOL bPrompt)
     {
         // Give this source to the CPlayer object for preview.
         hr = g_pPreview->SetDevice( param.ppDevices[iDevice] );
+        if (FAILED(hr)) {
+            ShowErrorMessage(L"g_pPreview->SetDevice(...) failed", hr);
+            goto done;
+        }
     }
 
 done:
@@ -411,11 +435,6 @@ done:
         SafeRelease(&param.ppDevices[i]);
     }
     CoTaskMemFree(param.ppDevices);
-
-    if (FAILED(hr))
-    {
-        ShowErrorMessage(L"Cannot create a video capture device", hr);
-    }
 }
 
 
@@ -560,7 +579,10 @@ void ShowErrorMessage(PCWSTR format, HRESULT hrErr)
     HRESULT hr = S_OK;
     WCHAR msg[MAX_PATH];
 
-    hr = StringCbPrintf(msg, sizeof(msg), L"%s (hr=0x%X)", format, hrErr);
+    _com_error err(hrErr);
+    const TCHAR* errErrorMessage = err.ErrorMessage();
+
+    hr = StringCbPrintf(msg, sizeof(msg), L"%s (hr=0x%X, %s)", format, hrErr, errErrorMessage);
 
     if (SUCCEEDED(hr))
     {
