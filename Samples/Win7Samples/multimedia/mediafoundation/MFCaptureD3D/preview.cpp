@@ -189,6 +189,7 @@ HRESULT CPreview::OnReadSample(
 
     if (FAILED(hrStatus))
     {
+        // Error is raised here, e.g. hrStatus == 0xC00D3EA2, "The video recording device is no longer present"
         hr = hrStatus;
     }
 
@@ -224,6 +225,7 @@ HRESULT CPreview::OnReadSample(
 
     if (FAILED(hr))
     {
+        // Post the error to the application, which displays a message box.
         NotifyError(hr);
     }
     SafeRelease(&pBuffer);
@@ -398,6 +400,10 @@ HRESULT CPreview::SetDevice(IMFActivate *pActivate)
     if (SUCCEEDED(hr))
     {
         // Ask for the first sample.
+        //
+        // After this first call to ReadSample,
+        // MF will call call CPreview::OnReadSample with an error,
+        // such as 0xC00D3EA2 "The video recording device is no longer present".
         hr = m_pReader->ReadSample(
             (DWORD)MF_SOURCE_READER_FIRST_VIDEO_STREAM,
             0,
