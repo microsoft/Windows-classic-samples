@@ -14,369 +14,305 @@ Abstract:
 
 #include <windows.h>
 #include <stdio.h>
-#include <comutil.h>
+#include <winsock.h> // for getprotocolbyname
 #include <atlcomcli.h>
 #include <netfw.h>
+#include <shlwapi.h> // for SHLoadIndirectString
 
-#define NET_FW_IP_PROTOCOL_TCP_NAME L"TCP"
-#define NET_FW_IP_PROTOCOL_UDP_NAME L"UDP"
-
-#define NET_FW_RULE_DIR_IN_NAME L"In"
-#define NET_FW_RULE_DIR_OUT_NAME L"Out"
-
-#define NET_FW_RULE_ACTION_BLOCK_NAME L"Block"
-#define NET_FW_RULE_ACTION_ALLOW_NAME L"Allow"
-
-#define NET_FW_RULE_ENABLE_IN_NAME L"TRUE"
-#define NET_FW_RULE_DISABLE_IN_NAME L"FALSE"
-
+#define IP_PROTOCOL_ICMP4  1
+#define IP_PROTOCOL_ICMP6  58
 
 // Forward declarations
 void        DumpFWRulesInCollection(INetFwRule* FwRule);
-HRESULT     WFCOMInitialize(INetFwPolicy2** ppNetFwPolicy2);
 
-
-int __cdecl main()
+void EnumerateFWRules()
 {
-    HRESULT hrComInit = S_OK;
-    HRESULT hr = S_OK;
-
-    ULONG cFetched = 0; 
-    CComVariant var;
-
-    IUnknown *pEnumerator;
-    IEnumVARIANT* pVariant = NULL;
-
-    INetFwPolicy2 *pNetFwPolicy2 = NULL;
-    INetFwRules *pFwRules = NULL;
-    INetFwRule *pFwRule = NULL;
-
-    long fwRuleCount;
-
-    // Initialize COM.
-    hrComInit = CoInitializeEx(
-                    0,
-                    COINIT_APARTMENTTHREADED
-                    );
-
-    // Ignore RPC_E_CHANGED_MODE; this just means that COM has already been
-    // initialized with a different mode. Since we don't care what the mode is,
-    // we'll just use the existing mode.
-    if (hrComInit != RPC_E_CHANGED_MODE)
-    {
-        if (FAILED(hrComInit))
-        {
-            wprintf(L"CoInitializeEx failed: 0x%08lx\n", hrComInit);
-            goto Cleanup;
-        }
-    }
+    HRESULT hr;
 
     // Retrieve INetFwPolicy2
-    hr = WFCOMInitialize(&pNetFwPolicy2);
+    CComPtr<INetFwPolicy2> pNetFwPolicy2;
+    hr = pNetFwPolicy2.CoCreateInstance(__uuidof(NetFwPolicy2));
     if (FAILED(hr))
     {
-        goto Cleanup;
+        wprintf(L"CoCreateInstance failed: 0x%08lx\n", hr);
+        return;
     }
 
     // Retrieve INetFwRules
+    CComPtr<INetFwRules> pFwRules;
     hr = pNetFwPolicy2->get_Rules(&pFwRules);
     if (FAILED(hr))
     {
         wprintf(L"get_Rules failed: 0x%08lx\n", hr);
-        goto Cleanup;
+        return;
     }
 
     // Obtain the number of Firewall rules
+    long fwRuleCount;
     hr = pFwRules->get_Count(&fwRuleCount);
     if (FAILED(hr))
     {
         wprintf(L"get_Count failed: 0x%08lx\n", hr);
-        goto Cleanup;
+        return;
     }
-    
+
     wprintf(L"The number of rules in the Windows Firewall are %d\n", fwRuleCount);
 
     // Iterate through all of the rules in pFwRules
-    pFwRules->get__NewEnum(&pEnumerator);
-
-    if(pEnumerator)
+    CComPtr<IUnknown> pEnumerator;
+    hr = pFwRules->get__NewEnum(&pEnumerator);
+    if (FAILED(hr))
     {
-        hr = pEnumerator->QueryInterface(__uuidof(IEnumVARIANT), (void **) &pVariant);
+        wprintf(L"get__NewEnum failed: 0x%08lx\n", hr);
+        return;
     }
 
-    while(SUCCEEDED(hr) && hr != S_FALSE)
+    CComPtr<IEnumVARIANT> pVariant;
+    hr = pEnumerator.QueryInterface(&pVariant);
+    if (FAILED(hr))
     {
-        var.Clear();
-        hr = pVariant->Next(1, &var, &cFetched);
+        wprintf(L"get__NewEnum failed to produce IEnumVariant: 0x%08lx\n", hr);
+        return;
+    }
 
-        if (S_FALSE != hr)
+    ULONG cFetched = 0;
+    for (CComVariant var; pVariant->Next(1, &var, &cFetched) == S_OK; var.Clear())
+    {
+        CComPtr<INetFwRule> pFwRule;
+        if (SUCCEEDED(var.ChangeType(VT_DISPATCH)) &&
+            SUCCEEDED(V_DISPATCH(&var)->QueryInterface(IID_PPV_ARGS(&pFwRule))))
         {
-            if (SUCCEEDED(hr))
-            {
-                hr = var.ChangeType(VT_DISPATCH);
-            }
-            if (SUCCEEDED(hr))
-            {
-                hr = (V_DISPATCH(&var))->QueryInterface(__uuidof(INetFwRule), reinterpret_cast<void**>(&pFwRule));
-            }
-
-            if (SUCCEEDED(hr))
-            {
-                // Output the properties of this rule
-                DumpFWRulesInCollection(pFwRule);
-            }
+            // Output the properties of this rule
+            DumpFWRulesInCollection(pFwRule);
         }
     }
- 
-Cleanup:
-
-    // Release pFwRule
-    if (pFwRule != NULL)
-    {
-        pFwRule->Release();
-    }
-
-    // Release INetFwPolicy2
-    if (pNetFwPolicy2 != NULL)
-    {
-        pNetFwPolicy2->Release();
-    }
-
-    // Uninitialize COM.
-    if (SUCCEEDED(hrComInit))
-    {
-        CoUninitialize();
-    }
-   
-    return 0;
 }
 
+void PrintLocalizableString(PCWSTR label, PCWSTR value)
+{
+    wchar_t buffer[256];
+    if (value[0] == L'@' &&
+        SUCCEEDED(SHLoadIndirectString(value, buffer, ARRAYSIZE(buffer), nullptr)))
+    {
+        value = buffer;
+    }
+    wprintf(L"%s%s\n", label, value);
+}
 
 // Output properties of a Firewall rule 
 void DumpFWRulesInCollection(INetFwRule* FwRule)
 {
-    variant_t InterfaceArray;
-    variant_t InterfaceString;  
-
-    VARIANT_BOOL bEnabled;
-    BSTR bstrVal;
-
-    long lVal = 0;
-    long lProfileBitmask = 0;
-
-    NET_FW_RULE_DIRECTION fwDirection;
-    NET_FW_ACTION fwAction;
-
-    struct ProfileMapElement 
-    {
-        NET_FW_PROFILE_TYPE2 Id;
-        LPCWSTR Name;
-    };
-
-    ProfileMapElement ProfileMap[3];
-    ProfileMap[0].Id = NET_FW_PROFILE2_DOMAIN;
-    ProfileMap[0].Name = L"Domain";
-    ProfileMap[1].Id = NET_FW_PROFILE2_PRIVATE;
-    ProfileMap[1].Name = L"Private";
-    ProfileMap[2].Id = NET_FW_PROFILE2_PUBLIC;
-    ProfileMap[2].Name = L"Public";
-
     wprintf(L"---------------------------------------------\n");
 
-    if (SUCCEEDED(FwRule->get_Name(&bstrVal)))
+    CComBSTR name;
+    if (SUCCEEDED(FwRule->get_Name(&name)) && name)
     {
-        wprintf(L"Name:             %s\n", bstrVal);
+        PrintLocalizableString(L"Name:             ", name);
     }
 
-    if (SUCCEEDED(FwRule->get_Description(&bstrVal)))
+    CComBSTR description;
+    if (SUCCEEDED(FwRule->get_Description(&description)) && description)
     {
-        wprintf(L"Description:      %s\n", bstrVal);
+        PrintLocalizableString(L"Description:      ", description);
     }
 
-    if (SUCCEEDED(FwRule->get_ApplicationName(&bstrVal)))
+    CComBSTR applicationName;
+    if (SUCCEEDED(FwRule->get_ApplicationName(&applicationName)) && applicationName)
     {
-        wprintf(L"Application Name: %s\n", bstrVal);
+        wprintf(L"Application Name: %ls\n", static_cast<BSTR>(applicationName));
     }
 
-    if (SUCCEEDED(FwRule->get_ServiceName(&bstrVal)))
+    CComBSTR serviceName;
+    if (SUCCEEDED(FwRule->get_ServiceName(&serviceName)) && serviceName)
     {
-        wprintf(L"Service Name:     %s\n", bstrVal);
+        wprintf(L"Service Name:     %ls\n", static_cast<BSTR>(serviceName));
     }
 
-    if (SUCCEEDED(FwRule->get_Protocol(&lVal)))
+    long protocolNumber = 0;
+    if (SUCCEEDED(FwRule->get_Protocol(&protocolNumber)))
     {
-        switch(lVal)
+        // Try to convert the protocol number to a name, for readability.
+        PCSTR protocolName = nullptr;
+
+        // This special value means "any protocol".
+        if (protocolNumber == NET_FW_IP_PROTOCOL_ANY)
         {
-            case NET_FW_IP_PROTOCOL_TCP: 
-
-                wprintf(L"IP Protocol:      %s\n", NET_FW_IP_PROTOCOL_TCP_NAME);
-                break;
-
-            case NET_FW_IP_PROTOCOL_UDP: 
-
-                wprintf(L"IP Protocol:      %s\n", NET_FW_IP_PROTOCOL_UDP_NAME);
-                break;
-
-            default:
-
-                break;
+            protocolName = "Any";
+        }
+        else
+        {
+            protoent* ent = getprotobynumber(protocolNumber);
+            if (ent)
+            {
+                protocolName = ent->p_name;
+            }
+        }
+        if (protocolName)
+        {
+            wprintf(L"IP Protocol:      %d (%hs)\n", protocolNumber, protocolName);
+        }
+        else
+        {
+            wprintf(L"IP Protocol:      %d\n", protocolNumber);
         }
 
-        if(lVal != NET_FW_IP_VERSION_V4 && lVal != NET_FW_IP_VERSION_V6)
+        if (protocolNumber != IP_PROTOCOL_ICMP4 && protocolNumber != IP_PROTOCOL_ICMP6)
         {
-            if (SUCCEEDED(FwRule->get_LocalPorts(&bstrVal)))
+            CComBSTR localPorts;
+            if (SUCCEEDED(FwRule->get_LocalPorts(&localPorts)) && localPorts)
             {
-                wprintf(L"Local Ports:      %s\n", bstrVal);
+                wprintf(L"Local Ports:      %ls\n", static_cast<BSTR>(localPorts));
             }
 
-            if (SUCCEEDED(FwRule->get_RemotePorts(&bstrVal)))
+            CComBSTR remotePorts;
+            if (SUCCEEDED(FwRule->get_RemotePorts(&remotePorts)) && remotePorts)
             {
-                wprintf(L"Remote Ports:      %s\n", bstrVal);
+                wprintf(L"Remote Ports:     %ls\n", static_cast<BSTR>(remotePorts));
             }
         }
         else
         {
-            if (SUCCEEDED(FwRule->get_IcmpTypesAndCodes(&bstrVal)))
+            CComBSTR icmpTypesAndCodes;
+            if (SUCCEEDED(FwRule->get_IcmpTypesAndCodes(&icmpTypesAndCodes)) && icmpTypesAndCodes)
             {
-                wprintf(L"ICMP TypeCode:      %s\n", bstrVal);
+                wprintf(L"ICMP TypeCode:    %ls\n", static_cast<BSTR>(icmpTypesAndCodes));
             }
         }
     }
 
-    if (SUCCEEDED(FwRule->get_LocalAddresses(&bstrVal)))
+    CComBSTR localAddresses;
+    if (SUCCEEDED(FwRule->get_LocalAddresses(&localAddresses)) && localAddresses)
     {
-        wprintf(L"LocalAddresses:   %s\n", bstrVal);
+        wprintf(L"LocalAddresses:   %ls\n", static_cast<BSTR>(localAddresses));
     }
 
-    if (SUCCEEDED(FwRule->get_RemoteAddresses(&bstrVal)))
+    CComBSTR remoteAddresses;
+    if (SUCCEEDED(FwRule->get_RemoteAddresses(&remoteAddresses)) && remoteAddresses)
     {
-        wprintf(L"RemoteAddresses:  %s\n", bstrVal);
+        wprintf(L"RemoteAddresses:  %ls\n", static_cast<BSTR>(remoteAddresses));
     }
 
+    long lProfileBitmask = 0;
     if (SUCCEEDED(FwRule->get_Profiles(&lProfileBitmask)))
     {
         // The returned bitmask can have more than 1 bit set if multiple profiles 
-        //   are active or current at the same time
-
-        for (int i=0; i<3; i++)
+        // are active or current at the same time
+        static const struct ProfileMapElement
         {
-            if ( lProfileBitmask & ProfileMap[i].Id  )
+            NET_FW_PROFILE_TYPE2 Id;
+            LPCWSTR Name;
+        } ProfileMap[3] = {
+            { NET_FW_PROFILE2_DOMAIN, L"Domain" },
+            { NET_FW_PROFILE2_PRIVATE, L"Private" },
+            { NET_FW_PROFILE2_PUBLIC, L"Public" },
+        };
+
+        for (ProfileMapElement const& entry : ProfileMap)
+        {
+            if (lProfileBitmask & entry.Id)
             {
-                wprintf(L"Profile:  %s\n", ProfileMap[i].Name);
+                wprintf(L"Profile:          %ls\n", entry.Name);
             }
         }
     }
 
+    NET_FW_RULE_DIRECTION fwDirection;
     if (SUCCEEDED(FwRule->get_Direction(&fwDirection)))
     {
-        switch(fwDirection)
+        switch (fwDirection)
         {
-            case NET_FW_RULE_DIR_IN:
+        case NET_FW_RULE_DIR_IN:
+            wprintf(L"Direction:        In\n");
+            break;
 
-                wprintf(L"Direction:        %s\n", NET_FW_RULE_DIR_IN_NAME);
-                break;
-
-            case NET_FW_RULE_DIR_OUT:
-
-                wprintf(L"Direction:        %s\n", NET_FW_RULE_DIR_OUT_NAME);
-                break;
-
-            default:
-
-                break;
+        case NET_FW_RULE_DIR_OUT:
+            wprintf(L"Direction:        Out\n");
+            break;
         }
     }
 
+    NET_FW_ACTION fwAction;
     if (SUCCEEDED(FwRule->get_Action(&fwAction)))
     {
-        switch(fwAction)
+        switch (fwAction)
         {
-            case NET_FW_ACTION_BLOCK:
+        case NET_FW_ACTION_BLOCK:
+            wprintf(L"Action:           Block\n");
+            break;
 
-                wprintf(L"Action:           %s\n", NET_FW_RULE_ACTION_BLOCK_NAME);
-                break;
-
-            case NET_FW_ACTION_ALLOW:
-
-                wprintf(L"Action:           %s\n", NET_FW_RULE_ACTION_ALLOW_NAME);
-                break;
-
-            default:
-
-                break;
+        case NET_FW_ACTION_ALLOW:
+            wprintf(L"Action:           Allow\n");
+            break;
         }
     }
 
+    CComVariant InterfaceArray;
     if (SUCCEEDED(FwRule->get_Interfaces(&InterfaceArray)))
     {
-        if(InterfaceArray.vt != VT_EMPTY)
+        if (InterfaceArray.vt == (VT_VARIANT | VT_ARRAY))
         {
-            SAFEARRAY    *pSa = NULL;
+            SAFEARRAY* pSa = NULL;
 
             pSa = InterfaceArray.parray;
 
-            for(long index= pSa->rgsabound->lLbound; index < (long)pSa->rgsabound->cElements; index++)
+            for (long index = pSa->rgsabound->lLbound; index < (long)pSa->rgsabound->cElements; index++)
             {
-                SafeArrayGetElement(pSa, &index, &InterfaceString);
-                wprintf(L"Interfaces:       %s\n", (BSTR)InterfaceString.bstrVal);
+                CComVariant InterfaceString;
+                if (SUCCEEDED(SafeArrayGetElement(pSa, &index, &InterfaceString)) &&
+                    (InterfaceString.vt == VT_BSTR))
+                {
+                    wprintf(L"Interfaces:       %ls\n", InterfaceString.bstrVal);
+                }
             }
         }
     }
 
-    if (SUCCEEDED(FwRule->get_InterfaceTypes(&bstrVal)))
+    CComBSTR interfaceTypes;
+    if (SUCCEEDED(FwRule->get_InterfaceTypes(&interfaceTypes)) && interfaceTypes)
     {
-        wprintf(L"Interface Types:  %s\n", bstrVal);
+        wprintf(L"Interface Types:  %ls\n", static_cast<BSTR>(interfaceTypes));
     }
 
-    if (SUCCEEDED(FwRule->get_Enabled(&bEnabled)))
+    VARIANT_BOOL enabled;
+    if (SUCCEEDED(FwRule->get_Enabled(&enabled)))
     {
-        if (bEnabled)
-        {
-            wprintf(L"Enabled:          %s\n", NET_FW_RULE_ENABLE_IN_NAME);
-        }
-        else
-        {
-            wprintf(L"Enabled:          %s\n", NET_FW_RULE_DISABLE_IN_NAME);
-        }
+        wprintf(L"Enabled:          %ls\n", enabled ? L"TRUE" : L"FALSE");
     }
 
-    if (SUCCEEDED(FwRule->get_Grouping(&bstrVal)))
+    CComBSTR grouping;
+    if (SUCCEEDED(FwRule->get_Grouping(&grouping)) && grouping)
     {
-        wprintf(L"Grouping:         %s\n", bstrVal);
+        PrintLocalizableString(L"Grouping:         ", grouping);
     }
 
-    if (SUCCEEDED(FwRule->get_EdgeTraversal(&bEnabled)))
+    if (SUCCEEDED(FwRule->get_EdgeTraversal(&enabled)))
     {
-        if (bEnabled)
-        {
-            wprintf(L"Edge Traversal:   %s\n", NET_FW_RULE_ENABLE_IN_NAME);
-        }
-        else
-        {
-            wprintf(L"Edge Traversal:   %s\n", NET_FW_RULE_DISABLE_IN_NAME);
-        }
+        wprintf(L"Edge Traversal:   %ls\n", enabled ? L"TRUE" : L"FALSE");
     }
 }
 
-
-// Instantiate INetFwPolicy2
-HRESULT WFCOMInitialize(INetFwPolicy2** ppNetFwPolicy2)
+int __cdecl main()
 {
-    HRESULT hr = S_OK;
-
-    hr = CoCreateInstance(
-        __uuidof(NetFwPolicy2), 
-        NULL, 
-        CLSCTX_INPROC_SERVER, 
-        __uuidof(INetFwPolicy2), 
-        (void**)ppNetFwPolicy2);
-
-    if (FAILED(hr))
+    // Initialize COM.
+    if (SUCCEEDED(CoInitialize(0)))
     {
-        wprintf(L"CoCreateInstance for INetFwPolicy2 failed: 0x%08lx\n", hr);
-        goto Cleanup;        
+        // We use WinSock only to convert protocol numbers to names.
+        // If we cannot initialize WinSock, then just proceed without it.
+        WSADATA wsaData;
+        int err = WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+        EnumerateFWRules();
+
+        // Clean up WinSock if we had started it.
+        if (err == 0)
+        {
+            WSACleanup();
+        }
+
+        // Uninitialize COM.
+        CoUninitialize();
     }
 
-Cleanup:
-    return hr;
+    return 0;
 }
+
