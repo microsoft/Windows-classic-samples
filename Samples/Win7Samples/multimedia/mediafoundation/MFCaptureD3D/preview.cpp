@@ -204,7 +204,13 @@ HRESULT CPreview::OnReadSample(
 
             if (SUCCEEDED(hr))
             {
-                hr = m_draw.DrawFrame(pBuffer);
+                // Note we don't check for whether DrawFrame failed.
+                // If it failed, we just let it fail, and request another sample.
+                // The error may be transient, and Future calls to DrawFrame may succeed.
+                // One case where this is true is where the device is lost
+                // (to reproduce this lost device case, 
+                // try locking then unlocking the screen with Windows+L).
+                m_draw.DrawFrame(pBuffer);
             }
         }
     }
