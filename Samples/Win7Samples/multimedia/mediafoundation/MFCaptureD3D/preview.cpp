@@ -266,7 +266,8 @@ HRESULT CPreview::TryMediaType(IMFMediaType *pType)
         for (DWORD i = 0;  ; i++)
         {
             // Get the i'th format.
-            m_draw.GetFormat(i, &subtype);
+            hr = m_draw.GetFormat(i, &subtype);
+            if (FAILED(hr)) { break; }
 
             hr = pType->SetGUID(MF_MT_SUBTYPE, subtype);
             
