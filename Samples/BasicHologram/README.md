@@ -1,4 +1,15 @@
-﻿Basic hologram sample
+﻿---
+page_type: sample
+languages:
+- cppwinrt
+products:
+- windows-api-win32
+name: Basic hologram sample
+urlFragment: BasicHologram
+description: Demonstrates a simple hologram rendered by a Win32 process.
+---
+
+Basic hologram sample
 =====================
 
 Demonstrates a simple hologram rendered by a Win32 process.
