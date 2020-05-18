@@ -1,5 +1,15 @@
-Windows Connection Manager WLAN cost sample
-===========================================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: Windows Connection Manager WLAN cost sample
+urlFragment: connection-manager-wlan-cost
+description: The sample demonstrates how to set and get cost for WLAN profiles using Windows Connection Manager (WCM) Cost APIs.
+---
+
+# Windows Connection Manager WLAN cost sample
 
 The sample demonstrates how to set and get cost for WLAN profiles using Windows Connection Manager (WCM) Cost APIs.
 
@@ -11,18 +21,15 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
+## Related topics
 
 [Windows Connection Manager](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437650)
 
-Related technologies
---------------------
+## Related technologies
 
 [Windows Connection Manager](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437650)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Client
 
@@ -32,25 +39,22 @@ Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 To build the sample using Visual Studio (preferred method):
 
-1.  Open **Windows Explorer** and navigate to the **\\cpp** directory.
-2.  Double-click the icon for the **.sln** (solution) file to open the file in Visual Studio.
-3.  In the **Build** menu, select **Build Solution**. The application will be built in the default **\\Debug** or **\\Release** directory.
+1. Open **Windows Explorer** and navigate to the **\\cpp** directory.
+2. Double-click the icon for the **.sln** (solution) file to open the file in Visual Studio.
+3. In the **Build** menu, select **Build Solution**. The application will be built in the default **\\Debug** or **\\Release** directory.
 
 To build the sample using the command prompt:
 
-1.  Open the **Command Prompt** window and navigate to the directory containing the sample for a specific language.
-2.  Type **msbuild wcmcostsample**.
+1. Open the **Command Prompt** window and navigate to the directory containing the sample for a specific language.
+2. Type **msbuild wcmcostsample**.
 
-Run the sample
---------------
+## Run the sample
 
 To run the sample:
 
-1.  Navigate to the directory that contains **wcmcostsample.exe**, using the **command prompt** or **Windows Explorer**.
-2.  Type **wcmcostsample.exe** at the **command prompt**, or double-click the icon for **wcmcostsample** to launch it from **Windows Explorer**.
-
+1. Navigate to the directory that contains **wcmcostsample.exe**, using the **command prompt** or **Windows Explorer**.
+2. Type **wcmcostsample.exe** at the **command prompt**, or double-click the icon for **wcmcostsample** to launch it from **Windows Explorer**.

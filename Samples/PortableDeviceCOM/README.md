@@ -1,16 +1,26 @@
-Portable Devices COM API Sample
-===============================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: Portable Devices COM API Sample
+urlFragment: portable-devices-com
+description: This sample demonstrates how to use the Windows Portable Device COM API (IPortableDevice).
+---
+
+# Portable Devices COM API Sample
 
 This sample demonstrates how to use the Windows Portable Device COM API (IPortableDevice).
 
 This sample shows you how to complete the following tasks using the WPD API:
 
--   Enumerate portable devices
--   Enumerate content on a portable device
--   Query the capabilities of a portable device
--   Read and write properties for content on a portable device
--   Transfer content on or off for a portable device
--   Register or unregister for portable device events
+- Enumerate portable devices
+- Enumerate content on a portable device
+- Query the capabilities of a portable device
+- Read and write properties for content on a portable device
+- Transfer content on or off for a portable device
+- Register or unregister for portable device events
 
 **Warning**  This sample requires Microsoft Visual Studio 2013 or a later version (any SKU) and doesn't compile in Microsoft Visual Studio Express 2013 for Windows.
 
@@ -20,8 +30,7 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
 Client
 
@@ -31,15 +40,12 @@ Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 Open Windows Explorer and navigate to the directory containing the sample. Double-click the icon for the .sln (solution) file to open the file in Visual Studio. In the Build menu, select Build Solution. The application will be built in the default \\Debug or \\Release directory.
 
-Run the sample
---------------
+## Run the sample
 
 Navigate to the directory that contains the new executable, using the command prompt. Type "WpdApiSample.exe" at the command line.
 
 This sample works bests with a Portable Device connected to the system, such as the Media Transfer Protocol (MTP) Device Simulator.
-
