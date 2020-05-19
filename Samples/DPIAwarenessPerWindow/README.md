@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: DpiAwarenessPerWindow
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Shows different ways of dealing with screen DPI."

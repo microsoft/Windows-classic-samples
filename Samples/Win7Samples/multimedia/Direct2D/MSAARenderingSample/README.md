@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: Direct2DMSAARendering
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Compares the quality of several antialiasing techniques."
@@ -27,8 +28,8 @@ Files
  
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft WindowsÂ® 7
+* WindowsÂ® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 * March 2009 DirectX SDK
 
 ## Configuring without Visual Studio
@@ -61,7 +62,7 @@ For building against the Win32 (x86) platform:
 
 1. Launch Visual Studio 2008.
 
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Optionsâ€¦. The Options dialog box appears.
 
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 
@@ -107,7 +108,7 @@ For building against the x64 platform:
 
 1. Launch Visual Studio 2008.
 
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Optionsâ€¦. The Options dialog box appears.
 
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 

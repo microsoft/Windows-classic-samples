@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: EnumerateFirewallRules
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Enumerates Windows Firewall rules."

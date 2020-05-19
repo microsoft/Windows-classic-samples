@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: DeskBands
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "A simple taskbar band."

@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: Direct2DSaveAsImageFile
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Uses a WIC bitmap render target to generate an image and save it as a file."
@@ -25,8 +26,8 @@ When you run the sample, it produces an image file named output.png.
  
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft WindowsÂ® 7
+* WindowsÂ® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 
 ## Building the Sample
 

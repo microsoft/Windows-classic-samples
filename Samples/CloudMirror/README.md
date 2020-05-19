@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: CloudMirror
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Simple cloud files provider."

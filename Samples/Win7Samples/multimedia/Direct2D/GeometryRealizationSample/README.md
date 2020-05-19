@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: Direct2DGeometryRealization
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Uses opacity masks and A8 targets to enhance performance for anti-aliased geometries."
@@ -30,8 +31,8 @@ This sample is written in C++.
 
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft WindowsÂ® 7
+* WindowsÂ® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 
 ## Building the Sample
 

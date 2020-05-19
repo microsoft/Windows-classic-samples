@@ -5,6 +5,7 @@ languages:
 products:
 - windows
 urlFragment: ProjectedFileSystem
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Sample provider for the Windows Projected File System (ProjFS)."
