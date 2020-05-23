@@ -1,7 +1,7 @@
 ---
 page_type: sample
 languages:
-- cs
+- csharp
 products:
 - windows-api-win32
 name: Hyper-V generation 2 virtual machine sample

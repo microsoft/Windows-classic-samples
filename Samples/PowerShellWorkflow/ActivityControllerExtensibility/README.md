@@ -1,7 +1,7 @@
 ---
 page_type: sample
 languages:
-- cs
+- csharp
 products:
 - windows-api-win32
 name: Activity Controller Extensibility sample

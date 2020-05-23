@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - cpp
-- cs
+- csharp
 products:
 - windows-api-win32
 name: Enumerate app packages by name and publisher sample

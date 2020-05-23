@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - cpp
-- cs
+- csharp
 products:
 - windows-api-win32
 name: Add app package sample

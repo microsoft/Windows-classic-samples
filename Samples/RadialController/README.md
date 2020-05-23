@@ -2,7 +2,7 @@
 page_type: sample
 languages:
 - cpp
-- cs
+- csharp
 products:
 - windows-api-win32
 name: Radial Contoller sample
