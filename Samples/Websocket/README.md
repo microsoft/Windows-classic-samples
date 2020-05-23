@@ -1,5 +1,18 @@
-Web Socket Protocol Component API sample
-========================================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: Web Socket Protocol Component API sample
+urlFragment: web-socket-protocol
+description: Demonstrates how to use Web Socket Protocol Component APIs.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
+# Web Socket Protocol Component API sample
 
 This sample demonstrates how to use Web Socket Protocol Component APIs.
 
@@ -9,8 +22,30 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
+## Related technologies
+
+[Web Socket Protocol Component API](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437448)
+
+## Operating system requirements
+
+### Client
+
+Windows 8.1
+
+### Server
+
+Windows Server 2012 R2
+
+## Build the sample
+
+1. To build this sample, open the CPP project solution (*.sln*) file within Visual Studio Express 2013 for Windows 8.1 or later versions of Visual Studio and Windows (any SKU). 
+1. Press **F7** (or **F6** for Visual Studio 2013) or go to **Build**-\>**Build Solution** from the top menu after the sample has loaded. The sample will be built in the default *\\Debug* or *Release* directory.
+
+## Run the sample
+
+To run this sample after building it, press **F5** (run with debugging enabled) or **Ctrl**-**F5** (run without debugging enabled) from Visual Studio Express 2013 for Windows 8.1 or later versions of Visual Studio and Windows (any SKU). (Or select the corresponding options from the **Debug** menu.)
+
+## Related topics
 
 [**WEB\_SOCKET\_ACTION**](http://msdn.microsoft.com/en-us/library/windows/desktop/hh449343)
 
@@ -37,30 +72,3 @@ Related topics
 [**WebSocketGetAction**](http://msdn.microsoft.com/en-us/library/windows/desktop/hh449336)
 
 [**WebSocketReceive**](http://msdn.microsoft.com/en-us/library/windows/desktop/hh449338)
-
-Related technologies
---------------------
-
-[Web Socket Protocol Component API](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437448)
-
-Operating system requirements
------------------------------
-
-Client
-
-Windows 8.1
-
-Server
-
-Windows Server 2012 R2
-
-Build the sample
-----------------
-
-To build this sample, open the CPP project solution (.sln) file within Visual Studio Express 2013 for Windows 8.1 or later versions of Visual Studio and Windows (any SKU). Press F7 (or F6 for Visual Studio 2013) or go to Build-\>Build Solution from the top menu after the sample has loaded. The sample will be built in the default \\Debug or Release directory.
-
-Run the sample
---------------
-
-To run this sample after building it, press F5 (run with debugging enabled) or Ctrl-F5 (run without debugging enabled) from Visual Studio Express 2013 for Windows 8.1 or later versions of Visual Studio and Windows (any SKU). (Or select the corresponding options from the Debug menu.)
-

@@ -4,14 +4,15 @@ languages:
 - cpp
 products:
 - windows
+name: RefFS sample
 urlFragment: ProjectedFileSystem
+description: "Sample provider for the Windows Projected File System (ProjFS)."
 extendedZipContent:
 - path: LICENSE
   target: LICENSE
-description: "Sample provider for the Windows Projected File System (ProjFS)."
 ---
 
-# RegFS Sample Provider
+# RegFS sample provider
 
 This sample is an example provider for the Windows Projected File System (ProjFS).
 
@@ -25,13 +26,20 @@ To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.micros
 
 ## Operating system requirements
 
-**Client** Windows 10, version 1809 or newer
+### Client
 
-**Server** Windows Server 2019
+Windows 10, version 1809 or newer
 
-**Windows SDK** 10.0.17763.0 or newer
+### Server 
+
+Windows Server 2019
+
+### Windows SDK 
+
+10.0.17763.0 or newer
 
 ## Enable ProjFS
+
 ProjFS is an Optional Component available in the Windows 10 October 2018 Update (Windows 10, version 1809), Windows Server 2019, and later versions of Windows.
 
 To use PowerShell to enable ProjFS use the `Enable-WindowsOptionalFeature` cmdlet in an elevated PowerShell window:
@@ -40,20 +48,21 @@ To use PowerShell to enable ProjFS use the `Enable-WindowsOptionalFeature` cmdle
 Enable-WindowsOptionalFeature -Online -FeatureName Client-ProjFS -NoRestart
 ```
 
-Reboot the computer if the Enable-WindowsOptionalFeature reports `RestartNeeded: True`.
+Reboot the computer if the `Enable-WindowsOptionalFeature` reports `RestartNeeded: True`.
 
 ## Build the sample
 
 1. Start Visual Studio and select **File > Open > Project/Solution...**.
 
-1. Go to the directory where you downloaded the RegFS sample and double-click its Microsoft Visual Studio Solution (.sln) file.
+1. Go to the directory where you downloaded the RegFS sample and double-click its Microsoft Visual Studio Solution (*.sln*) file.
 
-1. Press F5 or use **Build > Build Solution**
+1. Press **F5** or use **Build > Build Solution**
 
 ## Run the sample
+
 1. Start a RegFS virtualization instance.
 
-   Run `regfs.exe [virtualization root]`.  For example, `regfs.exe c:\regfsRoot`.  regfs.exe will create the virtualization root folder if it does not already exist.
+   Run `regfs.exe [virtualization root]`.  For example, `regfs.exe c:\regfsRoot`. *regfs.exe* will create the virtualization root folder if it does not already exist.
 
 1. Open another command-line window and perform operations in the virtualization root.
 
@@ -63,6 +72,6 @@ Reboot the computer if the Enable-WindowsOptionalFeature reports `RestartNeeded:
    * `cd [subkey name]` to change the current path to a particular registry key. For example, `cd HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PrjFlt`.
    * `type [value name]` to read a registry value.  For example, `type ImagePath`.
 
-1. To stop the provider and exit the sample, press the Enter key.
+1. To stop the provider and exit the sample, press **Enter**.
    You can restart the sample to resume virtualization.
    If you are finished with the sample, you can manually delete the virtualization root folder.

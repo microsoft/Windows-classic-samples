@@ -4,12 +4,15 @@ languages:
 - cpp
 products:
 - windows-api-win32
-name: Portable Devices COM API Sample
-urlFragment: portable-devices-com
-description: This sample demonstrates how to use the Windows Portable Device COM API (IPortableDevice).
+name: Portable Devices COM API sample
+urlFragment: portable-devices-com-api
+description: Demonstrates how to use the Windows Portable Device COM API (IPortableDevice).
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
 ---
 
-# Portable Devices COM API Sample
+# Portable Devices COM API sample
 
 This sample demonstrates how to use the Windows Portable Device COM API (IPortableDevice).
 
@@ -32,17 +35,17 @@ To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.micros
 
 ## Operating system requirements
 
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
 ## Build the sample
 
-Open Windows Explorer and navigate to the directory containing the sample. Double-click the icon for the .sln (solution) file to open the file in Visual Studio. In the Build menu, select Build Solution. The application will be built in the default \\Debug or \\Release directory.
+Open Windows Explorer and navigate to the directory containing the sample. Double-click the icon for the *.sln* (solution) file to open the file in Visual Studio. In the Build menu, select **Build Solution**. The application will be built in the default *\\Debug* or *\\Release directory*.
 
 ## Run the sample
 
