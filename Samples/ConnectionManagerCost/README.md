@@ -57,3 +57,5 @@ To run the sample:
 
 1. Navigate to the directory that contains **wcmcostsample.exe**, using the **command prompt** or **Windows Explorer**.
 2. Type **wcmcostsample.exe** at the **command prompt**, or double-click the icon for **wcmcostsample** to launch it from **Windows Explorer**.
+
+Ver 1.0
