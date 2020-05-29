@@ -1,12 +1,11 @@
 ---
 page_type: sample
 languages:
-- cpp
+- csharp
 products:
 - windows
-name: "Windows Connection Manager WLAN cost sample"
+description: "The sample demonstrates how to set and get cost for WLAN profiles using Windows Connection Manager (WCM) Cost APIs."
 urlFragment: ConnectionManagerCost
-description: The sample demonstrates how to set and get cost for WLAN profiles using Windows Connection Manager (WCM) Cost APIs.
 ---
 
 # Windows Connection Manager WLAN cost sample
