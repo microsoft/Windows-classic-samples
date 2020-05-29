@@ -3,9 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows-api-win32
-name: Windows Connection Manager WLAN cost sample
-urlFragment: connection-manager-wlan-cost
+- windows
+name: "Windows Connection Manager WLAN cost sample"
+urlFragment: ConnectionManagerCost
 description: The sample demonstrates how to set and get cost for WLAN profiles using Windows Connection Manager (WCM) Cost APIs.
 ---
 
