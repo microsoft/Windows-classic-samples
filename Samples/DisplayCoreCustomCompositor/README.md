@@ -4,7 +4,7 @@ languages:
 - cpp
 - cppwinrt
 products:
-- windows
+- windows-api-win32
 description: "Create a compositor application that can present Direct3D content to a specialized monitor."
 urlFragment: DisplayCoreCustomCompositor
 ---

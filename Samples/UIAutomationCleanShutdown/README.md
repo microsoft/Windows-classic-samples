@@ -48,7 +48,7 @@ Run the sample
 
 To run the sample after building it, follow these steps:
 
-1.  Copy both pieces—the control DLL and the host application—to the same location. You'll find the control DLL at \<*install\_root*\>\\UI Automation Clean Shutdown Sample\\C++\\UiaCleanShutdownControl\\Debug\\UiaCleanShutdownControl.dll, and the host application at \<*install\_root*\>\\UI Automation Clean Shutdown Sample\\C++\\UiaCleanShutdownHost\\Debug\\UiaCleanShutdownHost.exe.
+1.  Copy both pieces (the control DLL and the host application) to the same location. You'll find the control DLL at \<*install\_root*\>\\UI Automation Clean Shutdown Sample\\C++\\UiaCleanShutdownControl\\Debug\\UiaCleanShutdownControl.dll, and the host application at \<*install\_root*\>\\UI Automation Clean Shutdown Sample\\C++\\UiaCleanShutdownHost\\Debug\\UiaCleanShutdownHost.exe.
 2.  Navigate to the location where you copied both pieces of the sample.
 3.  Type UiaCleanShutdownHost.exe at the command line, or double-click the icon for UiaCleanShutdownHost.exe to launch it from Windows Explorer.
 

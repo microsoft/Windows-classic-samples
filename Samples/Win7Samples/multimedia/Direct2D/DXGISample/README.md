@@ -3,8 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows
+- windows-api-win32
 urlFragment: Direct2DDXGI
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Combines Direct2D and Direct3D."
@@ -31,8 +32,8 @@ This sample is written in C++.
  
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft Windows 7
+* Windows Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 * March 2009 DirectX SDK
 
 ## Configuring without Visual Studio
@@ -64,7 +65,7 @@ For building against the Win32 (x86) platform:
 
 1. Launch Visual Studio 2008.
 
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Options. The Options dialog box appears.
 
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 
@@ -110,7 +111,7 @@ For building against the x64 platform:
 
 1. Launch Visual Studio 2008.
 
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Options. The Options dialog box appears.
 
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 

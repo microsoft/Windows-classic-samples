@@ -1,5 +1,16 @@
-Add app package sample
-======================
+---
+page_type: sample
+languages:
+- cpp
+- csharp
+products:
+- windows-api-win32
+name: Add app package sample
+urlFragment: add-app-package
+description: Demonstrates how to install a package on the system using the Package deployment API.
+---
+
+# Add app package sample
 
 This sample shows you how to install a package on the system using the [Package deployment API](http://msdn.microsoft.com/en-us/library/windows/desktop/hh994436).
 
@@ -13,39 +24,21 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
-
-**Samples**
-
-[Remove app package sample](http://go.microsoft.com/fwlink/p/?linkid=236972)
-
-**Concepts**
-
-[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
-
-**Reference**
-
-[**Windows.Management.Deployment.PackageManager**](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)
-
-Related technologies
---------------------
+## Related technologies
 
 [App packaging and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446593)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 ### From the Command window
 
@@ -55,27 +48,38 @@ Build the sample
 
 3.  Run the following command:
 
-    **msbuild AddPackageSample.sln**
+    ```msbuild AddPackageSample.sln```
 
 ### From Visual Studio
 
 1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 
-2.  Go to the directory where you downloaded the AddPackage sample and double-click its Microsoft Visual Studio Solution (.sln) file.
+2.  Go to the directory where you downloaded the AddPackage sample and select its Microsoft Visual Studio Solution (*.sln*) file.
 
-3.  Press F7 (or F6 for Visual Studio 2013) or use **Build** \> **Build Solution**.
+3.  Press **F7** (or **F6** for Visual Studio 2013) or use **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 1.  Open a Command window.
 
-2.  Go to the directory that contains AddPackageSample.exe.
+2.  Go to the directory that contains *AddPackageSample.exe*.
 
 3.  Run the following command:
 
-    **AddPackageSample** *package-uri*
+    ```AddPackageSample package-uri```
 
-    For example, **AddPackageSample** "file://C|users/testuser/desktop/testpackage.appx".
+    For example, ```AddPackageSample "file://C|users/testuser/desktop/testpackage.appx"```.
 
+## Related topics
 
+### Samples
+
+[Remove app package sample](http://go.microsoft.com/fwlink/p/?linkid=236972)
+
+## Concepts
+
+[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
+
+## Reference
+
+[Windows.Management.Deployment.PackageManager](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)

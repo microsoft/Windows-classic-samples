@@ -57,9 +57,9 @@ To run the sample:
 1.  Install the Data Deduplication component.
 2.  Set up a Data Deduplication-enabled volume with some test files, and run a Deduplication Optimization job to optimize the files first.
     **Note**  The following sequence of PowerShell cmdlets assumes that your test volume is T:.
-    1.  **Enable-DedupVolume  -volume T:**
-    2.  **Set-DedupVolume  -volume T: -MinimumFileAgeDays 0**
-    3.  **Start-DedupJob  -volume T: -type Optimization -wait**
+    1.  **Enable-DedupVolume -volume T:**
+    2.  **Set-DedupVolume -volume T: -MinimumFileAgeDays 0**
+    3.  **Start-DedupJob -volume T: -type Optimization -wait**
 
     For more information, see the [Enable-DedupVolume](http://technet.microsoft.com/library/4a752894-524d-4a64-8483-f06a73ab0ed0) PowerShell cmdlet documentation.
 3.  Navigate to the directory that contains the new executable file, using the **Command Prompt** or **File Explorer**.

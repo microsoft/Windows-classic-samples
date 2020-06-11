@@ -3,8 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows
+- windows-api-win32
 urlFragment: Direct2DInteractive3dText
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Uses DirectWrite and Direct2D to create editable 3D text."
@@ -31,8 +32,8 @@ This sample is written in C++.
 
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1: Beta release 
+* Microsoft Windows 7
+* Windows Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1: Beta release 
 * March 2009 DirectX SDK
 
 ## Configuring without Visual Studio
@@ -64,7 +65,7 @@ each platform (Win32 or x64) you want to build against.
 For building against the Win32 (x86) platform:
 
 1. Launch Visual Studio 2008.
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Options. The Options dialog box appears.
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 4. Under Project and Solutions, select VC++ Directories.
 5. In the right pane, set the "Platform" drop-down list box to Win32 and the 
@@ -107,7 +108,7 @@ For building against the x64 platform:
 
 1. Launch Visual Studio 2008.
 
-2. Open the Tools menu and select Options…. The Options dialog box appears.
+2. Open the Tools menu and select Options. The Options dialog box appears.
 
 3. In the left pane of the Options dialog box, expand the Projects and Solutions node.
 

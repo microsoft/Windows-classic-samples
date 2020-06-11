@@ -1,5 +1,18 @@
-WinVerifyTrust signature verification sample
-============================================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: WinVerifyTrust signature verification sample
+urlFragment: winverifytrust-signiture-verification
+description: Demonstrates how to use the new WinVerifyTrust API to verify multiple signatures on a file and how to call the new CryptCATAdmin\* APIs.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
+# WinVerifyTrust signature verification sample
 
 This sample shows how to use the new WinVerifyTrust API to verify multiple signatures on a file and how to call the new CryptCATAdmin\* APIs.
 
@@ -9,28 +22,25 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 
-2.  Go to the directory named for the sample, and double-click the Microsoft Visual Studio Solution (.sln) file titled CodeSigning.sln.
+2.  Go to the directory named for the sample, and double-click the Microsoft Visual Studio Solution (*.sln*) file titled *CodeSigning.sln*.
 
-3.  Press F7 (or F6 for Visual Studio 2013) or use **Build** \> **Build Solution** to build the sample.
+3.  Press **F7** (or **F6** for Visual Studio 2013) or use **Build** \> **Build Solution** to build the sample.
 
-Run the sample
---------------
+## Run the sample
 
-To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
+To debug the app and then run it, press **F5** or use **Debug** \> **Start Debugging**. To run the app without debugging, press **Ctrl**+**F5** or use **Debug** \> **Start Without Debugging**.
 

@@ -1,5 +1,15 @@
-MediaFoundation transform decoder as hardware MF transcoder sample
-==================================================================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: MediaFoundation transform decoder as hardware MF transcoder sample
+urlFragment: mediafoundation-transform-decoder
+description: Demonstrates how to create an asynchronous Microsoft Media Foundation Transform (MFT) decoder for use as a hardware MFT.
+---
+
+# MediaFoundation transform decoder as hardware MF transcoder sample
 
 This sample demonstrates how to create an asynchronous Microsoft Media Foundation Transform (MFT) decoder for use as a hardware MFT.
 
@@ -11,40 +21,31 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
+## Operating system requirements
 
-[Media Foundation](http://msdn.microsoft.com/en-us/library/windows/desktop/ms694197)
-
-Related technologies
---------------------
-
-[Media Foundation](http://msdn.microsoft.com/en-us/library/windows/desktop/ms694197)
-
-Operating system requirements
------------------------------
-
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
+
 
 1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 
-2.  Go to the directory named for the sample, and double-click the Microsoft Visual Studio Solution (.sln) file.
+2.  Go to the directory named for the sample, and select the Microsoft Visual Studio Solution (*.sln*) file.
 
-3.  Press F7 (or F6 for Visual Studio 2013) or use **Build** \> **Build Solution** to build the sample.
+3.  Press **F7** (or **F6** for Visual Studio 2013) or use **Build** \> **Build Solution** to build the sample.
 
 **Warning**  This sample requires Microsoft Visual Studio Professional 2012, Visual Studio 2013, or later versions of Visual Studio (any SKU) and will not compile in Visual Studio Express 2013 for Windows
 
-Run the sample
---------------
+## Run the sample
 
-To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
+To debug the app and then run it, press **F5** or use **Debug** \> **Start Debugging**. To run the app without debugging, press **Ctrl**+**F5** or use **Debug** \> **Start Without Debugging**.
 
+## Related topics
+
+[Media Foundation](http://msdn.microsoft.com/en-us/library/windows/desktop/ms694197)

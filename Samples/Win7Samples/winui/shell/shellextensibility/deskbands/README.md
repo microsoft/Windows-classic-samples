@@ -3,8 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows
+- windows-api-win32
 urlFragment: DeskBands
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "A simple taskbar band."

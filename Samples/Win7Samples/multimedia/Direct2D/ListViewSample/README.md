@@ -3,8 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows
+- windows-api-win32
 urlFragment: Direct2DListView
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Uses a bitmap atlas to create and animate a list of items."
@@ -27,8 +28,8 @@ This sample is written in C++.
 
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft Windows 7
+* Windows Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 
 ## Building the Sample
 

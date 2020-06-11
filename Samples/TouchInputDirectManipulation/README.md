@@ -1,5 +1,18 @@
-Process touch input with Direct Manipulation sample
-===================================================
+---
+page_type: sample
+languages:
+- cpp
+products:
+- windows-api-win32
+name: Process touch input with Direct Manipulation sample
+urlFragment: process-touch-input
+description: Demonstrates how to process touch input with the Direct Manipulation.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
+# Process touch input with Direct Manipulation sample
 
 This sample shows how to process touch input with the [Direct Manipulation](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446969) APIs and support user interactions with smooth animations and feedback behaviors.Use these APIs to optimize UI response and reduce latency through off-thread input processing and predictive output based on the rendering time of the compositor.
 
@@ -15,38 +28,32 @@ Using two viewports, one nested in the other, this sample demonstrates:
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
+## Related technologies
+
+[Direct Manipulation](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446969), [DirectComposition](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437371)
+
+## Operating system requirements
+
+### Client
+
+Windows 8.1
+
+### Server
+
+Windows Server 2012 R2
+
+## Build the sample
+
+1.  Start Microsoft Visual Studio Express 2013 for Windows and select **File** \> **Open** \> **Project/Solution**.
+2.  Go to the directory named for the sample, and double-click the Visual Studio Solution (*.sln*) file.
+3.  Press **F7** or use **Build** \> **Build Solution** to build the sample.
+
+## Run the sample
+
+To debug the app and then run it, press **F5** or use **Debug** \> **Start Debugging**. To run the app without debugging, press **Ctrl**+**F5** or use **Debug** \> **Start Without Debugging**.
+
+## Related topics
 
 [User Interaction](http://msdn.microsoft.com/en-us/library/windows/desktop/ff657750)
 
 [Graphics and Gaming](http://msdn.microsoft.com/en-us/library/windows/desktop/ee663279)
-
-Related technologies
---------------------
-
-[Direct Manipulation](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446969), [DirectComposition](http://msdn.microsoft.com/en-us/library/windows/desktop/hh437371)
-
-Operating system requirements
------------------------------
-
-Client
-
-Windows 8.1
-
-Server
-
-Windows Server 2012 R2
-
-Build the sample
-----------------
-
-1.  Start Microsoft Visual Studio Express 2013 for Windows and select **File** \> **Open** \> **Project/Solution**.
-2.  Go to the directory named for the sample, and double-click the Visual Studio Solution (.sln) file.
-3.  Press F7 or use **Build** \> **Build Solution** to build the sample.
-
-Run the sample
---------------
-
-To debug the app and then run it, press F5 or use **Debug** \> **Start Debugging**. To run the app without debugging, press Ctrl+F5 or use **Debug** \> **Start Without Debugging**.
-

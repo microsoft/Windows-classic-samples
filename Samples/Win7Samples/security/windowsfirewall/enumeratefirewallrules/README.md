@@ -3,8 +3,9 @@ page_type: sample
 languages:
 - cpp
 products:
-- windows
+- windows-api-win32
 urlFragment: EnumerateFirewallRules
+extendedZipContent:
 - path: LICENSE
   target: LICENSE
 description: "Enumerates Windows Firewall rules."

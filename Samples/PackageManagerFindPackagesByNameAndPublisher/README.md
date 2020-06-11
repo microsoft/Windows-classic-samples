@@ -1,11 +1,25 @@
-Enumerate app packages by name and publisher sample
-===================================================
+---
+page_type: sample
+languages:
+- cpp
+- csharp
+products:
+- windows-api-win32
+name: Enumerate app packages by name and publisher sample
+urlFragment: enumerate-app-package-name-publisher
+description: Demonstrates how to enumerate app packages installed on the system by name and publisher.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
+# Enumerate app packages by name and publisher sample
 
 This sample shows how to enumerate app packages installed on the system by name and publisher.
 
 Users acquire your app as an app package. Windows uses the information in an app package to install the app on a per-user basis, and ensure that all traces of the app are gone from the device after all users who installed the app uninstall it. Each package consists of the files that constitute the app, along with a package manifest file that describes the app to Windows.
 
-The sample uses [**PackageManager.FindPackages(String, String)**](http://msdn.microsoft.com/en-us/library/windows/desktop/br240970) to find all installed packages with the specified name and publisher.
+The sample uses [PackageManager.FindPackages(String, String)](http://msdn.microsoft.com/en-us/library/windows/desktop/br240970) to find all installed packages with the specified name and publisher.
 
 **Warning**  This sample requires Microsoft Visual Studio 2013 or a later version (any SKU); it doesn't compile with Microsoft Visual Studio Express 2013 for Windows.
 
@@ -15,41 +29,21 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
-
-**Samples**
-
-[Enumerate app packages sample](http://code.msdn.microsoft.com/windowsdesktop/Package-Manager-Inventory-ee821079)
-
-[Enumerate app packages by user SID sample](http://code.msdn.microsoft.com/windowsdesktop/Package-Manager-Inventory-5bee970a)
-
-**Concepts**
-
-[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
-
-**Reference**
-
-[**Windows.Management.Deployment.PackageManager**](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)
-
-Related technologies
---------------------
+## Related technologies
 
 [App packaging and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446593)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 ### From the Command window
 
@@ -57,29 +51,43 @@ Build the sample
 
 2.  Go to the directory where you downloaded the FindPackagesByNameAndPublisher sample.
 
-3.  Run the following command:
+3.  Run the following command.
 
-    **msbuild FindPackagesByNameAndPublisherSample.sln**.
+    ```msbuild FindPackagesByNameAndPublisherSample.sln```
 
 ### From Visual Studio
 
 1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 
-2.  Go to the directory where you downloaded the FindPackagesByNameAndPublisher sample and double-click its Microsoft Visual Studio Solution (.sln) file.
+2.  Go to the directory where you downloaded the *FindPackagesByNameAndPublisher* sample and select its Microsoft Visual Studio Solution (*.sln*) file.
 
-3.  Press F7 (or F6 for Visual Studio 2013) or use **Build** \> **Build Solution**.
+3.  Press **F7** (or **F6** for Visual Studio 2013) or use **Build** \> **Build Solution**.
 
-Run the sample
---------------
+### Run the sample
 
 1.  Open a Command Prompt window.
 
-2.  Go to the directory that contains FindPackagesByPublisherSample.exe.
+2.  Go to the directory that contains *FindPackagesByPublisherSample.exe*.
 
-3.  Run the following command:
+3.  Run the following command.
 
-    **FindPackagesByPublisherSample** *packageName publisherName*.
+    ```FindPackagesByPublisherSample packageName publisherName```
 
-    For example, **FindPackagesByPublisherSample** microsoft.help "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US".
+    For example, ```FindPackagesByPublisherSample microsoft.help "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"```.
 
+## Related topics
+
+### Samples
+
+[Enumerate app packages sample](http://code.msdn.microsoft.com/windowsdesktop/Package-Manager-Inventory-ee821079)
+
+[Enumerate app packages by user SID sample](http://code.msdn.microsoft.com/windowsdesktop/Package-Manager-Inventory-5bee970a)
+
+### Concepts
+
+[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
+
+### Reference 
+
+[Windows.Management.Deployment.PackageManager](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)
 

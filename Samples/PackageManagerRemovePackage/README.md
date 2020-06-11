@@ -1,5 +1,19 @@
-App package removal sample
-==========================
+---
+page_type: sample
+languages:
+- cpp
+- csharp
+products:
+- windows-api-win32
+name: App package removal sample
+urlFragment: app-package-removal
+description: Demonstrates how to remove an app package from the system using the Package deployment API.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
+# App package removal sample
 
 This sample shows how to remove an app package from the system using the [Package deployment API](http://msdn.microsoft.com/en-us/library/windows/desktop/hh994436).
 
@@ -13,69 +27,63 @@ To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fw
 
 To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
 
-Related topics
---------------
-
-**Samples**
-
-[Add app package sample](http://go.microsoft.com/fwlink/p/?linkid=236968)
-
-**Concepts**
-
-[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
-
-**Reference**
-
-[**Windows.Management.Deployment.PackageManager**](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)
-
-Related technologies
---------------------
+## Related technologies
 
 [App packaging and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh446593)
 
-Operating system requirements
------------------------------
+## Operating system requirements
 
-Client
+### Client
 
 Windows 8.1
 
-Server
+### Server
 
 Windows Server 2012 R2
 
-Build the sample
-----------------
+## Build the sample
 
 ### From the Command window
 
 1.  Open a Command Prompt window.
 
-2.  Go to the directory where you downloaded the RemovePackage sample.
+2.  Go to the directory where you downloaded the *RemovePackage* sample.
 
-3.  Run the following command:
+3.  Run the following command.
 
-    **msbuild RemovePackageSample.sln**.
+    ```msbuild RemovePackageSample.sln```
 
 ### From Visual Studio
 
 1.  Start Visual Studio and select **File** \> **Open** \> **Project/Solution**.
 
-2.  Go to the directory where you downloaded the RemovePackage sample and double-click its Microsoft Visual Studio Solution (.sln) file.
+2.  Go to the directory where you downloaded the *RemovePackage* sample and select its Microsoft Visual Studio Solution (*.sln*) file.
 
-3.  Press F7 (or F6 for Visual Studio 2013) or use **Build** \> **Build Solution**.
+3.  Press **F7** (or **F6** for Visual Studio 2013) or use **Build** \> **Build Solution**.
 
-Run the sample
---------------
+## Run the sample
 
 1.  Open a Command Prompt window.
 
-2.  Go to the directory that contains RemovePackageSample.exe.
+2.  Go to the directory that contains *RemovePackageSample.exe*.
 
 3.  Run the following command:
 
-    **RemovePackageSample** *package-fullname*
+    ```RemovePackageSample package-fullname```
 
-    For example, **RemovePackageSample** testapp\_1.0.0.0\_neutral\_en-us\_ab1c2d3efghij.
+    For example, ```RemovePackageSample testapp\_1.0.0.0\_neutral\_en-us\_ab1c2d3efghij```.
 
+## Related topics
+
+### Samples
+
+[Add app package sample](http://go.microsoft.com/fwlink/p/?linkid=236968)
+
+### Concepts
+
+[App packages and deployment](http://msdn.microsoft.com/en-us/library/windows/desktop/hh464929)
+
+### Reference
+
+[Windows.Management.Deployment.PackageManager](http://msdn.microsoft.com/en-us/library/windows/desktop/br240960)
 

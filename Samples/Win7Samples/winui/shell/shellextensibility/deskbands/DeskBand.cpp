@@ -15,6 +15,7 @@ static const WCHAR g_szDeskBandSampleClass[] = L"DeskBandSampleClass";
 CDeskBand::CDeskBand() :
     m_cRef(1), m_pSite(NULL), m_fHasFocus(FALSE), m_fIsDirty(FALSE), m_dwBandID(0), m_hwnd(NULL), m_hwndParent(NULL)
 {
+    InterlockedIncrement(&g_cDllRef);
 }
 
 CDeskBand::~CDeskBand()
@@ -23,6 +24,7 @@ CDeskBand::~CDeskBand()
     {
         m_pSite->Release();
     }
+    InterlockedDecrement(&g_cDllRef);
 }
 
 //
