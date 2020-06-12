@@ -60,7 +60,7 @@ This sample is available in the following language implementations:
 1. From an elevated CMD prompt, navigate to the *Samples\WinBase\Eventing\EtwConsumer\Output*.
 1. Run the following to start logging to the *LogFile.etl* file.
 
-     `logman start "NT Kernel Logger" -o LogFile.etl –ets`
+     `logman start "NT Kernel Logger" -o LogFile.etl -ets`
 
 1. Run the following to stop logging.
 
@@ -78,6 +78,6 @@ This sample is available in the following language implementations:
 1. From a CMD prompt, navigate to the *Samples\WinBase\Eventing\EtwConsumer\Output* directory.
 1. Run the following command.
 
-     `EtwConsumer LogFile.etl –xml`
+     `EtwConsumer LogFile.etl -xml`
 
 

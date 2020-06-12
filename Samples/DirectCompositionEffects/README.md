@@ -3,7 +3,7 @@ DirectComposition effects with Direct2D bitmap content sample
 
 This sample shows how to use Microsoft DirectComposition to apply animations and effects to visuals that have Direct2D bitmap content.
 
-The sample creates two DirectComposition visual trees. The visual tree on the right consists of a single root visual, and the visual tree on the left consists of a root visual and four child visuals. Clicking the left mouse button applies animated 3-D transformation effects to the visual trees, including rotation, scaling, perspective, and translation transformations. In addition, animation is applied to the right visual's Opacity property to change the visual's opacity from transparent to opaque. Pressing the 1–4 number keys changes the color of the right visual.
+The sample creates two DirectComposition visual trees. The visual tree on the right consists of a single root visual, and the visual tree on the left consists of a root visual and four child visuals. Clicking the left mouse button applies animated 3-D transformation effects to the visual trees, including rotation, scaling, perspective, and translation transformations. In addition, animation is applied to the right visual's Opacity property to change the visual's opacity from transparent to opaque. Pressing the 1-4 number keys changes the color of the right visual.
 
 **Warning**  This sample requires Microsoft Visual Studio 2013 or a later version (any SKU) and will not compile in Microsoft Visual Studio Express 2013 for Windows.
 

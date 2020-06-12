@@ -28,8 +28,8 @@ This sample is written in C++.
  
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft Windows 7
+* Windows Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 
 
 ## Building the Sample

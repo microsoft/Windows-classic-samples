@@ -75,7 +75,7 @@ These are several scenarios in which a custom filter should be tested to make su
 1. Since the filter host shuts itself down on a regular basis to handle incorrectly implemented filters that leak or don't correctly terminate, you need to turn off this behavior by setting this registry value.
   
    `[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Search\Gathering Manager]
-       “FilterHostProcessTimeout”=dword:00000000`
+       "FilterHostProcessTimeout"=dword:00000000`
    
 1. Attach the debugger to *SearchFilterHost.exe* and set some breakpoints.
 1. Create, move. or modify some of your file types that are stored in an indexed location.

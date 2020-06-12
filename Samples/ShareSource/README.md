@@ -1,4 +1,4 @@
-﻿# WPF Sharing content source app sample
+# WPF Sharing content source app sample
 
 Shows how a managed Win32 app can participate in the [Share contract](https://docs.microsoft.com/en-us/windows/uwp/app-to-app/share-data).
 There is a corresponding [Sharing content UWP source app sample](http://go.microsoft.com/fwlink/p/?LinkId=620596) available. 
@@ -6,8 +6,8 @@ There is a corresponding [Sharing content UWP source app sample](http://go.micro
 Some of the classes you might want to review in more detail are the 
 [DataTransferManager](http://msdn.microsoft.com/library/windows/apps/br205932) class, 
 which you use to initiate a share operation, and the [DataPackage](http://msdn.microsoft.com/library/windows/apps/br205873) class, 
-which you use to package the content. Because each share scenario usually involves two apps—the source app 
-and a target app that receives the content—we recommend you install and deploy the 
+which you use to package the content. Because each share scenario usually involves two apps (the source app 
+and a target app that receives the content) we recommend you install and deploy the 
 [Sharing content target app sample](http://go.microsoft.com/fwlink/p/?linkid=231519) when you install and run this one. 
 This way, you can see how sharing works from end to end. 
 

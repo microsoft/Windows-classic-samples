@@ -26,8 +26,8 @@ When you run the sample, it produces an image file named output.png.
  
 ## Prerequisites
 
-* Microsoft Windows® 7
-* Windows® Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
+* Microsoft Windows 7
+* Windows Software Development Kit (SDK) for Windows 7 and .NET Framework 3.5 Service Pack 1 
 
 ## Building the Sample
 
