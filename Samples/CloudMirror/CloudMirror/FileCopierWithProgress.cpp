@@ -120,6 +120,37 @@ void FileCopierWithProgress::TransferData(
     winrt::check_hresult(CfExecute(&opInfo, &opParams));
 }
 
+void FileCopierWithProgress::AckDelete(
+	_In_ CF_CONNECTION_KEY connectionKey,
+	_In_ LARGE_INTEGER transferKey,
+	_In_ NTSTATUS completionStatus
+)
+{
+	CF_OPERATION_INFO opInfo = { 0 };
+	CF_OPERATION_PARAMETERS opParams = { 0 };
+
+	opInfo.StructSize = sizeof(opInfo);
+	opInfo.Type = CF_OPERATION_TYPE_ACK_DELETE;
+	opInfo.ConnectionKey = connectionKey;
+	opInfo.TransferKey = transferKey;
+
+	opParams.ParamSize = CF_SIZE_OF_OP_PARAM(AckDelete);
+	opParams.AckDelete.CompletionStatus = completionStatus;
+	opParams.AckDelete.Flags = CF_OPERATION_ACK_DELETE_FLAG_NONE;
+
+    try
+    {
+        wprintf(L"About to ACK delete, completionStatus = %08x\n", completionStatus);
+        winrt::check_hresult(CfExecute(&opInfo, &opParams));
+    }
+	catch(...)
+	{
+        // winrt::to_hresult() will eat the exception if it is a result of winrt::check_hresult,
+        // otherwise the exception will get rethrown and this method will crash out as it should
+        wprintf(L"Could not ACK delete, hr %08x\n", static_cast<HRESULT>(winrt::to_hresult()));
+    }
+}
+
 void WINAPI FileCopierWithProgress::OverlappedCompletionRoutine(
     _In_ DWORD errorCode,
     _In_ DWORD numberOfBytesTransfered,

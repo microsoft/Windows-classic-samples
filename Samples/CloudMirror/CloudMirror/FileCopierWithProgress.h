@@ -19,6 +19,11 @@ public:
         _In_ CONST CF_CALLBACK_INFO* callbackInfo,
         _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
 
+    static void AckDelete(
+        CF_CONNECTION_KEY connectionKey,
+        LARGE_INTEGER transferKey,
+        NTSTATUS completionStatus);
+
 private:
     static void CopyFromServerToClientWorker(
         _In_ CONST CF_CALLBACK_INFO* callbackInfo,
