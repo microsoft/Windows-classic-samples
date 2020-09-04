@@ -13,6 +13,7 @@ public:
     static void AddFolderToSearchIndexer(_In_ PCWSTR folder);
     static void ApplyTransferStateToFile(_In_ PCWSTR fullPath, _In_ CF_CALLBACK_INFO& callbackInfo, UINT64 total, UINT64 completed);
     static void ApplyCustomStateToPlaceholderFile(_In_ PCWSTR path, _In_ PCWSTR filename, _In_ winrt::StorageProviderItemProperty& prop);
+    static void UpdateErrorOnItem(PCWSTR path, bool setError);
     
     static winrt::com_array<wchar_t> ConvertSidToStringSid(_In_ PSID sid)
     {

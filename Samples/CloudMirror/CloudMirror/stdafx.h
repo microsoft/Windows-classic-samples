@@ -30,6 +30,7 @@
 #include <winrt\Windows.Security.Cryptography.h>
 #include <ppltasks.h>
 #include <strsafe.h>
+#include <filesystem>
 
 namespace winrt {
     using namespace Windows::Foundation;

@@ -114,7 +114,7 @@ void Placeholders::Create(
                     // This icon is just for the sample. You should provide your own branded icon here
                     prop.IconResource(L"shell32.dll,-44");
 
-                    wprintf(L"Applying custom state for %sx\n", relativeName.data());
+                    wprintf(L"Applying custom state for %s\n", relativeName.data());
                     Utilities::ApplyCustomStateToPlaceholderFile(destPath, relativeName.data(), prop);
 
                     if ((findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
@@ -129,6 +129,14 @@ void Placeholders::Create(
                     wprintf(L"Failed to set custom state on %s with %08x\n", relativeName.data(), static_cast<HRESULT>(winrt::to_hresult()));
                     // Eating it here lets other files still get a chance. Not worth crashing the sample, but
                     // certainly noteworthy for production code
+                }
+
+                if (std::wstring_view(relativeName).find(L"error") != std::wstring::npos)
+                {
+                    wprintf(L"Apply error state to %s\n", relativeName.c_str());
+                    
+                    auto placeholderPath = std::filesystem::path(destPath) / relativeName;
+                    Utilities::UpdateErrorOnItem(placeholderPath.c_str(), true);
                 }
 
             } while (FindNextFile(hFileHandle, &findData));
