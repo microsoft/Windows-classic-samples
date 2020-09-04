@@ -129,3 +129,37 @@ void Utilities::ApplyCustomStateToPlaceholderFile(PCWSTR path, PCWSTR filename, 
         wprintf(L"Failed to set custom state with %08x\n", static_cast<HRESULT>(winrt::to_hresult()));
     }
 }
+
+void Utilities::UpdateErrorOnItem(PCWSTR path, bool setError)
+{
+    try
+    {
+        winrt::com_ptr<IShellItem2> item;
+        winrt::check_hresult(SHCreateItemFromParsingName(path, nullptr, IID_PPV_ARGS(item.put())));
+
+        winrt::com_ptr<IPropertyStore> propertyStore;
+        winrt::check_hresult(item->GetPropertyStore(GPS_READWRITE | GPS_EXTRINSICPROPERTIESONLY, IID_PPV_ARGS(propertyStore.put())));
+
+        PROPVARIANT propVar{};
+        if (setError)
+        {
+            propVar.vt = VT_UI4;
+            propVar.ulVal = static_cast<unsigned long>(E_FAIL);
+            winrt::check_hresult(propertyStore->SetValue(PKEY_LastSyncError, propVar));
+        }
+        else
+        {
+            // Clear by setting to empty
+            propVar.vt = VT_EMPTY;
+            winrt::check_hresult(propertyStore->SetValue(PKEY_LastSyncError, propVar));
+        }
+
+        winrt::check_hresult(propertyStore->Commit());
+    }
+    catch (...)
+    {
+        // winrt::to_hresult() will eat the exception if it is a result of winrt::check_hresult,
+        // otherwise the exception will get rethrown and this method will crash out as it should
+        wprintf(L"Failed to set error state with %08x\n", static_cast<HRESULT>(winrt::to_hresult()));
+    }
+}
