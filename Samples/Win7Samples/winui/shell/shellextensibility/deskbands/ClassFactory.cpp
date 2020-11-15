@@ -1,7 +1,7 @@
 #include "ClassFactory.h"
 #include "Deskband.h"
 
-extern long g_cDllRef;
+extern ULONG g_cDllRef;
 
 CClassFactory::CClassFactory()
 {
