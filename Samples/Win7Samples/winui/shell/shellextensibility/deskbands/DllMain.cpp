@@ -8,7 +8,7 @@
 CLSID CLSID_DeskBandSample = {0x46b3d3ef, 0x71a, 0x4b7e, {0x8a, 0xa2, 0xe5, 0x60, 0x81, 0xd, 0xab, 0x35}};
 
 HINSTANCE   g_hInst     = NULL;
-long        g_cDllRef   = 0;
+ULONG       g_cDllRef   = 0;
 
 STDAPI_(BOOL) DllMain(HINSTANCE hInstance, DWORD dwReason, void *)
 {
