@@ -295,10 +295,6 @@ STDMETHODIMP CDeskBand::SetSite(IUnknown *pUnkSite)
                                 g_hInst,
                                 this);
 
-                if (!m_hwnd)
-                {
-                    hr = E_FAIL;
-                }
             }
 
             pow->Release();
@@ -307,7 +303,7 @@ STDMETHODIMP CDeskBand::SetSite(IUnknown *pUnkSite)
         hr = pUnkSite->QueryInterface(IID_IInputObjectSite, reinterpret_cast<void **>(&m_pSite));
     }
 
-    return hr;
+    return !m_hwnd ? E_FAIL : hr;
 }
 
 STDMETHODIMP CDeskBand::GetSite(REFIID riid, void **ppv)
