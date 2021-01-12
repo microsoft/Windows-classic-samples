@@ -955,7 +955,7 @@ Return Value:
     }
     
     if (DataContext->RenderItems != NULL) {
-        for(LONG Index = 0; Index < DataContext->CurrentTopLevelIndex; Index++) {
+        for(ULONG Index = 0; Index < DataContext->RenderItemsCount; Index++) {
             if (DataContext->RenderItems[Index] != NULL) {
                 free(DataContext->RenderItems[Index]);
             }
