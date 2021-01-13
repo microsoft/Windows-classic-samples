@@ -442,7 +442,7 @@ AddHardLinkInCim(_In_ const std::wstring& cimPath,
                                    imageName.c_str(),
                                    &imageHandle));
 
-    std::wcout << "Adding HardLink" << imageRelativePath.c_str() << " -> " << existingImageRelativePath.c_str();
+    std::wcout << "Adding HardLink " << imageRelativePath.c_str() << " -> " << existingImageRelativePath.c_str();
     std::wcout << std::endl;
 
     HRESULT hr =  CimCreateHardLink(imageHandle.get(), imageRelativePath.c_str(), existingImageRelativePath.c_str());

@@ -37,11 +37,15 @@ Run the sample
 **CimFSAPI.exe** [cim_path] [image_name] [file_to_add_path] [image_relative_path]
 
 cim_path - The path to the location where the generated cims will be stored. e.g. C:\cim
+
 image_name - The name of the cim image. e.g. test.cim
+
 file_to_add_path - The path on the source filesystem of a file to be added to the cim. e.g. C:\Windows\System32\ntdll.dll
+
 image_relative_path - The path in the cim to the source file. e.g. dir\ntdll.dll
 
 This will create 2 cim images:
 
 The first CIM will contain the file specified by file_to_add_path at the image_relative_path and a hardlink to that file in the same directory.
+
 The second CIM will be a fork of the first CIM, with the original file deleted but the hardlink still present.
