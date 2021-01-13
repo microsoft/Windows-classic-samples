@@ -29,7 +29,7 @@ Build the sample
 
 2.  Go to the directory named for the sample, and double-click the Microsoft Visual Studio Solution (.sln) file titled Networking.sln.
 
-3.  Press F7 (or F6 for Microsoft Visual Studio 2013) or use **Build** \> **Build Solution** to build the sample.
+3.  Use **Build** \> **Build Solution** to build the sample.
 
 Run the sample
 --------------
