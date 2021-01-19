@@ -12,7 +12,6 @@ Topics to cover:
     - Delete a file from the forked CIM image
 */
 
-#include "cimfs.h"
 #include <aclapi.h>
 #include <cstddef>
 #include <exception>
@@ -25,6 +24,7 @@ Topics to cover:
 #include <wil/result.h>
 #include <windows.h>
 #include <winioctl.h>
+#include <CimFs.h>
 
 // Keep information of a file's alternate streams
 struct StreamData

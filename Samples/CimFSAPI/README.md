@@ -16,11 +16,11 @@ Operating system requirements
 
 Client
 
-Windows 10 19H1 and above
+Windows 10 2004 and above
 
-Server
+SDK
 
-Windows Server 2019 and above
+Windows SDK 10.0.19041.0 and above
 
 Build the sample
 ----------------
