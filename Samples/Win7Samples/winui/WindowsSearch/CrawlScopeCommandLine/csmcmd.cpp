@@ -529,7 +529,7 @@ int Reindex()
     HRESULT hr = CreateCatalogManager(&pCatalogManager);
     if (SUCCEEDED(hr))
     {
-        hr = pCatalogManager->Reset();
+        hr = pCatalogManager->Reindex();
         pCatalogManager->Release();
     }
     return ReportHRESULTError(L"Reindex()", hr);

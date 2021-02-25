@@ -1,0 +1,20 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+// This is referenced in the .vcxproj PreprocessorDefinitions
+// to set an explicit class ID for the proxy instead of letting
+// it implicitly choose.
+declare_guid(CLSID_CSparkleProxy, 086BFA6B-3C18-4B61-9D4B-120E64F165DC);
+
+// This is also in SparkleFinisher.h for the __declspec on the class.
+declare_guid(CLSID_SparkleFinisher, EA27C73A-48C2-4714-9D20-A9D2C4F6AED3);
+
+[
+    object,
+    uuid(1284C788-6978-43D5-9A02-414901A2EC75)
+] interface ISparkleFinisher : IUnknown
+{
+    HRESULT AddSparkleFinishToFile([in, system_handle(sh_file)] HANDLE decorateThisFile,
+        [in, system_handle(sh_event)] HANDLE whenThisEventFires,
+        [out, system_handle(sh_event)] HANDLE* willNotifyWhenDone);
+}

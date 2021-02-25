@@ -1,3 +1,17 @@
+---
+page_type: sample
+languages:
+- csharp
+products:
+- windows-server
+name: System Insights sample capability
+urlFragment: system-insights
+description: Demonstrates how to write a capability in System Insights.
+extendedZipContent:
+- path: LICENSE
+  target: LICENSE
+---
+
 # System Insights sample capability
 
 This sample demonstrates how to write a capability in [System Insights](https://aka.ms/systeminsights). This sample demonstrates how to:
@@ -15,7 +29,7 @@ This sample demonstrates how to write a capability in [System Insights](https://
 [Adding and developing capabilities](https://aka.ms/systeminsights-addcapabilities)
 
 ## Operating system requirements
-**Server:** Windows Server Insider Preview build 17723 and later
+**Server:** Windows Server Version 1809 or later
 
 ## Build the sample
 1. Start Microsoft Visual Studio and select **File** > **Open** > **Project/Solution**.
@@ -25,7 +39,7 @@ This sample demonstrates how to write a capability in [System Insights](https://
 ## Run the sample
 After you've created the capability library, you need to add the capability to System Insights.
 1. Confirm you're running the a version of Windows Server which has the System Insights feature installed.
-    - This sample requires Windows Server Insider Preview build 17723 or later.
+    - This sample requires Windows Server Version 1809 or later.
 2. Copy the capability library onto the server. 
 3. Add the capability using the **Add-InsightsCapability** cmdlet:
 

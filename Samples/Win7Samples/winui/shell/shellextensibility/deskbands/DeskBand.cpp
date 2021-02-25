@@ -5,7 +5,7 @@
 #define RECTWIDTH(x)   ((x).right - (x).left)
 #define RECTHEIGHT(x)  ((x).bottom - (x).top)
 
-extern ULONG        g_cDllRef;
+extern long         g_cDllRef;
 extern HINSTANCE    g_hInst;
 
 extern CLSID CLSID_DeskBandSample;

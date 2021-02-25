@@ -739,9 +739,9 @@ HRESULT CFolderViewImplCategorizer_Value::GetCategory(UINT cidl,
                     rgCategoryIds[i] = IDS_5ORGREATER;
                 }
                 // Free the strings
-                for (int i = 0; i < ARRAYSIZE(rgNames); i++)
+                for (int j = 0; i < ARRAYSIZE(rgNames); j++)
                 {
-                    CoTaskMemFree(rgNames[i]);
+                    CoTaskMemFree(rgNames[j]);
                 }
             }
             VariantClear(&v);

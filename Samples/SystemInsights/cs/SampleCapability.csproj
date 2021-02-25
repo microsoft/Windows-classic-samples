@@ -50,10 +50,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SystemInsights.Capability, Version=10.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsServer.SystemInsights.10.0.17723.1000-180720-1452.rs5-release.amd64fre\lib\net47\Microsoft.SystemInsights.Capability.dll</HintPath>
+      <HintPath>packages\Microsoft.WindowsServer.SystemInsights.10.1809.0\lib\net47\Microsoft.SystemInsights.Capability.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SystemInsights.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.WindowsServer.SystemInsights.10.0.17723.1000-180720-1452.rs5-release.amd64fre\lib\net47\Microsoft.SystemInsights.Common.dll</HintPath>
+      <HintPath>packages\Microsoft.WindowsServer.SystemInsights.10.1809.0\lib\net47\Microsoft.SystemInsights.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
