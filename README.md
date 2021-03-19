@@ -3,7 +3,8 @@
 This repo contains samples that demonstrate
 the API used in Windows classic desktop applications.
 
-**Note**. You can use Microsoft Visual Studio to search the entire set of source code here to see whether the usage of a particular Windows API is being demonstrated. Clone this repo (or download the ZIP) to your local file system. Then **Find in Files** in Visual Studio, set **Look in** to the folder you cloned or downloaded into, and search for an API name. You can install [Visual Studio](https://visualstudio.microsoft.com/downloads/) without expense. A Community edition is available&mdash;it's free for students, open-source contributors, and individuals.
+> [!NOTE]
+> You can use Microsoft Visual Studio to search the entire set of source code here to see whether the usage of a particular Windows API is being demonstrated. Clone this repo (or download the ZIP) to your local file system. Then **Find in Files** in Visual Studio, set **Look in** to the folder you cloned or downloaded into, and search for an API name. You can install [Visual Studio](https://visualstudio.microsoft.com/downloads/) without expense. A Community edition is available&mdash;it's free for students, open-source contributors, and individuals.
 
 These samples demonstrate the functionality and programming model
 for Windows and Windows Server.
