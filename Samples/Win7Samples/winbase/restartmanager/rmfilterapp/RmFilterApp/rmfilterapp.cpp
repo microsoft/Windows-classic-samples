@@ -10,214 +10,130 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 Module Name:
 
     rmfilterapp.cpp
- 
+
 Abstract:
 
-	This module contains the skeleton code for a Windows native 
-	API console based Restart Manager conductor process sample.
+    This module contains the skeleton code for a Windows native
+    API console based Restart Manager conductor process sample.
 
 Notes:
     This example requires Windows 7 or Windows Server 2008 R2.
 
-	The following code snippet shows an example of a primary installer starting and using a Restart Manager session. 	
-	
-	This example shows how a primary installer can use Restart Manager to shutdown and restart a process. 
-	The example assumes that Calculator is already running before starting the Restart Manager session.
+    The following code snippet shows an example of a primary installer starting and using a Restart Manager session.
+
+    This example shows how a primary installer can use Restart Manager to shutdown and restart a process.
+    The example assumes that Calculator is already running before starting the Restart Manager session.
 --*/
 
 #include <windows.h>
 #include <restartmanager.h>
+#include <memory>
+#include <vector>
+#include <string>
+#include <algorithm>
 
-int _cdecl wmain()
+struct RestartManagerSessionHandle
 {
-    DWORD dwErrCode         = ERROR_SUCCESS;
-    DWORD dwSessionHandle   = 0xFFFFFFFF; // Invalid handle value
+    RestartManagerSessionHandle(RestartManagerSessionHandle&) = delete;
+    RestartManagerSessionHandle() = default;
 
-    //
-    // CCH_RM_SESSION_KEY: Character count of the  
-    // Text-Encoded session key,defined in RestartManager.h
-    //
-    WCHAR sessKey[CCH_RM_SESSION_KEY+1];
-    
-    // Number of calc files to be registered.
-    DWORD dwFiles = 2;   
-
-    //
-    // NOTE:We register two calc executable files. 
-    // The second one is for the redirection of 32 bit calc on 
-    // 64 bit machines. Even if you are using a 32 bit machine,  
-    // you don't need to comment out the second line. 
-    //
-    LPCWSTR rgsFiles[]      =	{L"C:\\Windows\\System32\\calc.exe",
-								 L"C:\\Windows\\SysWow64\\calc.exe"};
-
-    UINT nRetry             = 0; 
-    UINT nAffectedApps      = 0;
-    UINT nProcInfoNeeded    = 0;
-    RM_REBOOT_REASON dwRebootReasons    = RmRebootReasonNone;
-    RM_PROCESS_INFO *rgAffectedApps     = NULL;
-    
-    //
-    // Start a Restart Manager Session
-    //
-    dwErrCode = RmStartSession(&dwSessionHandle, 0, sessKey);
-    if (ERROR_SUCCESS != dwErrCode)
+    ~RestartManagerSessionHandle()
     {
-        goto RM_CLEANUP;
-    }
-
-    //
-    // Register items with Restart Manager
-    //
-    // NOTE: we only register two calc executable files 
-    //in this sample. You can register files, processes 
-    // (in the form of process ID), and services (in the   
-    // form of service short names) with Restart Manager.
-    //
-    dwErrCode = RmRegisterResources(dwSessionHandle,
-                                    dwFiles, 
-                                    rgsFiles,       // Files
-                                    0,  
-                                    NULL,           // Processes
-                                    0, 
-                                    NULL);          // Services 
-                                    
-    if (ERROR_SUCCESS != dwErrCode)
-    {
-        goto RM_CLEANUP;
-    }
-
-    //
-    // Obtain the list of affected applications/services.
-    //
-    // NOTE: Restart Manager returns the results into the  
-    // buffer allocated by the caller. The first call to 
-    // RmGetList() will return the size of the buffer  
-    // (i.e. nProcInfoNeeded) the caller needs to allocate. 
-    // The caller then needs to allocate the buffer  
-    // (i.e. rgAffectedApps) and make another RmGetList() 
-    // call to ask Restart Manager to write the results 
-    // into the buffer. However, since Restart Manager 
-    // refreshes the list every time RmGetList()is called, 
-    // it is possible that the size returned by the first 
-    // RmGetList()call is not sufficient to hold the results  
-    // discovered by the second RmGetList() call. Therefore, 
-    // it is recommended that the caller follows the 
-    // following practice to handle this race condition:
-    //   
-    //    Use a loop to call RmGetList() in case the buffer 
-    //    allocated according to the size returned in previous 
-    //    call is not enough. 	 
-    // 
-    // In this example, we use a do-while loop trying to make 
-    // 3 RmGetList() calls (including the first attempt to get 
-    // buffer size) and if we still cannot succeed, we give up. 
-    //
-    do
-    {
-        dwErrCode = RmGetList(dwSessionHandle,
-                              &nProcInfoNeeded,
-                              &nAffectedApps, 
-                              rgAffectedApps, 
-                              (LPDWORD) &dwRebootReasons);
-        if (ERROR_SUCCESS == dwErrCode)
+        if (m_handle != 0xFFFFFFFF)
         {
-            //
-            // RmGetList() succeeded
-            //
+            RmEndSession(m_handle);
+        }
+    }
+    DWORD get() { return m_handle; }
+    DWORD* putHandle() { return &m_handle; }
+    PWSTR putSessionKey() { return m_sessKey; }
+private:
+    DWORD m_handle = 0xFFFFFFFF;
+    wchar_t m_sessKey[CCH_RM_SESSION_KEY + 1]{}; // Text-Encoded session key,defined in RestartManager.h
+};
+
+void ThrowIfFailed(DWORD win32Error)
+{
+    if (ERROR_SUCCESS != win32Error) throw std::system_error(win32Error, std::system_category());
+}
+
+int _cdecl wmain() try
+{
+    RestartManagerSessionHandle sessionHandle;
+    ThrowIfFailed(RmStartSession(sessionHandle.putHandle(), 0, sessionHandle.putSessionKey()));
+
+    // These are the processes we intend to restart
+    PCWSTR fileToReplace[] =
+    {
+        LR"(C:\Windows\explorer.exe)",
+        LR"(C:\Windows\notepad.exe)",
+        LR"(C:\Windows\system32\notepad.exe)",
+        LR"(C:\Windows\SysWow64\notepad.exe)",
+    };
+
+    // Tell restart manager what we want to replace
+    ThrowIfFailed(RmRegisterResources(sessionHandle.get(), ARRAYSIZE(fileToReplace), fileToReplace,
+        0, nullptr, 0, nullptr)); // No processes or services.
+
+    RM_REBOOT_REASON rebootReasons = RmRebootReasonNone;
+    std::vector<RM_PROCESS_INFO> restartableApps;
+
+    // Need to loop since the list may change due to concurrency
+    for (;;)
+    {
+        DWORD reasonsAsDword = 0;
+        UINT allocationSizeNeeded = 0;
+        auto restartableAppSize = static_cast<UINT>(restartableApps.size()); // careful, in-out value
+        const auto errorCode = RmGetList(sessionHandle.get(), &allocationSizeNeeded, &restartableAppSize,
+            restartableApps.data(), &reasonsAsDword);
+        if (errorCode == ERROR_MORE_DATA)
+        {
+            restartableApps.resize(allocationSizeNeeded); // size the buffer
+        }
+        else if (ERROR_SUCCESS == errorCode)
+        {
+            rebootReasons = static_cast<decltype(rebootReasons)>(reasonsAsDword);
             break;
         }
-
-        if (ERROR_MORE_DATA != dwErrCode)
+        else
         {
-            //
-            // RmGetList() failed, with errors 
-            // other than ERROR_MORE_DATA
-            //
-            goto RM_CLEANUP;
+            throw std::system_error(errorCode, std::system_category());
         }
-
-        //
-        // RmGetList() is asking for more data
-        //
-        nAffectedApps = nProcInfoNeeded;
-        
-        if (NULL != rgAffectedApps)
-        {
-            delete []rgAffectedApps;
-            rgAffectedApps = NULL;
-        }
-
-        rgAffectedApps = new RM_PROCESS_INFO[nAffectedApps];
-    } while ((ERROR_MORE_DATA == dwErrCode) && (nRetry ++ < 3));
-
-    if (ERROR_SUCCESS != dwErrCode)
-    {
-        goto RM_CLEANUP;
     }
 
-    if (RmRebootReasonNone != dwRebootReasons)
+    for (const auto& app : restartableApps)
     {
-        //
-        // Restart Manager cannot mitigate a reboot. 
-        // We goes to the clean up. The caller may want   
-        // to add additional code to handle this scenario.
-        //
-        goto RM_CLEANUP;
+        wprintf(L"App: %s, %d", app.strAppName, app.Process.dwProcessId);
     }
-    
-    //
-    // Now rgAffectedApps contains the affected applications 
+
+    if (RmRebootReasonNone != rebootReasons)
+    {
+        return 0;
+    }
+
+    // Now restartableApps contains the affected applications 
     // and services. The number of applications and services
-    // returned is nAffectedApps. The result of RmGetList can 
+    // returned is restartableAppCount. The result of RmGetList can 
     // be interpreted by the user to determine subsequent  
     // action (e.g. ask user's permission to shutdown).
     //
     // CALLER CODE GOES HERE...
-     
-    //
+
     // Shut down all running instances of affected 
     // applications and services.
-    //
-    dwErrCode = RmShutdown(dwSessionHandle, 0, NULL);
-    if (ERROR_SUCCESS != dwErrCode)
-    {
-        goto RM_CLEANUP;
-    }
+    ThrowIfFailed(RmShutdown(sessionHandle.get(), 0, nullptr));
 
-    //
     // An installer can now replace or update
     // the calc executable file.
     //
     // CALLER CODE GOES HERE...
-
-
-    //
     // Restart applications and services, after the 
     // files have been replaced or updated.
     //
-    dwErrCode = RmRestart(dwSessionHandle, 0, NULL);
-    if (ERROR_SUCCESS != dwErrCode)
-    {
-        goto RM_CLEANUP;
-    }
-
-  RM_CLEANUP:
-    
-    if (NULL != rgAffectedApps)
-    {
-        delete [] rgAffectedApps;
-        rgAffectedApps = NULL;
-    }
-
-    if (0xFFFFFFFF != dwSessionHandle)
-    {
-        //
-        // Clean up the Restart Manager session.
-        //
-        RmEndSession(dwSessionHandle);
-        dwSessionHandle = 0xFFFFFFFF;
-    }
-
+    ThrowIfFailed(RmRestart(sessionHandle.get(), 0, nullptr));
     return 0;
+}
+catch (const std::exception& e)
+{
+    printf(e.what());
 }

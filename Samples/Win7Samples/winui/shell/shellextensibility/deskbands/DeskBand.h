@@ -60,7 +60,8 @@ protected:
 
 private:
     LONG                m_cRef;                 // ref count of deskband
-    IInputObjectSite   *m_pSite;                // parent site that contains deskband
+    IUnknown           *m_pSite;                // IObjectWithSite site
+    IInputObjectSite   *m_pInputObjectSite;     // parent site that contains deskband
     BOOL                m_fHasFocus;            // whether deskband window currently has focus
     BOOL                m_fIsDirty;             // whether deskband setting has changed
     BOOL                m_fCompositionEnabled;  // whether glass is currently enabled in deskband

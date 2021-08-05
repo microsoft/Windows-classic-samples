@@ -739,7 +739,7 @@ HRESULT CFolderViewImplCategorizer_Value::GetCategory(UINT cidl,
                     rgCategoryIds[i] = IDS_5ORGREATER;
                 }
                 // Free the strings
-                for (int j = 0; i < ARRAYSIZE(rgNames); j++)
+                for (int j = 0; j < ARRAYSIZE(rgNames); j++)
                 {
                     CoTaskMemFree(rgNames[j]);
                 }
