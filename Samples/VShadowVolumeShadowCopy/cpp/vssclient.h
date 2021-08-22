@@ -34,6 +34,13 @@ public:
     // Initialize the internal pointers
     void Initialize(DWORD dwContext = VSS_CTX_BACKUP, wstring xmlDoc = L"", bool bDuringRestore = false);
 
+
+    // Determines whether the specified provider supports shadow copies on the specified volume or remote file share.
+    HRESULT IsVolumeSupported(
+        VSS_PWSZ pwszVolumeName,
+        BOOL* pbSupportedByThisProvider
+    );
+
     //
     //  Shadow copy creation related methods
     //

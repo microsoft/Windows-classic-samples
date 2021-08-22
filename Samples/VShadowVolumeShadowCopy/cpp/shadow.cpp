@@ -674,6 +674,29 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
 
 #endif
 
+
+        // Perform a support check
+        if (MatchArgument(arguments[argIndex], L"isup", wsSnapIdDest))//, xmlBackupComponentsDoc))
+        {
+            ft.WriteLine(L"(Option: Perform a Simulated restore)");
+
+            vector<wstring> resyncArgsArray = SplitWString(wsSnapIdDest, L',');
+
+            VSS_ID snapshotID = WString2Guid(resyncArgsArray[0]);
+
+            // Initialize the VSS client
+            m_vssClient.Initialize(VSS_CTX_ALL);
+
+            WCHAR wszVolumePathName[MAX_PATH];
+            BOOL supported = TRUE;
+            BOOL bWorked = ::GetVolumePathName(wsSnapIdDest.c_str(), wszVolumePathName, MAX_PATH);
+            HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
+
+            ft.WriteLine(L"\nSupported check is done, bool:", supported, WSTR_GUID_FMT L", HRESULT:", is_supported_result);
+
+            return 0;
+        }
+
         // Perform a restore
         if (MatchArgument(arguments[argIndex], L"r", xmlBackupComponentsDoc))
         {
