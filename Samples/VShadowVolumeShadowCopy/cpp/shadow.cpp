@@ -678,11 +678,7 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
         // Perform a support check
         if (MatchArgument(arguments[argIndex], L"isup", wsSnapIdDest))//, xmlBackupComponentsDoc))
         {
-            ft.WriteLine(L"(Option: Perform a Simulated restore)");
-
-            vector<wstring> resyncArgsArray = SplitWString(wsSnapIdDest, L',');
-
-            VSS_ID snapshotID = WString2Guid(resyncArgsArray[0]);
+            ft.WriteLine(L"(Started support check a Simulated restore)");
 
             // Initialize the VSS client
             m_vssClient.Initialize(VSS_CTX_ALL);
