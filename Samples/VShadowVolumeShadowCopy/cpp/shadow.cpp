@@ -680,23 +680,18 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
         {
             ft.WriteLine(L"(Started support check)");
 
-            WCHAR wszVolumePathName[MAX_PATH];
-            BOOL supported = TRUE;
-            /*auto stP = arguments[argIndex];
-            stP.replace(stP.find(L"-isup="), 6, L"");*/
-            BOOL bWorked = ::GetVolumePathName(arguments[1].c_str(), wszVolumePathName, MAX_PATH);
-
-            //wstring xmlDoc = ReadFileContents(xmlBackupComponentsDoc);
-            //ft.Trace(DBG_INFO, L"XML document: '%s'", xmlDoc.c_str());
-            //m_vssClient.Initialize(VSS_CTX_ALL, xmlDoc, true);
 
             // Initialize the VSS client
             m_vssClient.Initialize(VSS_CTX_ALL);
 
+            WCHAR wszVolumePathName[MAX_PATH];
+            BOOL supported = TRUE;
+            BOOL bWorked = ::GetVolumePathName(arguments[1].c_str(), wszVolumePathName, MAX_PATH);
+
+
             HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
-
-            ft.WriteLine(L"\nSupported check is done, bool:", supported, WSTR_GUID_FMT L", HRESULT:", is_supported_result);
-
+            
+            ft.WriteLine(L"\nSupported check is done, bool: %i, BASEIMAGE: %i", supported, is_supported_result== VSS_E_NESTED_VOLUME_LIMIT);
             return 0;
         }
 
