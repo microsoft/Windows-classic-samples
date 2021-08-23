@@ -83,7 +83,6 @@ extern "C" int __cdecl wmain(__in int argc, __in_ecount(argc) WCHAR ** argv)
     }
 }
 
-
 //
 //  Main routine
 //  - First, parse the command-line options
@@ -689,17 +688,19 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
 
             HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
 
+            wstring result_phrase = L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i";
+
             switch (is_supported_result)
             {
             case S_OK:
-                ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, false);
+                ft.WriteLine(result_phrase, supported, false);
                 return 0;
             case VSS_E_NESTED_VOLUME_LIMIT:
-                ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, true);
+                ft.WriteLine(result_phrase, supported, true);
                 return 1;
             }
             
-            ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, false);
+            ft.WriteLine(result_phrase, supported, false);
             return -1;
         }
 
