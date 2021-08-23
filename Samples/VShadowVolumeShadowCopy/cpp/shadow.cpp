@@ -680,7 +680,6 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
         {
             ft.WriteLine(L"(Started support check)");
 
-
             // Initialize the VSS client
             m_vssClient.Initialize(VSS_CTX_ALL);
 
@@ -688,11 +687,22 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
             BOOL supported = TRUE;
             BOOL bWorked = ::GetVolumePathName(arguments[1].c_str(), wszVolumePathName, MAX_PATH);
 
-
             HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
+
+            switch (is_supported_result)
+            {
+            case S_OK:
+                ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, false);
+                return 0;
+                break;
+            case VSS_E_NESTED_VOLUME_LIMIT:
+                ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, true);
+                return 1;
+                break;
+            }
             
-            ft.WriteLine(L"\nSupported check is done, bool: %i, BASEIMAGE: %i", supported, is_supported_result== VSS_E_NESTED_VOLUME_LIMIT);
-            return 0;
+            ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, is_supported_result== VSS_E_NESTED_VOLUME_LIMIT);
+            return -1;
         }
 
         // Perform a restore
