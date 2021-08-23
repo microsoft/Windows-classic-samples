@@ -694,14 +694,12 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
             case S_OK:
                 ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, false);
                 return 0;
-                break;
             case VSS_E_NESTED_VOLUME_LIMIT:
                 ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, true);
                 return 1;
-                break;
             }
             
-            ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, is_supported_result== VSS_E_NESTED_VOLUME_LIMIT);
+            ft.WriteLine(L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i", supported, false);
             return -1;
         }
 
