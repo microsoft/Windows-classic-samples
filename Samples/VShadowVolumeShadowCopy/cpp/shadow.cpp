@@ -676,16 +676,23 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
 
 
         // Perform a support check
-        if (MatchArgument(arguments[argIndex], L"isup", wsSnapIdDest))//, xmlBackupComponentsDoc))
+        if (MatchArgument(arguments[argIndex], L"isup")) //wsSnapIdDest
         {
             ft.WriteLine(L"(Started support check)");
+
+            WCHAR wszVolumePathName[MAX_PATH];
+            BOOL supported = TRUE;
+            /*auto stP = arguments[argIndex];
+            stP.replace(stP.find(L"-isup="), 6, L"");*/
+            BOOL bWorked = ::GetVolumePathName(arguments[1].c_str(), wszVolumePathName, MAX_PATH);
+
+            //wstring xmlDoc = ReadFileContents(xmlBackupComponentsDoc);
+            //ft.Trace(DBG_INFO, L"XML document: '%s'", xmlDoc.c_str());
+            //m_vssClient.Initialize(VSS_CTX_ALL, xmlDoc, true);
 
             // Initialize the VSS client
             m_vssClient.Initialize(VSS_CTX_ALL);
 
-            WCHAR wszVolumePathName[MAX_PATH];
-            BOOL supported = TRUE;
-            BOOL bWorked = ::GetVolumePathName(wsSnapIdDest.c_str(), wszVolumePathName, MAX_PATH);
             HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
 
             ft.WriteLine(L"\nSupported check is done, bool:", supported, WSTR_GUID_FMT L", HRESULT:", is_supported_result);
@@ -1057,6 +1064,7 @@ void CommandLineParser::PrintUsage()
         L"  -dx={SnapSetID}                 - Deletes all shadow copies in this set\n"
         L"  -ds={SnapID}                    - Deletes this shadow copy\n"
         L"  -i={file.xml}                   - Transportable shadow copy import\n"
+        L"  -isup path                      - Check if volume path is supported by VSS\n"
         L"  -b={SnapSetID}                  - Break the given shadow set into read-only volumes\n"
         L"  -bw={SnapSetID}                 - Break the shadow set into writable volumes\n"
         L"  -bex={SnapSetID}                - Break using BreakSnapshotSetEx and flags, see options for available flags\n"
@@ -1120,6 +1128,7 @@ void CommandLineParser::PrintUsage()
         L"  -q                 - List all shadow copies in the system\n"
         L"  -qx={SnapSetID}    - List all shadow copies in this set\n"
         L"  -s={SnapID}        - List the shadow copy with the given ID\n"
+        L"  -isup path         - Check if volume path is supported by VSS\n"
         L"  -da                - Deletes all shadow copies in the system\n"
         L"  -dx={SnapSetID}    - Deletes all shadow copies in this set\n"
         L"  -ds={SnapID}       - Deletes this shadow copy\n"
