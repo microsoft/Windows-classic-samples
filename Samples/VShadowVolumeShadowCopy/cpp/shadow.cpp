@@ -689,7 +689,7 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
             HRESULT is_supported_result = m_vssClient.IsVolumeSupported(wszVolumePathName, &supported);
 
             const wstring result_phrase = L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i";
-            short trunked = short(is_supported_result);
+            auto trunked = short(is_supported_result);
 
             switch (is_supported_result)
             {
