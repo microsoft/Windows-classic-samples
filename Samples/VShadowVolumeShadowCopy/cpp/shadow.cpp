@@ -691,22 +691,14 @@ int CommandLineParser::MainRoutine(vector<wstring> arguments)
             const wstring result_phrase = L"\nSupported check is done, bool: %i, NESTED_VOLUME_LIMIT: %i";
             auto trunked = short(is_supported_result);
 
-            switch (is_supported_result)
+            if (is_supported_result == S_OK)
             {
-            case S_OK:
                 ft.WriteLine(result_phrase, supported, trunked);
                 return 0;
-            case VSS_E_NESTED_VOLUME_LIMIT:
-                ft.WriteLine(result_phrase, supported, trunked);
-                return trunked;
-            case E_UNEXPECTED:
-            case VSS_E_UNEXPECTED:
-                ft.WriteLine(result_phrase, false, trunked);
-                return trunked;
             }
             
             ft.WriteLine(result_phrase, supported, trunked);
-            return -1;
+            return trunked;
         }
 
         // Perform a restore
