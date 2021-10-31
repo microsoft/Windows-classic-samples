@@ -53,7 +53,7 @@ DUPLICATIONMANAGER::~DUPLICATIONMANAGER()
 //
 // Initialize duplication interfaces
 //
-DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
+DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device5* Device, UINT Output)
 {
     m_OutputNumber = Output;
 
@@ -62,16 +62,16 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
     m_Device->AddRef();
 
     // Get DXGI device
-    IDXGIDevice* DxgiDevice = nullptr;
-    HRESULT hr = m_Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&DxgiDevice));
+	IDXGIDevice4* DxgiDevice = nullptr;
+	HRESULT hr = m_Device->QueryInterface(__uuidof(IDXGIDevice4), reinterpret_cast<void**>(&DxgiDevice));
     if (FAILED(hr))
     {
         return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", hr);
     }
 
     // Get DXGI adapter
-    IDXGIAdapter* DxgiAdapter = nullptr;
-    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&DxgiAdapter));
+	IDXGIAdapter4* DxgiAdapter = nullptr;
+	hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter4), reinterpret_cast<void**>(&DxgiAdapter));
     DxgiDevice->Release();
     DxgiDevice = nullptr;
     if (FAILED(hr))
@@ -80,8 +80,8 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
     }
 
     // Get output
-    IDXGIOutput* DxgiOutput = nullptr;
-    hr = DxgiAdapter->EnumOutputs(Output, &DxgiOutput);
+    IDXGIOutput6* DxgiOutput = nullptr;
+    hr = DxgiAdapter->EnumOutputs(Output, reinterpret_cast<IDXGIOutput **>(&DxgiOutput));
     DxgiAdapter->Release();
     DxgiAdapter = nullptr;
     if (FAILED(hr))
@@ -92,8 +92,8 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
     DxgiOutput->GetDesc(&m_OutputDesc);
 
     // QI for Output 1
-    IDXGIOutput1* DxgiOutput1 = nullptr;
-    hr = DxgiOutput->QueryInterface(__uuidof(DxgiOutput1), reinterpret_cast<void**>(&DxgiOutput1));
+	IDXGIOutput6* DxgiOutput1 = nullptr;
+	hr = DxgiOutput->QueryInterface(__uuidof(IDXGIOutput6), reinterpret_cast<void**>(&DxgiOutput1));
     DxgiOutput->Release();
     DxgiOutput = nullptr;
     if (FAILED(hr))
@@ -102,9 +102,11 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
     }
 
     // Create desktop duplication
-    hr = DxgiOutput1->DuplicateOutput(m_Device, &m_DeskDupl);
-    DxgiOutput1->Release();
-    DxgiOutput1 = nullptr;
+	const DXGI_FORMAT DesktopFormats[] = { DXGI_FORMAT_B8G8R8A8_UNORM };
+	const unsigned DesktopFormatsCounts = ARRAYSIZE(DesktopFormats);
+	hr = DxgiOutput1->DuplicateOutput1(m_Device, 0, DesktopFormatsCounts, DesktopFormats, &m_DeskDupl);
+	DxgiOutput1->Release();
+	DxgiOutput1 = nullptr;
     if (FAILED(hr))
     {
         if (hr == DXGI_ERROR_NOT_CURRENTLY_AVAILABLE)
@@ -205,6 +207,7 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
     DXGI_OUTDUPL_FRAME_INFO FrameInfo;
 
     // Get new frame
+	m_DeskDupl->ReleaseFrame();
     HRESULT hr = m_DeskDupl->AcquireNextFrame(500, &FrameInfo, &DesktopResource);
     if (hr == DXGI_ERROR_WAIT_TIMEOUT)
     {
@@ -226,7 +229,7 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
     }
 
     // QI for IDXGIResource
-    hr = DesktopResource->QueryInterface(__uuidof(ID3D11Texture2D), reinterpret_cast<void **>(&m_AcquiredDesktopImage));
+    hr = DesktopResource->QueryInterface(__uuidof(ID3D11Texture2D1), reinterpret_cast<void **>(&m_AcquiredDesktopImage));
     DesktopResource->Release();
     DesktopResource = nullptr;
     if (FAILED(hr))
