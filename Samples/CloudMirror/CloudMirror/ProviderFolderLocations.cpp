@@ -68,8 +68,10 @@ std::wstring ProviderFolderLocations::PromptForFolderPath(_In_ PCWSTR title)
     {
         auto lastLocation = winrt::unbox_value<winrt::hstring>(settings.Lookup(title));
         winrt::com_ptr<IShellItem> lastItem;
-        winrt::check_hresult(SHCreateItemFromParsingName(lastLocation.c_str(), nullptr, __uuidof(lastItem), lastItem.put_void()));
-        winrt::check_hresult(fileOpen->SetFolder(lastItem.get()));
+        if (SUCCEEDED(SHCreateItemFromParsingName(lastLocation.c_str(), nullptr, __uuidof(lastItem), lastItem.put_void())))
+        {
+            winrt::check_hresult(fileOpen->SetFolder(lastItem.get()));
+        }
     }
 
     try

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -8,7 +8,8 @@
   xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
   xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
-  IgnorableNamespaces="uap mp rescap desktop3 desktop4">
+  xmlns:cloudfiles2="http://schemas.microsoft.com/appx/manifest/cloudfiles/windows10/2"        
+  IgnorableNamespaces="uap mp rescap desktop3 desktop4 cloudfiles2">
 
   <Identity
     Name="Microsoft.SDKSamples.CloudMirror.CPP"
@@ -22,7 +23,7 @@
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.17763.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.18362.0" MaxVersionTested="10.0.22598.0" />
   </Dependencies>
 
   <Resources>
@@ -49,6 +50,7 @@
             <desktop3:ThumbnailProviderHandler Clsid="3d781652-78c5-4038-87a4-ec5940ab560a"/>
             <desktop3:ExtendedPropertyHandler Clsid="20000000-0000-0000-0000-000000000001"/>
             <desktop3:BannersHandler Clsid="20000000-0000-0000-0000-000000000001"/>
+            <cloudfiles2:StorageProviderStatusUISourceFactory Clsid="b1d8ef74-822d-401a-a14a-25f45b1f70b7"/>
             <desktop3:CloudFilesContextMenus>
               <desktop3:Verb Id="Command1" Clsid="165cd069-d9c8-42b4-8e37-b6971afa4494" />
             </desktop3:CloudFilesContextMenus>
@@ -68,6 +70,9 @@
             </com:ExeServer>
             <com:ExeServer DisplayName="Cloud Mirror Uri Source" Executable="CloudMirror\CloudMirror.exe">
               <com:Class Id="97961bcb-601c-4950-927c-43b9319c7217" />
+            </com:ExeServer>
+            <com:ExeServer DisplayName="Cloud Mirror Status UI Source Factory" Executable="CloudMirror\CloudMirror.exe">
+              <com:Class Id="b1d8ef74-822d-401a-a14a-25f45b1f70b7" />
             </com:ExeServer>
           </com:ComServer>
         </com:Extension>

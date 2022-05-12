@@ -14,8 +14,14 @@
 
 #include "targetver.h"
 
+#ifndef NTDDI_WIN10_NI
+#error This sample requires the Windows SDK version 10.0.22598.0 or higher.
+#endif
+
 #include <stdio.h>
 #include <tchar.h>
+#include <ntstatus.h>
+#define WIN32_NO_STATUS
 #include <Unknwn.h>
 #include <winrt/base.h>
 #include <shlwapi.h>
@@ -24,11 +30,12 @@
 #include <ShObjIdl_core.h>
 #include <ShlObj_core.h>
 #include <cfapi.h>
-#include <ntstatus.h>
 #include <sddl.h>
+#include <winrt\Windows.Foundation.h>
+#include <winrt\windows.foundation.collections.h>
 #include <winrt\windows.storage.provider.h>
 #include <winrt\Windows.Security.Cryptography.h>
-#include <ppltasks.h>
+#include <functional>
 #include <strsafe.h>
 
 namespace winrt {

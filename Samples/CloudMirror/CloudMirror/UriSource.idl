@@ -7,7 +7,7 @@
 
 namespace CloudMirror
 {
-    runtimeclass UriSource : Windows.Storage.Provider.IStorageProviderUriSource
+    runtimeclass UriSource : [default] Windows.Storage.Provider.IStorageProviderUriSource
     {
         UriSource();
     }

@@ -7,7 +7,7 @@
 
 namespace CloudMirror
 {
-    runtimeclass CustomStateProvider : Windows.Storage.Provider.IStorageProviderItemPropertySource
+    runtimeclass CustomStateProvider : [default] Windows.Storage.Provider.IStorageProviderItemPropertySource
     {
         CustomStateProvider();
     }

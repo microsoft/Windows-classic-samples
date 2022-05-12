@@ -12,8 +12,8 @@ const size_t c_bufferSize = sizeof(FILE_NOTIFY_INFORMATION) * 100;
 // Run of the mill directory watcher to signal when user causes things to
 // happen in the client folder sync root
 
-void DirectoryWatcher::Initalize(
-    _In_ PCWSTR path, 
+void DirectoryWatcher::Initialize(
+    _In_ PCWSTR path,
     _In_ std::function<void(std::list<std::wstring>&)> callback)
 {
     _path = path;
@@ -34,64 +34,72 @@ void DirectoryWatcher::Initalize(
     }
 }
 
-concurrency::task<void> DirectoryWatcher::ReadChangesAsync()
+winrt::Windows::Foundation::IAsyncAction DirectoryWatcher::ReadChangesAsync()
 {
-    auto token = _cancellationTokenSource.get_token();
-    return concurrency::create_task([this, token]
+    _readTask = ReadChangesInternalAsync();
+    return _readTask;
+}
+
+winrt::Windows::Foundation::IAsyncAction DirectoryWatcher::ReadChangesInternalAsync()
+{
+    co_await winrt::resume_background();
+
+    while (true)
     {
-        while (true)
+        DWORD returned;
+        winrt::check_bool(ReadDirectoryChangesW(
+            _dir.get(),
+            _notify.get(),
+            c_bufferSize,
+            TRUE,
+            FILE_NOTIFY_CHANGE_ATTRIBUTES,
+            &returned,
+            &_overlapped,
+            nullptr));
+
+        DWORD transferred;
+        if (!GetOverlappedResult(_dir.get(), &_overlapped, &transferred, TRUE))
         {
-            DWORD returned;
-            winrt::check_bool(ReadDirectoryChangesW(
-                _dir.get(),
-                _notify.get(),
-                c_bufferSize,
-                TRUE,
-                FILE_NOTIFY_CHANGE_ATTRIBUTES,
-                &returned,
-                &_overlapped,
-                nullptr));
-
-            DWORD transferred;
-            if (GetOverlappedResultEx(_dir.get(), &_overlapped, &transferred, 1000, FALSE))
+            DWORD error = GetLastError();
+            if (error != ERROR_OPERATION_ABORTED)
             {
-                std::list<std::wstring> result;
-                FILE_NOTIFY_INFORMATION* next = _notify.get();
-                while (next != nullptr)
-                {
-                    std::wstring fullPath(_path);
-                    fullPath.append(L"\\");
-                    fullPath.append(std::wstring_view(next->FileName, next->FileNameLength / sizeof(wchar_t)));
-                    result.push_back(fullPath);
-
-                    if (next->NextEntryOffset)
-                    {
-                        next = reinterpret_cast<FILE_NOTIFY_INFORMATION*>(reinterpret_cast<char*>(next) + next->NextEntryOffset);
-                    }
-                    else
-                    {
-                        next = nullptr;
-                    }
-                }
-                _callback(result);
+                throw winrt::hresult_error(HRESULT_FROM_WIN32(error));
             }
-            else if (GetLastError() != WAIT_TIMEOUT)
+            break;
+        }
+
+        std::list<std::wstring> result;
+        FILE_NOTIFY_INFORMATION* next = _notify.get();
+        while (next != nullptr)
+        {
+            std::wstring fullPath(_path);
+            fullPath.append(L"\\");
+            fullPath.append(std::wstring_view(next->FileName, next->FileNameLength / sizeof(wchar_t)));
+            result.push_back(fullPath);
+
+            if (next->NextEntryOffset)
             {
-                throw winrt::hresult_error(HRESULT_FROM_WIN32(GetLastError()));
+                next = reinterpret_cast<FILE_NOTIFY_INFORMATION*>(reinterpret_cast<char*>(next) + next->NextEntryOffset);
             }
-            else if (token.is_canceled())
+            else
             {
-                wprintf(L"watcher cancel received\n");
-                concurrency::cancel_current_task();
-                return;
+                next = nullptr;
             }
         }
-    }, token);
+        _callback(result);
+    }
+
+    wprintf(L"watcher exiting\n");
 }
 
 void DirectoryWatcher::Cancel()
 {
     wprintf(L"Canceling watcher\n");
-    _cancellationTokenSource.cancel();
+    while (_readTask && (_readTask.Status() == winrt::AsyncStatus::Started) &&
+        !CancelIoEx(_dir.get(), &_overlapped))
+    {
+        // Raced against the thread loop. Try again.
+        Sleep(10);
+    }
 }
 

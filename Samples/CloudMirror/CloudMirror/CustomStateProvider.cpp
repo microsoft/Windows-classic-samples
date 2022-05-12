@@ -1,4 +1,4 @@
-﻿// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 // PARTICULAR PURPOSE.
@@ -20,7 +20,7 @@ namespace winrt::CloudMirror::implementation
         std::hash<std::wstring> hashFunc;
         auto hash = hashFunc(itemPath.c_str());
 
-        auto propertyVector{ winrt::single_threaded_vector<winrt::StorageProviderItemProperty>() };
+        std::vector<winrt::StorageProviderItemProperty> properties;
 
         if ((hash & 0x1) != 0)
         {
@@ -29,9 +29,9 @@ namespace winrt::CloudMirror::implementation
             itemProperty.Value(L"Value2");
             // This icon is just for the sample. You should provide your own branded icon here
             itemProperty.IconResource(L"shell32.dll,-14");
-            propertyVector.Append(itemProperty);
+            properties.push_back(std::move(itemProperty));
         }
 
-        return propertyVector;
+        return winrt::single_threaded_vector(std::move(properties));
     }
 }

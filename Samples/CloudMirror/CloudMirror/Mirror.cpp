@@ -9,10 +9,22 @@
 
 int __cdecl wmain( INT argc, PWSTR argv[] )
 {
+    winrt::init_apartment();
+
+    // Detect a common debugging error up front.
+    try
+    {
+        // If the program was launched incorrectly, this will throw.
+        (void)winrt::Windows::Storage::ApplicationData::Current();
+    }
+    catch (...)
+    {
+        wprintf(L"This program should be launched from the Start menu, not from Visual Studio.\n");
+        return 1;
+    }
+
     wprintf(L"Press ctrl-C to stop gracefully\n");
     wprintf(L"-------------------------------\n");
-
-    winrt::init_apartment();
 
     auto returnCode{ 0 };
 

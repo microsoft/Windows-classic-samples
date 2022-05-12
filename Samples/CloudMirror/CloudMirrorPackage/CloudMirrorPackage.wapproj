@@ -35,8 +35,8 @@
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.props" />
   <PropertyGroup>
     <ProjectGuid>1fab5d02-237c-4b9c-b820-2eb7c3b6e63a</ProjectGuid>
-    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.22598.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <PackageCertificateKeyFile>CloudMirrorPackage_TemporaryKey.pfx</PackageCertificateKeyFile>
     <EntryPointProjectUniqueName>..\CloudMirror\CloudMirror.vcxproj</EntryPointProjectUniqueName>
@@ -77,6 +77,14 @@
     <Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Images\StoreLogo.png" />
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Images\lightTheme\CloudIconSynced.svg" />
+    <Content Include="Images\lightTheme\CloudIconSyncing.svg" />
+    <Content Include="Images\lightTheme\ProfileIcon.svg" />
+    <Content Include="Images\lightTheme\SettingsIcon.svg" />
+    <Content Include="Images\darkTheme\CloudIconSynced.svg" />
+    <Content Include="Images\darkTheme\CloudIconSyncing.svg" />
+    <Content Include="Images\darkTheme\ProfileIcon.svg" />
+    <Content Include="Images\darkTheme\SettingsIcon.svg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CloudMirror\CloudMirror.vcxproj" />

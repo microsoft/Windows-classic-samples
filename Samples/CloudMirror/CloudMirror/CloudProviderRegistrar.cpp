@@ -35,7 +35,9 @@ void CloudProviderRegistrar::RegisterWithShell()
         auto folder = winrt::StorageFolder::GetFolderFromPathAsync(ProviderFolderLocations::GetClientFolder()).get();
         info.Path(folder);
 
-        info.DisplayNameResource(L"TestStorageProviderDisplayName");
+        // The string can be in any form acceptable to SHLoadIndirectString.
+        info.DisplayNameResource(L"CloudMirror");
+
         // This icon is just for the sample. You should provide your own branded icon here
         info.IconResource(L"%SystemRoot%\\system32\\charmap.exe,0");
         info.HydrationPolicy(winrt::StorageProviderHydrationPolicy::Full);

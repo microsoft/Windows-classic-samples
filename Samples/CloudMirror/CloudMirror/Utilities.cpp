@@ -116,11 +116,8 @@ void Utilities::ApplyCustomStateToPlaceholderFile(PCWSTR path, PCWSTR filename, 
         fullPath.append(L"\\");
         fullPath.append(filename);
 
-        auto customProperties{ winrt::single_threaded_vector<winrt::StorageProviderItemProperty>() };
-        customProperties.Append(prop);
-
         winrt::IStorageItem item = winrt::StorageFile::GetFileFromPathAsync(fullPath).get();
-        winrt::StorageProviderItemProperties::SetAsync(item, customProperties).get();
+        winrt::StorageProviderItemProperties::SetAsync(item, { prop }).get();
     }
     catch (...)
     {

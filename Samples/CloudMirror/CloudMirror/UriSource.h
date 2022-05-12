@@ -1,4 +1,4 @@
-﻿// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 // ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 // THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 // PARTICULAR PURPOSE.
@@ -9,12 +9,10 @@
 
 #include "UriSource.g.h"
 
-// 97961bcb-601c-4950-927c-43b9319c7217 
-constexpr CLSID CLSID_UriSource = { 0x97961bcb, 0x601c, 0x4950, {0x92, 0x7c, 0x43, 0xb9, 0x31, 0x9c, 0x72, 0x17} };
-
 namespace winrt::CloudMirror::implementation
 {
-    struct UriSource : UriSourceT<UriSource>
+    struct __declspec(uuid("97961bcb-601c-4950-927c-43b9319c7217"))
+        UriSource : UriSourceT<UriSource>
     {
         UriSource() = default;
 

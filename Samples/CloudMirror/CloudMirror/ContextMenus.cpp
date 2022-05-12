@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "ContextMenus.h"
 #include <winrt\Windows.Storage.Provider.h>
+#include <winrt\Windows.Foundation.h>
 
 namespace winrt
 {
@@ -33,54 +34,64 @@ IFACEMETHODIMP TestExplorerCommandHandler::GetFlags(_Out_ EXPCMDFLAGS* flags)
     return S_OK; 
 }
 
-IFACEMETHODIMP TestExplorerCommandHandler::Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) 
-{ 
+winrt::fire_and_forget TestExplorerCommandHandler::InvokeAsync(_In_opt_ IShellItemArray* selection)
+{
+    winrt::com_ptr<IShellItemArray> selectionCopy;
+    selectionCopy.copy_from(selection);
+    winrt::agile_ref<IShellItemArray> agileSelectionCopy{ selectionCopy };
+
+    auto strongThis = get_strong(); // prevent destruction while coroutine is running
+
+    co_await winrt::resume_background();
+
     try
     {
-        HWND hwnd = nullptr;
-
-        if (_site)
-        {
-            // Get the HWND of the browser from the site to parent our message box to
-            winrt::com_ptr<IUnknown> browser;
-            winrt::check_hresult(IUnknown_QueryService(_site.get(), SID_STopLevelBrowser, __uuidof(browser), browser.put_void()));
-            IUnknown_GetWindow(browser.get(), &hwnd);
-        }
 
         wprintf(L"Cloud Provider Command received\n");
+
+        // If you want to show UI on invoke, do it in your own process.
+        // Do not use the Explorer window as an owner, because Explorer
+        // is not aware that the provider's context menu is still using it.
 
         //
         // Set a new custom state on the selected files
         //
-        auto customProperties{ winrt::single_threaded_vector<winrt::StorageProviderItemProperty>() };
         winrt::StorageProviderItemProperty prop;
         prop.Id(3);
         prop.Value(L"Value3");
         // This icon is just for the sample. You should provide your own branded icon here
         prop.IconResource(L"shell32.dll,-259");
-        customProperties.Append(prop);
 
         DWORD count;
-        winrt::check_hresult(selection->GetCount(&count));
+        winrt::check_hresult(agileSelectionCopy.get()->GetCount(&count));
         for (DWORD i = 0; i < count; i++)
         {
             winrt::com_ptr<IShellItem> shellItem;
-            winrt::check_hresult(selection->GetItemAt(i, shellItem.put()));
+            winrt::check_hresult(agileSelectionCopy.get()->GetItemAt(i, shellItem.put()));
 
             winrt::com_array<wchar_t> fullPath;
             winrt::check_hresult(shellItem->GetDisplayName(SIGDN_FILESYSPATH, winrt::put_abi(fullPath)));
 
-            winrt::IStorageItem item = winrt::StorageFile::GetFileFromPathAsync(fullPath.data()).get();
-            winrt::StorageProviderItemProperties::SetAsync(item, customProperties).get();
+            auto fileAttributes = GetFileAttributes(fullPath.data());
+            if (!(fileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+            {
+                winrt::IStorageItem item = winrt::StorageFile::GetFileFromPathAsync(fullPath.data()).get();
+                winrt::StorageProviderItemProperties::SetAsync(item, { prop }).get();
+            }
 
             SHChangeNotify(SHCNE_UPDATEITEM, SHCNF_PATH, static_cast<void*>(fullPath.data()), nullptr);
         }
     }
     catch (...)
     {
-        return winrt::to_hresult();
+        wprintf(L"Cloud Provider Command failed\n");
     }
+}
 
+IFACEMETHODIMP TestExplorerCommandHandler::Invoke(_In_opt_ IShellItemArray* selection, _In_opt_ IBindCtx*) 
+{
+    TestExplorerCommandHandler::InvokeAsync(selection);
+    
     return S_OK;
 }
 

@@ -7,6 +7,12 @@
 //
 
 #include <windows.h>
+#include <vssym32.h>
+#include <Uxtheme.h>
+#include <dwmapi.h>
+
+#pragma comment(lib, "Uxtheme.lib")
+#pragma comment(lib, "dwmapi.lib")
 
 #pragma comment(linker, "\"/manifestdependency:type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 
@@ -39,9 +45,11 @@
 //      -   The fake-menu appears on the correct monitor (for
 //          multiple-monitor systems).
 //
+//      -   The fake-menu switches to keyboard focus highlighting
+//          once keyboard menu navigation is employed.
 
 HINSTANCE g_hInstance = NULL;
-HBRUSH g_hbrColor = NULL;   // The selected color
+COLORREF g_clrBackground;   // The selected color
 
 // This is the array of predefined colors we put into the color picker.
 const COLORREF c_rgclrPredef[] =
@@ -64,6 +72,26 @@ const COLORREF c_rgclrPredef[] =
     RGB(0xFF, 0xFF, 0xFF),          // F = white
 };
 
+//  FillRectClr
+//
+//      Helper function to fill a rectangle with a solid color.
+//
+void FillRectClr(HDC hdc, LPCRECT prc, COLORREF clr)
+{
+    SetDCBrushColor(hdc, clr);
+    FillRect(hdc, prc, (HBRUSH)GetStockObject(DC_BRUSH));
+}
+
+bool IsHighContrast()
+{
+    HIGHCONTRAST hc = { 0 };
+    hc.cbSize = sizeof(hc);
+    hc.dwFlags = 0;
+
+    SystemParametersInfo(SPI_GETHIGHCONTRAST, sizeof(HIGHCONTRAST), &hc, 0);
+    return hc.dwFlags & HCF_HIGHCONTRASTON;
+}
+
 //
 //  COLORPICKSTATE
 //
@@ -81,8 +109,22 @@ typedef struct COLORPICKSTATE
     int iSel;               // Which color is selected?
     int iResult;            // Which color should be returned?
     HWND hwndOwner;         // Our owner window
+    BOOL fKeyboardUsed;     // Has the keyboard been used?
+    HTHEME hTheme;          // The active theme, if any
+    int iPartKeyboardFocus; // MENU_POPUPITEMKBFOCUS if supported, else MENU_POPUPITEM
+    int iPartNonFocus;      // MENU_POPUPITEM_FOCUSABLE if supported, else MENU_POPUPITEM
+    int iStateFocus;        // MPIF_HOT if using the FOCUSABLE parts, else MPI_HOT
+    MARGINS marginsItem;    // Margins of a popup item
+} COLORPICKSTATE;
 
-} COLORPICKSTATE, *PCOLORPICKSTATE;
+void ColorPickState_Initialize(COLORPICKSTATE* pcps, HWND hwndOwner)
+{
+    pcps->fDone = FALSE;          // Not done yet
+    pcps->iSel = -1;              // No initial selection
+    pcps->iResult = -1;           // No result
+    pcps->hwndOwner = hwndOwner;  // Owner window
+    pcps->fKeyboardUsed = FALSE;  // No keyboard usage yet
+}
 
 #define CYCOLOR         16      // Height of a single color pick
 #define CXFAKEMENU      100     // Width of our fake menu
@@ -101,23 +143,98 @@ void ColorPick_GetColorRect(RECT *prc, int iColor)
     prc->bottom = prc->top + CYCOLOR;
 }
 
+//  ColorPick_UpdateVisuals
 //
+//      Update the theme and nonclient rendering to match current user preference.
+//
+void ColorPick_UpdateVisuals(COLORPICKSTATE* pcps, HWND hwnd)
+{
+    if (pcps->hTheme)
+    {
+        CloseThemeData(pcps->hTheme);
+        pcps->hTheme = NULL;
+    }
+
+    if (IsThemeActive() && !IsHighContrast())
+    {
+        pcps->hTheme = OpenThemeData(hwnd, VSCLASS_MENU);
+    }
+
+    if (pcps->hTheme)
+    {
+#if defined(NTDDI_WIN10_CO) && (NTDDI_VERSION >= NTDDI_WIN10_CO)
+        DWM_WINDOW_CORNER_PREFERENCE preference = DWMWCP_ROUNDSMALL;
+        DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
+
+        COLORREF color;
+        if (SUCCEEDED(GetThemeColor(pcps->hTheme, MENU_POPUPBORDERS, 0, TMT_FILLCOLORHINT, &color)))
+        {
+            DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, &color, sizeof(color));
+        }
+#endif
+    }
+    else
+    {
+#if defined(NTDDI_WIN10_CO) && (NTDDI_VERSION >= NTDDI_WIN10_CO)
+        DWM_WINDOW_CORNER_PREFERENCE preference = DWMWCP_DEFAULT;
+        DwmSetWindowAttribute(hwnd, DWMWA_WINDOW_CORNER_PREFERENCE, &preference, sizeof(preference));
+
+        COLORREF color = DWMWA_COLOR_DEFAULT;
+        DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, &color, sizeof(color));
+#endif
+    }
+
+#if defined(NTDDI_WIN10_NI) && (NTDDI_VERSION >= NTDDI_WIN10_NI)
+    // Use the MENU_POPUPITEMKBFOCUS and MENU_POPUPITEM_FOCUSABLE parts if available.
+    if (pcps->hTheme &&
+        IsThemePartDefined(pcps->hTheme, MENU_POPUPITEM_FOCUSABLE, MPIF_HOT))
+    {
+        pcps->iPartKeyboardFocus = MENU_POPUPITEMKBFOCUS;
+        pcps->iPartNonFocus = MENU_POPUPITEM_FOCUSABLE;
+        pcps->iStateFocus = MPIF_HOT;
+    }
+    else
+#endif
+    {
+        pcps->iPartKeyboardFocus = MENU_POPUPITEM;
+        pcps->iPartNonFocus = MENU_POPUPITEM;
+        pcps->iStateFocus = MPI_HOT;
+    }
+    if (pcps->hTheme &&
+        SUCCEEDED(GetThemeMargins(pcps->hTheme, NULL, MENU_POPUPITEM, 0, TMT_CONTENTMARGINS, NULL, &pcps->marginsItem)))
+    {
+        // Successfully obtained item content margins.
+    }
+    else
+    {
+        // Use fallback values for item content margins.
+        pcps->marginsItem.cxLeftWidth = pcps->marginsItem.cxRightWidth = GetSystemMetrics(SM_CXEDGE);
+        pcps->marginsItem.cyTopHeight = pcps->marginsItem.cyBottomHeight = GetSystemMetrics(SM_CYEDGE);
+    }
+
+    // Force everything to repaint with the new visuals.
+    InvalidateRect(hwnd, NULL, TRUE);
+}
+
 //  ColorPick_OnCreate
 //
 //      Stash away our state.
 //
 LRESULT ColorPick_OnCreate(HWND hwnd, LPCREATESTRUCT pcs)
 {
-    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)(pcs->lpCreateParams));
+    auto pcps = reinterpret_cast<COLORPICKSTATE*>(pcs->lpCreateParams);
+    SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)pcps);
+    ColorPick_UpdateVisuals(pcps, hwnd);
+
     return 0;
 }
 
 //
 //  ColorPick_OnPaint
 //
-//      Draw the color bars, and put a border around the selected color.
+//      Draw the background, color bars, and appropriate highlighting for the selected color.
 //
-void ColorPick_OnPaint(PCOLORPICKSTATE pcps, HWND hwnd)
+void ColorPick_OnPaint(COLORPICKSTATE* pcps, HWND hwnd)
 {
     PAINTSTRUCT ps;
     HDC hdc = BeginPaint(hwnd, &ps);
@@ -126,9 +243,20 @@ void ColorPick_OnPaint(PCOLORPICKSTATE pcps, HWND hwnd)
         RECT rcClient;
         GetClientRect(hwnd, &rcClient);
 
+        // Let the theme chooses the background fill color.
+        if (pcps->hTheme)
+        {
+            COLORREF color;
+            if (SUCCEEDED(GetThemeColor(pcps->hTheme, MENU_POPUPBACKGROUND, 0, TMT_FILLCOLORHINT, &color)))
+            {
+                FillRectClr(hdc, &ps.rcPaint, color);
+            }
+        }
+
         // For each of our predefined colors, draw it in a little
         // rectangular region, leaving some border so the user can
         // see if the item is highlighted or not.
+
         for (int iColor = 0; iColor < ARRAYSIZE(c_rgclrPredef); iColor++)
         {
             // Build the "menu" item rect.
@@ -138,17 +266,43 @@ void ColorPick_OnPaint(PCOLORPICKSTATE pcps, HWND hwnd)
             // If the item is highlighted, then draw a highlighted background.
             if (iColor == pcps->iSel)
             {
-                FillRect(hdc, &rc, GetSysColorBrush(COLOR_HIGHLIGHT));
+                // Draw focus effect.
+                if (pcps->hTheme)
+                {
+                    // If keyboard navigation active, then use the keyboard focus visuals.
+                    // Otherwise, use the traditional visuals.
+                    DrawThemeBackground(pcps->hTheme, hdc,
+                        pcps->fKeyboardUsed ? pcps->iPartKeyboardFocus : MENU_POPUPITEM,
+                        pcps->fKeyboardUsed ? pcps->iStateFocus : MPI_HOT, &rc, nullptr);
+                }
+                else
+                {
+                    FillRect(hdc, &rc, GetSysColorBrush(COLOR_HIGHLIGHT));
+                }
+            }
+            else
+            {
+                // Draw non-focus effect.
+                if (pcps->hTheme)
+                {
+                    DrawThemeBackground(pcps->hTheme, hdc,
+                        pcps->fKeyboardUsed ? pcps->iPartNonFocus : MENU_POPUPITEM,
+                        MPI_NORMAL, &rc, nullptr);
+                }
+                else
+                {
+                    // If not themed, then our background brush already filled for us.
+                }
             }
 
-            // Now shrink the rectangle by an edge and fill the rest with the
+            // Now shrink the rectangle by the margins and fill the rest with the
             // color of the item itself.
-            InflateRect(&rc, -GetSystemMetrics(SM_CXEDGE),
-                             -GetSystemMetrics(SM_CYEDGE));
+            rc.left += pcps->marginsItem.cxLeftWidth;
+            rc.right -= pcps->marginsItem.cxRightWidth;
+            rc.top += pcps->marginsItem.cyTopHeight;
+            rc.bottom -= pcps->marginsItem.cyBottomHeight;
 
-            HBRUSH hbr = CreateSolidBrush(c_rgclrPredef[iColor]);
-            FillRect(hdc, &rc, hbr);
-            DeleteObject(hbr);
+            FillRectClr(hdc, &rc, c_rgclrPredef[iColor]);
         }
 
         EndPaint(hwnd, &ps);
@@ -160,7 +314,7 @@ void ColorPick_OnPaint(PCOLORPICKSTATE pcps, HWND hwnd)
 //
 //      Change the selection to the specified item.
 //
-void ColorPick_ChangeSel(PCOLORPICKSTATE pcps, HWND hwnd, int iSel)
+void ColorPick_ChangeSel(COLORPICKSTATE* pcps, HWND hwnd, int iSel)
 {
     // If the selection changed, then repaint the items that need repainting.
     if (pcps->iSel != iSel)
@@ -187,7 +341,7 @@ void ColorPick_ChangeSel(PCOLORPICKSTATE pcps, HWND hwnd, int iSel)
 //
 //      Track the mouse to see if it is over any of our colors.
 //
-void ColorPick_OnMouseMove(PCOLORPICKSTATE pcps, HWND hwnd, int x, int y)
+void ColorPick_OnMouseMove(COLORPICKSTATE* pcps, HWND hwnd, int x, int y)
 {
     int iSel;
 
@@ -209,7 +363,7 @@ void ColorPick_OnMouseMove(PCOLORPICKSTATE pcps, HWND hwnd, int x, int y)
 //
 //      When the button comes up, we are done.
 //
-void ColorPick_OnLButtonUp(PCOLORPICKSTATE pcps, HWND hwnd, int x, int y)
+void ColorPick_OnLButtonUp(COLORPICKSTATE* pcps, HWND hwnd, int x, int y)
 {
     // First track to the final location, in case the user moves the mouse
     // REALLY FAST and immediately lets go.
@@ -229,40 +383,42 @@ void ColorPick_OnLButtonUp(PCOLORPICKSTATE pcps, HWND hwnd, int x, int y)
 //      If the Enter key is pressed, then accept the current selection.
 //      If an arrow key is pressed, the move the selection.
 //
-void ColorPick_OnKeyDown(PCOLORPICKSTATE pcps, HWND hwnd, WPARAM vk)
+void ColorPick_OnKeyDown(COLORPICKSTATE* pcps, HWND hwnd, WPARAM vk)
 {
+    pcps->fKeyboardUsed = TRUE;
+
     switch (vk)
     {
-        case VK_ESCAPE:
-            pcps->fDone = TRUE;         // Abandoned
-            break;
+    case VK_ESCAPE:
+        pcps->fDone = TRUE;         // Abandoned
+        break;
 
-        case VK_RETURN:
-            pcps->iResult = pcps->iSel; // Accept current selection
-            pcps->fDone = TRUE;
-            break;
+    case VK_RETURN:
+        pcps->iResult = pcps->iSel; // Accept current selection
+        pcps->fDone = TRUE;
+        break;
 
-        case VK_UP:
-            if (pcps->iSel > 0)         // Decrement selection
-            {
-                ColorPick_ChangeSel(pcps, hwnd, pcps->iSel - 1);
-            }
-            else
-            {
-                ColorPick_ChangeSel(pcps, hwnd, ARRAYSIZE(c_rgclrPredef) - 1);
-            }
-            break;
+    case VK_UP:
+        if (pcps->iSel > 0)         // Decrement selection
+        {
+            ColorPick_ChangeSel(pcps, hwnd, pcps->iSel - 1);
+        }
+        else
+        {
+            ColorPick_ChangeSel(pcps, hwnd, ARRAYSIZE(c_rgclrPredef) - 1);
+        }
+        break;
 
-        case VK_DOWN:                   // Increment selection
-            if (pcps->iSel + 1 < ARRAYSIZE(c_rgclrPredef))
-            {
-                ColorPick_ChangeSel(pcps, hwnd, pcps->iSel + 1);
-            }
-            else
-            {
-                ColorPick_ChangeSel(pcps, hwnd, 0);
-            }
-            break;
+    case VK_DOWN:                   // Increment selection
+        if (pcps->iSel + 1 < ARRAYSIZE(c_rgclrPredef))
+        {
+            ColorPick_ChangeSel(pcps, hwnd, pcps->iSel + 1);
+        }
+        else
+        {
+            ColorPick_ChangeSel(pcps, hwnd, 0);
+        }
+        break;
     }
 }
 
@@ -273,37 +429,41 @@ void ColorPick_OnKeyDown(PCOLORPICKSTATE pcps, HWND hwnd, WPARAM vk)
 //
 LRESULT CALLBACK ColorPick_WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
 {
-    PCOLORPICKSTATE pcps = (PCOLORPICKSTATE)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    COLORPICKSTATE* pcps = (COLORPICKSTATE*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
     switch (uiMsg)
     {
-        case WM_CREATE:
-            return ColorPick_OnCreate(hwnd, (LPCREATESTRUCT)lParam);
+    case WM_CREATE:
+        return ColorPick_OnCreate(hwnd, (LPCREATESTRUCT)lParam);
 
-        case WM_MOUSEMOVE:
-            ColorPick_OnMouseMove(pcps, hwnd, (short)LOWORD(lParam),
-                                              (short)HIWORD(lParam));
-            break;
+    case WM_MOUSEMOVE:
+        ColorPick_OnMouseMove(pcps, hwnd, (short)LOWORD(lParam),
+            (short)HIWORD(lParam));
+        break;
 
-        case WM_LBUTTONUP:
-            ColorPick_OnLButtonUp(pcps, hwnd, (short)LOWORD(lParam),
-                                              (short)HIWORD(lParam));
-            break;
+    case WM_LBUTTONUP:
+        ColorPick_OnLButtonUp(pcps, hwnd, (short)LOWORD(lParam),
+            (short)HIWORD(lParam));
+        break;
 
-        case WM_SYSKEYDOWN:
-        case WM_KEYDOWN:
-            ColorPick_OnKeyDown(pcps, hwnd, wParam);
-            break;
+    case WM_SYSKEYDOWN:
+    case WM_KEYDOWN:
+        ColorPick_OnKeyDown(pcps, hwnd, wParam);
+        break;
 
         // Do not activate when somebody clicks the window.
-        case WM_MOUSEACTIVATE:
-            return MA_NOACTIVATE;
+    case WM_MOUSEACTIVATE:
+        return MA_NOACTIVATE;
 
-        case WM_PAINT:
-            ColorPick_OnPaint(pcps, hwnd);
-            return 0;
+    case WM_PAINT:
+        ColorPick_OnPaint(pcps, hwnd);
+        return 0;
+
+    case WM_THEMECHANGED:
+    case WM_SETTINGCHANGE:
+        ColorPick_UpdateVisuals(pcps, hwnd);
+        break;
     }
-
     return DefWindowProc(hwnd, uiMsg, wParam, lParam);
 }
 
@@ -387,21 +547,18 @@ int ColorPick_Popup(HWND hwndOwner, int x, int y)
     }
 
     COLORPICKSTATE cps;
-    cps.fDone = FALSE;          // Not done yet
-    cps.iSel = -1;              // No initial selection
-    cps.iResult = -1;           // No result
-    cps.hwndOwner = hwndOwner;  // Owner window
+    ColorPickState_Initialize(&cps, hwndOwner);
 
     // Set up the style and extended style we want to use.
     DWORD dwStyle = WS_POPUP | WS_BORDER;
     DWORD dwExStyle = WS_EX_TOOLWINDOW |      // So it doesn't show up in taskbar
-                      WS_EX_DLGMODALFRAME |   // Get the edges right
-                      WS_EX_WINDOWEDGE |
-                      WS_EX_TOPMOST;          // So it isn't obscured
+        WS_EX_DLGMODALFRAME |   // Get the edges right
+        WS_EX_WINDOWEDGE |
+        WS_EX_TOPMOST;          // So it isn't obscured
 
-    // We want a client area of size (CXFAKEMENU, ARRAYSIZE(c_rgclrPredef) * CYCOLOR),
-    // so use AdjustWindowRectEx to figure out what window rect will give us a
-    // client rect of that size.
+// We want a client area of size (CXFAKEMENU, ARRAYSIZE(c_rgclrPredef) * CYCOLOR),
+// so use AdjustWindowRectEx to figure out what window rect will give us a
+// client rect of that size.
     RECT rc;
     rc.left = 0;
     rc.top = 0;
@@ -469,49 +626,49 @@ int ColorPick_Popup(HWND hwndOwner, int x, int y)
             // These mouse messages arrive in client coordinates, so in
             // addition to stealing the message, we also need to convert the
             // coordinates.
-            case WM_MOUSEMOVE:
-            case WM_LBUTTONDOWN:
-            case WM_LBUTTONUP:
-            case WM_LBUTTONDBLCLK:
-            case WM_RBUTTONDOWN:
-            case WM_RBUTTONUP:
-            case WM_RBUTTONDBLCLK:
-            case WM_MBUTTONDOWN:
-            case WM_MBUTTONUP:
-            case WM_MBUTTONDBLCLK:
-                pt.x = (short)LOWORD(msg.lParam);
-                pt.y = (short)HIWORD(msg.lParam);
-                MapWindowPoints(msg.hwnd, hwndPopup, &pt, 1);
-                msg.lParam = MAKELPARAM(pt.x, pt.y);
-                msg.hwnd = hwndPopup;
-                break;
+        case WM_MOUSEMOVE:
+        case WM_LBUTTONDOWN:
+        case WM_LBUTTONUP:
+        case WM_LBUTTONDBLCLK:
+        case WM_RBUTTONDOWN:
+        case WM_RBUTTONUP:
+        case WM_RBUTTONDBLCLK:
+        case WM_MBUTTONDOWN:
+        case WM_MBUTTONUP:
+        case WM_MBUTTONDBLCLK:
+            pt.x = (short)LOWORD(msg.lParam);
+            pt.y = (short)HIWORD(msg.lParam);
+            MapWindowPoints(msg.hwnd, hwndPopup, &pt, 1);
+            msg.lParam = MAKELPARAM(pt.x, pt.y);
+            msg.hwnd = hwndPopup;
+            break;
 
             // These mouse messages arrive in screen coordinates, so we just
             // need to steal the message.
-            case WM_NCMOUSEMOVE:
-            case WM_NCLBUTTONDOWN:
-            case WM_NCLBUTTONUP:
-            case WM_NCLBUTTONDBLCLK:
-            case WM_NCRBUTTONDOWN:
-            case WM_NCRBUTTONUP:
-            case WM_NCRBUTTONDBLCLK:
-            case WM_NCMBUTTONDOWN:
-            case WM_NCMBUTTONUP:
-            case WM_NCMBUTTONDBLCLK:
-                msg.hwnd = hwndPopup;
-                break;
+        case WM_NCMOUSEMOVE:
+        case WM_NCLBUTTONDOWN:
+        case WM_NCLBUTTONUP:
+        case WM_NCLBUTTONDBLCLK:
+        case WM_NCRBUTTONDOWN:
+        case WM_NCRBUTTONUP:
+        case WM_NCRBUTTONDBLCLK:
+        case WM_NCMBUTTONDOWN:
+        case WM_NCMBUTTONUP:
+        case WM_NCMBUTTONDBLCLK:
+            msg.hwnd = hwndPopup;
+            break;
 
             // We need to steal all keyboard messages, too.
-            case WM_KEYDOWN:
-            case WM_KEYUP:
-            case WM_CHAR:
-            case WM_DEADCHAR:
-            case WM_SYSKEYDOWN:
-            case WM_SYSKEYUP:
-            case WM_SYSCHAR:
-            case WM_SYSDEADCHAR:
-                msg.hwnd = hwndPopup;
-                break;
+        case WM_KEYDOWN:
+        case WM_KEYUP:
+        case WM_CHAR:
+        case WM_DEADCHAR:
+        case WM_SYSKEYDOWN:
+        case WM_SYSKEYUP:
+        case WM_SYSCHAR:
+        case WM_SYSDEADCHAR:
+            msg.hwnd = hwndPopup;
+            break;
         }
 
         TranslateMessage(&msg);
@@ -538,6 +695,12 @@ int ColorPick_Popup(HWND hwndOwner, int x, int y)
 
     DestroyWindow(hwndPopup);
 
+    // Clean up any theme data.
+    if (cps.hTheme)
+    {
+        CloseThemeData(cps.hTheme);
+    }
+
     // If we got a WM_QUIT message, then re-post it so the caller's message
     // loop will see it.
     if (msg.message == WM_QUIT)
@@ -557,7 +720,7 @@ void FakeMenuDemo_OnEraseBkgnd(HWND hwnd, HDC hdc)
 {
     RECT rc;
     GetClientRect(hwnd, &rc);
-    FillRect(hdc, &rc, g_hbrColor);
+    FillRectClr(hdc, &rc, g_clrBackground);
 }
 
 //
@@ -585,8 +748,7 @@ void FakeMenuDemo_OnContextMenu(HWND hwnd, int x, int y)
     // If the user picked a color, then change to that color.
     if (iColor >= 0)
     {
-        DeleteObject(g_hbrColor);
-        g_hbrColor = CreateSolidBrush(c_rgclrPredef[iColor]);
+        g_clrBackground = c_rgclrPredef[iColor];
         InvalidateRect(hwnd, NULL, TRUE);
     }
 }
@@ -600,18 +762,18 @@ LRESULT CALLBACK FakeMenuDemo_WndProc(HWND hwnd, UINT uiMsg, WPARAM wParam, LPAR
 {
     switch (uiMsg)
     {
-        case WM_ERASEBKGND:
-            FakeMenuDemo_OnEraseBkgnd(hwnd, (HDC)wParam);
-            return TRUE;
+    case WM_ERASEBKGND:
+        FakeMenuDemo_OnEraseBkgnd(hwnd, (HDC)wParam);
+        return TRUE;
 
-        case WM_CONTEXTMENU:
-            FakeMenuDemo_OnContextMenu(hwnd, (short)LOWORD(lParam),
-                                             (short)HIWORD(lParam));
-            return 0;
+    case WM_CONTEXTMENU:
+        FakeMenuDemo_OnContextMenu(hwnd, (short)LOWORD(lParam),
+            (short)HIWORD(lParam));
+        return 0;
 
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
     }
 
     return DefWindowProc(hwnd, uiMsg, wParam, lParam);
@@ -639,7 +801,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /* hInstPrev */, LPWSTR /* ps
     wc.lpszClassName = L"FakeMenuDemo";
     RegisterClassEx(&wc);
 
-    g_hbrColor = CreateSolidBrush(RGB(0xFF, 0xFF, 0xFF));
+    g_clrBackground = RGB(0xFF, 0xFF, 0xFF);
 
     HWND hwnd = CreateWindow(
         L"FakeMenuDemo",

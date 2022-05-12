@@ -23,8 +23,16 @@
 //
 //===============================================================
 
+namespace winrt
+{
+    using namespace winrt::Windows::Foundation;
+    using namespace winrt::Windows::Storage::Provider;
+}
+
 DirectoryWatcher CloudProviderSyncRootWatcher::s_directoryWatcher;
 bool CloudProviderSyncRootWatcher::s_shutdownWatcher;
+winrt::StorageProviderState CloudProviderSyncRootWatcher::s_state;
+winrt::event<winrt::EventHandler<winrt::IInspectable>> CloudProviderSyncRootWatcher::s_statusChanged;
 
 void CloudProviderSyncRootWatcher::WatchAndWait()
 {
@@ -38,14 +46,13 @@ void CloudProviderSyncRootWatcher::WatchAndWait()
         {
             auto task = s_directoryWatcher.ReadChangesAsync();
 
-            while (!task.is_done())
+            while (task.Status() == winrt::AsyncStatus::Started)
             {
                 Sleep(1000);
 
                 if (s_shutdownWatcher)
                 {
                     s_directoryWatcher.Cancel();
-                    task.wait();
                 }
             }
 
@@ -64,6 +71,10 @@ void CloudProviderSyncRootWatcher::WatchAndWait()
 
 void CloudProviderSyncRootWatcher::OnSyncRootFileChanges(_In_ std::list<std::wstring>& changes)
 {
+    auto start = GetTickCount64();
+    s_state = winrt::StorageProviderState::Syncing;
+    s_statusChanged(nullptr, nullptr);
+
     for (auto path : changes)
     {
         wprintf(L"Processing change for %s\n", path.c_str());
@@ -89,6 +100,16 @@ void CloudProviderSyncRootWatcher::OnSyncRootFileChanges(_In_ std::list<std::wst
             }
         }
     }
+
+    // For demonstration purposes, spend at least 3 seconds in the Syncing state.
+    auto elapsed = GetTickCount64() - start;
+    if (elapsed < 3000)
+    {
+        Sleep(static_cast<DWORD>(3000 - elapsed));
+    }
+
+    s_state = winrt::StorageProviderState::InSync;
+    s_statusChanged(nullptr, nullptr);
 }
 
 void CloudProviderSyncRootWatcher::InitDirectoryWatcher()
@@ -96,7 +117,7 @@ void CloudProviderSyncRootWatcher::InitDirectoryWatcher()
     // Set up a Directory Watcher on the client side to handle user's changing things there
     try
     {
-        s_directoryWatcher.Initalize(ProviderFolderLocations::GetClientFolder(), OnSyncRootFileChanges);
+        s_directoryWatcher.Initialize(ProviderFolderLocations::GetClientFolder(), OnSyncRootFileChanges);
     }
     catch (...)
     {

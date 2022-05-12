@@ -12,6 +12,8 @@
 #include "ContextMenus.h"
 #include "CustomStateProvider.h"
 #include "UriSource.h"
+#include "MyStatusUISourceFactory.h"
+#include "MyStorageProviderUICommand.h"
 
 //===============================================================
 // ShellServices
@@ -27,27 +29,29 @@
 //
 //===============================================================
 
+namespace
+{
+    template<typename T>
+    DWORD make_and_register_class_object()
+    {
+        DWORD cookie;
+        auto factory = winrt::make<ClassFactory<T>>();
+        winrt::check_hresult(CoRegisterClassObject(__uuidof(T), factory.get(), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &cookie));
+        return cookie;
+    }
+}
 
 void ShellServices::InitAndStartServiceTask()
 {
-    auto task = concurrency::create_task([]()
+    auto task = std::thread([]()
     {
         winrt::init_apartment(winrt::apartment_type::single_threaded);
 
-        winrt::check_hresult(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
-
-        DWORD cookie;
-        auto thumbnailProviderClassFactory = winrt::make<ClassFactory<ThumbnailProvider>>();
-        winrt::check_hresult(CoRegisterClassObject(__uuidof(ThumbnailProvider), thumbnailProviderClassFactory.get(), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &cookie));
-
-        auto contextMenuClassFactory = winrt::make<ClassFactory<TestExplorerCommandHandler>>();
-        winrt::check_hresult(CoRegisterClassObject(__uuidof(TestExplorerCommandHandler), contextMenuClassFactory.get(), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &cookie));
-
-        auto customStateProvider = winrt::make<ClassFactory<winrt::CloudMirror::implementation::CustomStateProvider>>();
-        winrt::check_hresult(CoRegisterClassObject(CLSID_CustomStateProvider, customStateProvider.get(), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &cookie));
-
-        auto uriSource = winrt::make<ClassFactory<winrt::CloudMirror::implementation::UriSource>>();
-        winrt::check_hresult(CoRegisterClassObject(CLSID_UriSource, uriSource.get(), CLSCTX_LOCAL_SERVER, REGCLS_MULTIPLEUSE, &cookie));
+        make_and_register_class_object<ThumbnailProvider>();
+        make_and_register_class_object<TestExplorerCommandHandler>();
+        make_and_register_class_object<winrt::CloudMirror::implementation::CustomStateProvider>();
+        make_and_register_class_object<winrt::CloudMirror::implementation::UriSource>();
+        make_and_register_class_object<winrt::CloudMirror::implementation::MyStatusUISourceFactory>();
 
         winrt::handle dummyEvent(CreateEvent(nullptr, FALSE, FALSE, nullptr));
         if (!dummyEvent)
@@ -58,4 +62,5 @@ void ShellServices::InitAndStartServiceTask()
         HANDLE temp = dummyEvent.get();
         CoWaitForMultipleHandles(COWAIT_DISPATCH_CALLS, INFINITE, 1, &temp, &index);
     });
+    task.detach();
 }

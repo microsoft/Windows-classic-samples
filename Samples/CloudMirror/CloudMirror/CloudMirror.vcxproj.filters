@@ -72,6 +72,15 @@
     <ClInclude Include="FakeCloudProvider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MyStatusUISource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStatusUISourceFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyStorageProviderUICommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContextMenus.cpp">
@@ -119,12 +128,24 @@
     <ClCompile Include="DirectoryWatcher.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
+    <ClCompile Include="MyStatusUISource.cpp">
+      <Filter>Source Files\Provider</Filter>
+    </ClCompile>
+    <ClCompile Include="MyStatusUISourceFactory.cpp">
+      <Filter>Source Files\Provider</Filter>
+    </ClCompile>
+    <ClCompile Include="MyStorageProviderUICommand.cpp">
+      <Filter>Source Files\Provider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="CustomStateProvider.idl">
       <Filter>Source Files</Filter>
     </Midl>
     <Midl Include="UriSource.idl">
+      <Filter>Source Files</Filter>
+    </Midl>
+    <Midl Include="StatusUI.idl">
       <Filter>Source Files</Filter>
     </Midl>
   </ItemGroup>

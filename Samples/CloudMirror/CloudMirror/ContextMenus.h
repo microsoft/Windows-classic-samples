@@ -6,6 +6,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved
 
 #pragma once
+#include <winrt/Windows.Foundation.h>
 
 class __declspec(uuid("165cd069-d9c8-42b4-8e37-b6971afa4494")) TestExplorerCommandHandler : 
     public winrt::implements<TestExplorerCommandHandler, IExplorerCommand, IObjectWithSite>
@@ -29,4 +30,5 @@ public:
 
 private:
     winrt::com_ptr<IUnknown> _site;
+    winrt::fire_and_forget InvokeAsync(_In_opt_ IShellItemArray* selection);
 };
