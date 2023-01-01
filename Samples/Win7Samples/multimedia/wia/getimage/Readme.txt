@@ -39,7 +39,7 @@ Files
     GetImage.cpp:      Implements the main entry point for the application
     GetImage.dsp:      VC 6.0 project settings file
     GetImage.rc:       Contains the project resources
-    resource.h:        Header file for the resouce identifiers
+    resource.h:        Header file for the resource identifiers
 
     MainWnd.cpp:       Implements the main frame window
     MainWnd.h:         Header file for MainWnd.cpp
