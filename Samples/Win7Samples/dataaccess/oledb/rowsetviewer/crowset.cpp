@@ -668,12 +668,12 @@ HRESULT CDataAccess::GetColumnData(const DBBINDING* pBinding, void* pData, DBSTA
 				//(ie: DBTYPE_WSTR = "130".  So we need to convert the string to an int, then to
 				//the actual assoicated mapped type name (for ease of viewing without having to 
 				//have the header handy when viewing schemas).
-				DBTYPE wSchemaType;
-				if(ConvertToLONG(pwszValue, (LONG*)&wSchemaType, 0/*Min*/, LONG_MAX, 0/*Base*/))
+				LONG lSchemaType; /*DBTYPE == UI2*/
+				if(ConvertToLONG(pwszValue, &lSchemaType, 0/*Min*/, USHRT_MAX, 0/*Base*/))
 				{
 					//NOTE: on failure we have no choice to leave the column as the original
 					//returned integer.
-					StringCopy(pwszValue, GetDBTypeName(wSchemaType), ulMaxSize);
+					StringCopy(pwszValue, GetDBTypeName((DBTYPE)lSchemaType), ulMaxSize);
 				}
 			}
 		}
