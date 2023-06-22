@@ -1,0 +1,38 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Window
+    x:Class="AppTabsIntegration.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AppTabsIntegration"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <TabView x:Name="MainWindowTabView"
+             CanDragTabs="True"
+             CanReorderTabs="True"
+             SelectionChanged="TabView_SelectionChanged"
+             AddTabButtonClick="TabView_AddTabClicked"
+             TabCloseRequested="TabView_CloseRequested"
+             TabDroppedOutside="TabView_TabDroppedOutside"
+             VerticalAlignment="Stretch">
+        <TabView.TabItemTemplate>
+            <DataTemplate x:DataType="local:TabViewModel">
+                <TabViewItem Header="{x:Bind Name, Mode=OneWay}">
+                    <TabViewItem.Content>
+                        <StackPanel Orientation="Vertical" Padding="10">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="Tab title:" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                <TextBox Text="{x:Bind Name, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            </StackPanel>
+                            <TextBlock Text="Tab thumbnail color:" Margin="0,10,00,0" HorizontalAlignment="Left"/>
+                            <ColorPicker Color="{x:Bind Color, Mode=TwoWay}" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </TabViewItem.Content>
+                </TabViewItem>
+            </DataTemplate>
+        </TabView.TabItemTemplate>
+    </TabView>
+</Window>

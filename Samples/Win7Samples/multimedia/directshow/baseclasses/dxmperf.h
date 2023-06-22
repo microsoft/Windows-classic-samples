@@ -10,7 +10,7 @@
 #ifndef _DXMPERF_H_
 #define _DXMPERF_H_
 
-#include <perfstruct.h>
+#include "perfstruct.h"
 #include "perflog.h"
 
 #ifdef _IA64_

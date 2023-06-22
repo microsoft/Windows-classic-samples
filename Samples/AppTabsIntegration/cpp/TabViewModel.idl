@@ -1,0 +1,8 @@
+namespace AppTabsIntegration
+{
+    runtimeclass TabViewModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        String Name;
+        Windows.UI.Color Color;
+    }
+}
