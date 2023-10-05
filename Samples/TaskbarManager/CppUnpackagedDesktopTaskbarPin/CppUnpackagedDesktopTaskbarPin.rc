@@ -1,0 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+// Replace the following line with the identity provided with your limited access feature token.
+// Identity LimitedAccessFeature { L"Contoso_aaaaaaaaaaaaa" }
