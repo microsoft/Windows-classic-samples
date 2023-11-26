@@ -39,7 +39,16 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## My Information
-
-- **Name:** Shaista
-- **Location:** Japla Palamu Jharkhand
-- **Certification:** Version Control Certification
+Crimson
+Orange
+Blue
+Cyan
+Yellow
+Charcoal
+Khaki
+Coral
+Silver
+Fuchsia
+Purple
+Brown
+Red
