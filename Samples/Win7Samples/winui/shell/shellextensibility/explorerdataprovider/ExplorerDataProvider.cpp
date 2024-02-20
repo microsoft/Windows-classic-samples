@@ -48,7 +48,8 @@ typedef UNALIGNED FVITEMID *PFVITEMID;
 typedef const UNALIGNED FVITEMID *PCFVITEMID;
 
 class CFolderViewImplFolder : public IShellFolder2,
-                              public IPersistFolder2
+                              public IPersistFolder2,
+                              public IExplorerPaneVisibility
 {
 public:
     CFolderViewImplFolder(UINT nLevel);
@@ -89,6 +90,9 @@ public:
 
     // IPersistFolder2
     IFACEMETHODIMP GetCurFolder(PIDLIST_ABSOLUTE *ppidl);
+
+    // IExplorerPaneVisibility
+    IFACEMETHODIMP GetPaneState(REFEXPLORERPANE ep, EXPLORERPANESTATE* peps);
 
     // IDList constructor public for the enumerator object
     HRESULT CreateChildID(PCWSTR pszName, int nLevel, int nSize, int nSides, BOOL fIsFolder, PITEMID_CHILD *ppidl);
@@ -191,6 +195,7 @@ HRESULT CFolderViewImplFolder::QueryInterface(REFIID riid, void **ppv)
         QITABENT(CFolderViewImplFolder, IPersist),
         QITABENT(CFolderViewImplFolder, IPersistFolder),
         QITABENT(CFolderViewImplFolder, IPersistFolder2),
+        QITABENT(CFolderViewImplFolder, IExplorerPaneVisibility),
         { 0 },
     };
     return QISearch(this, qit, riid, ppv);
@@ -1056,6 +1061,24 @@ HRESULT CFolderViewImplFolder::GetCurFolder(PIDLIST_ABSOLUTE *ppidl)
     }
     return hr;
 }
+
+// IExplorerPaneVisibility methods
+HRESULT CFolderViewImplFolder::GetPaneState(
+    REFEXPLORERPANE ep,
+    EXPLORERPANESTATE* peps
+)
+{
+    if (ep == EP_Ribbon)
+    {
+        *peps = EPS_INITIALSTATE | EPS_DEFAULT_ON;
+    }
+    else
+    {
+        *peps = EPS_DONTCARE;
+    }
+    return S_OK;
+}
+
 
 // Item idlists passed to folder methods are guaranteed to have accessible memory as specified
 // by the cbSize in the itemid.  However they may be loaded from a persisted form (for example
