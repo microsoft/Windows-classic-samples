@@ -1070,7 +1070,7 @@ HRESULT CFolderViewImplFolder::GetPaneState(
 {
     if (ep == EP_Ribbon)
     {
-        *peps = EPS_INITIALSTATE | EPS_DEFAULT_ON;
+        *peps = EPS_DEFAULT_ON;
     }
     else
     {
