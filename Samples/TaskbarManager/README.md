@@ -21,7 +21,7 @@ See [Pin your app to the taskbar](https://learn.microsoft.com/en-us/windows/apps
 
 **Warning**  At the time of publishing, this sample requires a recent Windows Insider Preview SDK, 23516 or later, *and* a recent Windows build (Windows Insider Preview Dev channel 23516 or later). Check [Windows Insider Preview Downloads](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewSDK) for the latest preview SDK.
 
-**Warning**  At the time of publishing, using the TaskbarManager API from a desktop app requires unlocking the appropriate limited access feature. You will not be able to meaningfully use these samples without obtaining an unlock token for the feature and providing it in the appropriate locations (LafData.h/.cs) according to the instructions you receive in the response to your request. See the documentation pages linked above for information on how to request an access token.
+**Warning**   At the time of publishing, using the TaskbarManager API from a desktop app requires unlocking the appropriate Limited Access Feature. You will not be able to meaningfully use these samples without obtaining an unlock token for the feature and providing it in the appropriate locations (LafData.h/.cs) according to the instructions you receive in the response to your request. For more information or to request an unlock token, contact [Microsoft Support](https://support.serviceshub.microsoft.com/supportforbusiness/create?sapId=d15d3aa2-0512-7cb8-1df9-86221f5cbfde).
 
 To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fwlink/p/?linkid=301696).
 
