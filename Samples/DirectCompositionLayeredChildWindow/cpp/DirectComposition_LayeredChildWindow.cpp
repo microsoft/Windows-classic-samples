@@ -121,23 +121,23 @@ HRESULT CApplication::InitializeMainWindow()
     wc.hInstance      = m_hInstance;
     wc.hCursor        = LoadCursor(NULL, IDC_ARROW);
     wc.hbrBackground  = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
-    wc.lpszClassName  = "DirectComposition Window Class";
+    wc.lpszClassName  = TEXT("DirectComposition Window Class");
 
     RegisterClassEx(&wc);
 
     // Creates the m_hMainWindow window.
-    m_hMainWindow = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,                          // Extended window style
-                                   wc.lpszClassName,                                // Name of window class
-                                   "DirectComposition Layered Child Window Sample", // Title-bar string
-                                   WS_OVERLAPPED | WS_SYSMENU,                      // Top-level window
-                                   CW_USEDEFAULT,                                   // Horizontal position
-                                   CW_USEDEFAULT,                                   // Vertical position
-                                   1000,                                            // Width
-                                   700,                                             // Height
-                                   NULL,                                            // Parent
-                                   NULL,                                            // Class menu
-                                   GetModuleHandle(NULL),                           // Handle to application instance
-                                   NULL                                             // Window-creation data
+    m_hMainWindow = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,                                  // Extended window style
+                                   wc.lpszClassName,                                        // Name of window class
+                                   TEXT("DirectComposition Layered Child Window Sample"),   // Title-bar string
+                                   WS_OVERLAPPED | WS_SYSMENU,                              // Top-level window
+                                   CW_USEDEFAULT,                                           // Horizontal position
+                                   CW_USEDEFAULT,                                           // Vertical position
+                                   1000,                                                    // Width
+                                   700,                                                     // Height
+                                   NULL,                                                    // Parent
+                                   NULL,                                                    // Class menu
+                                   GetModuleHandle(NULL),                                   // Handle to application instance
+                                   NULL                                                     // Window-creation data
                                    );
 
     if (!m_hMainWindow)
@@ -210,7 +210,7 @@ HRESULT CApplication::InitializeLayeredChildWindows()
     wcex.lpfnWndProc    = WindowProc;
     wcex.hCursor        = LoadCursor(NULL, IDC_ARROW);
     wcex.hbrBackground  = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
-    wcex.lpszClassName  = "DirectCompositionChildWindow-Child";
+    wcex.lpszClassName  = TEXT("DirectCompositionChildWindow-Child");
 
     RegisterClassEx(&wcex);
 
@@ -283,8 +283,8 @@ HRESULT CApplication::InitializeLayeredChildWindows()
 
         // Create Play/Stop button.
         m_hwndButton[0] = CreateWindowEx(WS_EX_TOPMOST,
-                                         "BUTTON",
-                                         "Play/Stop",
+                                         TEXT("BUTTON"),
+                                         TEXT("Play/Stop"),
                                          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
                                          50,
                                          50,
@@ -305,8 +305,8 @@ HRESULT CApplication::InitializeLayeredChildWindows()
     {
         // Create Rotate button.
         m_hwndButton[1] = CreateWindowEx(WS_EX_TOPMOST,
-                                         "BUTTON",
-                                         "Rotate",
+                                         TEXT("BUTTON"),
+                                         TEXT("Rotate"),
                                          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
                                          180,
                                          50,
@@ -327,8 +327,8 @@ HRESULT CApplication::InitializeLayeredChildWindows()
     {
         // Create Scale button.
         m_hwndButton[2] = CreateWindowEx(WS_EX_TOPMOST,
-                                         "BUTTON",
-                                         "Scale",
+                                         TEXT("BUTTON"),
+                                         TEXT("Scale"),
                                          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
                                          310,
                                          50,
@@ -349,8 +349,8 @@ HRESULT CApplication::InitializeLayeredChildWindows()
     {
         // Create Skew button.
         m_hwndButton[3] = CreateWindowEx(WS_EX_TOPMOST,
-                                         "BUTTON",
-                                         "Skew",
+                                         TEXT("BUTTON"),
+                                         TEXT("Skew"),
                                          WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
                                          440,
                                          50,
@@ -1430,12 +1430,12 @@ HRESULT CApplication::CloakWindow(BOOL cloakHwnd, HWND hwnd)
 // Show error messages.
 void CApplication::ShowErrorMessage(PCWSTR format, HRESULT hrErr)
 {
-    WCHAR msg[MAX_PATH];
-    HRESULT hr = StringCbPrintf((STRSAFE_LPSTR)msg, sizeof(msg), (STRSAFE_LPCSTR)(L"%s (hr=0x%08X)"), format, hrErr);
+    TCHAR msg[MAX_PATH];
+    HRESULT hr = StringCbPrintf(msg, sizeof(msg), TEXT("%ls (hr=0x%08lX)"), format, hrErr);
 
     if (SUCCEEDED(hr))
     {
-        MessageBox(NULL, (LPCSTR)msg, NULL, MB_ICONERROR);
+        MessageBox(NULL, msg, NULL, MB_ICONERROR);
     }
 }
 
