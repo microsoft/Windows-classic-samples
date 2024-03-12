@@ -19,6 +19,14 @@ public:
         _In_ CONST CF_CALLBACK_INFO* callbackInfo,
         _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
 
+    static void AckDelete(
+        _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+        _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
+
+    static void AckRename(
+        _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+        _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
+
 private:
     static void CopyFromServerToClientWorker(
         _In_ CONST CF_CALLBACK_INFO* callbackInfo,

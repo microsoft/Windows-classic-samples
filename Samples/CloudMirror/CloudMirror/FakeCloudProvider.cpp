@@ -39,6 +39,8 @@ CF_CALLBACK_REGISTRATION FakeCloudProvider::s_MirrorCallbackTable[] =
 {
     { CF_CALLBACK_TYPE_FETCH_DATA, FakeCloudProvider::OnFetchData },
     { CF_CALLBACK_TYPE_CANCEL_FETCH_DATA, FakeCloudProvider::OnCancelFetchData },
+    { CF_CALLBACK_TYPE_NOTIFY_DELETE, FakeCloudProvider::OnNotifyDelete},
+    { CF_CALLBACK_TYPE_NOTIFY_RENAME, FakeCloudProvider::OnNotifyRename},
     CF_CALLBACK_REGISTRATION_END
 };
 
@@ -102,6 +104,20 @@ void CALLBACK FakeCloudProvider::OnCancelFetchData(
     _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters)
 {
     FileCopierWithProgress::CancelCopyFromServerToClient(callbackInfo, callbackParameters);
+}
+
+void CALLBACK FakeCloudProvider::OnNotifyDelete(
+    _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+    _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters)
+{
+    FileCopierWithProgress::AckDelete(callbackInfo, callbackParameters);
+}
+
+void CALLBACK FakeCloudProvider::OnNotifyRename(
+    _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+    _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters)
+{
+    FileCopierWithProgress::AckRename(callbackInfo, callbackParameters);
 }
 
 // Registers the callbacks in the table at the top of this file so that the methods above

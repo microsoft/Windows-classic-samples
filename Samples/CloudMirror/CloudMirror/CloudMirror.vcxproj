@@ -24,7 +24,7 @@
     <ProjectGuid>{93C711E5-7D66-45DC-9658-4323CE0892B0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CloudMirror</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <CppWinRTEnabled>true</CppWinRTEnabled>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

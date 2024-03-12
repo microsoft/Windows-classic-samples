@@ -25,6 +25,14 @@ private:
         _In_ CONST CF_CALLBACK_INFO* callbackInfo,
         _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
 
+    static void CALLBACK OnNotifyDelete(
+        _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+        _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
+
+    static void CALLBACK OnNotifyRename(
+        _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+        _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters);
+
 private:
     static CF_CONNECTION_KEY s_transferCallbackConnectionKey;
     static CF_CALLBACK_REGISTRATION s_MirrorCallbackTable[];

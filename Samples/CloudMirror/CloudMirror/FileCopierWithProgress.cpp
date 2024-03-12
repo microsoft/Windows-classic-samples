@@ -400,3 +400,46 @@ void FileCopierWithProgress::CancelCopyFromServerToClientWorker(
         liCancelLength.LowPart);
 }
 
+static void AckDelete(
+    _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+    _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters)
+{
+    PCWSTR filePath = callbackInfo->NormalizedPath;
+    bool isDirectory = (callbackParameters->Delete.Flags & CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY) != 0;
+    bool isUndelete = (callbackParameters->Delete.Flags & CF_CALLBACK_DELETE_FLAG_IS_UNDELETE) != 0;
+
+    CF_OPERATION_INFO opInfo = { 0 };
+    opInfo.StructSize = sizeof(opInfo);
+    opInfo.Type = CF_OPERATION_TYPE_ACK_DELETE;
+    opInfo.ConnectionKey = callbackInfo->ConnectionKey;
+    opInfo.TransferKey = callbackInfo->TransferKey;
+    CF_OPERATION_PARAMETERS opParams = { 0 };
+    opParams.ParamSize = CF_SIZE_OF_OP_PARAM(AckDelete);
+    opParams.AckDelete.CompletionStatus = STATUS_SUCCESS;
+    opParams.AckDelete.Flags = CF_OPERATION_ACK_DELETE_FLAG_NONE;
+    HRESULT hr = CfExecute(&opInfo, &opParams);
+
+    wprintf(L"AckDelete isDirectory:%d, isUndelete:%d, filePath:%s, hr:%08x\n", isDirectory, isUndelete, filePath, hr);
+}
+
+static void AckRename(
+    _In_ CONST CF_CALLBACK_INFO* callbackInfo,
+    _In_ CONST CF_CALLBACK_PARAMETERS* callbackParameters)
+{
+    PCWSTR filePath = callbackInfo->NormalizedPath;
+    bool isDirectory = (callbackParameters->Rename.Flags & CF_CALLBACK_RENAME_FLAG_IS_DIRECTORY) != 0;
+    PCWSTR targetName = callbackParameters->Rename.TargetPath;
+
+    CF_OPERATION_INFO opInfo = { 0 };
+    opInfo.StructSize = (unsigned int)sizeof(CF_OPERATION_INFO);
+    opInfo.Type = CF_OPERATION_TYPE_ACK_RENAME;
+    opInfo.ConnectionKey = callbackInfo->ConnectionKey;
+    opInfo.TransferKey = callbackInfo->TransferKey;
+    CF_OPERATION_PARAMETERS opParams = { 0 };
+    opParams.ParamSize = CF_SIZE_OF_OP_PARAM(AckRename);
+    opParams.AckRename.CompletionStatus = STATUS_SUCCESS;
+    opParams.AckRename.Flags = CF_OPERATION_ACK_RENAME_FLAG_NONE;
+    HRESULT hr = CfExecute(&opInfo, &opParams);
+    wprintf(L"AckRename isDirectory:%d, targetName:%s, filePath:%s, hr:%08x\n", isDirectory, targetName, filePath, hr);
+}
+
