@@ -65,6 +65,11 @@ BOOL APIENTRY DllMain( HANDLE hModule,
     return TRUE;
 }
 
+STDAPI CreateEVRCustomPresenter(REFIID riid, void** ppvObject)
+{
+    return EVRCustomPresenter::CreateInstance(NULL, riid, ppvObject);
+}
+
 STDAPI DllCanUnloadNow()
 {
     if (!ClassFactory::IsLocked())
