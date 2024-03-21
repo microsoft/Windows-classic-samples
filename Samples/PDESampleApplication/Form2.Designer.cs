@@ -69,7 +69,7 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(12, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(775, 651);
+            this.panel1.Size = new System.Drawing.Size(588, 651);
             this.panel1.TabIndex = 0;
             // 
             // groupBox4
@@ -77,7 +77,7 @@
             this.groupBox4.Controls.Add(this.panel2);
             this.groupBox4.Location = new System.Drawing.Point(4, 378);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(768, 270);
+            this.groupBox4.Size = new System.Drawing.Size(566, 270);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Console";
@@ -87,17 +87,17 @@
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Location = new System.Drawing.Point(13, 20);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(749, 234);
+            this.panel2.Size = new System.Drawing.Size(542, 234);
             this.panel2.TabIndex = 0;
             // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InfoText;
             this.textBox2.ForeColor = System.Drawing.Color.Lime;
-            this.textBox2.Location = new System.Drawing.Point(7, 0);
+            this.textBox2.Location = new System.Drawing.Point(0, 0);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(742, 227);
+            this.textBox2.Size = new System.Drawing.Size(542, 227);
             this.textBox2.TabIndex = 0;
             // 
             // groupBox3
@@ -108,14 +108,14 @@
             this.groupBox3.Controls.Add(this.button3);
             this.groupBox3.Location = new System.Drawing.Point(4, 249);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(768, 103);
+            this.groupBox3.Size = new System.Drawing.Size(566, 103);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Protect Text in memory with PDE";
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(687, 76);
+            this.button11.Location = new System.Drawing.Point(312, 64);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 23);
             this.button11.TabIndex = 3;
@@ -125,7 +125,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(687, 46);
+            this.button8.Location = new System.Drawing.Point(231, 64);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 2;
@@ -138,12 +138,12 @@
             this.textBox1.Location = new System.Drawing.Point(13, 19);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(542, 78);
+            this.textBox1.Size = new System.Drawing.Size(542, 39);
             this.textBox1.TabIndex = 1;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(687, 17);
+            this.button3.Location = new System.Drawing.Point(150, 64);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
@@ -160,14 +160,14 @@
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Location = new System.Drawing.Point(4, 141);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(768, 102);
+            this.groupBox2.Size = new System.Drawing.Size(566, 102);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Protect Files with PDE";
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(687, 68);
+            this.button10.Location = new System.Drawing.Point(312, 58);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
             this.button10.TabIndex = 4;
@@ -177,7 +177,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(687, 38);
+            this.button7.Location = new System.Drawing.Point(231, 58);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 3;
@@ -187,7 +187,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(393, 21);
+            this.button5.Location = new System.Drawing.Point(437, 21);
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 20);
@@ -199,19 +199,24 @@
             // listView2
             // 
             this.listView2.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView2.HideSelection = false;
             this.listView2.HoverSelection = true;
             this.listView2.Location = new System.Drawing.Point(13, 21);
             this.listView2.Margin = new System.Windows.Forms.Padding(2);
+            this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(373, 59);
+            this.listView2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.listView2.Scrollable = false;
+            this.listView2.Size = new System.Drawing.Size(373, 20);
             this.listView2.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView2.TabIndex = 1;
             this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(687, 9);
+            this.button2.Location = new System.Drawing.Point(150, 58);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 0;
@@ -228,14 +233,14 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(4, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(768, 100);
+            this.groupBox1.Size = new System.Drawing.Size(566, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Protect Folders with PDE";
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(687, 68);
+            this.button9.Location = new System.Drawing.Point(312, 57);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 4;
@@ -245,7 +250,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(687, 38);
+            this.button6.Location = new System.Drawing.Point(231, 57);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 3;
@@ -255,7 +260,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(393, 18);
+            this.button4.Location = new System.Drawing.Point(437, 18);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 23);
@@ -267,17 +272,22 @@
             // listView1
             // 
             this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
+            this.listView1.HoverSelection = true;
             this.listView1.Location = new System.Drawing.Point(13, 18);
             this.listView1.Margin = new System.Windows.Forms.Padding(2);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(374, 65);
+            this.listView1.Scrollable = false;
+            this.listView1.Size = new System.Drawing.Size(374, 23);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(687, 9);
+            this.button1.Location = new System.Drawing.Point(150, 57);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -303,7 +313,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 703);
+            this.ClientSize = new System.Drawing.Size(615, 703);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "Form2";
