@@ -20,12 +20,8 @@ namespace PDETestApp
     public partial class Form2 : Form
     {
         UserDataProtectionManager g_udpm;
-        IBuffer g_protectedContent;
-        String g_protectbase64EncodedContent;
         String g_selectedFolder = String.Empty;
         String g_selectedFile = String.Empty;
-        HashSet<string> g_fileList = new HashSet<string>();
-        Queue<string> g_directoriesSubdirectories = new Queue<string>();   
         public Form2()
         {
             InitializeComponent();
@@ -116,8 +112,12 @@ namespace PDETestApp
                 var result = await g_udpm.UnprotectBufferAsync(protectedBuffer);
                 if (result.Status == UserDataBufferUnprotectStatus.Succeeded)
                 {
-                    LogLine("Result of Unprotecting the buffer:" +
-                        CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, result.UnprotectedBuffer));
+                    String unprotectedText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, result.UnprotectedBuffer);
+                    LogLine("Result of Unprotecting the buffer:" + unprotectedText
+                        );
+                    textBox3.Text = "";
+                    textBox3.Text = unprotectedText;
+
                     LogLine("Status of Unprotectng the buffer:" + result.Status);
                 }
                 else
@@ -140,9 +140,11 @@ namespace PDETestApp
             try
             {
                 var buffer = CryptographicBuffer.ConvertStringToBinary(text, BinaryStringEncoding.Utf8);
-                g_protectedContent = await g_udpm.ProtectBufferAsync(buffer, level);
-                g_protectbase64EncodedContent = CryptographicBuffer.EncodeToBase64String(g_protectedContent);
-                LogLine("Protected buffer: " + g_protectbase64EncodedContent);
+                var protectedContent = await g_udpm.ProtectBufferAsync(buffer, level);
+                String protectbase64EncodedContent = CryptographicBuffer.EncodeToBase64String(protectedContent);
+                textBox3.Text = protectbase64EncodedContent;
+                LogLine("Protected buffer: " + protectbase64EncodedContent);
+                
             }
             catch (ArgumentException)
             {
@@ -153,39 +155,6 @@ namespace PDETestApp
                 LogLine("Something went wrong");
             }
         }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                listView1.Items.Add(folderBrowserDialog1.SelectedPath.Trim());
-                string selectedPath = folderBrowserDialog1.SelectedPath;
-                if (File.Exists(selectedPath))
-                {
-                    g_selectedFile = selectedPath;
-                } 
-                else if (Directory.Exists(selectedPath))
-                {
-                    g_selectedFolder = selectedPath; 
-                } else
-                {
-                    MessageBox.Show("Selected path is neither a file nor a directory please rectify");
-                }
-            } 
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                listView2.Items.Add(openFileDialog1.FileName.Trim());
-                g_selectedFile = openFileDialog1.FileName;
-                if (!File.Exists(g_selectedFile))
-                {
-                    MessageBox.Show("Selected file is not a file. please rectify");
-                }
-            }
-        }
-
 
         private async void FolderL1_Click(object sender, EventArgs e)
         {
@@ -308,12 +277,46 @@ namespace PDETestApp
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
             }
-            UnprotectBuffer(g_protectbase64EncodedContent);
+            if (textBox3.Text.Length > 0)
+            {
+                UnprotectBuffer(textBox3.Text);
+            }
         }
 
-        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        private void FolderSelectBrowse_Click(object sender, EventArgs e)
         {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                listView1.Items.Clear();
+                listView1.Items.Add(folderBrowserDialog1.SelectedPath.Trim());
+                string selectedPath = folderBrowserDialog1.SelectedPath;
+                if (File.Exists(selectedPath))
+                {
+                    g_selectedFile = selectedPath;
+                }
+                else if (Directory.Exists(selectedPath))
+                {
+                    g_selectedFolder = selectedPath;
+                }
+                else
+                {
+                    MessageBox.Show("Selected path is neither a file nor a directory please rectify");
+                }
+            }
+        }
 
+        private void FileSelectBrowse_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                listView2.Items.Clear();
+                listView2.Items.Add(openFileDialog1.FileName.Trim());
+                g_selectedFile = openFileDialog1.FileName;
+                if (!File.Exists(g_selectedFile))
+                {
+                    MessageBox.Show("Selected file is not a file. please rectify");
+                }
+            }
         }
     }
 }
