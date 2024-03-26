@@ -129,20 +129,28 @@ namespace PDETestApp
             else
             {
                 var protectedBuffer = CryptographicBuffer.DecodeFromBase64String(protectbase64EncodedContent);
-                var result = await udpm.UnprotectBufferAsync(protectedBuffer);
-                if (result.Status == UserDataBufferUnprotectStatus.Succeeded)
+                try
                 {
-                    String unprotectedText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, result.UnprotectedBuffer);
-                    LogLine("Result of Unprotecting the buffer:" + unprotectedText
-                        );
-                    bufferOutputTextBox.Text = "";
-                    bufferOutputTextBox.Text = unprotectedText;
+                    var result = await udpm.UnprotectBufferAsync(protectedBuffer);
+                    if (result.Status == UserDataBufferUnprotectStatus.Succeeded)
+                    {
+                        String unprotectedText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, result.UnprotectedBuffer);
+                        LogLine("Result of Unprotecting the buffer:" + unprotectedText
+                            );
+                        bufferOutputTextBox.Text = "";
+                        bufferOutputTextBox.Text = unprotectedText;
 
-                    LogLine("Status of Unprotectng the buffer:" + result.Status);
+                        LogLine("Status of Unprotectng the buffer:" + result.Status);
+                    }
+                    else
+                    {
+                        LogLine("This protected buffer is currently unavailable for unprotection");
+                    }
                 }
-                else
+                catch(Exception ex) 
                 {
-                    LogLine("This protected buffer is currently unavailable for unprotection");
+                    LogLine("Please verify first the input text provided for unprotecting!");
+                    LogLine(ex.ToString());
                 }
             }
         }
@@ -289,9 +297,9 @@ namespace PDETestApp
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
             }
-            if (bufferOutputTextBox.Text.Length > 0)
+            if (bufferInputTextBox.Text.Length > 0)
             {
-                UnprotectBuffer(bufferOutputTextBox.Text);
+                UnprotectBuffer(bufferInputTextBox.Text);
             }
         }
 
