@@ -19,7 +19,6 @@ namespace PDETestApp
 {
     public partial class Form2 : Form
     {
-        UserDataProtectionManager g_udpm;
         String g_selectedFolder = String.Empty;
         String g_selectedFile = String.Empty;
         public Form2()
@@ -29,15 +28,15 @@ namespace PDETestApp
 
         private void Form2_load(object sender, EventArgs e)
         {
-            g_udpm = UserDataProtectionManager.TryGetDefault();
-            if (g_udpm == null)
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
             }
             else
             {
                 LogLine("Personal Data Encryption is enabled.");
-                g_udpm.DataAvailabilityStateChanged += M_udpm_DataAvailabilityStateChanged;
+                udpm.DataAvailabilityStateChanged += M_udpm_DataAvailabilityStateChanged;
                 LogCurrentDataAvailability();
                 LogLine("Listening to DataAvailabilityStateChanged event");
             }
@@ -57,7 +56,7 @@ namespace PDETestApp
             }
             string ts = DateTime.Now.ToString("MM/dd/yy HH:mm:ss.fff");
             textBox2.Text += "[" + ts + "] " + msg + "\r\n";
-            textBox2.Select(textBox1.TextLength, 0);
+            textBox2.Select(bufferInputTextBox.TextLength, 0);
             textBox2.ScrollToCaret();
             Console.WriteLine(msg);
         }
@@ -65,21 +64,37 @@ namespace PDETestApp
 
         private void LogCurrentDataAvailability()
         {
-            bool l1Avl = g_udpm.IsContinuedDataAvailabilityExpected(UserDataAvailability.AfterFirstUnlock);
-            bool l2Avl = g_udpm.IsContinuedDataAvailabilityExpected(UserDataAvailability.WhileUnlocked);
-            LogLine("IsContinuedDataAvailabilityExpected AfterFirstUnlock: " + l1Avl + ", WhileUnlocked: " + l2Avl);
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
+            {
+                LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
+            }
+            else
+            {
+                bool l1Avl = udpm.IsContinuedDataAvailabilityExpected(UserDataAvailability.AfterFirstUnlock);
+                bool l2Avl = udpm.IsContinuedDataAvailabilityExpected(UserDataAvailability.WhileUnlocked);
+                LogLine("IsContinuedDataAvailabilityExpected AfterFirstUnlock: " + l1Avl + ", WhileUnlocked: " + l2Avl);
+            }
         }
 
         async void ProtectAndLog(IStorageItem item, UserDataAvailability level)
         {
-            var protectResult = await g_udpm.ProtectStorageItemAsync(item, UserDataAvailability.AfterFirstUnlock);
-            if (protectResult == UserDataStorageItemProtectionStatus.Succeeded)
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
-                LogLine("Protected " + item.Name + " to level " + level);
+                LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
             }
             else
             {
-                LogLine("Protection failed for " + item.Name + " to level " + level + ", status: " + protectResult);
+                var protectResult = await udpm.ProtectStorageItemAsync(item, UserDataAvailability.AfterFirstUnlock);
+                if (protectResult == UserDataStorageItemProtectionStatus.Succeeded)
+                {
+                    LogLine("Protected " + item.Name + " to level " + level);
+                }
+                else
+                {
+                    LogLine("Protection failed for " + item.Name + " to level " + level + ", status: " + protectResult);
+                }
             }
         }
 
@@ -104,19 +119,24 @@ namespace PDETestApp
             }
         }
 
-        async void UnprotectBuffer(String g_protectbase64EncodedContent)
+        async void UnprotectBuffer(String protectbase64EncodedContent)
         {
-            try
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
-                var protectedBuffer = CryptographicBuffer.DecodeFromBase64String(g_protectbase64EncodedContent);
-                var result = await g_udpm.UnprotectBufferAsync(protectedBuffer);
+                LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
+            }
+            else
+            {
+                var protectedBuffer = CryptographicBuffer.DecodeFromBase64String(protectbase64EncodedContent);
+                var result = await udpm.UnprotectBufferAsync(protectedBuffer);
                 if (result.Status == UserDataBufferUnprotectStatus.Succeeded)
                 {
                     String unprotectedText = CryptographicBuffer.ConvertBinaryToString(BinaryStringEncoding.Utf8, result.UnprotectedBuffer);
                     LogLine("Result of Unprotecting the buffer:" + unprotectedText
                         );
-                    textBox3.Text = "";
-                    textBox3.Text = unprotectedText;
+                    bufferOutputTextBox.Text = "";
+                    bufferOutputTextBox.Text = unprotectedText;
 
                     LogLine("Status of Unprotectng the buffer:" + result.Status);
                 }
@@ -125,41 +145,33 @@ namespace PDETestApp
                     LogLine("This protected buffer is currently unavailable for unprotection");
                 }
             }
-            catch(ArgumentException)
-            {
-                LogLine("Invalid Argument, please check text being unprotected!");
-            }
-            catch (Exception)
-            {
-                LogLine("Something went wrong");
-            }
         }
 
         async void ProtectBuffer(String text, UserDataAvailability level)
         {
-            try
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
+                LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
+            }
+            else
+            {
+                if (text.Length == 0)
+                {
+                    return;
+                }
                 var buffer = CryptographicBuffer.ConvertStringToBinary(text, BinaryStringEncoding.Utf8);
-                var protectedContent = await g_udpm.ProtectBufferAsync(buffer, level);
+                var protectedContent = await udpm.ProtectBufferAsync(buffer, level);
                 String protectbase64EncodedContent = CryptographicBuffer.EncodeToBase64String(protectedContent);
-                textBox3.Text = protectbase64EncodedContent;
+                bufferOutputTextBox.Text = protectbase64EncodedContent;
                 LogLine("Protected buffer: " + protectbase64EncodedContent);
-                
-            }
-            catch (ArgumentException)
-            {
-                LogLine("Invalid Argument, please check text being protected!");
-            }
-            catch (Exception)
-            {
-                LogLine("Something went wrong");
             }
         }
 
         private async void FolderL1_Click(object sender, EventArgs e)
         {
-            g_udpm = UserDataProtectionManager.TryGetDefault();
-            if (g_udpm == null)
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
@@ -173,8 +185,8 @@ namespace PDETestApp
 
         private async void FolderL2_Click(object sender, EventArgs e)
         {
-            g_udpm = UserDataProtectionManager.TryGetDefault();
-            if (g_udpm == null)
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
@@ -188,8 +200,8 @@ namespace PDETestApp
 
         private async void FolderUnprotect_Click(object sender, EventArgs e)
         {
-            g_udpm = UserDataProtectionManager.TryGetDefault();
-            if (g_udpm == null)
+            var udpm = UserDataProtectionManager.TryGetDefault();
+            if (udpm == null)
             {
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
@@ -227,7 +239,7 @@ namespace PDETestApp
             if (g_selectedFile.Length > 0)
             {
                 IStorageItem item = await StorageFile.GetFileFromPathAsync(g_selectedFile);
-                this.ProtectAndLog(item, UserDataAvailability.AfterFirstUnlock);
+                this.ProtectAndLog(item, UserDataAvailability.WhileUnlocked);
             }
         }
 
@@ -242,7 +254,7 @@ namespace PDETestApp
             if (g_selectedFile.Length > 0)
             {
                 IStorageItem item = await StorageFile.GetFileFromPathAsync(g_selectedFile);
-                this.ProtectAndLog(item, UserDataAvailability.AfterFirstUnlock);
+                this.ProtectAndLog(item, UserDataAvailability.Always);
             }
 
         }
@@ -255,7 +267,7 @@ namespace PDETestApp
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
             }
-            ProtectBuffer(textBox1.Text, UserDataAvailability.AfterFirstUnlock);
+            ProtectBuffer(bufferInputTextBox.Text, UserDataAvailability.AfterFirstUnlock);
         }
 
         private void BufferL2_Click(object sender, EventArgs e)
@@ -266,7 +278,7 @@ namespace PDETestApp
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
             }
-            ProtectBuffer(textBox1.Text, UserDataAvailability.WhileUnlocked);
+            ProtectBuffer(bufferInputTextBox.Text, UserDataAvailability.WhileUnlocked);
         }
 
         private void BufferUnprotect_Click(object sender, EventArgs e)
@@ -277,45 +289,29 @@ namespace PDETestApp
                 LogLine("Personal Data Encryption is not supported or enabled. Restart this app to check again.");
                 return;
             }
-            if (textBox3.Text.Length > 0)
+            if (bufferOutputTextBox.Text.Length > 0)
             {
-                UnprotectBuffer(textBox3.Text);
+                UnprotectBuffer(bufferOutputTextBox.Text);
             }
         }
 
         private void FolderSelectBrowse_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                listView1.Items.Clear();
-                listView1.Items.Add(folderBrowserDialog1.SelectedPath.Trim());
-                string selectedPath = folderBrowserDialog1.SelectedPath;
-                if (File.Exists(selectedPath))
-                {
-                    g_selectedFile = selectedPath;
-                }
-                else if (Directory.Exists(selectedPath))
-                {
-                    g_selectedFolder = selectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("Selected path is neither a file nor a directory please rectify");
-                }
+                listViewSelectedFolder.Items.Clear();
+                listViewSelectedFolder.Items.Add(folderBrowserDialog.SelectedPath.Trim());
+                g_selectedFolder = folderBrowserDialog.SelectedPath;
             }
         }
 
         private void FileSelectBrowse_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (fileBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                listView2.Items.Clear();
-                listView2.Items.Add(openFileDialog1.FileName.Trim());
-                g_selectedFile = openFileDialog1.FileName;
-                if (!File.Exists(g_selectedFile))
-                {
-                    MessageBox.Show("Selected file is not a file. please rectify");
-                }
+                listViewSelectedFile.Items.Clear();
+                listViewSelectedFile.Items.Add(fileBrowserDialog.FileName.Trim());
+                g_selectedFile = fileBrowserDialog.FileName;
             }
         }
     }
