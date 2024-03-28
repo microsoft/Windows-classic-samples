@@ -55,6 +55,7 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.fileBrowserDialog = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -105,23 +106,25 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.bufferOutputTextBox);
             this.groupBox3.Controls.Add(this.button11);
             this.groupBox3.Controls.Add(this.button8);
             this.groupBox3.Controls.Add(this.bufferInputTextBox);
             this.groupBox3.Controls.Add(this.button3);
-            this.groupBox3.Location = new System.Drawing.Point(4, 249);
+            this.groupBox3.Location = new System.Drawing.Point(4, 203);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(566, 162);
+            this.groupBox3.Size = new System.Drawing.Size(566, 208);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Protect Text in memory with PDE";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 62);
+            this.label2.Location = new System.Drawing.Point(13, 118);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
@@ -130,7 +133,7 @@
             // 
             // bufferOutputTextBox
             // 
-            this.bufferOutputTextBox.Location = new System.Drawing.Point(13, 77);
+            this.bufferOutputTextBox.Location = new System.Drawing.Point(13, 134);
             this.bufferOutputTextBox.Multiline = true;
             this.bufferOutputTextBox.Name = "bufferOutputTextBox";
             this.bufferOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -139,7 +142,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(312, 121);
+            this.button11.Location = new System.Drawing.Point(312, 179);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 23);
             this.button11.TabIndex = 3;
@@ -149,7 +152,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(231, 121);
+            this.button8.Location = new System.Drawing.Point(231, 179);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 2;
@@ -159,7 +162,7 @@
             // 
             // bufferInputTextBox
             // 
-            this.bufferInputTextBox.Location = new System.Drawing.Point(13, 19);
+            this.bufferInputTextBox.Location = new System.Drawing.Point(13, 54);
             this.bufferInputTextBox.Multiline = true;
             this.bufferInputTextBox.Name = "bufferInputTextBox";
             this.bufferInputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -168,7 +171,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(150, 121);
+            this.button3.Location = new System.Drawing.Point(150, 179);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
@@ -183,9 +186,9 @@
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.listViewSelectedFile);
             this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Location = new System.Drawing.Point(4, 141);
+            this.groupBox2.Location = new System.Drawing.Point(4, 111);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(566, 102);
+            this.groupBox2.Size = new System.Drawing.Size(566, 86);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Protect Files with PDE";
@@ -213,7 +216,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(437, 21);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 20);
             this.button5.TabIndex = 2;
@@ -228,7 +231,7 @@
             this.listViewSelectedFile.HideSelection = false;
             this.listViewSelectedFile.HoverSelection = true;
             this.listViewSelectedFile.Location = new System.Drawing.Point(13, 21);
-            this.listViewSelectedFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listViewSelectedFile.Margin = new System.Windows.Forms.Padding(2);
             this.listViewSelectedFile.MultiSelect = false;
             this.listViewSelectedFile.Name = "listViewSelectedFile";
             this.listViewSelectedFile.Scrollable = false;
@@ -257,7 +260,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(4, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(566, 100);
+            this.groupBox1.Size = new System.Drawing.Size(566, 84);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Protect Folders with PDE";
@@ -285,7 +288,7 @@
             // FolderSelect
             // 
             this.FolderSelect.Location = new System.Drawing.Point(437, 18);
-            this.FolderSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FolderSelect.Margin = new System.Windows.Forms.Padding(2);
             this.FolderSelect.Name = "FolderSelect";
             this.FolderSelect.Size = new System.Drawing.Size(80, 23);
             this.FolderSelect.TabIndex = 2;
@@ -300,7 +303,7 @@
             this.listViewSelectedFolder.HideSelection = false;
             this.listViewSelectedFolder.HoverSelection = true;
             this.listViewSelectedFolder.Location = new System.Drawing.Point(13, 18);
-            this.listViewSelectedFolder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listViewSelectedFolder.Margin = new System.Windows.Forms.Padding(2);
             this.listViewSelectedFolder.MultiSelect = false;
             this.listViewSelectedFolder.Name = "listViewSelectedFolder";
             this.listViewSelectedFolder.Scrollable = false;
@@ -332,6 +335,15 @@
             // fileBrowserDialog
             // 
             this.fileBrowserDialog.FileName = "openFileDialog1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 35);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Input text to protect/unprotect";
             // 
             // Form2
             // 
@@ -385,5 +397,6 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.TextBox bufferOutputTextBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

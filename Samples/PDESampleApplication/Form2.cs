@@ -322,5 +322,10 @@ namespace PDETestApp
                 g_selectedFile = fileBrowserDialog.FileName;
             }
         }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
