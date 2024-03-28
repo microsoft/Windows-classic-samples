@@ -86,7 +86,7 @@ namespace PDETestApp
             }
             else
             {
-                var protectResult = await udpm.ProtectStorageItemAsync(item, UserDataAvailability.AfterFirstUnlock);
+                var protectResult = await udpm.ProtectStorageItemAsync(item, level);
                 if (protectResult == UserDataStorageItemProtectionStatus.Succeeded)
                 {
                     LogLine("Protected " + item.Name + " to level " + level);
