@@ -27,6 +27,7 @@ namespace PDETestApp
             InitializeComponent();
         }
 
+        // Loads the Windows Form to exercise PDE API and instantiates the UserDataProtectionManager object
         private void Form2_load(object sender, EventArgs e)
         {
             g_udpm = UserDataProtectionManager.TryGetDefault();
@@ -48,6 +49,8 @@ namespace PDETestApp
             LogLine("DataAvailabilityStateChanged event received");
             LogCurrentDataAvailability();
         }
+
+        // Logs PDE events
         private void LogLine(string msg)
         {
             if (InvokeRequired)
@@ -64,6 +67,7 @@ namespace PDETestApp
         }
 
 
+        // Logs the availability of the data being protected by PDE
         private void LogCurrentDataAvailability()
         {
             bool l1Avl = g_udpm.IsContinuedDataAvailabilityExpected(UserDataAvailability.AfterFirstUnlock);
@@ -71,6 +75,7 @@ namespace PDETestApp
             LogLine("IsContinuedDataAvailabilityExpected AfterFirstUnlock: " + l1Avl + ", WhileUnlocked: " + l2Avl);
         }
 
+        // Protects the File or Folder specified as the item to the given availability levels
         async void ProtectAndLog(IStorageItem item, UserDataAvailability level)
         {
             var protectResult = await g_udpm.ProtectStorageItemAsync(item, level);
@@ -84,6 +89,9 @@ namespace PDETestApp
             }
         }
 
+        // Protects Folders recursively, 
+        // NOTE: Protecting the folder first and then its contents ensures that contents added to that folder in the future will
+        // get protected to the same level of protection as the folder
         async void ProtectFolderRecursively(StorageFolder folder, UserDataAvailability level)
         {
             // Protect the folder first so new files / folders after this point will
@@ -105,6 +113,7 @@ namespace PDETestApp
             }
         }
 
+        // Unprotect the buffer that is PDE protected
         async void UnprotectBuffer(String protectbase64EncodedContent)
         {
             var protectedBuffer = CryptographicBuffer.DecodeFromBase64String(protectbase64EncodedContent);
@@ -133,6 +142,7 @@ namespace PDETestApp
             }
         }
 
+        // Protect the buffer to the level of protection specified
         async void ProtectBuffer(String text, UserDataAvailability level)
         {
             if (text.Length == 0)
@@ -146,6 +156,7 @@ namespace PDETestApp
             LogLine("Protected buffer: " + protectbase64EncodedContent);
         }
 
+        // Button click event handler to protect folder to L1 level of protection
         private async void FolderL1_Click(object sender, EventArgs e)
         {
             if (g_selectedFolder.Length > 0)
@@ -155,6 +166,7 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to protect folder to L2 level of protection
         private async void FolderL2_Click(object sender, EventArgs e)
         {
             if (g_selectedFolder.Length > 0)
@@ -164,6 +176,7 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to unprotect folder and its contents
         private async void FolderUnprotect_Click(object sender, EventArgs e)
         {
             if (g_selectedFolder.Length > 0)
@@ -173,6 +186,7 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to protect file to L1 level of protection
         private async void FileL1_Click(object sender, EventArgs e)
         {
             if (g_selectedFile.Length > 0)
@@ -182,6 +196,7 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to protect file to L2 level of protection
         private async void FileL2_Click(object sender, EventArgs e)
         {
             if (g_selectedFile.Length > 0)
@@ -191,6 +206,7 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to unprotect file
         private async void FileUnprotect_Click(object sender, EventArgs e)
         {
             if (g_selectedFile.Length > 0)
@@ -200,16 +216,19 @@ namespace PDETestApp
             }
         }
 
+        // Button click event handler to protect buffer to L1 level of protection
         private void BufferL1_Click(object sender, EventArgs e)
         {
             ProtectBuffer(bufferInputTextBox.Text, UserDataAvailability.AfterFirstUnlock);
         }
 
+        // Button click event handler to protect buffer to L2 level of protection
         private void BufferL2_Click(object sender, EventArgs e)
         {
             ProtectBuffer(bufferInputTextBox.Text, UserDataAvailability.WhileUnlocked);
         }
 
+        // Button click event handler to unprotect buffer
         private void BufferUnprotect_Click(object sender, EventArgs e)
         {
             if (bufferInputTextBox.Text.Length > 0)
@@ -236,11 +255,6 @@ namespace PDETestApp
                 listViewSelectedFile.Items.Add(fileBrowserDialog.FileName.Trim());
                 g_selectedFile = fileBrowserDialog.FileName;
             }
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
