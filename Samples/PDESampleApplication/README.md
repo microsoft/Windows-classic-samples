@@ -15,6 +15,7 @@ extendedZipContent:
 
 PDE API Sample Application
 ============================
+Please refer to this page (https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/personal-data-encryption/) for a high level overview of PDE and its capabilities
 
 This sample demonstrates how to use the Personal Data Encryption API (https://learn.microsoft.com/en-us/uwp/api/windows.security.dataprotection?view=winrt-22621) to protect/unprotect Folders, Files and Buffers to the two different levels of security. The sample demonstrates how to perform each of the following operations:
 
@@ -24,7 +25,6 @@ This sample demonstrates how to use the Personal Data Encryption API (https://le
 -   Unprotect a file.
 -   Protect buffer text with L1/L2 level of security.
 -   Unprotect buffer text to its original 
--   Delete a file from the forked CIM image.
 
 Operating system requirements
 -----------------------------
