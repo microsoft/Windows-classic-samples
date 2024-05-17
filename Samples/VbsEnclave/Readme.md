@@ -20,14 +20,14 @@ Build the sample
 
 3.  Press F7 or use **Build** \> **Build Solution** to build the sample.
 
-*Note*: The enclave won't run until it is signed. Please refer the VBS Enclave Developer Guide for the details.
+*Note*: The enclave won't run until it is signed. Please refer the VBS Enclaves Blog for the details.
 
-VBS Enclave Developer Guide
+VBS Enclaves Blog
 ---------------------------
 
-The developer guide provides insights on writing, compiling and debugging enclaves using this sample code as an example.
+The blog provides insights on writing, compiling and debugging enclaves using this sample code as an example.
 
-The developer guide is available at:
+It is available at: [aka.ms/VBSEnclavesBlog](https://aka.ms/VBSEnclavesBlog)
 
 Support
 -------
