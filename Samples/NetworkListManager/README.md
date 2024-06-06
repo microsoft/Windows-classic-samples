@@ -5,14 +5,15 @@ languages:
 products:
 - windows-api-win32
 name: Network List Manager API sample
+urlFragment: network-list-manager-api-sample
 description: Demonstrates how to use Windows APIs to determine the network connectivity status, and shows how to use this information to determine when to attempt to connect to the Internet.
 extendedZipContent:
 - path: LICENSE
   target: LICENSE
 ---
 
-Network List Manager API sample
-=========================================
+# Network List Manager API sample
+
 Apps can use INetworkListManager APIs to check the network connectivity status before
 attempting to connect to the Internet. This check is recommended as it saves apps the complex task
 of determining connectivity for various network configurations on their own. However this check
@@ -23,24 +24,16 @@ This sample also demonstrates how to register for network connectivity change no
 Apps can listen to the notifications published by Windows instead of building their
 own state machine to track network connectivity changes.
 
-System requirements
-=============
--   This sample requires at least Windows 8.
--   This sample requires at least Windows SDK for Windows 8.
+## System requirements
 
-Sample language implementations
-===============================
-C++
+- Requires Windows SDK 10.0.22621.0 to build and Windows 8 to run.
 
-To build the sample using Visual Studio (preferred method):
-================================================================
-     1. Open File Explorer and navigate to the directory.
-     2. Double-click the icon for the .sln (solution) file to open the file in
-     Visual Studio.
-     3. In the Build menu, select Build Solution. The application will be
-     built in the default \Debug or \Release directory.
+## Build the sample
 
+1. Open File Explorer and navigate to the directory.
+2. Double-click the icon for the .sln (solution) file to open the file in Visual Studio.
+3. In the Build menu, select Build Solution. The application will be built in the default \Debug or \Release directory.
 
-To run the sample:
-==================
-     1. Press F5 in Visual Studio or later.
+## Run the sample
+
+1. Press F5 in Visual Studio or later.
