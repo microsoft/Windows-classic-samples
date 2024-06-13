@@ -61,15 +61,15 @@ void DISPLAYMANAGER::InitD3D(DX_RESOURCES* Data)
 //
 // Process a given frame and its metadata
 //
-DUPL_RETURN DISPLAYMANAGER::ProcessFrame(_In_ FRAME_DATA* Data, _Inout_ ID3D11Texture2D* SharedSurf, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc)
+DUPL_RETURN DISPLAYMANAGER::ProcessFrame(_In_ FRAME_DATA* Data, _Inout_ ID3D11Texture2D1* SharedSurf, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc)
 {
     DUPL_RETURN Ret = DUPL_RETURN_SUCCESS;
 
     // Process dirties and moves
     if (Data->FrameInfo.TotalMetadataBufferSize)
     {
-        D3D11_TEXTURE2D_DESC Desc;
-        Data->Frame->GetDesc(&Desc);
+        D3D11_TEXTURE2D_DESC1 Desc;
+        Data->Frame->GetDesc1(&Desc);
 
         if (Data->MoveCount)
         {
@@ -92,7 +92,7 @@ DUPL_RETURN DISPLAYMANAGER::ProcessFrame(_In_ FRAME_DATA* Data, _Inout_ ID3D11Te
 //
 // Returns D3D device being used
 //
-ID3D11Device* DISPLAYMANAGER::GetDevice()
+ID3D11Device5* DISPLAYMANAGER::GetDevice()
 {
     return m_Device;
 }
@@ -166,21 +166,21 @@ void DISPLAYMANAGER::SetMoveRect(_Out_ RECT* SrcRect, _Out_ RECT* DestRect, _In_
 //
 // Copy move rectangles
 //
-DUPL_RETURN DISPLAYMANAGER::CopyMove(_Inout_ ID3D11Texture2D* SharedSurf, _In_reads_(MoveCount) DXGI_OUTDUPL_MOVE_RECT* MoveBuffer, UINT MoveCount, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc, INT TexWidth, INT TexHeight)
+DUPL_RETURN DISPLAYMANAGER::CopyMove(_Inout_ ID3D11Texture2D1* SharedSurf, _In_reads_(MoveCount) DXGI_OUTDUPL_MOVE_RECT* MoveBuffer, UINT MoveCount, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc, INT TexWidth, INT TexHeight)
 {
-    D3D11_TEXTURE2D_DESC FullDesc;
-    SharedSurf->GetDesc(&FullDesc);
+    D3D11_TEXTURE2D_DESC1 FullDesc;
+    SharedSurf->GetDesc1(&FullDesc);
 
     // Make new intermediate surface to copy into for moving
     if (!m_MoveSurf)
     {
-        D3D11_TEXTURE2D_DESC MoveDesc;
+        D3D11_TEXTURE2D_DESC1 MoveDesc;
         MoveDesc = FullDesc;
         MoveDesc.Width = DeskDesc->DesktopCoordinates.right - DeskDesc->DesktopCoordinates.left;
         MoveDesc.Height = DeskDesc->DesktopCoordinates.bottom - DeskDesc->DesktopCoordinates.top;
         MoveDesc.BindFlags = D3D11_BIND_RENDER_TARGET;
-        MoveDesc.MiscFlags = 0;
-        HRESULT hr = m_Device->CreateTexture2D(&MoveDesc, nullptr, &m_MoveSurf);
+		MoveDesc.MiscFlags = 0;
+        HRESULT hr = m_Device->CreateTexture2D1(&MoveDesc, nullptr, &m_MoveSurf);
         if (FAILED(hr))
         {
             return ProcessFailure(m_Device, L"Failed to create staging texture for move rects", L"Error", hr, SystemTransitionsExpectedErrors);
@@ -202,7 +202,7 @@ DUPL_RETURN DISPLAYMANAGER::CopyMove(_Inout_ ID3D11Texture2D* SharedSurf, _In_re
         Box.right = SrcRect.right + DeskDesc->DesktopCoordinates.left - OffsetX;
         Box.bottom = SrcRect.bottom + DeskDesc->DesktopCoordinates.top - OffsetY;
         Box.back = 1;
-        m_DeviceContext->CopySubresourceRegion(m_MoveSurf, 0, SrcRect.left, SrcRect.top, 0, SharedSurf, 0, &Box);
+        m_DeviceContext->CopySubresourceRegion1(m_MoveSurf, 0, SrcRect.left, SrcRect.top, 0, SharedSurf, 0, &Box, 0);
 
         // Copy back to shared surface
         Box.left = SrcRect.left;
@@ -211,7 +211,7 @@ DUPL_RETURN DISPLAYMANAGER::CopyMove(_Inout_ ID3D11Texture2D* SharedSurf, _In_re
         Box.right = SrcRect.right;
         Box.bottom = SrcRect.bottom;
         Box.back = 1;
-        m_DeviceContext->CopySubresourceRegion(SharedSurf, 0, DestRect.left + DeskDesc->DesktopCoordinates.left - OffsetX, DestRect.top + DeskDesc->DesktopCoordinates.top - OffsetY, 0, m_MoveSurf, 0, &Box);
+        m_DeviceContext->CopySubresourceRegion1(SharedSurf, 0, DestRect.left + DeskDesc->DesktopCoordinates.left - OffsetX, DestRect.top + DeskDesc->DesktopCoordinates.top - OffsetY, 0, m_MoveSurf, 0, &Box, 0);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -223,7 +223,7 @@ DUPL_RETURN DISPLAYMANAGER::CopyMove(_Inout_ ID3D11Texture2D* SharedSurf, _In_re
 #pragma warning(push)
 #pragma warning(disable:__WARNING_USING_UNINIT_VAR) // false positives in SetDirtyVert due to tool bug
 
-void DISPLAYMANAGER::SetDirtyVert(_Out_writes_(NUMVERTICES) VERTEX* Vertices, _In_ RECT* Dirty, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc, _In_ D3D11_TEXTURE2D_DESC* FullDesc, _In_ D3D11_TEXTURE2D_DESC* ThisDesc)
+void DISPLAYMANAGER::SetDirtyVert(_Out_writes_(NUMVERTICES) VERTEX* Vertices, _In_ RECT* Dirty, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc, _In_ D3D11_TEXTURE2D_DESC1* FullDesc, _In_ D3D11_TEXTURE2D_DESC1* ThisDesc)
 {
     INT CenterX = FullDesc->Width / 2;
     INT CenterY = FullDesc->Height / 2;
@@ -314,34 +314,35 @@ void DISPLAYMANAGER::SetDirtyVert(_Out_writes_(NUMVERTICES) VERTEX* Vertices, _I
 //
 // Copies dirty rectangles
 //
-DUPL_RETURN DISPLAYMANAGER::CopyDirty(_In_ ID3D11Texture2D* SrcSurface, _Inout_ ID3D11Texture2D* SharedSurf, _In_reads_(DirtyCount) RECT* DirtyBuffer, UINT DirtyCount, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc)
+DUPL_RETURN DISPLAYMANAGER::CopyDirty(_In_ ID3D11Texture2D1* SrcSurface, _Inout_ ID3D11Texture2D1* SharedSurf, _In_reads_(DirtyCount) RECT* DirtyBuffer, UINT DirtyCount, INT OffsetX, INT OffsetY, _In_ DXGI_OUTPUT_DESC* DeskDesc)
 {
     HRESULT hr;
 
-    D3D11_TEXTURE2D_DESC FullDesc;
-    SharedSurf->GetDesc(&FullDesc);
+    D3D11_TEXTURE2D_DESC1 FullDesc;
+    SharedSurf->GetDesc1(&FullDesc);
 
-    D3D11_TEXTURE2D_DESC ThisDesc;
-    SrcSurface->GetDesc(&ThisDesc);
+    D3D11_TEXTURE2D_DESC1 ThisDesc;
+    SrcSurface->GetDesc1(&ThisDesc);
 
     if (!m_RTV)
     {
-        hr = m_Device->CreateRenderTargetView(SharedSurf, nullptr, &m_RTV);
+        hr = m_Device->CreateRenderTargetView1(SharedSurf, nullptr, &m_RTV);
         if (FAILED(hr))
         {
             return ProcessFailure(m_Device, L"Failed to create render target view for dirty rects", L"Error", hr, SystemTransitionsExpectedErrors);
         }
     }
 
-    D3D11_SHADER_RESOURCE_VIEW_DESC ShaderDesc;
+    D3D11_SHADER_RESOURCE_VIEW_DESC1 ShaderDesc;
     ShaderDesc.Format = ThisDesc.Format;
     ShaderDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
     ShaderDesc.Texture2D.MostDetailedMip = ThisDesc.MipLevels - 1;
     ShaderDesc.Texture2D.MipLevels = ThisDesc.MipLevels;
+	ShaderDesc.Texture2D.PlaneSlice = 0;
 
     // Create new shader resource view
-    ID3D11ShaderResourceView* ShaderResource = nullptr;
-    hr = m_Device->CreateShaderResourceView(SrcSurface, &ShaderDesc, &ShaderResource);
+    ID3D11ShaderResourceView1* ShaderResource = nullptr; 
+    hr = m_Device->CreateShaderResourceView1(SrcSurface, &ShaderDesc, &ShaderResource);
     if (FAILED(hr))
     {
         return ProcessFailure(m_Device, L"Failed to create shader resource view for dirty rects", L"Error", hr, SystemTransitionsExpectedErrors);
@@ -349,10 +350,10 @@ DUPL_RETURN DISPLAYMANAGER::CopyDirty(_In_ ID3D11Texture2D* SrcSurface, _Inout_ 
 
     FLOAT BlendFactor[4] = {0.f, 0.f, 0.f, 0.f};
     m_DeviceContext->OMSetBlendState(nullptr, BlendFactor, 0xFFFFFFFF);
-    m_DeviceContext->OMSetRenderTargets(1, &m_RTV, nullptr);
+    m_DeviceContext->OMSetRenderTargets(1, reinterpret_cast<ID3D11RenderTargetView * const*>(&m_RTV), nullptr);
     m_DeviceContext->VSSetShader(m_VertexShader, nullptr, 0);
     m_DeviceContext->PSSetShader(m_PixelShader, nullptr, 0);
-    m_DeviceContext->PSSetShaderResources(0, 1, &ShaderResource);
+    m_DeviceContext->PSSetShaderResources(0, 1, reinterpret_cast<ID3D11ShaderResourceView * const*> (&ShaderResource));
     m_DeviceContext->PSSetSamplers(0, 1, &m_SamplerLinear);
     m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
