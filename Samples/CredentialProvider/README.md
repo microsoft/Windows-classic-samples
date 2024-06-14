@@ -14,8 +14,7 @@ description: Demonstrates how to build a v2 credential provider that makes use o
 This sample implements a simple v2 credential provider. A credential provider allows a 3rd 
 party to provide an alternate way of logging on. For example, a fingerprint solution vendor 
 would write a credential provider to interact with the user and send the appropriate 
-credentials to the system for authentication. Questions should be sent to 
-credprov@microsoft.com.
+credentials to the system for authentication. 
 
 This sample implements a simplified credential provider that is based on the password 
 credential provider that ships with Windows.  When run, the credential provider 
