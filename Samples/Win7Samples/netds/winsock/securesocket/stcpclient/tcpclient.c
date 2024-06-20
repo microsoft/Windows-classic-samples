@@ -58,7 +58,7 @@ Arguments:
     securitySettings - pointer to the socket security settings that should be
                        applied to the connection
 
-    serverAddrLen - length of securitySettings in bytes
+    settingsLen - length of securitySettings in bytes
 
 Return Value:
 
