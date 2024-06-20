@@ -42,8 +42,3 @@ VBS Enclaves Blog
 The blog provides insights on writing, compiling and debugging enclaves using this sample code as an example.
 
 It is available at: [aka.ms/VBSEnclavesBlog](https://aka.ms/VBSEnclavesBlog)
-
-Support
--------
-
-For VBS Enclaves support, email [vbsenclavesupport@microsoft.com](mailto:vbsenclavesupport@microsoft.com)

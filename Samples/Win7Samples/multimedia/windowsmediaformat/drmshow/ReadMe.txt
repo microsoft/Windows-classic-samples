@@ -22,8 +22,8 @@ Running the sample:
     
     
 Getting a stublib:
-    Contact wmla@microsoft.com to obtain the Windows Media Rights Managment setup, or for more information go to: http://www.msdn.microsoft.com/windowsmedia
-
+    For details on how to obtain the stub library,
+    see https://learn.microsoft.com/windows/win32/wmformat/obtaining-the-required-drm-library
 
 Items demonstrated in this sample:
     - Use of the IWMDRMReader::GetDRMProperty() method

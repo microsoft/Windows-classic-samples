@@ -15,14 +15,6 @@ Abstract:
     This c file includes sample code for packing WSAQUERYSET2 into
     a single buffer.
 
-Feedback:
-    If you have any questions or feedback, please contact us using
-    any of the mechanisms below:
-
-    Email: peerfb@microsoft.com
-    Newsgroup: Microsoft.public.win32.programmer.networks
-    Website: http://www.microsoft.com/p2p
-
 --********************************************************************/
 #include "utils.h"
 
