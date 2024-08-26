@@ -22,9 +22,13 @@ Topics to cover:
 #include <vector>
 #include <wil/resource.h>
 #include <wil/result.h>
+#include <wil/safecast.h> 
 #include <windows.h>
 #include <winioctl.h>
+#include <winnt.h>
 #include <CimFs.h>
+
+#define BUFFERSIZE 65536 //64 KB 
 
 // Keep information of a file's alternate streams
 struct StreamData
@@ -808,6 +812,64 @@ TogglePrivilege(std::wstring_view privilegeName, bool enable)
     return previouslyEnabled;
 }
 
+bool
+ReadFileFromCim(_In_ const std::wstring& imagePath,
+    _In_ const std::wstring& filePath,
+    _In_ const int offset)
+// Routine Description: 
+//  Reads a file from the provided CIM image and writes it to STDOUT. 
+// 
+// Parameters: 
+//  imagePath - Path to a CIM image. 
+// 
+//  filePath - Relative path of the file from the root in the CIM Image. 
+// 
+//  offset - offset at which to start reading the file 
+// 
+{
+    // Get the file size 
+    FILE_STAT_BASIC_INFORMATION statInfo{};
+    THROW_IF_FAILED(CimGetFileStatBasicInformation(imagePath.c_str(),
+        filePath.c_str(),
+        &statInfo));
+    uint64_t filesize = statInfo.EndOfFile.QuadPart;
+    uint64_t length = filesize - offset;
+    uint64_t readoffset = offset;
+
+    std::wcout << "The content of the file in the CIM are as follows: " << std::endl;
+
+    while (length > 0)
+    {
+        std::byte buffer[BUFFERSIZE];
+        uint64_t readbytes = 0;
+        uint64_t remainingbytes = 0;
+        THROW_IF_FAILED(CimReadFile(imagePath.c_str(),
+            filePath.c_str(),
+            readoffset,
+            &buffer,
+            BUFFERSIZE,
+            &readbytes,
+            &remainingbytes));
+
+        if(readbytes == 0)
+        {
+            std::wcerr << "Unable to read file" << std::endl;
+            break;
+        }
+
+        DWORD dummy;
+        THROW_IF_WIN32_BOOL_FALSE(WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),
+            buffer,
+            wil::safe_cast<uint32_t>(readbytes),
+            &dummy,
+            nullptr));
+        readoffset += readbytes;
+        length = remainingbytes;
+    }
+
+    return true;
+}
+
 int __cdecl wmain(int argc, const wchar_t** argv) try
 {
     if (argc != 5)
@@ -826,6 +888,9 @@ int __cdecl wmain(int argc, const wchar_t** argv) try
     AddFileToNewCim(cimPath, imageName, filePath, imageRelativePath);
 
     CompareFileWithCimFile(cimPath, imageName, imageRelativePath, filePath);
+
+    std::wstring imagepath = cimPath + L"\\" + imageName;
+    ReadFileFromCim(imagepath, imageRelativePath, 0);
 
     auto attributes = GetFileAttributes(filePath.c_str());
     std::wstring imageHardLinkPath(L"link");

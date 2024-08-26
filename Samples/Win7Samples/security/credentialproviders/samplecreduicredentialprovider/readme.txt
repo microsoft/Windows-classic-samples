@@ -14,7 +14,6 @@ A credential provider allows a 3rd party to provide an alternate way of logging 
 example, a fingerprint solution vendor would write a credential provider to interact with 
 the user and send the appropriate credentials to the system for authentication. More 
 information can be found in the Credential Provider document provided in this SDK. 
-Questions should be sent to credprov@microsoft.com.
 
 This sample implements a simplified credential provider that is based on the password 
 credential provider that ships with Windows.  When run, the credential provider 

@@ -12,8 +12,8 @@ NOTES:
    1) The DRM stub library "wmstubdrm.lib" is required. The project settings may need to be
       altered to include the directory in which this library is found. 
    2) Add SUPPORT_DRM to the preprocessor definitions.
-   Please contact wmla@microsoft.com to obtain the stub library, 
-   or for more information go to: http://www.microsoft.com/windows/windowsmedia/
+   For details on how to obtain the stub library,
+   see https://learn.microsoft.com/windows/win32/wmformat/obtaining-the-required-drm-library
 
 2. This sample shows how to handle one audio output. If you need to play a file containing 
    more than one audio output, you need to modify the source code and rebuild the sample.

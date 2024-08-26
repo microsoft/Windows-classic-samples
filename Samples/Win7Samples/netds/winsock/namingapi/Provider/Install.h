@@ -15,14 +15,6 @@ Abstract:
     This h file includes sample code for installation of an nspv2
     naming provider
 
-Feedback:
-    If you have any questions or feedback, please contact us using
-    any of the mechanisms below:
-
-    Email: peerfb@microsoft.com
-    Newsgroup: Microsoft.public.win32.programmer.networks
-    Website: http://www.microsoft.com/p2p
-
 --********************************************************************/
 #pragma once
 
