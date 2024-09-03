@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="CppUnpackagedDesktopTaskbarPin.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CppUnpackagedDesktopTaskbarPin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="C++ Unpackaged Desktop Taskbar Pinning Sample">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Padding="24">
+            <TextBlock x:Name="lafErrorText" FontSize="18" TextWrapping="Wrap">
+                Usage of this sample requires that you have an assigned Limited Access Feature token for this functionality.
+                (1) Edit LafData.h to include your feature token and attestation.
+                (2) Edit CppUnpackagedDesktopTaskbarPin.rc to include the identity resource.
+                See README.md for more information.
+            </TextBlock>
+
+            <StackPanel x:Name="samplePanel" Visibility="Collapsed">
+                <TextBlock
+                    Text="Quickstart: Taskbar pinning"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    TextWrapping="Wrap"/>
+
+                <RichTextBlock Margin="0,5,0,0">
+                    <Paragraph>You might want to encourage users to pin your app to taskbar so they can quickly re-engage with your app.</Paragraph>
+                    <Paragraph>This app illustrates how you can check for the appropriate pinning support and use the functionality of the TaskbarManager API to perform taskbar pin operations.</Paragraph>
+                </RichTextBlock>
+
+                <TextBlock
+                    Text="Scenario: Pin the current app"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    TextWrapping="Wrap"
+                    Margin="0,5,0,0"/>
+
+                <RichTextBlock Margin="0,0,0,12">
+                    <Paragraph>This section demonstrates how an app can use the TaskbarManager API to allow the user to trigger a taskbar pin request for the current app.</Paragraph>
+                    <Paragraph>The "Update pin UI" button below will do a few things...</Paragraph>
+                    <Paragraph>- Unlocks the desktop taskbar pinning LAF</Paragraph>
+                    <Paragraph>- Checks whether the taskbar supports pinning and whether pinning from desktop apps is supported</Paragraph>
+                    <Paragraph>- Checks whether the app is already pinned</Paragraph>
+                    <Paragraph>- Enables or disables a pin button according to the results of the above checks; this pin button will make the actual pinning request when clicked</Paragraph>
+                    <Paragraph>Generally, your app would automatically run the checks to determine whether pinning is possible and only provide the user with a pin action if pinning is supported and allowed.</Paragraph>
+                </RichTextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <Button x:Name="pinCurrentScenarioButton" Click="PinCurrentScenarioButton_Click">Update pin UI</Button>
+                    <Button x:Name="pinCurrentScenarioPinButton" Visibility="Collapsed" Click="PinCurrentScenarioPinButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE141;" />
+                    <TextBlock x:Name="pinCurrentScenarioStatusText" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <TextBlock
+                    Text="App list entry helpers"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    TextWrapping="Wrap"
+                    Margin="0,5,0,0"/>
+
+                <RichTextBlock Margin="0,0,0,12">
+                    <Paragraph>Apps must have an entry in the app list/Start menu in order to pin. Use these helpers to add/remove an entry for the sample.</Paragraph>
+                    <Paragraph>A typical app would create an entry as part of its installation.</Paragraph>
+                </RichTextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                    <Button x:Name="addAppListEntryButton" Click="AddAppListEntryButton_Click" >Add app list entry</Button>
+                    <Button x:Name="removeAppListEntryButton" Click="RemoveAppListEntryButton_Click" >Remove app list entry</Button>
+                    <TextBlock x:Name="appListEntryStatusText" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

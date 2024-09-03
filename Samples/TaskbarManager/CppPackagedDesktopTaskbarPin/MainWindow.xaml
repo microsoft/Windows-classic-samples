@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="CppPackagedDesktopTaskbarPin.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CppPackagedDesktopTaskbarPin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="C++ Packaged Desktop Taskbar Pinning Sample">
+
+    <ScrollViewer Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Padding="24">
+            <TextBlock x:Name="lafErrorText" FontSize="18" TextWrapping="Wrap">Usage of this sample requires that you have an assigned Limited Access Feature token for this functionality and have set it in LafData.h. See README.md for more information.</TextBlock>
+
+            <StackPanel x:Name="samplePanel" Visibility="Collapsed">
+                <TextBlock
+                    Text="Quickstart: Taskbar pinning"
+                    Style="{StaticResource TitleTextBlockStyle}"
+                    TextWrapping="Wrap"/>
+
+                <RichTextBlock Margin="0,5,0,0">
+                    <Paragraph>You might want to encourage users to pin your app to taskbar so they can quickly re-engage with your app.</Paragraph>
+                    <Paragraph>This app illustrates how you can check for the appropriate pinning support and use the functionality of the TaskbarManager API to perform taskbar pin operations.</Paragraph>
+                </RichTextBlock>
+
+                <TextBlock
+                    Text="Scenario: Pin the current app"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    TextWrapping="Wrap"
+                    Margin="0,5,0,0"/>
+
+                <RichTextBlock Margin="0,0,0,12">
+                    <Paragraph>This section demonstrates how an app can use the TaskbarManager API to allow the user to trigger a taskbar pin request for the current app.</Paragraph>
+                    <Paragraph>The "Update pin UI" button below will do a few things...</Paragraph>
+                    <Paragraph>- Unlocks the desktop taskbar pinning LAF</Paragraph>
+                    <Paragraph>- Checks whether the taskbar supports pinning and whether pinning from desktop apps is supported</Paragraph>
+                    <Paragraph>- Checks whether the app is already pinned</Paragraph>
+                    <Paragraph>- Shows/hides or enables/disables a pin button according to the results of the above checks; this pin button will make the actual pinning request when clicked</Paragraph>
+                    <Paragraph>Generally, your app should automatically run the checks run by "Update pin UI" to determine whether pinning is possible and only provide the user with a pin action if pinning is supported and allowed.</Paragraph>
+                </RichTextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <Button x:Name="pinCurrentScenarioButton" Click="PinCurrentScenarioButton_Click">Update pin UI</Button>
+                    <Button x:Name="pinCurrentScenarioPinButton" Visibility="Collapsed" Click="PinCurrentScenarioPinButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE141;" />
+                    <TextBlock x:Name="pinCurrentScenarioStatusText" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <TextBlock
+                    Text="Scenario: Pin a secondary tile for the current app"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    TextWrapping="Wrap"
+                    Margin="0,5,0,0"/>
+
+                <RichTextBlock Margin="0,0,0,12">
+                    <Paragraph>This section demonstrates how an app can use the TaskbarManager API to allow the user to trigger a pin request for a secondary tile (deep link) for the current app.</Paragraph>
+                    <Paragraph>The "Update pin UI" button performs the same checks as for the above scenario aside from checking whether the the test secondary tile is pinned already.</Paragraph>
+                    <Paragraph>Since TaskbarManager allows unpinning of secondary tiles, this section shows a pin/unpin button for a single test secondary tile.</Paragraph>
+                    <Paragraph>Generally, your app should automatically run the checks run by "Update pin UI" to determine whether pinning is possible and only provide the user with a pin action if pinning is supported and allowed.</Paragraph>
+                </RichTextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                    <Button x:Name="pinSecondaryScenarioButton" Click="PinSecondaryScenarioButton_Click">Update pin UI</Button>
+                    <Button x:Name="pinSecondaryScenarioPinButton" Visibility="Collapsed" Click="PinSecondaryScenarioPinButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE141;" />
+                    <Button x:Name="pinSecondaryScenarioUnpinButton" Visibility="Collapsed" Click="PinSecondaryScenarioUnpinButton_Click" FontFamily="Segoe MDL2 Assets" Content="&#xE77A;" />
+                    <TextBlock x:Name="pinSecondaryScenarioStatusText" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>

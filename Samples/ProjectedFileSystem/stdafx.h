@@ -14,6 +14,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <stdexcept>
 
 // Windows SDK
 #include <projectedfslib.h>

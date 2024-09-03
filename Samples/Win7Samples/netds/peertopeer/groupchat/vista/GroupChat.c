@@ -15,14 +15,6 @@ Abstract:
     This C file includes sample code for a chat application built
     with the Peer-to-Peer Grouping API.
 
-Feedback:
-    If you have any questions or feedback, please contact us using
-    any of the mechanisms below:
-
-    Email: peerfb@microsoft.com
-    Newsgroup: Microsoft.public.win32.programmer.networks
-    Website: http://www.microsoft.com/p2p
-
 Note:
     This peer to peer application requires global IPv6 connectivity.
 
@@ -2694,7 +2686,7 @@ HRESULT SetupDirectConnection(PCWSTR pwzIdentity)
             }
             else if (E_INVALIDARG == hr)
             {
-               DisplayHrError(L"Can’t open direct connection.", hr);
+               DisplayHrError(L"Can t open direct connection.", hr);
             }
         }
         PeerFreeData(ppMember);

@@ -9,14 +9,6 @@ Copyright (c) 1985-2005 Microsoft Corporation. All Rights Reserved.
 Abstract:
     This H file includes sample code for ...
 
-Feedback:
-    If you have any questions or feedback, please contact us using
-    any of the mechanisms below:
-
-    Email: peerfb@microsoft.com
-    Newsgroup: Microsoft.public.win32.programmer.networks
-    Website: http://www.microsoft.com/p2p
-
 --********************************************************************/
 
 // Registration info constants

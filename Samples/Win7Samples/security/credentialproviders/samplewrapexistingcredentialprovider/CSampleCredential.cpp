@@ -21,9 +21,7 @@
 // CSampleCredential ////////////////////////////////////////////////////////
 
 // NOTE: Please read the readme.txt file to understand when it's appropriate to
-// wrap an another credential provider and when it's not.  If you have questions
-// about whether your scenario is an appropriate use of wrapping another credprov,
-// please contact credprov@microsoft.com
+// wrap an another credential provider and when it's not.
 CSampleCredential::CSampleCredential():
     _cRef(1)
 {

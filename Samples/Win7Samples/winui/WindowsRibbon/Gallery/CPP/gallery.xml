@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved.
+-->
+<Application xmlns="http://schemas.microsoft.com/windows/2009/Ribbon">
+    <Application.Commands>
+        <Command Name="cmdTabHome">
+            <Command.LabelTitle>
+                <String Id="200">Home</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdShapesGroup">
+            <Command.LabelTitle>
+                <String Id="210">Shape</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdBorderGroup">
+            <Command.LabelTitle>
+                <String Id="220">Border</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdLayoutGroup">
+            <Command.LabelTitle>
+                <String Id="230">Border</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdShapes" Symbol="IDR_CMD_SHAPES">
+            <Command.LabelTitle>
+                <String Id="240">Shapes</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdSizeAndColor" Symbol="IDR_CMD_SIZEANDCOLOR">
+            <Command.LabelTitle>
+                <String Id="250">Size and Color</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="251" MinDPI="96">res/sizeAndColor_96.bmp</Image>
+                <Image Id="252" MinDPI="120">res/sizeAndColor_120.bmp</Image>
+                <Image Id="253" MinDPI="144">res/sizeAndColor_144.bmp</Image>
+                <Image Id="254" MinDPI="192">res/sizeAndColor_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdBorderStyles" Symbol="IDR_CMD_BORDERSTYLES">
+            <Command.LabelTitle>
+                <String Id="260">Style</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="261" MinDPI="96">res/solidBorder_96.bmp</Image>
+                <Image Id="262" MinDPI="120">res/solidBorder_120.bmp</Image>
+                <Image Id="263" MinDPI="144">res/solidBorder_144.bmp</Image>
+                <Image Id="264" MinDPI="192">res/solidBorder_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdBorderSizes" Symbol="IDR_CMD_BORDERSIZES">
+            <Command.LabelTitle>
+                <String Id="270">Size</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdLayouts" Symbol="IDR_CMD_LAYOUTS">
+            <Command.LabelTitle>
+                <String Id="280">Grid Size</String>
+            </Command.LabelTitle>
+        </Command>
+        <Command Name="cmdSmall" Symbol="IDR_CMD_SMALL" Id="100">
+            <Command.LabelTitle>
+                <String Id="290">Small</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="291" MinDPI="96">res/small_96.bmp</Image>
+                <Image Id="292" MinDPI="120">res/small_120.bmp</Image>
+                <Image Id="293" MinDPI="144">res/small_144.bmp</Image>
+                <Image Id="294" MinDPI="192">res/small_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdMedium" Symbol="IDR_CMD_MEDIUM" Id="101">
+            <Command.LabelTitle>
+                <String Id="300">Medium</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="301" MinDPI="96">res/medium_96.bmp</Image>
+                <Image Id="302" MinDPI="120">res/medium_120.bmp</Image>
+                <Image Id="303" MinDPI="144">res/medium_144.bmp</Image>
+                <Image Id="304" MinDPI="192">res/medium_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdLarge" Symbol="IDR_CMD_LARGE" Id="102">
+            <Command.LabelTitle>
+                <String Id="310">Large</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="311" MinDPI="96">res/large_96.bmp</Image>
+                <Image Id="312" MinDPI="120">res/large_120.bmp</Image>
+                <Image Id="313" MinDPI="144">res/large_144.bmp</Image>
+                <Image Id="314" MinDPI="192">res/large_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdRed" Symbol="IDR_CMD_RED" Id="103">
+            <Command.LabelTitle>
+                <String Id="320">Red</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="321" MinDPI="96">res/red_96.bmp</Image>
+                <Image Id="322" MinDPI="120">res/red_120.bmp</Image>
+                <Image Id="323" MinDPI="144">res/red_144.bmp</Image>
+                <Image Id="324" MinDPI="192">res/red_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdGreen" Symbol="IDR_CMD_GREEN" Id="104">
+            <Command.LabelTitle>
+                <String Id="330">Green</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="331" MinDPI="96">res/green_96.bmp</Image>
+                <Image Id="332" MinDPI="120">res/green_120.bmp</Image>
+                <Image Id="333" MinDPI="144">res/green_144.bmp</Image>
+                <Image Id="334" MinDPI="192">res/green_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+        <Command Name="cmdBlue" Symbol="IDR_CMD_BLUE" Id="105">
+            <Command.LabelTitle>
+                <String Id="340">Blue</String>
+            </Command.LabelTitle>
+            <Command.LargeImages>
+                <Image Id="341" MinDPI="96">res/blue_96.bmp</Image>
+                <Image Id="342" MinDPI="120">res/blue_120.bmp</Image>
+                <Image Id="343" MinDPI="144">res/blue_144.bmp</Image>
+                <Image Id="344" MinDPI="192">res/blue_192.bmp</Image>
+            </Command.LargeImages>
+        </Command>
+    </Application.Commands>
+    <Application.Views>
+        <Ribbon>
+            <Ribbon.Tabs>
+                <Tab CommandName="cmdTabHome">
+                    <Group CommandName="cmdShapesGroup" SizeDefinition="InRibbonGalleryAndBigButton">
+                        <InRibbonGallery CommandName="cmdShapes" Type="Items" ItemHeight="32" ItemWidth="32" TextPosition="Bottom" MaxColumns="3" MaxRows="1" MinColumnsMedium="1"/>
+                        <DropDownGallery CommandName="cmdSizeAndColor" TextPosition="Hide" Type="Commands" ItemHeight="32" ItemWidth="32">
+                            <DropDownGallery.MenuLayout>
+                                <FlowMenuLayout Rows="2" Columns="3" Gripper="None"/>
+                            </DropDownGallery.MenuLayout>
+                        </DropDownGallery>
+                    </Group>
+                    <Group CommandName="cmdBorderGroup">
+                        <SizeDefinition>
+                            <ControlNameMap>
+                                <ControlNameDefinition Name="gallery"/>
+                                <ControlNameDefinition Name="combobox"/>
+                            </ControlNameMap>
+                            <GroupSizeDefinition Size="Large">
+                                <ControlSizeDefinition ControlName="gallery" ImageSize="Large" IsImageVisible="true" IsLabelVisible="true"/>
+                                <ControlSizeDefinition ControlName="combobox" ImageSize="Small" IsImageVisible="true" IsLabelVisible="true"/>
+                            </GroupSizeDefinition>
+                            <GroupSizeDefinition Size="Medium">
+                                <ControlSizeDefinition ControlName="gallery" ImageSize="Large" IsImageVisible="true" IsLabelVisible="true"/>
+                                <ControlSizeDefinition ControlName="combobox" ImageSize="Small" IsImageVisible="true" IsLabelVisible="true"/>
+                            </GroupSizeDefinition>
+                            <GroupSizeDefinition Size="Small">
+                                <ControlSizeDefinition ControlName="gallery" ImageSize="Large" IsImageVisible="true" IsLabelVisible="true"/>
+                                <ControlSizeDefinition ControlName="combobox" ImageSize="Small" IsImageVisible="true" IsLabelVisible="true"/>
+                            </GroupSizeDefinition>
+                        </SizeDefinition>
+                        <SplitButtonGallery CommandName="cmdBorderStyles" TextPosition="Hide" Type="Items" ItemHeight="32" ItemWidth="32">
+                            <SplitButtonGallery.MenuLayout>
+                                <VerticalMenuLayout/>
+                            </SplitButtonGallery.MenuLayout>
+                        </SplitButtonGallery>
+                        <ComboBox CommandName="cmdBorderSizes" IsEditable="true"/>
+                    </Group>
+                    <Group CommandName="cmdLayoutGroup">
+                        <ComboBox CommandName="cmdLayouts" IsEditable="false"/>
+                    </Group>
+                </Tab>
+            </Ribbon.Tabs>
+        </Ribbon>
+    </Application.Views>
+</Application>

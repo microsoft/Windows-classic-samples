@@ -11,14 +11,6 @@ Abstract:
     This C file includes sample code for sending an invitation
     with the Microsoft Peer-to-Peer Collaboration APIs.
 
-Feedback:
-    If you have any questions or feedback, please contact us using
-    any of the mechanisms below:
-
-    Email: peerfb@microsoft.com
-    Newsgroup: Microsoft.public.win32.programmer.networks
-    Website: http://www.microsoft.com/p2p
-
 Notes:
     * This peer to peer application requires global IPv6 connectivity.
 
