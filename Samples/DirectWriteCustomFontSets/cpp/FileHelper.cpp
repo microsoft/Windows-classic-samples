@@ -13,7 +13,7 @@
 #include "stdafx.h"
 #include "FileHelper.h"
 
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
 
 
 namespace DWriteCustomFontSets
@@ -46,7 +46,7 @@ namespace DWriteCustomFontSets
             return false;
         }
 
-        fs::path absPath = fs::system_complete(inFolderName);
+        fs::path absPath = fs::absolute(inFolderName);
         fs::file_status pathStatus = fs::status(absPath);
 
         // Confirm input path is a folder.
