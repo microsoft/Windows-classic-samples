@@ -67,7 +67,7 @@ CSampleRichEditWindow::Initialize(
 
                                 // Define as a visible child window.
                                 // Also set flags to provide a multi-line rich edit experience.
-                                WS_VISIBLE | WS_CHILD |
+                                WS_VISIBLE | //WS_CHILD |
                                 WS_CLIPCHILDREN | WS_CLIPSIBLINGS |
                                 WS_VSCROLL | ES_WANTRETURN | ES_MULTILINE,
 
