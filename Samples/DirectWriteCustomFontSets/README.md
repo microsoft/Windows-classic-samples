@@ -148,7 +148,8 @@ Studio 2017 Release Candidate or later.
 
 The project includes a subfolder, "Fonts", containing font files. These are 
 used for scenarios 1 and 2. This sample doesn't include any installer project. 
-In order for scenarios 1 and 2 to work, the Fonts folder and contents must be
+
+**NOTE:** In order for scenarios 1 and 2 to work, the Fonts folder and contents must be
 copied to the same folder as the app executable.
 
 
