@@ -35,6 +35,7 @@ public:
                             const ULONG_PTR pulID
                             );
             BOOL    IsQueueEmpty(void);
+            DWORD GetSampleCount();
 
 protected:
                 class CNode;
