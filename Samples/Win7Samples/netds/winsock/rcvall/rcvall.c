@@ -231,10 +231,8 @@ int ValidateArgs(int argc, char **argv)
     // For SIO_RCVALL we may need to adjust the protocol value
     if ((g_dwIoControlCode == SIO_RCVALL) || (g_dwIoControlCode == SIO_RCVALL_MCAST))
     {
-        if (resif->ai_family == AF_INET)
-            g_dwProtocol = IPPROTO_IP;
-        else if (resif->ai_family == AF_INET6)
-            g_dwProtocol = IPPROTO_IPV6;
+        // Both IPv4 and IPv6 in Windows require IPPROTO_IP
+        g_dwProtocol = IPPROTO_IP;
     }
 
     // Copy the interface address
