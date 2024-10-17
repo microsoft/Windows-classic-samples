@@ -105,27 +105,36 @@ HRESULT DemoApp::Initialize()
         RegisterClassEx(&wcex);
 
         // Create the application window.
-        //
-        // Because the CreateWindow function takes its size in pixels, we
-        // obtain the system DPI and use it to scale the window size.
-        FLOAT dpiX = static_cast<FLOAT>(GetDpiForWindow(m_hwnd)) / 96.0f;
-        FLOAT dpiY = dpiX;
-
-        // Create the application window.
         m_hwnd = CreateWindow(
             L"D2DDemoApp",
             L"Direct2D Demo Application",
             WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            static_cast<INT>(ceil(640.f * dpiX / 96.f)),
-            static_cast<INT>(ceil(480.f * dpiY / 96.f)),
+            CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
             NULL,
             NULL,
             HINST_THISCOMPONENT,
             this
             );
-        hr = m_hwnd ? S_OK : E_FAIL;
+
+        if (m_hwnd)
+        {
+            // Because the CreateWindow function takes its size in pixels, we
+            // obtain the system DPI and use it to scale the window size.
+            FLOAT dpiX = static_cast<FLOAT>(GetDpiForWindow(m_hwnd)) / 96.0f;
+            FLOAT dpiY = dpiX;
+            SetWindowPos(m_hwnd, NULL, 0, 0, static_cast<INT>(ceil(640.f * dpiX)), static_cast<INT>(ceil(480.f * dpiY)),
+                         SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+            hr = S_OK;
+        }
+        else
+        {
+            hr = E_FAIL;
+        }
+
+
+
+
         if (SUCCEEDED(hr))
         {
             ShowWindow(m_hwnd, SW_SHOWNORMAL);
