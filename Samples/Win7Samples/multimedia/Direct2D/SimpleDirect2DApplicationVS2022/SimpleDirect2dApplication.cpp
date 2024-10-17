@@ -108,8 +108,8 @@ HRESULT DemoApp::Initialize()
         //
         // Because the CreateWindow function takes its size in pixels, we
         // obtain the system DPI and use it to scale the window size.
-        FLOAT dpiX, dpiY;
-        m_pD2DFactory->GetDesktopDpi(&dpiX, &dpiY);
+        FLOAT dpiX = static_cast<FLOAT>(GetDpiForWindow(m_hwnd)) / 96.0f;
+        FLOAT dpiY = dpiX;
 
         // Create the application window.
         m_hwnd = CreateWindow(
