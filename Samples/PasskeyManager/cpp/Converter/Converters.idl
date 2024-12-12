@@ -1,0 +1,10 @@
+// Converters.idl
+
+namespace PasskeyManager
+{
+    [default_interface]
+    runtimeclass BitwiseFlagToVisibilityConverter : Microsoft.UI.Xaml.Data.IValueConverter
+    {
+        BitwiseFlagToVisibilityConverter();
+    }
+}

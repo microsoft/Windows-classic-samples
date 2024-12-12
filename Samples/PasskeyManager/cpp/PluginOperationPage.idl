@@ -1,0 +1,9 @@
+namespace PasskeyManager
+{
+	interface IPluginOperationPage
+	{
+		void UpdatePasskeyOperationStatus(HRESULT hr);
+		void DisableUI();
+		void EnableUI();
+	}
+}

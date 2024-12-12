@@ -1,0 +1,11 @@
+import "CredentialListViewModel.idl";
+import "PluginOperationPage.idl";
+namespace PasskeyManager
+{
+	[default_interface]
+	runtimeclass GetAssertion : Microsoft.UI.Xaml.Controls.Page, PasskeyManager.IPluginOperationPage
+    {
+        GetAssertion();
+        CredentialListViewModel CredentialList{ get; };
+    }
+}

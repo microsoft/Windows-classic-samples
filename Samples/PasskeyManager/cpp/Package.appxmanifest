@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  IgnorableNamespaces="uap rescap com uap10">
+
+  <Identity
+    Name="Contoso.PasskeyManager"
+    Publisher="CN=sample"
+    Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>Contoso Passkey Manager</DisplayName>
+    <PublisherDisplayName>Contoso Corporation</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22635.4515" MaxVersionTested="10.0.22635.4515" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="Contoso.PasskeyManager"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
+		<uap:VisualElements
+			DisplayName="Contoso Passkey Manager"
+			Description="Contoso Passkey Manager"
+			BackgroundColor="transparent"
+			Square150x150Logo="Assets\Square150x150Logo.png"
+			Square44x44Logo="Assets\Square44x44Logo.png">
+					<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+					<uap:SplashScreen Image="Assets\SplashScreen.png" />
+				</uap:VisualElements>
+	    <Extensions>
+		    <com:Extension Category="windows.comServer">
+			    <com:ComServer>
+				    <com:ExeServer Executable="PasskeyManager.exe" Arguments="-PluginActivated" DisplayName="Contoso Passkey Manager">
+					        <com:Class Id="7fa07696-e94e-4a72-b8fd-6890c5897a35" DisplayName="Contoso Passkey Manager"/>
+					    </com:ExeServer>
+			    </com:ComServer>
+		    </com:Extension>
+	    </Extensions>
+	</Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

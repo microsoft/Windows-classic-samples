@@ -1,0 +1,307 @@
+<Page
+    x:Class="PasskeyManager.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:PasskeyManager"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:BitwiseFlagToVisibilityConverter x:Key="BitwiseFlagToVisibilityConverter" />
+                    <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="{ThemeResource SystemFillColorSuccess}"/>
+                    <SolidColorBrush x:Key="SystemFillColorCriticalBrush" Color="{ThemeResource SystemFillColorCritical}"/>
+                    <SolidColorBrush x:Key="SystemFillColorCautionBrush" Color="{ThemeResource SystemFillColorCaution}" />
+                    <SolidColorBrush x:Key="SystemFillColorNeutralBrush" Color="{ThemeResource SystemFillColorNeutral}" />
+                    <Style x:Key="CardStyle" TargetType="Grid">
+                        <Style.Setters>
+                            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="Padding" Value="12" />
+                            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                            <Setter Property="CornerRadius" Value="{StaticResource OverlayCornerRadius}" />
+                        </Style.Setters>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Image
+                Width="16"
+                Height="16"
+                Margin="16,0,8,0"
+                Source="ms-appx:///Assets/icon.ico" />
+            <TextBlock
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="Contoso Passkey Manager" />
+        </StackPanel>
+        <Grid
+            Grid.Row="1"
+            Padding="16,24,16,16"
+            ColumnSpacing="24"
+            RowSpacing="8"
+            Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="Plugin" />
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Padding="12"
+                Style="{StaticResource CardStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="pluginStateTextBlock" VerticalAlignment="Center">
+                    <Run Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="State:" />
+                    <Run Foreground="{ThemeResource SystemFillColorCautionBrush}" x:Name="pluginStateRun" Text=""/>
+                </TextBlock>
+                <StackPanel
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <Button
+                        x:Name="registerPluginButton"
+                        Click="registerPluginButton_Click"
+                        Content="Register"
+                        Style="{StaticResource AccentButtonStyle}" />
+                    <Button
+                        x:Name="unregisterPluginButton"
+                        Click="unregisterPluginButton_Click"
+                        Content="Remove" />
+                </StackPanel>
+            </Grid>
+
+
+            <TextBlock
+                Grid.Row="2"
+                Margin="0,16,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Stats" />
+            <Grid
+                Grid.Row="3"
+                Style="{StaticResource CardStyle}">
+                <InfoBarPanel>
+                    <TextBlock x:Name="credentialStateTextBlock1">
+                        <Run Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Local DB:" />
+                        <Run x:Name="credsStatsRun1" Text="Not available" />
+                        <LineBreak /><Run Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Windows Cache Stats:" />
+                        <Run x:Name="credsStatsRun2" Text="Not available" />
+                    </TextBlock>
+                </InfoBarPanel>
+            </Grid>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,16,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Configuration" />
+            <Grid
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource CardStyle}">
+                
+                <StackPanel
+                    Grid.Column="1"
+                    Orientation="Horizontal"
+                    Spacing="8">
+                    <ToggleSwitch 
+                        x:Name="vaultLockSwitch"
+                        Header="Simulate Vault Unlock"
+                        OnContent="Locked"
+                        OffContent="Unlocked"
+                        IsOn="False"
+                        Toggled="vaultLockSwitch_Toggled">
+                        <ToggleSwitch.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    Text="{Binding}"
+                                    Margin="0,0,0,0"
+                                    Padding="0,0,0,0"
+                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </DataTemplate>
+                        </ToggleSwitch.HeaderTemplate>
+                    </ToggleSwitch>
+                    <ToggleSwitch
+                        x:Name="silentOperationSwitch"
+                        Header="Minimize UI"
+                        OnContent="Hide"
+                        OffContent="Show"
+                        IsOn="False"
+                        Toggled="silentOperationSwitch_Toggled">
+                        <ToggleSwitch.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Text="{Binding}"
+                                    Margin="0,0,0,0"
+                                    Padding="0,0,0,0"
+                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            </DataTemplate>
+                        </ToggleSwitch.HeaderTemplate>
+                    </ToggleSwitch>
+                </StackPanel>
+            </Grid>
+
+
+            <TextBlock
+                Grid.Row="4"
+                Margin="0,16,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Credentials" />
+            <StackPanel
+                Grid.Row="5"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="refreshButton"
+                    Click="refreshButton_Click"
+                    Content="Refresh"
+                    Style="{StaticResource AccentButtonStyle}" />
+                <DropDownButton Content="Add">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Click="addAllPluginCredentials_Click" Text="All Passkeys to Cache" />
+                            <MenuFlyoutItem
+                                IsEnabled="False"
+                                x:Name="selectedAddButton"
+                                Click="addSelectedCredentials_Click" Text="Selected Passkeys to Cache"/>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+                <DropDownButton Content="Delete">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Click="deleteAllPluginCredentials_Click" Text="All Passkeys from Cache" />
+                            <MenuFlyoutItem
+                                x:Name="deleteSelectedCacheButton"
+                                Click="deleteSelectedPluginCredentials_Click" Text="Selected Passkeys from Cache" />
+                            <MenuFlyoutItem
+                                x:Name="deleteSelectedLocalButton"
+                                Click="deleteSelectedPluginCredentialsEverywhere_Click" Text="Selected Passkeys everywhere" />
+                            <MenuFlyoutItem Click="deleteAllLocalCredentials_Click" Text="All Passkeys from Local" />
+                            <MenuFlyoutItem Click="deleteAllCredentials_Click" Text="All Passkeys everywhere" />
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+            </StackPanel>
+            <Grid
+                Grid.Row="6"
+                VerticalAlignment="Stretch"
+                Style="{StaticResource CardStyle}">
+                <ListView ItemsSource="{x:Bind CredentialList.credentials}"
+                    x:Name="credentialListView"
+                    IsItemClickEnabled="False"
+                    SelectionMode="Multiple"
+                    SelectionChanged="SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Credential">
+                            <Grid Padding="8" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <FontIcon
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    FontSize="16"
+                                    Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                    Glyph="&#xF427;" />
+                                <TextBlock Grid.Column="1" Text="{x:Bind UserName}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="{x:Bind RpName}" />
+                                <Border
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Padding="4"
+                                    VerticalAlignment="Center"
+                                    Background="{ThemeResource ControlAltFillColorSecondaryBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{StaticResource ControlCornerRadius}"
+                                    Visibility="{x:Bind CredentialOptions,Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=AutofillCapable}">
+                                    <TextBlock FontSize="12" Text="Autofill" />
+                                </Border>
+                                <Border
+                                    Grid.RowSpan="2"
+                                    Grid.Column="3"
+                                    Padding="4"
+                                    VerticalAlignment="Center"
+                                    Background="{ThemeResource SystemFillColorCriticalBackgroundBrush}"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="{StaticResource ControlCornerRadius}"
+                                    Visibility="{x:Bind CredentialOptions,Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=MetadataStale}">
+                                    <TextBlock 
+                                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                        FontSize="12" 
+                                        Text="Stale" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <TextBlock
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="0,16,0,0"
+                Style="{StaticResource BodyStrongTextBlockStyle}"
+                Text="Logs" />
+            <Grid
+                Grid.Row="6"
+                Grid.Column="1"
+                VerticalAlignment="Stretch"
+                Style="{StaticResource CardStyle}">
+                <ScrollViewer x:Name="statusScrollArea" VerticalScrollBarVisibility="Auto">
+                    <RichTextBlock x:Name="statusTextBlock" FontFamily="Cascadia Code">
+                        <Paragraph x:Name="textContent" FontSize="12" />
+                    </RichTextBlock>
+                </ScrollViewer>
+            </Grid>
+
+            <StackPanel
+                Grid.Row="5"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Name="clearLogsButton"
+                    Click="clearLogsButton_Click"
+                    Content="Clear" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

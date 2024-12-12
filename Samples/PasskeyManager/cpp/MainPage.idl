@@ -1,0 +1,10 @@
+import "CredentialListViewModel.idl";
+namespace PasskeyManager
+{
+    [default_interface]
+    runtimeclass MainPage : Microsoft.UI.Xaml.Controls.Page
+    {
+        MainPage();
+        CredentialListViewModel CredentialList { get; };
+    }
+}

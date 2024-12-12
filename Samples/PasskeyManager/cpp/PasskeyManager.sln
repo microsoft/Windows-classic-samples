@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PasskeyManager", "PasskeyManager.vcxproj", "{4FCF5980-C8B1-4E00-93D9-F79C7B718387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D93638E8-E8F2-462D-A8BE-F91E360DCBC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|ARM64.Build.0 = Debug|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x64.ActiveCfg = Debug|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x64.Build.0 = Debug|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x64.Deploy.0 = Debug|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x86.ActiveCfg = Debug|Win32
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x86.Build.0 = Debug|Win32
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Debug|x86.Deploy.0 = Debug|Win32
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|ARM64.ActiveCfg = Release|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|ARM64.Build.0 = Release|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|ARM64.Deploy.0 = Release|ARM64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x64.ActiveCfg = Release|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x64.Build.0 = Release|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x64.Deploy.0 = Release|x64
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x86.ActiveCfg = Release|Win32
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x86.Build.0 = Release|Win32
+		{4FCF5980-C8B1-4E00-93D9-F79C7B718387}.Release|x86.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21BA6E0B-FCDD-4DA9-AFDC-AD787992E696}
+	EndGlobalSection
+EndGlobal
