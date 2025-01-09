@@ -4,19 +4,11 @@
 // 
 // Copyright (C) 1995-2000 Microsoft Corporation. All rights reserved.
 // 
-// This source code is intended only as a supplement to Microsoft
+// This code is intended only as a supplement to Microsoft
 // Development Tools and/or on-line documentation. See these other
 // materials for detailed information regarding Microsoft code samples.
 // 
-// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-// 
-// ----------------------------------------------------------------------------
-
-// ===========================================================================
-// Description:
+// THIS CODE AND INFORMATION And/or Description:
 // 
 //  This is the server-portion of the SIMPLE Network OLE sample. This
 // application implements the CLSID_SimpleObject class as a LocalServer.
