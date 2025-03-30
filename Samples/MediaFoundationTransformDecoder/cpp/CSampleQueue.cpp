@@ -288,6 +288,24 @@ BOOL CSampleQueue::IsQueueEmpty(void)
     return (m_pHead == NULL) ? TRUE : FALSE;
 }
 
+DWORD CSampleQueue::GetSampleCount(){
+
+	DWORD dwCount = 0;
+	CNode* pHead;
+
+	CAutoLock lock(&m_csLock);
+
+	pHead = m_pHead;
+
+	while(pHead)
+	{
+		dwCount++;
+		pHead = pHead->pNext;
+	}
+
+	return dwCount;
+}
+
 CSampleQueue::CSampleQueue(void)
 {
     m_ulRef         = 1;
