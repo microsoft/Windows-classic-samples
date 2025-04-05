@@ -43,8 +43,7 @@ void CSampleEngine::Update()
 
 template <class T> std::shared_ptr<T> CSampleEngine::CreateElement()
 {
-    SPSceneElement newElement(new T(this));
-    return newElement;
+    return std::make_shared<T>(this);
 }
 
 void CSampleEngine::AddElement(SPSampleElementBase element)
