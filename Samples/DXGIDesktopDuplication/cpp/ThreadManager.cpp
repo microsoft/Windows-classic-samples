@@ -176,8 +176,9 @@ DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
     // Create device
     for (UINT DriverTypeIndex = 0; DriverTypeIndex < NumDriverTypes; ++DriverTypeIndex)
     {
+
         hr = D3D11CreateDevice(nullptr, DriverTypes[DriverTypeIndex], nullptr, 0, FeatureLevels, NumFeatureLevels,
-                                D3D11_SDK_VERSION, &Data->Device, &FeatureLevel, &Data->Context);
+                                D3D11_SDK_VERSION, reinterpret_cast<ID3D11Device**> (&Data->Device), &FeatureLevel, reinterpret_cast<ID3D11DeviceContext * *> (&Data->Context));
         if (SUCCEEDED(hr))
         {
             // Device creation success, no need to loop anymore

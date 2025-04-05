@@ -438,7 +438,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
     DUPLICATIONMANAGER DuplMgr;
 
     // D3D objects
-    ID3D11Texture2D* SharedSurf = nullptr;
+    ID3D11Texture2D1* SharedSurf = nullptr;
     IDXGIKeyedMutex* KeyMutex = nullptr;
 
     // Data passed in from thread creation
@@ -471,7 +471,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
     DispMgr.InitD3D(&TData->DxRes);
 
     // Obtain handle to sync shared Surface
-    HRESULT hr = TData->DxRes.Device->OpenSharedResource(TData->TexSharedHandle, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&SharedSurf));
+    HRESULT hr = TData->DxRes.Device->OpenSharedResource(TData->TexSharedHandle, __uuidof(ID3D11Texture2D1), reinterpret_cast<void**>(&SharedSurf));
     if (FAILED (hr))
     {
         Ret = ProcessFailure(TData->DxRes.Device, L"Opening shared texture failed", L"Error", hr, SystemTransitionsExpectedErrors);
@@ -609,7 +609,7 @@ Exit:
 }
 
 _Post_satisfies_(return != DUPL_RETURN_SUCCESS)
-DUPL_RETURN ProcessFailure(_In_opt_ ID3D11Device* Device, _In_ LPCWSTR Str, _In_ LPCWSTR Title, HRESULT hr, _In_opt_z_ HRESULT* ExpectedErrors)
+DUPL_RETURN ProcessFailure(_In_opt_ ID3D11Device5* Device, _In_ LPCWSTR Str, _In_ LPCWSTR Title, HRESULT hr, _In_opt_z_ HRESULT* ExpectedErrors)
 {
     HRESULT TranslatedHr;
 
