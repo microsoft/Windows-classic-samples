@@ -1,0 +1,15 @@
+<!--
+  Copyright (C) Microsoft. All rights reserved.
+-->
+<Window x:Class="Microsoft.Samples.Speech.VoiceAccess.VoiceAccessWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Microsoft.Samples.Speech.VoiceAccess"
+        Title="Voice Access Control Demo" 
+        Height="500" 
+        Width="700"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <local:VoiceAccessUserControl x:Name="VoiceAccessControl"/>
+    </Grid>
+</Window>
