@@ -13,7 +13,28 @@
 
 
 #include "Decoder.h"
+IMFMediaBuffer* buffer = NULL;
+hr = MFCreateMemoryBuffer(l, &buffer);
+DWORD pcbMaxLength, pcbCurrentLength = 0;
+BYTE* ppbBuffer = NULL;
+buffer->Lock(&ppbBuffer, &pcbMaxLength, &pcbCurrentLength);
+memcpy_s(ppbBuffer, l, buff, l);
+buffer->SetCurrentLength(l);
+buffer->Unlock();
 
+IMFSample* sample = NULL;
+hr = MFCreateSample(&sample);
+if (SUCCEEDED(hr)) {
+                sample->AddBuffer(buffer);
+                hr = transform->ProcessInput(0, sample, 0);
+                while (FAILED(hr)) {
+                    hr = transform->ProcessInput(0, sample, 0);
+
+                    std::this_thread::sleep_for(std::chrono::milliseconds(30));
+                }
+                sample->Release();
+}
+buffer->Release();
 ///////////////////////////////////////////////////////////////////////
 //  Name: CreateInstance
 //  Description:  Static class method to create the CDecoder object.
