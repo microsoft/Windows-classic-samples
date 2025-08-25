@@ -25,56 +25,66 @@
 
 void CloudProviderRegistrar::RegisterWithShell()
 {
-    try
+    while (true)
     {
-        auto syncRootID = GetSyncRootId();
+        try
+        {
+            auto syncRootID = GetSyncRootId();
 
-        winrt::StorageProviderSyncRootInfo info;
-        info.Id(syncRootID);
+            winrt::StorageProviderSyncRootInfo info;
+            info.Id(syncRootID);
 
-        auto folder = winrt::StorageFolder::GetFolderFromPathAsync(ProviderFolderLocations::GetClientFolder()).get();
-        info.Path(folder);
+            auto folder = winrt::StorageFolder::GetFolderFromPathAsync(ProviderFolderLocations::GetClientFolder()).get();
+            info.Path(folder);
 
-        // The string can be in any form acceptable to SHLoadIndirectString.
-        info.DisplayNameResource(L"CloudMirror");
+            // The string can be in any form acceptable to SHLoadIndirectString.
+            info.DisplayNameResource(L"CloudMirror");
 
-        // This icon is just for the sample. You should provide your own branded icon here
-        info.IconResource(L"%SystemRoot%\\system32\\charmap.exe,0");
-        info.HydrationPolicy(winrt::StorageProviderHydrationPolicy::Full);
-        info.HydrationPolicyModifier(winrt::StorageProviderHydrationPolicyModifier::None);
-        info.PopulationPolicy(winrt::StorageProviderPopulationPolicy::AlwaysFull);
-        info.InSyncPolicy(winrt::StorageProviderInSyncPolicy::FileCreationTime | winrt::StorageProviderInSyncPolicy::DirectoryCreationTime);
-        info.Version(L"1.0.0");
-        info.ShowSiblingsAsGroup(false);
-        info.HardlinkPolicy(winrt::StorageProviderHardlinkPolicy::None);
+            // This icon is just for the sample. You should provide your own branded icon here
+            info.IconResource(L"%SystemRoot%\\system32\\charmap.exe,0");
+            info.HydrationPolicy(winrt::StorageProviderHydrationPolicy::Full);
+            info.HydrationPolicyModifier(winrt::StorageProviderHydrationPolicyModifier::None);
+            info.PopulationPolicy(winrt::StorageProviderPopulationPolicy::AlwaysFull);
+            info.InSyncPolicy(winrt::StorageProviderInSyncPolicy::FileCreationTime | winrt::StorageProviderInSyncPolicy::DirectoryCreationTime);
+            info.Version(L"1.0.0");
+            info.ShowSiblingsAsGroup(false);
+            info.HardlinkPolicy(winrt::StorageProviderHardlinkPolicy::None);
 
-        winrt::Uri uri(L"http://cloudmirror.example.com/recyclebin");
-        info.RecycleBinUri(uri);
+            winrt::Uri uri(L"http://cloudmirror.example.com/recyclebin");
+            info.RecycleBinUri(uri);
 
-        // Context
-        std::wstring syncRootIdentity(ProviderFolderLocations::GetServerFolder());
-        syncRootIdentity.append(L"->");
-        syncRootIdentity.append(ProviderFolderLocations::GetClientFolder());
+            // Context
+            std::wstring syncRootIdentity(ProviderFolderLocations::GetServerFolder());
+            syncRootIdentity.append(L"->");
+            syncRootIdentity.append(ProviderFolderLocations::GetClientFolder());
 
-        wchar_t const contextString[] = L"TestProviderContextString";
-        winrt::IBuffer contextBuffer = winrt::CryptographicBuffer::ConvertStringToBinary(syncRootIdentity.data(), winrt::BinaryStringEncoding::Utf8);
-        info.Context(contextBuffer);
+            wchar_t const contextString[] = L"TestProviderContextString";
+            winrt::IBuffer contextBuffer = winrt::CryptographicBuffer::ConvertStringToBinary(syncRootIdentity.data(), winrt::BinaryStringEncoding::Utf8);
+            info.Context(contextBuffer);
 
-        winrt::IVector<winrt::StorageProviderItemPropertyDefinition> customStates = info.StorageProviderItemPropertyDefinitions();
-        AddCustomState(customStates, L"CustomStateName1", 1);
-        AddCustomState(customStates, L"CustomStateName2", 2);
-        AddCustomState(customStates, L"CustomStateName3", 3);
+            winrt::IVector<winrt::StorageProviderItemPropertyDefinition> customStates = info.StorageProviderItemPropertyDefinitions();
+            AddCustomState(customStates, L"CustomStateName1", 1);
+            AddCustomState(customStates, L"CustomStateName2", 2);
+            AddCustomState(customStates, L"CustomStateName3", 3);
 
-        winrt::StorageProviderSyncRootManager::Register(info);
+            winrt::StorageProviderSyncRootManager::Register(info);
 
-        // Give the cache some time to invalidate
-        Sleep(1000);
-    }
-    catch (...)
-    {
-        // winrt::to_hresult() will eat the exception if it is a result of winrt::check_hresult,
-        // otherwise the exception will get rethrown and this method will crash out as it should
-        wprintf(L"Could not register the sync root, hr %08x\n", static_cast<HRESULT>(winrt::to_hresult()));
+            // Give the cache some time to invalidate
+            Sleep(1000);
+            break;
+        }
+        catch (...)
+        {
+            // winrt::to_hresult() will eat the exception if it is a result of winrt::check_hresult,
+            // otherwise the exception will get rethrown and this method will crash out as it should
+            HRESULT const hresult = static_cast<HRESULT>(winrt::to_hresult());
+
+            wprintf(L"Could not register the sync root, hr %08x\n", hresult);
+            if (hresult == 0x8007112A)
+            {
+                wprintf(L"Try creating a new folder as client folder to resolve the issue.\n");
+            }
+        }
     }
 }
 
