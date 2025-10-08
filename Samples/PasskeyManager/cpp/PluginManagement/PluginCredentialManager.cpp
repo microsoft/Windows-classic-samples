@@ -25,14 +25,14 @@ namespace winrt::PasskeyManager::implementation
     HRESULT PluginCredentialManager::AddAllPluginCredentials()
     {
         // Get the function pointer of WebAuthNPluginAuthenticatorAddCredentials
-        auto webAuthNPluginAuthenticatorAddCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(), EXPERIMENTAL_WebAuthNPluginAuthenticatorAddCredentials);
+        auto webAuthNPluginAuthenticatorAddCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(), WebAuthNPluginAuthenticatorAddCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorAddCredentials);
 
         std::vector<unique_plugin_credential_details> credentialDetailList{};
         for (auto& iter : m_pluginLocalCredentialMetadataMap)
         {
             auto& savedCred = iter.second;
-            unique_plugin_credential_details pluginCred (new EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS());
+            unique_plugin_credential_details pluginCred (new WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS());
             pluginCred->pwszRpId = _wcsdup(savedCred->pRpInformation->pwszId);
             pluginCred->pwszRpName = _wcsdup(savedCred->pRpInformation->pwszName);
             pluginCred->pwszUserName = _wcsdup(savedCred->pUserInformation->pwszName);
@@ -47,9 +47,9 @@ namespace winrt::PasskeyManager::implementation
         }
 
         RETURN_HR_IF(E_FAIL, credentialDetailList.empty());
-        EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
+        WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
         pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-        auto credentialDetailPtrList = std::vector<EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
+        auto credentialDetailPtrList = std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
         for (auto& credential : credentialDetailList)
         {
             credentialDetailPtrList.push_back(credential.get());
@@ -66,7 +66,7 @@ namespace winrt::PasskeyManager::implementation
         RETURN_HR_IF(E_FAIL, credentialIdList.empty());
 
         // Get the function pointer of WebAuthNPluginAuthenticatorAddCredentials
-        auto webAuthNPluginAuthenticatorAddCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(), EXPERIMENTAL_WebAuthNPluginAuthenticatorAddCredentials);
+        auto webAuthNPluginAuthenticatorAddCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(), WebAuthNPluginAuthenticatorAddCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorAddCredentials);
 
         std::vector<unique_plugin_credential_details> credentialDetailList{};
@@ -77,7 +77,7 @@ namespace winrt::PasskeyManager::implementation
             if (iter != m_pluginLocalCredentialMetadataMap.end())
             {
                 auto& savedCred = iter->second;
-                unique_plugin_credential_details pluginCred (new EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS ());
+                unique_plugin_credential_details pluginCred (new WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS ());
                 pluginCred->pwszRpId = _wcsdup(savedCred->pRpInformation->pwszId);
                 pluginCred->pwszRpName = _wcsdup(savedCred->pRpInformation->pwszName);
                 pluginCred->pwszUserName = _wcsdup(savedCred->pUserInformation->pwszName);
@@ -94,9 +94,9 @@ namespace winrt::PasskeyManager::implementation
 
         if (!credentialDetailList.empty())
         {
-            EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
+            WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
             pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-            std::vector<EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
+            std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
             for (auto& credential : credentialDetailList)
             {
                 credentialDetailPtrList.push_back(credential.get());
@@ -114,7 +114,7 @@ namespace winrt::PasskeyManager::implementation
         // Get the function pointer of WebAuthNPluginAuthenticatorAddCredentials
         auto webAuthNPluginAuthenticatorRemoveAllCredentials = GetProcAddressByFunctionDeclaration(
             m_webAuthnDll.get(),
-            EXPERIMENTAL_WebAuthNPluginAuthenticatorRemoveAllCredentials);
+            WebAuthNPluginAuthenticatorRemoveAllCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorRemoveAllCredentials);
         RETURN_HR(webAuthNPluginAuthenticatorRemoveAllCredentials(c_pluginClsid));
     }
@@ -126,7 +126,7 @@ namespace winrt::PasskeyManager::implementation
         // Get the function pointer of WebAuthNPluginAddAuthenticator
         auto webAuthNPluginRemoveCredential = GetProcAddressByFunctionDeclaration(
                 m_webAuthnDll.get(),
-                EXPERIMENTAL_WebAuthNPluginAuthenticatorRemoveCredentials);
+                WebAuthNPluginAuthenticatorRemoveCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginRemoveCredential);
 
         std::vector<unique_plugin_credential_details> credentialDetailList{};
@@ -145,9 +145,9 @@ namespace winrt::PasskeyManager::implementation
 
         if (!credentialDetailList.empty())
         {
-            EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
+            WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
             pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-            std::vector<EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
+            std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
             for (auto& credential : credentialDetailList)
             {
                 credentialDetailPtrList.push_back(credential.get());
@@ -177,22 +177,22 @@ namespace winrt::PasskeyManager::implementation
         std::lock_guard<std::mutex> lock(m_pluginCachedCredentialsOperationMutex);
         m_cachedCredentialsLoaded = false;
         m_pluginCachedCredentialMetadataMap.clear();
-        // Get the function pointer of EXPERIMENTAL_WebAuthNPluginAuthenticatorGetAllCredentials
+        // Get the function pointer of WebAuthNPluginAuthenticatorGetAllCredentials
         auto webAuthNPluginAuthenticatorGetAllCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(),
-            EXPERIMENTAL_WebAuthNPluginAuthenticatorGetAllCredentials);
+            WebAuthNPluginAuthenticatorGetAllCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorGetAllCredentials);
 
-        EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST localCredentialDetailsList = nullptr;
+        PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST localCredentialDetailsList = nullptr;
         HRESULT hr = webAuthNPluginAuthenticatorGetAllCredentials(c_pluginClsid, &localCredentialDetailsList);
         RETURN_HR_IF_EXPECTED(S_OK, hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND));
 
         for (DWORD i = 0; i < localCredentialDetailsList->cCredentialDetails; i++)
         {
-            EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS credentialDetailsPtr = localCredentialDetailsList->pCredentialDetails[i];
+            PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS credentialDetailsPtr = localCredentialDetailsList->pCredentialDetails[i];
             std::vector<UINT8> credentialId(credentialDetailsPtr->pbCredentialId, credentialDetailsPtr->pbCredentialId + credentialDetailsPtr->cbCredentialId);
 
             // Create a copy of the credential details
-            unique_plugin_credential_details credentialDetailsCopy(new EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS());
+            unique_plugin_credential_details credentialDetailsCopy(new WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS());
             credentialDetailsCopy->cbCredentialId = credentialDetailsPtr->cbCredentialId;
             credentialDetailsCopy->pbCredentialId = wil::make_unique_nothrow<BYTE[]>(credentialDetailsPtr->cbCredentialId).release();
             if (credentialDetailsCopy->pbCredentialId == nullptr || credentialDetailsPtr->cbCredentialId == 0 || credentialDetailsPtr->pbCredentialId == nullptr)

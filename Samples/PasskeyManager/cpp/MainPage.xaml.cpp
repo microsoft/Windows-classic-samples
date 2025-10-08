@@ -423,7 +423,7 @@ namespace winrt::PasskeyManager::implementation
         LogSuccess(L"All credentials deleted");
     }
 
-    void MainPage::UpdatePluginStateTextBlock(EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE state)
+    void MainPage::UpdatePluginStateTextBlock(PLUGIN_AUTHENTICATOR_STATE state)
     {
         auto resources = Application::Current().Resources();
         auto successBrush = resources.Lookup(winrt::box_value(L"SystemFillColorSuccessBrush")).as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();

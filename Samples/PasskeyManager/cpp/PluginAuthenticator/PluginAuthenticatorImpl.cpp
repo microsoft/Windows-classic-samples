@@ -164,12 +164,12 @@ namespace winrt::PasskeyManager::implementation
             return S_OK;
         }
 
-        EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV pluginPerformUv{};
+        WEBAUTHN_PLUGIN_PERFORM_UV pluginPerformUv{};
         pluginPerformUv.transactionId = &transactionId;
 
         if (curApp->m_silentMode)
         {
-            // If the app did not display any UI, use the hwnd of the caller here. This was included in the request to the plugin. Refer: EXPERIMENTAL_PCWEBAUTHN_PLUGIN_OPERATION_REQUEST
+            // If the app did not display any UI, use the hwnd of the caller here. This was included in the request to the plugin. Refer: PCWEBAUTHN_PLUGIN_OPERATION_REQUEST
             pluginPerformUv.hwnd = hWnd;
         }
         else
@@ -178,13 +178,13 @@ namespace winrt::PasskeyManager::implementation
             pluginPerformUv.hwnd = curApp->GetNativeWindowHandle();
         }
 
-        EXPERIMENTAL_PWEBAUTHN_PLUGIN_PERFORM_UV_RESPONSE pPluginPerformUvResponse = nullptr;
+        PWEBAUTHN_PLUGIN_PERFORM_UV_RESPONSE pPluginPerformUvResponse = nullptr;
 
-        auto webAuthNPluginPerformUv = GetProcAddressByFunctionDeclaration(webauthnDll.get(), EXPERIMENTAL_WebAuthNPluginPerformUv);
+        auto webAuthNPluginPerformUv = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNPluginPerformUv);
         RETURN_HR_IF_NULL(E_NOTIMPL, webAuthNPluginPerformUv);
 
         // Step 1: Get the UV count
-        pluginPerformUv.type = EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetUvCount;
+        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetUvCount;
         RETURN_IF_FAILED(webAuthNPluginPerformUv(&pluginPerformUv, &pPluginPerformUvResponse));
 
         /*
@@ -193,7 +193,7 @@ namespace winrt::PasskeyManager::implementation
         */
 
         // Step 2: Get the public key
-        pluginPerformUv.type = EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetPubKey;
+        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetPubKey;
         RETURN_IF_FAILED(webAuthNPluginPerformUv(&pluginPerformUv, &pPluginPerformUvResponse));
 
         // stash public key in a new buffer for later use
@@ -202,7 +202,7 @@ namespace winrt::PasskeyManager::implementation
         memcpy_s(ppbPubKeyData.get(), cbPubData, pPluginPerformUvResponse->pbResponse, pPluginPerformUvResponse->cbResponse);
 
         // Step 3: Perform UV. This step uses a Windows Hello prompt to authenticate the user
-        pluginPerformUv.type = EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::PerformUv;
+        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::PerformUv;
         pluginPerformUv.pwszUsername = wil::make_cotaskmem_string(userName.get()).release();
         // pwszContext can be used to provide additional context to the user. This is displayed alongside the username in the Windows Hello passkey user verification dialog.
         pluginPerformUv.pwszContext = wil::make_cotaskmem_string(L"Context String").release();
@@ -410,9 +410,9 @@ namespace winrt::PasskeyManager::implementation
     * This function is invoked by the platform to request the plugin to handle a make credential operation.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::EXPERIMENTAL_PluginMakeCredential(
-        /* [in] */ __RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest,
-        /* [out] */ __RPC__deref_out_opt EXPERIMENTAL_PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginMakeCredential(
+        /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest,
+        /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
     {
         try
         {
@@ -432,8 +432,8 @@ namespace winrt::PasskeyManager::implementation
                 return E_ABORT;
             }
 
-            wil::unique_cotaskmem_ptr<EXPERIMENTAL_WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST> pDecodedMakeCredentialRequest;
-            auto webauthnDecodeMakeCredentialRequest = GetProcAddressByFunctionDeclaration(webauthnDll.get(), EXPERIMENTAL_WebAuthNDecodeMakeCredentialRequest);
+            wil::unique_cotaskmem_ptr<WEBAUTHN_CTAPCBOR_MAKE_CREDENTIAL_REQUEST> pDecodedMakeCredentialRequest;
+            auto webauthnDecodeMakeCredentialRequest = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNDecodeMakeCredentialRequest);
             THROW_IF_FAILED(webauthnDecodeMakeCredentialRequest(
                 pPluginMakeCredentialRequest->cbEncodedRequest,
                 pPluginMakeCredentialRequest->pbEncodedRequest,
@@ -542,7 +542,7 @@ namespace winrt::PasskeyManager::implementation
                 packedAuthenticatorData,
                 vCredentialIdBuffer));
 
-            auto operationResponse = wil::make_unique_cotaskmem<EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
+            auto operationResponse = wil::make_unique_cotaskmem<WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
 
             WEBAUTHN_CREDENTIAL_ATTESTATION attestationResponse{};
             attestationResponse.dwVersion = WEBAUTHN_CREDENTIAL_ATTESTATION_CURRENT_VERSION;
@@ -558,7 +558,7 @@ namespace winrt::PasskeyManager::implementation
             DWORD cbAttestationBuffer = 0;
             PBYTE pbattestationBuffer;
 
-            auto webauthnEncodeMakeCredentialResponse = GetProcAddressByFunctionDeclaration(webauthnDll.get(), EXPERIMENTAL_WebAuthNEncodeMakeCredentialResponse);
+            auto webauthnEncodeMakeCredentialResponse = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNEncodeMakeCredentialResponse);
             THROW_IF_FAILED(webauthnEncodeMakeCredentialResponse(
                 &attestationResponse,
                 &cbAttestationBuffer,
@@ -607,9 +607,9 @@ namespace winrt::PasskeyManager::implementation
     * This function is invoked by the platform to request the plugin to handle a get assertion operation.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::EXPERIMENTAL_PluginGetAssertion(
-        /* [in] */ __RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest,
-        /* [out] */ __RPC__deref_out_opt EXPERIMENTAL_PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginGetAssertion(
+        /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest,
+        /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
     {
         try
         {
@@ -629,9 +629,9 @@ namespace winrt::PasskeyManager::implementation
                 return E_ABORT;
             }
 
-            wil::unique_cotaskmem_ptr<EXPERIMENTAL_WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST> pDecodedAssertionRequest;
-            // The EXPERIMENTAL_WebAuthNDecodeGetAssertionRequest function can be optionally used to decode the CBOR encoded request to a EXPERIMENTAL_WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST structure.
-            auto webauthnDecodeGetAssertionRequest = GetProcAddressByFunctionDeclaration(webauthnDll.get(), EXPERIMENTAL_WebAuthNDecodeGetAssertionRequest);
+            wil::unique_cotaskmem_ptr<WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST> pDecodedAssertionRequest;
+            // The WebAuthNDecodeGetAssertionRequest function can be optionally used to decode the CBOR encoded request to a WEBAUTHN_CTAPCBOR_GET_ASSERTION_REQUEST structure.
+            auto webauthnDecodeGetAssertionRequest = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNDecodeGetAssertionRequest);
             webauthnDecodeGetAssertionRequest(pPluginGetAssertionRequest->cbEncodedRequest, pPluginGetAssertionRequest->pbEncodedRequest, wil::out_param(pDecodedAssertionRequest));
             wil::shared_cotaskmem_string rpName = wil::make_cotaskmem_string(pDecodedAssertionRequest->pwszRpId);
             //load the user handle
@@ -846,7 +846,7 @@ namespace winrt::PasskeyManager::implementation
             }
 
             // create the response
-            auto operationResponse = wil::make_unique_cotaskmem<EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
+            auto operationResponse = wil::make_unique_cotaskmem<WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
 
             auto assertionResponse = wil::make_unique_cotaskmem<WEBAUTHN_ASSERTION>();
             assertionResponse->dwVersion = WEBAUTHN_ASSERTION_CURRENT_VERSION;
@@ -878,7 +878,7 @@ namespace winrt::PasskeyManager::implementation
             userEntityInformation.cbId = assertionResponse->cbUserId;
             userEntityInformation.pbId = assertionResponse->pbUserId;
 
-            auto ctapGetAssertionResponse = wil::make_unique_cotaskmem<EXPERIMENTAL_WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE>();
+            auto ctapGetAssertionResponse = wil::make_unique_cotaskmem<WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE>();
             ctapGetAssertionResponse->WebAuthNAssertion = *(assertionResponse.get()); // [1] Credential, [2] AuthenticatorData, [3] Signature
             ctapGetAssertionResponse->pUserInformation = &userEntityInformation; // [4] User
             ctapGetAssertionResponse->dwNumberOfCredentials = 1; // [5] NumberOfCredentials
@@ -886,11 +886,11 @@ namespace winrt::PasskeyManager::implementation
             DWORD cbAssertionBuffer = 0;
             PBYTE pbAssertionBuffer;
 
-            // The EXPERIMENTAL_WebAuthNEncodeGetAssertionResponse function can be optionally used to encode the 
-            // EXPERIMENTAL_WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE structure to a CBOR encoded response.
-            auto webAuthNEncodeGetAssertionResponse = GetProcAddressByFunctionDeclaration(webauthnDll.get(), EXPERIMENTAL_WebAuthNEncodeGetAssertionResponse);
+            // The WebAuthNEncodeGetAssertionResponse function can be optionally used to encode the
+            // WEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE structure to a CBOR encoded response.
+            auto webAuthNEncodeGetAssertionResponse = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNEncodeGetAssertionResponse);
             THROW_IF_FAILED(webAuthNEncodeGetAssertionResponse(
-                (EXPERIMENTAL_PCWEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE)(ctapGetAssertionResponse.get()),
+                (PCWEBAUTHN_CTAPCBOR_GET_ASSERTION_RESPONSE)(ctapGetAssertionResponse.get()),
                 &cbAssertionBuffer,
                 &pbAssertionBuffer));
 
@@ -931,8 +931,8 @@ namespace winrt::PasskeyManager::implementation
     /*
     * This function is invoked by the platform to request the plugin to cancel an ongoing operation.
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::EXPERIMENTAL_PluginCancelOperation(
-        /* [out] */ __RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST)
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginCancelOperation(
+        /* [out] */ __RPC__in PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST)
     {
         SetEvent(App::s_pluginOpRequestRecievedEvent.get());
         com_ptr<App> curApp = winrt::Microsoft::UI::Xaml::Application::Current().as<App>();
@@ -944,7 +944,7 @@ namespace winrt::PasskeyManager::implementation
     }
 
     /*
-    * This is a sample implementation of a factory method that creates an instance of the Class that implements the EXPERIMENTAL_IPluginAuthenticator interface.
+    * This is a sample implementation of a factory method that creates an instance of the Class that implements the IPluginAuthenticator interface.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl for the interface definition.
     */
     HRESULT __stdcall ContosoPluginFactory::CreateInstance(

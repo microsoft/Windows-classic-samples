@@ -7,7 +7,7 @@ namespace winrt::PasskeyManager::implementation {
     PluginRegistrationManager::PluginRegistrationManager() :
         m_pluginRegistered(false),
         m_initialized(false),
-        m_pluginState(EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown)
+        m_pluginState(PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown)
     {
         Initialize();
         m_webAuthnDll.reset(LoadLibraryExW(L"webauthn.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32));
@@ -29,7 +29,7 @@ namespace winrt::PasskeyManager::implementation {
         // Get the function pointer of WebAuthNPluginAddAuthenticator
         auto webAuthNPluginAddAuthenticator = GetProcAddressByFunctionDeclaration(
             m_webAuthnDll.get(),
-            EXPERIMENTAL_WebAuthNPluginAddAuthenticator);
+            WebAuthNPluginAddAuthenticator);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAddAuthenticator);
 
         /*
@@ -58,14 +58,14 @@ namespace winrt::PasskeyManager::implementation {
         CLSID CLSID_ContosoPluginAuthenticator;
         RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_ContosoPluginAuthenticator));
 
-        EXPERIMENTAL_WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS addOptions{};
+        WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS addOptions{};
         addOptions.pwszAuthenticatorName = c_pluginName;
         addOptions.pwszPluginRpId = c_pluginRpId;
         addOptions.pwszPluginClsId = c_pluginClsid;
         addOptions.pbAuthenticatorInfo = authenticatorInfo.data();
         addOptions.cbAuthenticatorInfo = static_cast<DWORD>(authenticatorInfo.size());
 
-        EXPERIMENTAL_PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE addResponse;
+        PWEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_RESPONSE addResponse;
         RETURN_IF_FAILED(webAuthNPluginAddAuthenticator(&addOptions, &addResponse));
 
         // The response from plugin contains the public key used to sign plugin operation requests. Stash it for later use.
@@ -96,7 +96,7 @@ namespace winrt::PasskeyManager::implementation {
         // Get the function pointer of WebAuthNPluginRemoveAuthenticator
         auto webAuthNPluginRemoveAuthenticator = GetProcAddressByFunctionDeclaration(
             m_webAuthnDll.get(),
-            EXPERIMENTAL_WebAuthNPluginRemoveAuthenticator);
+            WebAuthNPluginRemoveAuthenticator);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginRemoveAuthenticator);
 
         RETURN_HR(webAuthNPluginRemoveAuthenticator(c_pluginClsid));
@@ -106,19 +106,19 @@ namespace winrt::PasskeyManager::implementation {
     {
         // Reset the plugin state and registration status
         m_pluginRegistered = false;
-        m_pluginState = EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown;
+        m_pluginState = PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown;
 
-        // Get handle to EXPERIMENTAL_WebAuthNPluginGetAuthenticatorState which takes in a GUID and returns EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE
+        // Get handle to WebAuthNPluginGetAuthenticatorState which takes in a GUID and returns PLUGIN_AUTHENTICATOR_STATE
         auto webAuthNPluginGetAuthenticatorState = GetProcAddressByFunctionDeclaration(
             m_webAuthnDll.get(),
-            EXPERIMENTAL_WebAuthNPluginGetAuthenticatorState);
+            WebAuthNPluginGetAuthenticatorState);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginGetAuthenticatorState);
 
         // Get the plugin state
-        EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE localPluginState;
+        PLUGIN_AUTHENTICATOR_STATE localPluginState;
         RETURN_IF_FAILED(webAuthNPluginGetAuthenticatorState(c_pluginClsid, &localPluginState));
 
-        // If the EXPERIMENTAL_WebAuthNPluginGetAuthenticatorState function succeeded, that indicates the plugin is registered and localPluginState is the valid plugin state
+        // If the WebAuthNPluginGetAuthenticatorState function succeeded, that indicates the plugin is registered and localPluginState is the valid plugin state
         m_pluginRegistered = true;
         m_pluginState = localPluginState;
         return S_OK;

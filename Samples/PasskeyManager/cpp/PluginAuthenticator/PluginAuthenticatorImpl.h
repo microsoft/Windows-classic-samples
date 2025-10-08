@@ -14,11 +14,11 @@ static constexpr wchar_t contosoplugin_key_domain[] = L"contoso/";
 
 namespace winrt::PasskeyManager::implementation
 {
-    struct ContosoPlugin : winrt::implements<ContosoPlugin, EXPERIMENTAL_IPluginAuthenticator>
+    struct ContosoPlugin : winrt::implements<ContosoPlugin, IPluginAuthenticator>
     {
-        HRESULT __stdcall EXPERIMENTAL_PluginMakeCredential(__RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest, __RPC__deref_out_opt EXPERIMENTAL_PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
-        HRESULT __stdcall EXPERIMENTAL_PluginGetAssertion(__RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest, __RPC__deref_out_opt EXPERIMENTAL_PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
-        HRESULT __stdcall EXPERIMENTAL_PluginCancelOperation(__RPC__in EXPERIMENTAL_PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST pCancelRequest);
+        HRESULT __stdcall PluginMakeCredential(__RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest, __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
+        HRESULT __stdcall PluginGetAssertion(__RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest, __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
+        HRESULT __stdcall PluginCancelOperation(__RPC__in PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST pCancelRequest);
     };
 
     struct ContosoPluginFactory : implements<ContosoPluginFactory, IClassFactory>

@@ -25,7 +25,7 @@ constexpr wchar_t c_pluginLocalAppDataDBDir[] = L"CredentialsDB";
 constexpr wchar_t c_credentialsFileName[] = L"credentials.dat";
 
 struct PluginCredentialDetailsDeleter {
-    void operator()(EXPERIMENTAL_PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS p) {
+    void operator()(PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS p) {
         delete[](p->pbCredentialId);
         free(p->pwszRpId);
         free(p->pwszRpName);
@@ -34,7 +34,7 @@ struct PluginCredentialDetailsDeleter {
         free(p->pwszUserDisplayName);
     }
 };
-using unique_plugin_credential_details = std::unique_ptr<EXPERIMENTAL_WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS, PluginCredentialDetailsDeleter>;
+using unique_plugin_credential_details = std::unique_ptr<WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS, PluginCredentialDetailsDeleter>;
 
 struct CredentialDetailsDeleter {
     void operator()(PWEBAUTHN_CREDENTIAL_DETAILS p) {
