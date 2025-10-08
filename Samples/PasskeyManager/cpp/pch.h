@@ -52,5 +52,6 @@
 #include <shlobj_core.h>
 
 #include <include/webauthn/webauthn.h>
+#include <include/webauthn/webauthnplugin.h>
 
 std::vector<uint8_t> hexStringToBytes(const std::string& hex);
