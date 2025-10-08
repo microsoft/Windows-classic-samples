@@ -124,10 +124,10 @@ namespace winrt::PasskeyManager::implementation
         RETURN_HR_IF(E_FAIL, credentialIdList.empty());
 
         // Get the function pointer of WebAuthNPluginAddAuthenticator
-        auto webAuthNPluginRemoveCredential = GetProcAddressByFunctionDeclaration(
+        auto webAuthNPluginRemoveCredentials = GetProcAddressByFunctionDeclaration(
                 m_webAuthnDll.get(),
                 WebAuthNPluginAuthenticatorRemoveCredentials);
-        RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginRemoveCredential);
+        RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginRemoveCredentials);
 
         std::vector<unique_plugin_credential_details> credentialDetailList{};
 
