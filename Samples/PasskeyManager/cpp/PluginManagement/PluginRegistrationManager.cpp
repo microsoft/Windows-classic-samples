@@ -58,10 +58,11 @@ namespace winrt::PasskeyManager::implementation {
         CLSID CLSID_ContosoPluginAuthenticator;
         RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_ContosoPluginAuthenticator));
 
-        WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS addOptions{};
-        addOptions.pwszAuthenticatorName = c_pluginName;
+        WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS addOptions{
+            c_pluginName,
+            CLSID_ContosoPluginAuthenticator,
+        };
         addOptions.pwszPluginRpId = c_pluginRpId;
-        addOptions.pwszPluginClsId = c_pluginClsid;
         addOptions.pbAuthenticatorInfo = authenticatorInfo.data();
         addOptions.cbAuthenticatorInfo = static_cast<DWORD>(authenticatorInfo.size());
 
