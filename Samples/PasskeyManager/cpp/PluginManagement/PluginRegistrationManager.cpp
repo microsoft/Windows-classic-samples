@@ -55,12 +55,12 @@ namespace winrt::PasskeyManager::implementation {
         std::vector<BYTE> authenticatorInfo = hexStringToBytes(fullAuthenticatorInfoStr);
 
         // Validate that c_pluginClsid is a valid CLSID
-        CLSID CLSID_ContosoPluginAuthenticator;
-        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_ContosoPluginAuthenticator));
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
 
         WEBAUTHN_PLUGIN_ADD_AUTHENTICATOR_OPTIONS addOptions{
             c_pluginName,
-            CLSID_ContosoPluginAuthenticator,
+            CLSID_PluginAuthenticator,
         };
         addOptions.pwszPluginRpId = c_pluginRpId;
         addOptions.pbAuthenticatorInfo = authenticatorInfo.data();
@@ -100,7 +100,11 @@ namespace winrt::PasskeyManager::implementation {
             WebAuthNPluginRemoveAuthenticator);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginRemoveAuthenticator);
 
-        RETURN_HR(webAuthNPluginRemoveAuthenticator(c_pluginClsid));
+        // Convert c_pluginClsid to a CLSID
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+        RETURN_HR(webAuthNPluginRemoveAuthenticator(CLSID_PluginAuthenticator));
     }
 
     HRESULT PluginRegistrationManager::RefreshPluginState()
@@ -115,9 +119,13 @@ namespace winrt::PasskeyManager::implementation {
             WebAuthNPluginGetAuthenticatorState);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginGetAuthenticatorState);
 
+        // Convert c_pluginClsid to a CLSID
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
         // Get the plugin state
         AUTHENTICATOR_STATE localPluginState;
-        RETURN_IF_FAILED(webAuthNPluginGetAuthenticatorState(c_pluginClsid, &localPluginState));
+        RETURN_IF_FAILED(webAuthNPluginGetAuthenticatorState(CLSID_PluginAuthenticator, &localPluginState));
 
         // If the WebAuthNPluginGetAuthenticatorState function succeeded, that indicates the plugin is registered and localPluginState is the valid plugin state
         m_pluginRegistered = true;

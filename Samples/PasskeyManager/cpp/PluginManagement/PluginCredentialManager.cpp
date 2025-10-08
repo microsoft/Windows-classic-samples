@@ -116,7 +116,12 @@ namespace winrt::PasskeyManager::implementation
             m_webAuthnDll.get(),
             WebAuthNPluginAuthenticatorRemoveAllCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorRemoveAllCredentials);
-        RETURN_HR(webAuthNPluginAuthenticatorRemoveAllCredentials(c_pluginClsid));
+
+        // Convert c_pluginClsid to a CLSID
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+        RETURN_HR(webAuthNPluginAuthenticatorRemoveAllCredentials(CLSID_PluginAuthenticator));
     }
 
     HRESULT PluginCredentialManager::DeletePluginCredentialById(std::vector<std::vector<UINT8>> const& credentialIdList, bool deleteEverywhere)
