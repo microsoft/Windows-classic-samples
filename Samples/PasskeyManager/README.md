@@ -46,7 +46,7 @@ Windows 11 Insider Edition Beta Channel. Build Major Version = 22635 and Minor V
 #### Download Prerequisites
 
 * Download the [cbor-lite](https://bitbucket.org/isode/cbor-lite/src/master/include/) directory and copy it into the `include` directory of the sample.
-* Download the [webauthn](https://github.com/microsoft/webauthn/experimental) directory and copy it into the `include` directory of the sample.
+* Download the [webauthn](https://github.com/microsoft/webauthn) directory and copy it into the `include` directory of the sample.
 
 #### Fill in the plugin information.
 * Use guidgen.exe to generate a new GUID for the plugin.
