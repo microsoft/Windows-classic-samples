@@ -423,7 +423,7 @@ namespace winrt::PasskeyManager::implementation
         LogSuccess(L"All credentials deleted");
     }
 
-    void MainPage::UpdatePluginStateTextBlock(PLUGIN_AUTHENTICATOR_STATE state)
+    void MainPage::UpdatePluginStateTextBlock(AUTHENTICATOR_STATE state)
     {
         auto resources = Application::Current().Resources();
         auto successBrush = resources.Lookup(winrt::box_value(L"SystemFillColorSuccessBrush")).as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
@@ -432,16 +432,14 @@ namespace winrt::PasskeyManager::implementation
 
         switch (state)
         {
-        case PluginAuthenticatorState_Enabled:
+        case AuthenticatorState_Enabled:
             pluginStateRun().Text(L"Enabled");
             pluginStateRun().Foreground(successBrush);
             break;
-        case PluginAuthenticatorState_Disabled:
+        case AuthenticatorState_Disabled:
             pluginStateRun().Text(L"Disabled");
             pluginStateRun().Foreground(criticalBrush);
             break;
-        case PluginAuthenticatorState_Unknown:
-            [[fallthrough]];
         default:
             pluginStateRun().Text(L"Unknown");
             pluginStateRun().Foreground(cautionBrush);

@@ -52,13 +52,13 @@ namespace winrt::PasskeyManager::implementation
             return m_pluginRegistered;
         }
 
-        PLUGIN_AUTHENTICATOR_STATE GetPluginState() const
+        AUTHENTICATOR_STATE GetPluginState() const
         {
             return m_pluginState;
         }
 
     private:
-        PLUGIN_AUTHENTICATOR_STATE m_pluginState;
+        AUTHENTICATOR_STATE m_pluginState;
         bool m_initialized = false;
         bool m_pluginRegistered = false;
         wil::unique_hmodule m_webAuthnDll;

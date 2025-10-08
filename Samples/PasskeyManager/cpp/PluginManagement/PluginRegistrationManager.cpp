@@ -7,7 +7,7 @@ namespace winrt::PasskeyManager::implementation {
     PluginRegistrationManager::PluginRegistrationManager() :
         m_pluginRegistered(false),
         m_initialized(false),
-        m_pluginState(PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown)
+        m_pluginState(AUTHENTICATOR_STATE::AuthenticatorState_Disabled)
     {
         Initialize();
         m_webAuthnDll.reset(LoadLibraryExW(L"webauthn.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32));
@@ -106,16 +106,16 @@ namespace winrt::PasskeyManager::implementation {
     {
         // Reset the plugin state and registration status
         m_pluginRegistered = false;
-        m_pluginState = PLUGIN_AUTHENTICATOR_STATE::PluginAuthenticatorState_Unknown;
+        m_pluginState = AUTHENTICATOR_STATE::AuthenticatorState_Disabled;
 
-        // Get handle to WebAuthNPluginGetAuthenticatorState which takes in a GUID and returns PLUGIN_AUTHENTICATOR_STATE
+        // Get handle to WebAuthNPluginGetAuthenticatorState which takes in a GUID and returns AUTHENTICATOR_STATE
         auto webAuthNPluginGetAuthenticatorState = GetProcAddressByFunctionDeclaration(
             m_webAuthnDll.get(),
             WebAuthNPluginGetAuthenticatorState);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginGetAuthenticatorState);
 
         // Get the plugin state
-        PLUGIN_AUTHENTICATOR_STATE localPluginState;
+        AUTHENTICATOR_STATE localPluginState;
         RETURN_IF_FAILED(webAuthNPluginGetAuthenticatorState(c_pluginClsid, &localPluginState));
 
         // If the WebAuthNPluginGetAuthenticatorState function succeeded, that indicates the plugin is registered and localPluginState is the valid plugin state

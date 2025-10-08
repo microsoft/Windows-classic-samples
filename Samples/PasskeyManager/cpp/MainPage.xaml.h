@@ -62,7 +62,7 @@ namespace winrt::PasskeyManager::implementation
             std::wstring result = L"WARNING: " + std::wstring(input.c_str()) + L": " + winrt::to_hstring(static_cast<int>(hr)).c_str() + L"\U000026A0";
             UpdatePasskeyOperationStatusText(winrt::hstring{ result });
         }
-        void UpdatePluginStateTextBlock(PLUGIN_AUTHENTICATOR_STATE state);
+        void UpdatePluginStateTextBlock(AUTHENTICATOR_STATE state);
         winrt::IAsyncAction SelectionChanged(IInspectable const& sender, Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const&);
         winrt::fire_and_forget UpdatePluginEnableState();
 
