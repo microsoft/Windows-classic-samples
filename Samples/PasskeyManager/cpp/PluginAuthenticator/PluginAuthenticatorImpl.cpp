@@ -113,7 +113,7 @@ namespace winrt::PasskeyManager::implementation
         return S_OK;
     }
 
-    HRESULT PerformUv(
+    HRESULT PerformUserVerification(
         winrt::com_ptr<winrt::PasskeyManager::implementation::App>& curApp,
         HWND hWnd,
         wil::shared_hmodule webauthnDll,
@@ -413,7 +413,7 @@ namespace winrt::PasskeyManager::implementation
     * This function is invoked by the platform to request the plugin to handle a make credential operation.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginMakeCredential(
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::MakeCredential(
         /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest,
         /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
     {
@@ -463,7 +463,7 @@ namespace winrt::PasskeyManager::implementation
                 curApp->m_pluginOperationStatus.requestSignatureVerificationStatus = requestSignResult;
             }
 
-            THROW_IF_FAILED(PerformUv(curApp,
+            THROW_IF_FAILED(PerformUserVerification(curApp,
                 pPluginMakeCredentialRequest->hWnd,
                 webauthnDll,
                 pPluginMakeCredentialRequest->transactionId,
@@ -610,7 +610,7 @@ namespace winrt::PasskeyManager::implementation
     * This function is invoked by the platform to request the plugin to handle a get assertion operation.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginGetAssertion(
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::GetAssertion(
         /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest,
         /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
     {
@@ -718,7 +718,7 @@ namespace winrt::PasskeyManager::implementation
                 curApp->m_pluginOperationStatus.requestSignatureVerificationStatus = requestSignResult;
             }
 
-            THROW_IF_FAILED(PerformUv(curApp,
+            THROW_IF_FAILED(PerformUserVerification(curApp,
                 pPluginGetAssertionRequest->hWnd,
                 webauthnDll,
                 pPluginGetAssertionRequest->transactionId,
@@ -934,8 +934,8 @@ namespace winrt::PasskeyManager::implementation
     /*
     * This function is invoked by the platform to request the plugin to cancel an ongoing operation.
     */
-    HRESULT STDMETHODCALLTYPE ContosoPlugin::PluginCancelOperation(
-        /* [out] */ __RPC__in PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST)
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::CancelOperation(
+        /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST)
     {
         SetEvent(App::s_pluginOpRequestRecievedEvent.get());
         com_ptr<App> curApp = winrt::Microsoft::UI::Xaml::Application::Current().as<App>();
