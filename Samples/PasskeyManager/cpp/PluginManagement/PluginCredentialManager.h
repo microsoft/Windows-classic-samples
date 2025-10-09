@@ -27,11 +27,11 @@ constexpr wchar_t c_credentialsFileName[] = L"credentials.dat";
 struct PluginCredentialDetailsDeleter {
     void operator()(PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS p) {
         delete[](p->pbCredentialId);
-        free(p->pwszRpId);
-        free(p->pwszRpName);
+        delete[](p->pwszRpId);
+        delete[](p->pwszRpName);
         delete[](p->pbUserId);
-        free(p->pwszUserName);
-        free(p->pwszUserDisplayName);
+        delete[](p->pwszUserName);
+        delete[](p->pwszUserDisplayName);
     }
 };
 using unique_plugin_credential_details = std::unique_ptr<WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS, PluginCredentialDetailsDeleter>;
