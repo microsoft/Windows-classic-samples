@@ -47,17 +47,20 @@ namespace winrt::PasskeyManager::implementation
         }
 
         RETURN_HR_IF(E_FAIL, credentialDetailList.empty());
-        WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
-        pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-        auto credentialDetailPtrList = std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
+
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+        auto credentialDetailCopyList = std::vector<WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
         for (auto& credential : credentialDetailList)
         {
-            credentialDetailPtrList.push_back(credential.get());
+            credentialDetailCopyList.push_back(*credential.get());
         }
-        pluginCredentialList.pCredentialDetails = credentialDetailPtrList.data();
-        auto pluginClsId = wil::make_unique_string<wil::unique_cotaskmem_string>(c_pluginClsid);
-        pluginCredentialList.pwszPluginClsId = pluginClsId.get();
-        RETURN_IF_FAILED(webAuthNPluginAuthenticatorAddCredentials(&pluginCredentialList));
+        RETURN_IF_FAILED(webAuthNPluginAuthenticatorAddCredentials(
+            CLSID_PluginAuthenticator,
+            static_cast<DWORD>(credentialDetailCopyList.size()),
+            credentialDetailCopyList.data())
+        );
         return S_OK;
     }
 
@@ -94,17 +97,19 @@ namespace winrt::PasskeyManager::implementation
 
         if (!credentialDetailList.empty())
         {
-            WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
-            pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-            std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
+            CLSID CLSID_PluginAuthenticator;
+            RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+            auto credentialDetailCopyList = std::vector<WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
             for (auto& credential : credentialDetailList)
             {
-                credentialDetailPtrList.push_back(credential.get());
+                credentialDetailCopyList.push_back(*credential.get());
             }
-            pluginCredentialList.pCredentialDetails = credentialDetailPtrList.data();
-            auto pluginClsId = wil::make_unique_string<wil::unique_cotaskmem_string>(c_pluginClsid);
-            pluginCredentialList.pwszPluginClsId = pluginClsId.get();
-            RETURN_IF_FAILED(webAuthNPluginAuthenticatorAddCredentials(&pluginCredentialList));
+            RETURN_IF_FAILED(webAuthNPluginAuthenticatorAddCredentials(
+                CLSID_PluginAuthenticator,
+                static_cast<DWORD>(credentialDetailCopyList.size()),
+                credentialDetailCopyList.data())
+            );
         }
         return S_OK;
     }
@@ -150,17 +155,19 @@ namespace winrt::PasskeyManager::implementation
 
         if (!credentialDetailList.empty())
         {
-            WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST pluginCredentialList;
-            pluginCredentialList.cCredentialDetails = static_cast<DWORD>(credentialDetailList.size());
-            std::vector<PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS> credentialDetailPtrList{};
+            CLSID CLSID_PluginAuthenticator;
+            RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+            auto credentialDetailCopyList = std::vector<WEBAUTHN_PLUGIN_CREDENTIAL_DETAILS>{};
             for (auto& credential : credentialDetailList)
             {
-                credentialDetailPtrList.push_back(credential.get());
+                credentialDetailCopyList.push_back(*credential.get());
             }
-            pluginCredentialList.pCredentialDetails = credentialDetailPtrList.data();
-            auto pluginClsId = wil::make_unique_string<wil::unique_cotaskmem_string>(c_pluginClsid);
-            pluginCredentialList.pwszPluginClsId = pluginClsId.get();
-            RETURN_IF_FAILED(webAuthNPluginRemoveCredential(&pluginCredentialList));
+            RETURN_IF_FAILED(webAuthNPluginRemoveCredentials(
+                CLSID_PluginAuthenticator,
+                static_cast<DWORD>(credentialDetailCopyList.size()),
+                credentialDetailCopyList.data())
+            );
         }
 
         if (deleteEverywhere)
@@ -182,18 +189,24 @@ namespace winrt::PasskeyManager::implementation
         std::lock_guard<std::mutex> lock(m_pluginCachedCredentialsOperationMutex);
         m_cachedCredentialsLoaded = false;
         m_pluginCachedCredentialMetadataMap.clear();
+
         // Get the function pointer of WebAuthNPluginAuthenticatorGetAllCredentials
         auto webAuthNPluginAuthenticatorGetAllCredentials = GetProcAddressByFunctionDeclaration(m_webAuthnDll.get(),
             WebAuthNPluginAuthenticatorGetAllCredentials);
         RETURN_HR_IF_NULL(E_FAIL, webAuthNPluginAuthenticatorGetAllCredentials);
 
-        PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS_LIST localCredentialDetailsList = nullptr;
-        HRESULT hr = webAuthNPluginAuthenticatorGetAllCredentials(c_pluginClsid, &localCredentialDetailsList);
+        CLSID CLSID_PluginAuthenticator;
+        RETURN_IF_FAILED(CLSIDFromString(c_pluginClsid, &CLSID_PluginAuthenticator));
+
+        DWORD cCredentialDetails;
+        PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS pCredentialDetailsArray;
+
+        HRESULT hr = webAuthNPluginAuthenticatorGetAllCredentials(CLSID_PluginAuthenticator, &cCredentialDetails, &pCredentialDetailsArray);
         RETURN_HR_IF_EXPECTED(S_OK, hr == HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND));
 
-        for (DWORD i = 0; i < localCredentialDetailsList->cCredentialDetails; i++)
+        for (DWORD i = 0; i < cCredentialDetails; i++)
         {
-            PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS credentialDetailsPtr = localCredentialDetailsList->pCredentialDetails[i];
+            PWEBAUTHN_PLUGIN_CREDENTIAL_DETAILS credentialDetailsPtr = &pCredentialDetailsArray[i];
             std::vector<UINT8> credentialId(credentialDetailsPtr->pbCredentialId, credentialDetailsPtr->pbCredentialId + credentialDetailsPtr->cbCredentialId);
 
             // Create a copy of the credential details
