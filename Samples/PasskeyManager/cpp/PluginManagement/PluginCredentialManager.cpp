@@ -39,10 +39,10 @@ namespace winrt::PasskeyManager::implementation
             pluginCred->pwszUserDisplayName = _wcsdup(savedCred->pUserInformation->pwszDisplayName);
             pluginCred->cbUserId = savedCred->pUserInformation->cbId;
             pluginCred->pbUserId = wil::make_unique_nothrow<BYTE[]>(pluginCred->cbUserId).release();
-            memcpy_s(pluginCred->pbUserId, pluginCred->cbUserId, savedCred->pUserInformation->pbId, savedCred->pUserInformation->cbId);
+            memcpy_s(const_cast<BYTE*>(pluginCred->pbUserId), pluginCred->cbUserId, savedCred->pUserInformation->pbId, savedCred->pUserInformation->cbId);
             pluginCred->cbCredentialId = savedCred->cbCredentialID;
             pluginCred->pbCredentialId = wil::make_unique_nothrow<BYTE[]>(pluginCred->cbCredentialId).release();
-            memcpy_s(pluginCred->pbCredentialId, pluginCred->cbCredentialId, savedCred->pbCredentialID, savedCred->cbCredentialID);
+            memcpy_s(const_cast<BYTE*>(pluginCred->pbCredentialId), pluginCred->cbCredentialId, savedCred->pbCredentialID, savedCred->cbCredentialID);
             credentialDetailList.push_back(std::move(pluginCred));
         }
 
@@ -84,10 +84,10 @@ namespace winrt::PasskeyManager::implementation
                 pluginCred->pwszUserDisplayName = _wcsdup(savedCred->pUserInformation->pwszDisplayName);
                 pluginCred->cbUserId = savedCred->pUserInformation->cbId;
                 pluginCred->pbUserId = wil::make_unique_nothrow<BYTE[]>(pluginCred->cbUserId).release();
-                memcpy_s(pluginCred->pbUserId, pluginCred->cbUserId, savedCred->pUserInformation->pbId, savedCred->pUserInformation->cbId);
+                memcpy_s(const_cast<BYTE*>(pluginCred->pbUserId), pluginCred->cbUserId, savedCred->pUserInformation->pbId, savedCred->pUserInformation->cbId);
                 pluginCred->cbCredentialId = savedCred->cbCredentialID;
                 pluginCred->pbCredentialId = wil::make_unique_nothrow<BYTE[]>(pluginCred->cbCredentialId).release();
-                memcpy_s(pluginCred->pbCredentialId, pluginCred->cbCredentialId, savedCred->pbCredentialID, savedCred->cbCredentialID);
+                memcpy_s(const_cast<BYTE*>(pluginCred->pbCredentialId), pluginCred->cbCredentialId, savedCred->pbCredentialID, savedCred->cbCredentialID);
                 credentialDetailList.push_back(std::move(pluginCred));
             }
         }
@@ -204,7 +204,7 @@ namespace winrt::PasskeyManager::implementation
             {
                 continue;
             }
-            memcpy_s(credentialDetailsCopy->pbCredentialId,
+            memcpy_s(const_cast<BYTE*>(credentialDetailsCopy->pbCredentialId),
                 credentialDetailsCopy->cbCredentialId,
                 credentialDetailsPtr->pbCredentialId,
                 credentialDetailsPtr->cbCredentialId);
@@ -217,7 +217,7 @@ namespace winrt::PasskeyManager::implementation
                 continue;
             }
             memcpy_s(
-                credentialDetailsCopy->pbUserId,
+                const_cast<BYTE*>(credentialDetailsCopy->pbUserId),
                 credentialDetailsCopy->cbUserId,
                 credentialDetailsPtr->pbUserId,
                 credentialDetailsPtr->cbUserId);
