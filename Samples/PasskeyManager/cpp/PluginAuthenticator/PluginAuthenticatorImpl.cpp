@@ -415,7 +415,7 @@ namespace winrt::PasskeyManager::implementation
     */
     HRESULT STDMETHODCALLTYPE ContosoPlugin::MakeCredential(
         /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest,
-        /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
+        /* [out] */ __RPC__out PWEBAUTHN_PLUGIN_OPERATION_RESPONSE response) noexcept
     {
         try
         {
@@ -545,8 +545,6 @@ namespace winrt::PasskeyManager::implementation
                 packedAuthenticatorData,
                 vCredentialIdBuffer));
 
-            auto operationResponse = wil::make_unique_cotaskmem<WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
-
             WEBAUTHN_CREDENTIAL_ATTESTATION attestationResponse{};
             attestationResponse.dwVersion = WEBAUTHN_CREDENTIAL_ATTESTATION_CURRENT_VERSION;
             attestationResponse.pwszFormatType = WEBAUTHN_ATTESTATION_TYPE_NONE;
@@ -566,14 +564,13 @@ namespace winrt::PasskeyManager::implementation
                 &attestationResponse,
                 &cbAttestationBuffer,
                 &pbattestationBuffer));
-            operationResponse->cbEncodedResponse = cbAttestationBuffer;
-            operationResponse->pbEncodedResponse = wil::make_unique_cotaskmem<BYTE[]>(cbAttestationBuffer).release();
-            memcpy_s(operationResponse->pbEncodedResponse,
-                operationResponse->cbEncodedResponse,
+
+            response->cbEncodedResponse = cbAttestationBuffer;
+            response->pbEncodedResponse = wil::make_unique_cotaskmem<BYTE[]>(cbAttestationBuffer).release();
+            memcpy_s(response->pbEncodedResponse,
+                response->cbEncodedResponse,
                 pbattestationBuffer,
                 cbAttestationBuffer);
-
-            *response = operationResponse.release();
 
             WEBAUTHN_CREDENTIAL_DETAILS credentialDetails{};
             credentialDetails.dwVersion = WEBAUTHN_CREDENTIAL_DETAILS_CURRENT_VERSION;
@@ -612,7 +609,7 @@ namespace winrt::PasskeyManager::implementation
     */
     HRESULT STDMETHODCALLTYPE ContosoPlugin::GetAssertion(
         /* [in] */ __RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest,
-        /* [out] */ __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept
+        /* [out] */ __RPC__out PWEBAUTHN_PLUGIN_OPERATION_RESPONSE response) noexcept
     {
         try
         {
@@ -848,9 +845,6 @@ namespace winrt::PasskeyManager::implementation
                 memcpy_s(pbSignature.get(), cbSignature, encodedSignature.data(), static_cast<DWORD>(cbSignature));
             }
 
-            // create the response
-            auto operationResponse = wil::make_unique_cotaskmem<WEBAUTHN_PLUGIN_OPERATION_RESPONSE>();
-
             auto assertionResponse = wil::make_unique_cotaskmem<WEBAUTHN_ASSERTION>();
             assertionResponse->dwVersion = WEBAUTHN_ASSERTION_CURRENT_VERSION;
 
@@ -904,17 +898,16 @@ namespace winrt::PasskeyManager::implementation
             pbSignature.reset();
             pDecodedAssertionRequest.reset();
 
-            operationResponse->cbEncodedResponse = cbAssertionBuffer;
+            response->cbEncodedResponse = cbAssertionBuffer;
             // pbEncodedResponse must contain a CBOR encoded response as specified the FIDO CTAP.
             // Refer: https://fidoalliance.org/specs/fido-v2.0-ps-20190130/fido-client-to-authenticator-protocol-v2.0-ps-20190130.html#message-encoding.
-            operationResponse->pbEncodedResponse = wil::make_unique_cotaskmem<BYTE[]>(cbAssertionBuffer).release();
+            response->pbEncodedResponse = wil::make_unique_cotaskmem<BYTE[]>(cbAssertionBuffer).release();
             memcpy_s(
-                operationResponse->pbEncodedResponse,
-                operationResponse->cbEncodedResponse,
+                response->pbEncodedResponse,
+                response->cbEncodedResponse,
                 pbAssertionBuffer,
                 cbAssertionBuffer);
 
-            *response = operationResponse.release();
             SetEvent(App::s_hPluginOpCompletedEvent.get());
             return S_OK;
         }
