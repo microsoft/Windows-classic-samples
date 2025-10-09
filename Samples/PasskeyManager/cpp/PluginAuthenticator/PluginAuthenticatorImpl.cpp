@@ -946,6 +946,13 @@ namespace winrt::PasskeyManager::implementation
         return S_OK;
     }
 
+    HRESULT STDMETHODCALLTYPE ContosoPlugin::GetLockStatus(
+        /* [out] */ __RPC__out PLUGIN_LOCK_STATUS* lockStatus) noexcept
+    {
+        *lockStatus = PluginUnlocked;
+        return S_OK;
+    }
+
     /*
     * This is a sample implementation of a factory method that creates an instance of the Class that implements the IPluginAuthenticator interface.
     * Refer: pluginauthenticator.h/pluginauthenticator.idl for the interface definition.

@@ -19,6 +19,7 @@ namespace winrt::PasskeyManager::implementation
         HRESULT __stdcall MakeCredential(__RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginMakeCredentialRequest, __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
         HRESULT __stdcall GetAssertion(__RPC__in PCWEBAUTHN_PLUGIN_OPERATION_REQUEST pPluginGetAssertionRequest, __RPC__deref_out_opt PWEBAUTHN_PLUGIN_OPERATION_RESPONSE* response) noexcept;
         HRESULT __stdcall CancelOperation(__RPC__in PCWEBAUTHN_PLUGIN_CANCEL_OPERATION_REQUEST pCancelRequest);
+        HRESULT __stdcall GetLockStatus(__RPC__out PLUGIN_LOCK_STATUS* lockStatus) noexcept;
     };
 
     struct ContosoPluginFactory : implements<ContosoPluginFactory, IClassFactory>
