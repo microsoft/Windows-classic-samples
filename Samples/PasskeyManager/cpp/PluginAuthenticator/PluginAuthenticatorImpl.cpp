@@ -164,57 +164,60 @@ namespace winrt::PasskeyManager::implementation
             return S_OK;
         }
 
-        WEBAUTHN_PLUGIN_PERFORM_UV pluginPerformUv{};
-        pluginPerformUv.transactionId = &transactionId;
+        // Step 1: Get the UV count
+        DWORD dwVerificationCount;
 
+        auto webAuthNPluginGetUserVerificationCount = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNPluginGetUserVerificationCount);
+        RETURN_HR_IF_NULL(E_NOTIMPL, webAuthNPluginGetUserVerificationCount);
+
+        RETURN_IF_FAILED(webAuthNPluginGetUserVerificationCount(transactionId, &dwVerificationCount));
+
+        // Step 2: Get the public key
+        DWORD cbPublicKey;
+        PBYTE pbPublicKey = nullptr;
+
+        auto webAuthNPluginGetUserVerificationPublicKey = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNPluginGetUserVerificationPublicKey);
+        RETURN_HR_IF_NULL(E_NOTIMPL, webAuthNPluginGetUserVerificationPublicKey);
+
+        RETURN_IF_FAILED(webAuthNPluginGetUserVerificationPublicKey(transactionId, &cbPublicKey, &pbPublicKey));
+
+        // stash public key in a new buffer for later use
+        wil::unique_hlocal_ptr<BYTE[]> ppbPubKeyData = wil::make_unique_hlocal<BYTE[]>(cbPublicKey);
+        memcpy_s(ppbPubKeyData.get(), cbPublicKey, pbPublicKey, cbPublicKey);
+
+        // Step 3: Perform UV. This step uses a Windows Hello prompt to authenticate the user
+        DWORD cbResponse;
+        PBYTE pbResponse = nullptr;
+
+        HWND hwnd;
         if (curApp->m_silentMode)
         {
             // If the app did not display any UI, use the hwnd of the caller here. This was included in the request to the plugin. Refer: PCWEBAUTHN_PLUGIN_OPERATION_REQUEST
-            pluginPerformUv.hwnd = hWnd;
+            hwnd = hWnd;
         }
         else
         {
             // If the app displayed UI, use the hwnd of the app window here
-            pluginPerformUv.hwnd = curApp->GetNativeWindowHandle();
+            hwnd = curApp->GetNativeWindowHandle();
         }
 
-        PWEBAUTHN_PLUGIN_PERFORM_UV_RESPONSE pPluginPerformUvResponse = nullptr;
+        WEBAUTHN_PLUGIN_USER_VERIFICATION_REQUEST pluginUserVerificationRequest { hwnd, transactionId };
+        pluginUserVerificationRequest.pwszUsername = wil::make_cotaskmem_string(userName.get()).release();
+        // pwszDisplayHint can be used to provide additional context to the user. This is displayed alongside the username in the Windows Hello passkey user verification dialog.
+        pluginUserVerificationRequest.pwszDisplayHint = wil::make_cotaskmem_string(L"Display Hint").release();
 
-        auto webAuthNPluginPerformUv = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNPluginPerformUv);
-        RETURN_HR_IF_NULL(E_NOTIMPL, webAuthNPluginPerformUv);
+        auto webAuthNPluginPerformUserVerification = GetProcAddressByFunctionDeclaration(webauthnDll.get(), WebAuthNPluginPerformUserVerification);
+        RETURN_HR_IF_NULL(E_NOTIMPL, webAuthNPluginPerformUserVerification);
 
-        // Step 1: Get the UV count
-        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetUvCount;
-        RETURN_IF_FAILED(webAuthNPluginPerformUv(&pluginPerformUv, &pPluginPerformUvResponse));
-
-        /*
-        * pPluginPerformUvResponse->pbResponse contains the UV count
-        * The UV count tracks the number of times the user has performed a gesture to unlock the vault
-        */
-
-        // Step 2: Get the public key
-        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::GetPubKey;
-        RETURN_IF_FAILED(webAuthNPluginPerformUv(&pluginPerformUv, &pPluginPerformUvResponse));
-
-        // stash public key in a new buffer for later use
-        DWORD cbPubData = pPluginPerformUvResponse->cbResponse;
-        wil::unique_hlocal_ptr<BYTE[]> ppbPubKeyData = wil::make_unique_hlocal<BYTE[]>(cbPubData);
-        memcpy_s(ppbPubKeyData.get(), cbPubData, pPluginPerformUvResponse->pbResponse, pPluginPerformUvResponse->cbResponse);
-
-        // Step 3: Perform UV. This step uses a Windows Hello prompt to authenticate the user
-        pluginPerformUv.type = WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE::PerformUv;
-        pluginPerformUv.pwszUsername = wil::make_cotaskmem_string(userName.get()).release();
-        // pwszContext can be used to provide additional context to the user. This is displayed alongside the username in the Windows Hello passkey user verification dialog.
-        pluginPerformUv.pwszContext = wil::make_cotaskmem_string(L"Context String").release();
-        RETURN_IF_FAILED(webAuthNPluginPerformUv(&pluginPerformUv, &pPluginPerformUvResponse));
+        RETURN_IF_FAILED(webAuthNPluginPerformUserVerification(&pluginUserVerificationRequest, &cbResponse, &pbResponse));
 
         // Verify the signature over the hash of requestBuffer using the hKey
         auto signatureVerifyResult = VerifySignatureHelper(
             requestBuffer,
             ppbPubKeyData.get(),
-            cbPubData,
-            pPluginPerformUvResponse->pbResponse,
-            pPluginPerformUvResponse->cbResponse);
+            cbPublicKey,
+            pbResponse,
+            cbResponse);
         curApp->GetDispatcherQueue().TryEnqueue([curApp, signatureVerifyResult]()
             {
                 if (FAILED(signatureVerifyResult))
