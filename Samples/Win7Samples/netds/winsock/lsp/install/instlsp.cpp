@@ -237,7 +237,7 @@ int _cdecl main(int argc, char *argv[])
             case 'd':               // Full path and filename to LSP
                 if ( i+1 >= argc )
                     goto cleanup;
-                if (_strnicmp(argv[i], "-d32", 4))
+                if (!_strnicmp(argv[i], "-d32", 4))
                     lpszLspPathAndFile32 = argv[ ++i ];
                 else
                     lpszLspPathAndFile = argv[ ++i ];
