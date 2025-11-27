@@ -7,104 +7,87 @@
 
 #include "DuplicationManager.h"
 
-//
-// Constructor sets up references / variables
-//
-DUPLICATIONMANAGER::DUPLICATIONMANAGER() : m_DeskDupl(nullptr),
-                                           m_AcquiredDesktopImage(nullptr),
-                                           m_MetaDataBuffer(nullptr),
-                                           m_MetaDataSize(0),
-                                           m_OutputNumber(0),
-                                           m_Device(nullptr)
+DuplicationManager::DuplicationManager()
 {
-    RtlZeroMemory(&m_OutputDesc, sizeof(m_OutputDesc));
 }
 
-//
-// Destructor simply calls CleanRefs to destroy everything
-//
-DUPLICATIONMANAGER::~DUPLICATIONMANAGER()
+DuplicationManager::~DuplicationManager()
 {
-    if (m_DeskDupl)
-    {
-        m_DeskDupl->Release();
-        m_DeskDupl = nullptr;
-    }
-
-    if (m_AcquiredDesktopImage)
-    {
-        m_AcquiredDesktopImage->Release();
-        m_AcquiredDesktopImage = nullptr;
-    }
-
-    if (m_MetaDataBuffer)
-    {
-        delete [] m_MetaDataBuffer;
-        m_MetaDataBuffer = nullptr;
-    }
-
-    if (m_Device)
-    {
-        m_Device->Release();
-        m_Device = nullptr;
-    }
 }
 
 //
 // Initialize duplication interfaces
 //
-DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
+DUPL_RETURN DuplicationManager::InitDupl(_In_ ID3D11Device* Device, UINT Output)
 {
     m_OutputNumber = Output;
 
     // Take a reference on the device
-    m_Device = Device;
-    m_Device->AddRef();
+    m_Device.copy_from(Device);
 
     // Get DXGI device
-    IDXGIDevice* DxgiDevice = nullptr;
-    HRESULT hr = m_Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&DxgiDevice));
+    winrt::com_ptr<IDXGIDevice> DxgiDevice;
+    HRESULT hr = m_Device->QueryInterface(__uuidof(IDXGIDevice), DxgiDevice.put_void());
     if (FAILED(hr))
     {
         return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", hr);
     }
 
     // Get DXGI adapter
-    IDXGIAdapter* DxgiAdapter = nullptr;
-    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&DxgiAdapter));
-    DxgiDevice->Release();
-    DxgiDevice = nullptr;
+    winrt::com_ptr<IDXGIAdapter> DxgiAdapter;
+    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), DxgiAdapter.put_void());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Get output
-    IDXGIOutput* DxgiOutput = nullptr;
-    hr = DxgiAdapter->EnumOutputs(Output, &DxgiOutput);
-    DxgiAdapter->Release();
-    DxgiAdapter = nullptr;
+    winrt::com_ptr<IDXGIOutput> DxgiOutput;
+    hr = DxgiAdapter->EnumOutputs(Output, DxgiOutput.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get specified output in DUPLICATIONMANAGER", L"Error", hr, EnumOutputsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get specified output in DUPLICATIONMANAGER", L"Error", hr, EnumOutputsExpectedErrors);
     }
-
-    DxgiOutput->GetDesc(&m_OutputDesc);
 
     // QI for Output 1
-    IDXGIOutput1* DxgiOutput1 = nullptr;
-    hr = DxgiOutput->QueryInterface(__uuidof(DxgiOutput1), reinterpret_cast<void**>(&DxgiOutput1));
-    DxgiOutput->Release();
-    DxgiOutput = nullptr;
-    if (FAILED(hr))
+    winrt::com_ptr<IDXGIOutput1> DxgiOutput1 = DxgiOutput.try_as<IDXGIOutput1>();
+    if (!DxgiOutput1)
     {
-        return ProcessFailure(nullptr, L"Failed to QI for DxgiOutput1 in DUPLICATIONMANAGER", L"Error", hr);
+        return ProcessFailure(nullptr, L"Failed to QI for DxgiOutput1 in DUPLICATIONMANAGER", L"Error", E_NOTIMPL);
     }
 
-    // Create desktop duplication
-    hr = DxgiOutput1->DuplicateOutput(m_Device, &m_DeskDupl);
-    DxgiOutput1->Release();
-    DxgiOutput1 = nullptr;
+    winrt::com_ptr<IDXGIOutput6> DxgiOutput6 = DxgiOutput1.try_as<IDXGIOutput6>();
+    if (DxgiOutput6)
+    {
+        // Query the newer output description structure
+        hr = DxgiOutput6->GetDesc1(&m_OutputDesc);
+        assert(SUCCEEDED(hr));
+
+        // On supported OS versions, explicitly declare support for receiving FP16 surfaces for HDR mode
+        DXGI_FORMAT SupportedFormats[] = {
+            DXGI_FORMAT_R8G8B8A8_UNORM,
+            DXGI_FORMAT_B8G8R8A8_UNORM,
+            DXGI_FORMAT_R16G16B16A16_FLOAT
+        };
+        hr = DxgiOutput6->DuplicateOutput1(m_Device.get(), 0, ARRAYSIZE(SupportedFormats), SupportedFormats, m_DeskDupl.put());
+    }
+    else
+    {
+        // Query the older output description structure and copy to the newer structure
+        DXGI_OUTPUT_DESC OutputDesc = {};
+        hr = DxgiOutput->GetDesc(&OutputDesc);
+        assert(SUCCEEDED(hr));
+
+        m_OutputDesc.AttachedToDesktop = OutputDesc.AttachedToDesktop;
+        m_OutputDesc.Rotation = OutputDesc.Rotation;
+        m_OutputDesc.DesktopCoordinates = OutputDesc.DesktopCoordinates;
+        m_OutputDesc.Monitor = OutputDesc.Monitor;
+        std::copy(std::begin(m_OutputDesc.DeviceName), std::end(m_OutputDesc.DeviceName), std::begin(OutputDesc.DeviceName));
+
+        // Create desktop duplication
+        hr = DxgiOutput1->DuplicateOutput(m_Device.get(), m_DeskDupl.put());
+    }
+
     if (FAILED(hr))
     {
         if (hr == DXGI_ERROR_NOT_CURRENTLY_AVAILABLE)
@@ -112,7 +95,7 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
             MessageBoxW(nullptr, L"There is already the maximum number of applications using the Desktop Duplication API running, please close one of those applications and then try again.", L"Error", MB_OK);
             return DUPL_RETURN_ERROR_UNEXPECTED;
         }
-        return ProcessFailure(m_Device, L"Failed to get duplicate output in DUPLICATIONMANAGER", L"Error", hr, CreateDuplicationExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get duplicate output in DUPLICATIONMANAGER", L"Error", hr, CreateDuplicationExpectedErrors);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -121,7 +104,7 @@ DUPL_RETURN DUPLICATIONMANAGER::InitDupl(_In_ ID3D11Device* Device, UINT Output)
 //
 // Retrieves mouse info and write it into PtrInfo
 //
-DUPL_RETURN DUPLICATIONMANAGER::GetMouse(_Inout_ PTR_INFO* PtrInfo, _In_ DXGI_OUTDUPL_FRAME_INFO* FrameInfo, INT OffsetX, INT OffsetY)
+DUPL_RETURN DuplicationManager::GetMouse(_Inout_ PointerInfo* PtrInfo, _In_ DXGI_OUTDUPL_FRAME_INFO* FrameInfo, INT OffsetX, INT OffsetY)
 {
     // A non-zero mouse update timestamp indicates that there is a mouse position update and optionally a shape change
     if (FrameInfo->LastMouseUpdateTime.QuadPart == 0)
@@ -162,33 +145,25 @@ DUPL_RETURN DUPLICATIONMANAGER::GetMouse(_Inout_ PTR_INFO* PtrInfo, _In_ DXGI_OU
     }
 
     // Old buffer too small
-    if (FrameInfo->PointerShapeBufferSize > PtrInfo->BufferSize)
+    if (FrameInfo->PointerShapeBufferSize > PtrInfo->PtrShapeBuffer.size())
     {
-        if (PtrInfo->PtrShapeBuffer)
+        try
         {
-            delete [] PtrInfo->PtrShapeBuffer;
-            PtrInfo->PtrShapeBuffer = nullptr;
+            PtrInfo->PtrShapeBuffer.resize(FrameInfo->PointerShapeBufferSize);
         }
-        PtrInfo->PtrShapeBuffer = new (std::nothrow) BYTE[FrameInfo->PointerShapeBufferSize];
-        if (!PtrInfo->PtrShapeBuffer)
+        catch (std::bad_alloc)
         {
-            PtrInfo->BufferSize = 0;
             return ProcessFailure(nullptr, L"Failed to allocate memory for pointer shape in DUPLICATIONMANAGER", L"Error", E_OUTOFMEMORY);
         }
-
-        // Update buffer size
-        PtrInfo->BufferSize = FrameInfo->PointerShapeBufferSize;
     }
 
     // Get shape
     UINT BufferSizeRequired;
-    HRESULT hr = m_DeskDupl->GetFramePointerShape(FrameInfo->PointerShapeBufferSize, reinterpret_cast<VOID*>(PtrInfo->PtrShapeBuffer), &BufferSizeRequired, &(PtrInfo->ShapeInfo));
+    HRESULT hr = m_DeskDupl->GetFramePointerShape(FrameInfo->PointerShapeBufferSize, reinterpret_cast<VOID*>(PtrInfo->PtrShapeBuffer.data()), &BufferSizeRequired, &(PtrInfo->ShapeInfo));
     if (FAILED(hr))
     {
-        delete [] PtrInfo->PtrShapeBuffer;
-        PtrInfo->PtrShapeBuffer = nullptr;
-        PtrInfo->BufferSize = 0;
-        return ProcessFailure(m_Device, L"Failed to get frame pointer shape in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
+        PtrInfo->PtrShapeBuffer.clear();
+        return ProcessFailure(m_Device.get(), L"Failed to get frame pointer shape in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -199,13 +174,13 @@ DUPL_RETURN DUPLICATIONMANAGER::GetMouse(_Inout_ PTR_INFO* PtrInfo, _In_ DXGI_OU
 // Get next frame and write it into Data
 //
 _Success_(*Timeout == false && return == DUPL_RETURN_SUCCESS)
-DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Timeout)
+DUPL_RETURN DuplicationManager::GetFrame(_Out_ FrameData* Data, _Out_ bool* Timeout)
 {
-    IDXGIResource* DesktopResource = nullptr;
-    DXGI_OUTDUPL_FRAME_INFO FrameInfo;
+    winrt::com_ptr<IDXGIResource> DesktopResource;
+    DXGI_OUTDUPL_FRAME_INFO FrameInfo = {};
 
     // Get new frame
-    HRESULT hr = m_DeskDupl->AcquireNextFrame(500, &FrameInfo, &DesktopResource);
+    HRESULT hr = m_DeskDupl->AcquireNextFrame(500, &FrameInfo, DesktopResource.put());
     if (hr == DXGI_ERROR_WAIT_TIMEOUT)
     {
         *Timeout = true;
@@ -215,51 +190,39 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
 
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to acquire next frame in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to acquire next frame in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
     }
 
     // If still holding old frame, destroy it
-    if (m_AcquiredDesktopImage)
-    {
-        m_AcquiredDesktopImage->Release();
-        m_AcquiredDesktopImage = nullptr;
-    }
-
-    // QI for IDXGIResource
-    hr = DesktopResource->QueryInterface(__uuidof(ID3D11Texture2D), reinterpret_cast<void **>(&m_AcquiredDesktopImage));
-    DesktopResource->Release();
+    m_AcquiredDesktopImage = DesktopResource.try_as<ID3D11Texture2D>();
     DesktopResource = nullptr;
-    if (FAILED(hr))
+    if (!m_AcquiredDesktopImage)
     {
-        return ProcessFailure(nullptr, L"Failed to QI for ID3D11Texture2D from acquired IDXGIResource in DUPLICATIONMANAGER", L"Error", hr);
+        return ProcessFailure(nullptr, L"Failed to QI for ID3D11Texture2D from acquired IDXGIResource in DUPLICATIONMANAGER", L"Error", E_NOTIMPL);
     }
 
     // Get metadata
     if (FrameInfo.TotalMetadataBufferSize)
     {
         // Old buffer too small
-        if (FrameInfo.TotalMetadataBufferSize > m_MetaDataSize)
+        if (FrameInfo.TotalMetadataBufferSize > m_MetaDataBuffer.size())
         {
-            if (m_MetaDataBuffer)
+            try
             {
-                delete [] m_MetaDataBuffer;
-                m_MetaDataBuffer = nullptr;
+                m_MetaDataBuffer.resize(FrameInfo.TotalMetadataBufferSize);
             }
-            m_MetaDataBuffer = new (std::nothrow) BYTE[FrameInfo.TotalMetadataBufferSize];
-            if (!m_MetaDataBuffer)
+            catch (std::bad_alloc)
             {
-                m_MetaDataSize = 0;
                 Data->MoveCount = 0;
                 Data->DirtyCount = 0;
                 return ProcessFailure(nullptr, L"Failed to allocate memory for metadata in DUPLICATIONMANAGER", L"Error", E_OUTOFMEMORY);
             }
-            m_MetaDataSize = FrameInfo.TotalMetadataBufferSize;
         }
 
         UINT BufSize = FrameInfo.TotalMetadataBufferSize;
 
         // Get move rectangles
-        hr = m_DeskDupl->GetFrameMoveRects(BufSize, reinterpret_cast<DXGI_OUTDUPL_MOVE_RECT*>(m_MetaDataBuffer), &BufSize);
+        hr = m_DeskDupl->GetFrameMoveRects(BufSize, reinterpret_cast<DXGI_OUTDUPL_MOVE_RECT*>(m_MetaDataBuffer.data()), &BufSize);
         if (FAILED(hr))
         {
             Data->MoveCount = 0;
@@ -268,7 +231,7 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
         }
         Data->MoveCount = BufSize / sizeof(DXGI_OUTDUPL_MOVE_RECT);
 
-        BYTE* DirtyRects = m_MetaDataBuffer + BufSize;
+        BYTE* DirtyRects = m_MetaDataBuffer.data() + BufSize;
         BufSize = FrameInfo.TotalMetadataBufferSize - BufSize;
 
         // Get dirty rectangles
@@ -281,10 +244,10 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
         }
         Data->DirtyCount = BufSize / sizeof(RECT);
 
-        Data->MetaData = m_MetaDataBuffer;
+        Data->MetaData = m_MetaDataBuffer.data();
     }
 
-    Data->Frame = m_AcquiredDesktopImage;
+    Data->Frame = m_AcquiredDesktopImage.get();
     Data->FrameInfo = FrameInfo;
 
     return DUPL_RETURN_SUCCESS;
@@ -293,19 +256,15 @@ DUPL_RETURN DUPLICATIONMANAGER::GetFrame(_Out_ FRAME_DATA* Data, _Out_ bool* Tim
 //
 // Release frame
 //
-DUPL_RETURN DUPLICATIONMANAGER::DoneWithFrame()
+DUPL_RETURN DuplicationManager::DoneWithFrame()
 {
     HRESULT hr = m_DeskDupl->ReleaseFrame();
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to release frame in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to release frame in DUPLICATIONMANAGER", L"Error", hr, FrameInfoExpectedErrors);
     }
 
-    if (m_AcquiredDesktopImage)
-    {
-        m_AcquiredDesktopImage->Release();
-        m_AcquiredDesktopImage = nullptr;
-    }
+    m_AcquiredDesktopImage = nullptr;
 
     return DUPL_RETURN_SUCCESS;
 }
@@ -313,7 +272,7 @@ DUPL_RETURN DUPLICATIONMANAGER::DoneWithFrame()
 //
 // Gets output desc into DescPtr
 //
-void DUPLICATIONMANAGER::GetOutputDesc(_Out_ DXGI_OUTPUT_DESC* DescPtr)
+void DuplicationManager::GetOutputDesc(_Out_ DXGI_OUTPUT_DESC1* DescPtr)
 {
     *DescPtr = m_OutputDesc;
 }

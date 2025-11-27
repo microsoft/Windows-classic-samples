@@ -1,4 +1,4 @@
-﻿//
+//
 // pch.h
 // Precompiled header for commonly included header files
 //
@@ -14,3 +14,4 @@
 #include <algorithm>
 #include <iostream>
 #include <functional>
+#include <thread>

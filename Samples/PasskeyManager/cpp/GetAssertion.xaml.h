@@ -4,7 +4,6 @@
 #include<winrt/Microsoft.UI.Xaml.Navigation.h>
 
 #include "GetAssertion.g.h"
-#include <include/webauthn/webauthn.h>
 #include "CredentialListViewModel.h"
 
 namespace winrt::PasskeyManager::implementation

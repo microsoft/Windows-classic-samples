@@ -1,0 +1,8 @@
+schemaVersion: 0.0.1
+isProduction: false
+accountableOwners:
+  service: 567f58c6-ba0a-417c-b069-5bd29d670a65
+routing:
+  defaultAreaPath:
+    org: microsoft
+    path: OS\Windows Client and Services\WinPD\DFX-Developer Fundamentals and Experiences\DEFT\AmUse\Platform SDK

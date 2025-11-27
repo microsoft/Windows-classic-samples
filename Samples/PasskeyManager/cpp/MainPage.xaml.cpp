@@ -8,9 +8,12 @@
 #endif
 #include "PluginManagement/PluginRegistrationManager.h"
 #include "PluginManagement/PluginCredentialManager.h"
+#include "PluginAuthenticator/PluginAuthenticatorImpl.h"
 #include <future>
 #include <coroutine>
 #include <DispatcherQueue.h>
+#include <winrt/Microsoft.ui.interop.h>
+#include <winrt/Microsoft.UI.Content.h>
 
 namespace winrt {
     using namespace winrt::Microsoft::UI::Xaml;
@@ -19,18 +22,61 @@ namespace winrt {
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
+namespace {
+
+    void CALLBACK WebAuthNStatusChangeCallback(void* context)
+    {
+        auto mainPage = static_cast<winrt::PasskeyManager::implementation::MainPage*>(context);
+        if (mainPage)
+        {
+            mainPage->DispatcherQueue().TryEnqueue([mainPage]()
+            {
+                mainPage->UpdatePluginEnableState();
+            });
+        }
+    }
+
+    DWORD RegisterWebAuthNStatusChangeCallback(void* context)
+    {
+        auto app = winrt::Microsoft::UI::Xaml::Application::Current().as<winrt::PasskeyManager::implementation::App>();
+
+        DWORD cookie{};
+        THROW_IF_FAILED(WebAuthNPluginRegisterStatusChangeCallback(
+            &WebAuthNStatusChangeCallback,
+            context,
+            contosoplugin_guid,
+            &cookie));
+        return cookie;
+    }
+
+    DWORD UnregisterWebAuthNStatusChangeCallback()
+    {
+        auto app = winrt::Microsoft::UI::Xaml::Application::Current().as<winrt::PasskeyManager::implementation::App>();
+
+        DWORD cookie{};
+        THROW_IF_FAILED(WebAuthNPluginUnregisterStatusChangeCallback(&cookie));
+        return cookie;
+    }
+}
+
 namespace winrt::PasskeyManager::implementation
 {
     winrt::fire_and_forget MainPage::UpdatePluginEnableState()
     {
         winrt::apartment_context ui_thread;
+
         co_await winrt::resume_background();
         auto hr = PluginRegistrationManager::getInstance().RefreshPluginState();
         auto pluginState = PluginRegistrationManager::getInstance().GetPluginState();
         bool vaultLocked = PluginCredentialManager::getInstance().GetVaultLock();
         bool silentOperation = PluginCredentialManager::getInstance().GetSilentOperation();
-        co_await ui_thread;
+        VaultUnlockMethod vaultUnlockMethod = PluginCredentialManager::getInstance().GetVaultUnlockMethod();
 
+        co_await ui_thread;
+        VaultUnlockControl().IsChecked(vaultLocked);
+        UpdateVaultUnlockControlText(vaultLocked);
+        vaultLockSwitch().IsOn(vaultUnlockMethod == VaultUnlockMethod::Passkey);
+        silentOperationSwitch().IsOn(silentOperation);
         if (FAILED(hr))
         {
             pluginStateRun().Text(L"Not Registered");
@@ -38,15 +84,17 @@ namespace winrt::PasskeyManager::implementation
             auto neutralBrush = resources.Lookup(winrt::box_value(L"SystemFillColorNeutralBrush")).as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
             pluginStateRun().Foreground(neutralBrush);
             registerPluginButton().IsEnabled(true);
+            updatePluginButton().IsEnabled(false);
             unregisterPluginButton().IsEnabled(false);
+            activatePluginButton().IsEnabled(false);
         }
         else
         {
             registerPluginButton().IsEnabled(false);
+            updatePluginButton().IsEnabled(true);
             unregisterPluginButton().IsEnabled(true);
+            activatePluginButton().IsEnabled(pluginState != AuthenticatorState_Enabled);
             UpdatePluginStateTextBlock(pluginState);
-            vaultLockSwitch().IsOn(vaultLocked);
-            silentOperationSwitch().IsOn(silentOperation);
         }
         co_return;
     }
@@ -55,28 +103,92 @@ namespace winrt::PasskeyManager::implementation
     {
         auto toggleSwitch = sender.as<Microsoft::UI::Xaml::Controls::ToggleSwitch>();
         bool toggleSwitchState = toggleSwitch.IsOn();
-        winrt::apartment_context ui_thread;
+
+        com_ptr<App> curApp = winrt::Microsoft::UI::Xaml::Application::Current().as<App>();
+        HWND hwnd = curApp->GetNativeWindowHandle();
+
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
-        auto hr = PluginCredentialManager::getInstance().SetVaultLock(toggleSwitchState);
+        auto unlockMethod = toggleSwitchState ? VaultUnlockMethod::Passkey : VaultUnlockMethod::Consent;
+        auto hr = PluginCredentialManager::getInstance().SetVaultUnlockMethod(unlockMethod);
+
+        co_await wil::resume_foreground(DispatcherQueue());
+        auto self = weakThis.get();
         if (FAILED(hr))
         {
-            co_await ui_thread;
-            LogFailure(L"Failed to change 'Simulate Vault Unlock'", hr);
+            toggleSwitch.IsOn(!toggleSwitchState);
+            if (self)
+            {
+                self->LogFailure(L"Failed to change 'Vault Unlock Control'", hr);
+            }
+        }
+        else if (self)
+        {
+            self->LogSuccess(L"Changed 'Vault Unlock Control Method'");
+        }
+
+        if (unlockMethod == VaultUnlockMethod::Passkey)
+        {
+            weakThis = get_weak();
+            co_await winrt::resume_background();
+            hr = PluginRegistrationManager::getInstance().CreateVaultPasskey(hwnd);
+
+            co_await wil::resume_foreground(DispatcherQueue());
+            self = weakThis.get();
+            if (SUCCEEDED(hr) || hr == NTE_EXISTS)
+            {
+                if (self)
+                {
+                    if (hr == NTE_EXISTS)
+                    {
+                        self->LogSuccess(L"Vault Unlock passkey already exists");
+                    }
+                    else
+                    {
+                        self->LogSuccess(L"Created passkey for Vault Unlock");
+                    }
+                }
+            }
+            else
+            {
+                toggleSwitch.IsOn(false);
+                if (self)
+                {
+                    if (hr == NTE_USER_CANCELLED || hr == HRESULT_FROM_WIN32(ERROR_CANCELLED))
+                    {
+                        self->LogWarning(L"Passkey registration cancelled", hr);
+                    }
+                    else
+                    {
+                        self->LogFailure(L"Failed to register passkey", hr);
+                    }
+
+                    if (hr == NTE_NOT_SUPPORTED)
+                    {
+                        self->LogWarning(L"Likely the authenticator chosen does not suppport PRF. This means the passkey was created in the authenticator, but not registered in Contoso. Delete it to try again.");
+                    }
+                }
+            }
         }
         co_return;
     }
 
     winrt::IAsyncAction MainPage::silentOperationSwitch_Toggled(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const&)
     {
-        winrt::apartment_context ui_thread;
         auto toggleSwitch = sender.as<Microsoft::UI::Xaml::Controls::ToggleSwitch>();
         auto toggleSwitchState = toggleSwitch.IsOn();
+
+        auto weakThis = get_weak();
+
         co_await winrt::resume_background();
         auto hr = PluginCredentialManager::getInstance().SetSilentOperation(toggleSwitchState);
         if (FAILED(hr))
         {
-            co_await ui_thread;
-            LogFailure(L"Failed to change 'Minimize UI'", hr);
+            co_await wil::resume_foreground(DispatcherQueue());
+            if (auto self{ weakThis.get() })
+            {
+                self->LogFailure(L"Failed to change 'Silent Operation'", hr);
+            }
         }
         co_return;
     }
@@ -85,21 +197,31 @@ namespace winrt::PasskeyManager::implementation
     {
         m_credentialListViewModel = winrt::make<PasskeyManager::implementation::CredentialListViewModel>();
         DataContext(m_credentialListViewModel);
+
         auto weakThis = get_weak();
         m_registryWatcher = wil::make_registry_watcher(
             HKEY_CURRENT_USER,
             c_pluginRegistryPath,
             true,
-            [context = winrt::apartment_context{}, weakThis](wil::RegistryChangeKind changeKind) -> winrt::fire_and_forget {
-                auto weakThisCopy = weakThis;
-                auto contextCopy = context;
-                co_await contextCopy;
+            [weakThis](wil::RegistryChangeKind changeKind) -> winrt::fire_and_forget {
+                bool shouldLogWarning = false;
                 if (changeKind == wil::RegistryChangeKind::Modify)
                 {
-                    PluginCredentialManager::getInstance().ReloadRegistryValues();
+                    auto& credMgr = PluginCredentialManager::getInstance();
+                    credMgr.ReloadRegistryValues();
+                    if (credMgr.GetVaultLock() && credMgr.GetSilentOperation())
+                    {
+                        credMgr.SetSilentOperation(false);
+                        shouldLogWarning = true;
+                    }
                 }
-                if (auto self{ weakThisCopy.get() })
+                if (auto self{ weakThis.get() })
                 {
+                    co_await wil::resume_foreground(self->DispatcherQueue());
+                    if (shouldLogWarning)
+                    {
+                        self->LogWarning(L"Vault unlock requires UI", E_NOT_VALID_STATE);
+                    }
                     self->UpdatePluginEnableState();
                 }
             });
@@ -108,17 +230,25 @@ namespace winrt::PasskeyManager::implementation
         THROW_IF_FAILED(m_mockCredentialsDBWatcher.create(mockDBfilePath.c_str(),
             true,
             wil::FolderChangeEvents::All,
-            [context = winrt::apartment_context{}, weakThis](wil::FolderChangeEvent, PCWSTR) -> winrt::fire_and_forget {
-                auto weakThisCopy = weakThis;
-                auto contextCopy = context;
-                co_await contextCopy;
+            [weakThis](wil::FolderChangeEvent, PCWSTR) -> winrt::fire_and_forget {
                 PluginCredentialManager::getInstance().ReloadRegistryValues();
-                if (auto self{ weakThisCopy.get() })
+                if (auto self{ weakThis.get() })
                 {
+                    co_await wil::resume_foreground(self->DispatcherQueue());
                     self->UpdatePluginEnableState();
                     self->UpdateCredentialList();
                 }
             }));
+
+        m_cookie = RegisterWebAuthNStatusChangeCallback(static_cast<void*>(this));
+    }
+
+    MainPage::~MainPage()
+    {
+        if (m_cookie.has_value())
+        {
+            m_cookie = UnregisterWebAuthNStatusChangeCallback();
+        }
     }
 
     winrt::IAsyncAction MainPage::refreshButton_Click(IInspectable const&, RoutedEventArgs const&)
@@ -131,40 +261,45 @@ namespace winrt::PasskeyManager::implementation
     winrt::fire_and_forget MainPage::UpdateCredentialList()
     {
         m_credentialListViewModel.credentials().Clear();
-
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
 
         PluginCredentialManager& pluginCredentialManager = PluginCredentialManager::getInstance();
         pluginCredentialManager.ReloadCredentialManager();
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
         auto credentialViewList = pluginCredentialManager.GetCredentialListViewModel();
+
+        auto self = weakThis.get();
+        if (!self)
+        {
+            co_return;
+        }
 
         if (pluginCredentialManager.IsLocalCredentialMetadataLoaded())
         {
             std::wstring countOfLocalCreds = std::to_wstring(pluginCredentialManager.GetLocalCredentialCount()) + L" passkeys in Local DB";
-            credsStatsRun1().Text(countOfLocalCreds);
+            self->credsStatsRun1().Text(countOfLocalCreds);
         }
         else
         {
-            credsStatsRun1().Text(L"Local DB not loaded");
+            self->credsStatsRun1().Text(L"Local DB not loaded");
         }
 
         if (pluginCredentialManager.IsCachedCredentialsMetadataLoaded())
         {
             std::wstring countOfPluginCreds = std::to_wstring(pluginCredentialManager.GetCachedCredentialCount()) + L" passkeys in system Cache";
-            credsStatsRun2().Text(countOfPluginCreds);
+            self->credsStatsRun2().Text(countOfPluginCreds);
         }
         else
         {
-            credsStatsRun2().Text(L"Windows Cache Data not loaded");
+            self->credsStatsRun2().Text(L"Windows Cache Data not loaded");
         }
 
-        m_credentialListViewModel.credentials().Clear();
-        for (auto credListItem : credentialViewList)
+        self->m_credentialListViewModel.credentials().Clear();
+        for (auto& credListItem : credentialViewList)
         {
-            m_credentialListViewModel.credentials().Append(*credListItem.detach());
+            self->m_credentialListViewModel.credentials().Append(*credListItem.detach());
         }
         co_return;
     }
@@ -179,58 +314,107 @@ namespace winrt::PasskeyManager::implementation
     winrt::IAsyncAction MainPage::unregisterPluginButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         LogInProgress(L"Unregistering plugin...");
+        auto weakThis = get_weak();
 
-        winrt::apartment_context ui_thread;
+        if (m_cookie.has_value())
+        {
+            m_cookie = UnregisterWebAuthNStatusChangeCallback();
+        }
+
         co_await winrt::resume_background();
         HRESULT hr = PluginRegistrationManager::getInstance().UnregisterPlugin();
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdatePluginEnableState();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to Unregister plugin: ", hr);
             co_return;
         }
-        LogSuccess(L"Plugin unregistered");
+
+        self->UpdatePluginEnableState();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to Unregister plugin: ", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Plugin unregistered");
     }
 
     winrt::IAsyncAction MainPage::registerPluginButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
         LogInProgress(L"Registering plugin...");
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginRegistrationManager::getInstance().RegisterPlugin();
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
+        auto self = weakThis.get();
+        if (!self)
+        {
+            co_return;
+        }
 
-        UpdatePluginEnableState();
+        self->UpdatePluginEnableState();
 
         if (FAILED(hr))
         {
-            LogFailure(L"WebAuthNPluginAddAuthenticator", hr);
+            self->LogFailure(L"WebAuthNPluginAddAuthenticator", hr);
             co_return;
         }
-        LogSuccess(L"Plugin registered");
+        self->LogSuccess(L"Plugin registered");
+
+        m_cookie = RegisterWebAuthNStatusChangeCallback(static_cast<void*>(this));
+    }
+
+    winrt::IAsyncAction MainPage::updatePluginButton_Click(IInspectable const&, RoutedEventArgs const&)
+    {
+        LogInProgress(L"Updating plugin...");
+        auto weakThis = get_weak();
+        co_await winrt::resume_background();
+        HRESULT hr = PluginRegistrationManager::getInstance().UpdatePlugin();
+
+        co_await wil::resume_foreground(DispatcherQueue());
+
+        auto self = weakThis.get();
+        if (!self)
+        {
+            co_return;
+        }
+
+        self->UpdatePluginEnableState();
+
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"WebAuthNPluginUpdateAuthenticatorDetails", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Plugin updated");
     }
 
     winrt::IAsyncAction MainPage::addAllPluginCredentials_Click(IInspectable const&, RoutedEventArgs const&)
     {
         LogInProgress(L"Adding All credentials to windows...");
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginCredentialManager::getInstance().AddAllPluginCredentials();
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to add credential to system cache: ", hr);
             co_return;
         }
-        LogSuccess(L"Credentials synced");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to add credential to system cache: ", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Credentials synced");
         co_return;
     }
 
@@ -258,19 +442,25 @@ namespace winrt::PasskeyManager::implementation
         hstring statusText = L"Adding " + winrt::to_hstring(credentialIdList.size()) + L" selected credentials...";
         UpdatePasskeyOperationStatusText(statusText);
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginCredentialManager::getInstance().AddPluginCredentialById(credentialIdList);
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to add credentials to system cache", hr);
             co_return;
         }
-        LogSuccess(L"Selected credentials are added to system cache");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to add credentials to system cache", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Selected credentials are added to system cache");
         co_return;
     }
 
@@ -278,19 +468,25 @@ namespace winrt::PasskeyManager::implementation
     {
         LogInProgress(L"Deleting all credentials stored on this device...");
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginCredentialManager::getInstance().DeleteAllPluginCredentials();
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to delete credential from system cache", hr);
             co_return;
         }
-        LogSuccess(L"All credentials deleted from system cache");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to delete credential from system cache", hr);
+            co_return;
+        }
+        self->LogSuccess(L"All credentials deleted from system cache");
         co_return;
     }
 
@@ -320,19 +516,25 @@ namespace winrt::PasskeyManager::implementation
         hstring statusText = L"Deleting " + winrt::to_hstring(credentialIdList.size()) + L" selected credentials...";
         UpdatePasskeyOperationStatusText(statusText);
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginCredentialManager::getInstance().DeletePluginCredentialById(credentialIdList, false);
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to delete credentials from system cache", hr);
             co_return;
         }
-        LogSuccess(L"Selected credentials deleted from system cache");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to delete credentials from system cache", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Selected credentials deleted from system cache");
         co_return;
     }
 
@@ -362,19 +564,25 @@ namespace winrt::PasskeyManager::implementation
         hstring statusText = winrt::to_hstring(credentialIdList.size()) + L" credentials selected...";
         UpdatePasskeyOperationStatusText(statusText);
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         HRESULT hr = PluginCredentialManager::getInstance().DeletePluginCredentialById(credentialIdList, true);
 
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr))
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to delete credentials", hr);
             co_return;
         }
-        LogSuccess(L"Selected credentials deleted everywhere");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr))
+        {
+            self->LogFailure(L"Failed to delete credentials", hr);
+            co_return;
+        }
+        self->LogSuccess(L"Selected credentials deleted everywhere");
         co_return;
     }
 
@@ -388,42 +596,55 @@ namespace winrt::PasskeyManager::implementation
     {
         LogInProgress(L"Deleting all local credentials...");
 
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
 
         bool resetResult = PluginCredentialManager::getInstance().ResetLocalCredentialsStore();
 
-        co_await ui_thread;
-        UpdateCredentialList();
-        if (resetResult)
+        co_await wil::resume_foreground(DispatcherQueue());
+
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to delete all local credentials", E_FAIL);
             co_return;
         }
-        LogSuccess(L"All local credentials deleted");
+
+        self->UpdateCredentialList();
+        if (resetResult)
+        {
+            self->LogFailure(L"Failed to delete all local credentials", E_FAIL);
+            co_return;
+        }
+        self->LogSuccess(L"All local credentials deleted");
         co_return;
     }
 
     winrt::IAsyncAction MainPage::deleteAllCredentials_Click(IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&)
     {
         LogInProgress(L"Deleting all credentials stored on this device and cache...");
-        winrt::apartment_context ui_thread;
+        auto weakThis = get_weak();
         co_await winrt::resume_background();
         auto& credManager = PluginCredentialManager::getInstance();
         HRESULT hr = credManager.DeleteAllPluginCredentials();
         bool resetResult = credManager.ResetLocalCredentialsStore();
-        co_await ui_thread;
+        co_await wil::resume_foreground(DispatcherQueue());
 
-        UpdateCredentialList();
-        if (FAILED(hr) || !resetResult)
+        auto self = weakThis.get();
+        if (!self)
         {
-            LogFailure(L"Failed to delete all credentials", hr);
             co_return;
         }
-        LogSuccess(L"All credentials deleted");
+
+        self->UpdateCredentialList();
+        if (FAILED(hr) || !resetResult)
+        {
+            self->LogFailure(L"Failed to delete all credentials", hr);
+            co_return;
+        }
+        self->LogSuccess(L"All credentials deleted");
     }
 
-    void MainPage::UpdatePluginStateTextBlock(EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE state)
+    void MainPage::UpdatePluginStateTextBlock(AUTHENTICATOR_STATE state)
     {
         auto resources = Application::Current().Resources();
         auto successBrush = resources.Lookup(winrt::box_value(L"SystemFillColorSuccessBrush")).as<winrt::Microsoft::UI::Xaml::Media::SolidColorBrush>();
@@ -432,16 +653,14 @@ namespace winrt::PasskeyManager::implementation
 
         switch (state)
         {
-        case PluginAuthenticatorState_Enabled:
+        case AuthenticatorState_Enabled:
             pluginStateRun().Text(L"Enabled");
             pluginStateRun().Foreground(successBrush);
             break;
-        case PluginAuthenticatorState_Disabled:
+        case AuthenticatorState_Disabled:
             pluginStateRun().Text(L"Disabled");
             pluginStateRun().Foreground(criticalBrush);
             break;
-        case PluginAuthenticatorState_Unknown:
-            [[fallthrough]];
         default:
             pluginStateRun().Text(L"Unknown");
             pluginStateRun().Foreground(cautionBrush);
@@ -458,4 +677,42 @@ namespace winrt::PasskeyManager::implementation
         deleteSelectedLocalButton().IsEnabled(selected);
         co_return;
     }
+
+    winrt::IAsyncAction MainPage::activatePluginButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
+    {
+        // URI ms-settings:passkeys-advancedoptions to navigate to the page on Settings app where the users can enable the plugin
+        auto uri = Windows::Foundation::Uri(L"ms-settings:passkeys-advancedoptions");
+        co_await Windows::System::Launcher::LaunchUriAsync(uri);
+        co_return;
+    }
+
+    void MainPage::UpdateVaultUnlockControlText(bool isLocked)
+    {
+        if (isLocked)
+        {
+            VaultUnlockControl().Content(box_value(L"Vault Locked"));
+        }
+        else
+        {
+            VaultUnlockControl().Content(box_value(L"Vault Unlocked"));
+        }
+    }
+
+    winrt::IAsyncAction MainPage::VaultUnlockControl_IsCheckedChanged(winrt::Microsoft::UI::Xaml::Controls::ToggleSplitButton const& sender, winrt::Microsoft::UI::Xaml::Controls::ToggleSplitButtonIsCheckedChangedEventArgs const& args)
+    {
+        // Capture the value we need before switching context
+        bool toggleSplitState = sender.IsChecked();
+
+        auto hr = PluginCredentialManager::getInstance().SetVaultLock(toggleSplitState);
+
+        if (FAILED(hr))
+        {
+            LogFailure(L"Failed to change 'Simulate Vault Unlock'", hr);
+        }
+
+        UpdateVaultUnlockControlText(toggleSplitState);
+
+        co_return;
+    }
+
 }

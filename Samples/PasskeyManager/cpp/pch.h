@@ -25,6 +25,7 @@
 #include <winrt/Windows.UI.h>
 #include <winrt/Windows.UI.Core.h>
 #include <winrt/Windows.UI.Shell.h>
+#include <winrt/Windows.System.h>
 #include <winrt/Microsoft.UI.h>
 #include <winrt/Microsoft.UI.Composition.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
@@ -51,6 +52,12 @@
 
 #include <shlobj_core.h>
 
-#include <include/webauthn/webauthn.h>
+#include "DelayLoad.h"
+
+// WIL smart pointers with custom deleters so we cleanup resources correctly
+typedef wil::unique_any<PBYTE, decltype(&WebAuthNPluginFreePublicKeyResponse), WebAuthNPluginFreePublicKeyResponse> unique_plugin_public_key;
+typedef wil::unique_any<PWEBAUTHN_CREDENTIAL_DETAILS_LIST, decltype(&WebAuthNFreePlatformCredentialList), WebAuthNFreePlatformCredentialList> unique_webauthn_credential_details_list;
+typedef wil::unique_any<PWEBAUTHN_CREDENTIAL_ATTESTATION, decltype(&WebAuthNFreeCredentialAttestation), WebAuthNFreeCredentialAttestation> unique_webauthn_credential_attestation;
+typedef wil::unique_any<PWEBAUTHN_ASSERTION, decltype(&WebAuthNFreeAssertion), WebAuthNFreeAssertion> unique_webauthn_assertion;
 
 std::vector<uint8_t> hexStringToBytes(const std::string& hex);

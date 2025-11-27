@@ -15,7 +15,7 @@
 //
 // Globals
 //
-OUTPUTMANAGER OutMgr;
+OutputManager OutMgr;
 
 // Below are lists of errors expect from Dxgi API calls when a transition event like mode change, PnpStop, PnpStart
 // desktop switch, TDR or session disconnect/reconnect. In all these cases we want the application to clean up the threads that process
@@ -57,6 +57,7 @@ HRESULT EnumOutputsExpectedErrors[] = {
 // Forward Declarations
 //
 DWORD WINAPI DDProc(_In_ void* Param);
+DUPL_RETURN DDProcCore(DuplicationThreadData* TData);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 bool ProcessCmdline(_Out_ INT* Output);
 void ShowHelp();
@@ -64,24 +65,24 @@ void ShowHelp();
 //
 // Class for progressive waits
 //
-typedef struct
+struct WAIT_BAND
 {
     UINT    WaitTime;
     UINT    WaitCount;
-}WAIT_BAND;
+};
 
 #define WAIT_BAND_COUNT 3
 #define WAIT_BAND_STOP 0
 
 class DYNAMIC_WAIT
 {
-    public :
-        DYNAMIC_WAIT();
-        ~DYNAMIC_WAIT();
+public :
+    DYNAMIC_WAIT();
+    ~DYNAMIC_WAIT();
 
-        void Wait();
+    void Wait();
 
-    private :
+private:
 
     static const WAIT_BAND   m_WaitBands[WAIT_BAND_COUNT];
 
@@ -152,9 +153,9 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     INT SingleOutput;
 
     // Synchronization
-    HANDLE UnexpectedErrorEvent = nullptr;
-    HANDLE ExpectedErrorEvent = nullptr;
-    HANDLE TerminateThreadsEvent = nullptr;
+    winrt::handle UnexpectedErrorEvent;
+    winrt::handle ExpectedErrorEvent;
+    winrt::handle TerminateThreadsEvent;
 
     // Window
     HWND WindowHandle = nullptr;
@@ -166,8 +167,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
         return 0;
     }
 
+    winrt::init_apartment(winrt::apartment_type::single_threaded);
+
     // Event used by the threads to signal an unexpected error and we want to quit the app
-    UnexpectedErrorEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
+    UnexpectedErrorEvent.attach(CreateEvent(nullptr, TRUE, FALSE, nullptr));
     if (!UnexpectedErrorEvent)
     {
         ProcessFailure(nullptr, L"UnexpectedErrorEvent creation failed", L"Error", E_UNEXPECTED);
@@ -175,7 +178,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     }
 
     // Event for when a thread encounters an expected error
-    ExpectedErrorEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
+    ExpectedErrorEvent.attach(CreateEvent(nullptr, TRUE, FALSE, nullptr));
     if (!ExpectedErrorEvent)
     {
         ProcessFailure(nullptr, L"ExpectedErrorEvent creation failed", L"Error", E_UNEXPECTED);
@@ -183,7 +186,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     }
 
     // Event to tell spawned threads to quit
-    TerminateThreadsEvent = CreateEvent(nullptr, TRUE, FALSE, nullptr);
+    TerminateThreadsEvent.attach(CreateEvent(nullptr, TRUE, FALSE, nullptr));
     if (!TerminateThreadsEvent)
     {
         ProcessFailure(nullptr, L"TerminateThreadsEvent creation failed", L"Error", E_UNEXPECTED);
@@ -238,7 +241,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     ShowWindow(WindowHandle, nCmdShow);
     UpdateWindow(WindowHandle);
 
-    THREADMANAGER ThreadMgr;
+    ThreadManager ThreadMgr;
     RECT DeskBounds;
     UINT OutputCount;
 
@@ -265,20 +268,20 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
                 DispatchMessage(&msg);
             }
         }
-        else if (WaitForSingleObjectEx(UnexpectedErrorEvent, 0, FALSE) == WAIT_OBJECT_0)
+        else if (WaitForSingleObjectEx(UnexpectedErrorEvent.get(), 0, FALSE) == WAIT_OBJECT_0)
         {
             // Unexpected error occurred so exit the application
             break;
         }
-        else if (FirstTime || WaitForSingleObjectEx(ExpectedErrorEvent, 0, FALSE) == WAIT_OBJECT_0)
+        else if (FirstTime || WaitForSingleObjectEx(ExpectedErrorEvent.get(), 0, FALSE) == WAIT_OBJECT_0)
         {
             if (!FirstTime)
             {
                 // Terminate other threads
-                SetEvent(TerminateThreadsEvent);
+                SetEvent(TerminateThreadsEvent.get());
                 ThreadMgr.WaitForThreadTermination();
-                ResetEvent(TerminateThreadsEvent);
-                ResetEvent(ExpectedErrorEvent);
+                ResetEvent(TerminateThreadsEvent.get());
+                ResetEvent(ExpectedErrorEvent.get());
 
                 // Clean up
                 ThreadMgr.Clean();
@@ -301,7 +304,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
                 HANDLE SharedHandle = OutMgr.GetSharedHandle();
                 if (SharedHandle)
                 {
-                    Ret = ThreadMgr.Initialize(SingleOutput, OutputCount, UnexpectedErrorEvent, ExpectedErrorEvent, TerminateThreadsEvent, SharedHandle, &DeskBounds);
+                    Ret = ThreadMgr.Initialize(SingleOutput, OutputCount, UnexpectedErrorEvent.get(), ExpectedErrorEvent.get(), TerminateThreadsEvent.get(), SharedHandle, &DeskBounds);
                 }
                 else
                 {
@@ -328,7 +331,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
             if (Ret == DUPL_RETURN_ERROR_EXPECTED)
             {
                 // Some type of system transition is occurring so retry
-                SetEvent(ExpectedErrorEvent);
+                SetEvent(ExpectedErrorEvent.get());
             }
             else
             {
@@ -339,15 +342,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
     }
 
     // Make sure all other threads have exited
-    if (SetEvent(TerminateThreadsEvent))
+    if (SetEvent(TerminateThreadsEvent.get()))
     {
         ThreadMgr.WaitForThreadTermination();
     }
-
-    // Clean up
-    CloseHandle(UnexpectedErrorEvent);
-    CloseHandle(ExpectedErrorEvent);
-    CloseHandle(TerminateThreadsEvent);
 
     if (msg.message == WM_QUIT)
     {
@@ -433,16 +431,37 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 //
 DWORD WINAPI DDProc(_In_ void* Param)
 {
+    // Data passed in from thread creation
+    DuplicationThreadData* TData = reinterpret_cast<DuplicationThreadData*>(Param);
+
+    DUPL_RETURN Ret = DDProcCore(TData);
+
+    if (Ret != DUPL_RETURN_SUCCESS)
+    {
+        if (Ret == DUPL_RETURN_ERROR_EXPECTED)
+        {
+            // The system is in a transition state so request the duplication be restarted
+            SetEvent(TData->ExpectedErrorEvent);
+        }
+        else
+        {
+            // Unexpected error so exit the application
+            SetEvent(TData->UnexpectedErrorEvent);
+        }
+    }
+
+    return 0;
+}
+
+DUPL_RETURN DDProcCore(DuplicationThreadData* TData)
+{
     // Classes
-    DISPLAYMANAGER DispMgr;
-    DUPLICATIONMANAGER DuplMgr;
+    DisplayManager DispMgr;
+    DuplicationManager DuplMgr;
 
     // D3D objects
-    ID3D11Texture2D* SharedSurf = nullptr;
-    IDXGIKeyedMutex* KeyMutex = nullptr;
-
-    // Data passed in from thread creation
-    THREAD_DATA* TData = reinterpret_cast<THREAD_DATA*>(Param);
+    winrt::com_ptr<ID3D11Texture2D> SharedSurf;
+    winrt::com_ptr<IDXGIKeyedMutex> KeyMutex;
 
     // Get desktop
     DUPL_RETURN Ret;
@@ -452,8 +471,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
     {
         // We do not have access to the desktop so request a retry
         SetEvent(TData->ExpectedErrorEvent);
-        Ret = DUPL_RETURN_ERROR_EXPECTED;
-        goto Exit;
+        return DUPL_RETURN_ERROR_EXPECTED;
     }
 
     // Attach desktop to this thread
@@ -463,43 +481,42 @@ DWORD WINAPI DDProc(_In_ void* Param)
     if (!DesktopAttached)
     {
         // We do not have access to the desktop so request a retry
-        Ret = DUPL_RETURN_ERROR_EXPECTED;
-        goto Exit;
+        return DUPL_RETURN_ERROR_EXPECTED;
     }
 
-    // New display manager
-    DispMgr.InitD3D(&TData->DxRes);
+    // Set per-monitor DPI awareness which is required for the latest DuplicateOutput1 API
+    SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
     // Obtain handle to sync shared Surface
     HRESULT hr = TData->DxRes.Device->OpenSharedResource(TData->TexSharedHandle, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&SharedSurf));
-    if (FAILED (hr))
+    if (FAILED(hr))
     {
-        Ret = ProcessFailure(TData->DxRes.Device, L"Opening shared texture failed", L"Error", hr, SystemTransitionsExpectedErrors);
-        goto Exit;
+        return ProcessFailure(TData->DxRes.Device.get(), L"Opening shared texture failed", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     hr = SharedSurf->QueryInterface(__uuidof(IDXGIKeyedMutex), reinterpret_cast<void**>(&KeyMutex));
     if (FAILED(hr))
     {
-        Ret = ProcessFailure(nullptr, L"Failed to get keyed mutex interface in spawned thread", L"Error", hr);
-        goto Exit;
+        return ProcessFailure(nullptr, L"Failed to get keyed mutex interface in spawned thread", L"Error", hr);
     }
 
     // Make duplication manager
-    Ret = DuplMgr.InitDupl(TData->DxRes.Device, TData->Output);
+    Ret = DuplMgr.InitDupl(TData->DxRes.Device.get(), TData->Output);
     if (Ret != DUPL_RETURN_SUCCESS)
     {
-        goto Exit;
+        return Ret;
     }
 
     // Get output description
-    DXGI_OUTPUT_DESC DesktopDesc;
-    RtlZeroMemory(&DesktopDesc, sizeof(DXGI_OUTPUT_DESC));
+    DXGI_OUTPUT_DESC1 DesktopDesc = {};
     DuplMgr.GetOutputDesc(&DesktopDesc);
+
+    // New display manager
+    DispMgr.InitD3D(&TData->DxRes, DesktopDesc);
 
     // Main duplication loop
     bool WaitToProcessCurrentFrame = false;
-    FRAME_DATA CurrentData;
+    FrameData CurrentData;
 
     while ((WaitForSingleObjectEx(TData->TerminateThreadsEvent, 0, FALSE) == WAIT_TIMEOUT))
     {
@@ -535,7 +552,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
         else if (FAILED(hr))
         {
             // Generic unknown failure
-            Ret = ProcessFailure(TData->DxRes.Device, L"Unexpected error acquiring KeyMutex", L"Error", hr, SystemTransitionsExpectedErrors);
+            Ret = ProcessFailure(TData->DxRes.Device.get(), L"Unexpected error acquiring KeyMutex", L"Error", hr, SystemTransitionsExpectedErrors);
             DuplMgr.DoneWithFrame();
             break;
         }
@@ -553,7 +570,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
         }
 
         // Process new frame
-        Ret = DispMgr.ProcessFrame(&CurrentData, SharedSurf, TData->OffsetX, TData->OffsetY, &DesktopDesc);
+        Ret = DispMgr.ProcessFrame(&CurrentData, SharedSurf.get(), TData->OffsetX, TData->OffsetY, &DesktopDesc);
         if (Ret != DUPL_RETURN_SUCCESS)
         {
             DuplMgr.DoneWithFrame();
@@ -565,7 +582,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
         hr = KeyMutex->ReleaseSync(1);
         if (FAILED(hr))
         {
-            Ret = ProcessFailure(TData->DxRes.Device, L"Unexpected error releasing the keyed mutex", L"Error", hr, SystemTransitionsExpectedErrors);
+            Ret = ProcessFailure(TData->DxRes.Device.get(), L"Unexpected error releasing the keyed mutex", L"Error", hr, SystemTransitionsExpectedErrors);
             DuplMgr.DoneWithFrame();
             break;
         }
@@ -578,34 +595,7 @@ DWORD WINAPI DDProc(_In_ void* Param)
         }
     }
 
-Exit:
-    if (Ret != DUPL_RETURN_SUCCESS)
-    {
-        if (Ret == DUPL_RETURN_ERROR_EXPECTED)
-        {
-            // The system is in a transition state so request the duplication be restarted
-            SetEvent(TData->ExpectedErrorEvent);
-        }
-        else
-        {
-            // Unexpected error so exit the application
-            SetEvent(TData->UnexpectedErrorEvent);
-        }
-    }
-
-    if (SharedSurf)
-    {
-        SharedSurf->Release();
-        SharedSurf = nullptr;
-    }
-
-    if (KeyMutex)
-    {
-        KeyMutex->Release();
-        KeyMutex = nullptr;
-    }
-
-    return 0;
+    return Ret;
 }
 
 _Post_satisfies_(return != DUPL_RETURN_SUCCESS)
@@ -680,18 +670,7 @@ void DisplayMsg(_In_ LPCWSTR Str, _In_ LPCWSTR Title, HRESULT hr)
         return;
     }
 
-    const UINT StringLen = (UINT)(wcslen(Str) + sizeof(" with HRESULT 0x########."));
-    wchar_t* OutStr = new wchar_t[StringLen];
-    if (!OutStr)
-    {
-        return;
-    }
+    std::wstring OutStr = std::format(L"{0} with HRESULT 0x{1:X}", Str, static_cast<ULONG>(hr));
 
-    INT LenWritten = swprintf_s(OutStr, StringLen, L"%s with 0x%X.", Str, hr);
-    if (LenWritten != -1)
-    {
-        MessageBoxW(nullptr, OutStr, Title, MB_OK);
-    }
-
-    delete [] OutStr;
+    MessageBoxW(nullptr, OutStr.c_str(), Title, MB_OK);
 }

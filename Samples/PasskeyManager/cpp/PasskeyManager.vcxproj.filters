@@ -69,6 +69,7 @@
     <Image Include="Assets\SmallTile.scale-100.png" />
     <Image Include="Assets\LargeTile.scale-400.png" />
     <Image Include="Assets\LargeTile.scale-100.png" />
+    <Image Include="Assets\StoreLogo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">
@@ -83,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Assets\Square192x192Logo.svg" />
+    <None Include="Assets\PasskeyManager.svg" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PasskeyManager.rc" />

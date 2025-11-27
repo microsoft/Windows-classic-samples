@@ -1,0 +1,26 @@
+namespace Sample
+{
+    runtimeclass MainWindow : Microsoft.UI.Xaml.Window
+    {
+        MainWindow();
+
+        Windows.Foundation.Collections.IObservableVector<Object> DiscoveredTargets{ get; };
+        Microsoft.UI.Xaml.Controls.CheckBox TextCheckBox{ get; };
+        Microsoft.UI.Xaml.Controls.CheckBox HtmlCheckBox{ get; };
+        Microsoft.UI.Xaml.Controls.CheckBox CustomDataFormatCheckBox{ get; };
+        Microsoft.UI.Xaml.Controls.CheckBox AppFilterCheckBox{ get; };
+
+        static Double EnabledOpacity(Boolean value);
+        static Boolean IsNull(Object value);
+        static Boolean IsNotNull(Object value);
+    }
+
+    [Microsoft.UI.Xaml.Data.Bindable]
+    runtimeclass TransferTargetItem : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        String Label{ get; };
+        Microsoft.UI.Xaml.Media.ImageSource Logo{ get; };
+        Boolean IsEnabled{ get; };
+        void Invoke(Object sender, Microsoft.UI.Xaml.RoutedEventArgs e);
+    }
+}

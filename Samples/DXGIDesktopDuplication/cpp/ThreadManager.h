@@ -5,29 +5,25 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved
 
-#ifndef _THREADMANAGER_H_
-#define _THREADMANAGER_H_
+#pragma once
 
 #include "CommonTypes.h"
 
-class THREADMANAGER
+class ThreadManager
 {
-    public:
-        THREADMANAGER();
-        ~THREADMANAGER();
-        void Clean();
-        DUPL_RETURN Initialize(INT SingleOutput, UINT OutputCount, HANDLE UnexpectedErrorEvent, HANDLE ExpectedErrorEvent, HANDLE TerminateThreadsEvent, HANDLE SharedHandle, _In_ RECT* DesktopDim);
-        PTR_INFO* GetPointerInfo();
-        void WaitForThreadTermination();
+public:
+	ThreadManager();
+	~ThreadManager();
+	void Clean();
+	DUPL_RETURN Initialize(INT SingleOutput, UINT OutputCount, HANDLE UnexpectedErrorEvent, HANDLE ExpectedErrorEvent, HANDLE TerminateThreadsEvent, HANDLE SharedHandle, _In_ RECT* DesktopDim);
+	PointerInfo* GetPointerInfo();
+	void WaitForThreadTermination();
 
-    private:
-        DUPL_RETURN InitializeDx(_Out_ DX_RESOURCES* Data);
-        void CleanDx(_Inout_ DX_RESOURCES* Data);
+private:
+	DUPL_RETURN InitializeDx(_Inout_ DxResources* Data);
 
-        PTR_INFO m_PtrInfo;
-        UINT m_ThreadCount;
-        _Field_size_(m_ThreadCount) HANDLE* m_ThreadHandles;
-        _Field_size_(m_ThreadCount) THREAD_DATA* m_ThreadData;
+	PointerInfo m_PtrInfo;
+	UINT m_ThreadCount = 0;
+	std::vector<winrt::handle> m_ThreadHandles;
+	std::vector<DuplicationThreadData> m_ThreadData;
 };
-
-#endif

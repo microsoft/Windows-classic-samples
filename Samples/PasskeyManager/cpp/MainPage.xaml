@@ -11,8 +11,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:BitwiseFlagToVisibilityConverter x:Key="BitwiseFlagToVisibilityConverter" />
-                    <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="{ThemeResource SystemFillColorSuccess}"/>
-                    <SolidColorBrush x:Key="SystemFillColorCriticalBrush" Color="{ThemeResource SystemFillColorCritical}"/>
+                    <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="{ThemeResource SystemFillColorSuccess}" />
+                    <SolidColorBrush x:Key="SystemFillColorCriticalBrush" Color="{ThemeResource SystemFillColorCritical}" />
                     <SolidColorBrush x:Key="SystemFillColorCautionBrush" Color="{ThemeResource SystemFillColorCaution}" />
                     <SolidColorBrush x:Key="SystemFillColorNeutralBrush" Color="{ThemeResource SystemFillColorNeutral}" />
                     <Style x:Key="CardStyle" TargetType="Grid">
@@ -76,7 +76,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="pluginStateTextBlock" VerticalAlignment="Center">
                     <Run Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="State:" />
-                    <Run Foreground="{ThemeResource SystemFillColorCautionBrush}" x:Name="pluginStateRun" Text=""/>
+                    <Run
+                        x:Name="pluginStateRun"
+                        Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                        Text="" />
                 </TextBlock>
                 <StackPanel
                     Grid.Column="1"
@@ -86,6 +89,16 @@
                         x:Name="registerPluginButton"
                         Click="registerPluginButton_Click"
                         Content="Register"
+                        Style="{StaticResource AccentButtonStyle}" />
+                    <Button
+                        x:Name="updatePluginButton"
+                        Click="updatePluginButton_Click"
+                        Content="Update"
+                        Style="{StaticResource AccentButtonStyle}" />
+                    <Button
+                        x:Name="activatePluginButton"
+                        Click="activatePluginButton_Click"
+                        Content="Enable"
                         Style="{StaticResource AccentButtonStyle}" />
                     <Button
                         x:Name="unregisterPluginButton"
@@ -100,9 +113,7 @@
                 Margin="0,16,0,0"
                 Style="{StaticResource BodyStrongTextBlockStyle}"
                 Text="Stats" />
-            <Grid
-                Grid.Row="3"
-                Style="{StaticResource CardStyle}">
+            <Grid Grid.Row="3" Style="{StaticResource CardStyle}">
                 <InfoBarPanel>
                     <TextBlock x:Name="credentialStateTextBlock1">
                         <Run Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="Local DB:" />
@@ -122,42 +133,51 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Style="{StaticResource CardStyle}">
-                
+
                 <StackPanel
                     Grid.Column="1"
                     Orientation="Horizontal"
                     Spacing="8">
-                    <ToggleSwitch 
-                        x:Name="vaultLockSwitch"
-                        Header="Simulate Vault Unlock"
-                        OnContent="Locked"
-                        OffContent="Unlocked"
-                        IsOn="False"
-                        Toggled="vaultLockSwitch_Toggled">
-                        <ToggleSwitch.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock 
-                                    Text="{Binding}"
-                                    Margin="0,0,0,0"
-                                    Padding="0,0,0,0"
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </DataTemplate>
-                        </ToggleSwitch.HeaderTemplate>
-                    </ToggleSwitch>
+                    <ToggleSplitButton
+                        x:Name="VaultUnlockControl"
+                        Content="Vault Unlocked"
+                        IsCheckedChanged="VaultUnlockControl_IsCheckedChanged">
+                        <ToggleSplitButton.Flyout>
+                            <Flyout Placement="Bottom">
+                                <ToggleSwitch
+                                    x:Name="vaultLockSwitch"
+                                    Header="Unlock Method"
+                                    IsOn="False"
+                                    OffContent="Consent"
+                                    OnContent="Passkey"
+                                    Toggled="vaultLockSwitch_Toggled">
+                                    <ToggleSwitch.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                                Margin="0,0,0,0"
+                                                Padding="0,0,0,0"
+                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ToggleSwitch.HeaderTemplate>
+                                </ToggleSwitch>
+                            </Flyout>
+                        </ToggleSplitButton.Flyout>
+                    </ToggleSplitButton>
                     <ToggleSwitch
                         x:Name="silentOperationSwitch"
                         Header="Minimize UI"
-                        OnContent="Hide"
-                        OffContent="Show"
                         IsOn="False"
+                        OffContent="Show"
+                        OnContent="Hide"
                         Toggled="silentOperationSwitch_Toggled">
                         <ToggleSwitch.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock
-                                    Text="{Binding}"
                                     Margin="0,0,0,0"
                                     Padding="0,0,0,0"
-                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding}" />
                             </DataTemplate>
                         </ToggleSwitch.HeaderTemplate>
                     </ToggleSwitch>
@@ -184,9 +204,10 @@
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem Click="addAllPluginCredentials_Click" Text="All Passkeys to Cache" />
                             <MenuFlyoutItem
-                                IsEnabled="False"
                                 x:Name="selectedAddButton"
-                                Click="addSelectedCredentials_Click" Text="Selected Passkeys to Cache"/>
+                                Click="addSelectedCredentials_Click"
+                                IsEnabled="False"
+                                Text="Selected Passkeys to Cache" />
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
@@ -196,10 +217,12 @@
                             <MenuFlyoutItem Click="deleteAllPluginCredentials_Click" Text="All Passkeys from Cache" />
                             <MenuFlyoutItem
                                 x:Name="deleteSelectedCacheButton"
-                                Click="deleteSelectedPluginCredentials_Click" Text="Selected Passkeys from Cache" />
+                                Click="deleteSelectedPluginCredentials_Click"
+                                Text="Selected Passkeys from Cache" />
                             <MenuFlyoutItem
                                 x:Name="deleteSelectedLocalButton"
-                                Click="deleteSelectedPluginCredentialsEverywhere_Click" Text="Selected Passkeys everywhere" />
+                                Click="deleteSelectedPluginCredentialsEverywhere_Click"
+                                Text="Selected Passkeys everywhere" />
                             <MenuFlyoutItem Click="deleteAllLocalCredentials_Click" Text="All Passkeys from Local" />
                             <MenuFlyoutItem Click="deleteAllCredentials_Click" Text="All Passkeys everywhere" />
                         </MenuFlyout>
@@ -210,11 +233,12 @@
                 Grid.Row="6"
                 VerticalAlignment="Stretch"
                 Style="{StaticResource CardStyle}">
-                <ListView ItemsSource="{x:Bind CredentialList.credentials}"
+                <ListView
                     x:Name="credentialListView"
                     IsItemClickEnabled="False"
-                    SelectionMode="Multiple"
-                    SelectionChanged="SelectionChanged">
+                    ItemsSource="{x:Bind CredentialList.credentials}"
+                    SelectionChanged="SelectionChanged"
+                    SelectionMode="Multiple">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Credential">
                             <Grid Padding="8" ColumnSpacing="8">
@@ -250,7 +274,7 @@
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1"
                                     CornerRadius="{StaticResource ControlCornerRadius}"
-                                    Visibility="{x:Bind CredentialOptions,Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=AutofillCapable}">
+                                    Visibility="{x:Bind CredentialOptions, Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=AutofillCapable}">
                                     <TextBlock FontSize="12" Text="Autofill" />
                                 </Border>
                                 <Border
@@ -262,10 +286,10 @@
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1"
                                     CornerRadius="{StaticResource ControlCornerRadius}"
-                                    Visibility="{x:Bind CredentialOptions,Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=MetadataStale}">
-                                    <TextBlock 
+                                    Visibility="{x:Bind CredentialOptions, Converter={StaticResource BitwiseFlagToVisibilityConverter}, ConverterParameter=MetadataStale}">
+                                    <TextBlock
+                                        FontSize="12"
                                         Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                        FontSize="12" 
                                         Text="Stale" />
                                 </Border>
                             </Grid>

@@ -21,15 +21,15 @@ The APIs demonstrated in this sample are:
 1. WcmSetProperty - to set cost or data plan status for a profile.
 2. WcmQueryProperty - to query cost or data plan status info for a profile.
 
-**Note** The Windows-classic-samples repo contains a variety of code samples that exercise the various programming models, platforms, features, and components available in Windows and/or Windows Server. This repo provides a Visual Studio solution (SLN) file for each sample, along with the source files, assets, resources, and metadata needed to compile and run the sample. For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, check out the documentation on the [Windows Dev Center](https://dev.windows.com). This sample is provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows and/or Windows Server.
+**Note** The Windows-classic-samples repo contains a variety of code samples that exercise the various programming models, platforms, features, and components available in Windows and/or Windows Server. This repo provides a Visual Studio solution (SLN) file for each sample, along with the source files, assets, resources, and metadata needed to compile and run the sample. For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, check out the documentation on the [Windows Dev Center](https://developer.microsoft.com/windows/). This sample is provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows and/or Windows Server.
 
-To get a copy of Windows, go to [Downloads and tools](http://go.microsoft.com/fwlink/p/?linkid=301696).
+To get a copy of Windows, go to [Downloads and tools](https://go.microsoft.com/fwlink/p/?linkid=301696).
 
-To get a copy of Visual Studio, go to [Visual Studio Downloads](http://go.microsoft.com/fwlink/p/?linkid=301697).
+To get a copy of Visual Studio, go to [Visual Studio Downloads](https://go.microsoft.com/fwlink/p/?linkid=301697).
 
 ## Related topics
 
-[Windows Connection Manager](https://learn.microsoft.com/en-us/windows/win32/wcm/windows-connection-manager-portal)
+[Windows Connection Manager](https://learn.microsoft.com/windows/win32/wcm/windows-connection-manager-portal)
 
 ## System requirements
 

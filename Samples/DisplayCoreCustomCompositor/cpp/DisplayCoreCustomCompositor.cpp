@@ -1,5 +1,6 @@
-﻿#include "pch.h"
+#include "pch.h"
 
+#include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.Devices.Display.Core.h>
 #include <winrt/Windows.Graphics.DirectX.h>

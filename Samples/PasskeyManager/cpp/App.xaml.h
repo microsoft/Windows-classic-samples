@@ -7,7 +7,8 @@
 #include "MainWindow.xaml.h"
 #include "MakeCredentialPage.xaml.h"
 #include <synchapi.h>
-#include <include/webauthn/pluginauthenticator.h>
+#include <pluginauthenticator.h>
+#include <PluginAuthenticator/PluginAuthenticatorImpl.h>
 
 namespace winrt::PasskeyManager::implementation
 {
@@ -23,27 +24,25 @@ namespace winrt::PasskeyManager::implementation
         HRESULT requestSignatureVerificationStatus;
     };
 
-    // define a typedefed enum of operation type with two value for make credential and get assertion
-    typedef enum _PluginOperationType
-    {
-        PLUGIN_OPERATION_TYPE_MAKE_CREDENTIAL = 0,
-        PLUGIN_OPERATION_TYPE_GET_ASSERTION = 1
-    } PluginOperationType;
-
     struct PluginOpertaionOptions
     {
         // define default constructor
         PluginOpertaionOptions() :
             hWnd(nullptr),
-            operationType(PluginOperationType::PLUGIN_OPERATION_TYPE_MAKE_CREDENTIAL),
-            selectedCredential(nullptr)
-        {};
+            operationType(PluginOperationType::MakeCredential),
+            selectedCredential(nullptr),
+            transactionId(GUID_NULL),
+            silentMode(false)
+        {
+        };
         HWND hWnd;
         std::wstring rpName;
         std::wstring userName;
         PluginOperationType operationType;
+        GUID transactionId;
         std::vector<const WEBAUTHN_CREDENTIAL_DETAILS*> matchingCredentials;
         const WEBAUTHN_CREDENTIAL_DETAILS* selectedCredential;
+        bool silentMode;
     };
 
     struct App : AppT<App>
@@ -51,10 +50,9 @@ namespace winrt::PasskeyManager::implementation
         App();
         App(PWSTR args);
 
-        inline static wil::unique_event s_pluginOpRequestRecievedEvent { wil::EventOptions::ManualReset };
-        inline static wil::unique_event s_hAppReadyForPluginOpEvent { wil::EventOptions::ManualReset };
-        inline static wil::unique_event s_hPluginOpCompletedEvent{ wil::EventOptions::ManualReset };
-        inline static wil::unique_com_class_object_cookie m_registration;
+        wil::shared_event m_hAppReadyForPluginOpEvent { wil::EventOptions::ManualReset };
+        wil::shared_event m_hPluginOpCompletedEvent{ wil::EventOptions::ManualReset };
+        wil::unique_com_class_object_cookie m_registration;
 
         Microsoft::UI::Xaml::Controls::Frame CreateRootFrame();
         void InitializeAppWindTitleBar();
@@ -66,28 +64,44 @@ namespace winrt::PasskeyManager::implementation
         bool SetMatchingCredentials(std::wstring_view rpName, const std::vector<const WEBAUTHN_CREDENTIAL_DETAILS*>& matchedCreds, HWND hwnd);
         bool SetSelectedCredentialId(Windows::Storage::Streams::IBuffer credentialId);
 
+        void SetPluginTransactionId(GUID requestTransactionId)
+        {
+            std::lock_guard<std::mutex> lock(m_pluginOperationOptionsMutex);
+            m_pluginOperationOptions.transactionId = requestTransactionId;
+        }
+
         auto GetDispatcherQueue() { return m_dispatcherQueue; }
         Microsoft::UI::Dispatching::DispatcherQueue m_dispatcherQueue = Microsoft::UI::Dispatching::DispatcherQueue::GetForCurrentThread();
 
+        std::atomic<bool> m_isOperationInProgress{ false };
         wil::unique_event m_hPluginProceedButtonEvent{ wil::EventOptions::ManualReset };
-        wil::unique_event m_hPluginUserCancelEvent{ wil::EventOptions::ManualReset };
-        wil::unique_event m_hPluginOpReqDisplayInfoParsedEvent{ wil::EventOptions::ManualReset };
+        wil::shared_event m_hPluginCancelOperationEvent{ wil::EventOptions::ManualReset };
+        wil::unique_event m_hPluginWindowDisplayInfoReadyEvent{ wil::EventOptions::ManualReset };
         wil::unique_event m_hWindowReady{ wil::EventOptions::ManualReset };
         wil::unique_event m_hPluginCredentialSelected{ wil::EventOptions::ManualReset };
         wil::unique_event m_hVaultConsentComplete{ wil::EventOptions::ManualReset };
         wil::unique_event m_hVaultConsentFailed{ wil::EventOptions::ManualReset };
-        winrt::fire_and_forget SimulateUnLockVaultUsingConsentVerifier();
+        winrt::fire_and_forget SimulateUnLockVault();
 
-        bool m_silentMode = false;
-        bool GetSilentMode() const
+        bool GetSilentMode()
         {
-            return m_silentMode;
+            return m_pluginOperationOptions.silentMode;
         }
 
-        static void register_plugin_class_factory();
+        GUID GetPluginTransactionId()
+        {
+            return m_pluginOperationOptions.transactionId;
+        }
+
+        void RegisterPluginClassFactory();
         bool PluginCompleteAction();
         bool PluginCancelAction();
-    public:
+
+        void ResetPluginOperationState();
+        void CloseOrHideWindow();
+        void SetupPluginWindow();
+        void HandlePluginOperations();
+
         PluginOperationStatus m_pluginOperationStatus;
         winrt::Microsoft::UI::Xaml::Window m_window{ nullptr };
         hstring m_args;

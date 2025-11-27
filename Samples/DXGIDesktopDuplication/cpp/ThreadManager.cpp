@@ -9,14 +9,11 @@
 
 DWORD WINAPI DDProc(_In_ void* Param);
 
-THREADMANAGER::THREADMANAGER() : m_ThreadCount(0),
-                                 m_ThreadHandles(nullptr),
-                                 m_ThreadData(nullptr)
+ThreadManager::ThreadManager()
 {
-    RtlZeroMemory(&m_PtrInfo, sizeof(m_PtrInfo));
 }
 
-THREADMANAGER::~THREADMANAGER()
+ThreadManager::~ThreadManager()
 {
     Clean();
 }
@@ -24,92 +21,27 @@ THREADMANAGER::~THREADMANAGER()
 //
 // Clean up resources
 //
-void THREADMANAGER::Clean()
+void ThreadManager::Clean()
 {
-    if (m_PtrInfo.PtrShapeBuffer)
-    {
-        delete [] m_PtrInfo.PtrShapeBuffer;
-        m_PtrInfo.PtrShapeBuffer = nullptr;
-    }
-    RtlZeroMemory(&m_PtrInfo, sizeof(m_PtrInfo));
+    m_PtrInfo = {};
 
-    if (m_ThreadHandles)
-    {
-        for (UINT i = 0; i < m_ThreadCount; ++i)
-        {
-            if (m_ThreadHandles[i])
-            {
-                CloseHandle(m_ThreadHandles[i]);
-            }
-        }
-        delete [] m_ThreadHandles;
-        m_ThreadHandles = nullptr;
-    }
-
-    if (m_ThreadData)
-    {
-        for (UINT i = 0; i < m_ThreadCount; ++i)
-        {
-            CleanDx(&m_ThreadData[i].DxRes);
-        }
-        delete [] m_ThreadData;
-        m_ThreadData = nullptr;
-    }
-
+    m_ThreadHandles.clear();
+    m_ThreadData.clear();
     m_ThreadCount = 0;
-}
-
-//
-// Clean up DX_RESOURCES
-//
-void THREADMANAGER::CleanDx(_Inout_ DX_RESOURCES* Data)
-{
-    if (Data->Device)
-    {
-        Data->Device->Release();
-        Data->Device = nullptr;
-    }
-
-    if (Data->Context)
-    {
-        Data->Context->Release();
-        Data->Context = nullptr;
-    }
-
-    if (Data->VertexShader)
-    {
-        Data->VertexShader->Release();
-        Data->VertexShader = nullptr;
-    }
-
-    if (Data->PixelShader)
-    {
-        Data->PixelShader->Release();
-        Data->PixelShader = nullptr;
-    }
-
-    if (Data->InputLayout)
-    {
-        Data->InputLayout->Release();
-        Data->InputLayout = nullptr;
-    }
-
-    if (Data->SamplerLinear)
-    {
-        Data->SamplerLinear->Release();
-        Data->SamplerLinear = nullptr;
-    }
 }
 
 //
 // Start up threads for DDA
 //
-DUPL_RETURN THREADMANAGER::Initialize(INT SingleOutput, UINT OutputCount, HANDLE UnexpectedErrorEvent, HANDLE ExpectedErrorEvent, HANDLE TerminateThreadsEvent, HANDLE SharedHandle, _In_ RECT* DesktopDim)
+DUPL_RETURN ThreadManager::Initialize(INT SingleOutput, UINT OutputCount, HANDLE UnexpectedErrorEvent, HANDLE ExpectedErrorEvent, HANDLE TerminateThreadsEvent, HANDLE SharedHandle, _In_ RECT* DesktopDim)
 {
     m_ThreadCount = OutputCount;
-    m_ThreadHandles = new (std::nothrow) HANDLE[m_ThreadCount];
-    m_ThreadData = new (std::nothrow) THREAD_DATA[m_ThreadCount];
-    if (!m_ThreadHandles || !m_ThreadData)
+    try
+    {
+        m_ThreadHandles.resize(m_ThreadCount);
+        m_ThreadData.resize(m_ThreadCount);
+    }
+    catch (std::bad_alloc)
     {
         return ProcessFailure(nullptr, L"Failed to allocate array for threads", L"Error", E_OUTOFMEMORY);
     }
@@ -127,7 +59,6 @@ DUPL_RETURN THREADMANAGER::Initialize(INT SingleOutput, UINT OutputCount, HANDLE
         m_ThreadData[i].OffsetY = DesktopDim->top;
         m_ThreadData[i].PtrInfo = &m_PtrInfo;
 
-        RtlZeroMemory(&m_ThreadData[i].DxRes, sizeof(DX_RESOURCES));
         Ret = InitializeDx(&m_ThreadData[i].DxRes);
         if (Ret != DUPL_RETURN_SUCCESS)
         {
@@ -135,8 +66,8 @@ DUPL_RETURN THREADMANAGER::Initialize(INT SingleOutput, UINT OutputCount, HANDLE
         }
 
         DWORD ThreadId;
-        m_ThreadHandles[i] = CreateThread(nullptr, 0, DDProc, &m_ThreadData[i], 0, &ThreadId);
-        if (m_ThreadHandles[i] == nullptr)
+        m_ThreadHandles[i] = winrt::handle(CreateThread(nullptr, 0, DDProc, &m_ThreadData[i], 0, &ThreadId));
+        if (!m_ThreadHandles[i])
         {
             return ProcessFailure(nullptr, L"Failed to create thread", L"Error", E_FAIL);
         }
@@ -148,7 +79,7 @@ DUPL_RETURN THREADMANAGER::Initialize(INT SingleOutput, UINT OutputCount, HANDLE
 //
 // Get DX_RESOURCES
 //
-DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
+DUPL_RETURN ThreadManager::InitializeDx(_Inout_ DxResources* Data)
 {
     HRESULT hr = S_OK;
 
@@ -172,12 +103,16 @@ DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
     UINT NumFeatureLevels = ARRAYSIZE(FeatureLevels);
 
     D3D_FEATURE_LEVEL FeatureLevel;
+    D3D11_CREATE_DEVICE_FLAG DeviceFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
+#ifdef _DEBUG
+    DeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
 
     // Create device
     for (UINT DriverTypeIndex = 0; DriverTypeIndex < NumDriverTypes; ++DriverTypeIndex)
     {
-        hr = D3D11CreateDevice(nullptr, DriverTypes[DriverTypeIndex], nullptr, 0, FeatureLevels, NumFeatureLevels,
-                                D3D11_SDK_VERSION, &Data->Device, &FeatureLevel, &Data->Context);
+        hr = D3D11CreateDevice(nullptr, DriverTypes[DriverTypeIndex], nullptr, DeviceFlags, FeatureLevels, NumFeatureLevels,
+                                D3D11_SDK_VERSION, Data->Device.put(), &FeatureLevel, Data->Context.put());
         if (SUCCEEDED(hr))
         {
             // Device creation success, no need to loop anymore
@@ -189,12 +124,12 @@ DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
         return ProcessFailure(nullptr, L"Failed to create device in InitializeDx", L"Error", hr);
     }
 
-    // VERTEX shader
+    // Vertex shader
     UINT Size = ARRAYSIZE(g_VS);
-    hr = Data->Device->CreateVertexShader(g_VS, Size, nullptr, &Data->VertexShader);
+    hr = Data->Device->CreateVertexShader(g_VS, Size, nullptr, Data->VertexShader.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(Data->Device, L"Failed to create vertex shader in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(Data->Device.get(), L"Failed to create vertex shader in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Input layout
@@ -204,24 +139,23 @@ DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
     UINT NumElements = ARRAYSIZE(Layout);
-    hr = Data->Device->CreateInputLayout(Layout, NumElements, g_VS, Size, &Data->InputLayout);
+    hr = Data->Device->CreateInputLayout(Layout, NumElements, g_VS, Size, Data->InputLayout.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(Data->Device, L"Failed to create input layout in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(Data->Device.get(), L"Failed to create input layout in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
     }
-    Data->Context->IASetInputLayout(Data->InputLayout);
+    Data->Context->IASetInputLayout(Data->InputLayout.get());
 
     // Pixel shader
     Size = ARRAYSIZE(g_PS);
-    hr = Data->Device->CreatePixelShader(g_PS, Size, nullptr, &Data->PixelShader);
+    hr = Data->Device->CreatePixelShader(g_PS, Size, nullptr, Data->PixelShader.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(Data->Device, L"Failed to create pixel shader in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(Data->Device.get(), L"Failed to create pixel shader in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Set up sampler
-    D3D11_SAMPLER_DESC SampDesc;
-    RtlZeroMemory(&SampDesc, sizeof(SampDesc));
+    D3D11_SAMPLER_DESC SampDesc = {};
     SampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     SampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
     SampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -229,19 +163,19 @@ DUPL_RETURN THREADMANAGER::InitializeDx(_Out_ DX_RESOURCES* Data)
     SampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
     SampDesc.MinLOD = 0;
     SampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-    hr = Data->Device->CreateSamplerState(&SampDesc, &Data->SamplerLinear);
+    hr = Data->Device->CreateSamplerState(&SampDesc, Data->SamplerLinear.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(Data->Device, L"Failed to create sampler state in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(Data->Device.get(), L"Failed to create sampler state in InitializeDx", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     return DUPL_RETURN_SUCCESS;
 }
 
 //
-// Getter for the PTR_INFO structure
+// Getter for the PointerInfo structure
 //
-PTR_INFO* THREADMANAGER::GetPointerInfo()
+PointerInfo* ThreadManager::GetPointerInfo()
 {
     return &m_PtrInfo;
 }
@@ -249,10 +183,14 @@ PTR_INFO* THREADMANAGER::GetPointerInfo()
 //
 // Waits infinitely for all spawned threads to terminate
 //
-void THREADMANAGER::WaitForThreadTermination()
+void ThreadManager::WaitForThreadTermination()
 {
     if (m_ThreadCount != 0)
     {
-        WaitForMultipleObjectsEx(m_ThreadCount, m_ThreadHandles, TRUE, INFINITE, FALSE);
+        // Copy the thread handle smart pointers to a plain handle vector
+        std::vector<HANDLE> Handles;
+        std::transform(m_ThreadHandles.begin(), m_ThreadHandles.end(), std::back_inserter(Handles), [](const winrt::handle& Handle) { return Handle.get(); });
+
+        WaitForMultipleObjectsEx(m_ThreadCount, Handles.data(), TRUE, INFINITE, FALSE);
     }
 }

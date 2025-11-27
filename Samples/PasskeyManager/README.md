@@ -15,46 +15,46 @@ extendedZipContent:
 # Passkey Manager sample
 
 This sample demonstrates how to integrate a third-party passkey manager with the Windows platform using WebAuthn Plugin APIs.
+This sample assumes familiarity with webauthn credentials.
 
 * Registering the passkey manager app as a COM object in the system registry.
 * Implementing the `IPluginAuthenticator` interface for managing webauthn credentials.
 * Using the `WebAuthNPluginAddAuthenticator` API to add the plugin authenticator.
 * Handling credential creation requests from webauthn clients.
 * Managing credential metadata with `WebAuthNPluginAuthenticatorAddCredentials` and `WebAuthNPluginAuthenticatorRemoveCredentials`.
-* Performing user verification using Windows Hello with `WebAuthNPluginPerformUv`.
+* Performing user verification using Windows Hello with `WebAuthNPluginPerformUserVerification`.
 * Updating plugin authenticator details with `WebAuthNPluginUpdateAuthenticatorDetails`.
 * Removing the plugin authenticator with `WebAuthNPluginRemoveAuthenticator`.
-* Responding to system-initiated operations like `PluginCancelOperation`.
+* Responding to system-initiated operations like `CancelOperation` and rendering the plugin status with a callback.
 
 **Note**   The Windows-classic-samples repo contains a variety of code samples that exercise the various programming models, platforms, features, and components available in Windows and/or Windows Server. This repo provides a Visual Studio solution (SLN) file for each sample, along with the source files, assets, resources, and metadata needed to compile and run the sample. For more info about the programming models, platforms, languages, and APIs demonstrated in these samples, check out the documentation on the [Windows Dev Center](https://dev.windows.com). This sample is provided as-is in order to indicate or demonstrate the functionality of the programming models and feature APIs for Windows and/or Windows Server.
 
-This sample was created for Windows 11 Insider Edition Beta Channel 10.0.22635.4515 using Visual Studio and the Windows SDK 10.0.26100.1742. 
+## SDK requirements
 
-**Note**: `These are experimental APIs and are not guaranteed to be included in future versions of Windows`.
+Windows SDK version 10.0.26100.7175 or higher.
 
 ## Operating system requirements
 
-Windows 11 Insider Edition Beta Channel. Build Major Version = 22635 and Minor Version >= 4515.
-
-#### Windows Insider Program
-* To sign up for the Windows Insider Program (WIP) you must register here: [Windows Insider Program](https://www.microsoft.com/en-us/windowsinsider/register).
-* Once you have signed up for WIP, go to *Settings > Windows Update > WIP* and select Beta channel. Video instructions: https://www.microsoft.com/en-us/videoplayer/embed/RW1kR8G?download=false
-
+Windows 11 version 25H2. Build Major Version = 26200 and Minor Version >= 6725.
+Windows 11 version 24H2. Build Major Version = 26100 and Minor Version >= 6725.
 
 ## Build the sample
 
 #### Download Prerequisites
 
-* Download the [cbor-lite](https://bitbucket.org/isode/cbor-lite/src/master/include/) directory and copy it into the `include` directory of the sample.
-* Download the [webauthn](https://github.com/microsoft/webauthn/experimental) directory and copy it into the `include` directory of the sample.
+The PasskeyManager.vcxproj project file contains a custom MSBuild target (EnsureExternalHeaders) to download these files.
+If for some reason the task is not running successfully, you can download the files manually.
+
+* Download the header files from the [cbor-lite](https://bitbucket.org/isode/cbor-lite/src/master/include/) directory and copy them into the `include\cbor-lite` directory of the sample.
 
 #### Fill in the plugin information.
 * Use guidgen.exe to generate a new GUID for the plugin.
 * Open `Package.appxmanifest` and replace the `Clsid` with the new GUID. Also, replace the `DisplayName` and `PublisherDisplayName` with your plugin's name and your organization's name.
-* Open the `PluginManagement/PluginRegistrationManager.h` file and fill in the plugin's `Name`, `AAGUID`, `RpId`, and `Clsid` fields with your plugin information.
+* Open the `PluginAuthenticator/PluginAuthenticatorImpl.h` file and fill in the same `Clsid` from `Package.appxmanifest`.
+* Open the `PluginManagement/PluginRegistrationManager.h` file and fill in the plugin's `Name`, `AAGUID` and `RpId` fields with your plugin information.
 
 #### Build
-* Install the Windows SDK version 10.0.26100.1742 or higher.
+* Install the Windows SDK version 10.0.26100.7175 or higher.
 * Open the solution (*.sln*) file titled *PasskeyManager.sln* from Visual Studio.
 * Press Ctrl+Shift+B or select **Build** \> **Build Solution**.
 
@@ -64,23 +64,29 @@ Press F5 or select Debug \> Start Debugging. To run the sample without debugging
 
 Things to try with the sample:
 
-* Use the Register button to register the plugin on the system.
+* Click the __Register__ button to register the plugin on the system.
 
-* Go to *Settings > Accounts > Passkeys > Advanced Options* and enable __Contoso Passkey Manager__.
+* Click the __Enable__ button to open up *Settings* and enable __Contoso Passkey Manager__.
+  * Alternatively, manually go to *Settings > Accounts > Passkeys > Advanced Options* and enable __Contoso Passkey Manager__.
 
 * Create a new passkey.
   * Visit webauthn test websites, like https://webauthn.io, or use test accounts on websites like github.com, linkedin.com, or amazon.com.
   * Press *Continue* when asked to save the passkey to __Contoso Passkey Manager__.
-  * Or pick out __Contoso Passkey Manager__ from the list of authenticators"
-* Click the *Add Passkeys* button to add your new passkeys to the system cache.
-  * Look out for the `Autofill` label next to the username in the Passkeys list.
-* On supported browsers like Edge and Chrome visit websites that support autofill for passkeys.
-  * Click on the username or password text input fields to see the autofill dropdown show up.
-  * Your new passkey should show up in the dropdown.
-* You can also delete the passkey from the system cache by clicking on the *Delete Passkeys* button.
-* Use *Simulate Vault Unlock* toggle to switch between using the new `WebAuthNPluginPerformUv` and other existing methods to invoke a Windows Hello prompt.
-* Use the *Minimize UI* toggle to hide the plugin UI prompt asking confirmation during the make Save passkey and Sign in with passkey flow.
+  * Or pick out __Contoso Passkey Manager__ from the list of authenticators.
 
+* Once created, the passkey should also have been added to the system cache.
+  * Look out for the __Autofill__ label next to the username in the Passkeys list.
+  * Click the __Refresh__ button in Contoso to refresh the view.
+  * On supported browsers like Edge and Chrome, visit websites that support autofill for passkeys.
+    * Click on the username or password text input fields to see the autofill dropdown show up.
+    * Your new passkey should show up in the dropdown.
+
+* You can also delete the passkey from the system cache by clicking on the *Delete* button.
+  * Click the *Add* button to add your passkeys back to the system cache.
+
+* Use the *Vault Unlocked* button toggle to switch between using the new `WebAuthNPluginPerformUserVerification` and other existing methods to invoke a Windows Hello prompt.
+
+* Use the *Minimize UI* toggle to hide the plugin UI prompt asking for confirmation during the Save passkey and Sign-in with passkey flows.
 
 ## Files
 

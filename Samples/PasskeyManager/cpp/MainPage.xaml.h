@@ -1,6 +1,6 @@
 #pragma once
 
-#include <include/webauthn/pluginauthenticator.h>
+#include <pluginauthenticator.h>
 #include "MainPage.g.h"
 #include <winrt/Microsoft.UI.Xaml.Controls.h>
 #include <winrt/Microsoft.UI.Xaml.Documents.h>
@@ -20,6 +20,9 @@ namespace winrt::PasskeyManager::implementation
     struct MainPage : MainPageT<MainPage>
     {
         MainPage();
+        ~MainPage();
+
+        std::optional<DWORD> m_cookie{};
 
         PasskeyManager::CredentialListViewModel CredentialList()
         {
@@ -28,6 +31,7 @@ namespace winrt::PasskeyManager::implementation
 
         winrt::IAsyncAction refreshButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction registerPluginButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+        winrt::IAsyncAction updatePluginButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction unregisterPluginButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction addAllPluginCredentials_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction addSelectedCredentials_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
@@ -37,10 +41,14 @@ namespace winrt::PasskeyManager::implementation
         winrt::IAsyncAction clearLogsButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction deleteAllLocalCredentials_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
         winrt::IAsyncAction deleteAllCredentials_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+        winrt::IAsyncAction activatePluginButton_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
+        winrt::IAsyncAction VaultUnlockControl_IsCheckedChanged(winrt::Microsoft::UI::Xaml::Controls::ToggleSplitButton const& sender, winrt::Microsoft::UI::Xaml::Controls::ToggleSplitButtonIsCheckedChangedEventArgs const& args);
+        winrt::IAsyncAction TestPasskeyVaultUnlock_Click(IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
         winrt::fire_and_forget UpdateCredentialList();
 
         winrt::IAsyncAction OnNavigatedTo(Microsoft::UI::Xaml::Navigation::NavigationEventArgs);
+
         void UpdatePasskeyOperationStatusText(hstring const& statusText)
         {
             textContent().Inlines().InsertAt(0, Microsoft::UI::Xaml::Documents::LineBreak{});
@@ -58,11 +66,16 @@ namespace winrt::PasskeyManager::implementation
         void LogInProgress(const winrt::hstring& input) {
             UpdatePasskeyOperationStatusText(winrt::hstring{ input + L"\U000023F3"});
         }
-        void LogWarning(const winrt::hstring& input, HRESULT hr) {
+        void LogWarning(const winrt::hstring& input, HRESULT hr = S_OK) {
+            if (hr == S_OK)
+            {
+                UpdatePasskeyOperationStatusText(winrt::hstring{ L"WARNING: " + input + L"\U000026A0"});
+                return;
+            }
             std::wstring result = L"WARNING: " + std::wstring(input.c_str()) + L": " + winrt::to_hstring(static_cast<int>(hr)).c_str() + L"\U000026A0";
             UpdatePasskeyOperationStatusText(winrt::hstring{ result });
         }
-        void UpdatePluginStateTextBlock(EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE state);
+        void UpdatePluginStateTextBlock(AUTHENTICATOR_STATE state);
         winrt::IAsyncAction SelectionChanged(IInspectable const& sender, Microsoft::UI::Xaml::Controls::SelectionChangedEventArgs const&);
         winrt::fire_and_forget UpdatePluginEnableState();
 
@@ -73,6 +86,8 @@ namespace winrt::PasskeyManager::implementation
         winrt::IMap<winrt::IBuffer, IInspectable> m_selectedCredentialsSet = winrt::single_threaded_map<winrt::IBuffer, IInspectable>();
         wil::unique_registry_watcher m_registryWatcher;
         wil::unique_folder_change_reader_nothrow m_mockCredentialsDBWatcher;
+
+        void UpdateVaultUnlockControlText(bool isLocked);
     };
 }
 

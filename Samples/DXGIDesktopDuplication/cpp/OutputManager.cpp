@@ -11,7 +11,7 @@ using namespace DirectX;
 //
 // Constructor NULLs out all pointers & sets appropriate var vals
 //
-OUTPUTMANAGER::OUTPUTMANAGER() : m_SwapChain(nullptr),
+OutputManager::OutputManager() : m_SwapChain(nullptr),
                                  m_Device(nullptr),
                                  m_Factory(nullptr),
                                  m_DeviceContext(nullptr),
@@ -32,7 +32,7 @@ OUTPUTMANAGER::OUTPUTMANAGER() : m_SwapChain(nullptr),
 //
 // Destructor which calls CleanRefs to release all references and memory.
 //
-OUTPUTMANAGER::~OUTPUTMANAGER()
+OutputManager::~OutputManager()
 {
     CleanRefs();
 }
@@ -40,7 +40,7 @@ OUTPUTMANAGER::~OUTPUTMANAGER()
 //
 // Indicates that window has been resized.
 //
-void OUTPUTMANAGER::WindowResize()
+void OutputManager::WindowResize()
 {
     m_NeedsResize = true;
 }
@@ -48,7 +48,7 @@ void OUTPUTMANAGER::WindowResize()
 //
 // Initialize all state
 //
-DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT* OutCount, _Out_ RECT* DeskBounds)
+DUPL_RETURN OutputManager::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT* OutCount, _Out_ RECT* DeskBounds)
 {
     HRESULT hr;
 
@@ -78,8 +78,8 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     // Create device
     for (UINT DriverTypeIndex = 0; DriverTypeIndex < NumDriverTypes; ++DriverTypeIndex)
     {
-        hr = D3D11CreateDevice(nullptr, DriverTypes[DriverTypeIndex], nullptr, 0, FeatureLevels, NumFeatureLevels,
-        D3D11_SDK_VERSION, &m_Device, &FeatureLevel, &m_DeviceContext);
+        hr = D3D11CreateDevice(nullptr, DriverTypes[DriverTypeIndex], nullptr, D3D11_CREATE_DEVICE_BGRA_SUPPORT, FeatureLevels, NumFeatureLevels,
+        D3D11_SDK_VERSION, m_Device.put(), &FeatureLevel, m_DeviceContext.put());
         if (SUCCEEDED(hr))
         {
             // Device creation succeeded, no need to loop anymore
@@ -88,39 +88,36 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     }
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Device creation in OUTPUTMANAGER failed", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Device creation in OutputManager failed", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Get DXGI factory
-    IDXGIDevice* DxgiDevice = nullptr;
-    hr = m_Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&DxgiDevice));
-    if (FAILED(hr))
+    winrt::com_ptr<IDXGIDevice> DxgiDevice = m_Device.try_as<IDXGIDevice>();
+    if (!DxgiDevice)
     {
-        return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", hr, nullptr);
+        return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", E_NOTIMPL, nullptr);
     }
 
-    IDXGIAdapter* DxgiAdapter = nullptr;
-    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&DxgiAdapter));
-    DxgiDevice->Release();
+    winrt::com_ptr<IDXGIAdapter> DxgiAdapter;
+    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), DxgiAdapter.put_void());
     DxgiDevice = nullptr;
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
-    hr = DxgiAdapter->GetParent(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(&m_Factory));
-    DxgiAdapter->Release();
+    hr = DxgiAdapter->GetParent(__uuidof(IDXGIFactory2), m_Factory.put_void());
     DxgiAdapter = nullptr;
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get parent DXGI Factory", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get parent DXGI Factory", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Register for occlusion status windows message
     hr = m_Factory->RegisterOcclusionStatusWindow(Window, OCCLUSION_STATUS_MSG, &m_OcclusionCookie);
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to register for occlusion message", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to register for occlusion message", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Get window size
@@ -130,8 +127,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     UINT Height = WindowRect.bottom - WindowRect.top;
 
     // Create swapchain for window
-    DXGI_SWAP_CHAIN_DESC1 SwapChainDesc;
-    RtlZeroMemory(&SwapChainDesc, sizeof(SwapChainDesc));
+    DXGI_SWAP_CHAIN_DESC1 SwapChainDesc = {};
 
     SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
     SwapChainDesc.BufferCount = 2;
@@ -141,17 +137,17 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
     SwapChainDesc.SampleDesc.Count = 1;
     SwapChainDesc.SampleDesc.Quality = 0;
-    hr = m_Factory->CreateSwapChainForHwnd(m_Device, Window, &SwapChainDesc, nullptr, nullptr, &m_SwapChain);
+    hr = m_Factory->CreateSwapChainForHwnd(m_Device.get(), Window, &SwapChainDesc, nullptr, nullptr, m_SwapChain.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create window swapchain", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create window swapchain", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Disable the ALT-ENTER shortcut for entering full-screen mode
     hr = m_Factory->MakeWindowAssociation(Window, DXGI_MWA_NO_ALT_ENTER);
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to make window association", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to make window association", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Create shared texture
@@ -172,8 +168,7 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     SetViewPort(Width, Height);
 
     // Create the sample state
-    D3D11_SAMPLER_DESC SampDesc;
-    RtlZeroMemory(&SampDesc, sizeof(SampDesc));
+    D3D11_SAMPLER_DESC SampDesc = {};
     SampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
     SampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
     SampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -181,14 +176,14 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     SampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
     SampDesc.MinLOD = 0;
     SampDesc.MaxLOD = D3D11_FLOAT32_MAX;
-    hr = m_Device->CreateSamplerState(&SampDesc, &m_SamplerLinear);
+    hr = m_Device->CreateSamplerState(&SampDesc, m_SamplerLinear.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create sampler state in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create sampler state in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Create the blend state
-    D3D11_BLEND_DESC BlendStateDesc;
+    D3D11_BLEND_DESC BlendStateDesc = {};
     BlendStateDesc.AlphaToCoverageEnable = FALSE;
     BlendStateDesc.IndependentBlendEnable = FALSE;
     BlendStateDesc.RenderTarget[0].BlendEnable = TRUE;
@@ -199,10 +194,10 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
     BlendStateDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
     BlendStateDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
     BlendStateDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-    hr = m_Device->CreateBlendState(&BlendStateDesc, &m_BlendState);
+    hr = m_Device->CreateBlendState(&BlendStateDesc, m_BlendState.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create blend state in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create blend state in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Initialize shaders
@@ -221,25 +216,23 @@ DUPL_RETURN OUTPUTMANAGER::InitOutput(HWND Window, INT SingleOutput, _Out_ UINT*
 //
 // Recreate shared texture
 //
-DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCount, _Out_ RECT* DeskBounds)
+DUPL_RETURN OutputManager::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCount, _Out_ RECT* DeskBounds)
 {
     HRESULT hr;
 
     // Get DXGI resources
-    IDXGIDevice* DxgiDevice = nullptr;
-    hr = m_Device->QueryInterface(__uuidof(IDXGIDevice), reinterpret_cast<void**>(&DxgiDevice));
-    if (FAILED(hr))
+    winrt::com_ptr<IDXGIDevice> DxgiDevice = m_Device.try_as<IDXGIDevice>();
+    if (!DxgiDevice)
     {
-        return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", hr);
+        return ProcessFailure(nullptr, L"Failed to QI for DXGI Device", L"Error", E_NOTIMPL);
     }
 
-    IDXGIAdapter* DxgiAdapter = nullptr;
-    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), reinterpret_cast<void**>(&DxgiAdapter));
-    DxgiDevice->Release();
+    winrt::com_ptr<IDXGIAdapter> DxgiAdapter;
+    hr = DxgiDevice->GetParent(__uuidof(IDXGIAdapter), DxgiAdapter.put_void());
     DxgiDevice = nullptr;
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get parent DXGI Adapter", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Set initial values so that we always catch the right coordinates
@@ -248,7 +241,7 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
     DeskBounds->top = INT_MAX;
     DeskBounds->bottom = INT_MIN;
 
-    IDXGIOutput* DxgiOutput = nullptr;
+    winrt::com_ptr<IDXGIOutput> DxgiOutput;
 
     // Figure out right dimensions for full size desktop texture and # of outputs to duplicate
     UINT OutputCount;
@@ -257,12 +250,8 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
         hr = S_OK;
         for (OutputCount = 0; SUCCEEDED(hr); ++OutputCount)
         {
-            if (DxgiOutput)
-            {
-                DxgiOutput->Release();
-                DxgiOutput = nullptr;
-            }
-            hr = DxgiAdapter->EnumOutputs(OutputCount, &DxgiOutput);
+            DxgiOutput = nullptr;
+            hr = DxgiAdapter->EnumOutputs(OutputCount, DxgiOutput.put());
             if (DxgiOutput && (hr != DXGI_ERROR_NOT_FOUND))
             {
                 DXGI_OUTPUT_DESC DesktopDesc;
@@ -279,24 +268,21 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
     }
     else
     {
-        hr = DxgiAdapter->EnumOutputs(SingleOutput, &DxgiOutput);
+        hr = DxgiAdapter->EnumOutputs(SingleOutput, DxgiOutput.put());
         if (FAILED(hr))
         {
-            DxgiAdapter->Release();
             DxgiAdapter = nullptr;
-            return ProcessFailure(m_Device, L"Output specified to be duplicated does not exist", L"Error", hr);
+            return ProcessFailure(m_Device.get(), L"Output specified to be duplicated does not exist", L"Error", hr);
         }
         DXGI_OUTPUT_DESC DesktopDesc;
         DxgiOutput->GetDesc(&DesktopDesc);
         *DeskBounds = DesktopDesc.DesktopCoordinates;
 
-        DxgiOutput->Release();
         DxgiOutput = nullptr;
 
         OutputCount = 1;
     }
 
-    DxgiAdapter->Release();
     DxgiAdapter = nullptr;
 
     // Set passed in output count variable
@@ -310,8 +296,7 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
     }
 
     // Create shared texture for all duplication threads to draw into
-    D3D11_TEXTURE2D_DESC DeskTexD;
-    RtlZeroMemory(&DeskTexD, sizeof(D3D11_TEXTURE2D_DESC));
+    D3D11_TEXTURE2D_DESC DeskTexD = {};
     DeskTexD.Width = DeskBounds->right - DeskBounds->left;
     DeskTexD.Height = DeskBounds->bottom - DeskBounds->top;
     DeskTexD.MipLevels = 1;
@@ -323,7 +308,7 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
     DeskTexD.CPUAccessFlags = 0;
     DeskTexD.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
 
-    hr = m_Device->CreateTexture2D(&DeskTexD, nullptr, &m_SharedSurf);
+    hr = m_Device->CreateTexture2D(&DeskTexD, nullptr, m_SharedSurf.put());
     if (FAILED(hr))
     {
         if (OutputCount != 1)
@@ -334,19 +319,19 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
             // guarantee that it can support a texture size of the desktop.
             // The sample only use this large texture to display the desktop image in a single window using DX
             // we could revert back to using GDI to update the window in this failure case.
-            return ProcessFailure(m_Device, L"Failed to create DirectX shared texture - we are attempting to create a texture the size of the complete desktop and this may be larger than the maximum texture size of your GPU.  Please try again using the -output command line parameter to duplicate only 1 monitor or configure your computer to a single monitor configuration", L"Error", hr, SystemTransitionsExpectedErrors);
+            return ProcessFailure(m_Device.get(), L"Failed to create DirectX shared texture - we are attempting to create a texture the size of the complete desktop and this may be larger than the maximum texture size of your GPU.  Please try again using the -output command line parameter to duplicate only 1 monitor or configure your computer to a single monitor configuration", L"Error", hr, SystemTransitionsExpectedErrors);
         }
         else
         {
-            return ProcessFailure(m_Device, L"Failed to create shared texture", L"Error", hr, SystemTransitionsExpectedErrors);
+            return ProcessFailure(m_Device.get(), L"Failed to create shared texture", L"Error", hr, SystemTransitionsExpectedErrors);
         }
     }
 
     // Get keyed mutex
-    hr = m_SharedSurf->QueryInterface(__uuidof(IDXGIKeyedMutex), reinterpret_cast<void**>(&m_KeyMutex));
-    if (FAILED(hr))
+    m_KeyMutex = m_SharedSurf.try_as<IDXGIKeyedMutex>();
+    if (!m_KeyMutex)
     {
-        return ProcessFailure(m_Device, L"Failed to query for keyed mutex in OUTPUTMANAGER", L"Error", hr);
+        return ProcessFailure(m_Device.get(), L"Failed to query for keyed mutex in OutputManager", L"Error", E_NOTIMPL);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -355,7 +340,7 @@ DUPL_RETURN OUTPUTMANAGER::CreateSharedSurf(INT SingleOutput, _Out_ UINT* OutCou
 //
 // Present to the application window
 //
-DUPL_RETURN OUTPUTMANAGER::UpdateApplicationWindow(_In_ PTR_INFO* PointerInfo, _Inout_ bool* Occluded)
+DUPL_RETURN OutputManager::UpdateApplicationWindow(_In_ PointerInfo* PointerInfo, _Inout_ bool* Occluded)
 {
     // In a typical desktop duplication application there would be an application running on one system collecting the desktop images
     // and another application running on a different system that receives the desktop images via a network and display the image. This
@@ -371,7 +356,7 @@ DUPL_RETURN OUTPUTMANAGER::UpdateApplicationWindow(_In_ PTR_INFO* PointerInfo, _
     }
     else if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to acquire Keyed mutex in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to acquire Keyed mutex in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Got mutex, so draw
@@ -390,7 +375,7 @@ DUPL_RETURN OUTPUTMANAGER::UpdateApplicationWindow(_In_ PTR_INFO* PointerInfo, _
     hr = m_KeyMutex->ReleaseSync(0);
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to Release Keyed mutex in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to Release Keyed mutex in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Present to window if all worked
@@ -400,7 +385,7 @@ DUPL_RETURN OUTPUTMANAGER::UpdateApplicationWindow(_In_ PTR_INFO* PointerInfo, _
         hr = m_SwapChain->Present(1, 0);
         if (FAILED(hr))
         {
-            return ProcessFailure(m_Device, L"Failed to present", L"Error", hr, SystemTransitionsExpectedErrors);
+            return ProcessFailure(m_Device.get(), L"Failed to present", L"Error", hr, SystemTransitionsExpectedErrors);
         }
         else if (hr == DXGI_STATUS_OCCLUDED)
         {
@@ -414,19 +399,17 @@ DUPL_RETURN OUTPUTMANAGER::UpdateApplicationWindow(_In_ PTR_INFO* PointerInfo, _
 //
 // Returns shared handle
 //
-HANDLE OUTPUTMANAGER::GetSharedHandle()
+HANDLE OutputManager::GetSharedHandle()
 {
     HANDLE Hnd = nullptr;
 
     // QI IDXGIResource interface to synchronized shared surface.
-    IDXGIResource* DXGIResource = nullptr;
-    HRESULT hr = m_SharedSurf->QueryInterface(__uuidof(IDXGIResource), reinterpret_cast<void**>(&DXGIResource));
-    if (SUCCEEDED(hr))
+    winrt::com_ptr<IDXGIResource> DXGIResource = m_SharedSurf.try_as<IDXGIResource>();
+
+    if (DXGIResource)
     {
         // Obtain handle to IDXGIResource object.
         DXGIResource->GetSharedHandle(&Hnd);
-        DXGIResource->Release();
-        DXGIResource = nullptr;
     }
 
     return Hnd;
@@ -435,7 +418,7 @@ HANDLE OUTPUTMANAGER::GetSharedHandle()
 //
 // Draw frame into backbuffer
 //
-DUPL_RETURN OUTPUTMANAGER::DrawFrame()
+DUPL_RETURN OutputManager::DrawFrame()
 {
     HRESULT hr;
 
@@ -451,7 +434,7 @@ DUPL_RETURN OUTPUTMANAGER::DrawFrame()
     }
 
     // Vertices for drawing whole texture
-    VERTEX Vertices[NUMVERTICES] =
+    Vertex Vertices[NUMVERTICES] =
     {
         {XMFLOAT3(-1.0f, -1.0f, 0), XMFLOAT2(0.0f, 1.0f)},
         {XMFLOAT3(-1.0f, 1.0f, 0), XMFLOAT2(0.0f, 0.0f)},
@@ -471,56 +454,49 @@ DUPL_RETURN OUTPUTMANAGER::DrawFrame()
     ShaderDesc.Texture2D.MipLevels = FrameDesc.MipLevels;
 
     // Create new shader resource view
-    ID3D11ShaderResourceView* ShaderResource = nullptr;
-    hr = m_Device->CreateShaderResourceView(m_SharedSurf, &ShaderDesc, &ShaderResource);
+    winrt::com_ptr<ID3D11ShaderResourceView> ShaderResource;
+    hr = m_Device->CreateShaderResourceView(m_SharedSurf.get(), &ShaderDesc, ShaderResource.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create shader resource when drawing a frame", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create shader resource when drawing a frame", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Set resources
-    UINT Stride = sizeof(VERTEX);
+    UINT Stride = sizeof(Vertex);
     UINT Offset = 0;
     FLOAT blendFactor[4] = {0.f, 0.f, 0.f, 0.f};
+    ID3D11RenderTargetView* RTVs[] = { m_RTV.get() };
+    ID3D11ShaderResourceView* ShaderResources[] = { ShaderResource.get() };
+    ID3D11SamplerState* Samplers[] = { m_SamplerLinear.get() };
     m_DeviceContext->OMSetBlendState(nullptr, blendFactor, 0xffffffff);
-    m_DeviceContext->OMSetRenderTargets(1, &m_RTV, nullptr);
-    m_DeviceContext->VSSetShader(m_VertexShader, nullptr, 0);
-    m_DeviceContext->PSSetShader(m_PixelShader, nullptr, 0);
-    m_DeviceContext->PSSetShaderResources(0, 1, &ShaderResource);
-    m_DeviceContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+    m_DeviceContext->OMSetRenderTargets(1, RTVs, nullptr);
+    m_DeviceContext->VSSetShader(m_VertexShader.get(), nullptr, 0);
+    m_DeviceContext->PSSetShader(m_PixelShader.get(), nullptr, 0);
+    m_DeviceContext->PSSetShaderResources(0, 1, ShaderResources);
+    m_DeviceContext->PSSetSamplers(0, 1, Samplers);
     m_DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    D3D11_BUFFER_DESC BufferDesc;
-    RtlZeroMemory(&BufferDesc, sizeof(BufferDesc));
+    D3D11_BUFFER_DESC BufferDesc = {};
     BufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    BufferDesc.ByteWidth = sizeof(VERTEX) * NUMVERTICES;
+    BufferDesc.ByteWidth = sizeof(Vertex) * NUMVERTICES;
     BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     BufferDesc.CPUAccessFlags = 0;
-    D3D11_SUBRESOURCE_DATA InitData;
-    RtlZeroMemory(&InitData, sizeof(InitData));
+    D3D11_SUBRESOURCE_DATA InitData = {};
     InitData.pSysMem = Vertices;
 
-    ID3D11Buffer* VertexBuffer = nullptr;
+    winrt::com_ptr<ID3D11Buffer> VertexBuffer;
 
     // Create vertex buffer
-    hr = m_Device->CreateBuffer(&BufferDesc, &InitData, &VertexBuffer);
+    hr = m_Device->CreateBuffer(&BufferDesc, &InitData, VertexBuffer.put());
     if (FAILED(hr))
     {
-        ShaderResource->Release();
-        ShaderResource = nullptr;
-        return ProcessFailure(m_Device, L"Failed to create vertex buffer when drawing a frame", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create vertex buffer when drawing a frame", L"Error", hr, SystemTransitionsExpectedErrors);
     }
-    m_DeviceContext->IASetVertexBuffers(0, 1, &VertexBuffer, &Stride, &Offset);
+    ID3D11Buffer* Buffers[] = { VertexBuffer.get() };
+    m_DeviceContext->IASetVertexBuffers(0, 1, Buffers, &Stride, &Offset);
 
     // Draw textured quad onto render target
     m_DeviceContext->Draw(NUMVERTICES, 0);
-
-    VertexBuffer->Release();
-    VertexBuffer = nullptr;
-
-    // Release shader resource
-    ShaderResource->Release();
-    ShaderResource = nullptr;
 
     return DUPL_RETURN_SUCCESS;
 }
@@ -528,7 +504,7 @@ DUPL_RETURN OUTPUTMANAGER::DrawFrame()
 //
 // Process both masked and monochrome pointers
 //
-DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInfo, _Out_ INT* PtrWidth, _Out_ INT* PtrHeight, _Out_ INT* PtrLeft, _Out_ INT* PtrTop, _Outptr_result_bytebuffer_(*PtrHeight * *PtrWidth * BPP) BYTE** InitBuffer, _Out_ D3D11_BOX* Box)
+DUPL_RETURN OutputManager::ProcessMonoMask(bool IsMono, _Inout_ PointerInfo* PtrInfo, _Out_ INT* PtrWidth, _Out_ INT* PtrHeight, _Out_ INT* PtrLeft, _Out_ INT* PtrTop, _Inout_ std::vector<BYTE>& InitBuffer, _Out_ D3D11_BOX* Box)
 {
     // Desktop dimensions
     D3D11_TEXTURE2D_DESC FullDesc;
@@ -594,11 +570,11 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
     CopyBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
     CopyBufferDesc.MiscFlags = 0;
 
-    ID3D11Texture2D* CopyBuffer = nullptr;
-    HRESULT hr = m_Device->CreateTexture2D(&CopyBufferDesc, nullptr, &CopyBuffer);
+    winrt::com_ptr<ID3D11Texture2D> CopyBuffer;
+    HRESULT hr = m_Device->CreateTexture2D(&CopyBufferDesc, nullptr, CopyBuffer.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed creating staging texture for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed creating staging texture for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Copy needed part of desktop image
@@ -606,16 +582,14 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
     Box->top = *PtrTop;
     Box->right = *PtrLeft + *PtrWidth;
     Box->bottom = *PtrTop + *PtrHeight;
-    m_DeviceContext->CopySubresourceRegion(CopyBuffer, 0, 0, 0, 0, m_SharedSurf, 0, Box);
+    m_DeviceContext->CopySubresourceRegion(CopyBuffer.get(), 0, 0, 0, 0, m_SharedSurf.get(), 0, Box);
 
     // QI for IDXGISurface
-    IDXGISurface* CopySurface = nullptr;
-    hr = CopyBuffer->QueryInterface(__uuidof(IDXGISurface), (void **)&CopySurface);
-    CopyBuffer->Release();
+    winrt::com_ptr<IDXGISurface> CopySurface = CopyBuffer.try_as<IDXGISurface>();
     CopyBuffer = nullptr;
-    if (FAILED(hr))
+    if (!CopySurface)
     {
-        return ProcessFailure(nullptr, L"Failed to QI staging texture into IDXGISurface for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(nullptr, L"Failed to QI staging texture into IDXGISurface for pointer", L"Error", E_NOTIMPL, SystemTransitionsExpectedErrors);
     }
 
     // Map pixels
@@ -623,19 +597,20 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
     hr = CopySurface->Map(&MappedSurface, DXGI_MAP_READ);
     if (FAILED(hr))
     {
-        CopySurface->Release();
-        CopySurface = nullptr;
-        return ProcessFailure(m_Device, L"Failed to map surface for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to map surface for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // New mouseshape buffer
-    *InitBuffer = new (std::nothrow) BYTE[*PtrWidth * *PtrHeight * BPP];
-    if (!(*InitBuffer))
+    try
+    {
+        InitBuffer.resize(*PtrWidth * *PtrHeight * BPP);
+    }
+    catch (std::bad_alloc)
     {
         return ProcessFailure(nullptr, L"Failed to allocate memory for new mouse shape buffer.", L"Error", E_OUTOFMEMORY);
     }
 
-    UINT* InitBuffer32 = reinterpret_cast<UINT*>(*InitBuffer);
+    UINT* InitBuffer32 = reinterpret_cast<UINT*>(InitBuffer.data());
     UINT* Desktop32 = reinterpret_cast<UINT*>(MappedSurface.pBits);
     UINT  DesktopPitchInPixels = MappedSurface.Pitch / sizeof(UINT);
 
@@ -675,7 +650,7 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
     }
     else
     {
-        UINT* Buffer32 = reinterpret_cast<UINT*>(PtrInfo->PtrShapeBuffer);
+        UINT* Buffer32 = reinterpret_cast<UINT*>(PtrInfo->PtrShapeBuffer.data());
 
         // Iterate through pixels
         for (INT Row = 0; Row < *PtrHeight; ++Row)
@@ -700,11 +675,9 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
 
     // Done with resource
     hr = CopySurface->Unmap();
-    CopySurface->Release();
-    CopySurface = nullptr;
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to unmap surface for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to unmap surface for pointer", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -713,18 +686,18 @@ DUPL_RETURN OUTPUTMANAGER::ProcessMonoMask(bool IsMono, _Inout_ PTR_INFO* PtrInf
 //
 // Draw mouse provided in buffer to backbuffer
 //
-DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
+DUPL_RETURN OutputManager::DrawMouse(_In_ PointerInfo* PtrInfo)
 {
     // Vars to be used
-    ID3D11Texture2D* MouseTex = nullptr;
-    ID3D11ShaderResourceView* ShaderRes = nullptr;
-    ID3D11Buffer* VertexBufferMouse = nullptr;
+    winrt::com_ptr<ID3D11Texture2D> MouseTex;
+    winrt::com_ptr<ID3D11ShaderResourceView> ShaderRes;
+    winrt::com_ptr<ID3D11Buffer> VertexBufferMouse;
     D3D11_SUBRESOURCE_DATA InitData;
     D3D11_TEXTURE2D_DESC Desc;
     D3D11_SHADER_RESOURCE_VIEW_DESC SDesc;
 
     // Position will be changed based on mouse position
-    VERTEX Vertices[NUMVERTICES] =
+    Vertex Vertices[NUMVERTICES] =
     {
         {XMFLOAT3(-1.0f, -1.0f, 0), XMFLOAT2(0.0f, 1.0f)},
         {XMFLOAT3(-1.0f, 1.0f, 0), XMFLOAT2(0.0f, 0.0f)},
@@ -750,7 +723,7 @@ DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
     INT PtrTop = 0;
 
     // Buffer used if necessary (in case of monochrome or masked pointer)
-    BYTE* InitBuffer = nullptr;
+    std::vector<BYTE> InitBuffer;
 
     // Used for copying pixels
     D3D11_BOX Box;
@@ -788,13 +761,13 @@ DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
 
         case DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME:
         {
-            ProcessMonoMask(true, PtrInfo, &PtrWidth, &PtrHeight, &PtrLeft, &PtrTop, &InitBuffer, &Box);
+            ProcessMonoMask(true, PtrInfo, &PtrWidth, &PtrHeight, &PtrLeft, &PtrTop, InitBuffer, &Box);
             break;
         }
 
         case DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR:
         {
-            ProcessMonoMask(false, PtrInfo, &PtrWidth, &PtrHeight, &PtrLeft, &PtrTop, &InitBuffer, &Box);
+            ProcessMonoMask(false, PtrInfo, &PtrWidth, &PtrHeight, &PtrLeft, &PtrTop, InitBuffer, &Box);
             break;
         }
 
@@ -802,7 +775,7 @@ DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
             break;
     }
 
-    // VERTEX creation
+    // Vertex creation
     Vertices[0].Pos.x = (PtrLeft - CenterX) / (FLOAT)CenterX;
     Vertices[0].Pos.y = -1 * ((PtrTop + PtrHeight) - CenterY) / (FLOAT)CenterY;
     Vertices[1].Pos.x = (PtrLeft - CenterX) / (FLOAT)CenterX;
@@ -821,83 +794,59 @@ DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
     Desc.Height = PtrHeight;
 
     // Set up init data
-    InitData.pSysMem = (PtrInfo->ShapeInfo.Type == DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR) ? PtrInfo->PtrShapeBuffer : InitBuffer;
+    InitData.pSysMem = (PtrInfo->ShapeInfo.Type == DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR) ? PtrInfo->PtrShapeBuffer.data() : InitBuffer.data();
     InitData.SysMemPitch = (PtrInfo->ShapeInfo.Type == DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR) ? PtrInfo->ShapeInfo.Pitch : PtrWidth * BPP;
     InitData.SysMemSlicePitch = 0;
 
     // Create mouseshape as texture
-    HRESULT hr = m_Device->CreateTexture2D(&Desc, &InitData, &MouseTex);
+    HRESULT hr = m_Device->CreateTexture2D(&Desc, &InitData, MouseTex.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create mouse pointer texture", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create mouse pointer texture", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Create shader resource from texture
-    hr = m_Device->CreateShaderResourceView(MouseTex, &SDesc, &ShaderRes);
+    hr = m_Device->CreateShaderResourceView(MouseTex.get(), &SDesc, ShaderRes.put());
     if (FAILED(hr))
     {
-        MouseTex->Release();
-        MouseTex = nullptr;
-        return ProcessFailure(m_Device, L"Failed to create shader resource from mouse pointer texture", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create shader resource from mouse pointer texture", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
-    D3D11_BUFFER_DESC BDesc;
-    ZeroMemory(&BDesc, sizeof(D3D11_BUFFER_DESC));
+    D3D11_BUFFER_DESC BDesc = {};
     BDesc.Usage = D3D11_USAGE_DEFAULT;
-    BDesc.ByteWidth = sizeof(VERTEX) * NUMVERTICES;
+    BDesc.ByteWidth = sizeof(Vertex) * NUMVERTICES;
     BDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     BDesc.CPUAccessFlags = 0;
 
-    ZeroMemory(&InitData, sizeof(D3D11_SUBRESOURCE_DATA));
+    InitData = {};
     InitData.pSysMem = Vertices;
 
     // Create vertex buffer
-    hr = m_Device->CreateBuffer(&BDesc, &InitData, &VertexBufferMouse);
+    hr = m_Device->CreateBuffer(&BDesc, &InitData, VertexBufferMouse.put());
     if (FAILED(hr))
     {
-        ShaderRes->Release();
-        ShaderRes = nullptr;
-        MouseTex->Release();
-        MouseTex = nullptr;
-        return ProcessFailure(m_Device, L"Failed to create mouse pointer vertex buffer in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create mouse pointer vertex buffer in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Set resources
     FLOAT BlendFactor[4] = {0.f, 0.f, 0.f, 0.f};
-    UINT Stride = sizeof(VERTEX);
+    UINT Stride = sizeof(Vertex);
     UINT Offset = 0;
-    m_DeviceContext->IASetVertexBuffers(0, 1, &VertexBufferMouse, &Stride, &Offset);
-    m_DeviceContext->OMSetBlendState(m_BlendState, BlendFactor, 0xFFFFFFFF);
-    m_DeviceContext->OMSetRenderTargets(1, &m_RTV, nullptr);
-    m_DeviceContext->VSSetShader(m_VertexShader, nullptr, 0);
-    m_DeviceContext->PSSetShader(m_PixelShader, nullptr, 0);
-    m_DeviceContext->PSSetShaderResources(0, 1, &ShaderRes);
-    m_DeviceContext->PSSetSamplers(0, 1, &m_SamplerLinear);
+    ID3D11RenderTargetView* RTVs[] = { m_RTV.get() };
+    ID3D11ShaderResourceView* ShaderResources[] = { ShaderRes.get() };
+    ID3D11SamplerState* Samplers[] = { m_SamplerLinear.get() };
+    ID3D11Buffer* Buffers[] = { VertexBufferMouse.get() };
+
+    m_DeviceContext->IASetVertexBuffers(0, 1, Buffers, &Stride, &Offset);
+    m_DeviceContext->OMSetBlendState(m_BlendState.get(), BlendFactor, 0xFFFFFFFF);
+    m_DeviceContext->OMSetRenderTargets(1, RTVs, nullptr);
+    m_DeviceContext->VSSetShader(m_VertexShader.get(), nullptr, 0);
+    m_DeviceContext->PSSetShader(m_PixelShader.get(), nullptr, 0);
+    m_DeviceContext->PSSetShaderResources(0, 1, ShaderResources);
+    m_DeviceContext->PSSetSamplers(0, 1, Samplers);
 
     // Draw
     m_DeviceContext->Draw(NUMVERTICES, 0);
-
-    // Clean
-    if (VertexBufferMouse)
-    {
-        VertexBufferMouse->Release();
-        VertexBufferMouse = nullptr;
-    }
-    if (ShaderRes)
-    {
-        ShaderRes->Release();
-        ShaderRes = nullptr;
-    }
-    if (MouseTex)
-    {
-        MouseTex->Release();
-        MouseTex = nullptr;
-    }
-    if (InitBuffer)
-    {
-        delete [] InitBuffer;
-        InitBuffer = nullptr;
-    }
 
     return DUPL_RETURN_SUCCESS;
 }
@@ -905,15 +854,15 @@ DUPL_RETURN OUTPUTMANAGER::DrawMouse(_In_ PTR_INFO* PtrInfo)
 //
 // Initialize shaders for drawing to screen
 //
-DUPL_RETURN OUTPUTMANAGER::InitShaders()
+DUPL_RETURN OutputManager::InitShaders()
 {
     HRESULT hr;
 
     UINT Size = ARRAYSIZE(g_VS);
-    hr = m_Device->CreateVertexShader(g_VS, Size, nullptr, &m_VertexShader);
+    hr = m_Device->CreateVertexShader(g_VS, Size, nullptr, m_VertexShader.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create vertex shader in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create vertex shader in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     D3D11_INPUT_ELEMENT_DESC Layout[] =
@@ -922,18 +871,18 @@ DUPL_RETURN OUTPUTMANAGER::InitShaders()
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
     UINT NumElements = ARRAYSIZE(Layout);
-    hr = m_Device->CreateInputLayout(Layout, NumElements, g_VS, Size, &m_InputLayout);
+    hr = m_Device->CreateInputLayout(Layout, NumElements, g_VS, Size, m_InputLayout.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create input layout in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create input layout in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
-    m_DeviceContext->IASetInputLayout(m_InputLayout);
+    m_DeviceContext->IASetInputLayout(m_InputLayout.get());
 
     Size = ARRAYSIZE(g_PS);
-    hr = m_Device->CreatePixelShader(g_PS, Size, nullptr, &m_PixelShader);
+    hr = m_Device->CreatePixelShader(g_PS, Size, nullptr, m_PixelShader.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create pixel shader in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create pixel shader in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     return DUPL_RETURN_SUCCESS;
@@ -942,26 +891,26 @@ DUPL_RETURN OUTPUTMANAGER::InitShaders()
 //
 // Reset render target view
 //
-DUPL_RETURN OUTPUTMANAGER::MakeRTV()
+DUPL_RETURN OutputManager::MakeRTV()
 {
     // Get backbuffer
-    ID3D11Texture2D* BackBuffer = nullptr;
-    HRESULT hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&BackBuffer));
+    winrt::com_ptr<ID3D11Texture2D> BackBuffer;
+    HRESULT hr = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), BackBuffer.put_void());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to get backbuffer for making render target view in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to get backbuffer for making render target view in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Create a render target view
-    hr = m_Device->CreateRenderTargetView(BackBuffer, nullptr, &m_RTV);
-    BackBuffer->Release();
+    hr = m_Device->CreateRenderTargetView(BackBuffer.get(), nullptr, m_RTV.put());
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to create render target view in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to create render target view in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Set new render target
-    m_DeviceContext->OMSetRenderTargets(1, &m_RTV, nullptr);
+    ID3D11RenderTargetView* RTVs[] = { m_RTV.get() };
+    m_DeviceContext->OMSetRenderTargets(1, RTVs, nullptr);
 
     return DUPL_RETURN_SUCCESS;
 }
@@ -969,7 +918,7 @@ DUPL_RETURN OUTPUTMANAGER::MakeRTV()
 //
 // Set new viewport
 //
-void OUTPUTMANAGER::SetViewPort(UINT Width, UINT Height)
+void OutputManager::SetViewPort(UINT Width, UINT Height)
 {
     D3D11_VIEWPORT VP;
     VP.Width = static_cast<FLOAT>(Width);
@@ -984,13 +933,9 @@ void OUTPUTMANAGER::SetViewPort(UINT Width, UINT Height)
 //
 // Resize swapchain
 //
-DUPL_RETURN OUTPUTMANAGER::ResizeSwapChain()
+DUPL_RETURN OutputManager::ResizeSwapChain()
 {
-    if (m_RTV)
-    {
-        m_RTV->Release();
-        m_RTV = nullptr;
-    }
+    m_RTV = nullptr;
 
     RECT WindowRect;
     GetClientRect(m_WindowHandle, &WindowRect);
@@ -1003,7 +948,7 @@ DUPL_RETURN OUTPUTMANAGER::ResizeSwapChain()
     HRESULT hr = m_SwapChain->ResizeBuffers(SwapChainDesc.BufferCount, Width, Height, SwapChainDesc.BufferDesc.Format, SwapChainDesc.Flags);
     if (FAILED(hr))
     {
-        return ProcessFailure(m_Device, L"Failed to resize swapchain buffers in OUTPUTMANAGER", L"Error", hr, SystemTransitionsExpectedErrors);
+        return ProcessFailure(m_Device.get(), L"Failed to resize swapchain buffers in OutputManager", L"Error", hr, SystemTransitionsExpectedErrors);
     }
 
     // Make new render target view
@@ -1022,73 +967,19 @@ DUPL_RETURN OUTPUTMANAGER::ResizeSwapChain()
 //
 // Releases all references
 //
-void OUTPUTMANAGER::CleanRefs()
+void OutputManager::CleanRefs()
 {
-    if (m_VertexShader)
-    {
-        m_VertexShader->Release();
-        m_VertexShader = nullptr;
-    }
-
-    if (m_PixelShader)
-    {
-        m_PixelShader->Release();
-        m_PixelShader = nullptr;
-    }
-
-    if (m_InputLayout)
-    {
-        m_InputLayout->Release();
-        m_InputLayout = nullptr;
-    }
-
-    if (m_RTV)
-    {
-        m_RTV->Release();
-        m_RTV = nullptr;
-    }
-
-    if (m_SamplerLinear)
-    {
-        m_SamplerLinear->Release();
-        m_SamplerLinear = nullptr;
-    }
-
-    if (m_BlendState)
-    {
-        m_BlendState->Release();
-        m_BlendState = nullptr;
-    }
-
-    if (m_DeviceContext)
-    {
-        m_DeviceContext->Release();
-        m_DeviceContext = nullptr;
-    }
-
-    if (m_Device)
-    {
-        m_Device->Release();
-        m_Device = nullptr;
-    }
-
-    if (m_SwapChain)
-    {
-        m_SwapChain->Release();
-        m_SwapChain = nullptr;
-    }
-
-    if (m_SharedSurf)
-    {
-        m_SharedSurf->Release();
-        m_SharedSurf = nullptr;
-    }
-
-    if (m_KeyMutex)
-    {
-        m_KeyMutex->Release();
-        m_KeyMutex = nullptr;
-    }
+    m_VertexShader = nullptr;
+    m_PixelShader = nullptr;
+    m_InputLayout = nullptr;
+    m_RTV = nullptr;
+    m_SamplerLinear = nullptr;
+    m_BlendState = nullptr;
+    m_DeviceContext = nullptr;
+    m_Device = nullptr;
+    m_SwapChain = nullptr;
+    m_SharedSurf = nullptr;
+    m_KeyMutex = nullptr;
 
     if (m_Factory)
     {
@@ -1097,7 +988,6 @@ void OUTPUTMANAGER::CleanRefs()
             m_Factory->UnregisterOcclusionStatus(m_OcclusionCookie);
             m_OcclusionCookie = 0;
         }
-        m_Factory->Release();
         m_Factory = nullptr;
     }
 }

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="Sample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="TransferTarget API Sample">
+
+    <Grid x:Name="RootContent" Background="{ThemeResource LayerFillColorDefaultBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.Resources>
+            <FontIconSource x:Key="FallbackIconSource" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;" FontSize="32" />
+        </Grid.Resources>
+
+        <!-- Header -->
+        <StackPanel Spacing="8" Margin="40,20,0,0">
+            <TextBlock Text="TransferTarget API Sample"
+                       FontSize="28"
+                       FontWeight="SemiBold"
+                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+        </StackPanel>
+
+        <!-- Configuration panel -->
+        <ScrollViewer x:Name="ConfigurationPanel" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="40,20,40,20" Spacing="20">
+
+                <!-- Data Configuration Section -->
+                <StackPanel Spacing="16"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="24">
+                    <TextBlock Text="DataPackage contents"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8" />
+                    <TextBlock Text="The DataPackage should contain at least one data format for any Transfer Targets to accept it."
+                               Margin="0,0,0,8" />
+
+                    <!-- Text - check this one by default so that *something* is checked (an empty data package is not interesting) -->
+                    <StackPanel Spacing="8">
+                        <CheckBox x:Name="TextCheckBox" Content="Plain Text" FontWeight="SemiBold" IsChecked="True" />
+                        <TextBox x:Name="TextInput"
+                                 Text="Text from the TransferTarget sample."
+                                 PlaceholderText="Enter text content"
+                                 Visibility="{x:Bind TextCheckBox.IsChecked, Mode=OneWay}"
+                                 Margin="32,0,0,0" />
+                    </StackPanel>
+
+                    <!-- Link -->
+                    <StackPanel Spacing="8" Orientation="Horizontal">
+                        <TextBlock Text="Web Link" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <ComboBox x:Name="LinkComboBox" SelectedIndex="0">
+                            <x:String>(None)</x:String>
+                            <x:String>https://www.learn.microsoft.com</x:String>
+                            <x:String>https://www.microsoft.com/windows</x:String>
+                            <x:String>https://www.msn.com</x:String>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- HTML -->
+                    <StackPanel Spacing="8">
+                        <CheckBox x:Name="HtmlCheckBox"
+                                  Content="HTML Content"
+                                  FontWeight="SemiBold" />
+                        <TextBox x:Name="HtmlInput"
+                                 PlaceholderText="Enter HTML content"
+                                 Height="120"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 Visibility="{x:Bind HtmlCheckBox.IsChecked, Mode=OneWay}"
+                                 Margin="32,0,0,0">
+                           <TextBox.Text>
+                               <x:String xml:space="preserve">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Simple Link Example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Visit the &lt;a href="https://www.learn.microsoft.com" target="_blank"&gt;Windows learning page&lt;/a&gt; page for more details.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                              </x:String>
+                          </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+
+                    <!-- Storage Items -->
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <TextBlock Text="Files" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <TextBlock x:Name="FilesCountLabel"
+                                   Text="No files selected"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <Button x:Name="SelectFilesButton"
+                                Content="📁 Select Files"
+                                Click="SelectFilesButton_Click"
+                                Style="{ThemeResource AccentButtonStyle}" />
+                    </StackPanel>
+
+                    <!-- Custom Data Format -->
+                    <StackPanel Spacing="8">
+                        <CheckBox x:Name="CustomDataFormatCheckBox"
+                                  Content="Custom Data Format"
+                                  FontWeight="SemiBold" />
+                        <StackPanel Spacing="8" Margin="32,0,0,0" Visibility="{x:Bind CustomDataFormatCheckBox.IsChecked, Mode=OneWay}">
+                            <TextBox x:Name="CustomDataFormatNameInput"
+                                     Text="CustomDataFormat"
+                                     PlaceholderText="Format name"
+                                     Header="Format Name" />
+                            <TextBox x:Name="CustomDataContentInput"
+                                     Text="Sample text for Custom data format"
+                                     PlaceholderText="Format content"
+                                     Header="Format Content" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Discovery Options Section -->
+                <StackPanel Spacing="16"
+                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="24">
+                    <TextBlock Text="Discovery Options"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8" />
+
+                    <!-- Number of Targets -->
+                    <StackPanel Spacing="8" Orientation="Horizontal">
+                        <TextBlock Text="Maximum App Targets" FontWeight="SemiBold" VerticalAlignment="Center" />
+                        <ComboBox x:Name="NumberOfTargetsComboBox"
+                                  SelectedIndex="2"
+                                  Margin="32,0,0,0">
+                            <x:Int32>1</x:Int32>
+                            <x:Int32>5</x:Int32>
+                            <x:Int32>10</x:Int32>
+                            <x:Int32>50</x:Int32>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- App Filter -->
+                    <StackPanel Spacing="8">
+                        <CheckBox x:Name="AppFilterCheckBox"
+                                  Content="Filter by Application ID"
+                                  FontWeight="SemiBold" />
+                        <TextBox x:Name="AppFilterInput"
+                                 Text="Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows"
+                                 PlaceholderText="Enter App IDs"
+                                 Header="Application IDs (comma-separated)"
+                                 Visibility="{x:Bind AppFilterCheckBox.IsChecked, Mode=OneWay}"
+                                 Margin="32,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Discover Button -->
+                <Button x:Name="DiscoverTargetsButton"
+                        Content="🔍 Discover Transfer Targets"
+                        Click="DiscoverTargetsButton_Click"
+                        HorizontalAlignment="Center"
+                        FontSize="16"
+                        Padding="32,12"
+                        Style="{ThemeResource AccentButtonStyle}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Watcher configuration panel -->
+        <StackPanel x:Name="DiscoveryPanel" Grid.Row="1" Margin="40,20,40,20" Spacing="20" Visibility="Collapsed">
+            <!-- Discovered Targets Section -->
+            <TextBlock Text="Discovered Targets"
+                        FontSize="18"
+                        FontWeight="SemiBold" />
+            <ListView Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                      BorderThickness="1"
+                      CornerRadius="8"
+                      Padding="24"
+                      MinHeight="200"
+                      ItemsSource="{x:Bind DiscoveredTargets}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!-- Make this ListView lay out items in rows rather than columns -->
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:TransferTargetItem">
+                        <Button Width="120" Height="120" Margin="10" Padding="4" CornerRadius="8"
+                                Background="Transparent" BorderBrush="#FFE6E6E6" BorderThickness="1"
+                                IsEnabled="{x:Bind IsEnabled, Mode=OneWay}"
+                                Click="{x:Bind Invoke}">
+                            <StackPanel Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Opacity="{x:Bind local:MainWindow.EnabledOpacity(IsEnabled), Mode=OneWay}">
+                                <Grid Width="48" Height="48" CornerRadius="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image x:Name="IconImage"
+                                           x:Load="{x:Bind local:MainWindow.IsNotNull(Logo), Mode=OneWay}"
+                                           Source="{x:Bind Logo, Mode=OneWay}" />
+                                    <IconSourceElement x:Name="FallbackIconSourceElement"
+                                                       x:Load="{x:Bind local:MainWindow.IsNull(Logo), Mode=OneWay}"
+                                                       IconSource="{StaticResource FallbackIconSource}" />
+                                </Grid>
+                                <TextBlock Text="{x:Bind Label}" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                           MaxWidth="110" FontSize="12" MaxLines="2" Foreground="#FF3C3C3C" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!-- Watcher Control Section -->
+            <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
+                <Button x:Name="StopButton"
+                        Content="🛑 Stop Discovery"
+                        Click="StopDiscoveryButton_Click"
+                        HorizontalAlignment="Center"
+                        FontSize="16"
+                        Padding="32,12"
+                        Style="{ThemeResource AccentButtonStyle}" />
+                <Button x:Name="ReconfigureButton"
+                        Content="🔍 Reconfigure Discovery"
+                        Click="ReconfigureButton_Click"
+                        HorizontalAlignment="Center"
+                        FontSize="16"
+                        Padding="32,12"
+                        Style="{ThemeResource AccentButtonStyle}" />
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock x:Name="NotSupportedPanel" Grid.Row="1" TextWrapping="Wrap" Margin="40,20,40,20" Visibility="Collapsed">
+            Transfer Targets are not supported by this system.
+        </TextBlock>
+    </Grid>
+</Window>
