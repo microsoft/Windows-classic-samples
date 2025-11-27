@@ -1,0 +1,88 @@
+<!--
+  Copyright (C) Microsoft. All rights reserved.
+-->
+<UserControl x:Class="Microsoft.Samples.Speech.VoiceAccess.VoiceAccessUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="ModeDisplayStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FF2E75B6"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Background" Value="#FFF0F8FF"/>
+            <Setter Property="BorderBrush" Value="#FF2E75B6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Mode Display Area -->
+        <Border Grid.Row="0" 
+                BorderBrush="#FF2E75B6" 
+                BorderThickness="1" 
+                Background="#FFF0F8FF" 
+                CornerRadius="5" 
+                Margin="5">
+            <TextBlock x:Name="ModeTextBlock" 
+                       Text="{Binding ModeText}" 
+                       Style="{StaticResource ModeDisplayStyle}"/>
+        </Border>
+        
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Control Panel -->
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                <TextBlock Text="Voice Access Control Panel" 
+                           FontSize="14" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Button x:Name="ToggleModeButton" 
+                            Content="Toggle Mode" 
+                            Click="ToggleModeButton_Click" 
+                            Margin="0,0,10,0" 
+                            Padding="10,5"/>
+                    <Button x:Name="StartButton" 
+                            Content="Start" 
+                            Click="StartButton_Click" 
+                            Margin="0,0,10,0" 
+                            Padding="10,5"/>
+                    <Button x:Name="StopButton" 
+                            Content="Stop" 
+                            Click="StopButton_Click" 
+                            Padding="10,5"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- Status Area -->
+            <Border Grid.Row="1" 
+                    BorderBrush="#FFB0B0B0" 
+                    BorderThickness="1" 
+                    Background="#FAFAFA">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="StatusTextBlock" 
+                               Text="Ready. Select a mode and click Start to begin."
+                               Margin="10" 
+                               TextWrapping="Wrap"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
