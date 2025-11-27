@@ -9,6 +9,7 @@
 #include <ntstatus.h>   // For STATUS_CANNOT_DELETE
 
 // STL
+#include <stdexcept>
 #include <string>
 #include <map>
 #include <vector>
