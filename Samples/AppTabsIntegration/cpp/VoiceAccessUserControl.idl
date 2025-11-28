@@ -1,0 +1,13 @@
+namespace AppTabsIntegration
+{
+    [default_interface]
+    runtimeclass VoiceAccessUserControl : Microsoft.UI.Xaml.Controls.UserControl, Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        VoiceAccessUserControl();
+        
+        String Mode;
+        Boolean IsVoiceEnabled;
+        
+        void UpdateModeDisplay();
+    }
+}
