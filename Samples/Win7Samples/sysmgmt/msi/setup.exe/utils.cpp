@@ -705,10 +705,12 @@ bool AcquireShutdownPrivilege()
     // cannot test return value of AdjustTokenPrivileges
     if (ERROR_SUCCESS != WIN::GetLastError())
     {
+        CloseHandle(hToken);
         FreeLibrary(hAdvapi32);
         return false;
     }
 
+    CloseHandle(hToken);
     FreeLibrary(hAdvapi32);
 
     return true;
