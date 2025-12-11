@@ -1,0 +1,4 @@
+
+#include "resource.h"
+
+IDC_FULLSCREEN      ICON      "full-screen.ico"
