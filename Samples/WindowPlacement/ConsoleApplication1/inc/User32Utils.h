@@ -1,11 +1,5 @@
 #pragma once
 
-#ifdef USE_WINDOW_ACTION_APIS
-#include <nt.h>
-#include <ntrtl.h>
-#include <nturtl.h>
-#endif
-
 #include "windows.h"
 #include "shellscalingapi.h"
 #include "dwmapi.h"
@@ -33,7 +27,6 @@
 #endif
 
 #ifdef USE_WINDOW_ACTION_APIS
-#include <minappmodelp.h>
 bool IsApplyWindowActionSupported();
 bool ApplyWindowActionWrapper(HWND hwnd, WINDOW_ACTION* action);
 #endif
