@@ -86,7 +86,8 @@ public:
 inline bool
 MonitorData::FromHandle(HMONITOR monitorHandle, _Out_ MonitorData* monitorData) noexcept
 {
-    MONITORINFOEX mi = { sizeof(mi) };
+    MONITORINFOEX mi;
+    mi.cbSize = sizeof(mi);
     // Note: GetDpiForMonitor returns x/y DPI but these values are always equal.
     UINT _dpi, unused;
 

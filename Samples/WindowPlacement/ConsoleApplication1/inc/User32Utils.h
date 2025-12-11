@@ -18,6 +18,7 @@
 #include <strsafe.h>
 #include <optional>
 #include <algorithm>
+#include <cmath>
 
 #include "MonitorData.h"
 #include "MiscUser32.h"
