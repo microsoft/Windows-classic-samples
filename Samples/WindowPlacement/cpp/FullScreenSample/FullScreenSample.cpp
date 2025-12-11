@@ -1,6 +1,6 @@
 
 #define USE_VIRTUAL_DESKTOP_APIS
-#include "User32Utils.h"
+#include "../inc/User32Utils.h"
 #include "resource.h"
 
 // A FullScreen window is sized to the monitor and doesn't have a caption
