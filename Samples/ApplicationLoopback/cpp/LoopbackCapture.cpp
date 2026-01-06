@@ -103,9 +103,9 @@ HRESULT CLoopbackCapture::ActivateCompleted(IActivateAudioInterfaceAsyncOperatio
 
             // Initialize the AudioClient in Shared Mode with the user specified buffer
             RETURN_IF_FAILED(m_AudioClient->Initialize(AUDCLNT_SHAREMODE_SHARED,
-                AUDCLNT_STREAMFLAGS_LOOPBACK | AUDCLNT_STREAMFLAGS_EVENTCALLBACK,
+                AUDCLNT_STREAMFLAGS_LOOPBACK | AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM,
                 200000,
-                AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM,
+                0,
                 &m_CaptureFormat,
                 nullptr));
 
