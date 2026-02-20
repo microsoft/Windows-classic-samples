@@ -1422,7 +1422,7 @@ InstallProviderVista(
                 providerGuid,
                 lpszLspPathAndFile,
 #ifdef _WIN64
-                lpszLspPathAndFile,
+                lpszLspPathAndFile32,
 #endif
                 lpszLspName,
                 ( IfsProvider ? XP1_IFS_HANDLES : 0 ),
