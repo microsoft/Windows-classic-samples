@@ -1,7 +1,7 @@
 ---
 page_type: sample
 languages:
-- cpp
+- csharp
 products:
 - windows-api-win32
 name: Enumerate app packages sample
