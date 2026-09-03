@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directories:
+      - "/Samples/RegistrationFreeWinRT/cs/CSharpConsoleApp"
+      - "/Samples/ShareSource/wpf"
+      - "/Samples/SystemInsights/cs"
+      - "/Samples/TaskbarManager/CsPackagedDesktopTaskbarPin"
+      - "/Samples/TransferTarget/VBAScript/TransferTargetBridge"
+      - "/Samples/TransferTarget/cs"
+    schedule:
+      interval: "monthly"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
