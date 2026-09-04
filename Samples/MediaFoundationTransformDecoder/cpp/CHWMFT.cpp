@@ -588,6 +588,13 @@ HRESULT CHWMFT::RequestSample(
                 hr = MF_E_NOTACCEPTING;
                 break;
             }
+            
+            // Stop sending METransformNeedInput, because we have MAX output.
+            // Let client process output before sending METransformNeedInput agaain
+            if(m_pOutputSampleQueue->GetSampleCount() >= MFT_MAX_OUTPUT_STOP_NEED_INPUT)
+			{
+				break;
+			}
         }
 
         hr = MFCreateMediaEvent(METransformNeedInput, GUID_NULL, S_OK, NULL, &pEvent);

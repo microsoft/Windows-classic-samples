@@ -1020,6 +1020,17 @@ HRESULT CHWMFT::ProcessOutput(
             {
                 m_dwHaveOutputCount--;
             }
+
+            // Ask for input sample
+			if(m_dwHaveOutputCount < MFT_MAX_OUTPUT_STOP_NEED_INPUT)
+			{
+				hr = RequestSample(0);
+
+				if(FAILED(hr))
+				{
+					break;
+				}
+			}
         }
 
         /*****************************************

@@ -11,6 +11,8 @@
 #define MFT_FRAMERATE_DENOMINATOR   1
 #define MFT_DEFAULT_SAMPLE_DURATION 300000 // 1/30th of a second in hundred nanoseconds
 
+#define MFT_MAX_OUTPUT_STOP_NEED_INPUT    5 // Stop sending need input when output equal max value
+
 enum eMFTStatus
 {
     MYMFT_STATUS_INPUT_ACCEPT_DATA      = 0x00000001,   /* The MFT can accept input data */
