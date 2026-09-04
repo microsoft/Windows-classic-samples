@@ -118,7 +118,7 @@ __inline HRESULT SetItemImageImageInStaticControl(HWND hwndStatic, IShellItem *p
         {
             RECT rc;
             GetWindowRect(hwndStatic, &rc);
-            const UINT dxdy = min(rc.right - rc.left, rc.bottom - rc.top);    // make it square
+            const LONG dxdy = min(rc.right - rc.left, rc.bottom - rc.top);    // make it square
             const SIZE size = { dxdy, dxdy };
 
             hr = psiif->GetImage(size, SIIGBF_RESIZETOFIT, &hbmp);
