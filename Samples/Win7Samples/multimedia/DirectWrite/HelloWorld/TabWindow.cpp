@@ -283,7 +283,7 @@ LRESULT CALLBACK TabWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPAR
         ::SetWindowLongPtrW(
             hwnd,
             GWLP_USERDATA,
-            PtrToUlong(pTabWindow));
+            reinterpret_cast<LONG_PTR>(pTabWindow));
 
         return 1;
     }
