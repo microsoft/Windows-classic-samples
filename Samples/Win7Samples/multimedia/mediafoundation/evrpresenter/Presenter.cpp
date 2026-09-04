@@ -1409,7 +1409,8 @@ HRESULT EVRCustomPresenter::CreateOptimalVideoType(IMFMediaType* pProposedType, 
 
     // Helper object to manipulate the optimal type.
     VideoType mtOptimal;
-
+    mtOptimal.CreateEmptyType();
+    
     // Clone the proposed type.
     CHECK_HR(hr = mtOptimal.CopyFrom(pProposedType));
 
