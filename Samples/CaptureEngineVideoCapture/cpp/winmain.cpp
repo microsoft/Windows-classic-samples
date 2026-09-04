@@ -282,7 +282,7 @@ namespace MainWindow
             bEnableRecording = FALSE;
         }
 
-        if (!g_pEngine->IsPreviewing() || g_pEngine->IsPhotoPending())
+        if (g_pEngine->IsPreviewing() || g_pEngine->IsPhotoPending())
         {
             bEnablePhoto = FALSE;
         }
