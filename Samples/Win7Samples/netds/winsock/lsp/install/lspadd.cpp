@@ -1322,7 +1322,7 @@ InstallProviderVista(
 #ifdef _WIN64
     if ( ( eCatalog == LspCatalog32Only ) || ( eCatalog == LspCatalog64Only ) )
     {
-        fprintf(stderr, "New install API always installs into both catalogs!\n");
+        fprintf(stderr, "New install API always installs into both catalogs - -d and -d32 flags are required!\n");
         goto cleanup;
     }
     else 
@@ -1365,7 +1365,7 @@ InstallProviderVista(
                 providerGuid,
                 lpszLspPathAndFile,
 #ifdef _WIN64
-                (lpszLspPathAndFile32[0] == '\0' ? lpszLspPathAndFile : lpszLspPathAndFile32),
+                lpszLspPathAndFile32,
 #endif
                 lpszLspName,
                 ( IfsProvider ? XP1_IFS_HANDLES : 0 ),
@@ -1422,7 +1422,7 @@ InstallProviderVista(
                 providerGuid,
                 lpszLspPathAndFile,
 #ifdef _WIN64
-                lpszLspPathAndFile,
+                lpszLspPathAndFile32,
 #endif
                 lpszLspName,
                 ( IfsProvider ? XP1_IFS_HANDLES : 0 ),

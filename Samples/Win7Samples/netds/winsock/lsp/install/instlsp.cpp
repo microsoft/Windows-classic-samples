@@ -237,7 +237,7 @@ int _cdecl main(int argc, char *argv[])
             case 'd':               // Full path and filename to LSP
                 if ( i+1 >= argc )
                     goto cleanup;
-                if (_strnicmp(argv[i], "-d32", 4))
+                if (!_strnicmp(argv[i], "-d32", 4))
                     lpszLspPathAndFile32 = argv[ ++i ];
                 else
                     lpszLspPathAndFile = argv[ ++i ];
@@ -340,6 +340,22 @@ int _cdecl main(int argc, char *argv[])
             bArgsOkay = FALSE;
             goto cleanup;
         }
+
+		printf("lpszLspPathAndFile = %hs\n", lpszLspPathAndFile);
+		printf("lpszLspPathAndFile32 = %hs\n", lpszLspPathAndFile32);
+
+#ifdef _WIN64
+		if (lpszLspPathAndFile && lpszLspPathAndFile32)
+		{
+			eCatalog = LspCatalogBoth;
+		}
+		else
+		{
+			fprintf( stderr, "\n\nError! Please specify both 64-bit and 32-bit paths of LSP!\n\n");
+            bArgsOkay = FALSE;
+            goto cleanup;
+		}
+#endif
 
         if ( TRUE == bInstallOverAll )
         {
