@@ -1,0 +1,2 @@
+
+#define IDC_FULLSCREEN 10102

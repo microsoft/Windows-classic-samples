@@ -1,0 +1,4 @@
+
+#include "resource.h"
+
+IDC_SAVE      ICON      "save.ico"
