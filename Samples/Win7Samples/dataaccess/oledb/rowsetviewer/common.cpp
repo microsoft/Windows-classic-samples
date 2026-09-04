@@ -1097,7 +1097,8 @@ HRESULT SafeArrayToString(SAFEARRAY* pSafeArray, DBTYPE wType, WCHAR* pwszBuffer
 
 	CVariant cVariant;
 	WCHAR* pwsz = pwszBuffer;
-	WCHAR* pwszEnd = pwsz + ulMaxSize;
+	WCHAR* pwszEnd2 = pwsz + ulMaxSize;
+	WCHAR* pwszEnd  = pwszEnd2 - 1; //We will reserve a last symbol for wEOL
 
 	ULONG i,iDim, ulInnerElements = 0;
 	ULONG cDimensions = SafeArrayGetDim(pSafeArray);
@@ -1256,6 +1257,11 @@ HRESULT SafeArrayToString(SAFEARRAY* pSafeArray, DBTYPE wType, WCHAR* pwszBuffer
 		*pwsz = L']';
 		pwsz++;
 	}
+
+	ASSERT(pwsz <= pwszEnd);
+	ASSERT(pwsz < pwszEnd2);
+
+	(*pwsz) = wEOL;
 
 CLEANUP:
 	SAFE_FREE(rgIndices);
