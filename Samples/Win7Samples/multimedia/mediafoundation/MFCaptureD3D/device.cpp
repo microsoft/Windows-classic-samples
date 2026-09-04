@@ -348,7 +348,7 @@ done:
 void DrawDevice::UpdateDestinationRect()
 {
     RECT rcClient;
-    RECT rcSrc = { 0, 0, m_width, m_height };
+    RECT rcSrc = { 0, 0, (LONG) m_width, (LONG) m_height };
 
     GetClientRect(m_hwnd, &rcClient);
 
@@ -413,7 +413,7 @@ HRESULT DrawDevice::DrawFrame(IMFMediaBuffer *pBuffer)
 
     if (m_pDevice == NULL || m_pSwapChain == NULL)
     {
-        return S_OK;
+        ResetDevice();
     }
 
     VideoBufferLock buffer(pBuffer);    // Helper object to lock the video buffer.
@@ -549,14 +549,20 @@ HRESULT DrawDevice::ResetDevice()
     {
         hr = CreateDevice(m_hwnd);
 
-        if (FAILED(hr)) { goto done; }
+        if (FAILED(hr)) {
+            DestroyDevice();
+            goto done;
+        }
     }
 
     if ((m_pSwapChain == NULL) && (m_format != D3DFMT_UNKNOWN))
     {
         hr = CreateSwapChains();
         
-        if (FAILED(hr)) { goto done; }
+        if (FAILED(hr)) {
+            DestroyDevice();
+            goto done;
+        }
 
         UpdateDestinationRect();
     }
